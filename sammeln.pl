@@ -1,18 +1,5 @@
 :- module(sammeln, [sammelbar/3, nichtSammelbar/1, sammelAktion/1]).
 
-/* Spielkonditionen */
-minenLaser(true).
-verbesserterMinenLaser(true).
-terrainFormer(true).
-raumSchiffIstFlott(true).
-torWarpVerfügbar(true).
-autoIstFlott(true).
-frachterVorhanden(true).
-hyperAntriebGelb(true).
-hyperAntriebRot(false).
-hyperAntriebGruen(false).
-anbau(false).
-
 /* Spieler Präferenzen */
 kampfWille(true).
 
@@ -76,22 +63,22 @@ raumSchuerfen(platin, 20).
 
 sammelbar(Stoff, Operation, HauptZeit) :-
 	Operation = terrainFormerNutzen,
-	terrainFormer(true),
+	spielStatus:spielStatus(terrainFormer, true),
 	terrainFormerNutzen(Stoff, HauptZeit).
 	
 sammelbar(Stoff, Operation, HauptZeit) :-  
 	Operation = verbessertenMinenLaserNutzen,
-	verbesserterMinenLaser(true),
+	spielStatus:spielStatus(verbesserterMinenLaser, true),
 	verbessertenMinenLaserNutzen(Stoff, HauptZeit).
 	
 sammelbar(Stoff, Operation, HauptZeit) :-  
 	Operation = minenLaserNutzen,
-	minenLaser(true),
+	spielStatus:spielStatus(minenLaser, true),
 	minenLaserNutzen(Stoff, HauptZeit).
 
 sammelbar(Stoff, Operation, HauptZeit) :- 
 	Operation = raumSchuerfen,
-	raumSchiffIstFlott(true),
+	spielStatus:spielStatus(raumSchiffIstFlott, true),
 	raumSchuerfen(Stoff, HauptZeit).
 
 sammelbar(Stoff, Operation, HauptZeit) :-  
@@ -105,7 +92,7 @@ sammelbar(Stoff, Operation, HauptZeit) :-
 		
 sammelbar(Stoff, Operation, HauptZeit) :-  
 	Operation = ernten,
-	anbau(true),
+	spielStatus:spielStatus(anbau, true),
 	ernten(Stoff, HauptZeit).
 
 nichtSammelbar(Stoff) :-

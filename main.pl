@@ -69,11 +69,12 @@ bestesRezept(Anzahl, Stoff, MaximalErloesProSammelItem) :-
 	
 			
 load :-
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/ausgabe'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/ausgangsStoff'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/rezept'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/sammeln'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/kaufen'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/reisen'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/statistik'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyMaterialBeschaffung/suchAlgorithmus').
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgangsStoff'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/rezept'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/spielStatus'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/sammeln'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/kaufen'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/reisen'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/statistik'),
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus').

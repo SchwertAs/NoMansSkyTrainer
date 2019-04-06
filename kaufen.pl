@@ -125,7 +125,7 @@ kaufbar(terminal_1_US4, pyrit, 77).
 kaufbar(terminal_1_US4, reinesFerrit, 36).
 
 kaufen(Anzahl, Stoff, Operation, HauptZeit) :-
-	sammeln:torWarpVerfügbar(true),
+	spielStatus:spielStatus(torWarpVerfügbar, true),
 	kaufbar(Terminal, Stoff, _), 
 	Operation = Terminal,
 	HauptZeit is 2415 / Anzahl.
