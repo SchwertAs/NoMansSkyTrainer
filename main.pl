@@ -1,19 +1,19 @@
-:- module(main, [produktMit/5, schnellsteLoesung/2, billigsteLoesung/2, minimaleSammlungLoesung/2, bestesRezept/1]).
+:- module(main, [produktMit/5, schnellsteLoesung/2, billigsteLoesung/2, minimaleSammlungLoesung/2]).
 /* Declarationen */
+:- dynamic stoffBestLoesung/2.
 
 /* Benutzerprädikate */
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
-	stoff(Produkt, EinzelWert),
+	ausgangsStoff:stoff(Produkt, EinzelWert),
 	Wert is EinzelWert * Anzahl,
 	memberchk([_, Stoff], Komponenten).
 
 raffinierRezepteFuer(Stoff, Komponenten, Anzahl) :-
 	rezept:rezept(raffinieren, Komponenten, [Anzahl, Stoff], _).
-	
-schnellsteLoesung(Anzahl, Stoff) :- 
-	ausgangsStoff:stoff(Stoff, Wert),
-	\+suchAlgorithmus:baue(Anzahl, Stoff, Wert),
+
+schnellsteLoesung(Anzahl, Stoff) :-
+	\+suchAlgorithmus:baue(Anzahl, Stoff),
 	findall(ZeitSammlung, suchAlgorithmus:loesung(Stoff, _, _, _, _, ZeitSammlung, _, _), ZeitSammlungListe),
 	min_member(MinimalZeit, ZeitSammlungListe),
 	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, MinimalZeit, GesamtKosten, Erloes),
@@ -21,53 +21,26 @@ schnellsteLoesung(Anzahl, Stoff) :-
 	ausgabe:ausgabe(Vorgaenge),
 	ausgabe:ausgabeSummen(SammelSet, GesamtZahl, GesamtWertSammlung, MinimalZeit, GesamtKosten, Erloes).
 
-billigsteLoesung(Anzahl, Stoff) :- 
-	ausgangsStoff:stoff(Stoff, Wert),
-	\+suchAlgorithmus:baue(Anzahl, Stoff, Wert),
+billigsteLoesung(Anzahl, Stoff) :-
+	\+suchAlgorithmus:baue(Anzahl, Stoff),
 	findall(GesamtAufwand, suchAlgorithmus:loesung(Stoff, _, _, _, _, _, GesamtAufwand, _), GesamtAufwandListe),
 	min_member(MinimalKosten, GesamtAufwandListe),
 	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitSammlung, MinimalKosten, Erloes),
 	!,
 	ausgabe:ausgabe(Vorgaenge),
 	ausgabe:ausgabeSummen(SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitSammlung, MinimalKosten, Erloes).
-	
+
 minimaleSammlungLoesung(Anzahl, Stoff) :-
-	ausgangsStoff:stoff(Stoff, Wert),
-	\+suchAlgorithmus:baue(Anzahl, Stoff, Wert),
+	\+suchAlgorithmus:baue(Anzahl, Stoff),
 	findall(GesamtZahlSammlung, (suchAlgorithmus:loesung(Stoff, _, _, GesamtZahlSammlung, _, _, _, _), GesamtZahlSammlung > 0), GesamtZahlListe),
 	min_member(MinimalSammelZahl, GesamtZahlListe),
-	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, GesamtZeitSammlung, HandelswertSammlung, Erloes),
-	ausgabe:ausgabe(Vorgaenge),
-	ausgabe:ausgabeSummen(SammelSet, MinimalSammelZahl, GesamtWertSammlung, GesamtZeitSammlung, HandelswertSammlung, Erloes).
-	
-	
-bestesRezept(Stoff) :-
-	abolish(stoffBestLoesung/2),
-	\+bestesRezeptSub(Stoff),
-	findall(Gewinn, stoffBestLoesung(_, Gewinn), MaximalGewinnListe),
-	max_member(SpitzenGewinn, MaximalGewinnListe),
-	stoffBestLoesung(Stoff, SpitzenGewinn),
+	findall(ZeitSammlung, suchAlgorithmus:loesung(Stoff, _, _, MinimalSammelZahl, _, ZeitSammlung, _, _), ZeitSammlungListe),
+	min_member(MinimalZeit, ZeitSammlungListe),
+	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	!,
-	format('Bester Stoff: ~k', Stoff),
-	format(' Gewinn: ~k~n', SpitzenGewinn).
+	ausgabe:ausgabe(Vorgaenge),
+	ausgabe:ausgabeSummen(SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
-bestesRezeptSub(Stoff) :-
-	ausgangsStoff:reaktionsStoff(Stoff, _),
-	bestesRezept(1, Stoff, MaximalGewinn),
-	assertz(stoffBestLoesung(Stoff, MaximalGewinn)),
-	fail.
-	
-bestesRezept(Anzahl, Stoff, MaximalErloesProSammelItem) :-
-	ausgangsStoff:reaktionsStoff(Stoff, Wert),
-	\+suchAlgorithmus:baue(Anzahl, Stoff, Wert),
-	findall(ErloesProItem, 
-	        (	suchAlgorithmus:loesung(Stoff, _, _, GesamtZahl, _, _, _, Erloes),
-	            GesamtZahl > 0,
-		        ErloesProItem is Erloes / GesamtZahl
-	        ), GewinnListe),
-	max_member(MaximalErloesProSammelItem, GewinnListe).
-	
-			
 load :-
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe'),
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgangsStoff'),
@@ -77,4 +50,10 @@ load :-
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/kaufen'),
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/reisen'),
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/statistik'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus').
+	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus'),
+	\+sammeln:sammelbarInit.
+
+test :-
+	ausgangsStoff:stoff(Stoff, _),
+	minimaleSammlungLoesung(1, Stoff),
+	fail.

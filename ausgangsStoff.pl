@@ -2,8 +2,7 @@
 
 
 /* name, Wert in units (GrundPreis) */
-
-/* ----------------- gebaute Stoffe ------------------------------- */
+/* ----------------- alle Stoffe ------------------------------- */
 stoff(absprungKapselKoordinaten, 85000).
 stoff(angereicherterKohlenStoff, 50000).
 stoff(antiHaftKolben, 6000).
@@ -11,8 +10,10 @@ stoff(antiMaterie, 5233).
 stoff(antiMaterieGehaeuse, 6500).
 stoff(aronium, 25000).
 stoff(atlasPassV1, 0).
+stoff(atlasPassV2, 0).
+stoff(atlasPassV3, 0).
 stoff(ausrangierteSchaltPlatte, 1000).
-stoff(autonomePositionierungsEinheit, 0).
+stoff(autonomePositionierungsEinheit, 30000).
 stoff(bromSalz, 15000).
 stoff(diWasserStoffGelee, 200).
 stoff(dunkleMaterie, 1000).
@@ -27,8 +28,9 @@ stoff(fortschrittlicherIonenAkku, 500).
 stoff(fregattenTreibStoff100to, 40000).
 stoff(fregattenTreibStoff200to, 80000).
 stoff(fregattenTreibStoff50to, 20000).
+stoff(fuenfDimensionalerTorus, 30000).
 stoff(funkenKanister, 1000).
-stoff(fusionsBeschleuniger, 0).
+stoff(fusionsBeschleuniger, 7500000).
 stoff(fusionsZuender, 0).
 stoff(gedankenKontrollGeraet, 0).
 stoff(gefangeneNanode, 1000).
@@ -40,7 +42,7 @@ stoff(glas, 13000).
 stoff(grantine, 25000).
 stoff(gravitinoBall, 12445).
 stoff(halbLeiter, 320000).
-stoff(heissesEis, 0).
+stoff(heissesEis, 320000).
 stoff(hermetischesSiegel, 800).
 stoff(herox, 25000).
 stoff(hitzeKondensator, 50000).
@@ -51,10 +53,10 @@ stoff(hydrothermaleTreibStoffZelle, 7200).
 stoff(industrieBatterie, 6000).
 stoff(instabilesGel, 50000).
 stoff(instabilesNatrium, 12300).
-stoff(instabiltitaetsInjektor, 15000).
+stoff(instabilitaetsInjektor, 15000).
 stoff(ionenAkku, 200).
 stoff(ionenKugel, 30000).
-stoff(ionenKondensator, 0).
+stoff(ionenKondensator, 15000).
 stoff(iridesit, 150000).
 stoff(kampfLaeuferGehirn, 0).
 stoff(kobaltSpiegel, 20500).
@@ -63,7 +65,7 @@ stoff(kohlenStoffNanoRohr, 500).
 stoff(kometenTroepfchen, 15000).
 stoff(konvergenzWuerfel, 0).
 stoff(korvaxGehaeuse, 22000).
-stoff(kryogenKammer, 0).
+stoff(kryogenKammer, 3800000).
 stoff(kryoPumpe, 0).
 stoff(lebendesGlas, 566000).
 stoff(lebensErhaltungsGel, 200).
@@ -72,19 +74,24 @@ stoff(magnoGold, 25000).
 stoff(metallPlatten, 800).
 stoff(mikroProzessor, 2000).
 stoff(mineralKompressor, 0).
+stoff(nanoRohrKiste, 1000).
 stoff(natriumDiode, 3500).
 stoff(navigationsDaten, 1000).
 stoff(neuralLeitung, 50000).
+stoff(neutronenMikroskop, 6000).
+stoff(nichtMehrDuftendePheromonFlasche, 1000).
+stoff(nipNipKnospen, 17776).
 stoff(nooSpaerischKugel, 1000).
 stoff(organischerKatalysator, 0).
 stoff(ohmschesGel, 15000).
+stoff(optischesLoesungsMittel, 15000).
 stoff(organischeRohre, 30000).
 stoff(phasenStrahler, 0).
 stoff(polyFaser, 130000).
 stoff(polyChronesZirkonium, 30000).
 stoff(projektilMunition, 50).
-stoff(quantumBeschleuniger, 0).
-stoff(quantumProzessor, 0).
+stoff(quantumBeschleuniger, 50000).
+stoff(quantumProzessor, 4400000).
 stoff(raumSchiffStartTreibStoff, 450).
 stoff(saeure, 188000).
 stoff(salzRefaktor, 30500).
@@ -96,6 +103,7 @@ stoff(schmutz, 1000).
 stoff(schweisserSeife, 6000).
 stoff(sechsZackigerEntKoppler, 15000).
 stoff(seltenesMetallElement, 4200).
+stoff(sichSelbsReparierendesHeridium, 6000).
 stoff(sprengDrohnen, 0).
 stoff(sternenSeide, 6000).
 stoff(stickStoffSalz, 50000).
@@ -110,9 +118,9 @@ stoff(tragbarerReaktor, 0).
 stoff(treibStoffOxidant, 0).
 stoff(umhuellterSchatten, 1000).
 stoff(unraffiniertesPyritFett, 6000).
-stoff(vergitterterBogenKristall, 0).
-stoff(vierFachServo, 0).
-stoff(vyKeenBildnis, 0).
+stoff(vergitterterBogenKristall, 50000).
+stoff(vierFachServo, 20000).
+stoff(vyKeenBildnis, 24750).
 stoff(vyKeenDolch, 0).
 stoff(warpZelle, 11733).
 stoff(waermeSchutzModulS, 360).
@@ -243,7 +251,7 @@ basisBauEndStoff(bett).
 /* ------------------------------- Lichter ------------------------------ */
 basisBauEndStoff(licht).
 basisBauEndStoff(farbigeLeuchte).
-	
+
 /* ------------------------------- Verzierungen ------------------------- */
 basisBauEndStoff(flagge).
 
@@ -442,7 +450,7 @@ basisBauEndStoff(xFoermigerGlasTunnel).
 /* Testprädikate */
 /*----------------------------------------------------------------*/
 stoffInFunktionEingangsStoff(Stoff) :-
-	rezept:rezept(_, [[_, Stoff]], _, _);	
+	rezept:rezept(_, [[_, Stoff]], _, _);
 	rezept:rezept(_, [[_, Stoff], [_, _]], _, _);
 	rezept:rezept(_, [[_, _], [_, Stoff]], _, _);
 	rezept:rezept(_, [[_, Stoff], [_, _], [_, _]], _, _);
@@ -451,7 +459,7 @@ stoffInFunktionEingangsStoff(Stoff) :-
 
 stoffInFunktionErgebnisStoff(Stoff) :-
 	rezept:rezept(_, [_],[_,Stoff], _).
-	
+
 fehlerInputStoffNichtDefiniert(Stoff) :-
 	stoffInFunktionEingangsStoff(Stoff),
 	\+stoff(Stoff, _).
@@ -459,7 +467,7 @@ fehlerInputStoffNichtDefiniert(Stoff) :-
 fehlerOutputStoffNichtDefiniert(Stoff) :-
 	stoffInFunktionErgebnisStoff(Stoff),
 	\+stoff(Stoff, _).
-	
+
 produktNichtBewertet(Stoff) :-
 	stoff(Stoff, Wert),
 	\+basisBauEndStoff(Stoff),
@@ -468,5 +476,5 @@ produktNichtBewertet(Stoff) :-
 keineDoppeltenInStoff :-
 	findall(Stoff0, stoff(Stoff0, _), StoffListe),
 	is_set(StoffListe).
-	
-	
+
+

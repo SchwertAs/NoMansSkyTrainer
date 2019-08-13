@@ -1,5 +1,5 @@
 :- module(rezept, [rezept/4]).
-/* TODO: Zeiten aufnehmen 
+/* TODO: Zeiten aufnehmen
    Kostenfunktion mit Anreise, Abreise */
 
 /* Komponenten, AusgabeBestand, Dauer
@@ -159,7 +159,7 @@ rezept(raffinieren, [[1, gold], [1, silber]], [1, platin], 62 ).
 rezept(raffinieren, [[2, uran], [1, ferritStaub]], [1, pyrit], 92 ).
 rezept(raffinieren, [[1, sauerStoff], [1, gold]], [2, pyrit], 48 ).
 rezept(raffinieren, [[2, kaktusFleisch], [1, salz]], [1, pyrit], 92 ).
-rezept(raffinieren, [[1, schwefelin], [1, sauerStoff]], [1, radon], 92 ). 
+rezept(raffinieren, [[1, schwefelin], [1, sauerStoff]], [1, radon], 92 ).
 rezept(raffinieren, [[2, ferritStaub], [1, pugneum]], [3, reinesFerrit], 31 ).
 rezept(raffinieren, [[1, diWasserStoff], [1, sauerStoff]], [1, salz], 24 ).
 rezept(raffinieren, [[1, kohlenStoff], [1, kelpBeutel]], [2, sauerStoff], 48 ).
@@ -197,7 +197,6 @@ rezept(raffinieren, [[60, kobalt], [30, paraffinium], [10, gold]], [1, aronium],
 rezept(raffinieren, [[100, radon], [10, verdichteterKohlenStoff], [5, chlor]], [1, angereicherterKohlenStoff], 9000 ).
 rezept(raffinieren, [[100, radon], [10, verdichteterKohlenStoff], [10, salz]], [1, angereicherterKohlenStoff], 9000 ).
 rezept(raffinieren, [[100, radon], [20, kohlenStoff], [10, salz]], [1, angereicherterKohlenStoff], 9000 ).
-rezept(raffinieren, [[100, radon], [20, kohlenStoff], [5, chlor]], [1, angereicherterKohlenStoff], 9000 ).
 rezept(raffinieren, [[100, radon], [20, kohlenStoff], [5, chlor]], [1, angereicherterKohlenStoff], 9000 ).
 rezept(raffinieren, [[50, tritium], [40, salz], [40, chlor]], [1, chlorGitter], 20000 ).
 rezept(raffinieren, [[1, gold], [1, silber], [1, indium]], [30, chromatischesMetall], 41 ).
@@ -526,6 +525,7 @@ rezept(bauen, [[10, reinesFerrit], [5, kobalt]], [1, server], 0).
 rezept(bauen, [[50, solanium], [25, phosphor]], [1, sonnenRebe], 0).
 rezept(bauen, [[2, metallPlatten], [1, diWasserStoffGelee]], [1, speicherPunkt], 0).
 rezept(bauen, [[50, sternenKnolle], [25, paraffinium]], [1, sternenDorn], 0).
+rezept(bauen, [[5, verdichteterKohlenstoff], [1, sternenSeide]], [1, sternenDorn], 0).
 rezept(bauen, [[5, verdichteterKohlenStoff], [5, kobalt]], [1, techBedienFeld], 0).
 rezept(bauen, [[25, magnetisiertesFerrit], [3, mikroProzessor]], [1, terminalDesGalaktischenMarktes], 0).
 rezept(bauen, [[1, metallPlatten], [30, sauerStoff]], [1, tragbareRaffinerie], 0).
@@ -579,20 +579,20 @@ rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, xFoermige
 /* ---------------------  Test Prädikate ----------------------------------------------- */
 fehlerOperation(Op, Produkt) :-
 	rezept(Op, _, [_, Produkt], _),
-	\+memberchk(Op, [raffinieren, bauen, herstellen]). 
+	\+memberchk(Op, [raffinieren, bauen, herstellen]).
 
 komponenteIstKeinStoff(FehlStoff) :-
 	ausgangsStoff:stoffInFunktionEingangsStoff(FehlStoff),
 	\+ausgangsStoff:stoff(FehlStoff, _).
-	
+
 produktIstKeinStoff(FehlStoff) :-
 	ausgangsStoff:stoffInFunktionErgebnisStoff(FehlStoff),
 	\+ausgangsStoff:stoff(FehlStoff, _).
-	
+
 raffinerieRezeptHatKeineFertigungsZeit(Stoff, Komponenten) :-
 	rezept(raffinieren, Komponenten, [_, Stoff], 0).
-	
+
 nichtHerstellbar(Stoff) :-
-	reaktionsStoff(Stoff,_),
+	ausgangsStoff:stoff(Stoff,_),
 	\+rezept(_, _,[_,Stoff], _).
-	
+

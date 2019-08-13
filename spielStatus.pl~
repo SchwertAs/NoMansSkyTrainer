@@ -7,10 +7,10 @@ spielStatus(verbesserterMinenLaser, true).
 spielStatus(terrainFormer, true).
 
 /* Basis*/
-spielStatus(torWarpVerfügbar, false).
+spielStatus(torWarpVerfügbar, true).
 spielStatus(anbau, false).
-spielStatus(tragbareRaffinerie, false).
-spielStatus(mittlereRaffinerie, false).
+spielStatus(tragbareRaffinerie, true).
+spielStatus(mittlereRaffinerie, true).
 spielStatus(grosseRaffinerie, true).
 
 /* raumschiff */
@@ -18,7 +18,8 @@ spielStatus(raumSchiffIstFlott, true).
 spielStatus(hyperAntriebGelb, true).
 spielStatus(hyperAntriebRot, false).
 spielStatus(hyperAntriebGruen, false).
-spielStatus(hyperAntriebBlau, false).
+
+
 
 spielStatus(autoIstFlott, true).
 
