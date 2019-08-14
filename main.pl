@@ -2,7 +2,7 @@
 /* Declarationen */
 :- dynamic stoffBestLoesung/2.
 
-/* Benutzerprädikate */
+/* Benutzerprädikate 
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
 	ausgangsStoff:stoff(Produkt, EinzelWert),
@@ -29,6 +29,7 @@ billigsteLoesung(Anzahl, Stoff) :-
 	!,
 	ausgabe:ausgabe(Vorgaenge),
 	ausgabe:ausgabeSummen(SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitSammlung, MinimalKosten, Erloes).
+*/
 
 minimaleSammlungLoesung(Anzahl, Stoff) :-
 	\+suchAlgorithmus:baue(Anzahl, Stoff),
@@ -38,8 +39,9 @@ minimaleSammlungLoesung(Anzahl, Stoff) :-
 	min_member(MinimalZeit, ZeitSammlungListe),
 	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	!,
+	ausgabe:ausgabeSammlung(SammelSet),
 	ausgabe:ausgabe(Vorgaenge),
-	ausgabe:ausgabeSummen(SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
+	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
 load :-
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe'),
@@ -53,7 +55,35 @@ load :-
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus'),
 	\+sammeln:sammelbarInit.
 
-test :-
+testMinimaleSammlung :-
 	ausgangsStoff:stoff(Stoff, _),
 	minimaleSammlungLoesung(1, Stoff),
 	fail.
+
+testRezepte(FehlOperation, FehlOpProdukt, 
+			FehlKomponente,
+			FehlProdukt,
+			FertigungsZeitFehlStoff, FertigungsZeitFehlKomponenten) :-
+	\+rezept:fehlerOperation(FehlOperation, FehlOpProdukt),
+	format('Operationen ok~n'),
+	\+rezept:komponenteIstKeinStoff(FehlKomponente),
+	format('Komponenten ok~n'),
+	\+rezept:produktIstKeinStoff(FehlProdukt),
+	format('Produkte ok~n'),
+	\+rezept:raffinerieRezeptHatKeineFertigungsZeit(FertigungsZeitFehlStoff,FertigungsZeitFehlKomponenten),
+	format('Fertigungszeiten ok~n').
+	
+testStoff :-
+	format('Eingangsstoffe testen '),
+	\+ausgangsStoff:fehlerInputStoffNichtDefiniert(_),
+	format('ok~n'),
+	format('Ausgangsstoffe testen '),
+	\+ausgangsStoff:fehlerOutputStoffNichtDefiniert(_),
+	format('ok~n'),
+	format('Wertangaben testen '),
+	\+ausgangsStoff:produktNichtBewertet(_),
+	format('ok~n'),
+	format('Doppelte testen '),
+	\+ausgangsStoff:keineDoppeltenInStoff,
+	format('ok~n').
+	

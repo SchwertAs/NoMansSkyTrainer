@@ -298,13 +298,23 @@ rezept(herstellen, [[250, stickStoff], [50, verdichteterKohlenStoff]], [1, stick
 rezept(herstellen, [[50, pyrit], [100, reinesFerrit]], [1, strassenKoeterBronze], 0 ).
 rezept(herstellen, [[1, halbLeiter], [1, angereicherterKohlenStoff]], [1, supraLeiter], 0 ).
 rezept(herstellen, [[1, fluessigSprengStoff], [1, fusionsBeschleuniger]], [1, tragbarerReaktor], 0 ).
-rezept(herstellen, [[2, vierFachServo], [50, gold]], [1, treibStoffOxidant], 0 ).
-
+rezept(herstellen, [[2, vierfachServo], [50, gold]], [1, treibStoffOxidant], 0 ).
+rezept(herstellen, [[100, chromatischesMetall], [100, verdichteterKohlenStoff]], [1, neuralStimulator], 0 ).
+rezept(herstellen, [[1, antiMaterie], [3, technologieModul]], [1, teleportEmpfaenger], 0 ).
+rezept(herstellen, [[5, mikroProzessor], [1, technologieModul]], [1, wirtschaftsScanner], 0 ).
+rezept(herstellen, [[250, chromatischesMetall], [1, technologieModul]], [1, cadmiumAntriebC], 0 ).
+rezept(herstellen, [[1, kobaltSpiegel], [1, technologieModul]], [1, nichtLineareOptikC], 0 ).
+rezept(herstellen, [[250, emeril], [1, technologieModul]], [1, indiumAntriebC], 0 ).
+rezept(herstellen, [[250, cadmium], [1, technologieModul]], [1, emerilAntriebC], 0 ).
+rezept(herstellen, [[1, kampfLaeuferGehirn], [1, technologieModul]], [1, konfliktScanner], 0 ).
+rezept(herstellen, [[200, uran], [1, technologieModul]], [1, positronenWerfer], 0 ).
+rezept(herstellen, [[200, dioxit], [1, technologieModul]], [1, zyklotronBalliste], 0 ).
 
 rezept(herstellen, [[1, tragbarerReaktor], [1, quantumProzessor], [1, geoDesit]], [1, fusionsZuender], 0 ).
 rezept(herstellen, [[1, strassenKoeterBronze], [1, herox], [1, lemmium]], [1, geoDesit], 0 ).
 rezept(herstellen, [[1, aronium], [1, magnoGold], [1, grantine]], [1, iridesit], 0 ).
 rezept(herstellen, [[1, quantumProzessor], [1, kryogenKammer], [1, iridesit]], [1, staseGeraet], 0 ).
+rezept(herstellen, [[16, platin], [16, tritium], [16, gold]], [1, sternenSamen], 0 ).
 
 
 /* ---------------------  Anzug-Bau-Rezepte --------------------------------------- */
@@ -323,17 +333,26 @@ rezept(herstellen, [[150, ionisiertesKobalt]], [1, tetraKobalt], 0 ).
 /* Zwei Komponenten */
 rezept(herstellen, [[25, chromatischesMetall], [20, verdichteterKohlenStoff]], [1, antiMaterie], 0).
 rezept(herstellen, [[30, sauerStoff], [50, ferritStaub]], [1, antiMaterieGehaeuse], 0).
+rezept(herstellen, [[200, kupfer], [1, mikroProzessor]], [1, atlasPassV1], 0).
+rezept(herstellen, [[200, cadmium], [1, mikroProzessor]], [1, atlasPassV2], 0).
+rezept(herstellen, [[1, nooSpaerischKugel], [100, magnetisiertesFerrit]], [1, dunkleMaterie], 0).
+rezept(herstellen, [[1, dunkleMaterie], [100, chromatischesMetall]], [1, endeDerDaemmerung], 0).
 rezept(herstellen, [[1, saeure], [1, instabilesGel]], [1, fluessigSprengStoff], 0).
 rezept(herstellen, [[25, ionisiertesKobalt], [20, reinesFerrit]], [1, fortschrittlicherIonenAkku], 0).
 rezept(herstellen, [[50, diWasserStoff], [50, tritium]], [1, fregattenTreibStoff50to], 0).
 rezept(herstellen, [[100, diWasserStoff], [100, tritium]], [1, fregattenTreibStoff100to], 0).
 rezept(herstellen, [[200, diWasserStoff], [200, tritium]], [1, fregattenTreibStoff200to], 0).
 rezept(herstellen, [[100, frostKristall], [200, solanium]], [1, hitzeKondensator], 0).
+rezept(herstellen, [[1, modifizierteQuanten], [100, gold]], [1, herzDerSonne], 0).
 rezept(herstellen, [[25, kobalt], [20, ferritStaub]], [1, ionenAkku], 0).
 rezept(herstellen, [[1, schmierMittel], [5, glas]], [1, lebendesGlas], 0).
 rezept(herstellen, [[1, diWasserStoffGelee], [20, kohlenStoff]], [1, lebensErhaltungsGel], 0).
 rezept(herstellen, [[1, kohlenStoffNanoRohr], [40, chromatischesMetall]], [1, mikroProzessor], 0).
+rezept(herstellen, [[1, novaeRegenerat], [100, indium]], [1, modifizierteQuanten], 0).
+rezept(herstellen, [[1, umhuellterSchatten], [100, ionisiertesKobalt]], [1, nooSpaerischKugel], 0).
+rezept(herstellen, [[1, zustandsPhase], [100, emeril]], [1, novaeRegenerat], 0).
 rezept(herstellen, [[100, tritium], [1, technologieModul]], [1, phasenStrahler], 0 ).
+rezept(herstellen, [[1, endeDerDaemmerung], [100, kupfer]], [1, photischerJade], 0 ).
 rezept(herstellen, [[100, kaktusFleisch], [200, sternenKnolle]], [1, polyFaser], 0 ).
 rezept(herstellen, [[1, metallPlatten], [40, diWasserStoff]], [1, raumSchiffStartTreibStoff], 0).
 rezept(herstellen, [[25, mordit], [600, pilzSchimmel]], [1, saeure], 0).
@@ -342,6 +361,7 @@ rezept(herstellen, [[1, hitzeKondensator], [1, polyFaser]], [1, schaltPlatte], 0
 rezept(herstellen, [[50, coprit], [400, gammaWurzel]], [1, schmierMittel], 0).
 rezept(herstellen, [[1, gefangeneNanode], [100, reinesFerrit]], [1, umhuellterSchatten], 0).
 rezept(herstellen, [[1, antiMaterieGehaeuse], [1, antiMaterie]], [1, warpZelle], 0).
+rezept(herstellen, [[1, photischerJade], [100, cadmium]], [1, zustandsPhase], 0).
 
 
 
@@ -349,6 +369,11 @@ rezept(herstellen, [[1, antiMaterieGehaeuse], [1, antiMaterie]], [1, warpZelle],
 rezept(herstellen, [[10, reinesFerrit ], [10, natriumNitrat], [10, silber]], [1, fortschrittlicherIonenAkku], 0 ).
 rezept(herstellen, [[40, salz], [40, zytoPhosphat], [40, kohlenStoff]], [1, hydrothermaleTreibStoffZelle], 0).
 rezept(herstellen, [[1, herox], [1, strassenKoeterBronze], [1, lemmium]], [1, geoDesit], 0).
+rezept(herstellen, [[16, platin], [16, tritium], [5, gold]], [1, sternSamen], 0).
+
+/* ---------------------  verbrauchbares Fregatten Upgrade-Rezept -------------------- */
+rezept(herstellen, [[2, vierfachServo], [50, gold]], [1, treibStoffOxidant], 0).
+
 
 /* ---------------------  Siedlung-Bau-Rezepte --------------------------------------- */
 
@@ -374,7 +399,7 @@ rezept(bauen, [[20, kohlenStoff]], [1, duenneMetallWand], 0 ).
 rezept(bauen, [[10, verdichteterKohlenStoff]], [1, eckSofa], 0 ).
 rezept(bauen, [[10, verdichteterKohlenStoff]], [1, einfacherSchreibTisch], 0 ).
 rezept(bauen, [[10, verdichteterKohlenStoff]], [1, ergonomischesSofa], 0 ).
-rezept(bauen, [[5, natrium]], [1, farbigeLeuchtGruen], 0 ).
+rezept(bauen, [[5, natrium]], [1, farbigeLeuchteGruen], 0 ).
 rezept(bauen, [[5, natrium]], [1, farbigeLeuchteRot], 0 ).
 rezept(bauen, [[5, natrium]], [1, farbigeLeuchteWeiss], 0 ).
 rezept(bauen, [[15, kohlenStoff]], [1, floraBehaelter], 0 ).
@@ -525,7 +550,7 @@ rezept(bauen, [[10, reinesFerrit], [5, kobalt]], [1, server], 0).
 rezept(bauen, [[50, solanium], [25, phosphor]], [1, sonnenRebe], 0).
 rezept(bauen, [[2, metallPlatten], [1, diWasserStoffGelee]], [1, speicherPunkt], 0).
 rezept(bauen, [[50, sternenKnolle], [25, paraffinium]], [1, sternenDorn], 0).
-rezept(bauen, [[5, verdichteterKohlenstoff], [1, sternenSeide]], [1, sternenDorn], 0).
+rezept(bauen, [[5, verdichteterKohlenStoff], [1, sternenSeide]], [1, sternenDorn], 0).
 rezept(bauen, [[5, verdichteterKohlenStoff], [5, kobalt]], [1, techBedienFeld], 0).
 rezept(bauen, [[25, magnetisiertesFerrit], [3, mikroProzessor]], [1, terminalDesGalaktischenMarktes], 0).
 rezept(bauen, [[1, metallPlatten], [30, sauerStoff]], [1, tragbareRaffinerie], 0).
