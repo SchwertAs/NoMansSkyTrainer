@@ -1,23 +1,32 @@
-:- module(ausgabe, [ausgabe/1, ausgabeSummen/6]).
+:- module(ausgabe, [ausgabe/1, ausgabeSummen/5]).
 	
 ausgabe(Vorgaenge) :-
-	format('~n', []),
 	gebeAus(Vorgaenge).
 	
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [].
 	
 gebeAus(Vorgaenge) :-
-	Vorgaenge = [Kopf|Rest], 
+	Vorgaenge = [ Kopf | Rest], 
+	Kopf = [_, [Operation, _], _, [_, _]],
+	(Operation = raffinieren; Operation = herstellen; Operation = bauen),
 	format('~k~n', [Kopf]),
+	gebeAus(Rest),
+	!.		
+
+gebeAus(Vorgaenge) :-
+	Vorgaenge = [ _ | Rest], 
 	gebeAus(Rest).		
-	
-ausgabeSummen(SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWertEndProdukt) :-
-	format('~k~n', SammelSet),
-    format('Sammeln Gesamtbedarf: ~k Stück~n', GesamtZahl),
+
+ausgabeSammlung(SammelSet) :-
+	format('~n', []),
+	format('~k~n', SammelSet).
+    
+ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWertEndProdukt) :-
+	format('Sammeln Gesamtbedarf: ~k Stück~n', GesamtZahl),
     format('Gesamtwert Sammlung: ~k Units~n', GesamtWertSammlung),
-    format('GesamtZeitAufwand: ~k 1/10 sec~n', GesamtZeit),
+    format('GesamtZeitAufwand: ~k 1/100 sec~n', GesamtZeit),
     format('Kosten: ~k Units~n', GesamtKosten),
     format('Gesamtwert Endstoff: ~k Units~n', GesamtWertEndProdukt),
-    MehrWert is GesamtWertEndProdukt - GesamtKosten,
+    MehrWert is GesamtWertEndProdukt - GesamtWertSammlung,
     format('Mehrwert: ~k Units~n', MehrWert).

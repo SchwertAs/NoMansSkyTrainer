@@ -5,24 +5,38 @@
 /* ----------------- alle Stoffe ------------------------------- */
 stoff(absprungKapselKoordinaten, 85000).
 stoff(angereicherterKohlenStoff, 50000).
+stoff(aktiviertesCadmium, 450).
+stoff(aktiviertesEmeril, 696).
+stoff(aktiviertesIndium, 949).
+stoff(aktiviertesKupfer, 245).
+stoff(ammoniak, 62).
 stoff(antiHaftKolben, 6000).
 stoff(antiMaterie, 5233).
 stoff(antiMaterieGehaeuse, 6500).
 stoff(aronium, 25000).
-stoff(atlasPassV1, 0).
-stoff(atlasPassV2, 0).
-stoff(atlasPassV3, 0).
 stoff(ausrangierteSchaltPlatte, 1000).
 stoff(autonomePositionierungsEinheit, 30000).
+stoff(beutelGift, 0).
 stoff(bromSalz, 15000).
+stoff(cadmium, 234).
+stoff(chlor, 602).
+stoff(chlorGitter, 6150).
+stoff(chromatischesMetall, 245).
+stoff(coprit, 30).
+stoff(deuterium, 34).
+stoff(dioxit, 62).
+stoff(diWasserStoff, 34).
 stoff(diWasserStoffGelee, 200).
 stoff(dunkleMaterie, 1000).
 stoff(eiweissPerle, 9025).
+stoff(emeril, 348).
 stoff(endeDerDaemmerung, 1000).
 stoff(entschluesselteBenutzerDaten, 1000).
 stoff(erstGebruetetenHelm, 0).
 stoff(experimentelleEnergieFluessigkeit, 30000).
+stoff(ferritStaub, 14).
 stoff(frischeFlutPalmenSprossen, 118669).
+stoff(frostKristall, 12).
 stoff(fluessigSprengStoff, 800500).
 stoff(fortschrittlicherIonenAkku, 500).
 stoff(fregattenTreibStoff100to, 40000).
@@ -32,166 +46,251 @@ stoff(fuenfDimensionalerTorus, 30000).
 stoff(funkenKanister, 1000).
 stoff(fusionsBeschleuniger, 7500000).
 stoff(fusionsZuender, 0).
-stoff(gedankenKontrollGeraet, 0).
+stoff(gammaWurzel, 16).
 stoff(gefangeneNanode, 1000).
-stoff(gekNip, 0).
-stoff(gekRelikt, 0).
+stoff(gekNip, 20625).
+stoff(gekRelikt, 23375).
 stoff(geoDesit, 150000).
 stoff(gewaltigesMetallZahnRad, 1000).
 stoff(glas, 13000).
+stoff(gold, 202).
 stoff(grantine, 25000).
 stoff(gravitinoBall, 12445).
 stoff(halbLeiter, 320000).
 stoff(heissesEis, 320000).
 stoff(hermetischesSiegel, 800).
 stoff(herox, 25000).
+stoff(herzDerSonne, 1000).
 stoff(hitzeKondensator, 50000).
 stoff(holografischerAnalysator, 75000).
 stoff(holographischeKurbelWelle, 30000).
 stoff(hypnotischenTraenken, 706593).
 stoff(hydrothermaleTreibStoffZelle, 7200).
+stoff(indium, 464).
 stoff(industrieBatterie, 6000).
 stoff(instabilesGel, 50000).
 stoff(instabilesNatrium, 12300).
+stoff(instabilesPlasma, 5750).
 stoff(instabilitaetsInjektor, 15000).
 stoff(ionenAkku, 200).
 stoff(ionenKugel, 30000).
 stoff(ionenKondensator, 15000).
+stoff(ionisiertesKobalt, 401).
 stoff(iridesit, 150000).
+stoff(kaktusFleisch, 28).
 stoff(kampfLaeuferGehirn, 0).
+stoff(kelpBeutel, 41).
+stoff(kobalt, 198).
 stoff(kobaltSpiegel, 20500).
+stoff(kohlenStoff, 12).
 stoff(kohlenStoffKristall, 3600).
 stoff(kohlenStoffNanoRohr, 500).
 stoff(kometenTroepfchen, 15000).
-stoff(konvergenzWuerfel, 0).
 stoff(korvaxGehaeuse, 22000).
+stoff(korvaxKonvergenzWuerfel, 13063).
+stoff(kristallSulfid, 7410).
 stoff(kryogenKammer, 3800000).
 stoff(kryoPumpe, 0).
+stoff(kuerbisKnolle, 41).
+stoff(kupfer, 121).
+stoff(lebendePerle, 4798).
+stoff(lebenderSchleim, 20).
 stoff(lebendesGlas, 566000).
 stoff(lebensErhaltungsGel, 200).
 stoff(lemmium, 25000).
+stoff(magnetisiertesFerrit, 82).
 stoff(magnoGold, 25000).
 stoff(metallPlatten, 800).
 stoff(mikroProzessor, 2000).
-stoff(mineralKompressor, 0).
+stoff(modifizierteQuanten, 1000).
+stoff(mordit, 40).
+stoff(nanitHaufen, -1).
 stoff(nanoRohrKiste, 1000).
+stoff(natrium, 41).
 stoff(natriumDiode, 3500).
+stoff(natriumNitrat, 82).
 stoff(navigationsDaten, 1000).
 stoff(neuralLeitung, 50000).
 stoff(neutronenMikroskop, 6000).
 stoff(nichtMehrDuftendePheromonFlasche, 1000).
 stoff(nipNipKnospen, 17776).
 stoff(nooSpaerischKugel, 1000).
+stoff(novaeRegenerat, 1000).
 stoff(organischerKatalysator, 0).
 stoff(ohmschesGel, 15000).
 stoff(optischesLoesungsMittel, 15000).
 stoff(organischeRohre, 30000).
+stoff(paraffinium, 62).
 stoff(phasenStrahler, 0).
+stoff(phosphor, 62).
+stoff(photischerJade, 1000).
+stoff(pilzSchimmel, 2496).
+stoff(platin, 303).
 stoff(polyFaser, 130000).
 stoff(polyChronesZirkonium, 30000).
 stoff(projektilMunition, 50).
+stoff(pugneum, 138).
+stoff(pyrit, 62).
 stoff(quantumBeschleuniger, 50000).
 stoff(quantumProzessor, 4400000).
+stoff(radon, 20).
 stoff(raumSchiffStartTreibStoff, 450).
+stoff(reinesFerrit, 28).
+stoff(restSubstanz, 20).
 stoff(saeure, 188000).
+stoff(salz, 299).
 stoff(salzRefaktor, 30500).
+stoff(sauerStoff, 34).
 stoff(sauerStoffFilter, 615).
 stoff(sauerStoffKapsel, 350).
 stoff(schaltPlatte, 916250).
 stoff(schmierMittel, 110000).
 stoff(schmutz, 1000).
+stoff(schwefelin, 20).
 stoff(schweisserSeife, 6000).
+stoff(silber, 101).
+stoff(solanium, 7000).
+stoff(sternenKnolle, 32).
+stoff(stickStoff, 20).
 stoff(sechsZackigerEntKoppler, 15000).
 stoff(seltenesMetallElement, 4200).
 stoff(sichSelbsReparierendesHeridium, 6000).
-stoff(sprengDrohnen, 0).
 stoff(sternenSeide, 6000).
 stoff(stickStoffSalz, 50000).
 stoff(strassenKoeterBronze, 25000).
 stoff(superOxidKristall, 5100).
-stoff(supraLeiter, 0).
+stoff(supraLeiter, 1500000).
+stoff(supraleitendeFaser, 50000).
 stoff(technologieModul, 50000).
 stoff(teleportKoordinaten, 50000).
 stoff(tetraKobalt, 6150).
 stoff(thermischesKondensat, 50000).
 stoff(tragbarerReaktor, 0).
-stoff(treibStoffOxidant, 0).
+stoff(tritium, 6).
 stoff(umhuellterSchatten, 1000).
+stoff(unkontrollierbarerSchimmel, 20).
 stoff(unraffiniertesPyritFett, 6000).
+stoff(uran, 248).
+stoff(verdichteterKohlenStoff, 600).
 stoff(vergitterterBogenKristall, 50000).
-stoff(vierFachServo, 20000).
+stoff(verrostetesMetall, 20).
+stoff(vierfachServo, 20000).
 stoff(vyKeenBildnis, 24750).
-stoff(vyKeenDolch, 0).
+stoff(vyKeenDolch, 11688).
 stoff(warpZelle, 11733).
 stoff(waermeSchutzModulS, 360).
 stoff(wirbelWuerfel, 5800).
 stoff(wiederhergestellteTechnologie, 50000).
-
-
-/* ----------------- Rohstoffe ------------------------------------ */
-stoff(aktiviertesCadmium, 450).
-stoff(aktiviertesEmeril, 696).
-stoff(aktiviertesIndium, 949).
-stoff(aktiviertesKupfer, 245).
-stoff(ammoniak, 62).
-stoff(cadmium, 234).
-stoff(chlor, 602).
-stoff(chlorGitter, 6150).
-stoff(chromatischesMetall, 245).
-stoff(coprit, 30).
-stoff(deuterium, 34).
-stoff(dioxit, 62).
-stoff(diWasserStoff, 34).
-stoff(emeril, 348).
-stoff(frostKristall, 12).
-stoff(ferritStaub, 14).
-stoff(gammaWurzel, 16).
-stoff(gold, 202).
-stoff(indium, 464).
-stoff(ionisiertesKobalt, 401).
-stoff(kaktusFleisch, 28).
-stoff(kelpBeutel, 41).
-stoff(kobalt, 198).
-stoff(kohlenStoff, 12).
-stoff(kuerbisKnolle, 41).
-stoff(kristallSulfid, 7410).
-stoff(kupfer, 121).
-stoff(lebendePerle, 4798).
-stoff(lebenderSchleim, 20).
-stoff(magnetisiertesFerrit, 82).
-stoff(mordit, 40).
-stoff(nanitHaufen, -1).
-stoff(natrium, 41).
-stoff(natriumNitrat, 82).
-stoff(paraffinium, 62).
-stoff(phosphor, 62).
-stoff(pilzSchimmel, 2496).
-stoff(platin, 303).
-stoff(pugneum, 138).
-stoff(pyrit, 62).
-stoff(radon, 20).
-stoff(reinesFerrit, 28).
-stoff(restSubstanz, 20).
-stoff(salz, 299).
-stoff(sauerStoff, 34).
-stoff(schwefelin, 20).
-stoff(silber, 101).
-stoff(solanium, 7000).
-stoff(sternenKnolle, 32).
-stoff(stickStoff, 20).
-stoff(tritium, 6).
-stoff(unkontrollierbarerSchimmel, 20).
-stoff(uran, 248).
-stoff(verdichteterKohlenStoff, 600).
-stoff(verrostetesMetall, 20).
 stoff(zaeheFluessigkeiten, 20).
-
+stoff(zustandsPhase, 1000).
+stoff(zytoPhosphat, 0).
 
 stoff(Stoff, Wert) :-
 	basisBauEndStoff(Stoff),
 	Wert = 0.
 
 /* =============================== Ausruestung ========================== */
+/* ------------------------------- Zugangskarten ------------------------ */
+basisBauEndStoff(atlasPassV1).
+basisBauEndStoff(atlasPassV2).
+basisBauEndStoff(atlasPassV3).
+
+/* ------------------------------- Inventarnippes ----------------------- */
+basisBauEndStoff(sternenSamen).
+
+/* ------------------------------- Anzugmodule -------------------------- */
+basisBauEndStoff(ammoniumHaltigeVerarbeitungsAnlagen).
+basisBauEndStoff(effizienteWasserduesenA).
+basisBauEndStoff(effizienteWasserduesenB).
+basisBauEndStoff(effizienteWasserduesenC).
+basisBauEndStoff(effizienteWasserduesenS).
+basisBauEndStoff(gefahrenSchutz).
+basisBauEndStoff(gefahrGutSchutzHandschuh).
+basisBauEndStoff(jetPack).
+basisBauEndStoff(neuralStimulator).
+basisBauEndStoff(qFeldInternePolsterung).
+basisBauEndStoff(raketenStiefel).
+basisBauEndStoff(sauerstoffHaltigeStabilisatoren).
+basisBauEndStoff(sauerstoffUmleiterA).
+basisBauEndStoff(sauerstoffUmleiterB).
+basisBauEndStoff(sauerstoffUmleiterC).
+basisBauEndStoff(sauerstoffUmleiterS).
+basisBauEndStoff(sauerstoffWiederVerwerter).
+basisBauEndStoff(selbstReinigendeKiemenEinheit).
+basisBauEndStoff(schildGitter).
+basisBauEndStoff(unterHyperDruckStehendeKreislaufAtmungsHilfe).
+
+
+/* ------------------------------- Raumschiffmodule --------------------- */
+basisBauEndStoff(frachterHyperAntrieb).
+basisBauEndStoff(infraMesser).
+
+/* ------------------------------- Raumschiff Kauf-Module --------------- */
+basisBauEndStoff(asymetrischeRefraktoren).
+basisBauEndStoff(chromatischeSplitter).
+basisBauEndStoff(dauerwelligePolarisatoren).
+basisBauEndStoff(freiElektronischeOszillatoren).
+basisBauEndStoff(glorreicheNeutrinoInjektoren).
+basisBauEndStoff(gyroskopischeEntfernungsPolarisatoren).
+basisBauEndStoff(gyroskopischePlasmaAuspuffRohre).
+basisBauEndStoff(hypersonischeNeutrinoInjektoren).
+basisBauEndStoff(induktiveResonatoren).
+basisBauEndStoff(nuklearePolarisatoren).
+basisBauEndStoff(resonanteReflektorGlaeser).
+basisBauEndStoff(spezialisierteSuperLuminare).
+basisBauEndStoff(supraleitendeReflektorGlaeser).
+basisBauEndStoff(unvergleichlicheReflektorGlaeser).
+basisBauEndStoff(ultraHochfrequenteOszillatoren).
+
+
+/* ------------------------------- Fregatten-Module ------------------ */
+basisBauEndStoff(gedankenKontrollGeraet).
+basisBauEndStoff(holographischerAnalysator).
+basisBauEndStoff(mineralKompressor).
+basisBauEndStoff(sprengDrohnen).
+basisBauEndStoff(treibStoffOxidant).
+
+/* ------------------------------- Multiwerkzeugmodule ------------------ */
+basisBauEndStoff(analyseVisier).
+basisBauEndStoff(gammaStrahlendeBegrenzer).
+basisBauEndStoff(scanner).
+basisBauEndStoff(wellenFormWiederVerwerter).
+basisBauEndStoff(terrainManipulator).
+basisBauEndStoff(eigenesKraftFeld).
+basisBauEndStoff(kampfVisier).
+basisBauEndStoff(minenLaser).
+basisBauEndStoff(fortgeschrittenerMinenLaser).
+basisBauEndStoff(blitzWerfer).
+basisBauEndStoff(laufIonisator).
+basisBauEndStoff(plasmaWerfer).
+basisBauEndStoff(geologieKanone).
+basisBauEndStoff(glutSpeer).
+basisBauEndStoff(masseBeschleuniger).
+basisBauEndStoff(streuBlaster).
+basisBauEndStoff(geschossSchmierer).
+basisBauEndStoff(impulsWerfer).
+basisBauEndStoff(verstaerkteKartuschen).
+
+/* ------------------------------- Exo-Fahrzeugmodule ------------------- */
+basisBauEndStoff(fusionsAntrieb).
+basisBauEndStoff(humboldtAntrieb).
+basisBauEndStoff(driftAufhaengung).
+basisBauEndStoff(haftungsVerstaerkungsAufhaengung).
+basisBauEndStoff(rutschAufhaengung).
+basisBauEndStoff(exoFahrzeugBordKanonenUpgrade).
+basisBauEndStoff(exoFahrzeugMinenLaserUpgrade).
+basisBauEndStoff(exoFahrzeugSignalBooster).
+basisBauEndStoff(exoFahrzeugSignalBoosterUpgradeSigma).
+basisBauEndStoff(exoFahrzeugSignalBoosterUpgradeTau).
+basisBauEndStoff(exoFahrzeugBeschleunigungsModul).
+basisBauEndStoff(exoFahrzeugMinenLaser).
+basisBauEndStoff(exoFahrzeugMinenLaserUpgradeSigma).
+basisBauEndStoff(exoFahrzeugBordKanone).
+basisBauEndStoff(nautilonKanone).
+basisBauEndStoff(tethysStrahl).
+basisBauEndStoff(osmotischerGenerator).
+
+/* =============================== Baustoffe ============================ */
 /* ------------------------------- Terminals ---------------------------- */
 basisBauEndStoff(konstruktionsTerminal).
 basisBauEndStoff(exoFahrzeugTerminal).
@@ -219,7 +318,7 @@ basisBauEndStoff(pilzGeflecht).
 basisBauEndStoff(sonnenRebe).
 basisBauEndStoff(sternenDorn).
 
-/* ------------------------------- Exo-Fahrzeug-Module ------------------ */
+/* ------------------------------- Exo-Fahrzeug-Stationen --------------- */
 basisBauEndStoff(kollossGeoBucht).
 basisBauEndStoff(nomadenGeoBucht).
 basisBauEndStoff(roamerGeoBucht).
@@ -251,6 +350,9 @@ basisBauEndStoff(bett).
 /* ------------------------------- Lichter ------------------------------ */
 basisBauEndStoff(licht).
 basisBauEndStoff(farbigeLeuchte).
+basisBauEndStoff(farbigeLeuchteGruen).
+basisBauEndStoff(farbigeLeuchteRot).
+basisBauEndStoff(farbigeLeuchteWeiss).
 
 /* ------------------------------- Verzierungen ------------------------- */
 basisBauEndStoff(flagge).
@@ -353,7 +455,6 @@ basisBauEndStoff(stabilerWuerfel).
 basisBauEndStoff(stuhl1).
 basisBauEndStoff(stuhl2).
 basisBauEndStoff(stuhl3).
-basisBauEndStoff(terminalDesGalaktischenMarktes).
 basisBauEndStoff(tFoermigerKorridor).
 basisBauEndStoff(tisch1).
 basisBauEndStoff(tisch2).
@@ -373,9 +474,6 @@ basisBauEndStoff(zylindrischerRaumRahmen).
 
 
 /* Zwei Komponenten */
-
-
-
 basisBauEndStoff(aussichtsKugel).
 basisBauEndStoff(betonFassade).
 basisBauEndStoff(betonFenster).
@@ -384,10 +482,6 @@ basisBauEndStoff(bioKuppelRaum).
 basisBauEndStoff(bodenMatte).
 basisBauEndStoff(deckenLeuchte).
 basisBauEndStoff(deckenPaneel).
-basisBauEndStoff(exoFahrzeugBordKanone).
-basisBauEndStoff(exoFahrzeugBordKanonenUpgrade).
-basisBauEndStoff(exoFahrzeugMinenLaserUpgrade).
-basisBauEndStoff(exoFahrzeugSignalBooster).
 basisBauEndStoff(fassFoermigerFabrikator).
 basisBauEndStoff(fenster).
 basisBauEndStoff(flachesModul).
@@ -426,15 +520,10 @@ basisBauEndStoff(zugangsRampe).
 
 
 /* Drei Komponenten */
-
-
-basisBauEndStoff(exoFahrzeugBeschleunigungsModul).
 basisBauEndStoff(exoFahrzeugBeschleunigungsModulA).
 basisBauEndStoff(exoFahrzeugBeschleunigungsModulB).
-basisBauEndStoff(exoFahrzeugMinenLaser).
 basisBauEndStoff(exoFahrzeugSignalBoosterUpgrade).
 basisBauEndStoff(exoFahrzeugSignalBoosterUpgradeA).
-basisBauEndStoff(fortgeschrittenerMinenLaser).
 basisBauEndStoff(glasTunnel).
 basisBauEndStoff(kolossGeoBucht).
 basisBauEndStoff(landeFeld).
@@ -446,6 +535,74 @@ basisBauEndStoff(tFoermigerGlasTunnel).
 basisBauEndStoff(vertikalerGlasTunnel).
 basisBauEndStoff(wasserDichteTuer1).
 basisBauEndStoff(xFoermigerGlasTunnel).
+
+/* =============================== kaufbare Rezepte ===================== */
+/* ------------------------------- Raumschiffmodule --------------------- */
+
+modulRezept(ablativePanzerungC, 85).
+modulRezept(cadmiumAntriebC, 80).
+modulRezept(dysonPumpeB, 120).
+modulRezept(effizienteDuesenB, 120).
+modulRezept(emerilAntriebC, 120).
+modulRezept(fourierBegrenzerB, 120).
+modulRezept(fragmentSuperAufladerB, 120).
+modulRezept(frachterWarpReaktorSigmaC, 300).
+modulRezept(frachterWarpReaktorTauB, 400).
+modulRezept(frachterWarpReaktorTauC, 400).
+modulRezept(frachterWarpReaktorThetaA, 800).
+modulRezept(grosseRaketenRohreB, 50).
+modulRezept(indiumAntrieb, 120).
+modulRezept(infraMesserBeschleuniger, 150).
+modulRezept(konfliktScanner, 150).
+modulRezept(nichtLineareOptikB, 120).
+modulRezept(nichtLineareOptikC, 75).
+modulRezept(nichtLineareOptikInfraMesserB, 120).
+modulRezept(phasenStrahler, 150).
+modulRezept(positronenWerfer, 150).
+modulRezept(raketenWerfer, 100).
+modulRezept(teleportEmpfaenger, 150).
+modulRezept(wirtschaftsScanner, 150).
+modulRezept(zyklotronBalliste, 150).
+
+/* ------------------------------- Anzugmodule -------------------------- */
+
+modulRezept(effizienteWasserDuesenA, 350).
+modulRezept(sauerstoffUmleiterA, 240).
+modulRezept(sauerstoffWiederVerwerterC, 120).
+modulRezept(gefahrGutSchutzHandschuh, 80).
+modulRezept(raketenStiefelA, 200).
+modulRezept(neuralStimulatorB, 90).
+
+/* =============================== kaufbare Module ====================== */
+/* ------------------------------- Raumschiffmodule --------------------- */
+
+modulKauf(hyperAntriebModulC, 72).
+modulKauf(impulsAntriebModulC, 73).
+modulKauf(infraMesserModulC, 74).
+modulKauf(photonenKanonenModulC, 74).
+modulKauf(phasenStrahlerModulC, 71).
+modulKauf(positronModulC, 69).
+modulKauf(positronModulB, 172).
+modulKauf(phasenStrahlerModulS, 414).
+modulKauf(raumSchiffSchildModulC, 72).
+modulKauf(raumSchiffSchildModulS, 0).
+modulKauf(zykloTronModulB, 170).
+modulKauf(zykloTronModulC, 73).
+
+/* ------------------------------- Anzugmodule -------------------------- */
+
+modulKauf(bewegungsModulC, 67).
+modulKauf(giftSchutzModulB, 170).
+modulKauf(lebensErhaltungsModulB, 167).
+modulKauf(schildModulC, 72).
+modulKauf(strahlungsSchutzModulA, 288).
+modulKauf(strahlungsSchutzModulB, 175).
+modulKauf(strahlungsSchutzModulS, 445).
+modulKauf(streuBlasterModulA, 288).
+modulKauf(unterWasserSchutzModulB, 168).
+modulKauf(waermeSchutzModulA, 283).
+modulKauf(waermeSchutzModulB, 166).
+
 
 /* Testprädikate */
 /*----------------------------------------------------------------*/
@@ -462,19 +619,31 @@ stoffInFunktionErgebnisStoff(Stoff) :-
 
 fehlerInputStoffNichtDefiniert(Stoff) :-
 	stoffInFunktionEingangsStoff(Stoff),
-	\+stoff(Stoff, _).
+	\+stoff(Stoff, _),
+	format('falscher Eingangs-Stoff: ~k~n', Stoff).
 
 fehlerOutputStoffNichtDefiniert(Stoff) :-
 	stoffInFunktionErgebnisStoff(Stoff),
-	\+stoff(Stoff, _).
+	\+stoff(Stoff, _),
+	format('falscher Produkt-Stoff: ~k~n', Stoff).
 
 produktNichtBewertet(Stoff) :-
 	stoff(Stoff, Wert),
 	\+basisBauEndStoff(Stoff),
 	Wert = 0.
 
-keineDoppeltenInStoff :-
+doppelteInStoff :-
 	findall(Stoff0, stoff(Stoff0, _), StoffListe),
-	is_set(StoffListe).
+	sort(StoffListe, Sorted),
+	dubChk(StoffListe, Sorted, Doppelte),
+	Doppelte \= [],
+	format('Element(e) ~k ist/sind doppelt~n', [Doppelte]).
 
-
+dubChk(List, SortedList, Doppelte) :-
+	SortedList = [],
+	Doppelte = List.
+	
+dubChk(List, SortedList, Doppelte) :-
+	SortedList = [ Kopf | SortedRest ],
+	selectchk(Kopf, List, RestList),
+	dubChk(RestList, SortedRest, Doppelte). 
