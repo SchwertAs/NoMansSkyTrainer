@@ -1,4 +1,4 @@
-:- module(sammeln, [sammelbar/3, sammelAktion/1, fertigeLoesung/8]).
+:- module(sammeln, [sammelbar/3, sammelAktion/1, wandelAktion/1, fertigeLoesung/8]).
 
 :- dynamic(sammelbar/3).
 :- dynamic(fertigeLoesung/8).
@@ -16,6 +16,10 @@ sammelAktion(ernten).
 sammelAktion(raumSchuerfen).
 sammelAktion(vorfertigen).
 
+/* mögliche Stoffwandelaktionen */
+wandelAktion(raffinieren).
+wandelAktion(herstellen).
+wandelAktion(bauen).
 
 /* Pflanzen ohne Gerät wild ernten */
 pfluecken(natrium, 20).
