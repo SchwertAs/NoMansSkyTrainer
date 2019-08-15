@@ -1,6 +1,20 @@
-:- module(ausgabe, [ausgabe/1, ausgabeSummen/5]).
+:- module(ausgabe, [ausgabeVorgaenge/1, ausgabeSummen/5]).
 
-ausgabe(Vorgaenge) :-
+ausgabeSammlung(SammelSet) :-
+	dict_create(SammelSet0, 'SammelStueckliste', []),
+	SammelSet = SammelSet0.
+	
+ausgabeSammlung(SammelSet) :-
+	get_dict(Stoff, SammelSet, Vorgang),
+	Vorgang = [Operation, SammelAnzahl],
+	format('Bitte sammeln Sie ~k ', SammelAnzahl),
+	format('~k ', Stoff),
+	format('durch ~k.~n', Operation), 
+	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
+	ausgabeSammlung(SammelSetDanach),
+	!. 
+    
+ausgabeVorgaenge(Vorgaenge) :-
 	include(isRaffinieren, Vorgaenge, Raffinaden),
 	group(Raffinaden, [], Gruppiert),
 	!,
@@ -54,25 +68,39 @@ gebeAus(Vorgaenge) :-
 	
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, [Operation, _], _, [_, _]],
-	(Operation = raffinieren; Operation = herstellen; Operation = bauen),
-	format('~k~n', [Kopf]),
+	Kopf = [WandelAnz, [Operation, _], Komponenten, [_, Produkt]],
+	sammeln:wandelAktion(Operation),
+	format('führe ~k mal ', WandelAnz),
+	format('~k ', Operation),
+	format('von ~k ', Produkt),
+	format('mit den Komponenten '),
+	gebeKomponenteAus(Komponenten),
+	format('aus~n', [Komponenten]),
 	gebeAus(Rest),
 	!.		
 
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ _ | Rest], 
-	gebeAus(Rest).		
+	gebeAus(Rest).		 
 
-ausgabeSammlung(SammelSet) :-
-	format('~n', []),
-	format('~k~n', SammelSet).
-    
+gebeKomponenteAus(Komponenten) :-
+	Komponenten = [].
+	
+gebeKomponenteAus(Komponenten) :-
+	Komponenten = [ Kopf | Rest ],
+	Kopf = [_, Stoff],
+	format('~k', Stoff),
+	(Rest \= [], format(', '); format(' ')),
+	gebeKomponenteAus(Rest),
+	!.
+	
 ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWertEndProdukt) :-
 	format('Sammeln Gesamtbedarf: ~k Stück~n', GesamtZahl),
     format('Gesamtwert Sammlung: ~k Units~n', GesamtWertSammlung),
     format('GesamtZeitAufwand: ~k 1/100 sec~n', GesamtZeit),
-    format('Kosten: ~k Units~n', GesamtKosten),
+    format('Kosten Einkauf: ~k Units~n', GesamtKosten),
     format('Gesamtwert Endstoff: ~k Units~n', GesamtWertEndProdukt),
     MehrWert is GesamtWertEndProdukt - GesamtWertSammlung,
-    format('Mehrwert: ~k Units~n', MehrWert).
+    format('Mehrwert: ~k Units~n', MehrWert),
+    StundenLohn is round(MehrWert * 360000 / GesamtZeit),
+    format('Stundenlohn: ~k Units/Stunde~n', StundenLohn).

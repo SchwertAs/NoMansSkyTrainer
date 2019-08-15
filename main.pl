@@ -1,8 +1,8 @@
-:- module(main, [produktMit/5, schnellsteLoesung/2, billigsteLoesung/2, minimaleSammlungLoesung/2]).
+:- module(main, [minimaleSammlungLoesung/2]).
 /* Declarationen */
-:- dynamic stoffBestLoesung/2.
+/* :- dynamic stoffBestLoesung/2.
 
-/* Benutzerprädikate 
+Benutzerprädikate 
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
 	ausgangsStoff:stoff(Produkt, EinzelWert),
@@ -39,8 +39,9 @@ minimaleSammlungLoesung(Anzahl, Stoff) :-
 	min_member(MinimalZeit, ZeitSammlungListe),
 	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	!,
+	format('~n', []),
 	ausgabe:ausgabeSammlung(SammelSet),
-	ausgabe:ausgabe(Vorgaenge),
+	ausgabe:ausgabeVorgaenge(Vorgaenge),
 	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
 load :-
@@ -53,7 +54,7 @@ load :-
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/reisen'),
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/statistik'),
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus'),
-	\+sammeln:sammelbarInit.
+	sammeln:sammelbarInit.
 
 testMinimaleSammlung :-
 	ausgangsStoff:stoff(Stoff, _),
