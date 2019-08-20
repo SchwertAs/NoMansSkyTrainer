@@ -604,7 +604,7 @@ rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, xFoermige
 /* ---------------------  Test Prädikate ----------------------------------------------- */
 fehlerOperation(Op, Produkt) :-
 	rezept(Op, _, [_, Produkt], _),
-	\+memberchk(Op, [raffinieren, bauen, herstellen]).
+	sammeln:wandelAktion(Op).
 
 komponenteIstKeinStoff(FehlStoff) :-
 	ausgangsStoff:stoffInFunktionEingangsStoff(FehlStoff),

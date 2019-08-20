@@ -23,3 +23,8 @@ spielStatus(hyperAntriebBlau, false).
 spielStatus(autoIstFlott, true).
 
 spielStatus(frachterVorhanden, true).
+
+/* Spieler Präferenzen */
+spielStatus(kampfWille, true).
+
+

@@ -3,9 +3,6 @@
 :- dynamic(sammelbar/3).
 :- dynamic(fertigeLoesung/8).
 
-/* Spieler Präferenzen */
-kampfWille(true).
-
 /* mögliche Sammleaktionen */
 sammelAktion(minenLaserNutzen).
 sammelAktion(verbessertenMinenLaserNutzen).
@@ -151,7 +148,7 @@ sammelArt(Stoff, Operation, HauptZeit) :-
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = erkaempfen,
-	kampfWille(true),
+	spielStatus:spielStatus(kampfWille, true),
 	erkaempfen(Stoff, HauptZeit).
 
 
