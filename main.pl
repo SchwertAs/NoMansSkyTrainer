@@ -1,9 +1,12 @@
 :- module(main, [minimaleSammlungLoesung/2]).
 
+
+
 /* Declarationen */
 /* :- dynamic stoffBestLoesung/2.
 
-Benutzerprädikate 
+ Benutzerprädikate 
+
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
 	ausgangsStoff:stoff(Produkt, EinzelWert),

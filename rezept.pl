@@ -20,7 +20,7 @@ rezept(raffinieren, [[1, cadmium]], [1, chromatischesMetall], 79 ).
 rezept(raffinieren, [[2, emeril]], [3, chromatischesMetall], 14 ).
 rezept(raffinieren, [[2, indium]], [4, chromatischesMetall], 7 ).
 rezept(raffinieren, [[2, kupfer]], [1, chromatischesMetall], 93 ).
-rezept(raffinieren, [[3, mordit]], [1, coprit], 64 ).
+rezept(raffinieren, [[3, mordit]], [1, faecium], 64 ).
 rezept(raffinieren, [[1, ammoniak]], [1, ferritStaub], 93 ).
 rezept(raffinieren, [[1, dioxit]], [2, ferritStaub], 93 ).
 rezept(raffinieren, [[1, paraffinium]], [1, ferritStaub], 93 ).
@@ -29,6 +29,7 @@ rezept(raffinieren, [[1, pyrit]], [1, ferritStaub], 93 ).
 rezept(raffinieren, [[1, uran]], [1, ferritStaub], 93 ).
 rezept(raffinieren, [[1, verrostetesMetall]], [2, ferritStaub], 84 ).
 rezept(raffinieren, [[100, silber]], [1, glas], 6000 ).
+rezept(raffinieren, [[40, silikatPulver]], [1, glas], 6000 ).
 rezept(raffinieren, [[1, grantine]], [125, gold], 3 ).
 rezept(raffinieren, [[1, lebendePerle]], [100, gold], 1 ).
 rezept(raffinieren, [[1, lemmium]], [125, gold], 3 ).
@@ -45,7 +46,7 @@ rezept(raffinieren, [[1, sternenKnolle]], [2, kohlenStoff], 18 ).
 rezept(raffinieren, [[1, solanium]], [2, kohlenStoff], 18 ).
 rezept(raffinieren, [[1, zaeheFluessigkeiten]], [1, lebenderSchleim], 154 ).
 rezept(raffinieren, [[2, reinesFerrit]], [1, magnetisiertesFerrit], 64 ).
-rezept(raffinieren, [[3, coprit]], [2, mordit], 93 ).
+rezept(raffinieren, [[3, faecium]], [2, mordit], 93 ).
 rezept(raffinieren, [[5, platin]], [1, nanitHaufen], 64 ).
 rezept(raffinieren, [[10, pugneum]], [1, nanitHaufen], 33 ).
 rezept(raffinieren, [[5, unkontrollierbarerSchimmel]], [1, nanitHaufen], 15 ).
@@ -95,11 +96,11 @@ rezept(raffinieren, [[1, reinesFerrit], [1, indium]], [4, chromatischesMetall], 
 rezept(raffinieren, [[1, reinesFerrit], [1, emeril]], [3, chromatischesMetall], 31 ).
 rezept(raffinieren, [[1, reinesFerrit], [1, kupfer]], [1, chromatischesMetall], 94 ).
 rezept(raffinieren, [[1, reinesFerrit], [1, cadmium]], [2, chromatischesMetall], 48 ).
-rezept(raffinieren, [[1, stickStoff], [1, schwefelin]], [1, coprit], 62 ).
+rezept(raffinieren, [[1, stickStoff], [1, schwefelin]], [1, faecium], 62 ).
 rezept(raffinieren, [[1, diWasserStoff], [1, tritium]], [1, deuterium], 63 ).
-rezept(raffinieren, [[1, verdichteterKohlenStoff], [1, mordit]], [4, coprit], 24 ).
-rezept(raffinieren, [[2, kohlenStoff], [1, mordit]], [3, coprit], 31 ).
-rezept(raffinieren, [[1, coprit], [1, sauerStoff]], [3, coprit], 31 ).
+rezept(raffinieren, [[1, verdichteterKohlenStoff], [1, mordit]], [4, faecium], 24 ).
+rezept(raffinieren, [[2, kohlenStoff], [1, mordit]], [3, faecium], 31 ).
+rezept(raffinieren, [[1, faecium], [1, sauerStoff]], [3, faecium], 31 ).
 rezept(raffinieren, [[2, frostKristall], [1, salz]], [1, dioxit], 91 ).
 rezept(raffinieren, [[1, verdichteterKohlenStoff], [1, natriumNitrat]], [2, dioxit], 48 ).
 rezept(raffinieren, [[1, kohlenStoff], [1, natriumNitrat]], [1, dioxit], 84 ).
@@ -110,7 +111,7 @@ rezept(raffinieren, [[2, dioxit], [1, sauerStoff]], [1, frostKristall], 94 ).
 rezept(raffinieren, [[2, uran], [1, sauerStoff]], [1, gammaWurzel], 92 ).
 rezept(raffinieren, [[1, gammaWurzel], [1, uran]], [2, gammaWurzel], 48 ).
 rezept(raffinieren, [[1, mordit], [1, pugneum]], [1, gold], 92 ).
-rezept(raffinieren, [[1, coprit], [1, pugneum]], [2, gold], 47 ).
+rezept(raffinieren, [[1, faecium], [1, pugneum]], [2, gold], 47 ).
 rezept(raffinieren, [[1, chromatischesMetall], [1, indium]], [4, indium], 23 ).
 rezept(raffinieren, [[50, natriumNitrat], [50, natrium]], [1, instabilesNatrium], 12000 ).
 rezept(raffinieren, [[1, kuerbisKnolle], [1, pugneum]], [2, ionisiertesKobalt], 48 ).
@@ -145,9 +146,9 @@ rezept(raffinieren, [[1, natriumNitrat], [1, sauerStoff]], [2, natriumNitrat], 4
 rezept(raffinieren, [[1, natriumNitrat], [1, stickStoff]], [2, natriumNitrat], 48 ).
 rezept(raffinieren, [[1, natrium], [1, pugneum]], [1, natriumNitrat], 92 ).
 rezept(raffinieren, [[1, natrium], [1, sauerStoff]], [1, natriumNitrat], 92 ).
-rezept(raffinieren, [[1, natrium], [1, coprit]], [2, natriumNitrat], 48 ).
+rezept(raffinieren, [[1, natrium], [1, faecium]], [2, natriumNitrat], 48 ).
 rezept(raffinieren, [[1, natriumNitrat], [1, pugneum]], [3, natriumNitrat], 31 ).
-rezept(raffinieren, [[1, natriumNitrat], [1, coprit]], [2, natriumNitrat], 48 ).
+rezept(raffinieren, [[1, natriumNitrat], [1, faecium]], [2, natriumNitrat], 48 ).
 rezept(raffinieren, [[2, sternenKnolle], [1, salz]], [1, paraffinium], 92 ).
 rezept(raffinieren, [[1, sauerStoff], [1, silber]], [2, paraffinium], 48 ).
 rezept(raffinieren, [[2, pyrit], [1, ferritStaub]], [1, paraffinium], 92 ).
@@ -177,9 +178,9 @@ rezept(raffinieren, [[1, radon], [1, diWasserStoff]], [1, uran], 43 ).
 rezept(raffinieren, [[1, radon], [1, ferritStaub]], [1, uran], 92 ).
 rezept(raffinieren, [[1, radon], [1, reinesFerrit]], [2, uran], 48 ).
 rezept(raffinieren, [[1, radon], [1, magnetisiertesFerrit]], [3, uran], 31 ).
-rezept(raffinieren, [[1, coprit], [1, mordit]], [2, verdichteterKohlenStoff], 48 ).
-rezept(raffinieren, [[1, coprit], [1, verdichteterKohlenStoff]], [3, verdichteterKohlenStoff], 31 ).
-rezept(raffinieren, [[2, kohlenStoff], [1, coprit]], [2, verdichteterKohlenStoff], 48 ).
+rezept(raffinieren, [[1, faecium], [1, mordit]], [2, verdichteterKohlenStoff], 48 ).
+rezept(raffinieren, [[1, faecium], [1, verdichteterKohlenStoff]], [3, verdichteterKohlenStoff], 31 ).
+rezept(raffinieren, [[2, kohlenStoff], [1, faecium]], [2, verdichteterKohlenStoff], 48 ).
 rezept(raffinieren, [[2, sauerStoff], [1, verdichteterKohlenStoff]], [6, verdichteterKohlenStoff], 16 ).
 rezept(raffinieren, [[2, kohlenStoff], [2, sauerStoff]], [5, verdichteterKohlenStoff], 18 ).
 rezept(raffinieren, [[1, sauerStoff], [1, reinesFerrit]], [2, verrostetesMetall], 52 ).
@@ -264,27 +265,22 @@ rezept(raffinieren, [[250, chromatischesMetall], [25, verdichteterKohlenStoff], 
 rezept(raffinieren, [[250, chromatischesMetall], [50, kohlenStoff], [5, natriumNitrat]], [1, warpZelle], 60000 ).
 
 
-/* ---------------------  Fabik-Rezepte ------------------------------------------- */
+/* ---------------------  Rezepte aus Fabriken oder Quests ------------------------ */
 rezept(herstellen, [[150, chlor]], [1, chlorGitter], 0 ).
 rezept(herstellen, [[150, natriumNitrat]], [1, instabilesNatrium], 0 ).
 rezept(herstellen, [[150, natriumNitrat]], [1, hermetischesSiegel], 0 ).
 rezept(herstellen, [[50, ionisiertesKobalt]], [1, kobaltSpiegel], 0 ).
 rezept(herstellen, [[150, verdichteterKohlenStoff]], [1, kohlenStoffKristall], 0 ).
-rezept(herstellen, [[50, kohlenStoff]], [1, kohlenStoffNanoRohr], 0 ).
 rezept(herstellen, [[150, reinesFerrit]], [1, seltenesMetallElement], 0 ).
 rezept(herstellen, [[50, chlor]], [1, salzRefaktor], 0 ).
 rezept(herstellen, [[150, sauerStoff]], [1, superOxidKristall], 0 ).
 
-
 rezept(herstellen, [[50, paraffinium], [50, ionisiertesKobalt]], [1, aronium], 0 ).
 rezept(herstellen, [[250, radon], [50, verdichteterKohlenStoff]], [1, angereicherterKohlenStoff], 0 ).
 rezept(herstellen, [[1, organischerKatalysator], [1, stickStoffSalz]], [1, fusionsBeschleuniger], 0 ).
-rezept(herstellen, [[1, natriumDiode], [50, gold]], [1, gedankenKontrollGeraet], 0 ).
 rezept(herstellen, [[1, thermischesKondensat], [1, stickStoffSalz]], [1, halbLeiter], 0 ).
 rezept(herstellen, [[1, angereicherterKohlenStoff], [1, stickStoffSalz]], [1, heissesEis], 0 ).
 rezept(herstellen, [[50, ammoniak], [50, ionisiertesKobalt]], [1, herox], 0 ).
-rezept(herstellen, [[1, sauerStoffFilter], [50, gold]], [1, holografischerAnalysator], 0).
-rezept(herstellen, [[25, kobalt], [20, ferritStaub]], [1, ionenAkku], 0 ).
 rezept(herstellen, [[1, lebendesGlas], [1, kryoPumpe]], [1, kryogenKammer], 0 ).
 rezept(herstellen, [[1, heissesEis], [1, thermischesKondensat]], [1, kryoPumpe], 0 ).
 rezept(herstellen, [[100, reinesFerrit], [50, uran]], [1, lemmium], 0 ).
@@ -293,28 +289,20 @@ rezept(herstellen, [[40, natriumNitrat], [40, ferritStaub]], [1, natriumDiode], 
 rezept(herstellen, [[1, thermischesKondensat], [1, angereicherterKohlenStoff]], [1, organischerKatalysator], 0 ).
 rezept(herstellen, [[1, schaltPlatte], [1, supraLeiter]], [1, quantumProzessor], 0 ).
 rezept(herstellen, [[90, sauerStoff], [30, reinesFerrit]], [1, sauerStoffFilter], 0 ).
-rezept(herstellen, [[1, kampfLaeuferGehirn], [50, gold]], [1, sprengDrohnen], 0 ).
 rezept(herstellen, [[250, stickStoff], [50, verdichteterKohlenStoff]], [1, stickStoffSalz], 0 ).
 rezept(herstellen, [[50, pyrit], [100, reinesFerrit]], [1, strassenKoeterBronze], 0 ).
 rezept(herstellen, [[1, halbLeiter], [1, angereicherterKohlenStoff]], [1, supraLeiter], 0 ).
 rezept(herstellen, [[1, fluessigSprengStoff], [1, fusionsBeschleuniger]], [1, tragbarerReaktor], 0 ).
-rezept(herstellen, [[2, vierfachServo], [50, gold]], [1, treibStoffOxidant], 0 ).
-rezept(herstellen, [[100, chromatischesMetall], [100, verdichteterKohlenStoff]], [1, neuralStimulator], 0 ).
-rezept(herstellen, [[1, antiMaterie], [3, technologieModul]], [1, teleportEmpfaenger], 0 ).
-rezept(herstellen, [[5, mikroProzessor], [1, technologieModul]], [1, wirtschaftsScanner], 0 ).
-rezept(herstellen, [[250, chromatischesMetall], [1, technologieModul]], [1, cadmiumAntriebC], 0 ).
-rezept(herstellen, [[1, kobaltSpiegel], [1, technologieModul]], [1, nichtLineareOptikC], 0 ).
-rezept(herstellen, [[250, emeril], [1, technologieModul]], [1, indiumAntriebC], 0 ).
-rezept(herstellen, [[250, cadmium], [1, technologieModul]], [1, emerilAntriebC], 0 ).
-rezept(herstellen, [[1, kampfLaeuferGehirn], [1, technologieModul]], [1, konfliktScanner], 0 ).
-rezept(herstellen, [[200, uran], [1, technologieModul]], [1, positronenWerfer], 0 ).
-rezept(herstellen, [[200, dioxit], [1, technologieModul]], [1, zyklotronBalliste], 0 ).
+rezept(herstellen, [[1, kobaltSpiegel], [1, kabelBaum]], [1, nichtLineareOptikC], 0 ).
+rezept(herstellen, [[250, emeril], [1, kabelBaum]], [1, indiumAntriebC], 0 ).
 
 rezept(herstellen, [[1, tragbarerReaktor], [1, quantumProzessor], [1, geoDesit]], [1, fusionsZuender], 0 ).
 rezept(herstellen, [[1, strassenKoeterBronze], [1, herox], [1, lemmium]], [1, geoDesit], 0 ).
 rezept(herstellen, [[1, aronium], [1, magnoGold], [1, grantine]], [1, iridesit], 0 ).
 rezept(herstellen, [[1, quantumProzessor], [1, kryogenKammer], [1, iridesit]], [1, staseGeraet], 0 ).
 rezept(herstellen, [[16, platin], [16, tritium], [16, gold]], [1, sternenSamen], 0 ).
+rezept(herstellen, [[3, metallPlatten], [1, lebendePerle], [120, cadmium]], [1, seelenEngine], 0 ).
+rezept(herstellen, [[1, seelenEngine], [3, kabelBaum], [3, glas]], [1, gedankenBogen], 0 ).
 
 
 /* ---------------------  Anzug-Bau-Rezepte --------------------------------------- */
@@ -326,6 +314,7 @@ rezept(herstellen, [[50, frostKristall]], [1, glas], 0).
 rezept(herstellen, [[30, verdichteterKohlenStoff]], [1, hermetischesSiegel], 0 ).
 rezept(herstellen, [[200, kaktusFleisch]], [1, instabilesGel], 0 ).
 rezept(herstellen, [[50, kohlenStoff]], [1, kohlenStoffNanoRohr], 0).
+rezept(herstellen, [[10, kohlenStoff]], [1, kreaturenKugeln], 0).
 rezept(herstellen, [[50, ferritStaub]], [1, metallPlatten], 0).
 rezept(herstellen, [[60, ferritStaub]], [1, projektilMunition], 0).
 rezept(herstellen, [[150, ionisiertesKobalt]], [1, tetraKobalt], 0 ).
@@ -351,260 +340,550 @@ rezept(herstellen, [[1, kohlenStoffNanoRohr], [40, chromatischesMetall]], [1, mi
 rezept(herstellen, [[1, novaeRegenerat], [100, indium]], [1, modifizierteQuanten], 0).
 rezept(herstellen, [[1, umhuellterSchatten], [100, ionisiertesKobalt]], [1, nooSpaerischKugel], 0).
 rezept(herstellen, [[1, zustandsPhase], [100, emeril]], [1, novaeRegenerat], 0).
-rezept(herstellen, [[100, tritium], [1, technologieModul]], [1, phasenStrahler], 0 ).
 rezept(herstellen, [[1, endeDerDaemmerung], [100, kupfer]], [1, photischerJade], 0 ).
 rezept(herstellen, [[100, kaktusFleisch], [200, sternenKnolle]], [1, polyFaser], 0 ).
 rezept(herstellen, [[1, metallPlatten], [40, diWasserStoff]], [1, raumSchiffStartTreibStoff], 0).
 rezept(herstellen, [[25, mordit], [600, pilzSchimmel]], [1, saeure], 0).
 rezept(herstellen, [[25, sauerStoff], [20, ferritStaub]], [1, sauerStoffKapsel], 0).
 rezept(herstellen, [[1, hitzeKondensator], [1, polyFaser]], [1, schaltPlatte], 0).
-rezept(herstellen, [[50, coprit], [400, gammaWurzel]], [1, schmierMittel], 0).
+rezept(herstellen, [[50, faecium], [400, gammaWurzel]], [1, schmierMittel], 0).
 rezept(herstellen, [[1, gefangeneNanode], [100, reinesFerrit]], [1, umhuellterSchatten], 0).
 rezept(herstellen, [[1, antiMaterieGehaeuse], [1, antiMaterie]], [1, warpZelle], 0).
 rezept(herstellen, [[1, photischerJade], [100, cadmium]], [1, zustandsPhase], 0).
-
-
 
 /* Drei Komponenten */
 rezept(herstellen, [[10, reinesFerrit ], [10, natriumNitrat], [10, silber]], [1, fortschrittlicherIonenAkku], 0 ).
 rezept(herstellen, [[40, salz], [40, zytoPhosphat], [40, kohlenStoff]], [1, hydrothermaleTreibStoffZelle], 0).
 rezept(herstellen, [[1, herox], [1, strassenKoeterBronze], [1, lemmium]], [1, geoDesit], 0).
-rezept(herstellen, [[16, platin], [16, tritium], [5, gold]], [1, sternSamen], 0).
+rezept(herstellen, [[3, metallPlatten], [1, lebendePerle], [120, cadmium]], [1, seelenEngine], 0).
 
-/* ---------------------  verbrauchbares Fregatten Upgrade-Rezept -------------------- */
+/* %%%%%%%%%%%%%%%%%%%%%  Multi-Tool Module nicht erforschbar %%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(herstellen, [[1, kohlenStoffNanoRohr], [1, hermetischesSiegel], [2, kabelBaum]], [1, fortgeschrittenerMinenLaser], 0).
+
+/* =====================  verbrauchbare Fregatten Upgrade-Rezepte ==================== */
 rezept(herstellen, [[2, vierfachServo], [50, gold]], [1, treibStoffOxidant], 0).
+rezept(herstellen, [[1, natriumDiode], [50, gold]], [1, gedankenKontrollGeraet], 0 ).
+rezept(herstellen, [[1, sauerStoffFilter], [50, gold]], [1, holografischerAnalysator], 0).
+rezept(herstellen, [[1, kampfLaeuferGehirn], [50, gold]], [1, sprengDrohnen], 0 ).
+/* 
+rezept(herstellen, [[2, vierfachServo], [50, gold]], [1, mineralKompressor], 0).
+*/
 
-
-/* ---------------------  Siedlung-Bau-Rezepte --------------------------------------- */
-
-/* Eine Komponente */
-rezept(bauen, [[10, reinesFerrit]], [1, achtEckSchrank], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, arbeitsPlatte], 0 ).
-rezept(bauen, [[10, ferritStaub]], [1, aussehenModifikator], 0 ).
+/* %%%%%%%%%%%%%%%%%%%%%  Siedlung-Bau-Rezepte nicht erforschbar %%%%%%%%%%%%%%%%%%%%% */
+/* =====================  allgemein ================================================== */
 rezept(bauen, [[50, reinesFerrit]], [1, basisBergungsKapsel], 0 ).
-rezept(bauen, [[40, chromatischesMetall]], [1, basisComputer], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, betonBodenPlatte], 0 ).
-rezept(bauen, [[40, ferritStaub]], [1, betonBogen], 0 ).
-rezept(bauen, [[40, ferritStaub]], [1, betonDach], 0 ).
-rezept(bauen, [[30, ferritStaub]], [1, betonDachEndStueck], 0 ).
-rezept(bauen, [[25, ferritStaub]], [1, betonDachPlatte], 0 ).
-rezept(bauen, [[40, ferritStaub]], [1, betonWand], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, betonTuer], 0 ).
-rezept(bauen, [[40, ferritStaub]], [1, betonTuerRahmen], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, bett], 0 ).
-rezept(bauen, [[40, coprit]], [1, copritBlume], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, dekor], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, duenneBetonWand], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, duenneMetallWand], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, eckSofa], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, einfacherSchreibTisch], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, ergonomischesSofa], 0 ).
-rezept(bauen, [[5, natrium]], [1, farbigeLeuchteGruen], 0 ).
-rezept(bauen, [[5, natrium]], [1, farbigeLeuchteRot], 0 ).
-rezept(bauen, [[5, natrium]], [1, farbigeLeuchteWeiss], 0 ).
-rezept(bauen, [[15, kohlenStoff]], [1, floraBehaelter], 0 ).
-rezept(bauen, [[100, reinesFerrit]], [1, gebogenerKorridor], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, gebogenesRohr], 0 ).
-rezept(bauen, [[100, reinesFerrit]], [1, geraderKorridor], 0 ).
-rezept(bauen, [[100, reinesFerrit]], [1, gewoelbteWuerfelFoermigeWand], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, glasPlatteMitBetonRahmen], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, glasPlatteMitHolzRahmen], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, glasPlatteMitMetallRahmen], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, grosserKeil], 0 ).
-rezept(bauen, [[1, glas]], [1, grossesGlasPaneel], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, gruenerWandBildSchirm], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, halberBetonBogen], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, halberHolzBogen], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, halberMetallBogen], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, hoherSchrank], 0 ).
-rezept(bauen, [[40, kohlenStoff]], [1, holzBodenPlatte], 0 ).
-rezept(bauen, [[40, kohlenStoff]], [1, holzTuerRahmen], 0 ).
-rezept(bauen, [[40, kohlenStoff]], [1, holzWand], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, infraStrukturLeiter], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, kanisterRegal], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, kleineBetonBodenPlatte], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, kleineBetonWand], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, kleineHolzPlatte], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, kleineHolzWand], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, kleineMetallWand], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, kleineMetallPlatte], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, kleineKiste], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, kleinerKeil], 0 ).
 rezept(bauen, [[20, reinesFerrit]], [1, kommunikationsStation], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, kugel], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, kurzeBetonWand], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, kurzeHolzWand], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, kurzeMetallWand], 0 ).
-rezept(bauen, [[10, natrium]], [1, laborLampe], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, lagerBehaelter1], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, lagerModulDeko], 0 ).
-rezept(bauen, [[30, reinesFerrit]], [1, leiter], 0 ).
-rezept(bauen, [[100, reinesFerrit]], [1, lFoermigerKorridor], 0 ).
-rezept(bauen, [[5, natrium]], [1, licht], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, metallBodenPlatte], 0 ).
-rezept(bauen, [[40, ferritStaub]], [1, metallBogen], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, metallTuer], 0 ).
-rezept(bauen, [[40, ferritStaub]], [1, metallWand], 0 ).
-rezept(bauen, [[40, mordit]], [1, morditWurzel], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, orangeFarbenerWandBildSchirm], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, oszilloskop], 0 ).
-rezept(bauen, [[5, reinesFerrit]], [1, pflasterung1], 0 ).
-rezept(bauen, [[5, reinesFerrit]], [1, pflasterung2], 0 ).
-rezept(bauen, [[25, reinesFerrit]], [1, pflasterung3], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, pyramide], 0 ).
-rezept(bauen, [[350, reinesFerrit]], [1, quadratischerRaum], 0 ).
-rezept(bauen, [[350, reinesFerrit]], [1, quadratischeTiefSeeKammer], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, regalModul], 0 ).
-rezept(bauen, [[5, metallPlatten]], [1, rennHindernis], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, roboterArm], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, rohr], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, schliessFach], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, schraegeBetonPlatte], 0 ).
-rezept(bauen, [[20, kohlenStoff]], [1, schraegeHolzPlatte], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, schraegeMetallPlatte], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, schubLadenSchrank], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, sofa], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, stabilerWuerfel], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, stuhl1], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, stuhl2], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, stuhl3], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, tisch1], 0 ).
-rezept(bauen, [[10, verdichteterKohlenStoff]], [1, tisch2], 0 ).
-rezept(bauen, [[100, reinesFerrit]], [1, tFoermigerKorridor], 0 ).
-rezept(bauen, [[350, reinesFerrit]], [1, tiefSeeKammer], 0 ).
-rezept(bauen, [[10, kohlenStoff]], [1, topfPflanze], 0 ).
-rezept(bauen, [[50, reinesFerrit]], [1, tuer], 0 ).
-rezept(bauen, [[10, reinesFerrit]], [1, verschlosseneKiste], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, wuerfel], 0 ).
-rezept(bauen, [[50, reinesFerrit]], [1, wuerfelFoermigeInnenTuer], 0 ).
-rezept(bauen, [[80, reinesFerrit]], [1, wuerfelFoermigerDachAufsatz], 0 ).
-rezept(bauen, [[200, reinesFerrit]], [1, wuerfelFoermigerRaum], 0 ).
-rezept(bauen, [[80, reinesFerrit]], [1, wuerfelFoermigerRaumBoden], 0 ).
-rezept(bauen, [[80, reinesFerrit]], [1, wuerfelFoermigerRaumRahmen], 0 ).
-rezept(bauen, [[80, reinesFerrit]], [1, wuerfelRaumFundamentStrebe], 0 ).
-rezept(bauen, [[80, reinesFerrit]], [1, wuerfelRaumViererFundametStrebe], 0 ).
-rezept(bauen, [[100, reinesFerrit]], [1, xFoermigerKorridor], 0 ).
-rezept(bauen, [[20, ferritStaub]], [1, zylinder], 0 ).
-rezept(bauen, [[350, reinesFerrit]], [1, zylindrischerRaum], 0 ).
-rezept(bauen, [[200, reinesFerrit]], [1, zylindrischerRaumRahmen], 0 ).
-
-
-/* Zwei Komponenten */
-rezept(bauen, [[10, magnetisiertesFerrit], [3, glas]], [1, aussichtsKugel], 0).
-rezept(bauen, [[50, ionisiertesKobalt], [1, ionenAkku]], [1, basisTelePorterModul], 0).
-rezept(bauen, [[20, magnetisiertesFerrit], [1, kohlenStoffNanoRohr]], [1, bauplanAnalysator], 0).
-rezept(bauen, [[40, ferritStaub], [10, reinesFerrit]], [1, betonFassade], 0).
-rezept(bauen, [[40, ferritStaub], [1, glas]], [1, betonFenster], 0).
-rezept(bauen, [[50, ferritStaub], [10, reinesFerrit]], [1, betonRampe], 0).
-rezept(bauen, [[25, magnetisiertesFerrit], [5, glas]], [1, bioKuppelRaum], 0).
-rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, bodenMatte], 0).
-rezept(bauen, [[4, reinesFerrit], [5, kobalt]], [1, deckenLeuchte], 0).
-rezept(bauen, [[5, reinesFerrit], [5, kobalt]], [1, deckenPaneel], 0).
-rezept(bauen, [[50, kaktusFleisch], [25, pyrit]], [1, echinoKaktus], 0).
-rezept(bauen, [[60, indium], [20, paraffinium]], [1, eiweissPerlenKugel], 0).
-rezept(bauen, [[50, pugneum], [100, kupfer]], [1, exoFahrzeugBordKanone], 0).
-rezept(bauen, [[50, pugneum], [100, kupfer]], [1, exoFahrzeugBordKanonenUpgrade], 0).
-rezept(bauen, [[50, chromatischesMetall], [50, pugneum]], [1, exoFahrzeugMinenLaserUpgrade], 0).
-rezept(bauen, [[50, chromatischesMetall], [1, mikroProzessor]], [1, exoFahrzeugSignalBooster], 0).
-rezept(bauen, [[40, chromatischesMetall], [25, diWasserStoff]], [1, exoFahrzeugTerminal], 0).
-rezept(bauen, [[10, ionisiertesKobalt], [1, antiMaterie]], [1, fassFoermigerFabrikator], 0).
-rezept(bauen, [[5, ionisiertesKobalt], [1, glas]], [1, fenster], 0).
-rezept(bauen, [[10, ferritStaub], [10, natrium]], [1, flachesModul], 0).
-rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, flagge], 0).
-rezept(bauen, [[50, frostKristall], [25, dioxit]], [1, frostWurz], 0).
-rezept(bauen, [[50, gammaWurzel], [25, uran]], [1, gammaGras], 0).
-rezept(bauen, [[100, reinesFerrit], [1, glas]], [1, gewoelbtesWuerfelFoermigesDach], 0).
-rezept(bauen, [[100, emeril], [100, ionisiertesKobalt]], [1, giftIgel], 0).
-rezept(bauen, [[10, verdichteterKohlenStoff], [5, reinesFerrit]], [1, gewoelbterTisch], 0).
-rezept(bauen, [[5, reinesFerrit], [5, verdichteterKohlenStoff]], [1, grosseMonitorStation], 0).
-rezept(bauen, [[25, ferritStaub], [5, reinesFerrit]], [1, halbeBetonRampe], 0).
-rezept(bauen, [[25, kohlenStoff], [5, reinesFerrit]], [1, halbeHolzRampe], 0).
-rezept(bauen, [[25, ferritStaub], [5, reinesFerrit]], [1, halbeMetallRampe], 0).
-rezept(bauen, [[40, ionisiertesKobalt], [40, reinesFerrit]], [1, holoTuer], 0).
-rezept(bauen, [[40, kohlenStoff], [10, ferritStaub]], [1, holzDach], 0).
-rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, holzDachEndStueck], 0).
-rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, holzDachPlatte], 0).
-rezept(bauen, [[40, kohlenStoff], [10, reinesFerrit]], [1, holzFassade], 0).
-rezept(bauen, [[40, kohlenStoff], [1, glas]], [1, holzFenster], 0).
-rezept(bauen, [[40, kohlenStoff], [10, reinesFerrit]], [1, holzRampe], 0).
-rezept(bauen, [[50, reinesFerrit], [30, kohlenStoff]], [1, innenTreppen], 0).
-rezept(bauen, [[10, ionisiertesKobalt], [1, antiMaterie]], [1, kistenFoermigerFabrikator], 0).
-rezept(bauen, [[40, chromatischesMetall], [25, reinesFerrit]], [1, konstruktionsTerminal], 0).
-rezept(bauen, [[100, reinesFerrit], [1, glas]], [1, korridorMitGlasDach], 0).
-rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium]], [1, lagerBehaelter], 0).
-rezept(bauen, [[40, chromatischesMetall], [25, verdichteterKohlenStoff]], [1, landwirtschaftsTerminal], 0).
-rezept(bauen, [[10, ferritStaub], [10, natrium]], [1, leichterTisch], 0).
-rezept(bauen, [[20, ferritStaub], [10, ferritStaub]], [1, metallDach], 0).
-rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, metallDachEndStueck], 0).
-rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, metallDachPlatte], 0).
-rezept(bauen, [[40, ferritStaub], [10, reinesFerrit]], [1, metallFassade], 0).
-rezept(bauen, [[40, ferritStaub], [1, glas]], [1, metallFenster], 0).
-rezept(bauen, [[50, ferritStaub], [10, reinesFerrit]], [1, metallRampe], 0).
-rezept(bauen, [[100, magnetisiertesFerrit], [5, diWasserStoffGelee]], [1, mittlereRaffinerie], 0).
-rezept(bauen, [[5, reinesFerrit], [5, kobalt]], [1, monitorStation], 0).
-rezept(bauen, [[1, metallPlatten], [1, kohlenStoffNanoRohr]], [1, nachrichtenModul], 0).
-rezept(bauen, [[50, pilzSchimmel], [25, ammoniak]], [1, pilzGeflecht], 0).
-rezept(bauen, [[5, metallPlatten], [2, diWasserStoffGelee]], [1, rennKraftVerstaerker], 0).
-rezept(bauen, [[10, ferritStaub], [10, natrium]], [1, seitenModul], 0).
-rezept(bauen, [[10, reinesFerrit], [5, kobalt]], [1, server], 0).
-rezept(bauen, [[50, solanium], [25, phosphor]], [1, sonnenRebe], 0).
-rezept(bauen, [[2, metallPlatten], [1, diWasserStoffGelee]], [1, speicherPunkt], 0).
-rezept(bauen, [[50, sternenKnolle], [25, paraffinium]], [1, sternenDorn], 0).
-rezept(bauen, [[5, verdichteterKohlenStoff], [1, sternenSeide]], [1, sternenDorn], 0).
-rezept(bauen, [[5, verdichteterKohlenStoff], [5, kobalt]], [1, techBedienFeld], 0).
-rezept(bauen, [[25, magnetisiertesFerrit], [3, mikroProzessor]], [1, terminalDesGalaktischenMarktes], 0).
-rezept(bauen, [[1, metallPlatten], [30, sauerStoff]], [1, tragbareRaffinerie], 0).
-rezept(bauen, [[5, reinesFerrit], [5, kobalt]], [1, waffenRegal], 0).
-rezept(bauen, [[40, chromatischesMetall], [25, pugneum]], [1, waffenTerminal], 0).
-rezept(bauen, [[5, verdichteterKohlenStoff], [5, kobalt]], [1, wandBildSchirm], 0).
-rezept(bauen, [[10, reinesFerrit], [5, kobalt]], [1, wandEinheit], 0).
-rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, wandFlagge], 0).
-rezept(bauen, [[5, verdichteterKohlenStoff], [5, kobalt]], [1, wandVentilator], 0).
-rezept(bauen, [[25, ferritStaub], [1, kristallSulfid]], [1, wasserDichteTuer2], 0).
-rezept(bauen, [[40, chromatischesMetall], [25, magnetisiertesFerrit]], [1, wissenschaftsTerminal], 0).
-rezept(bauen, [[20, ionisiertesKobalt], [2, glas]], [1, wuerfelFoermigerGlasRaum], 0).
-rezept(bauen, [[50, kohlenStoff], [50, reinesFerrit]], [1, zugangsRampe], 0).
-
-
-
-/* Drei Komponenten */
-rezept(bauen, [[5, ammoniak], [2, metallPlatten], [2, hermetischesSiegel]], [1, atmosphaerenVerarbeitungsAnlage], 0).
 rezept(bauen, [[100, uran], [2, metallPlatten], [1, fortschrittlicherIonenAkku]], [1, autonomeBergBauEinheit], 0).
-rezept(bauen, [[50, chromatischesMetall], [15, magnetisiertesFerrit], [2, kohlenStoffNanoRohr]], [1, exoFahrzeugBeschleunigungsModul], 0).
-rezept(bauen, [[150, chromatischesMetall], [40, verdichteterKohlenStoff], [4, kohlenStoffNanoRohr]], [1, exoFahrzeugBeschleunigungsModulA], 0).
-rezept(bauen, [[100, chromatischesMetall], [20, verdichteterKohlenStoff], [3, kohlenStoffNanoRohr]], [1, exoFahrzeugBeschleunigungsModulB], 0).
-rezept(bauen, [[100, chromatischesMetall], [25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, exoFahrzeugMinenLaser], 0).
-rezept(bauen, [[100, chromatischesMetall], [2, ionenAkku], [2, mikroProzessor]], [1, exoFahrzeugSignalBoosterUpgrade], 0).
-rezept(bauen, [[150, chromatischesMetall], [2, ionenAkku], [50, gold]], [1, exoFahrzeugSignalBoosterUpgradeA], 0).
-rezept(bauen, [[120, silber], [40, gold], [10, tritium]], [1, flottenKommandoRaum], 0).
-rezept(bauen, [[1, kohlenStoffNanoRohr], [1, hermetischesSiegel], [2, technologieModul]], [1, fortgeschrittenerMinenLaser], 0).
-rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, phosphor]], [1, gefahrenSchutzEinheit], 0).
-rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, uran]], [1, gesundheitsStation], 0).
-rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, glasTunnel], 0).
-rezept(bauen, [[120, ionisiertesKobalt], [25, chromatischesMetall], [25, magnetisiertesFerrit]], [1, gravitinoWirt], 0).
-rezept(bauen, [[60, reinesFerrit], [50, ionisiertesKobalt], [50, kohlenStoff]], [1, grosserHydroKulturTrog], 0).
-rezept(bauen, [[200, chromatischesMetall], [100, natriumNitrat], [5, mikroProzessor]], [1, grosseRaffinerie], 0).
-rezept(bauen, [[30, reinesFerrit], [20, ionisiertesKobalt], [20, kohlenStoff]], [1, hydroKulturTrog], 0).
-rezept(bauen, [[100, paraffinium], [5, metallPlatten], [4, ionenAkku]], [1, kolossGeoBucht], 0).
-rezept(bauen, [[10, metallPlatten], [2, ionenAkku], [2, mikroProzessor]], [1, landeFeld], 0).
-rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, lFoermigerGlasTunnel], 0).
-rezept(bauen, [[5, lebendePerle], [1, glas], [29, ionisiertesKobalt]], [1, meeresUnterSchlupf], 0).
-rezept(bauen, [[5, metallPlatten], [4, kristallSulfid], [100, salz]], [1, nautilonKammer], 0).
-rezept(bauen, [[100, paraffinium], [4, metallPlatten], [4, ionenAkku]], [1, nomadenGeoBucht], 0).
-rezept(bauen, [[5, metallPlatten], [4, ionenAkku], [100, paraffinium]], [1, roamerGeoBucht], 0).
-rezept(bauen, [[5, metallPlatten], [5, sauerStoffKapsel], [3, diWasserStoffGelee]], [1, sauerStoffVerarbeiter], 0).
-rezept(bauen, [[1, metallPlatten], [2, ionenAkku], [1, mikroProzessor]], [1, signal], 0).
+rezept(bauen, [[5, ammoniak], [2, metallPlatten], [2, hermetischesSiegel]], [1, atmosphaerenVerarbeitungsAnlage], 0).
+rezept(bauen, [[1, metallPlatten], [1, kohlenStoffNanoRohr]], [1, nachrichtenModul], 0).
+
+/* =====================  tragbar ==================================================== */
+rezept(bauen, [[40, chromatischesMetall]], [1, basisComputer], 0 ).
+rezept(bauen, [[20, magnetisiertesFerrit], [1, kohlenStoffNanoRohr]], [1, konstruktionsForschungsStation], 0).
 rezept(bauen, [[1, metallPlatten], [1, kohlenStoffNanoRohr], [15, natrium]], [1, signalBooster], 0).
-rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, tFoermigerGlasTunnel], 0).
+rezept(bauen, [[1, metallPlatten], [2, ionenAkku], [1, mikroProzessor]], [1, speicherSignalTragbar], 0).
+rezept(bauen, [[2, metallPlatten], [1, diWasserStoffGelee]], [1, speicherPunkt], 0).
+
+/* =====================  Lager ====================================================== */
+rezept(bauen, [[10, reinesFerrit]], [1, verschlosseneKiste], 0 ).
+
+/* =====================  Terminals ================================================== */
+rezept(bauen, [[40, chromatischesMetall], [25, reinesFerrit]], [1, konstruktionsTerminal], 0).
+rezept(bauen, [[40, chromatischesMetall], [25, diWasserStoff]], [1, exoFahrzeugTerminal], 0).
+rezept(bauen, [[40, chromatischesMetall], [25, pugneum]], [1, waffenTerminal], 0).
+rezept(bauen, [[40, chromatischesMetall], [25, magnetisiertesFerrit]], [1, wissenschaftsTerminal], 0).
+rezept(bauen, [[40, chromatischesMetall], [25, verdichteterKohlenStoff]], [1, landwirtschaftsTerminal], 0).
+
+/* =====================  Frachter =================================================== */
+rezept(bauen, [[120, silber], [40, gold], [10, tritium]], [1, flottenKommandoRaum], 0).
+rezept(bauen, [[120, silber], [20, tritium]], [1, grosserFrachtRaum], 0).
+rezept(bauen, [[80, silber], [10, tritium]], [1, frachterKorridor], 0).
+rezept(bauen, [[80, silber], [10, tritium]], [1, gebogenerFrachterKorridor], 0).
+rezept(bauen, [[80, silber], [10, tritium]], [1, frachterKreuzungDreiFach], 0).
+rezept(bauen, [[50, silber]], [1, frachterTreppe], 0).
+rezept(bauen, [[80, silber], [10, tritium]], [1, frachterKreuzungVierFach], 0).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Siedlung-Bau-Rezepte erforschbar %%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/* =====================  gross vorgefertigt ========================================= */
+rezept(bauen, [[350, reinesFerrit]], [1, zylindrischerRaum], 0 ).
+rezept(bauen, [[350, reinesFerrit]], [1, quadratischerRaum], 0 ).
+rezept(bauen, [[100, reinesFerrit]], [1, geraderKorridor], 0 ).
+rezept(bauen, [[50, reinesFerrit]], [1, tuer], 0 ).
+rezept(bauen, [[350, reinesFerrit]], [1, fundament], 0 ).
+rezept(bauen, [[100, reinesFerrit]], [1, lFoermigerKorridor], 0 ).
+rezept(bauen, [[100, reinesFerrit], [1, glas]], [1, korridorMitGlasDach], 0 ).
+rezept(bauen, [[50, gold], [40, reinesFerrit], [40, silikatPulver]], [1, holoTuer], 0 ).
+rezept(bauen, [[50, kohlenStoff], [50, reinesFerrit]], [1, zugangsRampe], 0).
+rezept(bauen, [[50, reinesFerrit]], [1, rollTor], 0 ).
+rezept(bauen, [[5, reinesFerrit]], [1, pflasterungVierFach], 0 ).
+rezept(bauen, [[50, reinesFerrit]], [1, viererFundamentStrebe], 0 ).
+rezept(bauen, [[80, reinesFerrit]], [1, fundamentStrebe], 0 ).
+rezept(bauen, [[200, reinesFerrit]], [1, zylindrischerRaumRahmen], 0 ).
+rezept(bauen, [[100, reinesFerrit]], [1, tFoermigerKorridor], 0 ).
+rezept(bauen, [[100, reinesFerrit]], [1, xFoermigerKorridor], 0 ).
+rezept(bauen, [[25, silber], [1, glas]], [1, korridorFenster], 0).
+rezept(bauen, [[25, magnetisiertesFerrit], [5, glas]], [1, bioKuppelRaum], 0).
+rezept(bauen, [[100, reinesFerrit]], [1, gebogenerKorridor], 0 ).
+rezept(bauen, [[30, reinesFerrit]], [1, leiter], 0 ).
+rezept(bauen, [[5, reinesFerrit]], [1, pflasterung], 0 ).
+rezept(bauen, [[25, reinesFerrit]], [1, podestPflasterung], 0 ).
+rezept(bauen, [[1, glas]], [1, grossesGlasPaneel], 0 ).
+rezept(bauen, [[10, magnetisiertesFerrit], [3, glas]], [1, aussichtsKugel], 0).
+
+/* =====================  klein vorgefertigt ========================================= */
+rezept(bauen, [[200, reinesFerrit]], [1, wuerfelFoermigerRaum], 0 ).
+rezept(bauen, [[80, reinesFerrit]], [1, wuerfelRaumFundamentStrebe], 0 ).
+rezept(bauen, [[100, reinesFerrit]], [1, gewoelbteWuerfelFoermigeWand], 0 ).
+rezept(bauen, [[100, silber], [2, glas]], [1, wuerfelFoermigerGlasRaum], 0 ).
+rezept(bauen, [[80, reinesFerrit]], [1, wuerfelFoermigerRaumRahmen], 0 ).
+rezept(bauen, [[80, reinesFerrit]], [1, wuerfelFoermigerRaumBoden], 0 ).
+rezept(bauen, [[80, reinesFerrit]], [1, wuerfelRaumViererFundamentStrebe], 0 ).
+rezept(bauen, [[50, reinesFerrit], [30, kohlenStoff]], [1, innenTreppen], 0).
+rezept(bauen, [[80, reinesFerrit]], [1, wuerfelFoermigeInnenWand], 0 ).
+rezept(bauen, [[80, reinesFerrit]], [1, wuerfelFoermigerDachAufsatz], 0 ).
+rezept(bauen, [[100, reinesFerrit], [1, glas]], [1, gewoelbteWuerfelFoermigesDach], 0 ).
+rezept(bauen, [[25, silber], [1, glas]], [1, wuerfelFoermigesFensterEckig], 0 ).
+rezept(bauen, [[25, silber], [1, glas]], [1, wuerfelFoermigesFensterRund], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, infraStrukturLeiter], 0 ).
+rezept(bauen, [[50, reinesFerrit]], [1, wuerfelFoermigeInnenTuer], 0 ).
+
+/* =====================  Technologiemodule ========================================== */
+rezept(bauen, [[2, metallPlatten], [15, natriumNitrat]], [1, speicherSignal], 0).
+rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, uran]], [1, gesundheitsStation], 0).
+rezept(bauen, [[50, ionisiertesKobalt], [1, ionenAkku]], [1, basisTelePorterModul], 0).
+rezept(bauen, [[2, metallPlatten], [1, hermetischesSiegel], [25, natrium]], [1, naehrStoffProzessor], 0).
+rezept(herstellen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, phosphor]], [1, gefahrenSchutzEinheit], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium]], [1, lagerBehaelter], 0).
+rezept(bauen, [[10, ferritStaub]], [1, aussehenModifikator], 0 ).
+rezept(bauen, [[10, metallPlatten], [2, ionenAkku], [2, mikroProzessor]], [1, landeFeld], 0).
+rezept(bauen, [[1, metallPlatten], [30, sauerStoff]], [1, tragbareRaffinerie], 0).
+rezept(bauen, [[4, metallPlatten], [2, polyFaser], [50, faecium]], [1, nutzTierEinheit], 0).
+rezept(bauen, [[4, metallPlatten], [1, sauerStoffFilter], [10, kreaturenKugeln]], [1, automatischerFuetterer], 0).
+rezept(bauen, [[25, magnetisiertesFerrit], [3, mikroProzessor]], [1, terminalDesGalaktischenMarktes], 0).
+rezept(bauen, [[5, metallPlatten], [100, chromatischesMetall], [25, platin]], [1, kurzStreckenTelePorter], 0).
+rezept(bauen, [[100, magnetisiertesFerrit], [5, diWasserStoffGelee]], [1, mittlereRaffinerie], 0).
+rezept(bauen, [[200, chromatischesMetall], [100, natriumNitrat], [5, mikroProzessor]], [1, grosseRaffinerie], 0).
+rezept(bauen, [[1, sturmKristall], [2, antiMaterie], [2, metallPlatten]], [1, antiMaterieReaktor], 0).
+
+/* =====================  Transportmodule ============================================ */
+rezept(bauen, [[5, metallPlatten], [4, ionenAkku], [100, paraffinium]], [1, roamerGeoBucht], 0).
+rezept(bauen, [[100, paraffinium], [4, metallPlatten], [4, ionenAkku]], [1, nomadenGeoBucht], 0).
+rezept(bauen, [[100, magnetisiertesFerrit], [4, ionenAkku], [1, antiMaterie]], [1, exoFahrzeugRufStation], 0).
+rezept(bauen, [[5, metallPlatten], [4, kristallSulfid], [100, salz]], [1, nautilonKammer], 0).
+rezept(bauen, [[5, metallPlatten], [4, ionenAkku], [100, paraffinium]], [1, pilgerGeoBucht], 0).
+rezept(bauen, [[100, paraffinium], [5, metallPlatten], [4, ionenAkku]], [1, kolossGeoBucht], 0).
+rezept(bauen, [[2, mikroProzessor], [5, metallPlatten], [1, ionenAkku]], [1, rennInitiator], 0).
+rezept(bauen, [[5, metallPlatten]], [1, rennHindernis], 0 ).
+rezept(bauen, [[5, metallPlatten], [2, diWasserStoffGelee]], [1, rennKraftVerstaerker], 0).
+
+/* =====================  Wasser ===================================================== */
+rezept(bauen, [[350, reinesFerrit]], [1, tiefSeeKammer], 0 ).
+rezept(bauen, [[5, lebendePerle], [1, glas], [29, ionisiertesKobalt]], [1, meeresUnterSchlupf], 0).
+rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, glasTunnel], 0).
+rezept(bauen, [[350, reinesFerrit]], [1, quadratischeTiefSeeKammer], 0 ).
+rezept(bauen, [[25, ferritStaub], [1, kristallSulfid]], [1, wasserDichteTuer], 0).
+rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, lFoermigerGlasTunnel], 0).
 rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, vertikalerGlasTunnel], 0).
-rezept(bauen, [[350, reinesFerrit], [6, kristallSulfid], [2, lebendePerle]], [1, wasserDichteTuer1], 0).
+rezept(bauen, [[350, reinesFerrit], [6, kristallSulfid], [2, lebendePerle]], [1, mondTeichBoden], 0).
+rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, tFoermigerGlasTunnel], 0).
 rezept(bauen, [[1, glas], [2, kristallSulfid], [25, ferritStaub]], [1, xFoermigerGlasTunnel], 0).
 
+/* =====================  Motiv Designs ============================================== */
+rezept(bauen, [[20, kohlenStoff]], [1, motivStilisiertesR], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivRundPipette], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivFaltungDuennDick], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivZiegelSteine], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivRadioAktivGrau], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivGrabStein], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivHelloGames], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivBuegel], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo1], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo2], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo3], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo4], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo5], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo6], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo7], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo8], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivNo9], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivSchildErstochenerVogel], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivSchildGrünerMann], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivSchildKorvax], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivFroschSack], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, motivLaemmchen], 0 ).
 
-/* ---------------------  Test Prädikate ----------------------------------------------- */
+/* =====================  Dekorative Module 1 ======================================== */
+rezept(bauen, [[5, verdichteterKohlenStoff], [5, natrium]], [1, wandBildSchirm], 0).
+rezept(bauen, [[5, verdichteterKohlenStoff], [5, natrium]], [1, wandVentilator], 0).
+rezept(bauen, [[10, reinesFerrit]], [1, gruenerWandBildSchirm], 0 ).
+rezept(bauen, [[10, reinesFerrit]], [1, schubLadenSchrank], 0 ).
+rezept(bauen, [[10, reinesFerrit], [5, kobalt]], [1, wandEinheit], 0).
+rezept(bauen, [[10, reinesFerrit]], [1, lagerModulDeko], 0 ).
+rezept(bauen, [[5, reinesFerrit], [5, kobalt]], [1, deckenPaneel], 0).
+rezept(bauen, [[5, verdichteterKohlenStoff], [5, kobalt]], [1, techBedienFeld], 0).
+rezept(bauen, [[10, reinesFerrit], [5, kobalt]], [1, server], 0).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, kanisterRegal], 0 ).
+rezept(bauen, [[10, reinesFerrit]], [1, kleineKiste], 0 ).
+rezept(bauen, [[10, reinesFerrit]], [1, schliessFach], 0 ).
+rezept(bauen, [[10, ferritStaub], [10, natrium]], [1, flachesModul], 0).
+rezept(bauen, [[10, ferritStaub], [10, natrium]], [1, seitenModul], 0).
+rezept(bauen, [[10, reinesFerrit]], [1, regalModul], 0 ).
+rezept(bauen, [[10, reinesFerrit]], [1, roboterArm], 0 ).
+rezept(bauen, [[5, reinesFerrit], [5, kobalt]], [1, waffenRegal], 0).
+rezept(bauen, [[10, reinesFerrit]], [1, oszilloskop], 0 ).
+rezept(bauen, [[10, reinesFerrit]], [1, achtEckSchrank], 0 ).
+rezept(bauen, [[10, ionisiertesKobalt], [1, antiMaterie]], [1, fassFoermigerFabrikator], 0).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, hoherSchrank], 0 ).
+rezept(bauen, [[10, ionisiertesKobalt], [1, antiMaterie]], [1, kistenFoermigerFabrikator], 0).
+
+/* =====================  Dekorative Module 2 ======================================== */
+rezept(bauen, [[5, verdichteterKohlenStoff], [1, sternenSeide]], [1, stuhl], 0 ).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, flagge1], 0).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, tisch], 0 ).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, bett], 0 ).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, sofa], 0 ).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, flagge2], 0).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, wandFlagge1], 0).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, einfacherSchreibTisch], 0 ).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, ergonomischesSofa], 0 ).
+rezept(bauen, [[10, verdichteterKohlenStoff]], [1, eckSofa], 0 ).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, flagge3], 0).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, flagge4], 0).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, wandFlagge3], 0).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, wandFlagge2], 0).
+rezept(bauen, [[5, reinesFerrit], [5, kohlenStoff]], [1, bodenMatte], 0).
+rezept(bauen, [[5, reinesFerrit], [5, verdichteterKohlenStoff]], [1, grosseMonitorStation], 0).
+rezept(bauen, [[10, verdichteterKohlenStoff], [5, reinesFerrit]], [1, gewoelbterTisch], 0).
+rezept(bauen, [[5, reinesFerrit], [5, kobalt]], [1, monitorStation], 0).
+rezept(bauen, [[10, reinesFerrit]], [1, arbeitsPlatte], 0 ).
+rezept(bauen, [[10, ferritStaub], [10, natrium]], [1, leichterTisch], 0).
+
+/* =====================  Beleuchtung ================================================ */
+rezept(bauen, [[5, natrium]], [1, lichtHandLampe], 0 ).
+rezept(bauen, [[5, natrium]], [1, farbigeLeuchte], 0 ).
+rezept(bauen, [[5, natrium]], [1, lichtStehLampeEckig], 0 ).
+rezept(bauen, [[10, natrium]], [1, laborLampe], 0 ).
+rezept(bauen, [[5, natrium]], [1, farbigeLeuchteBlau], 0 ).
+rezept(bauen, [[5, natrium]], [1, farbigeLeuchteOrange], 0 ).
+rezept(bauen, [[5, natrium]], [1, lichtStehLampeRund], 0 ).
+rezept(bauen, [[5, natrium]], [1, lichtStehLampeSchirm], 0 ).
+rezept(bauen, [[5, reinesFerrit], [15, natrium]], [1, deckenLeuchte], 0).
+rezept(bauen, [[5, natrium]], [1, farbigeLeuchteGelb], 0 ).
+rezept(bauen, [[5, natrium]], [1, farbigeLeuchteGruen], 0 ).
+rezept(bauen, [[5, natrium]], [1, farbigeLeuchteRot], 0 ).
+
+/* =====================  Industriemodule ============================================ */
+rezept(bauen, [], [1, elektrischeVerkabelung], 0).
+rezept(bauen, [[1, metallPlatten], [40, sauerStoff]], [1, treibStoffReaktor], 0).
+rezept(bauen, [[5, metallPlatten], [100, chromatischesMetall]], [1, mineralienExtraktor], 0).
+rezept(bauen, [[25, ferritStaub], [25, ionisiertesKobalt]], [1, wandSchalter], 0).
+rezept(bauen, [[2, metallPlatten], [75, chromatischesMetall], [50, gold]], [1, solarModul], 0).
+rezept(bauen, [[60, magnetisiertesFerrit], [100, verdichteterKohlenStoff]], [1, batterie], 0).
+rezept(bauen, [[5, metallPlatten], [100, chromatischesMetall]], [1, gasExtraktor], 0).
+rezept(bauen, [[10, metallPlatten]], [1, versorgungsDepot], 0).
+rezept(bauen, [[25, ferritStaub], [10, kohlenStoff]], [1, versorgungsRohr], 0).
+rezept(bauen, [[25, ferritStaub], [25, ionisiertesKobalt]], [1, bodenSchalter], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, annaeherungsSchalter], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, schalter], 0).
+rezept(bauen, [[25, ferritStaub], [15, ionisiertesKobalt]], [1, energieUmkehrer], 0).
+rezept(bauen, [[2, metallPlatten], [60, magnetisiertesFerrit], [75, chromatischesMetall]], [1, elektroMagnetischerGenerator], 0).
+
+/* =====================  Landwirtschaftsmodule ====================================== */
+rezept(bauen, [[30, reinesFerrit], [20, ionisiertesKobalt], [20, kohlenStoff]], [1, hydroKulturTrog], 0).
+rezept(bauen, [[10, kohlenStoff]], [1, topfPflanze], 0 ).
+rezept(bauen, [[60, reinesFerrit], [50, ionisiertesKobalt], [50, kohlenStoff]], [1, grosserHydroKulturTrog], 0).
+rezept(bauen, [[50, pilzSchimmel], [25, ammoniak]], [1, pilzGeflecht], 0).
+rezept(bauen, [[50, frostKristall], [25, dioxit]], [1, frostWurz], 0).
+rezept(bauen, [[50, gammaWurzel], [25, uran]], [1, gammaGras], 0).
+rezept(bauen, [[50, kaktusFleisch], [25, pyrit]], [1, echinoKaktus], 0).
+rezept(bauen, [[50, sternenKnolle], [25, paraffinium]], [1, sternenDorn], 0).
+rezept(bauen, [[50, solanium], [25, phosphor]], [1, sonnenRebe], 0).
+rezept(bauen, [[15, kohlenStoff]], [1, floraBehaelterHochBeet], 0 ).
+rezept(bauen, [[15, kohlenStoff]], [1, floraBehaelterKasten], 0 ).
+rezept(bauen, [[15, kohlenStoff]], [1, floraBehaelterTubus], 0 ).
+rezept(bauen, [[100, emeril], [100, ionisiertesKobalt]], [1, giftIgel], 0).
+rezept(bauen, [[120, ionisiertesKobalt], [25, chromatischesMetall], [25, magnetisiertesFerrit]], [1, gravitinoWirt], 0).
+rezept(bauen, [[40, faecium]], [1, magenKrampfBlume], 0 ).
+rezept(bauen, [[40, mordit]], [1, morditWurzel], 0 ).
+rezept(bauen, [[60, indium], [20, paraffinium]], [1, eiweissPerlenKugel], 0).
+rezept(bauen, [[1, nipNipKnospen], [20, faecium]], [1, nipNip], 0).
+
+/* =====================  Unterschlüpfe aus Holz ===================================== */
+rezept(bauen, [[40, kohlenStoff]], [1, holzWand], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, holzBodenPlatte], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, duenneHolzWand], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, holzTuerRahmen], 0 ).
+rezept(bauen, [[40, kohlenStoff], [10, ferritStaub]], [1, holzDach], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, glasPlatteMitHolzRahmen], 0 ).
+rezept(bauen, [[40, kohlenStoff], [10, reinesFerrit]], [1, holzRampe], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, kleineHolzPlatte], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, schraegeHolzPlatte], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, kleineHolzWand], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, glas]], [1, holzFenster], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, holzTuer], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, elektrischeHolzTuer], 0 ).
+rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, holzDachPlatte], 0).
+rezept(bauen, [[20, kohlenStoff],[10, ferritStaub]], [1, holzDachEckStueck], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, holzBogen], 0 ).
+rezept(bauen, [[25, kohlenStoff], [5, reinesFerrit]], [1, halbeHolzRampe], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, kurzeHolzWand], 0 ).
+rezept(bauen, [[40, kohlenStoff], [10, reinesFerrit]], [1, holzFassade], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, kleineHolzTuer], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, grosseElektrischeHolzTuer], 0 ).
+rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, dachInnenEckteilAusHolz], 0 ).
+rezept(bauen, [[20, kohlenStoff]], [1, halberHolzBogen], 0 ).
+
+/* =====================  Unterschlüpfe aus Metall =================================== */
+rezept(bauen, [[40, ferritStaub]], [1, metallWand], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, metallBodenPlatte], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, duenneMetallWand], 0 ).
+rezept(bauen, [[40, ferritStaub]], [1, metallTuerRahmen], 0 ).
+rezept(bauen, [[20, ferritStaub], [10, ferritStaub]], [1, metallDach], 0).
+rezept(bauen, [[20, ferritStaub]], [1, glasPlatteMitMetallRahmen], 0 ).
+rezept(bauen, [[50, ferritStaub], [10, reinesFerrit]], [1, metallRampe], 0).
+rezept(bauen, [[20, ferritStaub]], [1, kleineMetallPlatte], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, schraegeMetallPlatte], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, kleineMetallWand], 0 ).
+rezept(bauen, [[400, ferritStaub], [1, glas]], [1, metallFenster], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, metallTuer], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, elektrischeMetallTuer], 0 ).
+rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, metallDachPlatte], 0).
+rezept(bauen, [[20, kohlenStoff], [10, ferritStaub]], [1, metallDachEckStueck], 0).
+rezept(bauen, [[40, ferritStaub]], [1, metallBogen], 0 ).
+rezept(bauen, [[25, ferritStaub], [5, reinesFerrit]], [1, halbeMetallRampe], 0).
+rezept(bauen, [[20, kohlenStoff]], [1, kurzeMetallWand], 0 ).
+rezept(bauen, [[40, ferritStaub], [10, reinesFerrit]], [1, metallFassade], 0).
+rezept(bauen, [[20, ferritStaub]], [1, kleineMetallTuer], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, grosseElektrischeMetallTuer], 0 ).
+rezept(bauen, [[20, kohlenStoff],[10, ferritStaub]], [1, dachInnenEckteilAusMetall], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, halberMetallBogen], 0 ).
+
+/* =====================  Unterschlüpfe aus Beton ==================================== */
+rezept(bauen, [[40, ferritStaub]], [1, betonWand], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, betonBodenPlatte], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, duenneBetonWand], 0 ).
+rezept(bauen, [[40, ferritStaub]], [1, betonTuerRahmen], 0 ).
+rezept(bauen, [[40, ferritStaub]], [1, betonDach], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, glasPlatteMitBetonRahmen], 0 ).
+rezept(bauen, [[50, ferritStaub], [10, reinesFerrit]], [1, betonRampe], 0).
+rezept(bauen, [[20, ferritStaub]], [1, kleineBetonBodenPlatte], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, schraegeBetonPlatte], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, kleineBetonWand], 0 ).
+rezept(bauen, [[40, ferritStaub], [1, glas]], [1, betonFenster], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, betonTuer], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, elektrischeBetonTuer], 0 ).
+rezept(bauen, [[25, ferritStaub]], [1, betonDachPlatte], 0 ).
+rezept(bauen, [[30, ferritStaub]], [1, betonDachEckStueck], 0 ).
+rezept(bauen, [[40, ferritStaub]], [1, betonBogen], 0 ).
+rezept(bauen, [[25, ferritStaub], [5, reinesFerrit]], [1, halbeBetonRampe], 0).
+rezept(bauen, [[20, ferritStaub]], [1, kurzeBetonWand], 0 ).
+rezept(bauen, [[40, ferritStaub], [10, reinesFerrit]], [1, betonFassade], 0).
+rezept(bauen, [[20, ferritStaub]], [1, kleineBetonTuer], 0 ).
+rezept(bauen, [[40, kohlenStoff]], [1, grosseElektrischeBetonTuer], 0 ).
+rezept(bauen, [[20, kohlenStoff],[10, ferritStaub]], [1, dachInnenEckteilAusBeton], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, halberBetonBogen], 0 ).
+
+/* =====================  Primitive Formen =========================================== */
+rezept(bauen, [[20, ferritStaub]], [1, grosserKeil], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, kleinerKeil], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, rohr], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, pyramide], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, gebogenesRohr], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, stabilerWuerfel], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, zylinder], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, wuerfel], 0 ).
+rezept(bauen, [[20, ferritStaub]], [1, kugel], 0 ).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Anzugmodule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(herstellen, [[100, ferritStaub]], [1, lebensErhaltung], 0 ).
+rezept(herstellen, [[50, chromatischesMetall], [20, natriumNitrat]], [1, gefahrGutSchutzHandschuh], 0).
+rezept(herstellen, [[100, ferritStaub]], [1, gefahrenSchutz], 0 ).
+rezept(herstellen, [[60, sauerStoff]], [1, sauerstoffWiederVerwerterC], 0 ).
+rezept(herstellen, [[100, ferritStaub]], [1, jetPack], 0 ).
+rezept(herstellen, [[1, kabelBaum]], [1, einfacherUeberSetzerB], 0 ).
+rezept(herstellen, [[150, phosphor],[60, silber],[75, kupfer]], [1, kuelMittelNetzwerkC], 0 ).
+rezept(herstellen, [[1, natriumDiode], [1, antiMaterie]], [1, schildGitterB], 0).
+rezept(herstellen, [[100, chromatischesMetall],[1, salzRefaktor],[6, kristallSulfid]], [1, sauerStoffUmleiterA], 0 ).
+rezept(herstellen, [[100, chromatischesMetall], [100, verdichteterKohlenStoff]], [1, neuralStimulator], 0 ).
+rezept(herstellen, [[100, tritium], [1, salzRefaktor]], [1, raketenStiefelA], 0).
+rezept(herstellen, [[100, chromatischesMetall],[100, sauerStoff],[6, lebendePerle]], [1, effizienteWasserDuesenA], 0 ).
+rezept(herstellen, [[2, kabelBaum],[1, natriumDiode],[50, chromatischesMetall]], [1, verbesserterUebersetzerA], 0 ).
+rezept(herstellen, [[3, kabelBaum],[2, korvaxKonvergenzWuerfel],[50, platin]], [1, perfektionierterUebersetzerS], 0 ).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Fahrzeugmodule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(herstellen, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, fusionsAntrieb], 0).
+rezept(herstellen, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, humboldtAntrieb], 0).
+rezept(herstellen, [[50, chromatischesMetall], [1, mikroProzessor]], [1, exoFahrzeugSignalBooster], 0).
+rezept(herstellen, [[50, chromatischesMetall], [15, magnetisiertesFerrit], [2, kohlenStoffNanoRohr]], [1, exoFahrzeugBeschleunigungsModul], 0).
+rezept(herstellen, [[100, chromatischesMetall], [25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, exoFahrzeugMinenLaser], 0).
+rezept(herstellen, [[150, chromatischesMetall], [6, lebendePerle], [2, chlorGitter]], [1, osmotischerGeneratorC], 0).
+rezept(herstellen, [[1, salzRefaktor], [3, kristallSulfid], [50, ferritStaub]], [1, hochleistungsSonar], 0).
+rezept(herstellen, [[50, magnetisiertesFerrit], [100, chlor], [10, lebendePerle]], [1, tethysStrahl], 0).
+rezept(herstellen, [[100, chlor], [6, kristallSulfid], [2, lebendePerle]], [1, nautilonKanone], 0).
+rezept(herstellen, [[100, chromatischesMetall], [2, ionenAkku], [2, mikroProzessor]], [1, exoFahrzeugSignalBoosterUpgradeSigmaB], 0).
+rezept(herstellen, [[50, chromatischesMetall], [50, pugneum]], [1, exoFahrzeugMinenLaserUpgradeSigmaA], 0).
+rezept(herstellen, [[50, pugneum], [100, kupfer]], [1, exoFahrzeugBordKanone], 0).
+rezept(herstellen, [[150, chromatischesMetall], [2, ionenAkku], [50, gold]], [1, exoFahrzeugSignalBoosterUpgradeTauA], 0).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Raumschiff-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(herstellen, [[1, antiMaterie], [3, kabelBaum]], [1, teleportEmpfaenger], 0 ).
+rezept(herstellen, [[1, hermetischesSiegel], [1, metallPlatten]], [1, impulsAntrieb], 0 ).
+rezept(herstellen, [[125, chromatischesMetall], [5, mikroProzessor]], [1, hyperAntrieb], 0 ).
+rezept(herstellen, [[100, reinesFerrit], [1, diWasserStoffGelee]], [1, startSchubDuese], 0 ).
+rezept(herstellen, [[100, chromatischesMetall], [25, natriumNitrat]], [1, deflektorSchild], 0 ).
+rezept(herstellen, [[100, reinesFerrit], [60, natriumNitrat]], [1, photonenKanone], 0 ).
+rezept(herstellen, [[1, kampfLaeuferGehirn], [1, kabelBaum]], [1, konfliktScanner], 0 ).
+rezept(herstellen, [[5, mikroProzessor], [1, kabelBaum]], [1, wirtschaftsScanner], 0 ).
+rezept(herstellen, [[250, chromatischesMetall], [1, kabelBaum]], [1, cadmiumAntriebB], 0 ).
+rezept(herstellen, [[1, diWasserStoffGelee], [100, tritium], [2, kabelBaum]], [1, effizienteDuesenB], 0).
+rezept(herstellen, [[1, kabelBaum], [100, gold], [50, natriumNitrat]], [1, ablativePanzerungC], 0).
+rezept(herstellen, [[1, hermetischesSiegel], [1, kabelBaum], [100, tritium]], [1, nichtlineareOptikCPhotonenKanone], 0).
+rezept(herstellen, [[200, kupfer], [100, verdichteterKohlenStoff]], [1, reketenWerfer], 0 ).
+rezept(herstellen, [[100, tritium], [1, kabelBaum]], [1, phasenStrahler], 0 ).
+rezept(herstellen, [[200, uran], [1, kabelBaum]], [1, positronenWerfer], 0 ).
+rezept(herstellen, [[200, phosphor], [2, kabelBaum]], [1, infraMesser], 0 ).
+rezept(herstellen, [[200, dioxit], [1, kabelBaum]], [1, zyklotronBalliste], 0 ).
+rezept(herstellen, [[250, cadmium], [1, kabelBaum]], [1, emerilAntriebA], 0 ).
+rezept(herstellen, [[5, antiMaterie], [2, kobaltSpiegel], [2, kabelBaum]], [1, startSystemLadeGeraetS], 0).
+rezept(herstellen, [[2, kabelBaum], [4, instabilesPlasma]], [1, grosseRaketenRohreB], 0 ).
+rezept(herstellen, [[1, salzRefaktor], [2, kabelBaum]], [1, fourierBegrenzerB], 0 ).
+rezept(herstellen, [[3, seltenesMetallElement], [2, kabelBaum]], [1, fragmentSuperAufladerB], 0 ).
+rezept(herstellen, [[1, instabilesNatrium], [2, kabelBaum]], [1, nichtlineareOptikBInfraMesserB], 0).
+rezept(herstellen, [[3, tetraKobalt], [2, kabelBaum]], [1, dysonPumpeBS], 0).
+rezept(herstellen, [[250, emeril], [1, kabelBaum]], [1, indiumAntriebS], 0 ).
+
+/* %%%%%%%%%%%%%%%%%%%%%  Multiwerkzeug-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(herstellen, [[60, ferritStaub]], [1, minenLaser], 0 ).
+rezept(herstellen, [[100, chromatischesMetall], [3, kohlenStoffNanoRohr]], [1, blitzWerfer], 0 ).
+rezept(herstellen, [[2, ionenAkku], [1, kabelBaum]], [1, eigenesKraftFeld], 0 ).
+rezept(herstellen, [[1, kohlenStoffNanoRohr], [1, hermetischesSiegel], [2, kabelBaum]], [1, eigenesKraftFeldA], 0 ).
+rezept(herstellen, [[100, magnetisiertesFerrit], [1, ionenAkku]], [1, wellenFormWiederVerwerterB], 0 ).
+rezept(herstellen, [[4, glas], [1, kabelBaum]], [1, laufIonisatorC], 0 ).
+rezept(herstellen, [[1, superOxidKristall], [1, kabelBaum]], [1, plasmaWerfer], 0 ).
+rezept(herstellen, [[200, chromatischesMetall], [150, verdichteterKohlenStoff], [1, kabelBaum]], [1, glutSpeer], 0 ).
+rezept(herstellen, [[200, pugneum], [1, kabelBaum]], [1, streuBlaster], 0 ).
+rezept(herstellen, [[200, deuterium], [1, kabelBaum]], [1, impulsWerfer], 0 ).
+rezept(herstellen, [[2, ionenAkku], [1, kabelBaum]], [1, kampfVisier], 0 ).
+rezept(herstellen, [[3, natriumDiode], [3, salzRefaktor], [5, kabelBaum]], [1, optischerBohrerS], 0 ).
+rezept(herstellen, [[3, natriumDiode], [1, kobaltSpiegel], [2, kabelBaum]], [1, untersuchungsGeraetA], 0 ).
+rezept(herstellen, [[1, seltenesMetallElement], [1, kabelBaum]], [1, geologieKanone], 0 ).
+rezept(herstellen, [[1, superOxidKristall], [1, kabelBaum]], [1, masseBeschleunigerC], 0 ).
+rezept(herstellen, [[1, chlorGitter], [1, kabelBaum]], [1, geschossSchmiererC], 0 ).
+rezept(herstellen, [[1, tetraKobalt], [1, kabelBaum]], [1, verstaerkteKartuschenC], 0 ).
+
+/* %%%%%%%%%%%%%%%%%%%%%  Kochrezepte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/* erntbare Kochstoffe */
+rezept(kochen, [[1, impulsBohnen]],[1, bitterSuesserKakao], 260).
+rezept(kochen, [[1, aloeFleisch]],[1, erfrischungsGetraenk], 260).
+rezept(kochen, [[1, feuerBeere]],[1, feuerWasser], 260).
+rezept(kochen, [[1, gefroreneKnollen]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, jadeErbsen]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, frostKristall]],[1, glasKoerner], 260).
+rezept(kochen, [[1, kaktusFleisch]],[1, kaktusNektar], 260).
+rezept(kochen, [[1, kelpBeutel]],[1, kelpEis], 260).
+rezept(kochen, [[1, kohlenStoff]],[1, kreaturenKugeln], 260).
+rezept(kochen, [[1, kuerbisKnolle]],[1, kuerbisFleisch], 260).
+rezept(kochen, [[1, sternenKnolle]],[1, pilgerBeere], 260).
+rezept(kochen, [[1, gammaWurzel]],[1, sievertBohnen], 260).
+rezept(kochen, [[1, solanium]],[1, solartillo], 260).
+rezept(kochen, [[1, pilzSchimmel]],[1, ungiftigerPilz], 260).
+rezept(kochen, [[1, grahBeere]],[1, verarbeiteterZucker], 260).
+rezept(kochen, [[1, suessWurzel]],[1, verarbeiteterZucker], 260).
+rezept(kochen, [[1, beinFleisch]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, fleischigeStuecke]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, katzenLeber]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, rohesSteak]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, heptaPloidWeizen]],[1, verfeinertesMehl], 260).
+rezept(kochen, [[1, faecium]],[1, wildeHefe], 260).
+rezept(kochen, [[1, fleischigeWurzeln]],[1, wurzelSaft], 260).
+
+rezept(kochen, [[1, kuerbisFleisch]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, sievertBohnen]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, solartillo]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, ungiftigerPilz]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, wurzelSaft]],[1, knusperKaramell], 260).
+rezept(kochen, [[1, pilgerBeere]],[1, pilgerElixier], 260).
+rezept(kochen, [[1, kaktusNektar]],[1, verarbeiteterZucker], 260).
+rezept(kochen, [[1, kelpEis]],[1, verfeinertesMehl], 260).
+
+rezept(kochen, [[1, fleischigeWurzeln], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, fleischigeWurzeln], [1, impulsBohnen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, fleischigeWurzeln], [1, jadeErbsen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, fleischigeWurzeln], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, fleischigeWurzeln], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, fleischigeWurzeln], [1, suessWurzel]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, fleischigeWurzeln], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, geduenstetesGemuese], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, geduenstetesGemuese], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, impulsBohnen], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, impulsBohnen], [1, jadeErbsen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, impulsBohnen], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, impulsBohnen], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, impulsBohnen], [1, suessWurzel]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, impulsBohnen], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, jadeErbsen], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, jadeErbsen], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, jadeErbsen], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, jadeErbsen], [1, suessWurzel]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, jadeErbsen], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, sievertBohnen], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, sievertBohnen], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, sievertBohnen], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, suessWurzel], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, suessWurzel], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, suessWurzel], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, suessWurzel], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, ungiftigerPilz], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, rohesSteak], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, beinFleisch], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, beinFleisch], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, katzenLeber], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, katzenLeber], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, rohesSteak], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, rohesSteak], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, grahBeere], [1, verarbeiteterZucker]],[1, grahmeLade], 260).
+rezept(kochen, [[1, wurzelSaft], [1, feuerBeere]],[1, heisseSosse], 260).
+rezept(kochen, [[1, wurzelSaft], [1, sievertBohnen]],[1, heisseSosse], 260).
+rezept(kochen, [[1, wurzelSaft], [1, solartillo]],[1, heisseSosse], 260).
+rezept(kochen, [[1, kaktusNektar], [1, verarbeiteterZucker]],[1, kaktusGelee], 260).
+rezept(kochen, [[1, fasrigerEintopf], [1, wohlSchmeckendeSosse]],[1, koestlicherEintopf], 260).
+rezept(kochen, [[1, fasrigerEintopf], [1, heisseSosse]],[1, scharferGemueseEintopf], 260).
+rezept(kochen, [[1, wurzelSaft], [1, geduenstetesGemuese]],[1, wohlSchmeckendeSosse], 260).
+
+rezept(kochen, [[1, faecium], [1, aloeFleisch]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, frostKristall]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, gammaWurzel]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, glasKoerner]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, heptaPloidWeizen]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, jadeErbsen]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, solanium]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, gefroreneKnollen]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, impulsBohnen]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, kaktusNektar]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, pilzSchimmel]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, feuerBeere]],[1, fermentierteFruechte], 260).
+rezept(kochen, [[1, faecium], [1, grahBeere]],[1, fermentierteFruechte], 260).
+rezept(kochen, [[1, faecium], [1, kaktusFleisch]],[1, fermentierteFruechte], 260).
+rezept(kochen, [[1, faecium], [1, kuerbisKnolle]],[1, fermentierteFruechte], 260).
+rezept(kochen, [[1, faecium], [1, sternenKnolle]],[1, fermentierteFruechte], 260).
+rezept(kochen, [[1, faecium], [1, suessWurzel]],[1, fermentierteFruechte], 260).
+
+rezept(kochen, [[1, faecium], [1, duftendeKraeuter]],[1, gesuessterKompost], 260).
+rezept(kochen, [[1, faecium], [1, enzymFluessigkeit]],[1, gesuessterKompost], 260).
+rezept(kochen, [[1, faecium], [1, fermentierteFruechte]],[1, gesuessterKompost], 260).
+
+/* ---------------------  Test Prädikate --------------------------------------------- */
 fehlerOperation(Op, Produkt) :-
 	rezept(Op, _, [_, Produkt], _),
-	sammeln:wandelAktion(Op).
+	\+sammeln:wandelAktion(Op).
 
 komponenteIstKeinStoff(FehlStoff) :-
 	ausgangsStoff:stoffInFunktionEingangsStoff(FehlStoff),
@@ -621,3 +900,8 @@ nichtHerstellbar(Stoff) :-
 	ausgangsStoff:stoff(Stoff,_),
 	\+rezept(_, _,[_,Stoff], _).
 
+rezeptDoppelt(Operation, Komponenten, Produkt) :-
+	rezept(Operation, Komponenten, Produkt, _),
+	findall(Komps, (rezept(Operation,Komps, Produkt, _), Komps = Komponenten), Bag),
+	length(Bag, Len),
+	Len > 1. 
