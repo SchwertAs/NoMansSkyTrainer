@@ -4,6 +4,7 @@
 /* name, Wert in units (GrundPreis) */
 /* ----------------- alle Stoffe ------------------------------- */
 stoff(absprungKapselKoordinaten, 85000).
+stoff(aloeFleisch, 300).
 stoff(angereicherterKohlenStoff, 50000).
 stoff(aktiviertesCadmium, 450).
 stoff(aktiviertesEmeril, 696).
@@ -16,48 +17,72 @@ stoff(antiMaterieGehaeuse, 6500).
 stoff(aronium, 25000).
 stoff(ausrangierteSchaltPlatte, 1000).
 stoff(autonomePositionierungsEinheit, 30000).
-stoff(beutelGift, 0).
+stoff(beinFleisch, 800).
+stoff(beutelGift, 11685).
+stoff(bitterSuesserKakao, 800).
 stoff(bromSalz, 15000).
 stoff(cadmium, 234).
 stoff(chlor, 602).
 stoff(chlorGitter, 6150).
 stoff(chromatischesMetall, 245).
-stoff(coprit, 30).
 stoff(deuterium, 34).
 stoff(dioxit, 62).
 stoff(diWasserStoff, 34).
 stoff(diWasserStoffGelee, 200).
+stoff(duftendeKraeuter, 800).
 stoff(dunkleMaterie, 1000).
 stoff(eiweissPerle, 9025).
 stoff(emeril, 348).
 stoff(endeDerDaemmerung, 1000).
 stoff(entschluesselteBenutzerDaten, 1000).
+stoff(erfrischungsGetraenk, 800).
+stoff(enzymFluessigkeit, 800).
 stoff(erstGebruetetenHelm, 0).
 stoff(experimentelleEnergieFluessigkeit, 30000).
+stoff(faecium, 30).
+stoff(fasrigerEintopf, 800).
+stoff(fermentierteFruechte, 800).
+stoff(feuerBeere, 300).
+stoff(feuerWasser, 800).
 stoff(ferritStaub, 14).
 stoff(frischeFlutPalmenSprossen, 118669).
-stoff(frostKristall, 12).
+stoff(fleischigeWurzeln, 300).
+stoff(fleischigeStuecke, 300).
 stoff(fluessigSprengStoff, 800500).
 stoff(fortschrittlicherIonenAkku, 500).
 stoff(fregattenTreibStoff100to, 40000).
 stoff(fregattenTreibStoff200to, 80000).
 stoff(fregattenTreibStoff50to, 20000).
+stoff(frostKristall, 12).
 stoff(fuenfDimensionalerTorus, 30000).
 stoff(funkenKanister, 1000).
 stoff(fusionsBeschleuniger, 7500000).
 stoff(fusionsZuender, 0).
 stoff(gammaWurzel, 16).
+stoff(gedankenBogen, 1000).
+stoff(geduenstetesGemuese, 300).
 stoff(gefangeneNanode, 1000).
+stoff(gefroreneKnollen, 300).
+stoff(geheimnisVollerFleischEintopf, 800).
 stoff(gekNip, 20625).
 stoff(gekRelikt, 23375).
 stoff(geoDesit, 150000).
+stoff(geode, 3280).
 stoff(gewaltigesMetallZahnRad, 1000).
+stoff(geraeuchertesFleischm, 800).
+stoff(gesuessterKompost, 800).
 stoff(glas, 13000).
+stoff(glasKoerner, 300).
 stoff(gold, 202).
+stoff(goldKlumpen, 3280).
 stoff(grantine, 25000).
+stoff(grahBeere, 2100).
+stoff(grahmeLade, 800).
 stoff(gravitinoBall, 12445).
 stoff(halbLeiter, 320000).
 stoff(heissesEis, 320000).
+stoff(heisseSosse, 800).
+stoff(heptaPloidWeizen, 300).
 stoff(hermetischesSiegel, 800).
 stoff(herox, 25000).
 stoff(herzDerSonne, 1000).
@@ -66,6 +91,7 @@ stoff(holografischerAnalysator, 75000).
 stoff(holographischeKurbelWelle, 30000).
 stoff(hypnotischenTraenken, 706593).
 stoff(hydrothermaleTreibStoffZelle, 7200).
+stoff(impulsBohnen, 300).
 stoff(indium, 464).
 stoff(industrieBatterie, 6000).
 stoff(instabilesGel, 50000).
@@ -77,21 +103,33 @@ stoff(ionenKugel, 30000).
 stoff(ionenKondensator, 15000).
 stoff(ionisiertesKobalt, 401).
 stoff(iridesit, 150000).
+stoff(jadeErbsen, 300).
+stoff(kabelBaum, 50000).
 stoff(kaktusFleisch, 28).
+stoff(kaktusNektar, 300).
+stoff(kaktusGelee, 800).
 stoff(kampfLaeuferGehirn, 0).
+stoff(kappillarMuschel, 1000).
+stoff(katzenLeber, 800).
 stoff(kelpBeutel, 41).
+stoff(kelpEis, 300).
+stoff(knusperKaramell, 800).
 stoff(kobalt, 198).
 stoff(kobaltSpiegel, 20500).
+stoff(koestlicherEintopf, 800).
 stoff(kohlenStoff, 12).
 stoff(kohlenStoffKristall, 3600).
 stoff(kohlenStoffNanoRohr, 500).
 stoff(kometenTroepfchen, 15000).
 stoff(korvaxGehaeuse, 22000).
 stoff(korvaxKonvergenzWuerfel, 13063).
+stoff(kreaturenKugeln, 20).
 stoff(kristallSulfid, 7410).
+stoff(kristallFragment, 3280).
 stoff(kryogenKammer, 3800000).
 stoff(kryoPumpe, 0).
 stoff(kuerbisKnolle, 41).
+stoff(kuerbisFleisch, 300).
 stoff(kupfer, 121).
 stoff(lebendePerle, 4798).
 stoff(lebenderSchleim, 20).
@@ -124,7 +162,9 @@ stoff(paraffinium, 62).
 stoff(phasenStrahler, 0).
 stoff(phosphor, 62).
 stoff(photischerJade, 1000).
-stoff(pilzSchimmel, 2496).
+stoff(pilgerBeere, 300).
+stoff(pilgerElixier, 800).
+stoff(pilzSchimmel, 16).
 stoff(platin, 303).
 stoff(polyFaser, 130000).
 stoff(polyChronesZirkonium, 30000).
@@ -137,6 +177,7 @@ stoff(radon, 20).
 stoff(raumSchiffStartTreibStoff, 450).
 stoff(reinesFerrit, 28).
 stoff(restSubstanz, 20).
+stoff(rohesSteak, 800).
 stoff(saeure, 188000).
 stoff(salz, 299).
 stoff(salzRefaktor, 30500).
@@ -144,46 +185,61 @@ stoff(sauerStoff, 34).
 stoff(sauerStoffFilter, 615).
 stoff(sauerStoffKapsel, 350).
 stoff(schaltPlatte, 916250).
+stoff(scharferGemueseEintopf, 800).
 stoff(schmierMittel, 110000).
 stoff(schmutz, 1000).
+stoff(schmutzigeKnochenFragmente, 104981).
 stoff(schwefelin, 20).
 stoff(schweisserSeife, 6000).
+stoff(seelenEngine, 1000).
 stoff(silber, 101).
-stoff(solanium, 7000).
-stoff(sternenKnolle, 32).
-stoff(stickStoff, 20).
 stoff(sechsZackigerEntKoppler, 15000).
 stoff(seltenesMetallElement, 4200).
-stoff(sichSelbsReparierendesHeridium, 6000).
+stoff(sichSelbstReparierendesHeridium, 6000).
+stoff(sievertBohnen, 300).
+stoff(silikatPulver, 2).
+stoff(solanium, 70).
+stoff(solartillo, 300).
+stoff(sternenKnolle, 32).
 stoff(sternenSeide, 6000).
+stoff(stickStoff, 20).
 stoff(stickStoffSalz, 50000).
 stoff(strassenKoeterBronze, 25000).
+stoff(sturmKristall, 129150).
+stoff(suessWurzel, 300).
 stoff(superOxidKristall, 5100).
 stoff(supraLeiter, 1500000).
 stoff(supraleitendeFaser, 50000).
-stoff(technologieModul, 50000).
 stoff(teleportKoordinaten, 50000).
 stoff(tetraKobalt, 6150).
+stoff(tritiumHyperCluster, 3280).
 stoff(thermischesKondensat, 50000).
 stoff(tragbarerReaktor, 0).
 stoff(tritium, 6).
 stoff(umhuellterSchatten, 1000).
+stoff(ungiftigerPilz, 300).
 stoff(unkontrollierbarerSchimmel, 20).
 stoff(unraffiniertesPyritFett, 6000).
 stoff(uran, 248).
+stoff(verarbeiteterZucker, 800).
+stoff(verarbeitetesFleisch, 800).
 stoff(verdichteterKohlenStoff, 600).
 stoff(vergitterterBogenKristall, 50000).
+stoff(verfeinertesMehl, 800).
 stoff(verrostetesMetall, 20).
 stoff(vierfachServo, 20000).
 stoff(vyKeenBildnis, 24750).
 stoff(vyKeenDolch, 11688).
 stoff(warpZelle, 11733).
 stoff(waermeSchutzModulS, 360).
+stoff(wildeHefe, 300).
 stoff(wirbelWuerfel, 5800).
 stoff(wiederhergestellteTechnologie, 50000).
+stoff(wohlSchmeckendeSosse, 800).
+stoff(wurzelSaft, 800).
 stoff(zaeheFluessigkeiten, 20).
 stoff(zustandsPhase, 1000).
-stoff(zytoPhosphat, 0).
+stoff(zytoPhosphat, 201).
 
 stoff(Stoff, Wert) :-
 	basisBauEndStoff(Stoff),
@@ -215,11 +271,12 @@ basisBauEndStoff(sauerstoffUmleiterA).
 basisBauEndStoff(sauerstoffUmleiterB).
 basisBauEndStoff(sauerstoffUmleiterC).
 basisBauEndStoff(sauerstoffUmleiterS).
-basisBauEndStoff(sauerstoffWiederVerwerter).
+basisBauEndStoff(sauerstoffWiederVerwerterC).
 basisBauEndStoff(selbstReinigendeKiemenEinheit).
 basisBauEndStoff(schildGitter).
 basisBauEndStoff(unterHyperDruckStehendeKreislaufAtmungsHilfe).
-
+basisBauEndStoff(lebensErhaltung).
+basisBauEndStoff(einfacherUeberSetzerB).
 
 /* ------------------------------- Raumschiffmodule --------------------- */
 basisBauEndStoff(frachterHyperAntrieb).
@@ -298,22 +355,33 @@ basisBauEndStoff(waffenTerminal).
 basisBauEndStoff(wissenschaftsTerminal).
 basisBauEndStoff(landwirtschaftsTerminal).
 
+/* ------------------------------- Industriemodule ---------------------- */
+basisBauEndStoff(versorgungsDepot).
+basisBauEndStoff(annaeherungsSchalter).
+basisBauEndStoff(schalter).
+
+/* ------------------------------- Landwirtschaftsmodule ---------------- */
+basisBauEndStoff(floraBehaelterHochBeet).
+
 /* ------------------------------- Lager --- ---------------------------- */
 basisBauEndStoff(lagerBehaelter1).
 basisBauEndStoff(verschlosseneKiste).
 
 /* ------------------------------- Landwirtschaft ----------------------- */
-basisBauEndStoff(floraBehaelter).
+basisBauEndStoff(floraBehaelterTubus).
+basisBauEndStoff(floraBehaelterKasten).
 basisBauEndStoff(hydroKulturTrog).
 basisBauEndStoff(grosserHydroKulturTrog).
+
 /* ------------------------------- Pflanzen ----------------------------- */
-basisBauEndStoff(copritBlume).
 basisBauEndStoff(echinoKaktus).
 basisBauEndStoff(frostWurz).
 basisBauEndStoff(gammaGras).
 basisBauEndStoff(giftIgel).
 basisBauEndStoff(gravitinoWirt).
+basisBauEndStoff(magenKrampfBlume).
 basisBauEndStoff(morditWurzel).
+basisBauEndStoff(nipNip).
 basisBauEndStoff(pilzGeflecht).
 basisBauEndStoff(sonnenRebe).
 basisBauEndStoff(sternenDorn).
@@ -322,6 +390,12 @@ basisBauEndStoff(sternenDorn).
 basisBauEndStoff(kollossGeoBucht).
 basisBauEndStoff(nomadenGeoBucht).
 basisBauEndStoff(roamerGeoBucht).
+basisBauEndStoff(exoFahrzeugRufStation).
+basisBauEndStoff(nautilonKammer).
+basisBauEndStoff(pilgerGeoBucht).
+basisBauEndStoff(rennInitiator).
+basisBauEndStoff(rennHindernis).
+basisBauEndStoff(rennKraftVerstaerker).
 
 /* ------------------------------- Tragbare Technologie ----------------- */
 basisBauEndStoff(atmosphaerenVerarbeitungsAnlage).
@@ -346,13 +420,45 @@ basisBauEndStoff(grosseRaffinerie).
 /* =============================== Dekoration =========================== */
 /* ------------------------------- InnenEinrichtung --------------------- */
 basisBauEndStoff(bett).
+basisBauEndStoff(tisch).
 
 /* ------------------------------- Lichter ------------------------------ */
 basisBauEndStoff(licht).
+basisBauEndStoff(lichtHandLampe).
+basisBauEndStoff(lichtStehLampeEckig).
+basisBauEndStoff(lichtStehLampeRund).
+basisBauEndStoff(lichtStehLampeSchirm).
 basisBauEndStoff(farbigeLeuchte).
+basisBauEndStoff(farbigeLeuchteBlau).
 basisBauEndStoff(farbigeLeuchteGruen).
+basisBauEndStoff(farbigeLeuchteGelb).
+basisBauEndStoff(farbigeLeuchteOrange).
 basisBauEndStoff(farbigeLeuchteRot).
 basisBauEndStoff(farbigeLeuchteWeiss).
+
+/* ------------------------------- Motive ------------------------------- */
+basisBauEndStoff(motivStilisiertesR).
+basisBauEndStoff(motivRundPipette).
+basisBauEndStoff(motivFaltungDuennDick).
+basisBauEndStoff(motivZiegelSteine).
+basisBauEndStoff(motivRadioAktivGrau).
+basisBauEndStoff(motivGrabStein).
+basisBauEndStoff(motivHelloGames).
+basisBauEndStoff(motivBuegel).
+basisBauEndStoff(motivNo1).
+basisBauEndStoff(motivNo2).
+basisBauEndStoff(motivNo3).
+basisBauEndStoff(motivNo4).
+basisBauEndStoff(motivNo5).
+basisBauEndStoff(motivNo6).
+basisBauEndStoff(motivNo7).
+basisBauEndStoff(motivNo8).
+basisBauEndStoff(motivNo9).
+basisBauEndStoff(motivSchildErstochenerVogel).
+basisBauEndStoff(motivSchildGrünerMann).
+basisBauEndStoff(motivSchildKorvax).
+basisBauEndStoff(motivFroschSack).
+basisBauEndStoff(motivLaemmchen).
 
 /* ------------------------------- Verzierungen ------------------------- */
 basisBauEndStoff(flagge).
@@ -369,6 +475,12 @@ basisBauEndStoff(holzFenster).
 basisBauEndStoff(holzRampe).
 basisBauEndStoff(holzTuerRahmen).
 basisBauEndStoff(holzWand).
+basisBauEndStoff(duenneHolzWand).
+basisBauEndStoff(holzTuer).
+basisBauEndStoff(elektrischeHolzTuer).
+basisBauEndStoff(holzBogen).
+basisBauEndStoff(kleineHolzTuer).
+basisBauEndStoff(grosseElektrischeHolzTuer).
 
 /* ------------------------------- Betonkomponenten --------------------- */
 basisBauEndStoff(betonWand).
@@ -376,6 +488,14 @@ basisBauEndStoff(betonWand).
 /* ------------------------------- Metallkomponenten -------------------- */
 basisBauEndStoff(metallFenster).
 basisBauEndStoff(metallWand).
+basisBauEndStoff(metallTuerRahmen).
+basisBauEndStoff(elektrischeMetallTuer).
+basisBauEndStoff(kleineMetallTuer).
+basisBauEndStoff(grosseElektrischeMetallTuer).
+basisBauEndStoff(elektrischeBetonTuer).
+basisBauEndStoff(betonDachEckStueck).
+basisBauEndStoff(kleineBetonTuer).
+basisBauEndStoff(grosseElektrischeBetonTuer).
 
 /* =============================== Strukturen =========================== */
 basisBauEndStoff(zylindrischerRaum).
@@ -398,6 +518,7 @@ basisBauEndStoff(dekor).
 basisBauEndStoff(eckSofa).
 basisBauEndStoff(ergonomischesSofa).
 basisBauEndStoff(einfacherSchreibTisch).
+basisBauEndStoff(frachterTreppe).
 basisBauEndStoff(fundament).
 basisBauEndStoff(gebogenerKorridor).
 basisBauEndStoff(gebogenesRohr).
@@ -435,16 +556,16 @@ basisBauEndStoff(metallBogen).
 basisBauEndStoff(metallTuer).
 basisBauEndStoff(orangeFarbenerWandBildSchirm).
 basisBauEndStoff(oszilloskop).
-basisBauEndStoff(pflasterung1).
-basisBauEndStoff(pflasterung2).
-basisBauEndStoff(pflasterung3).
+basisBauEndStoff(pflasterung).
+basisBauEndStoff(pflasterungVierFach).
+basisBauEndStoff(podestPflasterung).
 basisBauEndStoff(pyramide).
 basisBauEndStoff(quadratischerRaum).
 basisBauEndStoff(quadratischeTiefSeeKammer).
 basisBauEndStoff(regalModul).
-basisBauEndStoff(rennHindernis).
 basisBauEndStoff(roboterArm).
 basisBauEndStoff(rohr).
+basisBauEndStoff(rollTor).
 basisBauEndStoff(schliessFach).
 basisBauEndStoff(schraegeBetonPlatte).
 basisBauEndStoff(schraegeHolzPlatte).
@@ -452,22 +573,21 @@ basisBauEndStoff(schraegeMetallPlatte).
 basisBauEndStoff(schubLadenSchrank).
 basisBauEndStoff(sofa).
 basisBauEndStoff(stabilerWuerfel).
-basisBauEndStoff(stuhl1).
-basisBauEndStoff(stuhl2).
-basisBauEndStoff(stuhl3).
+basisBauEndStoff(stuhl).
 basisBauEndStoff(tFoermigerKorridor).
-basisBauEndStoff(tisch1).
-basisBauEndStoff(tisch2).
 basisBauEndStoff(topfPflanze).
 basisBauEndStoff(tuer).
 basisBauEndStoff(wuerfel).
 basisBauEndStoff(wuerfelFoermigeInnenTuer).
+basisBauEndStoff(wuerfelFoermigeInnenWand).
 basisBauEndStoff(wuerfelFoermigerDachAufsatz).
 basisBauEndStoff(wuerfelFoermigerRaum).
 basisBauEndStoff(wuerfelFoermigerRaumBoden).
 basisBauEndStoff(wuerfelFoermigerRaumRahmen).
 basisBauEndStoff(wuerfelRaumFundamentStrebe).
-basisBauEndStoff(wuerfelRaumViererFundametStrebe).
+basisBauEndStoff(wuerfelRaumViererFundamentStrebe).
+basisBauEndStoff(fundamentStrebe).
+basisBauEndStoff(viererFundamentStrebe).
 basisBauEndStoff(xFoermigerKorridor).
 basisBauEndStoff(zylinder).
 basisBauEndStoff(zylindrischerRaumRahmen).
@@ -506,7 +626,6 @@ basisBauEndStoff(metallFassade).
 basisBauEndStoff(metallRampe).
 basisBauEndStoff(mittlereRaffinerie).
 basisBauEndStoff(monitorStation).
-basisBauEndStoff(rennKraftVerstaerker).
 basisBauEndStoff(seitenModul).
 basisBauEndStoff(server).
 basisBauEndStoff(techBedienFeld).
@@ -514,7 +633,7 @@ basisBauEndStoff(waffenRegal).
 basisBauEndStoff(wandBildSchirm).
 basisBauEndStoff(wandEinheit).
 basisBauEndStoff(wandVentilator).
-basisBauEndStoff(wasserDichteTuer2).
+basisBauEndStoff(wasserDichteTuer).
 basisBauEndStoff(wuerfelFoermigerGlasRaum).
 basisBauEndStoff(zugangsRampe).
 
@@ -529,16 +648,23 @@ basisBauEndStoff(kolossGeoBucht).
 basisBauEndStoff(landeFeld).
 basisBauEndStoff(lFoermigerGlasTunnel).
 basisBauEndStoff(meeresUnterSchlupf).
-basisBauEndStoff(nautilonKammer).
 basisBauEndStoff(sauerStoffVerarbeiter).
 basisBauEndStoff(tFoermigerGlasTunnel).
 basisBauEndStoff(vertikalerGlasTunnel).
-basisBauEndStoff(wasserDichteTuer1).
 basisBauEndStoff(xFoermigerGlasTunnel).
 
 /* =============================== kaufbare Rezepte ===================== */
-/* ------------------------------- Raumschiffmodule --------------------- */
+/* modulRezept(<RezeptName>, <NanitPreis>) */
+/* ------------------------------- Exofahrzeugmodule -------------------- */
+modulRezept(hochleistungsSonar, 10).
 
+
+/* ------------------------------- Multiwerkzeugmodule ------------------ */
+modulRezept(optischerBohrerS, 460).
+modulRezept(untersuchungsGeraetA, 320).
+modulRezept(geschossSchmiererC, 180).
+
+/* ------------------------------- Raumschiffmodule --------------------- */
 modulRezept(ablativePanzerungC, 85).
 modulRezept(cadmiumAntriebC, 80).
 modulRezept(dysonPumpeB, 120).
@@ -565,13 +691,19 @@ modulRezept(wirtschaftsScanner, 150).
 modulRezept(zyklotronBalliste, 150).
 
 /* ------------------------------- Anzugmodule -------------------------- */
-
 modulRezept(effizienteWasserDuesenA, 350).
 modulRezept(sauerstoffUmleiterA, 240).
 modulRezept(sauerstoffWiederVerwerterC, 120).
 modulRezept(gefahrGutSchutzHandschuh, 80).
 modulRezept(raketenStiefelA, 200).
 modulRezept(neuralStimulatorB, 90).
+modulRezept(einfacherUeberSetzerB, 90).
+modulRezept(kuelMittelNetzwerkC, 160).
+modulRezept(waermeSchichtC, 160).
+modulRezept(toxinDaempferC, 160).
+modulRezept(strahlungsDeflektorC, 160).
+modulRezept(belueftungsMembranB, 120).
+modulRezept(verbesserterUebersetzerA, 580).
 
 /* =============================== kaufbare Module ====================== */
 /* ------------------------------- Raumschiffmodule --------------------- */
@@ -603,7 +735,20 @@ modulKauf(unterWasserSchutzModulB, 168).
 modulKauf(waermeSchutzModulA, 283).
 modulKauf(waermeSchutzModulB, 166).
 
-
+/* ------------------------------- Kochzutat ---------------------------- */
+kochStoff(Stoff) :-
+	setof(St, kochStoffSub(St), KochStoffeSet),
+	select(Stoff, KochStoffeSet, _).
+	
+kochStoffSub(Stoff) :-
+	rezept:rezept(kochen, [[_, Stoff]], _, _);
+	rezept:rezept(kochen, [[_, Stoff], [_, _]], _, _);
+	rezept:rezept(kochen, [[_, _], [_, Stoff]], _, _);
+	rezept:rezept(kochen, [[_, Stoff], [_, _], [_, _]], _, _);
+	rezept:rezept(kochen, [[_, _], [_, Stoff], [_, _]], _, _);
+	rezept:rezept(kochen, [[_, _], [_, _], [_, Stoff]], _, _);
+	rezept:rezept(kochen, [_],[_,Stoff], _).
+	
 /* Testprädikate */
 /*----------------------------------------------------------------*/
 stoffInFunktionEingangsStoff(Stoff) :-
@@ -616,6 +761,7 @@ stoffInFunktionEingangsStoff(Stoff) :-
 
 stoffInFunktionErgebnisStoff(Stoff) :-
 	rezept:rezept(_, [_],[_,Stoff], _).
+	
 
 fehlerInputStoffNichtDefiniert(Stoff) :-
 	stoffInFunktionEingangsStoff(Stoff),

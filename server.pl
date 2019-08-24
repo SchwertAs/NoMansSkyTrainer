@@ -40,7 +40,7 @@ web_form(_Request) :-
     <option>chlor
     <option>chlorGitter
     <option>chromatischesMetall
-    <option>coprit
+    <option>faecium
     <option>deuterium
     <option>dioxit
     <option>diWasserStoff
@@ -179,7 +179,7 @@ web_form(_Request) :-
     <option>superOxidKristall
     <option>supraLeiter
     <option>supraleitendeFaser
-    <option>technologieModul
+    <option>kabelBaum
     <option>teleportKoordinaten
     <option>tetraKobalt
     <option>thermischesKondensat
@@ -222,7 +222,7 @@ web_form(_Request) :-
     <option>sauerstoffUmleiterB
     <option>sauerstoffUmleiterC
     <option>sauerstoffUmleiterS
-    <option>sauerstoffWiederVerwerter
+    <option>sauerstoffWiederVerwerterC
     <option>selbstReinigendeKiemenEinheit
     <option>schildGitter
     <option>unterHyperDruckStehendeKreislaufAtmungsHilfe
@@ -291,10 +291,10 @@ web_form(_Request) :-
     <option>landwirtschaftsTerminal
     <option>lagerBehaelter1
     <option>verschlosseneKiste
-    <option>floraBehaelter
+    <option>floraBehaelterTubus
     <option>hydroKulturTrog
     <option>grosserHydroKulturTrog
-    <option>copritBlume
+    <option>magenKrampfBlume
     <option>echinoKaktus
     <option>frostWurz
     <option>gammaGras
@@ -310,10 +310,10 @@ web_form(_Request) :-
     <option>atmosphaerenVerarbeitungsAnlage
     <option>autonomeBergBauEinheit
     <option>basisComputer
-    <option>bauplanAnalysator
+    <option>konstruktionsForschungsStation
     <option>kommunikationsStation
     <option>nachrichtenModul
-    <option>signal
+    <option>speicherSignalTragbar
     <option>signalBooster
     <option>speicherPunkt
     <option>tragbareRaffinerie
@@ -329,7 +329,7 @@ web_form(_Request) :-
     <option>farbigeLeuchteGruen
     <option>farbigeLeuchteRot
     <option>farbigeLeuchteWeiss
-    <option>flagge
+    <option>flagge2
     <option>tiefSeeKammer
     <option>glasPlatteMitHolzRahmen
     <option>holzBodenPlatte
@@ -339,6 +339,7 @@ web_form(_Request) :-
     <option>holzTuerRahmen
     <option>holzWand
     <option>betonWand
+    <option>korridorFenster
     <option>metallFenster
     <option>metallWand
     <option>zylindrischerRaum
@@ -348,7 +349,7 @@ web_form(_Request) :-
     <option>betonBodenPlatte
     <option>betonBogen
     <option>betonDach
-    <option>betonDachEndStueck
+    <option>betonDachEckStueck
     <option>betonDachPlatte
     <option>betonTuer
     <option>betonTuerRahmen
@@ -395,8 +396,8 @@ web_form(_Request) :-
     <option>metallTuer
     <option>orangeFarbenerWandBildSchirm
     <option>oszilloskop
-    <option>pflasterung1
-    <option>pflasterung2
+    <option>pflasterungVierFach
+    <option>pflasterung
     <option>pflasterung3
     <option>pyramide
     <option>quadratischerRaum
@@ -426,8 +427,8 @@ web_form(_Request) :-
     <option>wuerfelFoermigerRaum
     <option>wuerfelFoermigerRaumBoden
     <option>wuerfelFoermigerRaumRahmen
-    <option>wuerfelRaumFundamentStrebe
-    <option>wuerfelRaumViererFundametStrebe
+    <option>fundamentStrebe
+    <option>viererFundametStrebe
     <option>xFoermigerKorridor
     <option>zylinder
     <option>zylindrischerRaumRahmen
@@ -457,7 +458,7 @@ web_form(_Request) :-
     <option>lagerBehaelter
     <option>leichterTisch
     <option>metallDach
-    <option>metallDachEndStueck
+    <option>metallDachEckStueck
     <option>metallDachPlatte
     <option>metallFassade
     <option>metallRampe
@@ -471,7 +472,7 @@ web_form(_Request) :-
     <option>wandBildSchirm
     <option>wandEinheit
     <option>wandVentilator
-    <option>wasserDichteTuer2
+    <option>wasserDichteTuer
     <option>wuerfelFoermigerGlasRaum
     <option>zugangsRampe
     <option>exoFahrzeugBeschleunigungsModulA
@@ -492,7 +493,6 @@ web_form(_Request) :-
         p([], [input([name='Submit', type='submit', value='OK'])])
 	  ])
 	]).
-
 
 landing_pad(Request) :-
         member(method(post), Request), !,

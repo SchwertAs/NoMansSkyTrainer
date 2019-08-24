@@ -14,9 +14,10 @@ sammelAktion(raumSchuerfen).
 sammelAktion(vorfertigen).
 
 /* mögliche Stoffwandelaktionen */
-wandelAktion(raffinieren).
-wandelAktion(herstellen).
 wandelAktion(bauen).
+wandelAktion(herstellen).
+wandelAktion(kochen).
+wandelAktion(raffinieren).
 
 /* Pflanzen ohne Gerät wild ernten */
 pfluecken(natrium, 20).
@@ -77,7 +78,9 @@ vorfertigen(instabilesGel).
 vorfertigen(instabilesNatrium).
 vorfertigen(kohlenStoffKristall).
 vorfertigen(lemmium).
+vorfertigen(organischerKatalysator).
 vorfertigen(magnoGold).
+vorfertigen(saeure).
 vorfertigen(seltenesMetallElement).
 vorfertigen(stickStoffSalz).
 vorfertigen(strassenKoeterBronze).

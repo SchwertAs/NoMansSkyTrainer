@@ -70,7 +70,7 @@ beschaffen(Anzahl, Stoff, _, BisherigeVorgaenge, ListeVorgaenge) :-
 
 beschaffen(Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-
 	length(StoffPfad, Len),
-	Len < 5,
+	Len < 6,
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], RaffinierZeit),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
 	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
