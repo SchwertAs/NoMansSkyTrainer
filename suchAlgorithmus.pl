@@ -72,6 +72,7 @@ beschaffen(Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-
 	length(StoffPfad, Len),
 	Len < 6,
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], RaffinierZeit),
+	wennHerstellenDannRezeptBekannt(Operation, Stoff),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
 	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
 	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),
@@ -101,3 +102,11 @@ listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaen
 	beschaffen(Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2),
 	beschaffen(Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3),
 	beschaffen(Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge).
+
+wennHerstellenDannRezeptBekannt(Operation, _) :-
+	\+Operation = herstellen.
+
+wennHerstellenDannRezeptBekannt(Operation, Stoff) :-
+	Operation = herstellen,
+	spielStatus:rezeptBekannt(Stoff).
+	

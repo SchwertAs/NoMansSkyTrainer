@@ -5,13 +5,16 @@
 /* Declarationen */
 /* :- dynamic stoffBestLoesung/2.
 
- Benutzerprädikate 
-
+ Benutzerprädikate  
+ 
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
-	ausgangsStoff:stoff(Produkt, EinzelWert),
+	ausgangsStoff:stoff(Produkt, EinzelWert), 
 	Wert is EinzelWert * Anzahl,
 	memberchk([_, Stoff], Komponenten).
+
+
+
 
 raffinierRezepteFuer(Stoff, Komponenten, Anzahl) :-
 	rezept:rezept(raffinieren, Komponenten, [Anzahl, Stoff], _).
@@ -43,50 +46,7 @@ minimaleSammlungLoesung(Anzahl, Stoff) :-
 	min_member(MinimalZeit, ZeitSammlungListe),
 	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	!,
-	format('<table width="55%" border="1">
-			  <caption>
-			    <h2>Sammelaktionen</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Anzahl&nbsp;</th>
-			    <th scope="col">Stoff&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Aktion&nbsp;</th>
-			  </tr>~n'
-			),
-	ausgabe:ausgabeSammlung(SammelSet),
-	format('</table>~n'),
-	format('<hr>~n', []),
-	format('<table width="100%" border="1">
-			  <caption>
-			    <h2>Herstellungsaktionen</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Anzahl&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Operation&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Stoff&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Komponenten&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			  </tr>~n'),
-	ausgabe:ausgabeVorgaenge(Vorgaenge),
-	format('</table>~n'),
-	format('<hr>~n', []),
-	format('<table width="35%" border="1">
-			  <caption>
-			    <h2>Summenwerte</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">Summenwert&nbsp;</th>
-			    <th scope="col">Anzahl&nbsp;</th>
-			    <th scope="col">Einheit&nbsp;</th>
-			  </tr>~n'),
-	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
-	format('</table>~n').
+	ausgabe:printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
 load :-
 	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe'),
@@ -107,6 +67,10 @@ testMinimaleSammlung :-
 	minimaleSammlungLoesung(1, Stoff),
 	fail.
 
+testStoffNichtSammelbar(Stoff) :-
+ 	stoff(Stoff, _),
+	\+sammeln:sammelbar(Stoff, _, _).
+	
 testRezepte(FehlOperation, FehlOpProdukt, 
 			FehlKomponente,
 			FehlProdukt,
