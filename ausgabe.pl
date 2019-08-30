@@ -1,5 +1,55 @@
-:- module(ausgabe, [ausgabeVorgaenge/1, ausgabeSummen/5]).
+:- module(ausgabe, [printMinSammlungForm/7]).
 
+printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
+	format('<table width="55%" border="1">
+			  <caption>
+			    <h2>Sammelaktionen</h2>
+			  </caption>
+			  <tr>
+			    <th scope="col">&nbsp;</th>
+			    <th scope="col">Anzahl&nbsp;</th>
+			    <th scope="col">Stoff&nbsp;</th>
+			    <th scope="col">&nbsp;</th>
+			    <th scope="col">Aktion&nbsp;</th>
+			  </tr>~n'
+			),
+	ausgabeSammlung(SammelSet),
+	format('</table>~n'),
+	format('<hr>~n', []),
+	format('<table width="100%" border="1">
+			  <caption>
+			    <h2>Herstellungsaktionen</h2>
+			  </caption>
+			  <tr>
+			    <th scope="col">&nbsp;</th>
+			    <th scope="col">Anzahl&nbsp;</th>
+			    <th scope="col">&nbsp;</th>
+			    <th scope="col">Operation&nbsp;</th>
+			    <th scope="col">&nbsp;</th>
+			    <th scope="col">Stoff&nbsp;</th>
+			    <th scope="col">&nbsp;</th>
+			    <th scope="col">Komponenten&nbsp;</th>
+			    <th scope="col">&nbsp;</th>
+			  </tr>~n'),
+	ausgabeVorgaenge(Vorgaenge),
+	format('</table>~n'),
+	format('<hr>~n', []),
+	format('<table width="35%" border="1">
+			  <caption>
+			    <h2>Summenwerte</h2>
+			  </caption>
+			  <tr>
+			    <th scope="col">Summenwert&nbsp;</th>
+			    <th scope="col">Anzahl&nbsp;</th>
+			    <th scope="col">Einheit&nbsp;</th>
+			  </tr>~n'),
+	ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
+	format('</table>~n').
+
+nichtHerstellBar(Stoff) :-
+	ausgangsStoff:stoff(Stoff, Wert),
+	format('<h4>Stoff kann nicht hergestellt werden. Kaufwert ca. ~k</h4>', Wert).
+	
 ausgabeSammlung(SammelSet) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	SammelSet = SammelSet0.

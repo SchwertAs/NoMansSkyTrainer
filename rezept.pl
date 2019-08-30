@@ -37,7 +37,7 @@ rezept(raffinieren, [[1, magnoGold]], [125, gold], 3 ).
 rezept(raffinieren, [[2, kobalt]], [1, ionisiertesKobalt], 93 ).
 rezept(raffinieren, [[1, tetraKobalt]], [150, ionisiertesKobalt], 2 ).
 rezept(raffinieren, [[1, ionisiertesKobalt]], [2, kobalt], 16 ).
-rezept(raffinieren, [[1, frostKristall]], [2, kohlenStoff], 15 ).
+rezept(raffinieren, [[40, frostKristall]], [1, glas], 15 ).
 rezept(raffinieren, [[1, gammaWurzel]], [2, kohlenStoff], 18 ).
 rezept(raffinieren, [[1, kaktusFleisch]], [2, kohlenStoff], 18 ).
 rezept(raffinieren, [[1, pilzSchimmel]], [2, kohlenStoff], 18 ).
@@ -45,6 +45,7 @@ rezept(raffinieren, [[1, sauerStoff]], [1, kohlenStoff], 22 ).
 rezept(raffinieren, [[1, sternenKnolle]], [2, kohlenStoff], 18 ).
 rezept(raffinieren, [[1, solanium]], [2, kohlenStoff], 18 ).
 rezept(raffinieren, [[1, zaeheFluessigkeiten]], [1, lebenderSchleim], 154 ).
+rezept(raffinieren, [[1, hypnotischesAuge]], [1, lebenderSchleim], 154 ).
 rezept(raffinieren, [[2, reinesFerrit]], [1, magnetisiertesFerrit], 64 ).
 rezept(raffinieren, [[3, faecium]], [2, mordit], 93 ).
 rezept(raffinieren, [[5, platin]], [1, nanitHaufen], 64 ).
@@ -265,109 +266,192 @@ rezept(raffinieren, [[250, chromatischesMetall], [25, verdichteterKohlenStoff], 
 rezept(raffinieren, [[250, chromatischesMetall], [50, kohlenStoff], [5, natriumNitrat]], [1, warpZelle], 60000 ).
 
 
-/* ---------------------  Rezepte aus Fabriken oder Quests ------------------------ */
-rezept(herstellen, [[150, chlor]], [1, chlorGitter], 0 ).
-rezept(herstellen, [[150, natriumNitrat]], [1, instabilesNatrium], 0 ).
-rezept(herstellen, [[150, natriumNitrat]], [1, hermetischesSiegel], 0 ).
-rezept(herstellen, [[50, ionisiertesKobalt]], [1, kobaltSpiegel], 0 ).
-rezept(herstellen, [[150, verdichteterKohlenStoff]], [1, kohlenStoffKristall], 0 ).
-rezept(herstellen, [[150, reinesFerrit]], [1, seltenesMetallElement], 0 ).
-rezept(herstellen, [[50, chlor]], [1, salzRefaktor], 0 ).
-rezept(herstellen, [[150, sauerStoff]], [1, superOxidKristall], 0 ).
-
-rezept(herstellen, [[50, paraffinium], [50, ionisiertesKobalt]], [1, aronium], 0 ).
+/* =====================  Fabrikrezepte ------------------------------------------- */
+/* ---------------------  Wertvolle Dinge ----------------------------------------- */
+rezept(herstellen, [[25, mordit], [600, pilzSchimmel]], [1, saeure], 0).
+rezept(herstellen, [[50, faecium], [400, gammaWurzel]], [1, schmierMittel], 0).
+rezept(herstellen, [[250, schwefelin], [50, verdichteterKohlenStoff]], [1, thermischesKondensat], 0).
+rezept(herstellen, [[1, fluessigSprengStoff], [1, fusionsBeschleuniger]], [1, tragbarerReaktor], 0).
+rezept(herstellen, [[200, kaktusFleisch]], [1, instabilesGel], 0 ).
+rezept(herstellen, [[40, frostKristall]], [1, glas], 0).
+rezept(herstellen, [[100, kaktusFleisch], [200, sternenKnolle]], [1, polyFaser], 0 ).
 rezept(herstellen, [[250, radon], [50, verdichteterKohlenStoff]], [1, angereicherterKohlenStoff], 0 ).
-rezept(herstellen, [[1, organischerKatalysator], [1, stickStoffSalz]], [1, fusionsBeschleuniger], 0 ).
+rezept(herstellen, [[250, stickStoff], [50, verdichteterKohlenStoff]], [1, stickStoffSalz], 0 ).
+rezept(herstellen, [[50, paraffinium], [50, ionisiertesKobalt]], [1, aronium], 0 ).
+rezept(herstellen, [[1, schaltPlatte], [1, supraLeiter]], [1, quantumProzessor], 0 ).
+rezept(herstellen, [[1, lebendesGlas], [1, kryoPumpe]], [1, kryogenKammer], 0 ).
+rezept(herstellen, [[1, saeure], [1, instabilesGel]], [1, fluessigSprengStoff], 0).
+rezept(herstellen, [[1, schmierMittel], [5, glas]], [1, lebendesGlas], 0).
+rezept(herstellen, [[100, frostKristall], [200, solanium]], [1, hitzeKondensator], 0).
+rezept(herstellen, [[1, hitzeKondensator], [1, polyFaser]], [1, schaltPlatte], 0).
+rezept(herstellen, [[1, thermischesKondensat], [1, angereicherterKohlenStoff]], [1, organischerKatalysator], 0 ).
 rezept(herstellen, [[1, thermischesKondensat], [1, stickStoffSalz]], [1, halbLeiter], 0 ).
 rezept(herstellen, [[1, angereicherterKohlenStoff], [1, stickStoffSalz]], [1, heissesEis], 0 ).
+rezept(herstellen, [[50, pyrit], [100, reinesFerrit]], [1, strassenKoeterBronze], 0 ).
 rezept(herstellen, [[50, ammoniak], [50, ionisiertesKobalt]], [1, herox], 0 ).
-rezept(herstellen, [[1, lebendesGlas], [1, kryoPumpe]], [1, kryogenKammer], 0 ).
-rezept(herstellen, [[1, heissesEis], [1, thermischesKondensat]], [1, kryoPumpe], 0 ).
 rezept(herstellen, [[100, reinesFerrit], [50, uran]], [1, lemmium], 0 ).
 rezept(herstellen, [[50, ionisiertesKobalt], [50, phosphor]], [1, magnoGold], 0 ).
-rezept(herstellen, [[40, natriumNitrat], [40, ferritStaub]], [1, natriumDiode], 0 ).
-rezept(herstellen, [[1, thermischesKondensat], [1, angereicherterKohlenStoff]], [1, organischerKatalysator], 0 ).
-rezept(herstellen, [[1, schaltPlatte], [1, supraLeiter]], [1, quantumProzessor], 0 ).
-rezept(herstellen, [[90, sauerStoff], [30, reinesFerrit]], [1, sauerStoffFilter], 0 ).
-rezept(herstellen, [[250, stickStoff], [50, verdichteterKohlenStoff]], [1, stickStoffSalz], 0 ).
-rezept(herstellen, [[50, pyrit], [100, reinesFerrit]], [1, strassenKoeterBronze], 0 ).
-rezept(herstellen, [[1, halbLeiter], [1, angereicherterKohlenStoff]], [1, supraLeiter], 0 ).
-rezept(herstellen, [[1, fluessigSprengStoff], [1, fusionsBeschleuniger]], [1, tragbarerReaktor], 0 ).
-rezept(herstellen, [[1, kobaltSpiegel], [1, kabelBaum]], [1, nichtLineareOptikC], 0 ).
-rezept(herstellen, [[250, emeril], [1, kabelBaum]], [1, indiumAntriebC], 0 ).
-
+rezept(herstellen, [[50, dioxit], [50, ionisiertesKobalt]], [1, grantine], 0 ).
 rezept(herstellen, [[1, tragbarerReaktor], [1, quantumProzessor], [1, geoDesit]], [1, fusionsZuender], 0 ).
-rezept(herstellen, [[1, strassenKoeterBronze], [1, herox], [1, lemmium]], [1, geoDesit], 0 ).
-rezept(herstellen, [[1, aronium], [1, magnoGold], [1, grantine]], [1, iridesit], 0 ).
 rezept(herstellen, [[1, quantumProzessor], [1, kryogenKammer], [1, iridesit]], [1, staseGeraet], 0 ).
+rezept(herstellen, [[1, organischerKatalysator], [1, stickStoffSalz]], [1, fusionsBeschleuniger], 0 ).
+rezept(herstellen, [[1, halbLeiter], [1, angereicherterKohlenStoff]], [1, supraLeiter], 0 ).
+rezept(herstellen, [[1, heissesEis], [1, thermischesKondensat]], [1, kryoPumpe], 0 ).
+rezept(herstellen, [[1, aronium], [1, magnoGold], [1, grantine]], [1, iridesit], 0 ).
+rezept(herstellen, [[1, strassenKoeterBronze], [1, herox], [1, lemmium]], [1, geoDesit], 0 ).
+
+/* ---------------------  Komponenten & Geräte ------------------------------------ */
+rezept(herstellen, [[1, diWasserStoffGelee], [20, kohlenStoff]], [1, lebensErhaltungsGel], 0).
+rezept(herstellen, [[40, diWasserStoff]], [1, diWasserStoffGelee], 0).
+rezept(herstellen, [[25, kobalt], [20, ferritStaub]], [1, ionenAkku], 0).
+rezept(herstellen, [[1, antiMaterieGehaeuse], [1, antiMaterie]], [1, warpZelle], 0).
+rezept(herstellen, [[150, verdichteterKohlenStoff]], [1, kohlenStoffKristall], 0 ).
+rezept(herstellen, [[150, reinesFerrit]], [1, seltenesMetallElement], 0 ).
+rezept(herstellen, [[150, ionisiertesKobalt]], [1, tetraKobalt], 0 ).
+rezept(herstellen, [[150, chlor]], [1, chlorGitter], 0 ).
+rezept(herstellen, [[150, natriumNitrat]], [1, instabilesNatrium], 0 ).
+rezept(herstellen, [[150, sauerStoff]], [1, superOxidKristall], 0 ).
+rezept(herstellen, [[1, metallPlatten], [40, diWasserStoff]], [1, raumSchiffStartTreibStoff], 0).
+rezept(herstellen, [[25, ionisiertesKobalt], [20, reinesFerrit]], [1, fortschrittlicherIonenAkku], 0).
+rezept(herstellen, [[200, kupfer], [1, mikroProzessor]], [1, atlasPassV1], 0).
+rezept(herstellen, [[50, ionisiertesKobalt]], [1, kobaltSpiegel], 0 ).
+rezept(herstellen, [[50, chlor]], [1, salzRefaktor], 0 ).
+rezept(herstellen, [[40, natriumNitrat], [40, ferritStaub]], [1, natriumDiode], 0 ).
+rezept(herstellen, [[90, sauerStoff], [30, reinesFerrit]], [1, sauerStoffFilter], 0 ).
+rezept(herstellen, [[25, sauerStoff], [20, ferritStaub]], [1, sauerStoffKapsel], 0).
+rezept(herstellen, [[40, salz], [40, zytoPhosphat], [40, kohlenStoff]], [1, hydrothermaleTreibStoffZelle], 0).
+rezept(herstellen, [[50, sauerStoff], [1, metallPlatten]], [1, instabilesPlasma], 0).
+rezept(herstellen, [[50, tritium], [20, gold]], [1, sternenSchildBatterie], 0).
+rezept(herstellen, [[200, cadmium], [1, mikroProzessor]], [1, atlasPassV2], 0).
+rezept(herstellen, [[1, antiMaterie], [1, sturmKristall]], [1, warpHyperKern], 0).
+rezept(herstellen, [[200, emeril], [1, mikroProzessor]], [1, atlasPassV3], 0).
+
+/* =====================  Questrezepte -------------------------------------------- */
+rezept(herstellen, [[100, chromatischesMetall]], [1, gefangeneNanode], 0 ).
+rezept(herstellen, [[1, gefangeneNanode], [100, reinesFerrit]], [1, umhuellterSchatten], 0).
+rezept(herstellen, [[1, umhuellterSchatten], [100, ionisiertesKobalt]], [1, nooSphaerischKugel], 0).
+rezept(herstellen, [[1, nooSphaerischKugel], [100, magnetisiertesFerrit]], [1, dunkleMaterie], 0).
+rezept(herstellen, [[1, dunkleMaterie], [100, chromatischesMetall]], [1, endeDerDaemmerung], 0).
+rezept(herstellen, [[1, endeDerDaemmerung], [100, kupfer]], [1, photischerJade], 0 ).
+rezept(herstellen, [[1, photischerJade], [100, cadmium]], [1, zustandsPhase], 0).
+rezept(herstellen, [[1, zustandsPhase], [100, emeril]], [1, novaeRegenerat], 0).
+rezept(herstellen, [[1, novaeRegenerat], [100, indium]], [1, modifizierteQuanten], 0).
+rezept(herstellen, [[1, modifizierteQuanten], [100, gold]], [1, herzDerSonne], 0).
 rezept(herstellen, [[16, platin], [16, tritium], [16, gold]], [1, sternenSamen], 0 ).
-rezept(herstellen, [[3, metallPlatten], [1, lebendePerle], [120, cadmium]], [1, seelenEngine], 0 ).
+
+rezept(herstellen, [[3, metallPlatten], [1, lebendePerle], [120, cadmium]], [1, seelenEngine], 0).
 rezept(herstellen, [[1, seelenEngine], [3, kabelBaum], [3, glas]], [1, gedankenBogen], 0 ).
 
-
 /* ---------------------  Anzug-Bau-Rezepte --------------------------------------- */
-
-/* Eine Komponente */
-rezept(herstellen, [[40, diWasserStoff]], [1, diWasserStoffGelee], 0).
-rezept(herstellen, [[100, chromatischesMetall]], [1, gefangeneNanode], 0 ).
-rezept(herstellen, [[50, frostKristall]], [1, glas], 0).
 rezept(herstellen, [[30, verdichteterKohlenStoff]], [1, hermetischesSiegel], 0 ).
-rezept(herstellen, [[200, kaktusFleisch]], [1, instabilesGel], 0 ).
 rezept(herstellen, [[50, kohlenStoff]], [1, kohlenStoffNanoRohr], 0).
-rezept(herstellen, [[10, kohlenStoff]], [1, kreaturenKugeln], 0).
 rezept(herstellen, [[50, ferritStaub]], [1, metallPlatten], 0).
 rezept(herstellen, [[60, ferritStaub]], [1, projektilMunition], 0).
-rezept(herstellen, [[150, ionisiertesKobalt]], [1, tetraKobalt], 0 ).
-
-/* Zwei Komponenten */
 rezept(herstellen, [[25, chromatischesMetall], [20, verdichteterKohlenStoff]], [1, antiMaterie], 0).
 rezept(herstellen, [[30, sauerStoff], [50, ferritStaub]], [1, antiMaterieGehaeuse], 0).
-rezept(herstellen, [[200, kupfer], [1, mikroProzessor]], [1, atlasPassV1], 0).
-rezept(herstellen, [[200, cadmium], [1, mikroProzessor]], [1, atlasPassV2], 0).
-rezept(herstellen, [[1, nooSpaerischKugel], [100, magnetisiertesFerrit]], [1, dunkleMaterie], 0).
-rezept(herstellen, [[1, dunkleMaterie], [100, chromatischesMetall]], [1, endeDerDaemmerung], 0).
-rezept(herstellen, [[1, saeure], [1, instabilesGel]], [1, fluessigSprengStoff], 0).
-rezept(herstellen, [[25, ionisiertesKobalt], [20, reinesFerrit]], [1, fortschrittlicherIonenAkku], 0).
+rezept(herstellen, [[1, kohlenStoffNanoRohr], [40, chromatischesMetall]], [1, mikroProzessor], 0).
+rezept(herstellen, [[10, kohlenStoff]], [1, kreaturenKugeln], 0).
+
+/* mit erstem Frachter gelernt */
 rezept(herstellen, [[50, diWasserStoff], [50, tritium]], [1, fregattenTreibStoff50to], 0).
 rezept(herstellen, [[100, diWasserStoff], [100, tritium]], [1, fregattenTreibStoff100to], 0).
 rezept(herstellen, [[200, diWasserStoff], [200, tritium]], [1, fregattenTreibStoff200to], 0).
-rezept(herstellen, [[100, frostKristall], [200, solanium]], [1, hitzeKondensator], 0).
-rezept(herstellen, [[1, modifizierteQuanten], [100, gold]], [1, herzDerSonne], 0).
-rezept(herstellen, [[25, kobalt], [20, ferritStaub]], [1, ionenAkku], 0).
-rezept(herstellen, [[1, schmierMittel], [5, glas]], [1, lebendesGlas], 0).
-rezept(herstellen, [[1, diWasserStoffGelee], [20, kohlenStoff]], [1, lebensErhaltungsGel], 0).
-rezept(herstellen, [[1, kohlenStoffNanoRohr], [40, chromatischesMetall]], [1, mikroProzessor], 0).
-rezept(herstellen, [[1, novaeRegenerat], [100, indium]], [1, modifizierteQuanten], 0).
-rezept(herstellen, [[1, umhuellterSchatten], [100, ionisiertesKobalt]], [1, nooSpaerischKugel], 0).
-rezept(herstellen, [[1, zustandsPhase], [100, emeril]], [1, novaeRegenerat], 0).
-rezept(herstellen, [[1, endeDerDaemmerung], [100, kupfer]], [1, photischerJade], 0 ).
-rezept(herstellen, [[100, kaktusFleisch], [200, sternenKnolle]], [1, polyFaser], 0 ).
-rezept(herstellen, [[1, metallPlatten], [40, diWasserStoff]], [1, raumSchiffStartTreibStoff], 0).
-rezept(herstellen, [[25, mordit], [600, pilzSchimmel]], [1, saeure], 0).
-rezept(herstellen, [[25, sauerStoff], [20, ferritStaub]], [1, sauerStoffKapsel], 0).
-rezept(herstellen, [[1, hitzeKondensator], [1, polyFaser]], [1, schaltPlatte], 0).
-rezept(herstellen, [[50, faecium], [400, gammaWurzel]], [1, schmierMittel], 0).
-rezept(herstellen, [[1, gefangeneNanode], [100, reinesFerrit]], [1, umhuellterSchatten], 0).
-rezept(herstellen, [[1, antiMaterieGehaeuse], [1, antiMaterie]], [1, warpZelle], 0).
-rezept(herstellen, [[1, photischerJade], [100, cadmium]], [1, zustandsPhase], 0).
 
-/* Drei Komponenten */
-rezept(herstellen, [[10, reinesFerrit ], [10, natriumNitrat], [10, silber]], [1, fortschrittlicherIonenAkku], 0 ).
-rezept(herstellen, [[40, salz], [40, zytoPhosphat], [40, kohlenStoff]], [1, hydrothermaleTreibStoffZelle], 0).
-rezept(herstellen, [[1, herox], [1, strassenKoeterBronze], [1, lemmium]], [1, geoDesit], 0).
-rezept(herstellen, [[3, metallPlatten], [1, lebendePerle], [120, cadmium]], [1, seelenEngine], 0).
-
-/* %%%%%%%%%%%%%%%%%%%%%  Multi-Tool Module nicht erforschbar %%%%%%%%%%%%%%%%%%%%%%%% */
-rezept(herstellen, [[1, kohlenStoffNanoRohr], [1, hermetischesSiegel], [2, kabelBaum]], [1, fortgeschrittenerMinenLaser], 0).
-
-/* =====================  verbrauchbare Fregatten Upgrade-Rezepte ==================== */
+/* %%%%%%%%%%%%%%%%%%%%%  verbrauchbare Fregatten Upgrade-Rezepte %%%%%%%%%%%%%%%%%%%% */
 rezept(herstellen, [[2, vierfachServo], [50, gold]], [1, treibStoffOxidant], 0).
 rezept(herstellen, [[1, natriumDiode], [50, gold]], [1, gedankenKontrollGeraet], 0 ).
 rezept(herstellen, [[1, sauerStoffFilter], [50, gold]], [1, holografischerAnalysator], 0).
-rezept(herstellen, [[1, kampfLaeuferGehirn], [50, gold]], [1, sprengDrohnen], 0 ).
-/* 
+rezept(herstellen, [[1, kampfLaeuferGehirn], [50, gold]], [1, sprengDrohnen], 0 ). 
 rezept(herstellen, [[2, vierfachServo], [50, gold]], [1, mineralKompressor], 0).
-*/
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Anzugmodule erforschbar %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(installieren, [[100, ferritStaub]], [1, lebensErhaltung], 0 ).
+rezept(installieren, [[50, chromatischesMetall], [20, natriumNitrat]], [1, gefahrGutSchutzHandschuh], 0).
+rezept(installieren, [[100, ferritStaub]], [1, gefahrenSchutz], 0 ).
+rezept(installieren, [[60, sauerStoff]], [1, sauerstoffWiederVerwerterC], 0 ).
+rezept(installieren, [[100, ferritStaub]], [1, jetPack], 0 ).
+rezept(installieren, [[1, kabelBaum]], [1, einfacherUeberSetzerB], 0 ).
+rezept(installieren, [[150, phosphor],[60, silber],[75, kupfer]], [1, kuelMittelNetzwerkC], 0 ).
+rezept(installieren, [[1, natriumDiode], [1, antiMaterie]], [1, schildGitterB], 0).
+rezept(installieren, [[100, chromatischesMetall],[1, salzRefaktor],[6, kristallSulfid]], [1, sauerStoffUmleiterA], 0 ).
+rezept(installieren, [[100, chromatischesMetall], [100, verdichteterKohlenStoff]], [1, neuralStimulator], 0 ).
+rezept(installieren, [[100, tritium], [1, salzRefaktor]], [1, raketenStiefelA], 0).
+rezept(installieren, [[100, chromatischesMetall],[100, sauerStoff],[6, lebendePerle]], [1, effizienteWasserDuesenA], 0 ).
+rezept(installieren, [[2, kabelBaum],[1, natriumDiode],[50, chromatischesMetall]], [1, verbesserterUebersetzerA], 0 ).
+rezept(installieren, [[3, kabelBaum],[2, korvaxKonvergenzWuerfel],[50, platin]], [1, perfektionierterUebersetzerS], 0 ).
+rezept(installieren, [[1, metallPlatten], [20, ionisiertesKobalt], [50, phosphor]], [1, gefahrenSchutzEinheit], 0).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Fahrzeugmodule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(installieren, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, fusionsAntrieb], 0).
+rezept(installieren, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, humboldtAntrieb], 0).
+rezept(installieren, [[50, chromatischesMetall], [1, mikroProzessor]], [1, exoFahrzeug], 0).
+rezept(installieren, [[50, chromatischesMetall], [15, magnetisiertesFerrit], [2, kohlenStoffNanoRohr]], [1, exoFahrzeugBeschleunigungsModul], 0).
+rezept(installieren, [[100, chromatischesMetall], [25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, exoFahrzeugMinenLaser], 0).
+rezept(installieren, [[150, chromatischesMetall], [6, lebendePerle], [2, chlorGitter]], [1, osmotischerGeneratorC], 0).
+rezept(installieren, [[1, salzRefaktor], [3, kristallSulfid], [50, ferritStaub]], [1, hochleistungsSonar], 0).
+rezept(installieren, [[50, magnetisiertesFerrit], [100, chlor], [10, lebendePerle]], [1, tethysStrahl], 0).
+rezept(installieren, [[100, chlor], [6, kristallSulfid], [2, lebendePerle]], [1, nautilonKanone], 0).
+rezept(installieren, [[100, chromatischesMetall], [2, ionenAkku], [2, mikroProzessor]], [1, exoFahrzeugUpgradeSigmaB], 0).
+rezept(installieren, [[50, chromatischesMetall], [50, pugneum]], [1, exoFahrzeugMinenLaserUpgradeSigmaA], 0).
+rezept(installieren, [[50, pugneum], [100, kupfer]], [1, exoFahrzeugBordKanone], 0).
+rezept(installieren, [[150, chromatischesMetall], [2, ionenAkku], [50, gold]], [1, exoFahrzeugUpgradeTauA], 0).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Raumschiff-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(installieren, [[1, antiMaterie], [3, kabelBaum]], [1, teleportEmpfaenger], 0 ).
+rezept(installieren, [[1, hermetischesSiegel], [1, metallPlatten]], [1, impulsAntrieb], 0 ).
+rezept(installieren, [[125, chromatischesMetall], [5, mikroProzessor]], [1, hyperAntrieb], 0 ).
+rezept(installieren, [[100, reinesFerrit], [1, diWasserStoffGelee]], [1, startSchubDuese], 0 ).
+rezept(installieren, [[100, chromatischesMetall], [25, natriumNitrat]], [1, deflektorSchild], 0 ).
+rezept(installieren, [[100, reinesFerrit], [60, natriumNitrat]], [1, photonenKanone], 0 ).
+rezept(installieren, [[1, kampfLaeuferGehirn], [1, kabelBaum]], [1, konfliktScanner], 0 ).
+rezept(installieren, [[5, mikroProzessor], [1, kabelBaum]], [1, wirtschaftsScanner], 0 ).
+rezept(installieren, [[250, chromatischesMetall], [1, kabelBaum]], [1, cadmiumAntriebB], 0 ).
+rezept(installieren, [[1, diWasserStoffGelee], [100, tritium], [2, kabelBaum]], [1, effizienteDuesenB], 0).
+rezept(installieren, [[1, kabelBaum], [100, gold], [50, natriumNitrat]], [1, ablativePanzerungC], 0).
+rezept(installieren, [[1, hermetischesSiegel], [1, kabelBaum], [100, tritium]], [1, nichtlineareOptikCPhotonenKanone], 0).
+rezept(installieren, [[200, kupfer], [100, verdichteterKohlenStoff]], [1, reketenWerfer], 0 ).
+rezept(installieren, [[100, tritium], [1, kabelBaum]], [1, phasenStrahler], 0 ).
+rezept(installieren, [[200, uran], [1, kabelBaum]], [1, positronenWerfer], 0 ).
+rezept(installieren, [[200, phosphor], [2, kabelBaum]], [1, infraMesser], 0 ).
+rezept(installieren, [[200, dioxit], [1, kabelBaum]], [1, zyklotronBalliste], 0 ).
+rezept(installieren, [[250, cadmium], [1, kabelBaum]], [1, emerilAntriebA], 0 ).
+rezept(installieren, [[5, antiMaterie], [2, kobaltSpiegel], [2, kabelBaum]], [1, startSystemLadeGeraetS], 0).
+rezept(installieren, [[2, kabelBaum], [4, instabilesPlasma]], [1, grosseRaketenRohreB], 0 ).
+rezept(installieren, [[1, salzRefaktor], [2, kabelBaum]], [1, fourierBegrenzerB], 0 ).
+rezept(installieren, [[3, seltenesMetallElement], [2, kabelBaum]], [1, fragmentSuperAufladerB], 0 ).
+rezept(installieren, [[1, instabilesNatrium], [2, kabelBaum]], [1, nichtlineareOptikBInfraMesserB], 0).
+rezept(installieren, [[3, tetraKobalt], [2, kabelBaum]], [1, dysonPumpeB], 0).
+rezept(installieren, [[250, emeril], [1, kabelBaum]], [1, indiumAntriebS], 0 ).
+
+/* %%%%%%%%%%%%%%%%%%%%%  Frachter-Module  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(installieren, [[250, cadmium], [1, sauerStoffFilter], [1, antiMaterieGehaeuse]], [1, frachterWarpReaktorSigmaC], 0 ).
+rezept(installieren, [[250, emeril], [1, natriumDiode], [1, antiMaterieGehaeuse]], [1, frachterWarpReaktorTauB], 0 ).
+rezept(installieren, [[250, indium], [1, salzRefaktor], [1, antiMaterieGehaeuse]], [1, frachterWarpReaktorThetaA], 0 ).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%  Multiwerkzeug-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+rezept(installieren, [[60, ferritStaub]], [1, minenLaser], 0 ).
+rezept(installieren, [[1, kohlenStoffNanoRohr], [1, hermetischesSiegel], [2, kabelBaum]], [1, fortgeschrittenerMinenLaser], 0).
+rezept(installieren, [[100, chromatischesMetall], [3, kohlenStoffNanoRohr]], [1, blitzWerfer], 0 ).
+rezept(installieren, [[2, ionenAkku], [1, kabelBaum]], [1, eigenesKraftFeld], 0 ).
+rezept(installieren, [[1, kohlenStoffNanoRohr], [1, hermetischesSiegel], [2, kabelBaum]], [1, eigenesKraftFeldA], 0 ).
+rezept(installieren, [[100, magnetisiertesFerrit], [1, ionenAkku]], [1, wellenFormWiederVerwerterB], 0 ).
+rezept(installieren, [[4, glas], [1, kabelBaum]], [1, laufIonisatorC], 0 ).
+rezept(installieren, [[1, superOxidKristall], [1, kabelBaum]], [1, plasmaWerfer], 0 ).
+rezept(installieren, [[200, chromatischesMetall], [150, verdichteterKohlenStoff], [1, kabelBaum]], [1, glutSpeer], 0 ).
+rezept(installieren, [[200, pugneum], [1, kabelBaum]], [1, streuBlaster], 0 ).
+rezept(installieren, [[200, deuterium], [1, kabelBaum]], [1, impulsWerfer], 0 ).
+rezept(installieren, [[2, ionenAkku], [1, kabelBaum]], [1, kampfVisier], 0 ).
+rezept(installieren, [[3, natriumDiode], [3, salzRefaktor], [5, kabelBaum]], [1, optischerBohrerS], 0 ).
+rezept(installieren, [[3, natriumDiode], [1, kobaltSpiegel], [2, kabelBaum]], [1, untersuchungsGeraetA], 0 ).
+rezept(installieren, [[1, seltenesMetallElement], [1, kabelBaum]], [1, geologieKanone], 0 ).
+rezept(installieren, [[1, superOxidKristall], [1, kabelBaum]], [1, masseBeschleunigerC], 0 ).
+rezept(installieren, [[1, chlorGitter], [1, kabelBaum]], [1, geschossSchmiererC], 0 ).
+rezept(installieren, [[1, tetraKobalt], [1, kabelBaum]], [1, verstaerkteKartuschenC], 0 ).
+
 
 /* %%%%%%%%%%%%%%%%%%%%%  Siedlung-Bau-Rezepte nicht erforschbar %%%%%%%%%%%%%%%%%%%%% */
 /* =====================  allgemein ================================================== */
@@ -453,7 +537,6 @@ rezept(bauen, [[2, metallPlatten], [15, natriumNitrat]], [1, speicherSignal], 0)
 rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, uran]], [1, gesundheitsStation], 0).
 rezept(bauen, [[50, ionisiertesKobalt], [1, ionenAkku]], [1, basisTelePorterModul], 0).
 rezept(bauen, [[2, metallPlatten], [1, hermetischesSiegel], [25, natrium]], [1, naehrStoffProzessor], 0).
-rezept(herstellen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, phosphor]], [1, gefahrenSchutzEinheit], 0).
 rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium]], [1, lagerBehaelter], 0).
 rezept(bauen, [[10, ferritStaub]], [1, aussehenModifikator], 0 ).
 rezept(bauen, [[10, metallPlatten], [2, ionenAkku], [2, mikroProzessor]], [1, landeFeld], 0).
@@ -695,121 +778,160 @@ rezept(bauen, [[20, ferritStaub]], [1, zylinder], 0 ).
 rezept(bauen, [[20, ferritStaub]], [1, wuerfel], 0 ).
 rezept(bauen, [[20, ferritStaub]], [1, kugel], 0 ).
 
-
-/* %%%%%%%%%%%%%%%%%%%%%  Anzugmodule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-rezept(herstellen, [[100, ferritStaub]], [1, lebensErhaltung], 0 ).
-rezept(herstellen, [[50, chromatischesMetall], [20, natriumNitrat]], [1, gefahrGutSchutzHandschuh], 0).
-rezept(herstellen, [[100, ferritStaub]], [1, gefahrenSchutz], 0 ).
-rezept(herstellen, [[60, sauerStoff]], [1, sauerstoffWiederVerwerterC], 0 ).
-rezept(herstellen, [[100, ferritStaub]], [1, jetPack], 0 ).
-rezept(herstellen, [[1, kabelBaum]], [1, einfacherUeberSetzerB], 0 ).
-rezept(herstellen, [[150, phosphor],[60, silber],[75, kupfer]], [1, kuelMittelNetzwerkC], 0 ).
-rezept(herstellen, [[1, natriumDiode], [1, antiMaterie]], [1, schildGitterB], 0).
-rezept(herstellen, [[100, chromatischesMetall],[1, salzRefaktor],[6, kristallSulfid]], [1, sauerStoffUmleiterA], 0 ).
-rezept(herstellen, [[100, chromatischesMetall], [100, verdichteterKohlenStoff]], [1, neuralStimulator], 0 ).
-rezept(herstellen, [[100, tritium], [1, salzRefaktor]], [1, raketenStiefelA], 0).
-rezept(herstellen, [[100, chromatischesMetall],[100, sauerStoff],[6, lebendePerle]], [1, effizienteWasserDuesenA], 0 ).
-rezept(herstellen, [[2, kabelBaum],[1, natriumDiode],[50, chromatischesMetall]], [1, verbesserterUebersetzerA], 0 ).
-rezept(herstellen, [[3, kabelBaum],[2, korvaxKonvergenzWuerfel],[50, platin]], [1, perfektionierterUebersetzerS], 0 ).
-
-
-/* %%%%%%%%%%%%%%%%%%%%%  Fahrzeugmodule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-rezept(herstellen, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, fusionsAntrieb], 0).
-rezept(herstellen, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, humboldtAntrieb], 0).
-rezept(herstellen, [[50, chromatischesMetall], [1, mikroProzessor]], [1, exoFahrzeugSignalBooster], 0).
-rezept(herstellen, [[50, chromatischesMetall], [15, magnetisiertesFerrit], [2, kohlenStoffNanoRohr]], [1, exoFahrzeugBeschleunigungsModul], 0).
-rezept(herstellen, [[100, chromatischesMetall], [25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, exoFahrzeugMinenLaser], 0).
-rezept(herstellen, [[150, chromatischesMetall], [6, lebendePerle], [2, chlorGitter]], [1, osmotischerGeneratorC], 0).
-rezept(herstellen, [[1, salzRefaktor], [3, kristallSulfid], [50, ferritStaub]], [1, hochleistungsSonar], 0).
-rezept(herstellen, [[50, magnetisiertesFerrit], [100, chlor], [10, lebendePerle]], [1, tethysStrahl], 0).
-rezept(herstellen, [[100, chlor], [6, kristallSulfid], [2, lebendePerle]], [1, nautilonKanone], 0).
-rezept(herstellen, [[100, chromatischesMetall], [2, ionenAkku], [2, mikroProzessor]], [1, exoFahrzeugSignalBoosterUpgradeSigmaB], 0).
-rezept(herstellen, [[50, chromatischesMetall], [50, pugneum]], [1, exoFahrzeugMinenLaserUpgradeSigmaA], 0).
-rezept(herstellen, [[50, pugneum], [100, kupfer]], [1, exoFahrzeugBordKanone], 0).
-rezept(herstellen, [[150, chromatischesMetall], [2, ionenAkku], [50, gold]], [1, exoFahrzeugSignalBoosterUpgradeTauA], 0).
-
-
-/* %%%%%%%%%%%%%%%%%%%%%  Raumschiff-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-rezept(herstellen, [[1, antiMaterie], [3, kabelBaum]], [1, teleportEmpfaenger], 0 ).
-rezept(herstellen, [[1, hermetischesSiegel], [1, metallPlatten]], [1, impulsAntrieb], 0 ).
-rezept(herstellen, [[125, chromatischesMetall], [5, mikroProzessor]], [1, hyperAntrieb], 0 ).
-rezept(herstellen, [[100, reinesFerrit], [1, diWasserStoffGelee]], [1, startSchubDuese], 0 ).
-rezept(herstellen, [[100, chromatischesMetall], [25, natriumNitrat]], [1, deflektorSchild], 0 ).
-rezept(herstellen, [[100, reinesFerrit], [60, natriumNitrat]], [1, photonenKanone], 0 ).
-rezept(herstellen, [[1, kampfLaeuferGehirn], [1, kabelBaum]], [1, konfliktScanner], 0 ).
-rezept(herstellen, [[5, mikroProzessor], [1, kabelBaum]], [1, wirtschaftsScanner], 0 ).
-rezept(herstellen, [[250, chromatischesMetall], [1, kabelBaum]], [1, cadmiumAntriebB], 0 ).
-rezept(herstellen, [[1, diWasserStoffGelee], [100, tritium], [2, kabelBaum]], [1, effizienteDuesenB], 0).
-rezept(herstellen, [[1, kabelBaum], [100, gold], [50, natriumNitrat]], [1, ablativePanzerungC], 0).
-rezept(herstellen, [[1, hermetischesSiegel], [1, kabelBaum], [100, tritium]], [1, nichtlineareOptikCPhotonenKanone], 0).
-rezept(herstellen, [[200, kupfer], [100, verdichteterKohlenStoff]], [1, reketenWerfer], 0 ).
-rezept(herstellen, [[100, tritium], [1, kabelBaum]], [1, phasenStrahler], 0 ).
-rezept(herstellen, [[200, uran], [1, kabelBaum]], [1, positronenWerfer], 0 ).
-rezept(herstellen, [[200, phosphor], [2, kabelBaum]], [1, infraMesser], 0 ).
-rezept(herstellen, [[200, dioxit], [1, kabelBaum]], [1, zyklotronBalliste], 0 ).
-rezept(herstellen, [[250, cadmium], [1, kabelBaum]], [1, emerilAntriebA], 0 ).
-rezept(herstellen, [[5, antiMaterie], [2, kobaltSpiegel], [2, kabelBaum]], [1, startSystemLadeGeraetS], 0).
-rezept(herstellen, [[2, kabelBaum], [4, instabilesPlasma]], [1, grosseRaketenRohreB], 0 ).
-rezept(herstellen, [[1, salzRefaktor], [2, kabelBaum]], [1, fourierBegrenzerB], 0 ).
-rezept(herstellen, [[3, seltenesMetallElement], [2, kabelBaum]], [1, fragmentSuperAufladerB], 0 ).
-rezept(herstellen, [[1, instabilesNatrium], [2, kabelBaum]], [1, nichtlineareOptikBInfraMesserB], 0).
-rezept(herstellen, [[3, tetraKobalt], [2, kabelBaum]], [1, dysonPumpeBS], 0).
-rezept(herstellen, [[250, emeril], [1, kabelBaum]], [1, indiumAntriebS], 0 ).
-
-/* %%%%%%%%%%%%%%%%%%%%%  Multiwerkzeug-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-rezept(herstellen, [[60, ferritStaub]], [1, minenLaser], 0 ).
-rezept(herstellen, [[100, chromatischesMetall], [3, kohlenStoffNanoRohr]], [1, blitzWerfer], 0 ).
-rezept(herstellen, [[2, ionenAkku], [1, kabelBaum]], [1, eigenesKraftFeld], 0 ).
-rezept(herstellen, [[1, kohlenStoffNanoRohr], [1, hermetischesSiegel], [2, kabelBaum]], [1, eigenesKraftFeldA], 0 ).
-rezept(herstellen, [[100, magnetisiertesFerrit], [1, ionenAkku]], [1, wellenFormWiederVerwerterB], 0 ).
-rezept(herstellen, [[4, glas], [1, kabelBaum]], [1, laufIonisatorC], 0 ).
-rezept(herstellen, [[1, superOxidKristall], [1, kabelBaum]], [1, plasmaWerfer], 0 ).
-rezept(herstellen, [[200, chromatischesMetall], [150, verdichteterKohlenStoff], [1, kabelBaum]], [1, glutSpeer], 0 ).
-rezept(herstellen, [[200, pugneum], [1, kabelBaum]], [1, streuBlaster], 0 ).
-rezept(herstellen, [[200, deuterium], [1, kabelBaum]], [1, impulsWerfer], 0 ).
-rezept(herstellen, [[2, ionenAkku], [1, kabelBaum]], [1, kampfVisier], 0 ).
-rezept(herstellen, [[3, natriumDiode], [3, salzRefaktor], [5, kabelBaum]], [1, optischerBohrerS], 0 ).
-rezept(herstellen, [[3, natriumDiode], [1, kobaltSpiegel], [2, kabelBaum]], [1, untersuchungsGeraetA], 0 ).
-rezept(herstellen, [[1, seltenesMetallElement], [1, kabelBaum]], [1, geologieKanone], 0 ).
-rezept(herstellen, [[1, superOxidKristall], [1, kabelBaum]], [1, masseBeschleunigerC], 0 ).
-rezept(herstellen, [[1, chlorGitter], [1, kabelBaum]], [1, geschossSchmiererC], 0 ).
-rezept(herstellen, [[1, tetraKobalt], [1, kabelBaum]], [1, verstaerkteKartuschenC], 0 ).
-
 /* %%%%%%%%%%%%%%%%%%%%%  Kochrezepte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-/* erntbare Kochstoffe */
+/* eine Zutat */
 rezept(kochen, [[1, impulsBohnen]],[1, bitterSuesserKakao], 260).
+rezept(kochen, [[1, teig]],[1, brot], 260).
 rezept(kochen, [[1, aloeFleisch]],[1, erfrischungsGetraenk], 260).
 rezept(kochen, [[1, feuerBeere]],[1, feuerWasser], 260).
+rezept(kochen, [[1, mordit]], [1, fleischFlocken], 260).
+rezept(kochen, [[1, fleischFlocken]],[1, fleischigeStuecke], 260).
+rezept(kochen, [[1, larvenKern]],[1, gebackeneEier], 260).
+rezept(kochen, [[1, kreaturenEi]],[1, gebackeneEier], 260).
+rezept(kochen, [[1, grosseEier]],[1, gebackeneEier], 260).
+rezept(kochen, [[1, riesenEi]],[1, gebackeneEier], 260).
 rezept(kochen, [[1, gefroreneKnollen]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, hexaBeere]],[1, geduenstetesGemuese], 260).
 rezept(kochen, [[1, jadeErbsen]],[1, geduenstetesGemuese], 260).
-rezept(kochen, [[1, frostKristall]],[1, glasKoerner], 260).
-rezept(kochen, [[1, kaktusFleisch]],[1, kaktusNektar], 260).
-rezept(kochen, [[1, kelpBeutel]],[1, kelpEis], 260).
-rezept(kochen, [[1, kohlenStoff]],[1, kreaturenKugeln], 260).
-rezept(kochen, [[1, kuerbisKnolle]],[1, kuerbisFleisch], 260).
-rezept(kochen, [[1, sternenKnolle]],[1, pilgerBeere], 260).
-rezept(kochen, [[1, gammaWurzel]],[1, sievertBohnen], 260).
-rezept(kochen, [[1, solanium]],[1, solartillo], 260).
-rezept(kochen, [[1, pilzSchimmel]],[1, ungiftigerPilz], 260).
-rezept(kochen, [[1, grahBeere]],[1, verarbeiteterZucker], 260).
-rezept(kochen, [[1, suessWurzel]],[1, verarbeiteterZucker], 260).
-rezept(kochen, [[1, beinFleisch]],[1, verarbeitetesFleisch], 260).
-rezept(kochen, [[1, fleischigeStuecke]],[1, verarbeitetesFleisch], 260).
-rezept(kochen, [[1, katzenLeber]],[1, verarbeitetesFleisch], 260).
-rezept(kochen, [[1, rohesSteak]],[1, verarbeitetesFleisch], 260).
-rezept(kochen, [[1, heptaPloidWeizen]],[1, verfeinertesMehl], 260).
-rezept(kochen, [[1, faecium]],[1, wildeHefe], 260).
-rezept(kochen, [[1, fleischigeWurzeln]],[1, wurzelSaft], 260).
-
 rezept(kochen, [[1, kuerbisFleisch]],[1, geduenstetesGemuese], 260).
 rezept(kochen, [[1, sievertBohnen]],[1, geduenstetesGemuese], 260).
 rezept(kochen, [[1, solartillo]],[1, geduenstetesGemuese], 260).
 rezept(kochen, [[1, ungiftigerPilz]],[1, geduenstetesGemuese], 260).
+rezept(kochen, [[1, sahne]],[1, geschlageneButter], 260).
+rezept(kochen, [[1, frostKristall]],[1, glasKoerner], 260).
+rezept(kochen, [[1, kaktusFleisch]],[1, kaktusNektar], 260).
+rezept(kochen, [[1, kelpBeutel]],[1, kelpReis], 260).
 rezept(kochen, [[1, wurzelSaft]],[1, knusperKaramell], 260).
+rezept(kochen, [[1, kohlenStoff]],[1, kreaturenKugeln], 260).
+rezept(kochen, [[1, kuerbisKnolle]],[1, kuerbisFleisch], 260).
+rezept(kochen, [[1, sternenKnolle]],[1, pilgerBeere], 260).
 rezept(kochen, [[1, pilgerBeere]],[1, pilgerElixier], 260).
+rezept(kochen, [[1, protoSahne]],[1, protoButter], 260).
+rezept(kochen, [[1, protoSahne]],[1, protoKaese], 260).
+rezept(kochen, [[1, warmeProtoMilch]],[1, protoSahne], 260).
+rezept(kochen, [[1, frischeMilch]],[1, sahne], 260).
+rezept(kochen, [[1, wildeMilch]],[1, sahne], 260).
+rezept(kochen, [[1, hypnotischesAuge]],[1, schrecklicherBrei], 260).
+rezept(kochen, [[1, gammaWurzel]],[1, sievertBohnen], 260).
+rezept(kochen, [[1, chromatischesMetall]],[1, silikonEi], 260).
+rezept(kochen, [[1, solanium]],[1, solartillo], 260).
+rezept(kochen, [[1, klebrigerHonig]],[1, synthetischerHonig], 260).
+rezept(kochen, [[1, gebaeck]],[1, tortenBoden], 260).
+rezept(kochen, [[1, pilzSchimmel]],[1, ungiftigerPilz], 260).
+rezept(kochen, [[1, grahBeere]],[1, verarbeiteterZucker], 260).
 rezept(kochen, [[1, kaktusNektar]],[1, verarbeiteterZucker], 260).
-rezept(kochen, [[1, kelpEis]],[1, verfeinertesMehl], 260).
+rezept(kochen, [[1, suessWurzel]],[1, verarbeiteterZucker], 260).
+rezept(kochen, [[1, beinFleisch]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, diploStuecke]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, fleischigeFluegel]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, fleischigeStuecke]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, innereienBeutel]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, katzenLeber]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, protoWurst]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, rohesSteak]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, schreiterWurst]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, schuppigesFleisch]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, unholdRogen]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, glasKoerner]],[1, verfeinertesMehl], 260).
+rezept(kochen, [[1, heptaPloidWeizen]],[1, verfeinertesMehl], 260).
+rezept(kochen, [[1, kelpReis]],[1, verfeinertesMehl], 260).
+rezept(kochen, [[1, wildeHefe]],[1, wildeHefe], 260).
+rezept(kochen, [[1, faecium]],[1, wildeHefe], 260).
+rezept(kochen, [[1, fleischigeWurzeln]],[1, wurzelSaft], 260).
 
+/* zwei Zutaten */
+rezept(kochen, [[1, hypnotischesAuge], [1, hypnotischesAuge]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, hypnotischesAuge]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, schrecklicherBrei]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, verarbeitetesFleisch]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, geraeuchertesFleisch]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, fleischigeStuecke]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, innereienBeutel]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, katzenLeber]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, fleischigeFluegel]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, protoWurst]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, diploStuecke]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, schuppigesFleisch]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, schreiterWurst]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, rohesSteak]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, geduenstetesGemuese]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, impulsBohnen]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, solartillo]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, jadeErbsen]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, ungiftigerPilz]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, sievertBohnen]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, suessWurzel]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, schrecklicherBrei], [1, fleischigeWurzeln]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, verarbeitetesFleisch]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, geraeuchertesFleisch]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, fleischigeStuecke]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, innereienBeutel]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, katzenLeber]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, fleischigeFluegel]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, protoWurst]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, diploStuecke]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, schuppigesFleisch]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, schreiterWurst]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, rohesSteak]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, geduenstetesGemuese]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, impulsBohnen]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, solartillo]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, jadeErbsen]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, ungiftigerPilz]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, sievertBohnen]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, suessWurzel]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hypnotischesAuge], [1, fleischigeWurzeln]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, hexaBeere], [1, verarbeiteterZucker]],[1, anormaleMarmelade], 260).
+rezept(kochen, [[1, hexaBeere], [1, tortenBoden]],[1, anormaleTorte], 260).
+rezept(kochen, [[1, anormaleMarmelade], [1, tortenBoden]],[1, anormaleTorte], 260).
+rezept(kochen, [[1, anormaleMarmelade], [1, klobigerDonut]],[1, anormalerDonut], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, klebrigerPudding]],[1, apfelEisCreme], 260).
+rezept(kochen, [[1, frostKristall], [1, klebrigerPudding]],[1, apfelEisCreme], 260).
+rezept(kochen, [[1, holzApfel], [1, heulenderTeig]],[1, apfelKuchen], 260).
+rezept(kochen, [[1, holzApfel], [1, protoTeig]],[1, apfelKuriositaet], 260).
+rezept(kochen, [[1, tortenBoden], [1, geduenstetesGemuese]],[1, balastStoffReichePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, jadeErbsen]],[1, balastStoffReichePastete], 260).
+rezept(kochen, [[1, beinFleisch], [1, tortenBoden]],[1, beineImTeigMantel], 260).
+rezept(kochen, [[1, mordit], [1, katzenLeber]],[1, blutigesOrgan], 260).
+rezept(kochen, [[1, mordit], [1, innereienBeutel]],[1, blutigesOrgan], 260).
+rezept(kochen, [[1, geschlageneButter], [1, geschlageneButter]],[1, bratOel], 260).
+rezept(kochen, [[1, geschlageneButter], [1, protoButter]],[1, bratOel], 260).
+rezept(kochen, [[1, monstroeserPudding], [1, tortenBoden]],[1, brueterTorte], 260).
+rezept(kochen, [[1, sahne], [1, sahne]],[1, cremigeSosse], 260).
+rezept(kochen, [[1, sahne], [1, protoSahne]],[1, cremigeSosse], 260).
+rezept(kochen, [[1, protoSahne], [1, protoSahne]],[1, cremigeSosse], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, larvenKern]],[1, delikatessBaiser], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, kreaturenEi]],[1, delikatessBaiser], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, grosseEier]],[1, delikatessBaiser], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, riesenEi]],[1, delikatessBaiser], 260).
+rezept(kochen, [[1, protoTeig], [1, klebrigerHonig]],[1, derMerkWuerdigsteKuchen], 260).
+rezept(kochen, [[1, protoTeig], [1, klebrigeButter]],[1, derMerkWuerdigsteKuchen], 260).
+rezept(kochen, [[1, klobigerDonut], [1, sternenPudding]],[1, derStellarator], 260).
+rezept(kochen, [[1, faecium], [1, aloeFleisch]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, cremigeSosse], [1, geheimnisVollerFleischEintopf]],[1, dickerFleischEintopf], 260).
+rezept(kochen, [[1, faecium], [1, frostKristall]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, gammaWurzel]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, glasKoerner]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, heptaPloidWeizen]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, jadeErbsen]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, sievertBohnen]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, faecium], [1, solanium]],[1, duftendeKraeuter], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen]],[1, eisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, frostKristall]],[1, eisCreme], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, hypnotischesAuge]],[1, eisSchreie], 260).
+rezept(kochen, [[1, frostKristall], [1, hypnotischesAuge]],[1, eisSchreie], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, schrecklicherBrei]],[1, eisSchreie], 260).
+rezept(kochen, [[1, frostKristall], [1, schrecklicherBrei]],[1, eisSchreie], 260).
+rezept(kochen, [[1, holzApfel], [1, extraFluffigerTeig]],[1, engelsObstKuchen], 260).
+rezept(kochen, [[1, sahne], [1, windenderAufgewuehlterTeig]],[1, entfesseltesSahneHorn], 260).
+rezept(kochen, [[1, faecium], [1, gefroreneKnollen]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, fleischigeWurzeln]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, impulsBohnen]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, kaktusNektar]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, pilzSchimmel]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, solartillo]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, faecium], [1, ungiftigerPilz]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, fleischigeWurzeln], [1, fleischigeWurzeln]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, fleischigeWurzeln], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, fleischigeWurzeln], [1, impulsBohnen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, fleischigeWurzeln], [1, jadeErbsen]],[1, fasrigerEintopf], 260).
@@ -818,67 +940,426 @@ rezept(kochen, [[1, fleischigeWurzeln], [1, solartillo]],[1, fasrigerEintopf], 2
 rezept(kochen, [[1, fleischigeWurzeln], [1, suessWurzel]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, fleischigeWurzeln], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, geduenstetesGemuese], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, geduenstetesGemuese], [1, impulsBohnen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, geduenstetesGemuese], [1, solartillo]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, impulsBohnen], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, geduenstetesGemuese], [1, jadeErbsen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, geduenstetesGemuese], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, geduenstetesGemuese], [1, suessWurzel]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, impulsBohnen], [1, impulsBohnen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, impulsBohnen], [1, jadeErbsen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, impulsBohnen], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, impulsBohnen], [1, solartillo]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, impulsBohnen], [1, suessWurzel]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, impulsBohnen], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, jadeErbsen], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, jadeErbsen], [1, jadeErbsen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, jadeErbsen], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, jadeErbsen], [1, solartillo]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, jadeErbsen], [1, suessWurzel]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, jadeErbsen], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, sievertBohnen], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, sievertBohnen], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, sievertBohnen], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, sievertBohnen], [1, suessWurzel]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, sievertBohnen], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, suessWurzel], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, suessWurzel], [1, sievertBohnen]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, suessWurzel], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, solartillo], [1, solartillo]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, solartillo], [1, suessWurzel]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, solartillo], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, suessWurzel], [1, suessWurzel]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, suessWurzel], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, ungiftigerPilz], [1, solartillo]],[1, fasrigerEintopf], 260).
-rezept(kochen, [[1, fleischigeStuecke], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, fleischigeStuecke], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, rohesSteak], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, beinFleisch], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, beinFleisch], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, fleischigeStuecke], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, fleischigeStuecke], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, katzenLeber], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, katzenLeber], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, rohesSteak], [1, verdichteterKohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, rohesSteak], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, grahBeere], [1, verarbeiteterZucker]],[1, grahmeLade], 260).
-rezept(kochen, [[1, wurzelSaft], [1, feuerBeere]],[1, heisseSosse], 260).
-rezept(kochen, [[1, wurzelSaft], [1, sievertBohnen]],[1, heisseSosse], 260).
-rezept(kochen, [[1, wurzelSaft], [1, solartillo]],[1, heisseSosse], 260).
-rezept(kochen, [[1, kaktusNektar], [1, verarbeiteterZucker]],[1, kaktusGelee], 260).
-rezept(kochen, [[1, fasrigerEintopf], [1, wohlSchmeckendeSosse]],[1, koestlicherEintopf], 260).
-rezept(kochen, [[1, fasrigerEintopf], [1, heisseSosse]],[1, scharferGemueseEintopf], 260).
-rezept(kochen, [[1, wurzelSaft], [1, geduenstetesGemuese]],[1, wohlSchmeckendeSosse], 260).
-
-rezept(kochen, [[1, faecium], [1, aloeFleisch]],[1, duftendeKraeuter], 260).
-rezept(kochen, [[1, faecium], [1, frostKristall]],[1, duftendeKraeuter], 260).
-rezept(kochen, [[1, faecium], [1, gammaWurzel]],[1, duftendeKraeuter], 260).
-rezept(kochen, [[1, faecium], [1, glasKoerner]],[1, duftendeKraeuter], 260).
-rezept(kochen, [[1, faecium], [1, heptaPloidWeizen]],[1, duftendeKraeuter], 260).
-rezept(kochen, [[1, faecium], [1, jadeErbsen]],[1, duftendeKraeuter], 260).
-rezept(kochen, [[1, faecium], [1, solanium]],[1, duftendeKraeuter], 260).
-rezept(kochen, [[1, faecium], [1, gefroreneKnollen]],[1, enzymFluessigkeit], 260).
-rezept(kochen, [[1, faecium], [1, impulsBohnen]],[1, enzymFluessigkeit], 260).
-rezept(kochen, [[1, faecium], [1, kaktusNektar]],[1, enzymFluessigkeit], 260).
-rezept(kochen, [[1, faecium], [1, pilzSchimmel]],[1, enzymFluessigkeit], 260).
+rezept(kochen, [[1, ungiftigerPilz], [1, ungiftigerPilz]],[1, fasrigerEintopf], 260).
+rezept(kochen, [[1, leopardenFrucht], [1, verarbeiteterZucker]],[1, fellKnaeuelGelee], 260).
+rezept(kochen, [[1, leopardenFrucht], [1, tortenBoden]],[1, fellTorteInAspik], 260).
+rezept(kochen, [[1, fellKnaeuelGelee], [1, tortenBoden]],[1, fellTorteInAspik], 260).
 rezept(kochen, [[1, faecium], [1, feuerBeere]],[1, fermentierteFruechte], 260).
 rezept(kochen, [[1, faecium], [1, grahBeere]],[1, fermentierteFruechte], 260).
+rezept(kochen, [[1, faecium], [1, hexaBeere]],[1, fermentierteFruechte], 260).
 rezept(kochen, [[1, faecium], [1, kaktusFleisch]],[1, fermentierteFruechte], 260).
 rezept(kochen, [[1, faecium], [1, kuerbisKnolle]],[1, fermentierteFruechte], 260).
+rezept(kochen, [[1, faecium], [1, pilgerBeere]],[1, fermentierteFruechte], 260).
 rezept(kochen, [[1, faecium], [1, sternenKnolle]],[1, fermentierteFruechte], 260).
 rezept(kochen, [[1, faecium], [1, suessWurzel]],[1, fermentierteFruechte], 260).
-
+rezept(kochen, [[1, regisFett], [1, tortenBoden]],[1, festerFettKuchen], 260).
+rezept(kochen, [[1, bratOel], [1, tortenBoden]],[1, festerFettKuchen], 260).
+rezept(kochen, [[1, protoOel], [1, tortenBoden]],[1, festerFettKuchen], 260).
+rezept(kochen, [[1, tortenBoden], [1, salzigeFischFilets]],[1, fischPastete], 260).
+rezept(kochen, [[1, geheimnisVollerFleischEintopf], [1, wohlSchmeckendeSosse]],[1, fleischMitGewurzKruste], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, windenderAufgewuehlterTeig]],[1, fluechtigeSchokoTorte], 260).
+rezept(kochen, [[1, extraFluffigerTeig], [1, knusperKaramell]],[1, fluffigeKaramellFreude], 260).
+rezept(kochen, [[1, kaktusNektar], [1, windenderAufgewuehlterTeig]],[1, fluffigerRachenSpalter], 260).
+rezept(kochen, [[1, larvenKern], [1, wuerzigerKaese]],[1, fluesterndesOmelett], 260).
+rezept(kochen, [[1, kuchenTeig], [1, klebrigerHonig]],[1, fragwuerdigerSuesserKuchen], 260).
+rezept(kochen, [[1, kuchenTeig], [1, klebrigeButter]],[1, fragwuerdigerSuesserKuchen], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, klebrigerHonig]],[1, fragwuerdigerSuesserKuchen], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, klebrigeButter]],[1, fragwuerdigerSuesserKuchen], 260).
+rezept(kochen, [[1, pilgerBeere], [1, tortenBoden]],[1, fruchtigerPudding], 260).
+rezept(kochen, [[1, grahBeere], [1, tortenBoden]],[1, fruchtigerPudding], 260).
+rezept(kochen, [[1, kuchenTeig], [1, synthetischerHonig]],[1, funkelnderHonigKuchen], 260).
+rezept(kochen, [[1, geschlageneButter], [1, verfeinertesMehl]],[1, gebaeck], 260).
+rezept(kochen, [[1, protoButter], [1, verfeinertesMehl]],[1, gebaeck], 260).
+rezept(kochen, [[1, heisseSosse], [1, geschmorteOrgane]],[1, gefuellteOrgane], 260).
+rezept(kochen, [[1, diploStuecke], [1, tortenBoden]],[1, geheimnisVolleFleischPastete], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, tortenBoden]],[1, geheimnisVolleFleischPastete], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, tortenBoden]],[1, geheimnisVolleFleischPastete], 260).
+rezept(kochen, [[1, rohesSteak], [1, tortenBoden]],[1, geheimnisVolleFleischPastete], 260).
+rezept(kochen, [[1, schuppigesFleisch], [1, tortenBoden]],[1, geheimnisVolleFleischPastete], 260).
+rezept(kochen, [[1, schreiterWurst], [1, tortenBoden]],[1, geheimnisVolleFleischPastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, verarbeitetesFleisch]],[1, geheimnisVolleFleischPastete], 260).
+rezept(kochen, [[1, diploStuecke], [1, diploStuecke]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, fleischigeFluegel]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, fleischigeStuecke]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, diploStuecke], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, fleischigeFluegel]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, fleischigeStuecke]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeFluegel], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, fleischigeStuecke]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, geraeuchertesFleisch], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, geraeuchertesFleisch], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, geraeuchertesFleisch], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, geraeuchertesFleisch], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, geraeuchertesFleisch], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, geraeuchertesFleisch], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, rohesSteak], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, rohesSteak], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, rohesSteak], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, rohesSteak], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, schreiterWurst], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, schreiterWurst], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, schreiterWurst], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, schuppigesFleisch], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, schuppigesFleisch], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, verarbeitetesFleisch], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, cremigeSosse], [1, fasrigerEintopf]],[1, gemueseCremeSuppe], 260).
+rezept(kochen, [[1, synthetischerHonig], [1, windenderAufgewuehlterTeig]],[1, gequaelterHonigKuchen], 260).
+rezept(kochen, [[1, geraeuchertesFleisch], [1, tortenBoden]],[1, geraeucherteFleischPastete], 260).
+rezept(kochen, [[1, kohlenStoff], [1, beinFleisch]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, diploStuecke]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, fleischigeFluegel]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, fleischigeStuecke]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, katzenLeber]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, innereienBeutel]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, protoWurst]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, rohesSteak]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, schreiterWurst]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, schuppigesFleisch]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, unholdRogen]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, verarbeitetesFleisch]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, beinFleisch]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, diploStuecke]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, fleischigeFluegel]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, fleischigeStuecke]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, katzenLeber]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, innereienBeutel]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, protoWurst]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, rohesSteak]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, schreiterWurst]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, schuppigesFleisch]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, unholdRogen]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, verarbeitetesFleisch]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, innereienBeutel], [1, innereienBeutel]],[1, geschmorteOrgane], 260).
+rezept(kochen, [[1, katzenLeber], [1, katzenLeber]],[1, geschmorteOrgane], 260).
+rezept(kochen, [[1, katzenLeber], [1, innereienBeutel]],[1, geschmorteOrgane], 260).
+rezept(kochen, [[1, tortenBoden], [1, suessWurzel]],[1, gestampfteWurzelPastete], 260).
+rezept(kochen, [[1, geschlageneButter], [1, verarbeiteterZucker]],[1, gesuessteButter], 260).
+rezept(kochen, [[1, protoButter], [1, verarbeiteterZucker]],[1, gesuessteProtoButter], 260).
 rezept(kochen, [[1, faecium], [1, duftendeKraeuter]],[1, gesuessterKompost], 260).
 rezept(kochen, [[1, faecium], [1, enzymFluessigkeit]],[1, gesuessterKompost], 260).
 rezept(kochen, [[1, faecium], [1, fermentierteFruechte]],[1, gesuessterKompost], 260).
+rezept(kochen, [[1, kuchenTeig], [1, holzApfel]],[1, gewuerzterApfelKuchen], 260).
+rezept(kochen, [[1, grahBeere], [1, verarbeiteterZucker]],[1, grahmeLade], 260).
+rezept(kochen, [[1, mordit], [1, diploStuecke]],[1, hackFleisch], 260).
+rezept(kochen, [[1, mordit], [1, fleischigeStuecke]],[1, hackFleisch], 260).
+rezept(kochen, [[1, mordit], [1, protoWurst]],[1, hackFleisch], 260).
+rezept(kochen, [[1, mordit], [1, rohesSteak]],[1, hackFleisch], 260).
+rezept(kochen, [[1, mordit], [1, schuppigesFleisch]],[1, hackFleisch], 260).
+rezept(kochen, [[1, sahne], [1, wuerzigerKaese]],[1, halbFluessigerKaese], 260).
+rezept(kochen, [[1, sahne], [1, protoKaese]],[1, halbFluessigerKaese], 260).
+rezept(kochen, [[1, protoSahne], [1, wuerzigerKaese]],[1, halbFluessigerKaese], 260).
+rezept(kochen, [[1, protoSahne], [1, protoKaese]],[1, halbFluessigerKaese], 260).
+rezept(kochen, [[1, tortenBoden], [1, unholdRogen]],[1, heimgesuchtePastete], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, heulenderTeig]],[1, heimgesuchteSchokoTraeume], 260).
+rezept(kochen, [[1, feuerBeere], [1, feuerWasser]],[1, heisseSosse], 260).
+rezept(kochen, [[1, feuerBeere], [1, wurzelSaft]],[1, heisseSosse], 260).
+rezept(kochen, [[1, feuerWasser], [1, feuerWasser]],[1, heisseSosse], 260).
+rezept(kochen, [[1, feuerWasser], [1, grahBeere]],[1, heisseSosse], 260).
+rezept(kochen, [[1, feuerWasser], [1, sievertBohnen]],[1, heisseSosse], 260).
+rezept(kochen, [[1, feuerWasser], [1, solartillo]],[1, heisseSosse], 260).
+rezept(kochen, [[1, grahBeere], [1, wurzelSaft]],[1, heisseSosse], 260).
+rezept(kochen, [[1, sievertBohnen], [1, wurzelSaft]],[1, heisseSosse], 260).
+rezept(kochen, [[1, solartillo], [1, wurzelSaft]],[1, heisseSosse], 260).
+rezept(kochen, [[1, heulenderTeig], [1, knusperKaramell]],[1, heulenderKaramellKuchen], 260).
+rezept(kochen, [[1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, geschlageneButter], [1, synthetischerHonig]],[1, honigButter], 260).
+rezept(kochen, [[1, gesuessteButter], [1, klobigerDonut]],[1, honigButterDonut], 260).
+rezept(kochen, [[1, gesuessteProtoButter], [1, klobigerDonut]],[1, honigButterDonut], 260).
+rezept(kochen, [[1, honigButter], [1, klobigerDonut]],[1, honigButterDonut], 260).
+rezept(kochen, [[1, protoButterMitHonig], [1, klobigerDonut]],[1, honigButterDonut], 260).
+rezept(kochen, [[1, synthetischerHonig], [1, klobigerDonut]],[1, honigDonut], 260).
+rezept(kochen, [[1, extraFluffigerTeig], [1, synthetischerHonig]],[1, honigEngelKuchen], 260).
+rezept(kochen, [[1, salzigerPudding], [1, dickerSuesserTeig]],[1, honigKuchenMitSalz], 260).
+rezept(kochen, [[1, klebrigerHonig], [1, tortenBoden]],[1, honigTorte], 260).
+rezept(kochen, [[1, synthetischerHonig], [1, tortenBoden]],[1, honigTorte], 260).
+rezept(kochen, [[1, feuerBeere], [1, verarbeiteterZucker]],[1, immerBrennendeMarmelade], 260).
+rezept(kochen, [[1, protoTeig], [1, sternenPudding]],[1, interStellareKuriositaet], 260).
+rezept(kochen, [[1, kuchenTeig], [1, sternenPudding]],[1, interStellareTorte], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, klobigerDonut]],[1, kakaoDonut], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, tortenBoden]],[1, kakaoTorte], 260).
+rezept(kochen, [[1, kaktusNektar], [1, verarbeiteterZucker]],[1, kaktusGelee], 260).
+rezept(kochen, [[1, klobigerDonut], [1, knusperKaramell]],[1, karamellDonut], 260).
+rezept(kochen, [[1, windenderAufgewuehlterTeig], [1, knusperKaramell]],[1, karamellisierterAlbTraum], 260).
+rezept(kochen, [[1, protoTeig], [1, knusperKaramell]],[1, karamellKuriositaet], 260).
+rezept(kochen, [[1, tortenBoden], [1, knusperKaramell]],[1, karamellTorte], 260).
+rezept(kochen, [[1, geheimnisVollerFleischEintopf], [1, halbFluessigerKaese]],[1, kaeseFleischEintopf], 260).
+rezept(kochen, [[1, tortenBoden], [1, wuerzigerKaese]],[1, kaeseTorte], 260).
+rezept(kochen, [[1, tortenBoden], [1, protoKaese]],[1, kaeseTorte], 260).
+rezept(kochen, [[1, geschlageneButter], [1, klebrigerHonig]],[1, klebrigeButter], 260).
+rezept(kochen, [[1, holzApfel], [1, dickerSuesserTeig]],[1, klebrigeFruchtUeberraschung], 260).
+rezept(kochen, [[1, protoButter], [1, klebrigerHonig]],[1, klebrigeProtoButter], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, klebrigerPudding]],[1, klebrigePuddingTorte], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, monstroeserPudding]],[1, klebrigerBrueller], 260).
+rezept(kochen, [[1, klebrigerHonig], [1, heulenderTeig]],[1, klebrigerBrueller], 260).
+rezept(kochen, [[1, klebrigeButter], [1, heulenderTeig]],[1, klebrigerBrueller], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, knusperKaramell]],[1, klebrigerKaramellKuchen], 260).
+rezept(kochen, [[1, klebrigeProtoButter], [1, klobigerDonut]],[1, klebrigerPudding], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, dickerSuesserTeig]],[1, klebrigerSchokoladenKuchen], 260).
+rezept(kochen, [[1, extraFluffigerTeig], [1, klebrigerHonig]],[1, klebrigerSchokoladenKuchen], 260).
+rezept(kochen, [[1, extraFluffigerTeig], [1, klebrigeButter]],[1, klebrigerSchokoladenKuchen], 260).
+rezept(kochen, [[1, salz], [1, verarbeiteterZucker]],[1, knusperKaramell], 260).
+rezept(kochen, [[1, fasrigerEintopf], [1, wohlSchmeckendeSosse]],[1, koestlicherGemueseEintopf], 260).
+rezept(kochen, [[1, klebrigerHonig], [1, windenderAufgewuehlterTeig]],[1, kriechendesJuckHonigBiskuit], 260).
+rezept(kochen, [[1, klebrigeButter], [1, windenderAufgewuehlterTeig]],[1, kriechendesJuckHonigBiskuit], 260).
+rezept(kochen, [[1, holzApfel], [1, windenderAufgewuehlterTeig]],[1, kuchenDerSuende], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, windenderAufgewuehlterTeig]],[1, kuchenDerVerlorenen], 260).
+rezept(kochen, [[1, salzigerPudding], [1, windenderAufgewuehlterTeig]],[1, kuchenDerVerlorenen], 260).
+rezept(kochen, [[1, monstroeserPudding], [1, windenderAufgewuehlterTeig]],[1, kuchenDerVerlorenen], 260).
+rezept(kochen, [[1, sternenPudding], [1, windenderAufgewuehlterTeig]],[1, kuchenDerVerlorenen], 260).
+rezept(kochen, [[1, kuchenTeig], [1, knusperKaramell]],[1, kuchenMitKaramellKruste], 260).
+rezept(kochen, [[1, mordit], [1, beinFleisch]],[1, kuenstlicheWuermer], 260).
+rezept(kochen, [[1, mordit], [1, kohlenStoffNanoRohr]],[1, kuenstlicheWuermer], 260).
+rezept(kochen, [[1, tortenBoden], [1, feuerBeere]],[1, leuchtPastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, solartillo]],[1, leuchtPastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, sievertBohnen]],[1, leuchtPastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, immerBrennendeMarmelade]],[1, leuchtPastete], 260).
+rezept(kochen, [[1, immerBrennendeMarmelade], [1, klobigerDonut]],[1, marmeladenDonut], 260).
+rezept(kochen, [[1, grahmeLade], [1, klobigerDonut]],[1, marmeladenDonut], 260).
+rezept(kochen, [[1, kaktusGelee], [1, klobigerDonut]],[1, marmeladenDonut], 260).
+rezept(kochen, [[1, fellKnaeuelGelee], [1, klobigerDonut]],[1, marmeladenDonut], 260).
+rezept(kochen, [[1, grahmeLade], [1, tortenBoden]],[1, marmeladenTorte], 260).
+rezept(kochen, [[1, kaktusGelee], [1, tortenBoden]],[1, marmeladenTorte], 260).
+rezept(kochen, [[1, klobigerDonut], [1, monstroeserPudding]],[1, monstroeserDonut], 260).
+rezept(kochen, [[1, heulenderTeig], [1, synthetischerHonig]],[1, monstroeserHonigKuchen], 260).
+rezept(kochen, [[1, kreaturenEi], [1, wuerzigerKaese]],[1, omelett], 260).
+rezept(kochen, [[1, grosseEier], [1, wuerzigerKaese]],[1, omelett], 260).
+rezept(kochen, [[1, riesenEi], [1, wuerzigerKaese]],[1, omelett], 260).
+rezept(kochen, [[1, larvenKern], [1, protoKaese]],[1, parasitenOmelett], 260).
+rezept(kochen, [[1, duftendeKraeuter], [1, mordit]],[1, pheromonBeutel], 260).
+rezept(kochen, [[1, enzymFluessigkeit], [1, mordit]],[1, pheromonBeutel], 260).
+rezept(kochen, [[1, heisseSosse], [1, geheimnisVollerFleischEintopf]],[1, pikanteFleischBaellchen], 260).
+rezept(kochen, [[1, tortenBoden], [1, ungiftigerPilz]],[1, pilzTorte], 260).
+rezept(kochen, [[1, fleischigeStuecke], [1, klobigerDonut]],[1, proteinReicherDonut], 260).
+rezept(kochen, [[1, protoButter], [1, synthetischerHonig]],[1, protoButterMitHonig], 260).
+rezept(kochen, [[1, kreaturenEi], [1, protoKaese]],[1, protoOmelett], 260).
+rezept(kochen, [[1, grosseEier], [1, protoKaese]],[1, protoOmelett], 260).
+rezept(kochen, [[1, riesenEi], [1, protoKaese]],[1, protoOmelett], 260).
+rezept(kochen, [[1, protoWurst], [1, tortenBoden]],[1, protoWurstPastete], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, klobigerDonut]],[1, puddingDonut], 260).
+rezept(kochen, [[1, protoTeig], [1, klebrigerPudding]],[1, puddingKuriositaet], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, tortenBoden]],[1, puddingTorte], 260).
+rezept(kochen, [[1, salzigerPudding], [1, tortenBoden]],[1, puddingTorte], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, kuchenTeig]],[1, puddingTorte], 260). /* TODO Stimmt das? */
+rezept(kochen, [[1, kaktusNektar], [1, dickerSuesserTeig]],[1, rachenKleberMitHonig], 260).
+rezept(kochen, [[1, cremigeSosse], [1, geschmorteOrgane]],[1, rahmOrganSuppe], 260).
+rezept(kochen, [[1, kuchenTeig], [1, sahne]],[1, sahneBroetchen], 260).
+rezept(kochen, [[1, tortenBoden], [1, sahne]],[1, sahneHaeppchen], 260).
+rezept(kochen, [[1, heulenderTeig], [1, sahne]],[1, sahneKuchenDesUntergangs], 260).
+rezept(kochen, [[1, protoTeig], [1, sahne]],[1, sahneKuriositaet], 260).
+rezept(kochen, [[1, kuchenTeig], [1, salzigerPudding]],[1, salzigeKoestlichkeit], 260).
+rezept(kochen, [[1, protoTeig], [1, salzigerPudding]],[1, salzigeUeberraschung], 260).
+rezept(kochen, [[1, klobigerDonut], [1, salzigerPudding]],[1, salzigerDonut], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, salzigerPudding]],[1, salzigerRauReif], 260).
+rezept(kochen, [[1, frostKristall], [1, salzigerPudding]],[1, salzigerRauReif], 260).
+rezept(kochen, [[1, kaktusNektar], [1, extraFluffigerTeig]],[1, sanfteStachelUeberraschung], 260).
+rezept(kochen, [[1, fasrigerEintopf], [1, heisseSosse]],[1, scharferGemueseEintopf], 260).
+rezept(kochen, [[1, holzApfel], [1, verarbeiteterZucker]],[1, schlaengelndeMarmelade], 260).
+rezept(kochen, [[1, holzApfel], [1, tortenBoden]],[1, schlaengelndeTorte], 260).
+rezept(kochen, [[1, schlaengelndeMarmelade], [1, tortenBoden]],[1, schlaengelndeTorte], 260).
+rezept(kochen, [[1, schlaengelndeMarmelade], [1, klobigerDonut]],[1, schlaengelnderDonut], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, kuchenTeig]],[1, schokoladenKuchen], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, extraFluffigerTeig]],[1, schokoTraum], 260).
+rezept(kochen, [[1, monstroeserPudding], [1, extraFluffigerTeig]],[1, heulenderTeig], 260). /* TODO sitmmt das? */
+rezept(kochen, [[1, monstroeserPudding], [1, extraFluffigerTeig]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, monstroeserPudding], [1, extraFluffigerTeig]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, extraFluffigerTeig]],[1, kuchenTeig], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, extraFluffigerTeig]],[1, protoTeig], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, extraFluffigerTeig]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, extraFluffigerTeig]],[1, softePuddingTorte], 260).
+rezept(kochen, [[1, salzigerPudding], [1, extraFluffigerTeig]],[1, softePuddingTorte], 260).
+rezept(kochen, [[1, monstroeserPudding], [1, extraFluffigerTeig]],[1, softePuddingTorte], 260).
+rezept(kochen, [[1, sternenPudding], [1, extraFluffigerTeig]],[1, softePuddingTorte], 260).
+rezept(kochen, [[1, kaktusNektar], [1, kuchenTeig]],[1, speiseRoehrenUeberraschung], 260).
+rezept(kochen, [[1, kaktusNektar], [1, protoTeig]],[1, stacheligeKuriositaet], 260).
+rezept(kochen, [[1, aloeFleisch], [1, tortenBoden]],[1, stacheligeTorte], 260).
+rezept(kochen, [[1, kaktusNektar], [1, tortenBoden]],[1, stacheligeTorte], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, sternenPudding]],[1, sternenEisCreme], 260).
+rezept(kochen, [[1, frostKristall], [1, sternenPudding]],[1, sternenEisCreme], 260).
+rezept(kochen, [[1, sternenPudding], [1, tortenBoden]],[1, sternenPuddingTorte], 260).
+rezept(kochen, [[1, sternenPudding], [1, dickerSuesserTeig]],[1, sternenGeburtKoestlichkeit], 260).
+rezept(kochen, [[1, sahne], [1, extraFluffigerTeig]],[1, superLeichterSahneKuchen], 260).
+rezept(kochen, [[1, sahne], [1, dickerSuesserTeig]],[1, suesseSahneTraeume], 260).
+rezept(kochen, [[1, wildeHefe], [1, verfeinertesMehl]],[1, teig], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, monstroeserPudding]],[1, toedlichKalteEisCreme], 260).
+rezept(kochen, [[1, frostKristall], [1, monstroeserPudding]],[1, toedlichKalteEisCreme], 260).
+rezept(kochen, [[1, synthetischerHonig], [1, dickerSuesserTeig]],[1, ueppigeHonigTorte], 260).
+rezept(kochen, [[1, wurzelSaft], [1, geduenstetesGemuese]],[1, wohlSchmeckendeSosse], 260).
+rezept(kochen, [[1, geduenstetesGemuese], [1, geduenstetesGemuese]],[1, wohlSchmeckendeSosse], 260).
+rezept(kochen, [[1, kaktusNektar], [1, heulenderTeig]],[1, wuergendesKuchenMonster], 260).
+rezept(kochen, [[1, halbFluessigerKaese], [1, geschmorteOrgane]],[1, wuerzigeOrganUeberraschung], 260).
+rezept(kochen, [[1, halbFluessigerKaese], [1, geschmorteOrgane]],[1, wuerzigeOrganUeberraschung], 260).
+rezept(kochen, [[1, fasrigerEintopf], [1, halbFluessigerKaese]],[1, wuerzigerGemueseEintopf], 260).
+rezept(kochen, [[1, innereienBeutel], [1, tortenBoden]],[1, zaeheOrganPaste], 260).
+rezept(kochen, [[1, katzenLeber], [1, tortenBoden]],[1, zaeheOrganPaste], 260).
+
+
+
+
+
+/* drei Zutaten */
+rezept(kochen, [[1, klebrigerPudding], [1, holzApfel], [1, gefroreneKnollen]],[1, apfelEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, holzApfel], [1, frostKristall]],[1, apfelEisCreme], 260).
+rezept(kochen, [[1, sahne], [1, protoTeig], [1, schlaengelndeMarmelade]],[1, apfelKuriositaet], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, schlaengelndeMarmelade], [1, gefroreneKnollen]],[1, apfelEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, schlaengelndeMarmelade], [1, frostKristall]],[1, apfelEisCreme], 260).
+rezept(kochen, [[1, sahne], [1, heulenderTeig], [1, schlaengelndeMarmelade]],[1, apfelKuchenVerlorenerSeelen], 260).
+rezept(kochen, [[1, sahne], [1, protoTeig], [1, schlaengelndeMarmelade]],[1, apfelKuriositaet], 260).
+rezept(kochen, [[1, sahne], [1, immerBrennendeMarmelade], [1, protoTeig]],[1, alarmierendeTorte], 260).
+rezept(kochen, [[1, sahne], [1, immerBrennendeMarmelade], [1, heulenderTeig]],[1, brandKuchenDesGrauens], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeButter], [1, kreaturenEi]],[1, dickerSuesserTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeButter], [1, grosseEier]],[1, dickerSuesserTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeButter], [1, riesenEi]],[1, dickerSuesserTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeProtoButter], [1, kreaturenEi]],[1, dickerSuesserTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeProtoButter], [1, grosseEier]],[1, dickerSuesserTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeProtoButter], [1, riesenEi]],[1, dickerSuesserTeig], 260).
+rezept(kochen, [[1, sahne], [1, extraFluffigerTeig], [1, schlaengelndeMarmelade]],[1, engelsObstKuchen], 260).
+rezept(kochen, [[1, anormaleMarmelade], [1, sahne], [1, windenderAufgewuehlterTeig]],[1, entfesselteMonstrositaet], 260).
+rezept(kochen, [[1, sahne], [1, grahmeLade], [1, heulenderTeig]],[1, entsetzlicherMarmeladenSchwamm], 260).
+rezept(kochen, [[1, sahne], [1, fellKnaeuelGelee], [1, heulenderTeig]],[1, entsetzlicherMarmeladenSchwamm], 260).
+rezept(kochen, [[1, sahne], [1, kuchenTeig], [1, immerBrennendeMarmelade]],[1, ewigSiedenderKuchen], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, hexaBeere], [1, frostKristall]],[1, ewigeEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, hexaBeere], [1, gefroreneKnollen]],[1, ewigeEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, anormaleMarmelade], [1, frostKristall]],[1, ewigeEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, anormaleMarmelade], [1, gefroreneKnollen]],[1, ewigeEisCreme], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, sahne], [1, anormaleMarmelade]],[1, ewigerHonigKuchen], 260).
+rezept(kochen, [[1, kuchenTeig], [1, sahne], [1, anormaleMarmelade]],[1, ewigerKuchen], 260).
+rezept(kochen, [[1, extraFluffigerTeig], [1, sahne], [1, anormaleMarmelade]],[1, ewigesMarmeladenBiskuit], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, delikatessBaiser], [1, kreaturenEi]],[1, extraFluffigerTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, delikatessBaiser], [1, grosseEier]],[1, extraFluffigerTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, delikatessBaiser], [1, riesenEi]],[1, extraFluffigerTeig], 260).
+rezept(kochen, [[1, sahne], [1, immerBrennendeMarmelade], [1, windenderAufgewuehlterTeig]],[1, feurigeMarmelade], 260).
+rezept(kochen, [[1, sahne], [1, immerBrennendeMarmelade], [1, extraFluffigerTeig]],[1, feurigesMarmeladenBiskuit], 260).
+rezept(kochen, [[1, kaktusGelee], [1, sahne], [1, windenderAufgewuehlterTeig]],[1, fluffigerRachenSpalter], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, kaktusGelee]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen], [1, kaktusGelee]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, fellKnaeuelGelee]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen], [1, fellKnaeuelGelee]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, kaktusNektar]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen], [1, kaktusNektar]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, leopardenFrucht]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen], [1, leopardenFrucht]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, suessWurzel]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen], [1, suessWurzel]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, pilgerBeere]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen], [1, pilgerBeere]],[1, fruchtEisCreme], 260).
+rezept(kochen, [[1, kuchenTeig], [1, sahne], [1, schlaengelndeMarmelade]],[1, gewuerzterApfelKuchen], 260).
+rezept(kochen, [[1, anormaleMarmelade], [1, sahne], [1, heulenderTeig]],[1, glasKuchen], 260).
+rezept(kochen, [[1, gesuessteButter], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, gesuessteProtoButter], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, honigButter], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, klebrigeButter], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, klebrigeProtoButter], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, protoButterMitHonig], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, synthetischerHonig], [1, frostKristall]],[1, honigEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, synthetischerHonig], [1, gefroreneKnollen]],[1, honigEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, klebrigerHonig], [1, frostKristall]],[1, honigEisCreme], 260).
+rezept(kochen, [[1, klebrigerPudding], [1, klebrigerHonig], [1, gefroreneKnollen]],[1, honigEisCreme], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, klebrigerPudding], [1, knusperKaramell]],[1, karamellEisCreme], 260).
+rezept(kochen, [[1, frostKristall], [1, klebrigerPudding], [1, knusperKaramell]],[1, karamellEisCreme], 260).
+rezept(kochen, [[1, tortenBoden], [1, wuerzigerKaese], [1, solartillo]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, wuerzigerKaese], [1, jadeErbsen]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, wuerzigerKaese], [1, sievertBohnen]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, wuerzigerKaese], [1, fleischigeWurzeln]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, wuerzigerKaese], [1, aloeFleisch]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, protoKaese], [1, solartillo]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, protoKaese], [1, jadeErbsen]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, protoKaese], [1, sievertBohnen]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, protoKaese], [1, fleischigeWurzeln]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, tortenBoden], [1, protoKaese], [1, aloeFleisch]],[1, kaeseGemuesePastete], 260).
+rezept(kochen, [[1, schlaengelndeMarmelade], [1, sahne], [1, dickerSuesserTeig]],[1, klebrigeFruchtUeberraschung], 260).
+rezept(kochen, [[1, kreaturenEi], [1, sahne], [1, verarbeiteterZucker]],[1, klebrigerPudding], 260).
+rezept(kochen, [[1, grosseEier], [1, sahne], [1, verarbeiteterZucker]],[1, klebrigerPudding], 260).
+rezept(kochen, [[1, riesenEi], [1, sahne], [1, verarbeiteterZucker]],[1, klebrigerPudding], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, sahne], [1, immerBrennendeMarmelade]],[1, klebrigesMundFeuer], 260).
+rezept(kochen, [[1, bratOel], [1, teig], [1, verarbeiteterZucker]],[1, klobigerDonut], 260).
+rezept(kochen, [[1, kreaturenEi], [1, gesuessteButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
+rezept(kochen, [[1, grosseEier], [1, gesuessteButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
+rezept(kochen, [[1, riesenEi], [1, gesuessteButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
+rezept(kochen, [[1, kreaturenEi], [1, honigButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
+rezept(kochen, [[1, grosseEier], [1, honigButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
+rezept(kochen, [[1, riesenEi], [1, honigButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
+rezept(kochen, [[1, sahne], [1, extraFluffigerTeig], [1, grahmeLade]],[1, marmeladenBiskuit], 260).
+rezept(kochen, [[1, sahne], [1, extraFluffigerTeig], [1, fellKnaeuelGelee]],[1, marmeladenBiskuit], 260).
+rezept(kochen, [[1, sahne], [1, protoTeig], [1, fellKnaeuelGelee]],[1, marmeladenKuriositaet], 260).
+rezept(kochen, [[1, sahne], [1, protoTeig], [1, grahmeLade]],[1, marmeladenKuriositaet], 260).
+rezept(kochen, [[1, sahne], [1, dickerSuesserTeig], [1, fellKnaeuelGelee]],[1, marmeladenKuriositaet], 260).
+rezept(kochen, [[1, sahne], [1, dickerSuesserTeig], [1, grahmeLade]],[1, marmeladenKuriositaet], 260).
+rezept(kochen, [[1, sahne], [1, larvenKern], [1, verarbeiteterZucker]],[1, monstroeserPudding], 260).
+rezept(kochen, [[1, protoOel], [1, teig], [1, verarbeiteterZucker]],[1, protoKrapfen], 260).
+rezept(kochen, [[1, kreaturenEi], [1, gesuessteProtoButter], [1, verfeinertesMehl]],[1, protoTeig], 260).
+rezept(kochen, [[1, kreaturenEi], [1, protoButterMitHonig], [1, verfeinertesMehl]],[1, protoTeig], 260).
+rezept(kochen, [[1, grosseEier], [1, gesuessteProtoButter], [1, verfeinertesMehl]],[1, protoTeig], 260).
+rezept(kochen, [[1, grosseEier], [1, protoButterMitHonig], [1, verfeinertesMehl]],[1, protoTeig], 260).
+rezept(kochen, [[1, riesenEi], [1, gesuessteProtoButter], [1, verfeinertesMehl]],[1, protoTeig], 260).
+rezept(kochen, [[1, riesenEi], [1, protoButterMitHonig], [1, verfeinertesMehl]],[1, protoTeig], 260).
+rezept(kochen, [[1, kaktusGelee], [1, sahne], [1, dickerSuesserTeig]],[1, rachenKleberMitHonig], 260).
+rezept(kochen, [[1, salz], [1, sahne], [1, verarbeiteterZucker]],[1, salzigerPudding], 260).
+rezept(kochen, [[1, kaktusGelee], [1, sahne], [1, extraFluffigerTeig]],[1, sanfteStachelUeberraschung], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, frostKristall], [1, klebrigerPudding]],[1, schokoladenEisCreme], 260).
+rezept(kochen, [[1, bitterSuesserKakao], [1, gefroreneKnollen], [1, klebrigerPudding]],[1, schokoladenEisCreme], 260).
+rezept(kochen, [[1, kaktusGelee], [1, sahne], [1, kuchenTeig]],[1, speiseRoehrenUeberraschung], 260).
+rezept(kochen, [[1, kaktusGelee], [1, sahne], [1, protoTeig]],[1, stacheligeKuriositaet], 260).
+rezept(kochen, [[1, silikonEi], [1, sahne], [1, verarbeiteterZucker]],[1, sternenPudding], 260).
+rezept(kochen, [[1, kuchenTeig], [1, sahne], [1, grahmeLade]],[1, traditionsKuchen], 260).
+rezept(kochen, [[1, kuchenTeig], [1, sahne], [1, grahmeLade]],[1, fellKnaeuelGelee], 260).
+rezept(kochen, [[1, protoTeig], [1, sahne], [1, anormaleMarmelade]],[1, unloesbarerMarmeladenSturz], 260).
+rezept(kochen, [[1, frostKristall], [1, grahmeLade], [1, klebrigerPudding]],[1, vyEisCreme], 260).
+rezept(kochen, [[1, frostKristall], [1, grahBeere], [1, klebrigerPudding]],[1, vyEisCreme], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, grahmeLade], [1, klebrigerPudding]],[1, vyEisCreme], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, grahBeere], [1, klebrigerPudding]],[1, vyEisCreme], 260).
+rezept(kochen, [[1, grahmeLade], [1, sahne], [1, windenderAufgewuehlterTeig]],[1, windenderAufgewuehlterTeig], 260).
+rezept(kochen, [[1, fellKnaeuelGelee], [1, sahne], [1, windenderAufgewuehlterTeig]],[1, windenderAufgewuehlterTeig], 260).
+rezept(kochen, [[1, kaktusGelee], [1, sahne], [1, heulenderTeig]],[1, wuergendesKuchenMonster], 260).
+rezept(kochen, [[1, immerBrennendeMarmelade], [1, frostKristall], [1, klebrigerPudding]],[1, wuerzigesEis], 260).
+rezept(kochen, [[1, feuerBeere], [1, frostKristall], [1, klebrigerPudding]],[1, wuerzigesEis], 260).
+rezept(kochen, [[1, immerBrennendeMarmelade], [1, gefroreneKnollen], [1, klebrigerPudding]],[1, wuerzigesEis], 260).
+rezept(kochen, [[1, feuerBeere], [1, gefroreneKnollen], [1, klebrigerPudding]],[1, wuerzigesEis], 260).
 
 /* ---------------------  Test Prädikate --------------------------------------------- */
 fehlerOperation(Op, Produkt) :-
