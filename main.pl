@@ -95,6 +95,9 @@ testStoff :-
 	\+ausgangsStoff:produktNichtBewertet(_),
 	format('ok~n'),
 	format('Doppelte testen '),
-	\+ausgangsStoff:keineDoppeltenInStoff,
+	\+ausgangsStoff:doppelteInStoff,
+	format('ok~n'),
+	format('Verwendung testen~n'),
+	\+ausgangsStoff:stoffNichtVerwendet(_),
 	format('ok~n').
 	

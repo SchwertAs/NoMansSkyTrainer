@@ -1,7 +1,67 @@
-:- module(ausgangsStoff, [stoff/2]).
+:- module(ausgangsStoff, [stoff/2, doppelteInStoff/0]).
 
 
 /* name, Wert in units (GrundPreis) */
+
+/* nur kaufen und verkaufen */
+handelsWare(antiHaftKolben, 6000).
+handelsWare(ausrangierteSchaltPlatte, 1000).
+handelsWare(autonomePositionierungsEinheit, 30000).
+handelsWare(experimentelleEnergieFluessigkeit, 30000).
+handelsWare(bromSalz, 15000).
+handelsWare(fuenfDimensionalerTorus, 30000).
+handelsWare(funkenKanister, 1000).
+handelsWare(gewaltigesMetallZahnRad, 1000).
+handelsWare(holographischeKurbelWelle, 30000).
+handelsWare(industrieBatterie, 6000).
+handelsWare(instabilitaetsInjektor, 15000).
+handelsWare(ionenKugel, 30000).
+handelsWare(ionenKondensator, 15000).
+handelsWare(kometenTroepfchen, 15000).
+handelsWare(nanoRohrKiste, 1000).
+handelsWare(neuralLeitung, 50000).
+handelsWare(neutronenMikroskop, 6000).
+handelsWare(nichtMehrDuftendePheromonFlasche, 1000). 
+handelsWare(ohmschesGel, 15000).
+handelsWare(optischesLoesungsMittel, 15000).
+handelsWare(organischeRohre, 30000).
+handelsWare(polyChronesZirkonium, 30000).
+handelsWare(quantumBeschleuniger, 50000).
+handelsWare(schmutz, 1000).
+handelsWare(schweisserSeife, 6000).
+handelsWare(sechsZackigerEntKoppler, 15000).
+handelsWare(sichSelbstReparierendesHeridium, 6000).
+handelsWare(supraleitendeFaser, 50000).
+handelsWare(unraffiniertesPyritFett, 6000).
+handelsWare(vergitterterBogenKristall, 50000).
+
+/* nur aufnehmen, bauen, verkaufen */
+anormaleMaterialien(kappillarMuschel, 1000).
+anormaleMaterialien(lichtBruch, 1000).
+
+/* ausgraben, pflücken, für Ansehen schenken, verkaufen */
+relikt(gekNip, 20625).
+relikt(gekRelikt, 23375).
+relikt(korvaxGehaeuse, 22000).
+relikt(vyKeenBildnis, 24750).
+relikt(vyKeenDolch, 11688).
+
+/* ausgraben, pflücken, verkaufen */
+artefakte(schmutzigeKnochenFragmente, 104981).
+
+/* sammeln, verkaufen */
+gesammelteHandelsWare(beutelGift, 11685).
+gesammelteHandelsWare(eiweissPerle, 9025).
+gesammelteHandelsWare(gravitinoBall, 12445).
+gesammelteHandelsWare(wirbelWuerfel, 5800).
+
+/* sammeln, verkaufen oder analysieren */
+konglomerat(goldKlumpen, 3280).
+konglomerat(tritiumHyperCluster, 3280).
+konglomerat(kristallFragment, 3280).
+konglomerat(geode, 3280).
+
+
 /* ----------------- alle Stoffe ------------------------------- */
 stoff(absprungKapselKoordinaten, 85000).
 stoff(abgruendigerEintopf, 800).
@@ -16,24 +76,19 @@ stoff(anormaleMarmelade, 800).
 stoff(anormaleTorte, 800).
 stoff(anormalerDonut, 800).
 stoff(ammoniak, 62).
-stoff(antiHaftKolben, 6000).
 stoff(antiMaterie, 5233).
 stoff(antiMaterieGehaeuse, 6500).
 stoff(apfelEisCreme, 800).
 stoff(apfelKuchenVerlorenerSeelen, 800).
 stoff(apfelKuriositaet, 800).
 stoff(aronium, 25000).
-stoff(ausrangierteSchaltPlatte, 1000).
-stoff(autonomePositionierungsEinheit, 30000).
 stoff(balastStoffReichePastete, 800).
 stoff(beinFleisch, 800).
 stoff(beineImTeigMantel, 800).
-stoff(beutelGift, 11685).
 stoff(bitterSuesserKakao, 800).
 stoff(blutigesOrgan, 800).
 stoff(brandKuchenDesGrauens, 800).
 stoff(bratOel, 800).
-stoff(bromSalz, 15000).
 stoff(brot, 800).
 stoff(brueterTorte, 800).
 stoff(cadmium, 234).
@@ -55,7 +110,6 @@ stoff(duftendeKraeuter, 800).
 stoff(dunkleMaterie, 1000).
 stoff(eisCreme, 800).
 stoff(eisSchreie, 800).
-stoff(eiweissPerle, 9025).
 stoff(emeril, 348).
 stoff(endeDerDaemmerung, 1000).
 stoff(engelsObstKuchen, 800).
@@ -65,13 +119,11 @@ stoff(entschluesselteBenutzerDaten, 1000).
 stoff(entsetzlicherMarmeladenSchwamm, 800).
 stoff(enzymFluessigkeit, 800).
 stoff(erfrischungsGetraenk, 800).
-stoff(erstGebruetetenHelm, 0).
 stoff(ewigSiedenderKuchen, 800).
 stoff(ewigeEisCreme, 800).
 stoff(ewigerHonigKuchen, 800).
 stoff(ewigerKuchen, 800).
 stoff(ewigesMarmeladenBiskuit, 800).
-stoff(experimentelleEnergieFluessigkeit, 30000).
 stoff(extraFluffigerTeig, 800).
 stoff(faecium, 30).
 stoff(fasrigerEintopf, 800).
@@ -105,9 +157,7 @@ stoff(frischeMilch, 800).
 stoff(frostKristall, 12).
 stoff(fruchtEisCreme, 800).
 stoff(fruchtigerPudding, 800).
-stoff(fuenfDimensionalerTorus, 30000).
 stoff(funkelnderHonigKuchen, 800).
-stoff(funkenKanister, 1000).
 stoff(fusionsBeschleuniger, 7500000).
 stoff(fusionsZuender, 15600000).
 stoff(gammaWurzel, 16).
@@ -121,12 +171,8 @@ stoff(gefuellteOrgane, 800).
 stoff(geheimnisVollerFleischEintopf, 800).
 stoff(geheimnisVolleFleischPastete, 800).
 stoff(gemueseCremeSuppe, 800).
-stoff(gekNip, 20625).
-stoff(gekRelikt, 23375).
 stoff(geoDesit, 150000).
-stoff(geode, 3280).
 stoff(gequaelterHonigKuchen, 800).
-stoff(gewaltigesMetallZahnRad, 1000).
 stoff(geraeucherteFleischPastete, 800).
 stoff(geraeuchertesFleisch, 800).
 stoff(geschlageneButter, 800).
@@ -140,11 +186,9 @@ stoff(glas, 13000).
 stoff(glasKoerner, 300).
 stoff(glasKuchen, 800).
 stoff(gold, 202).
-stoff(goldKlumpen, 3280).
 stoff(grantine, 25000).
 stoff(grahBeere, 300).
 stoff(grahmeLade, 800).
-stoff(gravitinoBall, 12445).
 stoff(grosseEier, 800).
 stoff(hackFleisch, 800).
 stoff(halbFluessigerKaese, 800).
@@ -161,7 +205,7 @@ stoff(herox, 25000).
 stoff(herzDerSonne, 1000).
 stoff(hexaBeere, 300).
 stoff(hitzeKondensator, 50000).
-stoff(holografischerAnalysator, 75000).
+stoff(holzApfel, 800).
 stoff(honigButter, 800).
 stoff(honigButterDonut, 800).
 stoff(honigDonut, 800).
@@ -169,25 +213,18 @@ stoff(honigEisCreme, 800).
 stoff(honigEngelKuchen, 800).
 stoff(honigKuchenMitSalz, 800).
 stoff(honigTorte, 800).
-stoff(holographischeKurbelWelle, 30000).
-stoff(holzApfel, 800).
-stoff(honigButter, 800).
 stoff(hypnotischesAuge, 60000).
 stoff(hydrothermaleTreibStoffZelle, 7200).
 stoff(immerBrennendeMarmelade, 800).
 stoff(impulsBohnen, 300).
 stoff(indium, 464).
-stoff(industrieBatterie, 6000).
 stoff(innereienBeutel, 800).
 stoff(instabilesGel, 50000).
 stoff(instabilesNatrium, 12300).
 stoff(instabilesPlasma, 5750).
-stoff(instabilitaetsInjektor, 15000).
 stoff(interStellareKuriositaet, 800).
 stoff(interStellareTorte, 800).
 stoff(ionenAkku, 200).
-stoff(ionenKugel, 30000).
-stoff(ionenKondensator, 15000).
 stoff(ionisiertesKobalt, 401).
 stoff(iridesit, 150000).
 stoff(jadeErbsen, 300).
@@ -201,7 +238,6 @@ stoff(kaktusFleisch, 28).
 stoff(kaktusGelee, 800).
 stoff(kaktusNektar, 300).
 stoff(kampfLaeuferGehirn, 35000).
-stoff(kappillarMuschel, 1000).
 stoff(karamellDonut, 800).
 stoff(karamellEisCreme, 800).
 stoff(karamellisierterAlbTraum, 800).
@@ -224,22 +260,17 @@ stoff(klebrigesHonigKuechlein, 800).
 stoff(klebrigesMundFeuer, 800).
 stoff(klobigerDonut, 800).
 stoff(knusperKaramell, 800).
-stoff(knusperPudding, 800).
 stoff(kobalt, 198).
 stoff(kobaltSpiegel, 20500).
-stoff(koestlicherEintopf, 800).
 stoff(koestlicherGemueseEintopf, 800).
 stoff(kohlenStoff, 12).
 stoff(kohlenStoffKristall, 3600).
 stoff(kohlenStoffNanoRohr, 500).
-stoff(kometenTroepfchen, 15000).
-stoff(korvaxGehaeuse, 22000).
 stoff(korvaxKonvergenzWuerfel, 13063).
 stoff(kreaturenEi, 800).
 stoff(kreaturenKugeln, 20).
 stoff(kriechendesJuckHonigBiskuit, 7410).
 stoff(kristallSulfid, 7410).
-stoff(kristallFragment, 3280).
 stoff(kryogenKammer, 3800000).
 stoff(kryoPumpe, 1500000).
 stoff(kuchenDerSuende, 800).
@@ -258,7 +289,6 @@ stoff(lebensErhaltungsGel, 200).
 stoff(leopardenFrucht, 800).
 stoff(lemmium, 25000).
 stoff(leuchtPastete, 800).
-stoff(lichtBruch, 1000).
 stoff(magnetisiertesFerrit, 82).
 stoff(magnoGold, 25000).
 stoff(marmeladenBiskuit, 800).
@@ -274,22 +304,15 @@ stoff(monstroeserHonigKuchen, 800).
 stoff(monstroeserPudding, 800).
 stoff(mordit, 40).
 stoff(nanitHaufen, -1).
-stoff(nanoRohrKiste, 1000).
 stoff(natrium, 41).
 stoff(natriumDiode, 3500).
 stoff(natriumNitrat, 82).
 stoff(navigationsDaten, 1000).
-stoff(neuralLeitung, 50000).
-stoff(neutronenMikroskop, 6000).
-stoff(nichtMehrDuftendePheromonFlasche, 1000). 
 stoff(nipNipKnospen, 17776).
 stoff(nooSphaerischKugel, 1000).
 stoff(novaeRegenerat, 1000).
-stoff(ohmschesGel, 15000).
 stoff(omelett, 800).
-stoff(optischesLoesungsMittel, 15000).
 stoff(organischerKatalysator, 320000).
-stoff(organischeRohre, 30000).
 stoff(paraffinium, 62).
 stoff(parasitenOmelett, 800).
 stoff(pheromonBeutel, 800).
@@ -302,7 +325,6 @@ stoff(pilzSchimmel, 16).
 stoff(pilzTorte, 800).
 stoff(platin, 303).
 stoff(polyFaser, 130000).
-stoff(polyChronesZirkonium, 30000).
 stoff(projektilMunition, 50).
 stoff(proteinReicherDonut, 800).
 stoff(protoButter, 800).
@@ -321,7 +343,6 @@ stoff(puddingKuriositaet, 800).
 stoff(puddingTorte, 800).
 stoff(pugneum, 138).
 stoff(pyrit, 62).
-stoff(quantumBeschleuniger, 50000).
 stoff(quantumProzessor, 4400000).
 stoff(rachenKleberMitHonig, 800).
 stoff(radon, 20).
@@ -356,8 +377,6 @@ stoff(schlaengelndeMarmelade, 800).
 stoff(schlaengelndeTorte, 800).
 stoff(schlaengelnderDonut, 800).
 stoff(schmierMittel, 110000).
-stoff(schmutz, 1000).
-stoff(schmutzigeKnochenFragmente, 104981).
 stoff(schokoladenEisCreme, 800).
 stoff(schokoladenKuchen, 800).
 stoff(schokoladenKuriositaet, 800).
@@ -367,13 +386,9 @@ stoff(schrecklicherBrei, 800).
 stoff(schreiterWurst, 800).
 stoff(schuppigesFleisch, 800).
 stoff(schwefelin, 20).
-stoff(schweisserSeife, 6000).
-stoff(sechsZackigerEntKoppler, 15000).
 stoff(seelenEngine, 1000).
 stoff(seltenesMetallElement, 4200).
 stoff(silber, 101).
-stoff(silikonEi, 300).
-stoff(sichSelbstReparierendesHeridium, 6000).
 stoff(sievertBohnen, 300).
 stoff(silikatPulver, 2).
 stoff(silikonEi, 800).
@@ -400,14 +415,12 @@ stoff(suessWurzel, 300).
 stoff(superLeichterSahneKuchen, 800).
 stoff(superOxidKristall, 5100).
 stoff(supraLeiter, 1500000).
-stoff(supraleitendeFaser, 50000).
 stoff(synthetischerHonig, 800).
 stoff(teleportKoordinaten, 50000).
 stoff(teig, 800).
 stoff(tetraKobalt, 6150).
 stoff(toedlichKalteEisCreme, 800).
 stoff(tortenBoden, 800).
-stoff(tritiumHyperCluster, 3280).
 stoff(thermischesKondensat, 50000).
 stoff(tragbarerReaktor, 4200000).
 stoff(traditionsKuchen, 800).
@@ -415,31 +428,24 @@ stoff(tritium, 6).
 stoff(ueppigeHonigTorte, 800).
 stoff(umhuellterSchatten, 1000).
 stoff(ungiftigerPilz, 300).
-stoff(unholdMagen, 800).
 stoff(unholdRogen, 800).
 stoff(unkontrollierbarerSchimmel, 20).
 stoff(unloesbarerMarmeladenSturz, 800).
-stoff(unraffiniertesPyritFett, 6000).
 stoff(uran, 248).
 stoff(verarbeiteterZucker, 800).
 stoff(verarbeitetesFleisch, 800).
 stoff(verdichteterKohlenStoff, 600).
-stoff(vergitterterBogenKristall, 50000).
 stoff(verfeinertesMehl, 800).
 stoff(verrostetesMetall, 20).
 stoff(vierfachServo, 20000).
 stoff(vyEisCreme, 800).
-stoff(vyKeenBildnis, 24750).
-stoff(vyKeenDolch, 11688).
 stoff(warpZelle, 11733).
 stoff(warmeProtoMilch, 800).
-stoff(waermeSchutzModulS, 360).
 stoff(warpHyperKern, 46750).
 stoff(wildeHefe, 300).
 stoff(wildeMilch, 800).
 stoff(windenderAufgewuehlterTeig, 800).
 stoff(windendesMarmeladenKuechlein, 800).
-stoff(wirbelWuerfel, 5800).
 stoff(geborgeneDaten, 50000).
 stoff(wohlSchmeckendeSosse, 800).
 stoff(wuergendesKuchenMonster, 800).
@@ -457,7 +463,168 @@ stoff(Stoff, Wert) :-
 	basisBauEndStoff(Stoff),
 	Wert = 0.
 
+stoff(Stoff, Wert) :-
+	modul(Stoff),
+	Wert = 0.
+
 /* =============================== Ausruestung ========================== */
+/* ------------------------------- Anzugmodule -------------------------- */
+modul(belueftungsMembranB).
+modul(bewegungsModulC).
+modul(bewegungsModulS).
+modul(effizienteWasserDuesenA).
+modul(einfacherUeberSetzerB).
+modul(gefahrenSchutz).
+modul(gefahrGutSchutzHandschuh).
+modul(giftSchutzModulA).
+modul(giftSchutzModulB).
+modul(jetPack).
+modul(kuehlMittelNetzwerkC).
+modul(lebensErhaltung).
+modul(lebensErhaltungsModulA).
+modul(lebensErhaltungsModulB).
+modul(lebensErhaltungsModulS).
+modul(neuralStimulatorB).
+modul(perfektionierterUebersetzerS).
+modul(raketenStiefelA).
+modul(sauerStoffUmleiterA).
+modul(sauerStoffWiederVerwerterC).
+modul(schildGitterB).
+modul(schildModulA).
+modul(schildModulC).
+modul(strahlungsDeflektorC).
+modul(strahlungsSchutzModulA).
+modul(strahlungsSchutzModulB).
+modul(strahlungsSchutzModulS).
+modul(toxinDaempferC).
+modul(verbesserterUebersetzerA).
+modul(waermeSchichtC).
+modul(waermeSchutzModulA).
+modul(waermeSchutzModulB).
+modul(waermeSchutzModulKaelteB).
+modul(unterWasserSchutzModulB).
+
+/* ------------------------------- Raumschiffmodule --------------------- */
+modul(ablativePanzerungC).
+modul(cadmiumAntriebB).
+modul(deflektorSchild).
+modul(dysonPumpeB).
+modul(effizienteDuesenB).
+modul(emerilAntriebA).
+modul(fourierBegrenzerB).
+modul(fragmentSuperAufladerB).
+modul(grosseRaketenRohreB).
+modul(hyperAntrieb).
+modul(hyperAntriebModulC).
+modul(impulsAntrieb).
+modul(impulsAntriebModulC).
+modul(infraMesser).
+modul(infraMesserBeschleuniger).
+modul(infraMesserModulC).
+modul(infraMesserModulS).
+modul(indiumAntriebS).
+modul(konfliktScanner).
+modul(nichtlineareOptikB).
+modul(nichtlineareOptikC).
+modul(phasenStrahler).
+modul(phasenStrahlerModulC).
+modul(phasenStrahlerModulS).
+modul(photonenKanone).
+modul(photonenKanonenModulC).
+modul(positronenWerfer).
+modul(positronModulB).
+modul(positronModulC).
+modul(positronModulS).
+modul(raketenWerfer).
+modul(raumSchiffSchildModulB).
+modul(raumSchiffSchildModulC).
+modul(startSchubDuese).
+modul(startSystemLadeGeraetS).
+modul(teleportEmpfaenger).
+modul(wirtschaftsScanner).
+modul(zyklotronBalliste).
+modul(zyklotronModulB).
+modul(zyklotronModulC).
+modul(zyklotronModulS).
+
+
+/* ------------------------------- Frachtermodule ----------------------- */
+modul(frachterHyperAntrieb).
+modul(frachterWarpReaktorSigmaC).
+modul(frachterWarpReaktorTauB).
+modul(frachterWarpReaktorThetaA).
+
+/* ------------------------------- Fregatten-Module ------------------ */
+modul(gedankenKontrollGeraet).
+modul(holografischerAnalysator).
+modul(mineralKompressor).
+modul(sprengDrohnen).
+modul(treibStoffOxidant).
+
+/* ------------------------------- Multiwerkzeugmodule ------------------ */
+modul(analyseVisier).
+modul(bergBauStrahlModulC).
+modul(blitzWerfer).
+modul(blitzWerferModulC).
+modul(blitzWerferModulS).
+modul(eigenesKraftFeld).
+modul(fortgeschrittenerMinenLaserA).
+modul(geologieKanone).
+modul(geologieKanonenModulC).
+modul(geschossSchmiererC).
+modul(glutSpeer).
+modul(glutSpeerModulC).
+modul(impulsWerfer).
+modul(impulsWerferModulB).
+modul(impulsWerferModulC).
+modul(kampfVisier).
+modul(laufIonisatorC).
+modul(masseBeschleunigerC).
+modul(minenLaser).
+modul(optischerBohrerS).
+modul(plasmaWerfer).
+modul(plasmaWerferModulB).
+modul(plasmaWerferModulC).
+modul(plasmaWerferModulS).
+modul(scanner).
+modul(scannerModulA).
+modul(scannerModulC).
+modul(scannerModulS).
+modul(streuBlaster).
+modul(streuBlasterModulC).
+modul(terrainManipulator).
+modul(untersuchungsGeraetA).
+modul(verstaerkteKartuschenC).
+modul(wellenFormWiederVerwerterB).
+
+
+/* ------------------------------- Exo-Fahrzeugmodule ------------------- */
+
+modul(exoFahrzeugAntriebModulC).
+modul(exoFahrzeugAntriebModulS).
+modul(exoFahrzeugBeschleunigungsModul).
+modul(exoFahrzeugBoostModulB).
+modul(exoFahrzeugBoostModulC).
+modul(exoFahrzeugBoostModulS).
+modul(exoFahrzeugBordKanone).
+modul(exoFahrzeugKanonenModulC).
+modul(exoFahrzeugKanonenModulS).
+modul(exoFahrzeugLaserModulC).
+modul(exoFahrzeugMinenLaser).
+modul(exoFahrzeugMinenLaserUpgradeSigmaA).
+modul(exoFahrzeugSignalBooster).
+modul(exoFahrzeugSignalBoosterUpgradeSigmaB).
+modul(exoFahrzeugSignalBoosterUpgradeTauA).
+modul(fusionsAntrieb).
+modul(hochleistungsSonar).
+modul(humboldtAntrieb).
+modul(humboldtAntriebsModulC).
+modul(humboldtAntriebsModulS).
+modul(nautilonKanone).
+modul(nautilonKanonenModulC).
+modul(osmotischerGeneratorC).
+modul(tethysStrahl).
+
 /* ------------------------------- Zugangskarten ------------------------ */
 basisBauEndStoff(atlasPassV1).
 basisBauEndStoff(atlasPassV2).
@@ -465,123 +632,6 @@ basisBauEndStoff(atlasPassV3).
 
 /* ------------------------------- Inventarnippes ----------------------- */
 basisBauEndStoff(sternenSamen).
-
-/* ------------------------------- Anzugmodule -------------------------- */
-basisBauEndStoff(ammoniumHaltigeVerarbeitungsAnlagen).
-basisBauEndStoff(effizienteWasserduesenA).
-basisBauEndStoff(effizienteWasserduesenB).
-basisBauEndStoff(effizienteWasserduesenC).
-basisBauEndStoff(effizienteWasserduesenS).
-basisBauEndStoff(gefahrenSchutz).
-basisBauEndStoff(gefahrGutSchutzHandschuh).
-basisBauEndStoff(jetPack).
-basisBauEndStoff(neuralStimulator).
-basisBauEndStoff(qFeldInternePolsterung).
-basisBauEndStoff(raketenStiefel).
-basisBauEndStoff(sauerstoffHaltigeStabilisatoren).
-basisBauEndStoff(sauerstoffUmleiterA).
-basisBauEndStoff(sauerstoffUmleiterB).
-basisBauEndStoff(sauerstoffUmleiterC).
-basisBauEndStoff(sauerstoffUmleiterS).
-basisBauEndStoff(sauerstoffWiederVerwerterC).
-basisBauEndStoff(selbstReinigendeKiemenEinheit).
-basisBauEndStoff(schildGitter).
-basisBauEndStoff(unterHyperDruckStehendeKreislaufAtmungsHilfe).
-basisBauEndStoff(lebensErhaltung).
-basisBauEndStoff(einfacherUeberSetzerB).
-
-/* ------------------------------- Raumschiffmodule --------------------- */
-basisBauEndStoff(deflektorSchild).
-basisBauEndStoff(photonenKanone).
-basisBauEndStoff(konfliktScanner).
-basisBauEndStoff(wirtschaftsScanner).
-basisBauEndStoff(cadmiumAntriebB).
-basisBauEndStoff(effizienteDuesenB).
-basisBauEndStoff(ablativePanzerungC).
-basisBauEndStoff(nichtlineareOptikCPhotonenKanone).
-basisBauEndStoff(reketenWerfer).
-basisBauEndStoff(phasenStrahler).
-basisBauEndStoff(positronenWerfer).
-basisBauEndStoff(infraMesser).
-basisBauEndStoff(zyklotronBalliste).
-basisBauEndStoff(emerilAntriebA).
-basisBauEndStoff(startSystemLadeGeraetS).
-basisBauEndStoff(grosseRaketenRohreB).
-basisBauEndStoff(fourierBegrenzerB).
-basisBauEndStoff(fragmentSuperAufladerB).
-basisBauEndStoff(nichtlineareOptikBInfraMesserB).
-basisBauEndStoff(dysonPumpeB).
-basisBauEndStoff(indiumAntriebS).
-
-/* ------------------------------- Frachtermodule ----------------------- */
-basisBauEndStoff(frachterHyperAntrieb).
-basisBauEndStoff(frachterWarpReaktorTauB).
-basisBauEndStoff(frachterWarpReaktorThetaA).
-
-/* ------------------------------- Raumschiff Kauf-Module --------------- */
-basisBauEndStoff(asymetrischeRefraktoren).
-basisBauEndStoff(chromatischeSplitter).
-basisBauEndStoff(dauerwelligePolarisatoren).
-basisBauEndStoff(freiElektronischeOszillatoren).
-basisBauEndStoff(glorreicheNeutrinoInjektoren).
-basisBauEndStoff(gyroskopischeEntfernungsPolarisatoren).
-basisBauEndStoff(gyroskopischePlasmaAuspuffRohre).
-basisBauEndStoff(hypersonischeNeutrinoInjektoren).
-basisBauEndStoff(induktiveResonatoren).
-basisBauEndStoff(nuklearePolarisatoren).
-basisBauEndStoff(resonanteReflektorGlaeser).
-basisBauEndStoff(spezialisierteSuperLuminare).
-basisBauEndStoff(supraleitendeReflektorGlaeser).
-basisBauEndStoff(unvergleichlicheReflektorGlaeser).
-basisBauEndStoff(ultraHochfrequenteOszillatoren).
-
-
-/* ------------------------------- Fregatten-Module ------------------ */
-basisBauEndStoff(gedankenKontrollGeraet).
-basisBauEndStoff(holographischerAnalysator).
-basisBauEndStoff(mineralKompressor).
-basisBauEndStoff(sprengDrohnen).
-basisBauEndStoff(treibStoffOxidant).
-
-/* ------------------------------- Multiwerkzeugmodule ------------------ */
-basisBauEndStoff(analyseVisier).
-basisBauEndStoff(gammaStrahlendeBegrenzer).
-basisBauEndStoff(scanner).
-basisBauEndStoff(wellenFormWiederVerwerter).
-basisBauEndStoff(terrainManipulator).
-basisBauEndStoff(eigenesKraftFeld).
-basisBauEndStoff(kampfVisier).
-basisBauEndStoff(minenLaser).
-basisBauEndStoff(fortgeschrittenerMinenLaser).
-basisBauEndStoff(blitzWerfer).
-basisBauEndStoff(laufIonisator).
-basisBauEndStoff(plasmaWerfer).
-basisBauEndStoff(geologieKanone).
-basisBauEndStoff(glutSpeer).
-basisBauEndStoff(masseBeschleuniger).
-basisBauEndStoff(streuBlaster).
-basisBauEndStoff(geschossSchmierer).
-basisBauEndStoff(impulsWerfer).
-basisBauEndStoff(verstaerkteKartuschen).
-
-/* ------------------------------- Exo-Fahrzeugmodule ------------------- */
-basisBauEndStoff(fusionsAntrieb).
-basisBauEndStoff(humboldtAntrieb).
-basisBauEndStoff(driftAufhaengung).
-basisBauEndStoff(haftungsVerstaerkungsAufhaengung).
-basisBauEndStoff(rutschAufhaengung).
-basisBauEndStoff(exoFahrzeugBordKanonenUpgrade).
-basisBauEndStoff(exoFahrzeugMinenLaserUpgrade).
-basisBauEndStoff(exoFahrzeugSignalBooster).
-basisBauEndStoff(exoFahrzeugSignalBoosterUpgradeSigma).
-basisBauEndStoff(exoFahrzeugSignalBoosterUpgradeTau).
-basisBauEndStoff(exoFahrzeugBeschleunigungsModul).
-basisBauEndStoff(exoFahrzeugMinenLaser).
-basisBauEndStoff(exoFahrzeugMinenLaserUpgradeSigma).
-basisBauEndStoff(exoFahrzeugBordKanone).
-basisBauEndStoff(nautilonKanone).
-basisBauEndStoff(tethysStrahl).
-basisBauEndStoff(osmotischerGenerator).
 
 /* =============================== Baustoffe ============================ */
 /* ------------------------------- Terminals ---------------------------- */
@@ -592,38 +642,47 @@ basisBauEndStoff(wissenschaftsTerminal).
 basisBauEndStoff(landwirtschaftsTerminal).
 
 /* ------------------------------- Industriemodule ---------------------- */
-basisBauEndStoff(versorgungsDepot).
 basisBauEndStoff(annaeherungsSchalter).
+basisBauEndStoff(bodenSchalter).
+basisBauEndStoff(elektroMagnetischerGenerator).
+basisBauEndStoff(energieUmkehrer).
+basisBauEndStoff(gasExtraktor).
+basisBauEndStoff(mineralienExtraktor).
 basisBauEndStoff(schalter).
+basisBauEndStoff(solarModul).
+basisBauEndStoff(treibStoffReaktor).
+basisBauEndStoff(versorgungsDepot).
+basisBauEndStoff(versorgungsRohr).
+basisBauEndStoff(wandSchalter).
+
 
 /* ------------------------------- Landwirtschaftsmodule ---------------- */
-basisBauEndStoff(floraBehaelterHochBeet).
-
-/* ------------------------------- Lager --- ---------------------------- */
-basisBauEndStoff(lagerBehaelter1).
-basisBauEndStoff(verschlosseneKiste).
-
-/* ------------------------------- Landwirtschaft ----------------------- */
-basisBauEndStoff(floraBehaelterTubus).
-basisBauEndStoff(floraBehaelterKasten).
-basisBauEndStoff(hydroKulturTrog).
-basisBauEndStoff(grosserHydroKulturTrog).
-
-/* ------------------------------- Pflanzen ----------------------------- */
 basisBauEndStoff(echinoKaktus).
+basisBauEndStoff(eiweissPerlenKugel).
+basisBauEndStoff(floraBehaelterHochBeet).
+basisBauEndStoff(floraBehaelterKasten).
+basisBauEndStoff(floraBehaelterTubus).
 basisBauEndStoff(frostWurz).
 basisBauEndStoff(gammaGras).
 basisBauEndStoff(giftIgel).
 basisBauEndStoff(gravitinoWirt).
+basisBauEndStoff(grosserHydroKulturTrog).
+basisBauEndStoff(hydroKulturTrog).
 basisBauEndStoff(magenKrampfBlume).
 basisBauEndStoff(morditWurzel).
 basisBauEndStoff(nipNip).
 basisBauEndStoff(pilzGeflecht).
 basisBauEndStoff(sonnenRebe).
 basisBauEndStoff(sternenDorn).
+basisBauEndStoff(topfPflanze).
+
+
+/* ------------------------------- Lager --- ---------------------------- */
+basisBauEndStoff(lagerBehaelter).
+basisBauEndStoff(verschlosseneKiste).
 
 /* ------------------------------- Exo-Fahrzeug-Stationen --------------- */
-basisBauEndStoff(kollossGeoBucht).
+basisBauEndStoff(kolossGeoBucht).
 basisBauEndStoff(nomadenGeoBucht).
 basisBauEndStoff(roamerGeoBucht).
 basisBauEndStoff(exoFahrzeugRufStation).
@@ -637,42 +696,37 @@ basisBauEndStoff(rennKraftVerstaerker).
 basisBauEndStoff(atmosphaerenVerarbeitungsAnlage).
 basisBauEndStoff(autonomeBergBauEinheit).
 basisBauEndStoff(basisComputer).
-basisBauEndStoff(bauplanAnalysator).
+basisBauEndStoff(batterie).
+basisBauEndStoff(konstruktionsForschungsStation).
+basisBauEndStoff(bioTreibStoffReaktor).
 basisBauEndStoff(kommunikationsStation).
 basisBauEndStoff(nachrichtenModul).
-basisBauEndStoff(signal).
+basisBauEndStoff(naehrStoffProzessor).
 basisBauEndStoff(signalBooster).
 basisBauEndStoff(speicherPunkt).
+basisBauEndStoff(speicherSignal).
 basisBauEndStoff(tragbareRaffinerie).
 
-/* ------------------------------- Permanente Technologie --------------- */
+/* ------------------------------- Technologie Allgemein ---------------- */
+basisBauEndStoff(antiMaterieReaktor).
+basisBauEndStoff(aussehenModifikator).
+basisBauEndStoff(automatischerFuetterer).
 basisBauEndStoff(basisBergungsKapsel).
 basisBauEndStoff(basisTelePorterModul).
-basisBauEndStoff(terminalDesGalaktischenMarktes).
 basisBauEndStoff(gefahrenSchutzEinheit).
 basisBauEndStoff(gesundheitsStation).
 basisBauEndStoff(grosseRaffinerie).
+basisBauEndStoff(kurzStreckenTelePorter).
+basisBauEndStoff(landeFeld).
+basisBauEndStoff(mittlereRaffinerie).
+basisBauEndStoff(nutzTierEinheit).
+basisBauEndStoff(terminalDesGalaktischenMarktes).
 
-/* =============================== Dekoration =========================== */
-/* ------------------------------- InnenEinrichtung --------------------- */
-basisBauEndStoff(bett).
-basisBauEndStoff(tisch).
+/* ------------------------------- Energietechnologie ------------------- */
+basisBauEndStoff(elektrischeVerkabelung).
 
-/* ------------------------------- Lichter ------------------------------ */
-basisBauEndStoff(licht).
-basisBauEndStoff(lichtHandLampe).
-basisBauEndStoff(lichtStehLampeEckig).
-basisBauEndStoff(lichtStehLampeRund).
-basisBauEndStoff(lichtStehLampeSchirm).
-basisBauEndStoff(farbigeLeuchte).
-basisBauEndStoff(farbigeLeuchteBlau).
-basisBauEndStoff(farbigeLeuchteGruen).
-basisBauEndStoff(farbigeLeuchteGelb).
-basisBauEndStoff(farbigeLeuchteOrange).
-basisBauEndStoff(farbigeLeuchteRot).
-basisBauEndStoff(farbigeLeuchteWeiss).
-
-/* ------------------------------- Motive ------------------------------- */
+/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Dekoration %%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/* =====================  Motiv Designs ============================================== */
 basisBauEndStoff(motivStilisiertesR).
 basisBauEndStoff(motivRundPipette).
 basisBauEndStoff(motivFaltungDuennDick).
@@ -696,172 +750,22 @@ basisBauEndStoff(motivSchildKorvax).
 basisBauEndStoff(motivFroschSack).
 basisBauEndStoff(motivLaemmchen).
 
-/* ------------------------------- Verzierungen ------------------------- */
-basisBauEndStoff(flagge).
-
-/* =============================== Wasser-Konstruktion ================== */
-basisBauEndStoff(tiefSeeKammer).
-
-/* =============================== Einfache Komponenten ================= */
-/* ------------------------------- Holzkomponenten ---------------------- */
-basisBauEndStoff(glasPlatteMitHolzRahmen).
-basisBauEndStoff(holzBodenPlatte).
-basisBauEndStoff(holzDach).
-basisBauEndStoff(holzFenster).
-basisBauEndStoff(holzRampe).
-basisBauEndStoff(holzTuerRahmen).
-basisBauEndStoff(holzWand).
-basisBauEndStoff(duenneHolzWand).
-basisBauEndStoff(holzTuer).
-basisBauEndStoff(elektrischeHolzTuer).
-basisBauEndStoff(holzBogen).
-basisBauEndStoff(kleineHolzTuer).
-basisBauEndStoff(grosseElektrischeHolzTuer).
-
-/* ------------------------------- Betonkomponenten --------------------- */
-basisBauEndStoff(betonWand).
-
-/* ------------------------------- Metallkomponenten -------------------- */
-basisBauEndStoff(metallFenster).
-basisBauEndStoff(metallWand).
-basisBauEndStoff(metallTuerRahmen).
-basisBauEndStoff(elektrischeMetallTuer).
-basisBauEndStoff(kleineMetallTuer).
-basisBauEndStoff(grosseElektrischeMetallTuer).
-basisBauEndStoff(elektrischeBetonTuer).
-basisBauEndStoff(betonDachEckStueck).
-basisBauEndStoff(kleineBetonTuer).
-basisBauEndStoff(grosseElektrischeBetonTuer).
-
-/* =============================== Strukturen =========================== */
-basisBauEndStoff(zylindrischerRaum).
-
-
-/* Eine Komponente */
+/* =====================  Dekorative Module 1 ======================================== */
 basisBauEndStoff(achtEckSchrank).
-basisBauEndStoff(arbeitsPlatte).
-basisBauEndStoff(aussehenModifikator).
-basisBauEndStoff(betonBodenPlatte).
-basisBauEndStoff(betonBogen).
-basisBauEndStoff(betonDach).
-basisBauEndStoff(betonDachEndStueck).
-basisBauEndStoff(betonDachPlatte).
-basisBauEndStoff(betonTuer).
-basisBauEndStoff(betonTuerRahmen).
-basisBauEndStoff(duenneBetonWand).
-basisBauEndStoff(duenneMetallWand).
-basisBauEndStoff(dekor).
-basisBauEndStoff(eckSofa).
-basisBauEndStoff(ergonomischesSofa).
-basisBauEndStoff(einfacherSchreibTisch).
-basisBauEndStoff(frachterTreppe).
-basisBauEndStoff(fundament).
-basisBauEndStoff(gebogenerKorridor).
-basisBauEndStoff(gebogenesRohr).
-basisBauEndStoff(geraderKorridor).
-basisBauEndStoff(gewoelbteWuerfelFoermigeWand).
-basisBauEndStoff(glasPlatteMitBetonRahmen).
-basisBauEndStoff(glasPlatteMitMetallRahmen).
-basisBauEndStoff(grossesGlasPaneel).
-basisBauEndStoff(grosserKeil).
-basisBauEndStoff(gruenerWandBildSchirm).
-basisBauEndStoff(halberBetonBogen).
-basisBauEndStoff(halberHolzBogen).
-basisBauEndStoff(halberMetallBogen).
-basisBauEndStoff(hoherSchrank).
-basisBauEndStoff(infraStrukturLeiter).
-basisBauEndStoff(kanisterRegal).
-basisBauEndStoff(kleineBetonBodenPlatte).
-basisBauEndStoff(kleineBetonWand).
-basisBauEndStoff(kleineHolzWand).
-basisBauEndStoff(kleineHolzPlatte).
-basisBauEndStoff(kleineMetallPlatte).
-basisBauEndStoff(kleineMetallWand).
-basisBauEndStoff(kleineKiste).
-basisBauEndStoff(kleinerKeil).
-basisBauEndStoff(kurzeBetonWand).
-basisBauEndStoff(kurzeHolzWand).
-basisBauEndStoff(kurzeMetallWand).
-basisBauEndStoff(kugel).
-basisBauEndStoff(laborLampe).
-basisBauEndStoff(lagerModulDeko).
-basisBauEndStoff(leiter).
-basisBauEndStoff(lFoermigerKorridor).
-basisBauEndStoff(metallBodenPlatte).
-basisBauEndStoff(metallBogen).
-basisBauEndStoff(metallTuer).
-basisBauEndStoff(orangeFarbenerWandBildSchirm).
-basisBauEndStoff(oszilloskop).
-basisBauEndStoff(pflasterung).
-basisBauEndStoff(pflasterungVierFach).
-basisBauEndStoff(podestPflasterung).
-basisBauEndStoff(pyramide).
-basisBauEndStoff(quadratischerRaum).
-basisBauEndStoff(quadratischeTiefSeeKammer).
-basisBauEndStoff(regalModul).
-basisBauEndStoff(roboterArm).
-basisBauEndStoff(rohr).
-basisBauEndStoff(rollTor).
-basisBauEndStoff(schliessFach).
-basisBauEndStoff(schraegeBetonPlatte).
-basisBauEndStoff(schraegeHolzPlatte).
-basisBauEndStoff(schraegeMetallPlatte).
-basisBauEndStoff(schubLadenSchrank).
-basisBauEndStoff(sofa).
-basisBauEndStoff(stabilerWuerfel).
-basisBauEndStoff(stuhl).
-basisBauEndStoff(tFoermigerKorridor).
-basisBauEndStoff(topfPflanze).
-basisBauEndStoff(tuer).
-basisBauEndStoff(wuerfel).
-basisBauEndStoff(wuerfelFoermigeInnenTuer).
-basisBauEndStoff(wuerfelFoermigeInnenWand).
-basisBauEndStoff(wuerfelFoermigerDachAufsatz).
-basisBauEndStoff(wuerfelFoermigerRaum).
-basisBauEndStoff(wuerfelFoermigerRaumBoden).
-basisBauEndStoff(wuerfelFoermigerRaumRahmen).
-basisBauEndStoff(wuerfelRaumFundamentStrebe).
-basisBauEndStoff(wuerfelRaumViererFundamentStrebe).
-basisBauEndStoff(fundamentStrebe).
-basisBauEndStoff(viererFundamentStrebe).
-basisBauEndStoff(xFoermigerKorridor).
-basisBauEndStoff(zylinder).
-basisBauEndStoff(zylindrischerRaumRahmen).
-
-
-/* Zwei Komponenten */
-basisBauEndStoff(aussichtsKugel).
-basisBauEndStoff(betonFassade).
-basisBauEndStoff(betonFenster).
-basisBauEndStoff(betonRampe).
-basisBauEndStoff(bioKuppelRaum).
-basisBauEndStoff(bodenMatte).
-basisBauEndStoff(deckenLeuchte).
 basisBauEndStoff(deckenPaneel).
 basisBauEndStoff(fassFoermigerFabrikator).
-basisBauEndStoff(fenster).
 basisBauEndStoff(flachesModul).
-basisBauEndStoff(gewoelbtesWuerfelFoermigesDach).
-basisBauEndStoff(grosseMonitorStation).
-basisBauEndStoff(halbeBetonRampe).
-basisBauEndStoff(halbeHolzRampe).
-basisBauEndStoff(halbeMetallRampe).
-basisBauEndStoff(holoTuer).
-basisBauEndStoff(holzDachEndStueck).
-basisBauEndStoff(holzDachPlatte).
-basisBauEndStoff(holzFassade).
-basisBauEndStoff(innenTreppen).
+basisBauEndStoff(gruenerWandBildSchirm).
+basisBauEndStoff(hoherSchrank).
+basisBauEndStoff(kanisterRegal).
 basisBauEndStoff(kistenFoermigerFabrikator).
-basisBauEndStoff(korridorMitGlasDach).
-basisBauEndStoff(lagerBehaelter).
-basisBauEndStoff(leichterTisch).
-basisBauEndStoff(metallDach).
-basisBauEndStoff(metallDachEndStueck).
-basisBauEndStoff(metallDachPlatte).
-basisBauEndStoff(metallFassade).
-basisBauEndStoff(metallRampe).
-basisBauEndStoff(mittlereRaffinerie).
-basisBauEndStoff(monitorStation).
+basisBauEndStoff(kleineKiste).
+basisBauEndStoff(lagerModulDeko).
+basisBauEndStoff(oszilloskop).
+basisBauEndStoff(regalModul).
+basisBauEndStoff(roboterArm).
+basisBauEndStoff(schliessFach).
+basisBauEndStoff(schubLadenSchrank).
 basisBauEndStoff(seitenModul).
 basisBauEndStoff(server).
 basisBauEndStoff(techBedienFeld).
@@ -869,108 +773,199 @@ basisBauEndStoff(waffenRegal).
 basisBauEndStoff(wandBildSchirm).
 basisBauEndStoff(wandEinheit).
 basisBauEndStoff(wandVentilator).
-basisBauEndStoff(wasserDichteTuer).
-basisBauEndStoff(wuerfelFoermigerGlasRaum).
+
+/* =====================  Dekorative Module 2 ======================================== */
+basisBauEndStoff(arbeitsPlatte).
+basisBauEndStoff(bett).
+basisBauEndStoff(bodenMatte).
+basisBauEndStoff(eckSofa).
+basisBauEndStoff(einfacherSchreibTisch).
+basisBauEndStoff(ergonomischesSofa).
+basisBauEndStoff(flagge1).
+basisBauEndStoff(flagge2).
+basisBauEndStoff(flagge3).
+basisBauEndStoff(flagge4).
+basisBauEndStoff(gewoelbterTisch).
+basisBauEndStoff(grosseMonitorStation).
+basisBauEndStoff(leichterTisch).
+basisBauEndStoff(monitorStation).
+basisBauEndStoff(sofa).
+basisBauEndStoff(stuhl).
+basisBauEndStoff(tisch).
+basisBauEndStoff(wandFlagge1).
+basisBauEndStoff(wandFlagge2).
+basisBauEndStoff(wandFlagge3).
+
+/* =====================  Beleuchtung ================================================ */
+basisBauEndStoff(deckenLeuchte).
+basisBauEndStoff(laborLampe).
+basisBauEndStoff(lichtHandLampe).
+basisBauEndStoff(lichtStehLampeEckig).
+basisBauEndStoff(lichtStehLampeRund).
+basisBauEndStoff(lichtStehLampeSchirm).
+basisBauEndStoff(farbigeLeuchte).
+basisBauEndStoff(farbigeLeuchteBlau).
+basisBauEndStoff(farbigeLeuchteGruen).
+basisBauEndStoff(farbigeLeuchteGelb).
+basisBauEndStoff(farbigeLeuchteOrange).
+basisBauEndStoff(farbigeLeuchteRot).
+
+
+/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Strukturen %%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/* =============================== Einfache Komponenten ================= */
+/* ------------------------------- Holzkomponenten ---------------------- */
+basisBauEndStoff(dachInnenEckteilAusHolz).
+basisBauEndStoff(duenneHolzWand).
+basisBauEndStoff(elektrischeHolzTuer).
+basisBauEndStoff(glasPlatteMitHolzRahmen).
+basisBauEndStoff(grosseElektrischeHolzTuer).
+basisBauEndStoff(halbeHolzRampe).
+basisBauEndStoff(halberHolzBogen).
+basisBauEndStoff(holzBodenPlatte).
+basisBauEndStoff(holzBogen).
+basisBauEndStoff(holzDach).
+basisBauEndStoff(holzDachEckStueck).
+basisBauEndStoff(holzDachPlatte).
+basisBauEndStoff(holzFassade).
+basisBauEndStoff(holzFenster).
+basisBauEndStoff(holzRampe).
+basisBauEndStoff(holzTuerRahmen).
+basisBauEndStoff(holzWand).
+basisBauEndStoff(holzTuer).
+basisBauEndStoff(kleineHolzPlatte).
+basisBauEndStoff(kleineHolzTuer).
+basisBauEndStoff(kleineHolzWand).
+basisBauEndStoff(kurzeHolzWand).
+basisBauEndStoff(schraegeHolzPlatte).
+
+/* ------------------------------- Metallkomponenten -------------------- */
+basisBauEndStoff(dachInnenEckteilAusMetall).
+basisBauEndStoff(duenneMetallWand).
+basisBauEndStoff(elektrischeMetallTuer).
+basisBauEndStoff(glasPlatteMitMetallRahmen).
+basisBauEndStoff(grosseElektrischeMetallTuer).
+basisBauEndStoff(halbeMetallRampe).
+basisBauEndStoff(halberMetallBogen).
+basisBauEndStoff(kleineMetallPlatte).
+basisBauEndStoff(kleineMetallTuer).
+basisBauEndStoff(kleineMetallWand).
+basisBauEndStoff(kurzeMetallWand).
+basisBauEndStoff(metallBodenPlatte).
+basisBauEndStoff(metallBogen).
+basisBauEndStoff(metallDach).
+basisBauEndStoff(metallDachEckStueck).
+basisBauEndStoff(metallDachPlatte).
+basisBauEndStoff(metallFassade).
+basisBauEndStoff(metallFenster).
+basisBauEndStoff(metallRampe).
+basisBauEndStoff(metallTuer).
+basisBauEndStoff(metallTuerRahmen).
+basisBauEndStoff(metallWand).
+basisBauEndStoff(schraegeMetallPlatte).
+
+/* ------------------------------- Betonkomponenten --------------------- */
+basisBauEndStoff(betonBodenPlatte).
+basisBauEndStoff(betonBogen).
+basisBauEndStoff(betonDach).
+basisBauEndStoff(betonDachEckStueck).
+basisBauEndStoff(betonDachPlatte).
+basisBauEndStoff(betonFassade).
+basisBauEndStoff(betonFenster).
+basisBauEndStoff(betonRampe).
+basisBauEndStoff(betonTuer).
+basisBauEndStoff(betonTuerRahmen).
+basisBauEndStoff(betonWand).
+basisBauEndStoff(dachInnenEckteilAusBeton).
+basisBauEndStoff(duenneBetonWand).
+basisBauEndStoff(elektrischeBetonTuer).
+basisBauEndStoff(glasPlatteMitBetonRahmen).
+basisBauEndStoff(grosseElektrischeBetonTuer).
+basisBauEndStoff(halbeBetonRampe).
+basisBauEndStoff(halberBetonBogen).
+basisBauEndStoff(kleineBetonBodenPlatte).
+basisBauEndStoff(kleineBetonTuer).
+basisBauEndStoff(kleineBetonWand).
+basisBauEndStoff(kurzeBetonWand).
+basisBauEndStoff(schraegeBetonPlatte).
+
+
+/* =====================  gross vorgefertigt ========================================= */
+basisBauEndStoff(zylindrischerRaum).
+basisBauEndStoff(quadratischerRaum).
+basisBauEndStoff(geraderKorridor).
+basisBauEndStoff(tuer).
+basisBauEndStoff(fenster).
+basisBauEndStoff(fundament).
+basisBauEndStoff(lFoermigerKorridor).
+basisBauEndStoff(korridorMitGlasDach).
+basisBauEndStoff(holoTuer).
 basisBauEndStoff(zugangsRampe).
+basisBauEndStoff(rollTor).
+basisBauEndStoff(pflasterungVierFach).
+basisBauEndStoff(viererFundamentStrebe).
+basisBauEndStoff(fundamentStrebe).
+basisBauEndStoff(zylindrischerRaumRahmen).
+basisBauEndStoff(tFoermigerKorridor).
+basisBauEndStoff(xFoermigerKorridor).
+basisBauEndStoff(korridorFenster).
+basisBauEndStoff(bioKuppelRaum).
+basisBauEndStoff(gebogenerKorridor).
+basisBauEndStoff(leiter).
+basisBauEndStoff(pflasterung).
+basisBauEndStoff(pflasterungPodest).
+basisBauEndStoff(grossesGlasPaneel).
+basisBauEndStoff(aussichtsKugel).
 
+/* =====================  klein vorgefertigt ========================================= */
+basisBauEndStoff(wuerfelFoermigerRaum).
+basisBauEndStoff(wuerfelRaumFundamentStrebe).
+basisBauEndStoff(gewoelbteWuerfelFoermigeWand).
+basisBauEndStoff(wuerfelFoermigerGlasRaum).
+basisBauEndStoff(wuerfelFoermigerRaumRahmen).
+basisBauEndStoff(wuerfelFoermigerRaumBoden).
+basisBauEndStoff(wuerfelRaumViererFundamentStrebe).
+basisBauEndStoff(innenTreppen).
+basisBauEndStoff(wuerfelFoermigeInnenWand).
+basisBauEndStoff(wuerfelFoermigerDachAufsatz).
+basisBauEndStoff(gewoelbtesWuerfelFoermigesDach).
+basisBauEndStoff(wuerfelFoermigesFensterEckig).
+basisBauEndStoff(wuerfelFoermigesFensterRund).
+basisBauEndStoff(infraStrukturLeiter).
+basisBauEndStoff(wuerfelFoermigeInnenTuer).
 
-/* Drei Komponenten */
-basisBauEndStoff(exoFahrzeugBeschleunigungsModulA).
-basisBauEndStoff(exoFahrzeugBeschleunigungsModulB).
-basisBauEndStoff(exoFahrzeugSignalBoosterUpgrade).
-basisBauEndStoff(exoFahrzeugSignalBoosterUpgradeA).
+/* =============================== Wasser-Konstruktion ================== */
 basisBauEndStoff(glasTunnel).
-basisBauEndStoff(kolossGeoBucht).
-basisBauEndStoff(landeFeld).
 basisBauEndStoff(lFoermigerGlasTunnel).
 basisBauEndStoff(meeresUnterSchlupf).
-basisBauEndStoff(sauerStoffVerarbeiter).
+basisBauEndStoff(mondTeichBoden).
+basisBauEndStoff(quadratischeTiefSeeKammer).
 basisBauEndStoff(tFoermigerGlasTunnel).
+basisBauEndStoff(tiefSeeKammer).
 basisBauEndStoff(vertikalerGlasTunnel).
 basisBauEndStoff(xFoermigerGlasTunnel).
+basisBauEndStoff(wasserDichteTuer).
 
-/* =============================== kaufbare Rezepte ===================== */
-/* modulRezept(<RezeptName>, <NanitPreis>) */
-/* ------------------------------- Exofahrzeugmodule -------------------- */
-modulRezept(hochleistungsSonar, 10).
+/* =============================== Frachter ============================= */
+basisBauEndStoff(flottenKommandoRaum).
+basisBauEndStoff(grosserFrachtRaum).
+basisBauEndStoff(frachterKorridor).
+basisBauEndStoff(gebogenerFrachterKorridor).
+basisBauEndStoff(frachterKreuzungDreiFach).
+basisBauEndStoff(frachterKreuzungVierFach).
 
 
-/* ------------------------------- Multiwerkzeugmodule ------------------ */
-modulRezept(optischerBohrerS, 460).
-modulRezept(untersuchungsGeraetA, 320).
-modulRezept(geschossSchmiererC, 180).
+/* Eine Komponente */
+basisBauEndStoff(frachterTreppe).
+basisBauEndStoff(gebogenesRohr).
+basisBauEndStoff(grosserKeil).
+basisBauEndStoff(kleinerKeil).
+basisBauEndStoff(kugel).
+basisBauEndStoff(pyramide).
+basisBauEndStoff(rohr).
+basisBauEndStoff(stabilerWuerfel).
+basisBauEndStoff(wuerfel).
+basisBauEndStoff(zylinder).
 
-/* ------------------------------- Raumschiffmodule --------------------- */
-modulRezept(ablativePanzerungC, 85).
-modulRezept(cadmiumAntriebC, 80).
-modulRezept(dysonPumpeB, 120).
-modulRezept(effizienteDuesenB, 120).
-modulRezept(emerilAntriebC, 120).
-modulRezept(fourierBegrenzerB, 120).
-modulRezept(fragmentSuperAufladerB, 120).
-modulRezept(frachterWarpReaktorSigmaC, 300).
-modulRezept(frachterWarpReaktorTauB, 400).
-modulRezept(frachterWarpReaktorTauC, 400).
-modulRezept(frachterWarpReaktorThetaA, 800).
-modulRezept(grosseRaketenRohreB, 50).
-modulRezept(indiumAntrieb, 120).
-modulRezept(infraMesserBeschleuniger, 150).
-modulRezept(konfliktScanner, 150).
-modulRezept(nichtLineareOptikB, 120).
-modulRezept(nichtLineareOptikC, 75).
-modulRezept(nichtLineareOptikInfraMesserB, 120).
-modulRezept(phasenStrahler, 150).
-modulRezept(positronenWerfer, 150).
-modulRezept(raketenWerfer, 100).
-modulRezept(teleportEmpfaenger, 150).
-modulRezept(wirtschaftsScanner, 150).
-modulRezept(zyklotronBalliste, 150).
-
-/* ------------------------------- Anzugmodule -------------------------- */
-modulRezept(analyseVisier, 0).
-modulRezept(effizienteWasserDuesenA, 350).
-modulRezept(sauerstoffUmleiterA, 240).
-modulRezept(sauerstoffWiederVerwerterC, 120).
-modulRezept(gefahrGutSchutzHandschuh, 80).
-modulRezept(raketenStiefelA, 200).
-modulRezept(neuralStimulatorB, 90).
-modulRezept(einfacherUeberSetzerB, 90).
-modulRezept(kuelMittelNetzwerkC, 160).
-modulRezept(waermeSchichtC, 160).
-modulRezept(toxinDaempferC, 160).
-modulRezept(strahlungsDeflektorC, 160).
-modulRezept(belueftungsMembranB, 120).
-modulRezept(verbesserterUebersetzerA, 580).
-
-/* =============================== kaufbare Module ====================== */
-/* ------------------------------- Raumschiffmodule --------------------- */
-
-modulKauf(hyperAntriebModulC, 72).
-modulKauf(impulsAntriebModulC, 73).
-modulKauf(infraMesserModulC, 74).
-modulKauf(photonenKanonenModulC, 74).
-modulKauf(phasenStrahlerModulC, 71).
-modulKauf(positronModulC, 69).
-modulKauf(positronModulB, 172).
-modulKauf(phasenStrahlerModulS, 414).
-modulKauf(raumSchiffSchildModulC, 72).
-modulKauf(raumSchiffSchildModulS, 0).
-modulKauf(zykloTronModulB, 170).
-modulKauf(zykloTronModulC, 73).
-
-/* ------------------------------- Anzugmodule -------------------------- */
-
-modulKauf(bewegungsModulC, 67).
-modulKauf(giftSchutzModulB, 170).
-modulKauf(lebensErhaltungsModulB, 167).
-modulKauf(schildModulC, 72).
-modulKauf(strahlungsSchutzModulA, 288).
-modulKauf(strahlungsSchutzModulB, 175).
-modulKauf(strahlungsSchutzModulS, 445).
-modulKauf(streuBlasterModulA, 288).
-modulKauf(unterWasserSchutzModulB, 168).
-modulKauf(waermeSchutzModulA, 283).
-modulKauf(waermeSchutzModulB, 166).
 
 /* ------------------------------- Kochzutat ---------------------------- */
 kochStoff(Stoff) :-
@@ -997,7 +992,7 @@ stoffInFunktionEingangsStoff(Stoff) :-
 	rezept:rezept(_, [[_, _], [_, _], [_, Stoff]], _, _).
 
 stoffInFunktionErgebnisStoff(Stoff) :-
-	rezept:rezept(_, [_],[_,Stoff], _).
+	rezept:rezept(_, _,[_,Stoff], _).
 	
 
 fehlerInputStoffNichtDefiniert(Stoff) :-
@@ -1013,8 +1008,16 @@ fehlerOutputStoffNichtDefiniert(Stoff) :-
 produktNichtBewertet(Stoff) :-
 	stoff(Stoff, Wert),
 	\+basisBauEndStoff(Stoff),
+	\+modul(Stoff),
 	Wert = 0.
 
+stoffNichtVerwendet(Stoff) :-
+	stoff(Stoff, _),
+	\+stoffInFunktionErgebnisStoff(Stoff),
+	\+stoffInFunktionEingangsStoff(Stoff),
+	format('Element(e) ~k ist nicht verwendet~n', Stoff),
+	fail.
+	
 doppelteInStoff :-
 	findall(Stoff0, stoff(Stoff0, _), StoffListe),
 	sort(StoffListe, Sorted),
