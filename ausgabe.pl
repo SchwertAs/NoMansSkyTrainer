@@ -176,7 +176,14 @@ ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWe
     format('<tr>~n<td>Mehrwert~n&nbsp;</td>'),
 	format('<td>~k~n&nbsp;</td>', MehrWert),
 	format('<td>Units~n&nbsp;</td>~n</tr>'),
-    StundenLohn is round(MehrWert * 360000 / GesamtZeit),
+	berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn),
     format('<tr>~n<td>Stundenlohn~n&nbsp;</td>'),
 	format('<td>~k~n&nbsp;</td>', StundenLohn),
 	format('<td>Units/Stunde~n&nbsp;</td>~n</tr>').
+
+	berechneStundenLohn(GesamtZeit, _, StundenLohn) :-
+		GesamtZeit = 0,
+		StundenLohn = 0.
+	
+	berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn) :-
+	StundenLohn is round(MehrWert * 360000 / GesamtZeit).

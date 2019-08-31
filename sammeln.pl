@@ -116,6 +116,7 @@ erkaempfen(hypnotischesAuge, 0). /* von abyssal horror */
 erkaempfen(larvenKern, 0).       /* von flüsterndes Ei */
 erkaempfen(lebendePerle, 0).     /* von gepanzerte Muschel */
 erkaempfen(kampfLaeuferGehirn, 0).     /* von gepanzerte Muschel */
+erkaempfen(unholdRogen, 0).     /* von ??? */
 
 /* Agrar */
 ernten(frostKristall, 20).

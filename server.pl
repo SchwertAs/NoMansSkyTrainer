@@ -60,7 +60,7 @@ buildOptions(Options) :-
 	printOptions(Options).
 
 printOptions(Optionen) :-
-	findall(St, (ausgangsStoff:stoff(St, _), \+ausgangsStoff:modulRezept(St, _), \+ausgangsStoff:basisBauEndStoff(St), \+ausgangsStoff:kochStoff(St)), Stoffe),
+	findall(St, (ausgangsStoff:stoff(St, _), \+ausgangsStoff:basisBauEndStoff(St), \+ausgangsStoff:kochStoff(St)), Stoffe),
 	sort(Stoffe, StoffeSet),
 	printOption(StoffeSet, "", Optionen).
 	
