@@ -56,22 +56,19 @@ minSammlungForm(Request) :-
 	    \+minimaleSammlungLoesung(Anzahl, Stoff) -> ausgabe:nichtHerstellBar(Stoff); true/* */
         .
 
-buildOptions(Options) :-
-	printOptions(Options).
-
-printOptions(Optionen) :-
-	findall(St, (ausgangsStoff:stoff(St, _), \+ausgangsStoff:basisBauEndStoff(St), \+ausgangsStoff:kochStoff(St)), Stoffe),
+buildOptions(Optionen) :-
+	findall(St, (ausgangsStoff:stoff(St, _), \+ausgangsStoff:bauRezept(St)), Stoffe),
 	sort(Stoffe, StoffeSet),
-	printOption(StoffeSet, "", Optionen).
+	buildOptions(StoffeSet, "", Optionen).
 	
-printOption(StoffList, BisherList, NextList) :-
+buildOptions(StoffList, BisherList, NextList) :-
 	StoffList = [],
 	BisherList = NextList.
 
-printOption(StoffList, BisherList, NextList) :-
+buildOptions(StoffList, BisherList, NextList) :-
 	StoffList = [Stoff|Rest],
 	format(string(StoffString), '<option>~k~n', Stoff),
 	string_concat(BisherList, StoffString, BisherList2),
-	printOption(Rest, BisherList2, NextList).
+	buildOptions(Rest, BisherList2, NextList).
 	
 	

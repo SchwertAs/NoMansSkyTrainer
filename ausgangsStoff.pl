@@ -1,4 +1,4 @@
-:- module(ausgangsStoff, [stoff/2, doppelteInStoff/0]).
+:- module(ausgangsStoff, [stoff/2, doppelteInStoff/0, bauRezept/1]).
 
 
 /* name, Wert in units (GrundPreis) */
@@ -31,6 +31,7 @@ handelsWare(schmutz, 1000).
 handelsWare(schweisserSeife, 6000).
 handelsWare(sechsZackigerEntKoppler, 15000).
 handelsWare(sichSelbstReparierendesHeridium, 6000).
+handelsWare(sternenSeide, 6000).
 handelsWare(supraleitendeFaser, 50000).
 handelsWare(unraffiniertesPyritFett, 6000).
 handelsWare(vergitterterBogenKristall, 50000).
@@ -404,7 +405,6 @@ stoff(sternenGeburtKoestlichkeit, 32).
 stoff(sternenKnolle, 32).
 stoff(sternenPudding, 800).
 stoff(sternenPuddingTorte, 800).
-stoff(sternenSeide, 6000).
 stoff(sternenSchildBatterie, 500).
 stoff(stickStoff, 20).
 stoff(stickStoffSalz, 50000).
@@ -460,11 +460,15 @@ stoff(zustandsPhase, 1000).
 stoff(zytoPhosphat, 201).
 
 stoff(Stoff, Wert) :-
+	modul(Stoff),
+	Wert = 0.
+
+stoff(Stoff, Wert) :-
 	basisBauEndStoff(Stoff),
 	Wert = 0.
 
 stoff(Stoff, Wert) :-
-	modul(Stoff),
+	bauRezept(Stoff),
 	Wert = 0.
 
 /* =============================== Ausruestung ========================== */
@@ -518,7 +522,6 @@ modul(hyperAntrieb).
 modul(hyperAntriebModulC).
 modul(impulsAntrieb).
 modul(impulsAntriebModulC).
-modul(infraMesser).
 modul(infraMesserBeschleuniger).
 modul(infraMesserModulC).
 modul(infraMesserModulS).
@@ -894,7 +897,6 @@ basisBauEndStoff(zylindrischerRaum).
 basisBauEndStoff(quadratischerRaum).
 basisBauEndStoff(geraderKorridor).
 basisBauEndStoff(tuer).
-basisBauEndStoff(fenster).
 basisBauEndStoff(fundament).
 basisBauEndStoff(lFoermigerKorridor).
 basisBauEndStoff(korridorMitGlasDach).
@@ -966,6 +968,456 @@ basisBauEndStoff(stabilerWuerfel).
 basisBauEndStoff(wuerfel).
 basisBauEndStoff(zylinder).
 
+bauRezept(saeureRezept).
+bauRezept(schmierMittelRezept).
+bauRezept(thermischesKondensatRezept).
+bauRezept(tragbarerReaktorRezept).
+bauRezept(instabilesGelRezept).
+bauRezept(glasRezept).
+bauRezept(polyFaserRezept).
+bauRezept(angereicherterKohlenStoffRezept).
+bauRezept(stickStoffSalzRezept).
+bauRezept(aroniumRezept).
+bauRezept(quantumProzessorRezept).
+bauRezept(kryogenKammerRezept).
+bauRezept(fluessigSprengStoffRezept).
+bauRezept(lebendesGlasRezept).
+bauRezept(hitzeKondensatorRezept).
+bauRezept(schaltPlatteRezept).
+bauRezept(organischerKatalysatorRezept).
+bauRezept(halbLeiterRezept).
+bauRezept(heissesEisRezept).
+bauRezept(strassenKoeterBronzeRezept).
+bauRezept(heroxRezept).
+bauRezept(lemmiumRezept).
+bauRezept(magnoGoldRezept).
+bauRezept(grantineRezept).
+bauRezept(fusionsZuenderRezept).
+bauRezept(staseGeraetRezept).
+bauRezept(fusionsBeschleunigerRezept).
+bauRezept(supraLeiterRezept).
+bauRezept(kryoPumpeRezept).
+bauRezept(iridesitRezept).
+bauRezept(geoDesitRezept).
+bauRezept(lebensErhaltungsGelRezept).
+bauRezept(diWasserStoffGeleeRezept).
+bauRezept(ionenAkkuRezept).
+bauRezept(warpZelleRezept).
+bauRezept(kohlenStoffKristallRezept).
+bauRezept(seltenesMetallElementRezept).
+bauRezept(tetraKobaltRezept).
+bauRezept(chlorGitterRezept).
+bauRezept(instabilesNatriumRezept).
+bauRezept(superOxidKristallRezept).
+bauRezept(raumSchiffStartTreibStoffRezept).
+bauRezept(fortschrittlicherIonenAkkuRezept).
+bauRezept(atlasPassV1Rezept).
+bauRezept(kobaltSpiegelRezept).
+bauRezept(salzRefaktorRezept).
+bauRezept(natriumDiodeRezept).
+bauRezept(sauerStoffFilterRezept).
+bauRezept(sauerStoffKapselRezept).
+bauRezept(hydrothermaleTreibStoffZelleRezept).
+bauRezept(instabilesPlasmaRezept).
+bauRezept(sternenSchildBatterieRezept).
+bauRezept(atlasPassV2Rezept).
+bauRezept(warpHyperKernRezept).
+bauRezept(atlasPassV3Rezept).
+bauRezept(hermetischesSiegelRezept).
+bauRezept(kohlenStoffNanoRohrRezept).
+bauRezept(metallPlattenRezept).
+bauRezept(projektilMunitionRezept).
+bauRezept(antiMaterieRezept).
+bauRezept(antiMaterieGehaeuseRezept).
+bauRezept(mikroProzessorRezept).
+bauRezept(kreaturenKugelnRezept).
+bauRezept(fregattenTreibStoff50toRezept).
+bauRezept(fregattenTreibStoff100toRezept).
+bauRezept(fregattenTreibStoff200toRezept).
+bauRezept(treibStoffOxidantRezept).
+bauRezept(gedankenKontrollGeraetRezept).
+bauRezept(holografischerAnalysatorRezept).
+bauRezept(sprengDrohnenRezept).
+bauRezept(mineralKompressorRezept).
+bauRezept(gefangeneNanodeRezept).
+bauRezept(umhuellterSchattenRezept).
+bauRezept(nooSphaerischKugelRezept).
+bauRezept(dunkleMaterieRezept).
+bauRezept(endeDerDaemmerungRezept).
+bauRezept(photischerJadeRezept).
+bauRezept(zustandsPhaseRezept).
+bauRezept(novaeRegeneratRezept).
+bauRezept(modifizierteQuantenRezept).
+bauRezept(herzDerSonneRezept).
+bauRezept(sternenSamenRezept).
+bauRezept(seelenEngineRezept).
+bauRezept(gedankenBogenRezept).
+
+bauRezept(lebensErhaltungRezept).
+bauRezept(gefahrGutSchutzHandschuhRezept).
+bauRezept(gefahrenSchutzRezept).
+bauRezept(sauerStoffWiederVerwerterCRezept).
+bauRezept(jetPackRezept).
+bauRezept(einfacherUeberSetzerBRezept).
+bauRezept(kuehlMittelNetzwerkCRezept).
+bauRezept(waermeSchichtCRezept).
+bauRezept(toxinDaempferCRezept).
+bauRezept(strahlungsDeflektorCRezept).
+bauRezept(belueftungsMembranBRezept).
+bauRezept(schildGitterBRezept).
+bauRezept(sauerStoffUmleiterARezept).
+bauRezept(neuralStimulatorBRezept).
+bauRezept(raketenStiefelARezept).
+bauRezept(effizienteWasserDuesenARezept).
+bauRezept(verbesserterUebersetzerARezept).
+bauRezept(perfektionierterUebersetzerSRezept).
+bauRezept(fusionsAntriebRezept).
+bauRezept(humboldtAntriebRezept).
+bauRezept(exoFahrzeugSignalBoosterRezept).
+bauRezept(exoFahrzeugBeschleunigungsModulRezept).
+bauRezept(exoFahrzeugMinenLaserRezept).
+bauRezept(osmotischerGeneratorCRezept).
+bauRezept(hochleistungsSonarRezept).
+bauRezept(tethysStrahlRezept).
+bauRezept(nautilonKanoneRezept).
+bauRezept(exoFahrzeugSignalBoosterUpgradeSigmaBRezept).
+bauRezept(exoFahrzeugMinenLaserUpgradeSigmaARezept).
+bauRezept(exoFahrzeugBordKanoneRezept).
+bauRezept(exoFahrzeugSignalBoosterUpgradeTauARezept).
+bauRezept(impulsAntriebRezept).
+bauRezept(teleportEmpfaengerRezept).
+bauRezept(hyperAntriebRezept).
+bauRezept(startSchubDueseRezept).
+bauRezept(deflektorSchildRezept).
+bauRezept(photonenKanoneRezept).
+bauRezept(konfliktScannerRezept).
+bauRezept(wirtschaftsScannerRezept).
+bauRezept(cadmiumAntriebBRezept).
+bauRezept(effizienteDuesenBRezept).
+bauRezept(ablativePanzerungCRezept).
+bauRezept(nichtlineareOptikCRezept).
+bauRezept(raketenWerferRezept).
+bauRezept(phasenStrahlerRezept).
+bauRezept(positronenWerferRezept).
+bauRezept(infraMesserBeschleunigerRezept).
+bauRezept(zyklotronBallisteRezept).
+bauRezept(emerilAntriebARezept).
+bauRezept(startSystemLadeGeraetSRezept).
+bauRezept(grosseRaketenRohreBRezept).
+bauRezept(fourierBegrenzerBRezept).
+bauRezept(fragmentSuperAufladerBRezept).
+bauRezept(nichtlineareOptikBRezept).
+bauRezept(dysonPumpeBRezept).
+bauRezept(indiumAntriebSRezept).
+bauRezept(frachterWarpReaktorSigmaCRezept).
+bauRezept(frachterWarpReaktorTauBRezept).
+bauRezept(frachterWarpReaktorThetaARezept).
+bauRezept(analyseVisierRezept).
+bauRezept(scannerRezept).
+bauRezept(terrainManipulatorRezept).
+bauRezept(minenLaserRezept).
+bauRezept(blitzWerferRezept).
+bauRezept(eigenesKraftFeldRezept).
+bauRezept(fortgeschrittenerMinenLaserARezept).
+bauRezept(wellenFormWiederVerwerterBRezept).
+bauRezept(laufIonisatorCRezept).
+bauRezept(plasmaWerferRezept).
+bauRezept(glutSpeerRezept).
+bauRezept(streuBlasterRezept).
+bauRezept(impulsWerferRezept).
+bauRezept(kampfVisierRezept).
+bauRezept(optischerBohrerSRezept).
+bauRezept(untersuchungsGeraetARezept).
+bauRezept(geologieKanoneRezept).
+bauRezept(masseBeschleunigerCRezept).
+bauRezept(geschossSchmiererCRezept).
+bauRezept(verstaerkteKartuschenCRezept).
+
+bauRezept(basisBergungsKapselRezept).
+bauRezept(kommunikationsStationRezept).
+bauRezept(autonomeBergBauEinheitRezept).
+bauRezept(atmosphaerenVerarbeitungsAnlageRezept).
+bauRezept(nachrichtenModulRezept).
+bauRezept(basisComputerRezept).
+bauRezept(konstruktionsForschungsStationRezept).
+bauRezept(tragbareRaffinerieRezept).
+bauRezept(speicherPunktRezept).
+bauRezept(verschlosseneKisteRezept).
+bauRezept(konstruktionsTerminalRezept).
+bauRezept(exoFahrzeugTerminalRezept).
+bauRezept(waffenTerminalRezept).
+bauRezept(wissenschaftsTerminalRezept).
+bauRezept(landwirtschaftsTerminalRezept).
+bauRezept(flottenKommandoRaumRezept).
+bauRezept(grosserFrachtRaumRezept).
+bauRezept(frachterKorridorRezept).
+bauRezept(gebogenerFrachterKorridorRezept).
+bauRezept(frachterKreuzungDreiFachRezept).
+bauRezept(frachterTreppeRezept).
+bauRezept(frachterKreuzungVierFachRezept).
+bauRezept(zylindrischerRaumRezept).
+bauRezept(quadratischerRaumRezept).
+bauRezept(geraderKorridorRezept).
+bauRezept(tuerRezept).
+bauRezept(fundamentRezept).
+bauRezept(lFoermigerKorridorRezept).
+bauRezept(korridorMitGlasDachRezept).
+bauRezept(holoTuerRezept).
+bauRezept(zugangsRampeRezept).
+bauRezept(rollTorRezept).
+bauRezept(pflasterungVierFachRezept).
+bauRezept(viererFundamentStrebeRezept).
+bauRezept(fundamentStrebeRezept).
+bauRezept(zylindrischerRaumRahmenRezept).
+bauRezept(tFoermigerKorridorRezept).
+bauRezept(xFoermigerKorridorRezept).
+bauRezept(korridorFensterRezept).
+bauRezept(bioKuppelRaumRezept).
+bauRezept(gebogenerKorridorRezept).
+bauRezept(leiterRezept).
+bauRezept(pflasterungRezept).
+bauRezept(pflasterungPodestRezept).
+bauRezept(grossesGlasPaneelRezept).
+bauRezept(aussichtsKugelRezept).
+bauRezept(wuerfelFoermigerRaumRezept).
+bauRezept(wuerfelRaumFundamentStrebeRezept).
+bauRezept(gewoelbteWuerfelFoermigeWandRezept).
+bauRezept(wuerfelFoermigerGlasRaumRezept).
+bauRezept(wuerfelFoermigerRaumRahmenRezept).
+bauRezept(wuerfelFoermigerRaumBodenRezept).
+bauRezept(wuerfelRaumViererFundamentStrebeRezept).
+bauRezept(innenTreppenRezept).
+bauRezept(wuerfelFoermigeInnenWandRezept).
+bauRezept(wuerfelFoermigerDachAufsatzRezept).
+bauRezept(gewoelbtesWuerfelFoermigesDachRezept).
+bauRezept(wuerfelFoermigesFensterEckigRezept).
+bauRezept(wuerfelFoermigesFensterRundRezept).
+bauRezept(infraStrukturLeiterRezept).
+bauRezept(wuerfelFoermigeInnenTuerRezept).
+bauRezept(basisTelePorterModulRezept).
+bauRezept(bioTreibStoffReaktorRezept).
+bauRezept(speicherSignalRezept).
+bauRezept(gesundheitsStationRezept).
+bauRezept(signalBoosterRezept).
+bauRezept(batterieRezept).
+bauRezept(solarModulRezept).
+bauRezept(gefahrenSchutzEinheitRezept).
+bauRezept(naehrStoffProzessorRezept).
+bauRezept(lagerBehaelterRezept).
+bauRezept(aussehenModifikatorRezept).
+bauRezept(landeFeldRezept).
+bauRezept(nutzTierEinheitRezept).
+bauRezept(automatischerFuettererRezept).
+bauRezept(terminalDesGalaktischenMarktesRezept).
+bauRezept(kurzStreckenTelePorterRezept).
+bauRezept(mittlereRaffinerieRezept).
+bauRezept(grosseRaffinerieRezept).
+bauRezept(antiMaterieReaktorRezept).
+bauRezept(roamerGeoBuchtRezept).
+bauRezept(nomadenGeoBuchtRezept).
+bauRezept(exoFahrzeugRufStationRezept).
+bauRezept(nautilonKammerRezept).
+bauRezept(pilgerGeoBuchtRezept).
+bauRezept(kolossGeoBuchtRezept).
+bauRezept(rennInitiatorRezept).
+bauRezept(rennHindernisRezept).
+bauRezept(rennKraftVerstaerkerRezept).
+bauRezept(tiefSeeKammerRezept).
+bauRezept(meeresUnterSchlupfRezept).
+bauRezept(glasTunnelRezept).
+bauRezept(quadratischeTiefSeeKammerRezept).
+bauRezept(wasserDichteTuerRezept).
+bauRezept(lFoermigerGlasTunnelRezept).
+bauRezept(vertikalerGlasTunnelRezept).
+bauRezept(mondTeichBodenRezept).
+bauRezept(tFoermigerGlasTunnelRezept).
+bauRezept(xFoermigerGlasTunnelRezept).
+bauRezept(motivStilisiertesRRezept).
+bauRezept(motivRundPipetteRezept).
+bauRezept(motivFaltungDuennDickRezept).
+bauRezept(motivZiegelSteineRezept).
+bauRezept(motivRadioAktivGrauRezept).
+bauRezept(motivGrabSteinRezept).
+bauRezept(motivHelloGamesRezept).
+bauRezept(motivBuegelRezept).
+bauRezept(motivNo1Rezept).
+bauRezept(motivNo2Rezept).
+bauRezept(motivNo3Rezept).
+bauRezept(motivNo4Rezept).
+bauRezept(motivNo5Rezept).
+bauRezept(motivNo6Rezept).
+bauRezept(motivNo7Rezept).
+bauRezept(motivNo8Rezept).
+bauRezept(motivNo9Rezept).
+bauRezept(motivSchildErstochenerVogelRezept).
+bauRezept(motivSchildGrünerMannRezept).
+bauRezept(motivSchildKorvaxRezept).
+bauRezept(motivFroschSackRezept).
+bauRezept(motivLaemmchenRezept).
+bauRezept(wandBildSchirmRezept).
+bauRezept(wandVentilatorRezept).
+bauRezept(gruenerWandBildSchirmRezept).
+bauRezept(schubLadenSchrankRezept).
+bauRezept(wandEinheitRezept).
+bauRezept(lagerModulDekoRezept).
+bauRezept(deckenPaneelRezept).
+bauRezept(techBedienFeldRezept).
+bauRezept(serverRezept).
+bauRezept(kanisterRegalRezept).
+bauRezept(kleineKisteRezept).
+bauRezept(schliessFachRezept).
+bauRezept(flachesModulRezept).
+bauRezept(seitenModulRezept).
+bauRezept(regalModulRezept).
+bauRezept(roboterArmRezept).
+bauRezept(waffenRegalRezept).
+bauRezept(oszilloskopRezept).
+bauRezept(achtEckSchrankRezept).
+bauRezept(fassFoermigerFabrikatorRezept).
+bauRezept(hoherSchrankRezept).
+bauRezept(kistenFoermigerFabrikatorRezept).
+bauRezept(stuhlRezept).
+bauRezept(flagge1Rezept).
+bauRezept(tischRezept).
+bauRezept(bettRezept).
+bauRezept(sofaRezept).
+bauRezept(flagge2Rezept).
+bauRezept(wandFlagge1Rezept).
+bauRezept(einfacherSchreibTischRezept).
+bauRezept(ergonomischesSofaRezept).
+bauRezept(eckSofaRezept).
+bauRezept(flagge3Rezept).
+bauRezept(flagge4Rezept).
+bauRezept(wandFlagge3Rezept).
+bauRezept(wandFlagge2Rezept).
+bauRezept(bodenMatteRezept).
+bauRezept(grosseMonitorStationRezept).
+bauRezept(gewoelbterTischRezept).
+bauRezept(monitorStationRezept).
+bauRezept(arbeitsPlatteRezept).
+bauRezept(leichterTischRezept).
+bauRezept(lichtHandLampeRezept).
+bauRezept(farbigeLeuchteRezept).
+bauRezept(lichtStehLampeEckigRezept).
+bauRezept(laborLampeRezept).
+bauRezept(farbigeLeuchteBlauRezept).
+bauRezept(farbigeLeuchteOrangeRezept).
+bauRezept(lichtStehLampeRundRezept).
+bauRezept(lichtStehLampeSchirmRezept).
+bauRezept(deckenLeuchteRezept).
+bauRezept(farbigeLeuchteGelbRezept).
+bauRezept(farbigeLeuchteGruenRezept).
+bauRezept(farbigeLeuchteRotRezept).
+bauRezept(elektrischeVerkabelungRezept).
+bauRezept(treibStoffReaktorRezept).
+bauRezept(mineralienExtraktorRezept).
+bauRezept(wandSchalterRezept).
+bauRezept(solarModulRezept).
+bauRezept(batterieRezept).
+bauRezept(gasExtraktorRezept).
+bauRezept(versorgungsDepotRezept).
+bauRezept(versorgungsRohrRezept).
+bauRezept(bodenSchalterRezept).
+bauRezept(annaeherungsSchalterRezept).
+bauRezept(schalterRezept).
+bauRezept(energieUmkehrerRezept).
+bauRezept(elektroMagnetischerGeneratorRezept).
+bauRezept(hydroKulturTrogRezept).
+bauRezept(topfPflanzeRezept).
+bauRezept(grosserHydroKulturTrogRezept).
+bauRezept(pilzGeflechtRezept).
+bauRezept(frostWurzRezept).
+bauRezept(gammaGrasRezept).
+bauRezept(echinoKaktusRezept).
+bauRezept(sternenDornRezept).
+bauRezept(sonnenRebeRezept).
+bauRezept(floraBehaelterHochBeetRezept).
+bauRezept(floraBehaelterKastenRezept).
+bauRezept(floraBehaelterTubusRezept).
+bauRezept(giftIgelRezept).
+bauRezept(gravitinoWirtRezept).
+bauRezept(magenKrampfBlumeRezept).
+bauRezept(morditWurzelRezept).
+bauRezept(eiweissPerlenKugelRezept).
+bauRezept(nipNipRezept).
+bauRezept(holzWandRezept).
+bauRezept(holzBodenPlatteRezept).
+bauRezept(duenneHolzWandRezept).
+bauRezept(holzTuerRahmenRezept).
+bauRezept(holzDachRezept).
+bauRezept(glasPlatteMitHolzRahmenRezept).
+bauRezept(holzRampeRezept).
+bauRezept(kleineHolzPlatteRezept).
+bauRezept(schraegeHolzPlatteRezept).
+bauRezept(kleineHolzWandRezept).
+bauRezept(holzFensterRezept).
+bauRezept(holzTuerRezept).
+bauRezept(elektrischeHolzTuerRezept).
+bauRezept(holzDachPlatteRezept).
+bauRezept(holzDachEckStueckRezept).
+bauRezept(holzBogenRezept).
+bauRezept(halbeHolzRampeRezept).
+bauRezept(kurzeHolzWandRezept).
+bauRezept(holzFassadeRezept).
+bauRezept(kleineHolzTuerRezept).
+bauRezept(grosseElektrischeHolzTuerRezept).
+bauRezept(dachInnenEckteilAusHolzRezept).
+bauRezept(halberHolzBogenRezept).
+bauRezept(metallWandRezept).
+bauRezept(metallBodenPlatteRezept).
+bauRezept(duenneMetallWandRezept).
+bauRezept(metallTuerRahmenRezept).
+bauRezept(metallDachRezept).
+bauRezept(glasPlatteMitMetallRahmenRezept).
+bauRezept(metallRampeRezept).
+bauRezept(kleineMetallPlatteRezept).
+bauRezept(schraegeMetallPlatteRezept).
+bauRezept(kleineMetallWandRezept).
+bauRezept(metallFensterRezept).
+bauRezept(metallTuerRezept).
+bauRezept(elektrischeMetallTuerRezept).
+bauRezept(metallDachPlatteRezept).
+bauRezept(metallDachEckStueckRezept).
+bauRezept(metallBogenRezept).
+bauRezept(halbeMetallRampeRezept).
+bauRezept(kurzeMetallWandRezept).
+bauRezept(metallFassadeRezept).
+bauRezept(kleineMetallTuerRezept).
+bauRezept(grosseElektrischeMetallTuerRezept).
+bauRezept(dachInnenEckteilAusMetallRezept).
+bauRezept(halberMetallBogenRezept).
+bauRezept(betonWandRezept).
+bauRezept(betonBodenPlatteRezept).
+bauRezept(duenneBetonWandRezept).
+bauRezept(betonTuerRahmenRezept).
+bauRezept(betonDachRezept).
+bauRezept(glasPlatteMitBetonRahmenRezept).
+bauRezept(betonRampeRezept).
+bauRezept(kleineBetonBodenPlatteRezept).
+bauRezept(schraegeBetonPlatteRezept).
+bauRezept(kleineBetonWandRezept).
+bauRezept(betonFensterRezept).
+bauRezept(betonTuerRezept).
+bauRezept(elektrischeBetonTuerRezept).
+bauRezept(betonDachPlatteRezept).
+bauRezept(betonDachEckStueckRezept).
+bauRezept(betonBogenRezept).
+bauRezept(halbeBetonRampeRezept).
+bauRezept(kurzeBetonWandRezept).
+bauRezept(betonFassadeRezept).
+bauRezept(kleineBetonTuerRezept).
+bauRezept(grosseElektrischeBetonTuerRezept).
+bauRezept(dachInnenEckteilAusBetonRezept).
+bauRezept(halberBetonBogenRezept).
+bauRezept(grosserKeilRezept).
+bauRezept(kleinerKeilRezept).
+bauRezept(rohrRezept).
+bauRezept(pyramideRezept).
+bauRezept(gebogenesRohrRezept).
+bauRezept(stabilerWuerfelRezept).
+bauRezept(zylinderRezept).
+bauRezept(wuerfelRezept).
+bauRezept(kugelRezept).
 
 /* ------------------------------- Kochzutat ---------------------------- */
 kochStoff(Stoff) :-
@@ -989,7 +1441,8 @@ stoffInFunktionEingangsStoff(Stoff) :-
 	rezept:rezept(_, [[_, _], [_, Stoff]], _, _);
 	rezept:rezept(_, [[_, Stoff], [_, _], [_, _]], _, _);
 	rezept:rezept(_, [[_, _], [_, Stoff], [_, _]], _, _);
-	rezept:rezept(_, [[_, _], [_, _], [_, Stoff]], _, _).
+	rezept:rezept(_, [[_, _], [_, _], [_, Stoff]], _, _);
+	rezept:rezept(_, [[_, _], [_, _], [_, _], [_, Stoff]], _, _).
 
 stoffInFunktionErgebnisStoff(Stoff) :-
 	rezept:rezept(_, _,[_,Stoff], _).
