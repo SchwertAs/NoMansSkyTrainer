@@ -7,8 +7,7 @@ baue(Anzahl, Stoff) :-
 	abolish(loesung/8),
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
-	beschaffen(Anzahl, Stoff, [], [], VorgaengeMitVorfertigung),
-	expandiereVorgaenge(VorgaengeMitVorfertigung, [], Vorgaenge),
+	beschaffen(Anzahl, Stoff, [], [], Vorgaenge),
 	dict_create(SammelSet1, 'SammelStueckliste', []),
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
@@ -61,18 +60,29 @@ keinZirkel(Komponenten, StoffPfad, Stoff) :-
 	\+Stoff = Stoff2,
 	\+Stoff = Stoff3.
 
+keinZirkel(Komponenten, StoffPfad, Stoff) :-
+	Komponenten = [[_, Stoff1], [_, Stoff2], [_, Stoff3], [_, Stoff4]],
+	\+memberchk(Stoff1, StoffPfad),
+	\+memberchk(Stoff2, StoffPfad),
+	\+memberchk(Stoff3, StoffPfad),
+	\+memberchk(Stoff4, StoffPfad),
+	\+Stoff = Stoff1,
+	\+Stoff = Stoff2,
+	\+Stoff = Stoff3,
+	\+Stoff = Stoff4.
+
 /*----------------------------------------------------------------*/
 
-beschaffen(Anzahl, Stoff, _, BisherigeVorgaenge, ListeVorgaenge) :-
+beschaffen(Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammeln:sammelbar(Stoff, Operation, HauptZeit),
 	!,
-	append([[Anzahl, [Operation, HauptZeit], [], [Anzahl, Stoff]]], BisherigeVorgaenge, ListeVorgaenge).
+	append([[Anzahl, [Operation, HauptZeit], [], [Anzahl, Stoff]]], BisherigeVorgaenge, VorgaengeMitVorfertigung),
+	expandiereVorgaenge(VorgaengeMitVorfertigung, [], Vorgaenge).
 
 beschaffen(Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-
 	length(StoffPfad, Len),
 	Len < 6,
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], RaffinierZeit),
-	wennHerstellenDannRezeptBekannt(Operation, Stoff),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
 	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
 	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),
@@ -103,10 +113,14 @@ listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaen
 	beschaffen(Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3),
 	beschaffen(Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge).
 
-wennHerstellenDannRezeptBekannt(Operation, _) :-
-	\+Operation = herstellen.
-
-wennHerstellenDannRezeptBekannt(Operation, Stoff) :-
-	Operation = herstellen,
-	spielStatus:rezeptBekannt(Stoff).
+listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+	Komponenten = [[Anz1, Komp1], [Anz2, Komp2], [Anz3, Komp3], [Anz4, Komp4]],
+	Anzahl1 is Anz1 * AnzahlRaffinaden,
+	Anzahl2 is Anz2 * AnzahlRaffinaden,
+	Anzahl3 is Anz3 * AnzahlRaffinaden,
+	Anzahl4 is Anz4 * AnzahlRaffinaden,
+	beschaffen(Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2),
+	beschaffen(Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3),
+	beschaffen(Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge4),
+	beschaffen(Anzahl4, Komp4, StoffPfad, ListeVorgaenge4, ListeVorgaenge).
 	

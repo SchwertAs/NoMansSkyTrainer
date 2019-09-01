@@ -56,7 +56,23 @@ ausgabeSammlung(SammelSet) :-
 	
 ausgabeSammlung(SammelSet) :-
 	get_dict(Stoff, SammelSet, Vorgang),
+	Vorgang = [Operation, _],
+	Operation = bekannt,
+	format('<tr>~n'),
+	format('<td>&nbsp;</td>~n', []),
+	format('<td>&nbsp;</td>~n'),
+	format('<td>~k&nbsp;</td>~n', Stoff),
+	format('<td>ist&nbsp;</td>~n', []), 
+	format('<td>~k&nbsp;</td>~n', Operation), 
+	format('</tr>~n'),
+	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
+	ausgabeSammlung(SammelSetDanach),
+	!. 
+
+ausgabeSammlung(SammelSet) :-
+	get_dict(Stoff, SammelSet, Vorgang),
 	Vorgang = [Operation, SammelAnzahl],
+	Operation \= bekannt,
 	format('<tr>~n'),
 	format('<td>Bitte sammeln Sie&nbsp;</td>~n', []),
 	format('<td>~k&nbsp;</td>~n', SammelAnzahl),

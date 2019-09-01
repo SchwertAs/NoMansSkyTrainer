@@ -3,13 +3,13 @@
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [_, _]],
-	\+sammeln:sammelAktion(Operation),
+	sammeln:wandelAktion(Operation),
 	bildeSammelSet(Rest, SammelSet, NextSammelSet).
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [Anz1, Stoff1]],
-	sammeln:sammelAktion(Operation),
+	\+sammeln:wandelAktion(Operation),
 	get_dict(Stoff1, SammelSet, Vorgang1),
 	Vorgang1 = [_, Anz0],
 	Anz2 is Anz0 + Anz1,
@@ -20,7 +20,7 @@ bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [Anz1, Stoff1]],
-	sammeln:sammelAktion(Operation),
+	\+sammeln:wandelAktion(Operation),
 	\+get_dict(Stoff1, SammelSet, _),
 	Vorgang = [Operation, Anz1],
 	put_dict([Stoff1:Vorgang], SammelSet, NextSammelSet0),
@@ -37,8 +37,17 @@ bildeGesamtZahl(SammelSet, Bisher, GesamtZahl) :-
 
 bildeGesamtZahl(SammelSet, Bisher, GesamtZahl) :-
 	get_dict(Stoff, SammelSet, Value),
+	\+ausgangsStoff:bauRezept(Stoff),
 	Value = [_, Anz],
 	BisherNeu is Bisher + Anz,
+	del_dict(Stoff, SammelSet, _, NextSammelSet),
+	bildeGesamtZahl(NextSammelSet, BisherNeu, GesamtZahl)
+	,!.
+	
+bildeGesamtZahl(SammelSet, Bisher, GesamtZahl) :-
+	get_dict(Stoff, SammelSet, _),
+	ausgangsStoff:bauRezept(Stoff),
+	BisherNeu = Bisher,
 	del_dict(Stoff, SammelSet, _, NextSammelSet),
 	bildeGesamtZahl(NextSammelSet, BisherNeu, GesamtZahl)
 	,!.
