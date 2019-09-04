@@ -13,31 +13,37 @@ baue(Anzahl, Stoff) :-
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
 	statistik:bildeGesamtHauptZeitAufwand(Vorgaenge, 0, GesamtSammelZeitAufwand),
-	reisen:bildeReiseZeiten(Vorgaenge, ReiseZeit),
-	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
-	GesamtZeitAufwand is GesamtSammelZeitAufwand + ReiseZeit,
+	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
+	reisen:bildeReiseZeiten(OptimierteVorgaenge, ReiseZeit),
+	reisen:fuegeReiseOperationenEin(OptimierteVorgaenge, ortSpieler, [], ErgaenzteVorgaenge),
+	arbeitsVorbereitung:bildeNebenZeiten(ErgaenzteVorgaenge, NebenZeit),
+	statistik:bildeGesamtAufwaende(ErgaenzteVorgaenge, 0, GesamtEinkaufsAufwand),
+	GesamtZeitAufwand is GesamtSammelZeitAufwand + NebenZeit + ReiseZeit, 
 	GesamtAufwand is GesamtEinkaufsAufwand,
 	ausgangsStoff:stoff(Stoff, Wert),
 	Erloes is Anzahl * Wert,
-	assertz(loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
+	assertz(loesung(Stoff, ErgaenzteVorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
 	fail.
 
 expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [],
-	VorgaengeExpandiert = VorgaengeExpandiertTmp.
+	VorgaengeExpandiert = VorgaengeExpandiertTmp,
+	!.
 	
 expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest], 
 	Kopf \= [_, [vorfertigen, _], _, [_, _]],
 	append(VorgaengeExpandiertTmp, [Kopf], VorgaengeExpandiertDanach),
-	expandiereVorgaenge(Rest, VorgaengeExpandiertDanach, VorgaengeExpandiert).
+	expandiereVorgaenge(Rest, VorgaengeExpandiertDanach, VorgaengeExpandiert),
+	!.
 
 expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [vorfertigen, _], _, [_, Stoff]],
 	sammeln:fertigeLoesung(Stoff, VorgaengeDanach, _, _, _, _, _, _),
 	expandiereVorgaenge(VorgaengeDanach, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
-	expandiereVorgaenge(Rest, VorgaengeExpandiert0, VorgaengeExpandiert).
+	expandiereVorgaenge(Rest, VorgaengeExpandiert0, VorgaengeExpandiert),
+	!.
 
 keinZirkel(Komponenten, StoffPfad, Stoff) :-
 	Komponenten = [[_, Stoff1]],
@@ -71,7 +77,34 @@ keinZirkel(Komponenten, StoffPfad, Stoff) :-
 	\+Stoff = Stoff3,
 	\+Stoff = Stoff4.
 
-/*----------------------------------------------------------------*/
+rezeptZulaessig(Operation, _) :-
+	Operation \= raffinieren,
+	!.
+	
+rezeptZulaessig(_, Komponenten) :-
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	(spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], _); 
+	 spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
+	 spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _)
+	),
+	Komponenten = [[_, _]],
+	!.
+	
+rezeptZulaessig(_, Komponenten) :-
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
+	 spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _)
+	),
+	Komponenten = [[_, _], [_, _]],
+	!.
+
+rezeptZulaessig(_, Komponenten) :-
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
+	Komponenten = [[_, _], [_, _], [_, _]],
+	!.
+
+/*---------------------------------------------------------------*/
 
 beschaffen(Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammeln:sammelbar(Stoff, Operation, HauptZeit),
@@ -83,6 +116,7 @@ beschaffen(Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-
 	length(StoffPfad, Len),
 	Len < 6,
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], RaffinierZeit),
+	rezeptZulaessig(Operation, Komponenten),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
 	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
 	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),

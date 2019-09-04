@@ -3,28 +3,31 @@
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [_, _]],
-	sammeln:wandelAktion(Operation),
-	bildeSammelSet(Rest, SammelSet, NextSammelSet).
+	rezept:wandelAktion(Operation, _),
+	bildeSammelSet(Rest, SammelSet, NextSammelSet),
+	!.
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [Anz1, Stoff1]],
-	\+sammeln:wandelAktion(Operation),
+	\+rezept:wandelAktion(Operation, _),
 	get_dict(Stoff1, SammelSet, Vorgang1),
 	Vorgang1 = [_, Anz0],
 	Anz2 is Anz0 + Anz1,
 	Vorgang = [Operation, Anz2],
 	put_dict(Stoff1, SammelSet, Vorgang, NextSammelSet0),
-	bildeSammelSet(Rest, NextSammelSet0, NextSammelSet).
+	bildeSammelSet(Rest, NextSammelSet0, NextSammelSet),
+	!.
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [Anz1, Stoff1]],
-	\+sammeln:wandelAktion(Operation),
+	\+rezept:wandelAktion(Operation, _),
 	\+get_dict(Stoff1, SammelSet, _),
 	Vorgang = [Operation, Anz1],
 	put_dict([Stoff1:Vorgang], SammelSet, NextSammelSet0),
-	bildeSammelSet(Rest, NextSammelSet0, NextSammelSet).
+	bildeSammelSet(Rest, NextSammelSet0, NextSammelSet),
+	!.
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [],
@@ -72,9 +75,10 @@ bildeGesamtHauptZeitAufwand(Vorgaenge, Aufwand, AufwandDanach) :-
 
 bildeGesamtHauptZeitAufwand(Vorgaenge, Aufwand, AufwandDanach) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [Anzahl, [_, SammelZeit], _, [_, _]],
+	Kopf = [Anzahl, [_, SammelZeit], _, _],
 	Aufwand0 is Aufwand + (Anzahl * SammelZeit),
-	bildeGesamtHauptZeitAufwand(Rest, Aufwand0, AufwandDanach).
+	bildeGesamtHauptZeitAufwand(Rest, Aufwand0, AufwandDanach),
+	!.
 
 bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 	Vorgaenge = [],
@@ -82,9 +86,10 @@ bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 
 bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [_, [Terminal, _], _, [_, _]],
+	Kopf = [_, [Terminal, _], _, _],
 	\+kaufen:terminal(_, _, Terminal),
-	bildeGesamtAufwaende(Rest, Aufwand, AufwandDanach).
+	bildeGesamtAufwaende(Rest, Aufwand, AufwandDanach),
+	!.
 
 bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 	Vorgaenge = [Kopf|Rest],
@@ -92,5 +97,6 @@ bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 	kaufen:terminal(_, _, Terminal),
 	kaufen:kaufbar(Terminal, Stoff, Preis),
 	Aufwand0 is Aufwand + (Anzahl * Preis),
-	bildeGesamtAufwaende(Rest, Aufwand0, AufwandDanach).
+	bildeGesamtAufwaende(Rest, Aufwand0, AufwandDanach),
+	!.
 

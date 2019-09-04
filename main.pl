@@ -1,18 +1,31 @@
 :- module(main, [minimaleSammlungLoesung/2]).
 
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgangsStoff').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/spielStatus').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/sammeln').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/rezept').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/kaufen').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/reisen').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/logistik').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/arbeitsVorbereitung').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/statistik').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe').
+:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/server').
+:-	sammeln:sammelbarInit.
 
-
-/* Declarationen */
-/* :- dynamic stoffBestLoesung/2.
-
- Benutzerprädikate  
- 
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
 	ausgangsStoff:stoff(Produkt, EinzelWert), 
 	Wert is EinzelWert * Anzahl,
 	memberchk([_, Stoff], Komponenten).
 
+
+
+/* Declarationen */
+/* :- dynamic stoffBestLoesung/2.
+ 
+ Benutzerprädikate   
 
 
 
@@ -48,18 +61,7 @@ minimaleSammlungLoesung(Anzahl, Stoff) :-
 	!,
 	ausgabe:printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
-load :-
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgangsStoff'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/rezept'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/spielStatus'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/sammeln'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/kaufen'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/reisen'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/statistik'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus'),
-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/server'),
-	sammeln:sammelbarInit,
+startServer :-
 	server:server(8000).
 
 testMinimaleSammlung :-

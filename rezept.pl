@@ -1,6 +1,16 @@
 :- module(rezept, [rezept/4]).
-/* TODO: Zeiten aufnehmen
-   Kostenfunktion mit Anreise, Abreise */
+   
+/* mögliche Stoffwandelaktionen */
+wandelAktion(bauen, nil).
+wandelAktion(herstellen, ortSpieler).
+wandelAktion(installieren, ortSpieler).
+wandelAktion(kochen, ortNahrungsProzessor).
+wandelAktion(raffinieren, nil).  /* sonderlocke mit Ortsauswahl */
+wandelAktion(rezeptInAussenPostenErwerben, ortAussenPosten).
+wandelAktion(rezeptAmForschungsComputerErwerben, ortForschungsTerminal).
+wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).
+wandelAktion(modulInRaumstationErwerben, ortRaumStation).
+
 
 /* Komponenten, AusgabeBestand, Dauer
 [[Anzahl, Stoff]], [Anzahl, Produkt], Dauer in 1/100 sec pro Ergebnis-Stück */
@@ -1621,7 +1631,7 @@ rezept(modulInRaumstationErwerben, [[140, nanitHaufen]], [1, unterWasserSchutzMo
 /* ---------------------  Test Prädikate --------------------------------------------- */
 fehlerOperation(Op, Produkt) :-
 	rezept(Op, _, [_, Produkt], _),
-	\+sammeln:wandelAktion(Op).
+	\+wandelAktion(Op).
 
 komponenteIstKeinStoff(FehlStoff) :-
 	ausgangsStoff:stoffInFunktionEingangsStoff(FehlStoff),
