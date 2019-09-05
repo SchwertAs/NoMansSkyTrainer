@@ -12,11 +12,15 @@ baueFuerVorfertigung(Anzahl, Stoff) :-
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
 	statistik:bildeGesamtHauptZeitAufwand(Vorgaenge, 0, GesamtSammelZeitAufwand),
+	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
+	reisen:bildeReiseZeiten(OptimierteVorgaenge, ReiseZeit),
+	arbeitsVorbereitung:bildeNebenZeiten(OptimierteVorgaenge, NebenZeit),
 	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
+	GesamtZeitAufwand is GesamtSammelZeitAufwand + NebenZeit + ReiseZeit, 
 	GesamtAufwand is GesamtEinkaufsAufwand,
 	ausgangsStoff:stoff(Stoff, Wert),
 	Erloes is Anzahl * Wert,
-	assertz(loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtSammelZeitAufwand, GesamtAufwand, Erloes)),
+	assertz(loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
 	fail.
 
 /* Subprädikate */
@@ -32,13 +36,13 @@ baue(Anzahl, Stoff) :-
 	statistik:bildeGesamtHauptZeitAufwand(Vorgaenge, 0, GesamtSammelZeitAufwand),
 	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
 	reisen:bildeReiseZeiten(OptimierteVorgaenge, ReiseZeit),
-	reisen:fuegeReiseOperationenEin(OptimierteVorgaenge, ortSpieler, [], ErgaenzteVorgaenge),
-	arbeitsVorbereitung:bildeNebenZeiten(ErgaenzteVorgaenge, NebenZeit),
-	statistik:bildeGesamtAufwaende(ErgaenzteVorgaenge, 0, GesamtEinkaufsAufwand),
+	arbeitsVorbereitung:bildeNebenZeiten(OptimierteVorgaenge, NebenZeit),
+	statistik:bildeGesamtAufwaende(OptimierteVorgaenge, 0, GesamtEinkaufsAufwand),
 	GesamtZeitAufwand is GesamtSammelZeitAufwand + NebenZeit + ReiseZeit, 
 	GesamtAufwand is GesamtEinkaufsAufwand,
 	ausgangsStoff:stoff(Stoff, Wert),
 	Erloes is Anzahl * Wert,
+	reisen:fuegeReiseOperationenEin(OptimierteVorgaenge, ortSpieler, [], ErgaenzteVorgaenge),
 	assertz(loesung(Stoff, ErgaenzteVorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
 	fail.
 
