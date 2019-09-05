@@ -1,16 +1,13 @@
 :- module(ausgabe, [printMinSammlungForm/7]).
 
 printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
-	format('<table width="55%" border="1">
+	format('<table width="25%" border="1">
 			  <caption>
-			    <h2>Sammelaktionen</h2>
+			    <h2>Stückliste</h2>
 			  </caption>
 			  <tr>
-			    <th scope="col">&nbsp;</th>
 			    <th scope="col">Anzahl&nbsp;</th>
 			    <th scope="col">Stoff&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Aktion&nbsp;</th>
 			  </tr>~n'
 			),
 	ausgabeSammlung(SammelSet),
@@ -18,18 +15,11 @@ printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung
 	format('<hr>~n', []),
 	format('<table width="100%" border="1">
 			  <caption>
-			    <h2>Herstellungsaktionen</h2>
+			    <h2>Aktionsreihenfolge</h2>
 			  </caption>
 			  <tr>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Anzahl&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Operation&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Stoff&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
-			    <th scope="col">Komponenten&nbsp;</th>
-			    <th scope="col">&nbsp;</th>
+			    <th scope="col">Anweisung&nbsp;</th>
+			    <th scope="col">Ergebnis&nbsp;</th>
 			  </tr>~n'),
 	ausgabeVorgaenge(Vorgaenge),
 	format('</table>~n'),
@@ -56,14 +46,11 @@ ausgabeSammlung(SammelSet) :-
 	
 ausgabeSammlung(SammelSet) :-
 	get_dict(Stoff, SammelSet, Vorgang),
-	Vorgang = [Operation, _],
+	Vorgang = [Operation, SammelAnzahl],
 	Operation = bekannt,
 	format('<tr>~n'),
-	format('<td>&nbsp;</td>~n', []),
-	format('<td>&nbsp;</td>~n'),
+	format('<td>~k&nbsp;</td>~n', SammelAnzahl),
 	format('<td>~k&nbsp;</td>~n', Stoff),
-	format('<td>ist&nbsp;</td>~n', []), 
-	format('<td>~k&nbsp;</td>~n', Operation), 
 	format('</tr>~n'),
 	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
 	ausgabeSammlung(SammelSetDanach),
@@ -74,98 +61,102 @@ ausgabeSammlung(SammelSet) :-
 	Vorgang = [Operation, SammelAnzahl],
 	Operation \= bekannt,
 	format('<tr>~n'),
-	format('<td>Bitte sammeln Sie&nbsp;</td>~n', []),
 	format('<td>~k&nbsp;</td>~n', SammelAnzahl),
 	format('<td>~k&nbsp;</td>~n', Stoff),
-	format('<td>durch&nbsp;</td>~n', []), 
-	format('<td>~k&nbsp;</td>~n', Operation), 
 	format('</tr>~n'),
 	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
 	ausgabeSammlung(SammelSetDanach),
 	!. 
     
 ausgabeVorgaenge(Vorgaenge) :-
-	include(isRaffinieren, Vorgaenge, Raffinaden),
-	group(Raffinaden, [], Gruppiert),
-	!,
-	exclude(isRaffinieren, Vorgaenge, NichtRaffinaden),
-	append(Gruppiert, NichtRaffinaden, VorgaengeDanach),
-	gebeAus(VorgaengeDanach).
+	gebeAus(Vorgaenge).
 
-isRaffinieren(Vorgang) :-
-	Vorgang = [_, [raffinieren, _], _, [_, _]].
-
-group(Vorgaenge, BisherGruppiert, Gruppiert) :-
-	Vorgaenge = [],
-	BisherGruppiert = Gruppiert.
-	
-group(Vorgaenge, BisherGruppiert, Gruppiert) :-
-	/* Listen aufspalten in AnzahlenListe und StoffListe */
-	length(Vorgaenge, Len),
-	Len > 1,
-	Vorgaenge = [SuchVorgang | _],
-	between(2, Len, VergleichsVorgangNo),
-	nth1(VergleichsVorgangNo, Vorgaenge, VergleichsVorgang),
-	extrahiereKomponenten(SuchVorgang, SuchStoffListe),
-	extrahiereKomponenten(VergleichsVorgang, VergleichsStoffListe),
-	SuchStoffListe = VergleichsStoffListe,
-	addiereVorgangsWerte(SuchVorgang, VergleichsVorgang, SummenVorgang),
-	selectchk(SuchVorgang, Vorgaenge, VorgaengeDanach0),
-	selectchk(VergleichsVorgang, VorgaengeDanach0, VorgaengeDanach1),
-	append([SummenVorgang], VorgaengeDanach1, VorgaengeDanach),
-	group(VorgaengeDanach, BisherGruppiert, Gruppiert).
-
-group(Vorgaenge, BisherGruppiert, Gruppiert) :-
-	Vorgaenge = [SuchVorgang | _],
-	selectchk(SuchVorgang, Vorgaenge, VorgaengeDanach),
-	append(BisherGruppiert, [SuchVorgang], BisherGruppiertDanach),
-	group(VorgaengeDanach, BisherGruppiertDanach, Gruppiert).
-	
-extrahiereKomponenten(EinVorgang, KomponentenStoffListe) :-
-	EinVorgang = [_, [raffinieren, _], Komponenten, [_, _]],
-	maplist(nth1(2), Komponenten, KomponentenStoffListe).
-
-addiereVorgangsWerte(SuchVorgang, VergleichsVorgang, SummenVorgang) :-
-	SuchVorgang = [Anzahl1,[raffinieren, RaffinierZeit1], Komponenten, [ProduktZahl1, Produkt]],
-	VergleichsVorgang = [Anzahl2,[raffinieren, RaffinierZeit2], Komponenten, [ProduktZahl2,_]],
-	SummenAnzahl is Anzahl1 + Anzahl2,
-	SummenRaffinierZeit is RaffinierZeit1 + RaffinierZeit2,
-	SummenProduktZahl is ProduktZahl1 + ProduktZahl2,
-	SummenVorgang = [SummenAnzahl,[raffinieren, SummenRaffinierZeit], Komponenten, [SummenProduktZahl, Produkt]].
-	
 gebeAus(Vorgaenge) :-
-	Vorgaenge = [].
+	Vorgaenge = [],
+	!.
 	
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [WandelAnz, [Operation, _], Komponenten, [_, Produkt]],
-	sammeln:wandelAktion(Operation),
+	Kopf = [WandelAnz, [Operation, _], Komponenten, [ProduktAnzahl, Produkt]],
+	rezept:wandelAktion(Operation, _),
 	format('<tr>~n'),
-	format('<td>Führe~n&nbsp;</td>', []),
-	format('<td>~k~n&nbsp;</td>', WandelAnz),
-	format('<td>mal~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', Operation),
-	format('<td>von~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', Produkt),
-	format('<td>mit den Komponenten~n&nbsp;</td>'),
-	format('<td>',[]),
+	format('<td>Führen Sie ', []),
+	format('~k', WandelAnz),
+	format(' mal '),
+	format('~k', Operation),
+	format(' von '),
+	format('~k', Produkt),
+	format(' unter Verwendung von '),
 	gebeKomponenteAus(Komponenten),
-	format('~n&nbsp;</td>',[]),
-	format('<td>aus.~n&nbsp;</td>', [Komponenten]),
+	format(' aus'),
+	format('.~n&nbsp;</td>'),
+	format('<td>'),
+	format('~k ', ProduktAnzahl),
+	format('Einheiten ~k', Produkt),
+	format('~n&nbsp;</td>'),
+	format('</tr>~n'),
+	gebeAus(Rest),
+	!.		
+
+gebeAus(Vorgaenge) :-
+	Vorgaenge = [ Kopf | Rest], 
+	Kopf = [_, [Operation, _], _, [_, Produkt]],
+	Operation = bekannt,
+	format('<tr>~n'),
+	format('<td>'),
+	format('Das ~k ist bekannt.', Produkt),
+	format('~n&nbsp;</td>'),
+	format('<td>'),
+	format('~n&nbsp;</td>'),
+	format('</tr>~n'),
+	gebeAus(Rest),
+	!.		
+
+gebeAus(Vorgaenge) :-
+	Vorgaenge = [ Kopf | Rest], 
+	Kopf = [WandelAnz, [Operation, _], _, [_, Produkt]],
+	sammeln:sammelAktion(Operation, _),
+	format('<tr>~n'),
+	format('<td>'),
+	format('Sammeln Sie ~k ', WandelAnz),
+	format('Einheiten ~k mit ', Produkt),
+	format('~k', Operation),
+	format('.~n&nbsp;</td>'),
+	format('<td>'),
+	format('~k ', WandelAnz),
+	format('Einheiten ~k', Produkt),
+	format('~n&nbsp;</td>'),
+	format('</tr>~n'),
+	gebeAus(Rest),
+	!.		
+
+gebeAus(Vorgaenge) :-
+	Vorgaenge = [ Kopf | Rest], 
+	Kopf = [_, [Operation, _], [[_, _], [_, Nach]], [_, Produkt]],
+	Operation = reisen,
+	format('<tr>~n'),
+	format('<td>'),
+	format('Bitte ~k Sie nach ', Operation),
+	format('~k.', Nach),
+	format('~n&nbsp;</td>'),
+	format('<td>'),
+	format('~k', Produkt),
 	format('</tr>~n'),
 	gebeAus(Rest),
 	!.		
 
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ _ | Rest], 
-	gebeAus(Rest).		 
+	gebeAus(Rest),
+	!.		 
 
 gebeKomponenteAus(Komponenten) :-
 	Komponenten = [].
 	
 gebeKomponenteAus(Komponenten) :-
 	Komponenten = [ Kopf | Rest ],
-	Kopf = [_, Stoff],
+	Kopf = [Anzahl, Stoff],
+	format('~k x ', Anzahl),
 	format('~k', Stoff),
 	(Rest \= [], format(', '); format(' ')),
 	gebeKomponenteAus(Rest),

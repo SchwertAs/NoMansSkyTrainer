@@ -1,6 +1,16 @@
 :- module(rezept, [rezept/4]).
-/* TODO: Zeiten aufnehmen
-   Kostenfunktion mit Anreise, Abreise */
+   
+/* mögliche Stoffwandelaktionen */
+wandelAktion(bauen, nil).
+wandelAktion(herstellen, ortSpieler).
+wandelAktion(installieren, ortSpieler).
+wandelAktion(kochen, ortNahrungsProzessor).
+wandelAktion(raffinieren, nil).  /* sonderlocke mit Ortsauswahl */
+wandelAktion(rezeptInAussenPostenErwerben, ortAussenPosten).
+wandelAktion(rezeptAmForschungsComputerErwerben, ortForschungsTerminal).
+wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).
+wandelAktion(modulInRaumstationErwerben, ortRaumStation).
+
 
 /* Komponenten, AusgabeBestand, Dauer
 [[Anzahl, Stoff]], [Anzahl, Produkt], Dauer in 1/100 sec pro Ergebnis-Stück */
@@ -9,7 +19,7 @@
 /* Eine Komponente */
 rezept(raffinieren, [[1, diWasserStoffGelee]], [50, diWasserStoff], 3 ).
 rezept(raffinieren, [[5, tritium]], [1, diWasserStoff], 90 ).
-rezept(raffinieren, [[30, diWasserStoff]], [2, diWasserStoffGelee], 12000 ).
+rezept(raffinieren, [[30, diWasserStoff]], [1, diWasserStoffGelee], 12000 ).
 rezept(raffinieren, [[1, chlorGitter]], [150, chlor], 2 ).
 rezept(raffinieren, [[2, salz]], [1, chlor], 90 ).
 rezept(raffinieren, [[1, aktiviertesCadmium]], [2, chromatischesMetall], 28 ).
@@ -1621,7 +1631,7 @@ rezept(modulInRaumstationErwerben, [[140, nanitHaufen]], [1, unterWasserSchutzMo
 /* ---------------------  Test Prädikate --------------------------------------------- */
 fehlerOperation(Op, Produkt) :-
 	rezept(Op, _, [_, Produkt], _),
-	\+sammeln:wandelAktion(Op).
+	\+wandelAktion(Op).
 
 komponenteIstKeinStoff(FehlStoff) :-
 	ausgangsStoff:stoffInFunktionEingangsStoff(FehlStoff),

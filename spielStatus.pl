@@ -1,35 +1,53 @@
-:- module(spielStatus, [spielStatus/2]).
+:- module(spielStatus, [spielStatus/1, spielStatus:systemAusstattung/2, vorhaben/4]).
+
+:- dynamic(spielStatus/1).
+:- dynamic(spielStatus:systemAusstattung/2).
+:- dynamic(vorhaben/4).
 
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
-spielStatus(minenLaser, true).
-spielStatus(verbesserterMinenLaser, true).
-spielStatus(terrainFormer, true).
-spielStatus(waffeVorhanden, true).
+spielStatusInit :- 
+	abolish(spielerStatus/1)
+	,assertz(spielStatus(minenLaser))
+	,assertz(spielStatus(verbesserterMinenLaser))
+	,assertz(spielStatus(terrainFormer))
+	,assertz(spielStatus(waffeVorhanden))
+	
+	/* Basisausbau */
+	,assertz(spielStatus(torWarpVerfügbar))
+	
+	/* Bewegungsmöglichkeiten, Umgebung */ 
+	,assertz(spielStatus(raumSchiffIstFlott))
+	,assertz(spielStatus(exoFahrzeugIstFlott))
+	,assertz(spielStatus(aussenPostenVerfügbar))
+	,assertz(spielStatus(frachterVorhanden))
+	,assertz(spielStatus(sphaereRufbar)) 
+	,assertz(spielStatus(kampfWille))
 
-/* Basisausbau */
-spielStatus(torWarpVerfügbar, true).
-spielStatus(tragbareRaffinerie, false).
-spielStatus(mittlereRaffinerie, false).
-spielStatus(grosseRaffinerie, true).
+	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
+	,abolish(systemAusstattung/2)
+	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWald], 1500)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWeltRaum], 1431)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortRaumStation], 2914)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWasser], 10660)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAussenPosten], 11336)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortNahrungsProzessor], 1100)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortKleineRaffinerie], 1171))
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortMittlereRaffinerie], 1135)) 
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortGrosseRaffinerie], 2400))
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107))
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortForschungsTerminal], 470))
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 2400)) 
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasis], 2400))
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0))
+	,abolish(vorhaben/4)
+	,assertz(vorhaben('System', 'MeinPlanet', bauen, ortHauptBasis))
+	.
 
-/* Bewegungsmöglichkeiten, Umgebung */
-spielStatus(raumSchiffIstFlott, true).
-spielStatus(exoFahrzeugIstFlott, true).
-spielStatus(aussenPostenVerfügbar, true).
-spielStatus(frachterVorhanden, true).
-spielStatus(sphaereRufbar, true).
-
-/* Spieler Präferenzen */
-spielStatus(kampfWille, true).
-
-/* Spieler Standort */
-spielStatus(spielerInBasis, true).
-spielStatus(spielerAufFrachter, false).
-spielStatus(spielerAufPlanet, true).
-spielStatus(spielerImWeltRaum, false).
-spielStatus(spielerInAnomalie, false).
-spielStatus(spielerImWasser, false).
 
 /* ------------------------- Rezepte für Wertvolle Dinge ----------------------------- */
 /* Rezeptstoff, Event, Questname */

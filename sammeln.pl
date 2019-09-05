@@ -1,35 +1,25 @@
-:- module(sammeln, [sammelbar/3, sammelAktion/1, wandelAktion/1, fertigeLoesung/8]).
+:- module(sammeln, [sammelbar/3, sammelAktion/2, fertigeLoesung/2]).
 
 :- dynamic(sammelbar/3).
-:- dynamic(fertigeLoesung/8).
+:- dynamic(fertigeLoesung/2).
 
 /* mögliche Sammleaktionen */
-sammelAktion(bekannt).
-sammelAktion(pfluecken).
-sammelAktion(minenLaserNutzen).
-sammelAktion(verbessertenMinenLaserNutzen).
-sammelAktion(terrainFormerNutzen).
-sammelAktion(jagen).
-sammelAktion(erkaempfen).
-sammelAktion(raumSchuerfen).
-sammelAktion(kaufen).
-sammelAktion(rezeptInAussenPostenErwerben).
-sammelAktion(rezeptAmForschungsComputerErwerben).
-sammelAktion(rezeptInAnomalieErwerben).
-sammelAktion(vonTierenErhalten).
-sammelAktion(ernten).
-sammelAktion(vorfertigen).
+sammelErsatzAktion(vorfertigen, nil).
 
-/* mögliche Stoffwandelaktionen */
-wandelAktion(bauen).
-wandelAktion(herstellen).
-wandelAktion(installieren).
-wandelAktion(kochen).
-wandelAktion(raffinieren).
-wandelAktion(rezeptInAussenPostenErwerben).
-wandelAktion(rezeptAmForschungsComputerErwerben).
-wandelAktion(rezeptInAnomalieErwerben).
-wandelAktion(modulInRaumstationErwerben).
+sammelAktion(bekannt, ortSpieler).
+sammelAktion(pfluecken, ortWald).
+sammelAktion(minenLaserNutzen, ortWald).
+sammelAktion(verbessertenMinenLaserNutzen, ortWald).
+sammelAktion(terrainFormerNutzen, ortWald).
+sammelAktion(jagen, ortWald).
+sammelAktion(erkaempfen, ortWald).
+sammelAktion(vonTierenErhalten, ortWald).
+sammelAktion(ernten, ortWald).
+sammelAktion(raumSchuerfen, ortWeltRaum).
+sammelAktion(kaufen, ortHandelsTerminal).
+
+sammelAktion(ertauchen, ortWasser).
+sammelAktion(unterWasserErkaempfen, ortWasser).
 
 /* bekannte Rezepte TODO: Dynamisch machen, wenn Projektierungsmaske */
 rezeptBekannt(saeureRezept).
@@ -546,14 +536,11 @@ rezeptBekannt(zylinderRezept).
 rezeptBekannt(wuerfelRezept).
 rezeptBekannt(kugelRezept).
 
-/* Pflanzen ohne Gerät wild ernten */
+/* Stoffe ohne Gerät wild ernten */
 pfluecken(natrium, 20).
 pfluecken(sauerStoff, 20).
 pfluecken(pilzSchimmel, 20).
-pfluecken(kristallSulfid, 20).
-pfluecken(kelpBeutel, 20).
 pfluecken(korvaxKonvergenzWuerfel, 20).
-pfluecken(zytoPhosphat, 20).
 
 /* seit Koch Update */
 pfluecken(aloeFleisch, 20).
@@ -621,7 +608,7 @@ terrainFormerNutzen(geborgeneDaten, 300).
 
 /* verbesserter Minenlaser */
 verbessertenMinenLaserNutzen(reinesFerrit, 3).
-verbessertenMinenLaserNutzen(paraffinium, 3).
+/* verbessertenMinenLaserNutzen(paraffinium, 3). */
 verbessertenMinenLaserNutzen(mordit, 3).
 
 /* Jagd */
@@ -640,10 +627,8 @@ jagen(schuppigesFleisch, 20).
 
 /* bei Zerstörung von Wesen */
 erkaempfen(pugneum, 12000).      /* von Wächter */
-erkaempfen(hypnotischesAuge, 0). /* von abyssal horror */
-erkaempfen(larvenKern, 0).       /* von flüsterndes Ei */
-erkaempfen(lebendePerle, 0).     /* von gepanzerte Muschel */
-erkaempfen(kampfLaeuferGehirn, 0).     /* von gepanzerte Muschel */
+erkaempfen(larvenKern, 9000).       /* von flüsterndes Ei */
+erkaempfen(kampfLaeuferGehirn, 12000).     /* von gepanzerte Muschel */
 erkaempfen(unholdRogen, 0).     /* von ??? */
 
 /* Meteoritenfelder */
@@ -684,31 +669,82 @@ vonTierErhalten(riesenEi, 20).
 vonTierErhalten(warmeProtoMilch, 20).
 vonTierErhalten(wildeMilch, 20).
 
+/* Stoff ohne Gerät unter Wasser ernten */
+ertauchen(kristallSulfid, 20).
+ertauchen(kelpBeutel, 20).
+ertauchen(zytoPhosphat, 20).
+
+/* Stoff unter Wasser mit Waffe erbeuten */
+unterWasserErkaempfen(lebendePerle, 0).     /* von gepanzerte Muschel */
+unterWasserErkaempfen(hypnotischesAuge, 0). /* von abyssal horror */
+
 
 /* Vorfertigen */
+/* Basis */
+vorfertigen(paraffinium).
+vorfertigen(dioxit).
+vorfertigen(phosphor).
+vorfertigen(schwefelin).
+vorfertigen(radon).
+vorfertigen(uran).
+vorfertigen(salz).
+vorfertigen(frostKristall).
+
+/* mittlere agglomeration*/
 vorfertigen(antiMaterie).
 vorfertigen(antiMaterieGehaeuse).
-vorfertigen(aronium).
 vorfertigen(glas).
 vorfertigen(grantine).
 vorfertigen(herox).
 vorfertigen(instabilesGel).
 vorfertigen(instabilesNatrium).
 vorfertigen(kohlenStoffKristall).
-vorfertigen(lemmium).
-vorfertigen(magnoGold).
 vorfertigen(saeure).
 vorfertigen(seltenesMetallElement).
 vorfertigen(stickStoffSalz).
-vorfertigen(strassenKoeterBronze).
 vorfertigen(superOxidKristall).
 vorfertigen(tetraKobalt).
-vorfertigen(thermischesKondensat).
+vorfertigen(angereicherterKohlenStoff).
+
+vorfertigen(aronium).
+vorfertigen(lemmium).
+vorfertigen(magnoGold).
+vorfertigen(strassenKoeterBronze).
 vorfertigen(chlorGitter).
-vorfertigen(frostKristall).
-vorfertigen(gammaWurzel).
+
+vorfertigen(thermischesKondensat).
 vorfertigen(organischerKatalysator).
+
+/* kochen */
+vorfertigen(geraeuchertesFleisch).
 vorfertigen(geheimnisVollerFleischEintopf).
+
+vorfertigen(immerBrennendeMarmelade).
+vorfertigen(schlaengelndeMarmelade).
+vorfertigen(kaktusGelee).
+
+vorfertigen(geschlageneButter).
+vorfertigen(protoButter).
+vorfertigen(verfeinertesMehl).
+
+vorfertigen(klebrigerPudding).
+vorfertigen(monstroeserPudding).
+vorfertigen(salzigerPudding).
+
+vorfertigen(protoTeig).
+vorfertigen(heulenderTeig).
+vorfertigen(kuchenTeig).
+vorfertigen(dickerSuesserTeig).
+vorfertigen(extraFluffigerTeig).
+vorfertigen(windenderAufgewuehlterTeig).
+vorfertigen(tortenBoden).
+
+vorfertigen(delikatessBaiser).
+vorfertigen(klobigerDonut).
+vorfertigen(wuerzigerKaese).
+vorfertigen(synthetischerHonig).
+vorfertigen(knusperKaramell).
+
 
 sammelbarInit :-
 	\+sammelbarInitFlach,
@@ -717,25 +753,18 @@ sammelbarInit :-
 sammelbarInitFlach :-
 	abolish(sammelbar/3),
 	ausgangsStoff:stoff(Stoff, _),
-	findall(EineHauptZeit, sammelArt(Stoff, _, EineHauptZeit), HauptZeiten),
-	min_member( MinimaleHauptZeit, HauptZeiten),
-	\+HauptZeiten = [],
 	sammelArt(Stoff, Operation, MinimaleHauptZeit),
 	assertz(sammelbar(Stoff, Operation, MinimaleHauptZeit)),
 	fail.
 	
 sammelbarVorfertigen :-
-	abolish(fertigeLoesung/8),
+	abolish(fertigeLoesung/2),
 	vorfertigen(Stoff),
-	Operation = vorfertigen,
-	\+suchAlgorithmus:baue(1, Stoff),
-	findall(GesamtZahlSammlung, (suchAlgorithmus:loesung(Stoff, _, _, GesamtZahlSammlung, _, _, _, _), GesamtZahlSammlung > 0), GesamtZahlListe),
-	min_member(MinimalSammelZahl, GesamtZahlListe),
-	findall(ZeitSammlung, suchAlgorithmus:loesung(Stoff, _, _, MinimalSammelZahl, _, ZeitSammlung, _, _), ZeitSammlungListe),
-	min_member(MinimalZeit, ZeitSammlungListe),
-	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, GesamtAufwand, Erloes),
-	assertz(sammelbar(Stoff, Operation, MinimalZeit)),
-	assertz(fertigeLoesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, GesamtAufwand, Erloes)),
+	\+sammelbar(Stoff, _, _),
+	\+suchAlgorithmus:baueFuerVorfertigung(1, Stoff),
+	optimierung:optimierungsStrategie(minimaleSammlung, Stoff, _, Vorgaenge, _, _, MinimalZeit, _, _),
+	assertz(sammelbar(Stoff, vorfertigen, MinimalZeit)),
+	assertz(fertigeLoesung(Stoff, Vorgaenge)),
 	fail.
 
 sammelArt(Stoff, Operation, HauptZeit) :-
@@ -749,37 +778,37 @@ sammelArt(Stoff, Operation, HauptZeit) :-
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = minenLaserNutzen,
-	spielStatus:spielStatus(minenLaser, true),
+	spielStatus:spielStatus(minenLaser),
 	minenLaserNutzen(Stoff, HauptZeit).
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = verbessertenMinenLaserNutzen,
-	spielStatus:spielStatus(verbesserterMinenLaser, true),
+	spielStatus:spielStatus(verbesserterMinenLaser),
 	verbessertenMinenLaserNutzen(Stoff, HauptZeit).
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = terrainFormerNutzen,
-	spielStatus:spielStatus(terrainFormer, true),
+	spielStatus:spielStatus(terrainFormer),
 	terrainFormerNutzen(Stoff, HauptZeit).
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = jagen,
-	spielStatus:spielStatus(waffeVorhanden, true),
+	spielStatus:spielStatus(waffeVorhanden),
 	jagen(Stoff, HauptZeit).
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = erkaempfen,
-	spielStatus:spielStatus(kampfWille, true),
+	spielStatus:spielStatus(kampfWille),
 	erkaempfen(Stoff, HauptZeit).
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = raumSchuerfen,
-	spielStatus:spielStatus(raumSchiffIstFlott, true),
+	spielStatus:spielStatus(raumSchiffIstFlott),
 	raumSchuerfen(Stoff, HauptZeit).
 
 sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = kaufen,
-	spielStatus:spielStatus(torWarpVerfügbar, true),
+	spielStatus:spielStatus(torWarpVerfügbar),
 	kaufen(Stoff, HauptZeit).
 
 sammelArt(Stoff, Operation, HauptZeit) :-
@@ -791,5 +820,11 @@ sammelArt(Stoff, Operation, HauptZeit) :-
 	Operation = vonTierenErhalten,
 	vonTierErhalten(Stoff, HauptZeit).
 
+sammelArt(Stoff, Operation, HauptZeit) :-
+	Operation = ertauchen,
+	ertauchen(Stoff, HauptZeit).
 
-
+sammelArt(Stoff, Operation, HauptZeit) :-
+	Operation = unterWasserErkaempfen,
+	unterWasserErkaempfen(Stoff, HauptZeit).
+	

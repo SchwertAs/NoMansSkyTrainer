@@ -1,97 +1,179 @@
-:- module(reisen, [bildeReiseZeiten/2]).
+:- module(reisen, [bildeReiseZeiten/2, fuegeReiseOperationenEin/4]).
 
+/* Die Berechnung erfolgt auf Basis eines Sternverkehrs immer über die Hauptbasis */
+
+transportArt(exoFahrzeug).
+transportArt(gateWarp).
+transportArt(raumschiffBooster). 
+transportArt(raumschiffImpuls).
+transportArt(raumschiffWarp).
+transportArt(laufen).
+
+bauenNurInFrachter(flottenKommandoRaum). /* Plausicheck bei Eingabemaske Stoff <-> Spielerort */
+bauenNurInFrachter(frachterKorridor).
+bauenNurInFrachter(frachterKreuzungDreiFach).
+bauenNurInFrachter(frachterKreuzungVierFach).
+bauenNurInFrachter(frachterTreppe).
+bauenNurInFrachter(frachterHyperAntrieb).
+bauenNurInFrachter(frachterWarpReaktorSigmaC).
+bauenNurInFrachter(frachterWarpReaktorTauB).
+bauenNurInFrachter(frachterWarpReaktorThetaA).
+
+ort(ortHauptBasis).
+ort(ortWald). 
+ort(ortBasisTerminus).
+ort(ortWeltRaum).
+ort(ortAnomalie).
+ort(ortRaumStation). 
+ort(ortWasser).
+ort(ortAussenPosten).
+ort(ortNahrungsProzessor).
+ort(ortRaffinerie).
+ort(ortHandelsTerminal).
+ort(ortForschungsTerminal).
+ort(ortFrachter).
+ort(ortSpieler).
+ort(ortBasis).
+
+fuegeReiseOperationenEin(Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
+	Vorgaenge = [],
+	VorgaengeDanach = VorgaengeBisher,
+	!.
+
+fuegeReiseOperationenEin(Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
+	Vorgaenge = [Vorgang | RestVorgaenge],
+	Vorgang = [_, [Operation1, _], _, _],
+	Operation1 = reisen,
+	fuegeReiseOperationenEin(RestVorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach),
+	!.
+
+fuegeReiseOperationenEin(Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
+	Vorgaenge = [Vorgang | RestVorgaenge], 
+	vorgangsOrt(Vorgang, VorgangsOrt),
+	vorgangAnfuegenWennVerschiedeneOrte([Vorgang], ReiseOrtBisher, VorgangsOrt, ErweiterterVorgang),
+	append(VorgaengeBisher, ErweiterterVorgang, VorgaengeBisher1),
+	fuegeReiseOperationenEin(RestVorgaenge, VorgangsOrt, VorgaengeBisher1, VorgaengeDanach),
+	!.
+	
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
+	ReiseOrtBisher = VorgangsOrt,
+	VorgaengeBisher2 = VorgaengeBisher.
+
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, _, VorgangsOrt, VorgaengeBisher2) :-
+	VorgangsOrt = ortSpieler,
+	VorgaengeBisher2 = VorgaengeBisher.
+	
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
+	ReiseOrtBisher \= VorgangsOrt, 
+	append([[1, [reisen, 1], [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2).
+	
 bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
-	findall(Operation1, (member(Vorgang, Vorgaenge), operation(Vorgang, Operation1)), Operationen1),
-	list_to_set(Operationen1, Operationen2),
-	findall(EinzelZeit, (member(Operation2, Operationen2), reisen(Operation2, EinzelZeit, _)), EinzelZeiten),
-	sum_list(EinzelZeiten, ReiseZeit).
+	spielStatus:vorhaben(System, Planet, _, _),
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung),
+	findall(VorgangsOrt1, (member(Vorgang, Vorgaenge), vorgangsOrt(Vorgang, VorgangsOrt1)), VorgangsOrte1),
+	findall(EinzelZeit, (member(VorgangsOrt2, VorgangsOrte1), reisen(VorgangsOrt2, EinzelZeit)), EinzelZeiten),
+	sum_list(EinzelZeiten, ReiseZeit),
+	retract(spielStatus:systemAusstattung([_, _, ortSpieler], _)),
+	assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung)).
 
-operation(Vorgang, Operation) :-
-	Vorgang = [_, [Operation1, _], _, _],
-	(Operation1 = minenLaserNutzen; Operation1 = verbessertenMinenLaserNutzen; Operation1 = pfluecken),
-	Operation = zumWald,
+vorgangsOrt(Vorgang, VorgangsOrt) :-
+	Vorgang = [_, [bauen, _], _, _],
+	spielStatus:vorhaben(_, _, bauen, VorgangsOrt),
+	!.
+		
+vorgangsOrt(Vorgang, VorgangsOrt) :-
+	Vorgang = [_, [raffinieren, _], Komponenten, _],
+	length(Komponenten, AnzKomponenten),
+	AnzKomponenten = 1,
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	(spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], DistanzKleineRaffinerie); DistanzKleineRaffinerie = 99999999999),
+	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], DistanzMittlereRaffinerie); DistanzMittlereRaffinerie = 99999999999),
+	(spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], DistanzGrosseRaffinerie); DistanzGrosseRaffinerie = 99999999999),
+	min_member(NaehesteRaffinerie, [[DistanzKleineRaffinerie, ortKleineRaffinerie], 
+									[DistanzMittlereRaffinerie, ortMittlereRaffinerie], 
+									[DistanzGrosseRaffinerie, ortGrosseRaffinerie]]),
+	NaehesteRaffinerie = [Distanz, VorgangsOrt],
+	Distanz < 99999999999,
 	!.
 	
-operation(Vorgang, Operation) :-
-	Vorgang = [_, [Operation1, _], _, _],
-	Operation = Operation1.
+vorgangsOrt(Vorgang, VorgangsOrt) :-
+	Vorgang = [_, [raffinieren, _], Komponenten, _],
+	length(Komponenten, AnzKomponenten),
+	AnzKomponenten = 2,
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], DistanzMittlereRaffinerie); DistanzMittlereRaffinerie = 99999999999),
+	(spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], DistanzGrosseRaffinerie); DistanzGrosseRaffinerie = 99999999999),
+	min_member(NaehesteRaffinerie, [[DistanzMittlereRaffinerie, ortMittlereRaffinerie], 
+									[DistanzGrosseRaffinerie, ortGrosseRaffinerie]]),
+	NaehesteRaffinerie = [Distanz, VorgangsOrt],
+	Distanz < 99999999999,
+	!.
 	
-reisen(Nach, Zeit, Kosten) :-
-	Nach = raumSchuerfen,
-	Kosten = 496, /* Sprit für Startschubduesen mit effiziente Düsen gefuellt 496 mit Uran, 450 mit raumSchiffStartTreibStoff (+- gekauft), 2060 mit gebautem raumSchiffStartTreibStoff */
-	laufZeit(ortBasis, flieger, HinZeit),
-	flugZeit(ortBasis, raumSchuerfen, FlugZeit),
-	Zeit is 2 * (HinZeit + FlugZeit),
+vorgangsOrt(Vorgang, VorgangsOrt) :-
+	Vorgang = [_, [raffinieren, _], Komponenten, _],
+	length(Komponenten, AnzKomponenten),
+	AnzKomponenten = 3,
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
+	VorgangsOrt = ortGrosseRaffinerie,
 	!.
 
-reisen(Nach, Zeit, Kosten) :-
-	Nach = zumWald,
-	laufZeit(ortBasis, minenLaserNutzen, HinZeit),
-	Zeit is 2 * HinZeit,
-    Kosten = 0,
+vorgangsOrt(Vorgang, VorgangsOrt) :-
+	Vorgang = [_, [Operation1, _], _, _],
+	sammeln:sammelAktion(Operation1, VorgangsOrt),
 	!.
 
-reisen(Nach, Zeit, Kosten) :-  /* wir gehen davon aus, zur Resourcenansammlung zu laufen */
-	Nach = terrainFormerNutzen,
-	resourcenAnsammlungSuchen(SuchZeit),
-	laufZeit(ortBasis, terrainFormerNutzen, HinZeit),
-	Zeit is 2 * HinZeit + SuchZeit,
-	Kosten = 0,
+vorgangsOrt(Vorgang, VorgangsOrt) :-
+	Vorgang = [_, [Operation1, _], _, _],
+	rezept:wandelAktion(Operation1, VorgangsOrt),
 	!.
 
-reisen(Nach, Zeit, Kosten) :-
-	Nach = herstellen,
-	Zeit = 0,
-	Kosten = 0,
-	!.
+ 
+reisen(VorgangsOrt, Zeit) :-
+	VorgangsOrt = ortSpieler,
+	Zeit = 0,  /* der Spieler muss nicht zu sich selbst reisen */
+ 	!.
+ 	
+/* vorhaben auf gleichem Planeten */
+reisen(VorgangsOrt, Zeit) :-
+	spielStatus:systemAusstattung([System1, Planet1, ortSpieler], ZurBasisTransferZeit),
+	spielStatus:systemAusstattung([System1, Planet1, VorgangsOrt], ZumVorgangTransferZeit),
+	retract(spielStatus:systemAusstattung([System1, Planet1, ortSpieler], ZurBasisTransferZeit)),
+	assertz(spielStatus:systemAusstattung([System1, Planet1, ortSpieler], ZumVorgangTransferZeit)),
+	Zeit is ZurBasisTransferZeit + ZumVorgangTransferZeit.
 
-reisen(Nach, Zeit, Kosten) :-
-	Nach = erkaempfen,
-	Zeit = 0 ,
-	Kosten = 0,
-	!.
+/* vorhaben auf anderem Planeten */
+/*
+reisen(VorgangsOrt, Zeit) :-
+	spielStatus:systemAusstattung([System1, Planet1, ortSpieler], ZurBasisTransferZeit),
+	vorhaben(System2, Planet2, bauen, OrtBaustelle),
+	System1 = System2,
+	Planet1 \= Planet2,
+	spielStatus:spielStatus(torWarpVerfügbar),
+	spielStatus:systemAusstattung(System1, Planet2, ortRaumStation, TorWarpZeit1),
+	spielStatus:systemAusstattung(System1, Planet2, VorgangsOrt, ZumZielTransferZeit),
+	Zeit is ZurBasisTransferZeit + ZumZielTransferZeit + TorWarpZeit.
 
-reisen(Nach, Zeit, Kosten) :-
-	Nach = raffinieren,
-	laufZeit(ortBasis, Nach, HinZeit),
-	Zeit is 2 * HinZeit,
-	Kosten = 0,
-	!.
-    
+*/
+
 /* kaufen mit Teleportreise Raumstation */	
-reisen(Nach, Zeit, Kosten) :-
-	kaufen:terminal(_, raumStation, Nach),
-	laufZeit(ortBasis, gate, ZumGate),
-	laufZeit(Nach, gate, HinZeit),
-	teleportZeit(PortZeit),
-	terminalOeffnen(OeffnenZeit),
-	Zeit is 2 * (ZumGate + HinZeit) + OeffnenZeit + PortZeit,
-	Kosten = 0,
-	!.
-
 /* kaufen mit flug gleicher Planet */
 /* kaufen mit flug anderer Planet, gleiches System */
 /* kaufen mit flug anderer Planet, anderes System, mit Teleport */
 /* kaufen mit flug anderer Planet, anderes System, mit Warp */
 
-/* Nebenzeiten */
-laufZeit(terminal_9_6_W, gate, 600).
-laufZeit(terminal_13H_9, gate, 600).
-laufZeit(terminal_R_44A_DQ0, gate, 600).
-laufZeit(terminal_60O_Q, gate, 600).
-laufZeit(terminal_4W78_3, gate, 600).
-laufZeit(terminal_1_US4, gate, 600).
+/*
+transferZeit(ortGate, 600).
+transferZeit(ortBasis, raffinieren, 450).
+transferZeit(ortBasis, ortImWald, 2500).
+transferZeit(ortBasis, ortImWeltRaum, 1600).
 
-laufZeit(ortBasis, gate, 600).
-laufZeit(ortBasis, raffinieren, 450).
-laufZeit(ortBasis, minenLaserNutzen, 2500).
-laufZeit(ortBasis, flieger, 800).
+transferZeit(A, B) :-
+	transferZeit(B, A).
 
-laufZeit(A, B) :-
-	laufZeit(B, A).
+flugZtransferZeiteit(ortBasis, raumSchuerfen, 4500).
 
-flugZeit(ortBasis, raumSchuerfen, 4500).
-
-teleportZeit(3880).
+transferZeit(3880).
 resourcenAnsammlungSuchen(800).
 terminalOeffnen(980).
+*/

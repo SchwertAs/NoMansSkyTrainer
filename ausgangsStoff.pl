@@ -49,6 +49,9 @@ relikt(vyKeenDolch, 11688).
 
 /* ausgraben, pflücken, verkaufen */
 artefakte(schmutzigeKnochenFragmente, 104981).
+artefakte(fortgeschritteneProzessoren, 1747804).
+artefakte(beschaedigteGetriebe, 264901).
+artefakte(aussergewoehnlicheDrehmomentErzeuger, 1269186).
 
 /* sammeln, verkaufen */
 gesammelteHandelsWare(beutelGift, 11685).
