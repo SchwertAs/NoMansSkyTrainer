@@ -6,7 +6,8 @@
 
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
-:- abolish(spielerStatus/1)
+spielStatusInit :- 
+	abolish(spielerStatus/1)
 	,assertz(spielStatus(minenLaser))
 	,assertz(spielStatus(verbesserterMinenLaser))
 	,assertz(spielStatus(terrainFormer))

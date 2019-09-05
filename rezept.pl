@@ -19,7 +19,7 @@ wandelAktion(modulInRaumstationErwerben, ortRaumStation).
 /* Eine Komponente */
 rezept(raffinieren, [[1, diWasserStoffGelee]], [50, diWasserStoff], 3 ).
 rezept(raffinieren, [[5, tritium]], [1, diWasserStoff], 90 ).
-rezept(raffinieren, [[30, diWasserStoff]], [2, diWasserStoffGelee], 12000 ).
+rezept(raffinieren, [[30, diWasserStoff]], [1, diWasserStoffGelee], 12000 ).
 rezept(raffinieren, [[1, chlorGitter]], [150, chlor], 2 ).
 rezept(raffinieren, [[2, salz]], [1, chlor], 90 ).
 rezept(raffinieren, [[1, aktiviertesCadmium]], [2, chromatischesMetall], 28 ).

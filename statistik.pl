@@ -3,14 +3,14 @@
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [_, _]],
-	rezept:wandelAktion(Operation, _),
+	\+sammeln:sammelAktion(Operation, _),
 	bildeSammelSet(Rest, SammelSet, NextSammelSet),
 	!.
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [Anz1, Stoff1]],
-	\+rezept:wandelAktion(Operation, _),
+	sammeln:sammelAktion(Operation, _),
 	get_dict(Stoff1, SammelSet, Vorgang1),
 	Vorgang1 = [_, Anz0],
 	Anz2 is Anz0 + Anz1,
@@ -22,7 +22,7 @@ bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, [Operation, _], _, [Anz1, Stoff1]],
-	\+rezept:wandelAktion(Operation, _),
+	sammeln:sammelAktion(Operation, _),
 	\+get_dict(Stoff1, SammelSet, _),
 	Vorgang = [Operation, Anz1],
 	put_dict([Stoff1:Vorgang], SammelSet, NextSammelSet0),
@@ -82,7 +82,8 @@ bildeGesamtHauptZeitAufwand(Vorgaenge, Aufwand, AufwandDanach) :-
 
 bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 	Vorgaenge = [],
-	AufwandDanach = Aufwand.
+	AufwandDanach = Aufwand
+	,!.
 
 bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 	Vorgaenge = [Kopf|Rest],

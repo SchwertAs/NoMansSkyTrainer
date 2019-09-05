@@ -41,6 +41,13 @@ fuegeReiseOperationenEin(Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
 	!.
 
 fuegeReiseOperationenEin(Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
+	Vorgaenge = [Vorgang | RestVorgaenge],
+	Vorgang = [_, [Operation1, _], _, _],
+	Operation1 = reisen,
+	fuegeReiseOperationenEin(RestVorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach),
+	!.
+
+fuegeReiseOperationenEin(Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
 	Vorgaenge = [Vorgang | RestVorgaenge], 
 	vorgangsOrt(Vorgang, VorgangsOrt),
 	vorgangAnfuegenWennVerschiedeneOrte([Vorgang], ReiseOrtBisher, VorgangsOrt, ErweiterterVorgang),
@@ -58,7 +65,7 @@ vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, _, VorgangsOrt, VorgaengeBi
 	
 vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
 	ReiseOrtBisher \= VorgangsOrt, 
-	append([[1, [reisen, 1], [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, nil]]], VorgaengeBisher, VorgaengeBisher2).
+	append([[1, [reisen, 1], [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2).
 	
 bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
 	spielStatus:vorhaben(System, Planet, _, _),
@@ -120,6 +127,7 @@ vorgangsOrt(Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [Operation1, _], _, _],
 	rezept:wandelAktion(Operation1, VorgangsOrt),
 	!.
+
  
 reisen(VorgangsOrt, Zeit) :-
 	VorgangsOrt = ortSpieler,
@@ -146,39 +154,6 @@ reisen(VorgangsOrt, Zeit) :-
 	spielStatus:systemAusstattung(System1, Planet2, VorgangsOrt, ZumZielTransferZeit),
 	Zeit is ZurBasisTransferZeit + ZumZielTransferZeit + TorWarpZeit.
 
-reisen(Nach, Zeit, Kosten) :-  
-	Nach = terrainFormerNutzen,
-	resourcenAnsammlungSuchen(SuchZeit),
-	transferZeit(ortBasis, terrainFormerNutzen, HinZeit),
-	Zeit is 2 * HinZeit + SuchZeit,
-	!.
-
-reisen(Nach, Zeit, Kosten) :-
-	Nach = herstellen,
-	Zeit = 0,
-	!.
-
-reisen(Nach, Zeit, Kosten) :-
-	Nach = erkaempfen,
-	Zeit = 0 ,
-	Kosten = 0,
-	!.
-
-reisen(Nach, Zeit, Kosten) :-
-	Nach = raffinieren,
-	transferZeit(ortBasis, Nach, HinZeit),
-	Zeit is 2 * HinZeit,
-	Kosten = 0,
-	!.
-    
-reisen(Nach, Zeit, Kosten) :-
-	kaufen:terminal(_, raumStation, Nach),
-	transferZeit(ortBasis, ortGate, ZumortGate),
-	transferZeit(Nach, ortGate, HinZeit),
-	transferZeit(PortZeit),
-	Zeit is 2 * (ZumortGate + HinZeit) + PortZeit,
-	Kosten = 0,
-	!.
 */
 
 /* kaufen mit Teleportreise Raumstation */	

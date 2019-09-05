@@ -69,62 +69,15 @@ ausgabeSammlung(SammelSet) :-
 	!. 
     
 ausgabeVorgaenge(Vorgaenge) :-
-/*	include(isRaffinieren, Vorgaenge, Raffinaden),
-	group(Raffinaden, [], Gruppiert),
-	!,
-	exclude(isRaffinieren, Vorgaenge, NichtRaffinaden),
-	append(Gruppiert, NichtRaffinaden, VorgaengeDanach),
-	gebeAus(VorgaengeDanach).*/
 	gebeAus(Vorgaenge).
 
-isRaffinieren(Vorgang) :-
-	Vorgang = [_, [raffinieren, _], _, [_, _]].
-
-/* gleiche Stoffumsetzungen, die mehrfach vorkommen, zu einer mit erhöhter Stückzahl machen */
-group(Vorgaenge, BisherGruppiert, Gruppiert) :-
-	Vorgaenge = [],
-	BisherGruppiert = Gruppiert.
-	
-group(Vorgaenge, BisherGruppiert, Gruppiert) :-
-	length(Vorgaenge, Len),
-	Len > 1,
-	Vorgaenge = [SuchVorgang | _],
-	between(2, Len, VergleichsVorgangNo),
-	nth1(VergleichsVorgangNo, Vorgaenge, VergleichsVorgang),
-	extrahiereKomponenten(SuchVorgang, SuchStoffListe),
-	extrahiereKomponenten(VergleichsVorgang, VergleichsStoffListe),
-	SuchStoffListe = VergleichsStoffListe,
-	addiereVorgangsWerte(SuchVorgang, VergleichsVorgang, SummenVorgang),
-	selectchk(SuchVorgang, Vorgaenge, VorgaengeDanach0),
-	selectchk(VergleichsVorgang, VorgaengeDanach0, VorgaengeDanach1),
-	append([SummenVorgang], VorgaengeDanach1, VorgaengeDanach),
-	group(VorgaengeDanach, BisherGruppiert, Gruppiert).
-
-group(Vorgaenge, BisherGruppiert, Gruppiert) :-
-	Vorgaenge = [SuchVorgang | _],
-	selectchk(SuchVorgang, Vorgaenge, VorgaengeDanach),
-	append(BisherGruppiert, [SuchVorgang], BisherGruppiertDanach),
-	group(VorgaengeDanach, BisherGruppiertDanach, Gruppiert).
-	
-extrahiereKomponenten(EinVorgang, KomponentenStoffListe) :-
-	EinVorgang = [_, [raffinieren, _], Komponenten, [_, _]],
-	maplist(nth1(2), Komponenten, KomponentenStoffListe).
-
-addiereVorgangsWerte(SuchVorgang, VergleichsVorgang, SummenVorgang) :-
-	SuchVorgang = [Anzahl1,[raffinieren, RaffinierZeit1], Komponenten, [ProduktZahl1, Produkt]],
-	VergleichsVorgang = [Anzahl2,[raffinieren, RaffinierZeit2], Komponenten, [ProduktZahl2,_]],
-	SummenAnzahl is Anzahl1 + Anzahl2,
-	SummenRaffinierZeit is RaffinierZeit1 + RaffinierZeit2,
-	SummenProduktZahl is ProduktZahl1 + ProduktZahl2,
-	SummenVorgang = [SummenAnzahl,[raffinieren, SummenRaffinierZeit], Komponenten, [SummenProduktZahl, Produkt]].
-	
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [],
 	!.
 	
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [WandelAnz, [Operation, _], Komponenten, [_, Produkt]],
+	Kopf = [WandelAnz, [Operation, _], Komponenten, [ProduktAnzahl, Produkt]],
 	rezept:wandelAktion(Operation, _),
 	format('<tr>~n'),
 	format('<td>Führen Sie ', []),
@@ -138,26 +91,7 @@ gebeAus(Vorgaenge) :-
 	format(' aus'),
 	format('.~n&nbsp;</td>'),
 	format('<td>'),
-	format('~k ', WandelAnz),
-	format('Einheiten ~k', Produkt),
-	format('~n&nbsp;</td>'),
-	format('</tr>~n'),
-	gebeAus(Rest),
-	!.		
-
-gebeAus(Vorgaenge) :-
-	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [WandelAnz, [Operation, _], _, [_, Produkt]],
-	sammeln:sammelAktion(Operation, _),
-	Operation \= bekannt,
-	format('<tr>~n'),
-	format('<td>'),
-	format('Sammeln Sie ~k ', WandelAnz),
-	format('Einheiten ~k mit ', Produkt),
-	format('~k', Operation),
-	format('.~n&nbsp;</td>'),
-	format('<td>'),
-	format('~k ', WandelAnz),
+	format('~k ', ProduktAnzahl),
 	format('Einheiten ~k', Produkt),
 	format('~n&nbsp;</td>'),
 	format('</tr>~n'),
@@ -180,7 +114,25 @@ gebeAus(Vorgaenge) :-
 
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, [Operation, _], [[_, _], [_, Nach]], [_, _]],
+	Kopf = [WandelAnz, [Operation, _], _, [_, Produkt]],
+	sammeln:sammelAktion(Operation, _),
+	format('<tr>~n'),
+	format('<td>'),
+	format('Sammeln Sie ~k ', WandelAnz),
+	format('Einheiten ~k mit ', Produkt),
+	format('~k', Operation),
+	format('.~n&nbsp;</td>'),
+	format('<td>'),
+	format('~k ', WandelAnz),
+	format('Einheiten ~k', Produkt),
+	format('~n&nbsp;</td>'),
+	format('</tr>~n'),
+	gebeAus(Rest),
+	!.		
+
+gebeAus(Vorgaenge) :-
+	Vorgaenge = [ Kopf | Rest], 
+	Kopf = [_, [Operation, _], [[_, _], [_, Nach]], [_, Produkt]],
 	Operation = reisen,
 	format('<tr>~n'),
 	format('<td>'),
@@ -188,7 +140,7 @@ gebeAus(Vorgaenge) :-
 	format('~k.', Nach),
 	format('~n&nbsp;</td>'),
 	format('<td>'),
-	format('angekommen~n&nbsp;</td>'),
+	format('~k', Produkt),
 	format('</tr>~n'),
 	gebeAus(Rest),
 	!.		
@@ -203,7 +155,8 @@ gebeKomponenteAus(Komponenten) :-
 	
 gebeKomponenteAus(Komponenten) :-
 	Komponenten = [ Kopf | Rest ],
-	Kopf = [_, Stoff],
+	Kopf = [Anzahl, Stoff],
+	format('~k x ', Anzahl),
 	format('~k', Stoff),
 	(Rest \= [], format(', '); format(' ')),
 	gebeKomponenteAus(Rest),

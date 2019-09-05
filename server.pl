@@ -53,7 +53,7 @@ minSammlungForm(Request) :-
         format('<td>~k</td>~n<tr>~n', Stoff),
         format('</table>'),
 	    format('<hr>~n', []),
-	    \+minimaleSammlungLoesung(Anzahl, Stoff) -> ausgabe:nichtHerstellBar(Stoff); true/* */
+	    \+main:minimaleSammlungLoesung(Anzahl, Stoff) -> ausgabe:nichtHerstellBar(Stoff); true/* */
         .
 
 buildOptions(Optionen) :-

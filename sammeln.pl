@@ -1,22 +1,25 @@
-:- module(sammeln, [sammelbar/3, sammelAktion/2, fertigeLoesung/8]).
+:- module(sammeln, [sammelbar/3, sammelAktion/2, fertigeLoesung/2]).
 
 :- dynamic(sammelbar/3).
-:- dynamic(fertigeLoesung/8).
+:- dynamic(fertigeLoesung/2).
 
 /* mögliche Sammleaktionen */
+sammelErsatzAktion(vorfertigen, nil).
+
 sammelAktion(bekannt, ortSpieler).
 sammelAktion(pfluecken, ortWald).
-sammelAktion(ertauchen, ortWasser).
 sammelAktion(minenLaserNutzen, ortWald).
 sammelAktion(verbessertenMinenLaserNutzen, ortWald).
 sammelAktion(terrainFormerNutzen, ortWald).
 sammelAktion(jagen, ortWald).
 sammelAktion(erkaempfen, ortWald).
-sammelAktion(raumSchuerfen, ortWeltRaum).
-sammelAktion(kaufen, ortHandelsTerminal).
 sammelAktion(vonTierenErhalten, ortWald).
 sammelAktion(ernten, ortWald).
-sammelAktion(vorfertigen, nil).
+sammelAktion(raumSchuerfen, ortWeltRaum).
+sammelAktion(kaufen, ortHandelsTerminal).
+
+sammelAktion(ertauchen, ortWasser).
+sammelAktion(unterWasserErkaempfen, ortWasser).
 
 /* bekannte Rezepte TODO: Dynamisch machen, wenn Projektierungsmaske */
 rezeptBekannt(saeureRezept).
@@ -624,9 +627,8 @@ jagen(schuppigesFleisch, 20).
 
 /* bei Zerstörung von Wesen */
 erkaempfen(pugneum, 12000).      /* von Wächter */
-erkaempfen(hypnotischesAuge, 0). /* von abyssal horror */
-erkaempfen(larvenKern, 0).       /* von flüsterndes Ei */
-erkaempfen(kampfLaeuferGehirn, 0).     /* von gepanzerte Muschel */
+erkaempfen(larvenKern, 9000).       /* von flüsterndes Ei */
+erkaempfen(kampfLaeuferGehirn, 12000).     /* von gepanzerte Muschel */
 erkaempfen(unholdRogen, 0).     /* von ??? */
 
 /* Meteoritenfelder */
@@ -674,33 +676,75 @@ ertauchen(zytoPhosphat, 20).
 
 /* Stoff unter Wasser mit Waffe erbeuten */
 unterWasserErkaempfen(lebendePerle, 0).     /* von gepanzerte Muschel */
-unterWasserErkaempfen(hypnotischesAuge, 0). /* */
+unterWasserErkaempfen(hypnotischesAuge, 0). /* von abyssal horror */
 
 
 /* Vorfertigen */
+/* Basis */
+vorfertigen(paraffinium).
+vorfertigen(dioxit).
+vorfertigen(phosphor).
+vorfertigen(schwefelin).
+vorfertigen(radon).
+vorfertigen(uran).
+vorfertigen(salz).
+vorfertigen(frostKristall).
+
+/* mittlere agglomeration*/
 vorfertigen(antiMaterie).
 vorfertigen(antiMaterieGehaeuse).
-vorfertigen(aronium).
 vorfertigen(glas).
 vorfertigen(grantine).
 vorfertigen(herox).
 vorfertigen(instabilesGel).
 vorfertigen(instabilesNatrium).
 vorfertigen(kohlenStoffKristall).
-vorfertigen(lemmium).
-vorfertigen(magnoGold).
 vorfertigen(saeure).
 vorfertigen(seltenesMetallElement).
 vorfertigen(stickStoffSalz).
-vorfertigen(strassenKoeterBronze).
 vorfertigen(superOxidKristall).
 vorfertigen(tetraKobalt).
-vorfertigen(thermischesKondensat).
+vorfertigen(angereicherterKohlenStoff).
+
+vorfertigen(aronium).
+vorfertigen(lemmium).
+vorfertigen(magnoGold).
+vorfertigen(strassenKoeterBronze).
 vorfertigen(chlorGitter).
-vorfertigen(frostKristall).
-vorfertigen(gammaWurzel).
+
+vorfertigen(thermischesKondensat).
 vorfertigen(organischerKatalysator).
+
+/* kochen */
+vorfertigen(geraeuchertesFleisch).
 vorfertigen(geheimnisVollerFleischEintopf).
+
+vorfertigen(immerBrennendeMarmelade).
+vorfertigen(schlaengelndeMarmelade).
+vorfertigen(kaktusGelee).
+
+vorfertigen(geschlageneButter).
+vorfertigen(protoButter).
+vorfertigen(verfeinertesMehl).
+
+vorfertigen(klebrigerPudding).
+vorfertigen(monstroeserPudding).
+vorfertigen(salzigerPudding).
+
+vorfertigen(protoTeig).
+vorfertigen(heulenderTeig).
+vorfertigen(kuchenTeig).
+vorfertigen(dickerSuesserTeig).
+vorfertigen(extraFluffigerTeig).
+vorfertigen(windenderAufgewuehlterTeig).
+vorfertigen(tortenBoden).
+
+vorfertigen(delikatessBaiser).
+vorfertigen(klobigerDonut).
+vorfertigen(wuerzigerKaese).
+vorfertigen(synthetischerHonig).
+vorfertigen(knusperKaramell).
+
 
 sammelbarInit :-
 	\+sammelbarInitFlach,
@@ -714,17 +758,13 @@ sammelbarInitFlach :-
 	fail.
 	
 sammelbarVorfertigen :-
-	abolish(fertigeLoesung/8),
+	abolish(fertigeLoesung/2),
 	vorfertigen(Stoff),
-	Operation = vorfertigen,
-	\+suchAlgorithmus:baue(1, Stoff),
-	findall(ZeitSammlung, suchAlgorithmus:loesung(Stoff, _, _, _, _, ZeitSammlung, _, _), ZeitSammlungListe),
-	min_member(MinimalZeit, ZeitSammlungListe),
-	findall(GesamtZahlSammlung, (suchAlgorithmus:loesung(Stoff, _, _, GesamtZahlSammlung, _, MinimalZeit, _, _), GesamtZahlSammlung > 0), GesamtZahlListe),
-	min_member(MinimalSammelZahl, GesamtZahlListe),
-	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, GesamtAufwand, Erloes),
-	assertz(sammelbar(Stoff, Operation, MinimalZeit)),
-	assertz(fertigeLoesung(Stoff, Vorgaenge, SammelSet, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, GesamtAufwand, Erloes)),
+	\+sammelbar(Stoff, _, _),
+	\+suchAlgorithmus:baueFuerVorfertigung(1, Stoff),
+	optimierung:optimierungsStrategie(minimaleSammlung, Stoff, _, Vorgaenge, _, _, MinimalZeit, _, _),
+	assertz(sammelbar(Stoff, vorfertigen, MinimalZeit)),
+	assertz(fertigeLoesung(Stoff, Vorgaenge)),
 	fail.
 
 sammelArt(Stoff, Operation, HauptZeit) :-

@@ -1,6 +1,23 @@
-:- module(suchAlgorithmus, [baue/2]).
+:- module(suchAlgorithmus, [baue/2, baueFuerVorfertigung/2]).
 
 :- dynamic(loesung/8).
+
+baueFuerVorfertigung(Anzahl, Stoff) :-
+	abolish(loesung/8),
+	dict_create(SammelSet0, 'SammelStueckliste', []),
+	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
+	beschaffen(Anzahl, Stoff, [], [], Vorgaenge),
+	dict_create(SammelSet1, 'SammelStueckliste', []),
+	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
+	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
+	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
+	statistik:bildeGesamtHauptZeitAufwand(Vorgaenge, 0, GesamtSammelZeitAufwand),
+	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
+	GesamtAufwand is GesamtEinkaufsAufwand,
+	ausgangsStoff:stoff(Stoff, Wert),
+	Erloes is Anzahl * Wert,
+	assertz(loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtSammelZeitAufwand, GesamtAufwand, Erloes)),
+	fail.
 
 /* Subprädikate */
 baue(Anzahl, Stoff) :-
@@ -39,11 +56,26 @@ expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 
 expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [_, [vorfertigen, _], _, [_, Stoff]],
-	sammeln:fertigeLoesung(Stoff, VorgaengeDanach, _, _, _, _, _, _),
-	expandiereVorgaenge(VorgaengeDanach, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
+	Kopf = [Anzahl, [vorfertigen, _], _, [_, Stoff]],
+	sammeln:fertigeLoesung(Stoff, VorgaengeDanach0),
+	multipliziereVorgangsWerte(VorgaengeDanach0, Anzahl, [], VorgaengeDanach1), 
+	expandiereVorgaenge(VorgaengeDanach1, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
 	expandiereVorgaenge(Rest, VorgaengeExpandiert0, VorgaengeExpandiert),
 	!.
+
+multipliziereVorgangsWerte(Vorgaenge, _, VorgaengeMultipliziertBisher, VorgaengeMultipliziert) :-
+	Vorgaenge = [],
+	VorgaengeMultipliziertBisher = VorgaengeMultipliziert,
+	!.
+
+multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, VorgaengeMultipliziert) :-
+	Vorgaenge = [Vorgang|RestVorgaenge],
+	Vorgang = [AnzahlVorgang, Operation, Komponenten, [AnzahlProdukteVorgang, Stoff]],
+	AnzahlVorgangMultipliziert is AnzahlVorgang * Faktor,
+	AnzahlProdukteVorgangMultipliziert is AnzahlProdukteVorgang * Faktor,
+	VorgangMultipliziert = [AnzahlVorgangMultipliziert, Operation, Komponenten, [AnzahlProdukteVorgangMultipliziert, Stoff]],
+	append(VorgaengeMultipliziertBisher, [VorgangMultipliziert], VorgaengeMultipliziertBisher1),
+	multipliziereVorgangsWerte(RestVorgaenge, Faktor, VorgaengeMultipliziertBisher1, VorgaengeMultipliziert).   
 
 keinZirkel(Komponenten, StoffPfad, Stoff) :-
 	Komponenten = [[_, Stoff1]],
@@ -110,11 +142,11 @@ beschaffen(Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammeln:sammelbar(Stoff, Operation, HauptZeit),
 	!,
 	append([[Anzahl, [Operation, HauptZeit], [], [Anzahl, Stoff]]], BisherigeVorgaenge, VorgaengeMitVorfertigung),
-	expandiereVorgaenge(VorgaengeMitVorfertigung, [], Vorgaenge).
+	expandiereVorgaenge(VorgaengeMitVorfertigung, [], Vorgaenge). 
 
 beschaffen(Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-
 	length(StoffPfad, Len),
-	Len < 6,
+	Len < 5,
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], RaffinierZeit),
 	rezeptZulaessig(Operation, Komponenten),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
