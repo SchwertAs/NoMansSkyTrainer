@@ -19,6 +19,7 @@ printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung
 			  </caption>
 			  <tr>
 			    <th scope="col">Anweisung&nbsp;</th>
+			    <th scope="col">Operation&nbsp;</th>
 			    <th scope="col">Ergebnis&nbsp;</th>
 			  </tr>~n'),
 	ausgabeVorgaenge(Vorgaenge),
@@ -90,6 +91,7 @@ gebeAus(Vorgaenge) :-
 	gebeKomponenteAus(Komponenten),
 	format(' aus'),
 	format('.~n&nbsp;</td>'),
+	format('<td>~k~n&nbsp;</td>~n', Operation),
 	format('<td>'),
 	format('~k ', ProduktAnzahl),
 	format('Einheiten ~k', Produkt),
@@ -106,8 +108,8 @@ gebeAus(Vorgaenge) :-
 	format('<td>'),
 	format('Das ~k ist bekannt.', Produkt),
 	format('~n&nbsp;</td>'),
-	format('<td>'),
-	format('~n&nbsp;</td>'),
+	format('<td>&nbsp;</td>~n'),
+	format('<td>~n&nbsp;</td>'),
 	format('</tr>~n'),
 	gebeAus(Rest),
 	!.		
@@ -122,6 +124,7 @@ gebeAus(Vorgaenge) :-
 	format('Einheiten ~k mit ', Produkt),
 	format('~k', Operation),
 	format('.~n&nbsp;</td>'),
+	format('<td>~k~n&nbsp;</td>~n', Operation),
 	format('<td>'),
 	format('~k ', WandelAnz),
 	format('Einheiten ~k', Produkt),
@@ -139,8 +142,10 @@ gebeAus(Vorgaenge) :-
 	format('Bitte ~k Sie nach ', Operation),
 	format('~k.', Nach),
 	format('~n&nbsp;</td>'),
+	format('<td>~k~n&nbsp;</td>~n', Operation),
 	format('<td>'),
-	format('~k', Produkt),
+	format('in ~k ', Nach),
+	format('~k~n&nbsp;', Produkt),
 	format('</tr>~n'),
 	gebeAus(Rest),
 	!.		

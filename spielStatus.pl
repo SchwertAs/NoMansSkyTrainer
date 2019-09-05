@@ -6,7 +6,7 @@
 
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
-spielStatusInit :- 
+spielStatusInit :-  
 	abolish(spielerStatus/1)
 	,assertz(spielStatus(minenLaser))
 	,assertz(spielStatus(verbesserterMinenLaser))
@@ -45,7 +45,7 @@ spielStatusInit :-
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasis], 2400))
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0))
 	,abolish(vorhaben/4)
-	,assertz(vorhaben('System', 'MeinPlanet', bauen, ortHauptBasis))
+	,assertz(vorhaben('System', 'MeinPlanet', bauen, ortWasser))
 	.
 
 

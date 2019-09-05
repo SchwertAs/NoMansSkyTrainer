@@ -577,7 +577,6 @@ minenLaserNutzen(diWasserStoff, 4).
 minenLaserNutzen(ferritStaub, 3).
 minenLaserNutzen(gammaWurzel, 4).
 minenLaserNutzen(geode, 0).
-minenLaserNutzen(kelpBeutel, 20).
 minenLaserNutzen(kristallFragment, 0).
 minenLaserNutzen(kobalt, 4).
 minenLaserNutzen(kohlenStoff, 2).
@@ -587,7 +586,6 @@ minenLaserNutzen(pilzSchimmel, 1).
 minenLaserNutzen(sauerStoff, 9).
 minenLaserNutzen(sternenKnolle, 0).
 minenLaserNutzen(stickStoff, 9).
-minenLaserNutzen(sturmKristall, 0).
 
 /* mit Terrainformer abbauen */
 terrainFormerNutzen(aktiviertesCadmium, 0).

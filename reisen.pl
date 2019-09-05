@@ -28,33 +28,65 @@ ort(ortRaumStation).
 ort(ortWasser).
 ort(ortAussenPosten).
 ort(ortNahrungsProzessor).
-ort(ortRaffinerie).
+ort(ortKleineRaffinerie).
+ort(ortMittlereRaffinerie).
+ort(ortGrosseRaffinerie).
 ort(ortHandelsTerminal).
 ort(ortForschungsTerminal).
 ort(ortFrachter).
 ort(ortSpieler).
 ort(ortBasis).
 
+domaenenPruefungOrt(Ort) :-
+	ort(Ort) -> true; throw(error(domain_error(ort, Ort), _)).
+
+
 fuegeReiseOperationenEin(Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
+	ermittleGroessteNoetigeRaffinerie(Vorgaenge, ortKleineRaffinerie, Groesste),
+	fuegeReiseOperationenEinSub(Groesste, Vorgaenge, ortSpieler, VorgaengeBisher, VorgaengeDanach).
+	
+ermittleGroessteNoetigeRaffinerie(Vorgaenge, GroessteBisherige, Groesste) :-
+	Vorgaenge = [],
+	Groesste = GroessteBisherige,
+	!.
+	
+ermittleGroessteNoetigeRaffinerie(Vorgaenge, GroessteBisherige, Groesste) :-
+	Vorgaenge = [Vorgang | RestVorgaenge], 
+	vorgangsOrt(GroessteBisherige, Vorgang, VorgangsOrt),
+	raffinerieOrtGroesser(GroessteBisherige, VorgangsOrt),
+	ermittleGroessteNoetigeRaffinerie(RestVorgaenge, VorgangsOrt, Groesste),
+	!.
+
+ermittleGroessteNoetigeRaffinerie(Vorgaenge, GroessteBisherige, Groesste) :-
+	Vorgaenge = [_ | RestVorgaenge], 
+	ermittleGroessteNoetigeRaffinerie(RestVorgaenge, GroessteBisherige, Groesste),
+	!.
+
+raffinerieOrtGroesser(OrtBisher, OrtNeu) :-
+	OrtBisher = ortKleineRaffinerie, 
+	OrtNeu = ortMittlereRaffinerie.
+
+raffinerieOrtGroesser(OrtBisher, OrtNeu) :-
+	OrtBisher = ortKleineRaffinerie, 
+	OrtNeu = ortGrosseRaffinerie.
+
+raffinerieOrtGroesser(OrtBisher, OrtNeu) :-
+	OrtBisher = ortMittlereRaffinerie, 
+	OrtNeu = ortGrosseRaffinerie.
+	
+fuegeReiseOperationenEinSub(_, Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
 	Vorgaenge = [],
 	VorgaengeDanach = VorgaengeBisher,
 	!.
 
-fuegeReiseOperationenEin(Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
-	Vorgaenge = [Vorgang | RestVorgaenge],
-	Vorgang = [_, [Operation1, _], _, _],
-	Operation1 = reisen,
-	fuegeReiseOperationenEin(RestVorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach),
-	!.
-
-fuegeReiseOperationenEin(Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
+fuegeReiseOperationenEinSub(Groesste, Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
 	Vorgaenge = [Vorgang | RestVorgaenge], 
-	vorgangsOrt(Vorgang, VorgangsOrt),
+	vorgangsOrt(Groesste, Vorgang, VorgangsOrt),
 	vorgangAnfuegenWennVerschiedeneOrte([Vorgang], ReiseOrtBisher, VorgangsOrt, ErweiterterVorgang),
 	append(VorgaengeBisher, ErweiterterVorgang, VorgaengeBisher1),
-	fuegeReiseOperationenEin(RestVorgaenge, VorgangsOrt, VorgaengeBisher1, VorgaengeDanach),
+	fuegeReiseOperationenEinSub(Groesste, RestVorgaenge, VorgangsOrt, VorgaengeBisher1, VorgaengeDanach),
 	!.
-	
+		
 vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
 	ReiseOrtBisher = VorgangsOrt,
 	VorgaengeBisher2 = VorgaengeBisher.
@@ -66,22 +98,27 @@ vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, _, VorgangsOrt, VorgaengeBi
 vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
 	ReiseOrtBisher \= VorgangsOrt, 
 	append([[1, [reisen, 1], [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2).
+
+vorgangsOrtModifikationRaffinerieen(Groesste, VorgangsOrt, ModOrt) :-
+	(VorgangsOrt = ortKleineRaffinerie; VorgangsOrt = ortMittlereRaffinerie; VorgangsOrt = ortGrosseRaffinerie) ->
+	 ModOrt = Groesste; ModOrt = VorgangsOrt.
 	
 bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
 	spielStatus:vorhaben(System, Planet, _, _),
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung),
-	findall(VorgangsOrt1, (member(Vorgang, Vorgaenge), vorgangsOrt(Vorgang, VorgangsOrt1)), VorgangsOrte1),
+	ermittleGroessteNoetigeRaffinerie(Vorgaenge, ortKleineRaffinerie, Groesste),
+	findall(VorgangsOrt1, (member(Vorgang, Vorgaenge), vorgangsOrt(Groesste, Vorgang, VorgangsOrt1)), VorgangsOrte1),
 	findall(EinzelZeit, (member(VorgangsOrt2, VorgangsOrte1), reisen(VorgangsOrt2, EinzelZeit)), EinzelZeiten),
 	sum_list(EinzelZeiten, ReiseZeit),
 	retract(spielStatus:systemAusstattung([_, _, ortSpieler], _)),
 	assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung)).
 
-vorgangsOrt(Vorgang, VorgangsOrt) :-
+vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [bauen, _], _, _],
 	spielStatus:vorhaben(_, _, bauen, VorgangsOrt),
 	!.
 		
-vorgangsOrt(Vorgang, VorgangsOrt) :-
+vorgangsOrt(Groesste, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [raffinieren, _], Komponenten, _],
 	length(Komponenten, AnzKomponenten),
 	AnzKomponenten = 1,
@@ -92,11 +129,12 @@ vorgangsOrt(Vorgang, VorgangsOrt) :-
 	min_member(NaehesteRaffinerie, [[DistanzKleineRaffinerie, ortKleineRaffinerie], 
 									[DistanzMittlereRaffinerie, ortMittlereRaffinerie], 
 									[DistanzGrosseRaffinerie, ortGrosseRaffinerie]]),
-	NaehesteRaffinerie = [Distanz, VorgangsOrt],
+	NaehesteRaffinerie = [Distanz, VorgangsOrt0],
 	Distanz < 99999999999,
+	vorgangsOrtModifikationRaffinerieen(Groesste, VorgangsOrt0, VorgangsOrt),
 	!.
 	
-vorgangsOrt(Vorgang, VorgangsOrt) :-
+vorgangsOrt(Groesste, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [raffinieren, _], Komponenten, _],
 	length(Komponenten, AnzKomponenten),
 	AnzKomponenten = 2,
@@ -105,11 +143,12 @@ vorgangsOrt(Vorgang, VorgangsOrt) :-
 	(spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], DistanzGrosseRaffinerie); DistanzGrosseRaffinerie = 99999999999),
 	min_member(NaehesteRaffinerie, [[DistanzMittlereRaffinerie, ortMittlereRaffinerie], 
 									[DistanzGrosseRaffinerie, ortGrosseRaffinerie]]),
-	NaehesteRaffinerie = [Distanz, VorgangsOrt],
+	NaehesteRaffinerie = [Distanz, VorgangsOrt0],
 	Distanz < 99999999999,
+	vorgangsOrtModifikationRaffinerieen(Groesste, VorgangsOrt0, VorgangsOrt),
 	!.
 	
-vorgangsOrt(Vorgang, VorgangsOrt) :-
+vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [raffinieren, _], Komponenten, _],
 	length(Komponenten, AnzKomponenten),
 	AnzKomponenten = 3,
@@ -118,12 +157,12 @@ vorgangsOrt(Vorgang, VorgangsOrt) :-
 	VorgangsOrt = ortGrosseRaffinerie,
 	!.
 
-vorgangsOrt(Vorgang, VorgangsOrt) :-
+vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [Operation1, _], _, _],
 	sammeln:sammelAktion(Operation1, VorgangsOrt),
 	!.
 
-vorgangsOrt(Vorgang, VorgangsOrt) :-
+vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [Operation1, _], _, _],
 	rezept:wandelAktion(Operation1, VorgangsOrt),
 	!.
