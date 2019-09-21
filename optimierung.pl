@@ -1,9 +1,9 @@
-:- module(optimierung, [optimierungsStrategie/9]).
+:- module(optimierung, [optimierungsStrategie/9, optimierungsZiel/1]).
 
-optimierungsStrategieLiteral(minimaleSammlung).
-optimierungsStrategieLiteral(minimaleZeit).
-optimierungsStrategieLiteral(moeglichstLagernd).
-optimierungsStrategieLiteral(billig).
+optimierungsZiel(minimaleSammlung).
+optimierungsZiel(minimaleZeit).
+optimierungsZiel(moeglichstLagernd).
+optimierungsZiel(minimaleKosten).
 
 optimierungsStrategie(Strategie, Stoff, SammelSet, Vorgaenge, SammelZahl, WertSammlung, BeschaffungsZeit, HandelswertSammlung, Erloes) :-
 	Strategie = minimaleSammlung,
@@ -19,6 +19,13 @@ optimierungsStrategie(Strategie, Stoff, SammelSet, Vorgaenge, SammelZahl, WertSa
 	Strategie = minimaleZeit,
 	findall(EineZeitSammlung, suchAlgorithmus:loesung(Stoff, _, _, _, _, EineZeitSammlung, _, _), ZeitSammlungListe),
 	min_member(BeschaffungsZeit, ZeitSammlungListe),
+	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, SammelZahl, WertSammlung, BeschaffungsZeit, HandelswertSammlung, Erloes),
+	!. /* nach einem ist Schluss */
+
+optimierungsStrategie(Strategie, Stoff, SammelSet, Vorgaenge, SammelZahl, WertSammlung, BeschaffungsZeit, HandelswertSammlung, Erloes) :-
+	Strategie = minimaleKosten,
+	findall(EinPreis, suchAlgorithmus:loesung(Stoff, _, _, _, _, _, EinPreis, _), PreisListe),
+	min_member(HandelswertSammlung, PreisListe),
 	suchAlgorithmus:loesung(Stoff, Vorgaenge, SammelSet, SammelZahl, WertSammlung, BeschaffungsZeit, HandelswertSammlung, Erloes),
 	!. /* nach einem ist Schluss */
 

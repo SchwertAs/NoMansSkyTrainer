@@ -18,7 +18,7 @@ baueFuerVorfertigung(Anzahl, Stoff) :-
 	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
 	GesamtZeitAufwand is GesamtSammelZeitAufwand + NebenZeit + ReiseZeit, 
 	GesamtAufwand is GesamtEinkaufsAufwand,
-	ausgangsStoff:stoff(Stoff, Wert),
+	stoff:stoff(_, Stoff, Wert),
 	Erloes is Anzahl * Wert,
 	assertz(loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
 	fail.
@@ -40,7 +40,7 @@ baue(Anzahl, Stoff) :-
 	statistik:bildeGesamtAufwaende(OptimierteVorgaenge, 0, GesamtEinkaufsAufwand),
 	GesamtZeitAufwand is GesamtSammelZeitAufwand + NebenZeit + ReiseZeit, 
 	GesamtAufwand is GesamtEinkaufsAufwand,
-	ausgangsStoff:stoff(Stoff, Wert),
+	stoff:stoff(_, Stoff, Wert),
 	Erloes is Anzahl * Wert,
 	reisen:fuegeReiseOperationenEin(OptimierteVorgaenge, ortSpieler, [], ErgaenzteVorgaenge),
 	assertz(loesung(Stoff, ErgaenzteVorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
@@ -61,7 +61,7 @@ expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [Anzahl, [vorfertigen, _], _, [_, Stoff]],
-	sammeln:fertigeLoesung(Stoff, VorgaengeDanach0),
+	sammlung:fertigeLoesung(Stoff, VorgaengeDanach0),
 	multipliziereVorgangsWerte(VorgaengeDanach0, Anzahl, [], VorgaengeDanach1), 
 	expandiereVorgaenge(VorgaengeDanach1, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
 	expandiereVorgaenge(Rest, VorgaengeExpandiert0, VorgaengeExpandiert),
@@ -143,7 +143,7 @@ rezeptZulaessig(_, Komponenten) :-
 /*---------------------------------------------------------------*/
 
 beschaffen(Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
-	sammeln:sammelbar(Stoff, Operation, HauptZeit),
+	sammlung:sammelbar(Stoff, Operation, HauptZeit),
 	!,
 	append([[Anzahl, [Operation, HauptZeit], [], [Anzahl, Stoff]]], BisherigeVorgaenge, VorgaengeMitVorfertigung),
 	expandiereVorgaenge(VorgaengeMitVorfertigung, [], Vorgaenge). 

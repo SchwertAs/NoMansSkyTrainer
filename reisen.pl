@@ -19,23 +19,6 @@ bauenNurInFrachter(frachterWarpReaktorSigmaC).
 bauenNurInFrachter(frachterWarpReaktorTauB).
 bauenNurInFrachter(frachterWarpReaktorThetaA).
 
-ort(ortHauptBasis).
-ort(ortWald). 
-ort(ortBasisTerminus).
-ort(ortWeltRaum).
-ort(ortAnomalie).
-ort(ortRaumStation). 
-ort(ortWasser).
-ort(ortAussenPosten).
-ort(ortNahrungsProzessor).
-ort(ortKleineRaffinerie).
-ort(ortMittlereRaffinerie).
-ort(ortGrosseRaffinerie).
-ort(ortHandelsTerminal).
-ort(ortForschungsTerminal).
-ort(ortFrachter).
-ort(ortSpieler).
-ort(ortBasis).
 
 domaenenPruefungOrt(Ort) :-
 	ort(Ort) -> true; throw(error(domain_error(ort, Ort), _)).
@@ -159,12 +142,12 @@ vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [Operation1, _], _, _],
-	sammeln:sammelAktion(Operation1, VorgangsOrt),
+	sammelAktion:sammelAktion(Operation1, VorgangsOrt),
 	!.
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, [Operation1, _], _, _],
-	rezept:wandelAktion(Operation1, VorgangsOrt),
+	wandelAktion:wandelAktion(Operation1, VorgangsOrt),
 	!.
 
  
