@@ -12,63 +12,82 @@ server(Port) :-
 
 
 :- http_handler('/', rootForm, []).
-:- http_handler('/minimaleSammlung', minSammlungForm, []).
+:- http_handler('/favicon.ico', dummy, []).
 
 rootForm(_Request) :-
-	ListString = '<select name="stoffAuswahl" size="1" id="StoffAuswahl">~n',
-	buildOptions(Options),
-	string_concat(ListString, Options, ListString2),
-    string_concat(ListString2, '</select>', ListString3),
-	OptionList = [\[ListString3]],
+	baueOptionsFeld('auswahlRohStoff', [rohStoff, rohUndKochStoff], OptionList1),
+	baueOptionsFeld('auswahlProdukt', [produkt, produktUndKochStoff], OptionList2),
+	baueOptionsFeld('auswahlBau', [basisBauEndStoff], OptionList3),
+	baueOptionsFeld('auswahlModul', [modul], OptionList4),
+	baueOptionsFeld('auswahlGericht', [kochStoff, produktUndKochStoff, rohUndKochStoff], OptionList5),
+	baueFelderMenge(FelderMenge),
 	HtmlString = [
-	  form([action='/minimaleSammlung', method='post'], [
-	  	h1(['Empfohlene Handlungen um bestimmten Stoff zu erhalten']),
-	    p([], [input([name='anzahl', type='text', value='', size='24'])]),
-        p([], OptionList),
-        p([], [input([name='Submit', type='submit', value='OK'])])
-	  ])
+	  form([action='/stoffErlangen', method='post'], 
+	       	[  	h1(['Empfohlene Handlungen um bestimmten Stoff zu erhalten']),
+		        p([], [\[FelderMenge]]),
+		        
+			  	h2(['Anzahl']),
+			    p([], [input([name='anzahl', type='text', value='', size='24'])]),
+			    h2(['Rohstoffe']),
+		        p([], OptionList1),
+			    h2(['Produkte']),
+		        p([], OptionList2),
+			    h2(['Basis-Bauteile']),
+		        p([], OptionList3),
+			    h2(['Module']),
+		        p([], OptionList4),
+			    h2(['Gerichte']),
+		        p([], OptionList5),
+		        p([], [input([name='submit', type='submit', value='OK'])])
+	      	]
+	      )
 	],
 	reply_html_page(
-	title('MinimaleSammlungDialog'), HtmlString
+	title('stoffErlangenDialog'), HtmlString
 	).
 
-minSammlungForm(Request) :-
-        member(method(post), Request), !,
-        format('Content-type: text/html~n~n', []),
-		http_parameters(Request, [
-          anzahl(AtomAnzahl, [default('1')]),
-          stoffAuswahl(Stoff, [length > 1])
-        ]),
-        atom_number(AtomAnzahl, Anzahl),
-        format('<table width="20%" border="1">
-			  <caption>
-			    <h2>Eingaben</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">Anzahl&nbsp;</th>
-			    <th scope="col">Gesuchter Stoff&nbsp;</th>
-			  </tr>~n'
-			),
-        format('<tr>~n<td>~k</td>~n', Anzahl),
-        format('<td>~k</td>~n<tr>~n', Stoff),
-        format('</table>'),
-	    format('<hr>~n', []),
-	    \+main:minimaleSammlungLoesung(Anzahl, Stoff) -> ausgabe:nichtHerstellBar(Stoff); true/* */
-        .
+        
+baueOptionsFeld(FeldName, StoffKlassen, OptionList) :-
+	ListString1 = '<select name="',
+	string_concat(ListString1, FeldName, ListString2),
+	string_concat(ListString2, '" size="1" id="', ListString3),
+	string_concat(ListString3, FeldName, ListString4),
+	string_concat(ListString4, '">~n', ListString5),
+	baueOptionen(StoffKlassen, Options),
+	string_concat(ListString5, Options, ListString6),
+	string_concat(ListString6, '</select>', ListString7),
+	OptionList = [\[ListString7]].
 
-buildOptions(Optionen) :-
-	findall(St, (ausgangsStoff:stoff(St, _), \+ausgangsStoff:bauRezept(St)), Stoffe),
+baueOptionen(StoffKlassen, Optionen) :-
+	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe),
 	sort(Stoffe, StoffeSet),
-	buildOptions(StoffeSet, "", Optionen).
+	BisherList = '<option>Bitte wählen</option>',
+	baueOption(StoffeSet, BisherList, Optionen).
 	
-buildOptions(StoffList, BisherList, NextList) :-
+baueOption(StoffList, BisherList, NextList) :-
 	StoffList = [],
 	BisherList = NextList.
 
-buildOptions(StoffList, BisherList, NextList) :-
+baueOption(StoffList, BisherList, NextList) :-
 	StoffList = [Stoff|Rest],
 	format(string(StoffString), '<option>~k~n', Stoff),
 	string_concat(BisherList, StoffString, BisherList2),
-	buildOptions(Rest, BisherList2, NextList).
+	baueOption(Rest, BisherList2, NextList).
 	
+baueFelderMenge(FelderMenge) :-
+	FelderMenge = '<h3>Optimierungsstrategie</h3>
+     <fieldset>
+        <legend>Möglichst wenig</legend>
+        <label for="Zeitverbrauch">
+            <input type="radio" name="optimierungsZiel" id="optimierungsZielZeit" value="minimaleZeit"> Zeitverbrauch
+        </label>
+        <label for="Sammlungsgegenstände">
+            <input type="radio" checked="true" name="optimierungsZiel" id="optimierungsZielSammelZahl" value="minimaleSammlung"> Sammlungsgegenstände
+        </label>
+        <label for="Kosten">
+            <input type="radio" name="optimierungsZiel" id="optimierungsZielSammelKosten" value="minimaleKosten"> Kosten
+        </label>
+     </fieldset>'.
 	
+dummy(_)  :-
+	format('').

@@ -16,7 +16,7 @@ logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge) :-
 isSammlung(Vorgang) :-
 	Vorgang = [_, [Operation, _], _, [_, _]],
 	Operation \= bekannt,
-	sammeln:sammelAktion(Operation, _),
+	sammelAktion:sammelAktion(Operation, _),
 	!.
 
 gruppiereSammelvorgaengeNachOrt(Vorgaenge, OptimierteVorgaenge) :-
@@ -109,6 +109,6 @@ isBekannt(Vorgang) :-
 	
 isWandlung(Vorgang) :-
 	Vorgang = [_, [Operation, _], _, [_, _]],
-	rezept:wandelAktion(Operation, _),
+	wandelAktion:wandelAktion(Operation, _),
 	!.
 	

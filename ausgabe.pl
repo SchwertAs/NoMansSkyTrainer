@@ -38,8 +38,8 @@ printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung
 	format('</table>~n').
 
 nichtHerstellBar(Stoff) :-
-	ausgangsStoff:stoff(Stoff, Wert),
-	format('<h4>Stoff kann nicht hergestellt werden. Kaufwert ca. ~k</h4>', Wert).
+	stoff:stoff(_, Stoff, Wert),
+	format('<h3>Stoff kann nicht hergestellt werden. Kaufwert ca. ~k</h3>', Wert).
 	
 ausgabeSammlung(SammelSet) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
@@ -79,7 +79,7 @@ gebeAus(Vorgaenge) :-
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [WandelAnz, [Operation, _], Komponenten, [ProduktAnzahl, Produkt]],
-	rezept:wandelAktion(Operation, _),
+	wandelAktion:wandelAktion(Operation, _),
 	format('<tr>~n'),
 	format('<td>Führen Sie ', []),
 	format('~k', WandelAnz),
@@ -117,7 +117,7 @@ gebeAus(Vorgaenge) :-
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [WandelAnz, [Operation, _], _, [_, Produkt]],
-	sammeln:sammelAktion(Operation, _),
+	sammelAktion:sammelAktion(Operation, _),
 	format('<tr>~n'),
 	format('<td>'),
 	format('Sammeln Sie ~k ', WandelAnz),

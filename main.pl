@@ -1,49 +1,38 @@
-:- module(main, [minimaleSammlungLoesung/2]).
-
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgangsStoff').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/spielStatus').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/sammeln').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/rezept').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/kaufen').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/reisen').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/logistik').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/arbeitsVorbereitung').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/statistik').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/suchAlgorithmus').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/optimierung').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe').
-:-	consult('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/server').
+:- module(main, [optimierteLoesung/3]).
 
 startServer :-
 	spielStatus:spielStatusInit,
-	sammeln:sammelbarInit, 
-	server:server(8000).
+	sammlung:sammelbarInit, 
+	server:server(8000),
+	format('Zum Server beenden Taste drücken!', []),
+	get_single_char(_).
 
 
-minimaleSammlungLoesung(Anzahl, Stoff) :- 
+optimierteLoesung(OptimierungsZiel, Anzahl, Stoff) :-  
 	\+suchAlgorithmus:baue(Anzahl, Stoff),
-	optimierung:optimierungsStrategie(minimaleSammlung, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
+	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	ausgabe:printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
+
+produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
+	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
+	stoff:stoff(_, Produkt, EinzelWert), 
+	Wert is EinzelWert * Anzahl, 
+	memberchk([_, Stoff], Komponenten).
 
 /* Declarationen */
 /* 
 
-produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
-	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
-	ausgangsStoff:stoff(Produkt, EinzelWert), 
-	Wert is EinzelWert * Anzahl, 
-	memberchk([_, Stoff], Komponenten).
-
 */
 	
 testMinimaleSammlung :-
-	ausgangsStoff:stoff(Stoff, _),
+	stoff:stoff(_, Stoff, _, _),
 	minimaleSammlungLoesung(1, Stoff),
 	fail.
 
+
 testStoffNichtSammelbar(Stoff) :-
- 	stoff(Stoff, _),
-	\+sammeln:sammelbar(Stoff, _, _).
+ 	stoff:stoff(_, Stoff, _),
+	\+sammlung:sammelbar(Stoff, _, _).
 	
 testRezepte(FehlOperation, FehlOpProdukt, 
 			FehlKomponente,
@@ -60,18 +49,18 @@ testRezepte(FehlOperation, FehlOpProdukt,
 	
 testStoff :-
 	format('Eingangsstoffe testen '),
-	\+ausgangsStoff:fehlerInputStoffNichtDefiniert(_),
+	\+stoff:fehlerInputStoffNichtDefiniert(_),
 	format('ok~n'),
 	format('Ausgangsstoffe testen '),
-	\+ausgangsStoff:fehlerOutputStoffNichtDefiniert(_),
+	\+stoff:fehlerOutputStoffNichtDefiniert(_),
 	format('ok~n'),
 	format('Wertangaben testen '),
-	\+ausgangsStoff:produktNichtBewertet(_),
+	\+stoff:produktNichtBewertet(_),
 	format('ok~n'),
 	format('Doppelte testen '),
-	\+ausgangsStoff:doppelteInStoff,
+	\+stoff:doppelteInStoff,
 	format('ok~n'),
 	format('Verwendung testen~n'),
-	\+ausgangsStoff:stoffNichtVerwendet(_),
+	\+stoff:stoffNichtVerwendet(_),
 	format('ok~n').
 	
