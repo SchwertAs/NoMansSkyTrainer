@@ -11,10 +11,11 @@ logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge) :-
 	append(SammlungenGruppiert1, Bekannte, OptimierteVorgaenge0),
 	include(isWandlung, Vorgaenge, Wandlungen),
 	gruppierenUndSummieren(Wandlungen, [], WandlungenGruppiert),
-	append(OptimierteVorgaenge0, WandlungenGruppiert, OptimierteVorgaenge).
+	append(OptimierteVorgaenge0, WandlungenGruppiert, OptimierteVorgaenge),
+	!.
 
 isSammlung(Vorgang) :-
-	Vorgang = [_, [Operation, _], _, [_, _]],
+	Vorgang = [_, Operation, _, [_, _]],
 	Operation \= bekannt,
 	sammelAktion:sammelAktion(Operation, _),
 	!.
@@ -57,16 +58,17 @@ ausDictSammeln(DictGefuellt, Keys, OptimierteVorgaengeBisher, OptimierteVorgaeng
 
 gruppierenUndSummieren(Vorgaenge, BisherGruppiert, Gruppiert) :-
 	Vorgaenge = [],
-	BisherGruppiert = Gruppiert.
+	BisherGruppiert = Gruppiert,
+	!.
 	 
 gruppierenUndSummieren(Vorgaenge, BisherGruppiert, Gruppiert) :-
 	length(Vorgaenge, Len),
 	Len > 1,
 	Vorgaenge = [SuchVorgang | _],
-	SuchVorgang =  [_, [SuchOperation, _], _, [_, SuchProdukt]],
+	SuchVorgang =  [_, SuchOperation, _, [_, SuchProdukt]],
 	between(2, Len, VergleichsVorgangNo),
 	nth1(VergleichsVorgangNo, Vorgaenge, VergleichsVorgang),
-	VergleichsVorgang =  [_, [VergleichsOperation, _], _, [_, VergleichsProdukt]],
+	VergleichsVorgang =  [_, VergleichsOperation, _, [_, VergleichsProdukt]],
 	SuchOperation = VergleichsOperation,
 	SuchProdukt = VergleichsProdukt,
 	extrahiereKomponenten(SuchVorgang, SuchStoffListe), 
@@ -92,23 +94,23 @@ gleicheElementeEnthalten(SuchStoffListe, VergleichsStoffListe) :-
 
 	
 extrahiereKomponenten(EinVorgang, KomponentenStoffListe) :-
-	EinVorgang = [_, [_, _], Komponenten, [_, _]],
+	EinVorgang = [_, _, Komponenten, [_, _]],
 	maplist(nth1(2), Komponenten, KomponentenStoffListe).
 
 addiereVorgangsWerte(SuchVorgang, VergleichsVorgang, SummenVorgang) :-
-	SuchVorgang = [Anzahl1,[Operation, RaffinierZeit], Komponenten, [ProduktZahl1, Produkt]],
-	VergleichsVorgang = [Anzahl2,[Operation, RaffinierZeit], Komponenten, [ProduktZahl2,_]],
+	SuchVorgang = [Anzahl1, Operation, Komponenten, [ProduktZahl1, Produkt]],
+	VergleichsVorgang = [Anzahl2, Operation, Komponenten, [ProduktZahl2,_]],
 	SummenAnzahl is Anzahl1 + Anzahl2,
 	SummenProduktZahl is ProduktZahl1 + ProduktZahl2,
-	SummenVorgang = [SummenAnzahl,[Operation, RaffinierZeit], Komponenten, [SummenProduktZahl, Produkt]].
+	SummenVorgang = [SummenAnzahl, Operation, Komponenten, [SummenProduktZahl, Produkt]].
 	
 isBekannt(Vorgang) :-
-	Vorgang = [_, [Operation, _], _, [_, _]],
+	Vorgang = [_, Operation, _, [_, _]],
 	Operation = bekannt,
 	!.
 	
 isWandlung(Vorgang) :-
-	Vorgang = [_, [Operation, _], _, [_, _]],
+	Vorgang = [_, Operation, _, [_, _]],
 	wandelAktion:wandelAktion(Operation, _),
 	!.
 	

@@ -47,10 +47,10 @@ ausgabeSammlung(SammelSet) :-
 	
 ausgabeSammlung(SammelSet) :-
 	get_dict(Stoff, SammelSet, Vorgang),
-	Vorgang = [Operation, SammelAnzahl],
+	Vorgang = [Operation, _],
 	Operation = bekannt,
 	format('<tr>~n'),
-	format('<td>~k&nbsp;</td>~n', SammelAnzahl),
+	format('<td>~k&nbsp;</td>~n', 1),
 	format('<td>~k&nbsp;</td>~n', Stoff),
 	format('</tr>~n'),
 	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
@@ -78,7 +78,7 @@ gebeAus(Vorgaenge) :-
 	
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [WandelAnz, [Operation, _], Komponenten, [ProduktAnzahl, Produkt]],
+	Kopf = [WandelAnz, Operation, Komponenten, [ProduktAnzahl, Produkt]],
 	wandelAktion:wandelAktion(Operation, _),
 	format('<tr>~n'),
 	format('<td>Führen Sie ', []),
@@ -102,7 +102,7 @@ gebeAus(Vorgaenge) :-
 
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, [Operation, _], _, [_, Produkt]],
+	Kopf = [_, Operation, _, [_, Produkt]],
 	Operation = bekannt,
 	format('<tr>~n'),
 	format('<td>'),
@@ -116,11 +116,11 @@ gebeAus(Vorgaenge) :-
 
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [WandelAnz, [Operation, _], _, [_, Produkt]],
+	Kopf = [WandelAnz, Operation, _, [_, Produkt]],
 	sammelAktion:sammelAktion(Operation, _),
 	format('<tr>~n'),
 	format('<td>'),
-	format('Sammeln Sie ~k ', WandelAnz),
+	format('Erlangen Sie ~k ', WandelAnz),
 	format('Einheiten ~k mit ', Produkt),
 	format('~k', Operation),
 	format('.~n&nbsp;</td>'),
@@ -135,7 +135,7 @@ gebeAus(Vorgaenge) :-
 
 gebeAus(Vorgaenge) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, [Operation, _], [[_, _], [_, Nach]], [_, Produkt]],
+	Kopf = [_, Operation, [[_, _], [_, Nach]], [_, Produkt]],
 	Operation = reisen,
 	format('<tr>~n'),
 	format('<td>'),
@@ -178,13 +178,13 @@ ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWe
     format('<tr>~n<td>GesamtZeitAufwand~n&nbsp;</td>'),
 	format('<td>~k~n&nbsp;</td>', GesamtZeit),
 	format('<td>1/100 sec~n&nbsp;</td>~n</tr>'),
-    format('<tr>~n<td>Kosten Einkauf~n&nbsp;</td>'),
+    format('<tr>~n<td>Kosten Eingangsstoffe~n&nbsp;</td>'),
 	format('<td>~k~n&nbsp;</td>', GesamtKosten),
 	format('<td>Units~n&nbsp;</td>~n</tr>'),
     format('<tr>~n<td>Gesamtwert Endstoff~n&nbsp;</td>'),
 	format('<td>~k~n&nbsp;</td>', GesamtWertEndProdukt),
 	format('<td>Units~n&nbsp;</td>~n</tr>'),
-    MehrWert is GesamtWertEndProdukt - GesamtWertSammlung,
+    MehrWert is GesamtWertEndProdukt - GesamtKosten,
     format('<tr>~n<td>Mehrwert~n&nbsp;</td>'),
 	format('<td>~k~n&nbsp;</td>', MehrWert),
 	format('<td>Units~n&nbsp;</td>~n</tr>'),
