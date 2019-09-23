@@ -9,7 +9,7 @@ startServer :-
 
 
 optimierteLoesung(OptimierungsZiel, Anzahl, Stoff) :-  
-	\+suchAlgorithmus:baue(Anzahl, Stoff),
+	\+suchAlgorithmus:baue(OptimierungsZiel, Anzahl, Stoff),
 	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	ausgabe:printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
@@ -32,7 +32,7 @@ testMinimaleSammlung :-
 
 testStoffNichtSammelbar(Stoff) :-
  	stoff:stoff(_, Stoff, _),
-	\+sammlung:sammelbar(Stoff, _, _).
+	\+sammlung:sammelbar(Stoff, _).
 	
 testRezepte(FehlOperation, FehlOpProdukt, 
 			FehlKomponente,

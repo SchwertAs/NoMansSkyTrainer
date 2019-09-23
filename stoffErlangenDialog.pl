@@ -33,17 +33,19 @@ stoffErlangen(Request) :-
          format('Bitte nur eine Auswahl treffen! Bei den nicht benötigten Auswahlen muss "Bitte wählen" eingestellt sein</p>'), !, fail
         ),
         atom_number(AtomAnzahl, Anzahl),
-        format('<table width="20%" border="1">
+        format('<table width="25%" border="1">
 			  <caption>
 			    <h2>Eingaben</h2>
 			  </caption>
 			  <tr>
 			    <th scope="col">Anzahl&nbsp;</th>
 			    <th scope="col">Gesuchter Stoff&nbsp;</th>
+			    <th scope="col">Ziel&nbsp;</th>
 			  </tr>~n'
 			),
         format('<tr>~n<td>~k</td>~n', Anzahl),
-        format('<td>~k</td>~n<tr>~n', Stoff),
+        format('<td>~k</td>~n', Stoff),
+        format('<td>~k</td>~n<tr>~n', Ziel),
         format('</table>'),
 	    format('<hr>~n', []),
 	    !,

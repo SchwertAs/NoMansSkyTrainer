@@ -1,71 +1,114 @@
-:- module(suchAlgorithmus, [baue/2, baueFuerVorfertigung/2]).
+:- module(suchAlgorithmus, [baue/3, baueFuerVorfertigung/3]).
 
 :- dynamic(loesung/8).
+:- dynamic(maxTiefe/1).
 
-baueFuerVorfertigung(Anzahl, Stoff) :-
+baueFuerVorfertigung(Strategie, Anzahl, Stoff) :-
 	abolish(loesung/8),
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
-	beschaffen(Anzahl, Stoff, [], [], Vorgaenge),
+	abolish(maxTiefe/1),
+	assertz(maxTiefe(99)),
+	beschaffen(Strategie, Anzahl, Stoff, [], [], Vorgaenge, 0, MaxTiefe),
+	maxTiefeVerringern(MaxTiefe),
 	dict_create(SammelSet1, 'SammelStueckliste', []),
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
-	statistik:bildeGesamtHauptZeitAufwand(Vorgaenge, 0, GesamtSammelZeitAufwand),
+	arbeitsVorbereitung:bildeAvZeiten(Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
 	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
-	reisen:bildeReiseZeiten(OptimierteVorgaenge, ReiseZeit),
-	arbeitsVorbereitung:bildeNebenZeiten(OptimierteVorgaenge, NebenZeit),
+	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
 	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
-	GesamtZeitAufwand is GesamtSammelZeitAufwand + NebenZeit + ReiseZeit, 
-	GesamtAufwand is GesamtEinkaufsAufwand,
+	GesamtZeitAufwand is GesamtHauptZeit + GesamtNebenZeit + GesamtRuestZeit + GesamtReiseZeit, 
+	GesamtAufwand is GesamtEinkaufsAufwand + GesamtWertSammlung,
 	stoff:stoff(_, Stoff, Wert),
 	Erloes is Anzahl * Wert,
 	assertz(loesung(Stoff, Vorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
 	fail.
 
 /* Subprädikate */
-baue(Anzahl, Stoff) :-
+baue(Strategie, Anzahl, Stoff) :-
 	abolish(loesung/8),
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
-	beschaffen(Anzahl, Stoff, [], [], Vorgaenge),
+	abolish(maxTiefe/1),
+	assertz(maxTiefe(99)),
+	beschaffen(Strategie, Anzahl, Stoff, [], [], Vorgaenge, 0, MaxTiefe),
+	maxTiefeVerringern(MaxTiefe),
 	dict_create(SammelSet1, 'SammelStueckliste', []),
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
-	statistik:bildeGesamtHauptZeitAufwand(Vorgaenge, 0, GesamtSammelZeitAufwand),
+	arbeitsVorbereitung:bildeAvZeiten(Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
 	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
-	reisen:bildeReiseZeiten(OptimierteVorgaenge, ReiseZeit),
-	arbeitsVorbereitung:bildeNebenZeiten(OptimierteVorgaenge, NebenZeit),
+	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
 	statistik:bildeGesamtAufwaende(OptimierteVorgaenge, 0, GesamtEinkaufsAufwand),
-	GesamtZeitAufwand is GesamtSammelZeitAufwand + NebenZeit + ReiseZeit, 
-	GesamtAufwand is GesamtEinkaufsAufwand,
+	GesamtZeitAufwand is GesamtHauptZeit + GesamtNebenZeit + GesamtRuestZeit + GesamtReiseZeit, 
+	GesamtAufwand is GesamtEinkaufsAufwand + GesamtWertSammlung,
 	stoff:stoff(_, Stoff, Wert),
 	Erloes is Anzahl * Wert,
 	reisen:fuegeReiseOperationenEin(OptimierteVorgaenge, ortSpieler, [], ErgaenzteVorgaenge),
 	assertz(loesung(Stoff, ErgaenzteVorgaenge, SammelSet, GesamtZahl, GesamtWertSammlung, GesamtZeitAufwand, GesamtAufwand, Erloes)),
 	fail.
 
-expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
+beschaffen(Strategie, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge, IstTiefe, MaxTiefe) :-
+	sammlung:sammelbar(Stoff, vorfertigen),
+	!,
+	append([[Anzahl, vorfertigen, [], [Anzahl, Stoff]]], BisherigeVorgaenge, VorgaengeMitVorfertigung),
+	expandiereVorgaenge(Strategie, VorgaengeMitVorfertigung, [], Vorgaenge),
+	ignore(MaxTiefe = IstTiefe). 
+
+beschaffen(_, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge, IstTiefe, MaxTiefe) :-
+	sammlung:sammelbar(Stoff, Operation),
+	append([[Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
+	ignore(MaxTiefe = IstTiefe).
+
+beschaffen(Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge, IstTiefe, MaxTiefe) :-
+	maxTiefe(MaxTiefe0),
+	length(StoffPfad, Len),
+	Len =< MaxTiefe0, 
+	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], _),
+	rezeptZulaessig(Operation, Komponenten),
+	keinZirkel(Komponenten, StoffPfad, Stoff),
+	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
+	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),
+	AnzahlRaffiniert is AnzahlRaffinaden * AnzahlRezeptErgebnis,
+	append([[AnzahlRaffinaden, Operation, Komponenten, [AnzahlRaffiniert, Stoff]]], BisherigeVorgaenge, ListeVorgaenge0),
+	append([Stoff], StoffPfad, StoffPfadDanach),
+	IstTiefe0 is IstTiefe + 1,
+	listeBeschaffen(Strategie, IstTiefe0, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfadDanach, ListeVorgaenge0, ListeVorgaenge),
+	ignore(MaxTiefe = IstTiefe0). 
+
+expandiereVorgaenge(_, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [],
 	VorgaengeExpandiert = VorgaengeExpandiertTmp,
 	!.
 	
-expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
+expandiereVorgaenge(Strategie, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest], 
-	Kopf \= [_, [vorfertigen, _], _, [_, _]],
+	Kopf \= [_, vorfertigen, _, [_, _]],
 	append(VorgaengeExpandiertTmp, [Kopf], VorgaengeExpandiertDanach),
-	expandiereVorgaenge(Rest, VorgaengeExpandiertDanach, VorgaengeExpandiert),
+	expandiereVorgaenge(Strategie, Rest, VorgaengeExpandiertDanach, VorgaengeExpandiert),
 	!.
 
-expandiereVorgaenge(Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
+expandiereVorgaenge(Strategie, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [Anzahl, [vorfertigen, _], _, [_, Stoff]],
-	sammlung:fertigeLoesung(Stoff, VorgaengeDanach0),
-	multipliziereVorgangsWerte(VorgaengeDanach0, Anzahl, [], VorgaengeDanach1), 
-	expandiereVorgaenge(VorgaengeDanach1, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
-	expandiereVorgaenge(Rest, VorgaengeExpandiert0, VorgaengeExpandiert),
+	Kopf = [Anzahl, vorfertigen, _, [_, Stoff]],
+	sammlung:fertigeLoesung(Strategie, Stoff, VorgaengeDanach0),
+	ermittleNoetigenRezeptMultiplikator(VorgaengeDanach0, Anzahl, Faktor),
+	multipliziereVorgangsWerte(VorgaengeDanach0, Faktor, [], VorgaengeDanach1), 
+	expandiereVorgaenge(Strategie, VorgaengeDanach1, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
+	expandiereVorgaenge(Strategie, Rest, VorgaengeExpandiert0, VorgaengeExpandiert),
 	!.
+
+ermittleNoetigenRezeptMultiplikator(Vorgaenge, Anzahl, Faktor) :-
+	Vorgaenge = [ Vorgang | []],
+	Vorgang = [_, _, _, [AnzahlProdukteVorgang, _]],
+	Faktor is ceiling(Anzahl / AnzahlProdukteVorgang).
+
+ermittleNoetigenRezeptMultiplikator(Vorgaenge, Anzahl, Faktor) :-
+	Vorgaenge = [ _ | Rest],
+	ermittleNoetigenRezeptMultiplikator(Rest, Anzahl, Faktor).
 
 multipliziereVorgangsWerte(Vorgaenge, _, VorgaengeMultipliziertBisher, VorgaengeMultipliziert) :-
 	Vorgaenge = [],
@@ -80,38 +123,6 @@ multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, Vorg
 	VorgangMultipliziert = [AnzahlVorgangMultipliziert, Operation, Komponenten, [AnzahlProdukteVorgangMultipliziert, Stoff]],
 	append(VorgaengeMultipliziertBisher, [VorgangMultipliziert], VorgaengeMultipliziertBisher1),
 	multipliziereVorgangsWerte(RestVorgaenge, Faktor, VorgaengeMultipliziertBisher1, VorgaengeMultipliziert).   
-
-keinZirkel(Komponenten, StoffPfad, Stoff) :-
-	Komponenten = [[_, Stoff1]],
-	\+memberchk(Stoff1, StoffPfad),
-	\+Stoff = Stoff1.
-
-keinZirkel(Komponenten, StoffPfad, Stoff) :-
-	Komponenten = [[_, Stoff1], [_, Stoff2]],
-	\+memberchk(Stoff1, StoffPfad),
-	\+memberchk(Stoff2, StoffPfad),
-	\+Stoff = Stoff1,
-	\+Stoff = Stoff2.
-
-keinZirkel(Komponenten, StoffPfad, Stoff) :-
-	Komponenten = [[_, Stoff1], [_, Stoff2], [_, Stoff3]],
-	\+memberchk(Stoff1, StoffPfad),
-	\+memberchk(Stoff2, StoffPfad),
-	\+memberchk(Stoff3, StoffPfad),
-	\+Stoff = Stoff1,
-	\+Stoff = Stoff2,
-	\+Stoff = Stoff3.
-
-keinZirkel(Komponenten, StoffPfad, Stoff) :-
-	Komponenten = [[_, Stoff1], [_, Stoff2], [_, Stoff3], [_, Stoff4]],
-	\+memberchk(Stoff1, StoffPfad),
-	\+memberchk(Stoff2, StoffPfad),
-	\+memberchk(Stoff3, StoffPfad),
-	\+memberchk(Stoff4, StoffPfad),
-	\+Stoff = Stoff1,
-	\+Stoff = Stoff2,
-	\+Stoff = Stoff3,
-	\+Stoff = Stoff4.
 
 rezeptZulaessig(Operation, _) :-
 	Operation \= raffinieren,
@@ -140,57 +151,89 @@ rezeptZulaessig(_, Komponenten) :-
 	Komponenten = [[_, _], [_, _], [_, _]],
 	!.
 
+keinZirkel(Komponenten, StoffPfad, Stoff) :-
+	Komponenten = [[_, Stoff1]],
+	\+memberchk(Stoff1, StoffPfad),
+	\+Stoff = Stoff1,
+	!.
+
+keinZirkel(Komponenten, StoffPfad, Stoff) :-
+	Komponenten = [[_, Stoff1], [_, Stoff2]],
+	\+memberchk(Stoff1, StoffPfad),
+	\+memberchk(Stoff2, StoffPfad),
+	\+Stoff = Stoff1,
+	\+Stoff = Stoff2,
+	!.
+
+keinZirkel(Komponenten, StoffPfad, Stoff) :-
+	Komponenten = [[_, Stoff1], [_, Stoff2], [_, Stoff3]],
+	\+memberchk(Stoff1, StoffPfad),
+	\+memberchk(Stoff2, StoffPfad),
+	\+memberchk(Stoff3, StoffPfad),
+	\+Stoff = Stoff1,
+	\+Stoff = Stoff2,
+	\+Stoff = Stoff3,
+	!.
+
+keinZirkel(Komponenten, StoffPfad, Stoff) :-
+	Komponenten = [[_, Stoff1], [_, Stoff2], [_, Stoff3], [_, Stoff4]],
+	\+memberchk(Stoff1, StoffPfad),
+	\+memberchk(Stoff2, StoffPfad),
+	\+memberchk(Stoff3, StoffPfad),
+	\+memberchk(Stoff4, StoffPfad),
+	\+Stoff = Stoff1,
+	\+Stoff = Stoff2,
+	\+Stoff = Stoff3,
+	\+Stoff = Stoff4,
+	!.
+	
+
 /*---------------------------------------------------------------*/
-
-beschaffen(Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
-	sammlung:sammelbar(Stoff, Operation, HauptZeit),
-	!,
-	append([[Anzahl, [Operation, HauptZeit], [], [Anzahl, Stoff]]], BisherigeVorgaenge, VorgaengeMitVorfertigung),
-	expandiereVorgaenge(VorgaengeMitVorfertigung, [], Vorgaenge). 
-
-beschaffen(Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-
-	length(StoffPfad, Len),
-	Len < 5,
-	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], RaffinierZeit),
-	rezeptZulaessig(Operation, Komponenten),
-	keinZirkel(Komponenten, StoffPfad, Stoff),
-	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
-	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),
-	AnzahlRaffiniert is AnzahlRaffinaden * AnzahlRezeptErgebnis,
-	append([[AnzahlRaffinaden, [Operation, RaffinierZeit], Komponenten, [AnzahlRaffiniert, Stoff]]], BisherigeVorgaenge, ListeVorgaenge0),
-	append([Stoff], StoffPfad, StoffPfadDanach),
-	listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfadDanach, ListeVorgaenge0, ListeVorgaenge).
-
-
-listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
-	beschaffen(Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge).
+	beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge, IstTiefe, MaxTiefe),
+	!.
 
-listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1], [Anz2, Komp2]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
 	Anzahl2 is Anz2 * AnzahlRaffinaden,
-	beschaffen(Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge1),
-	beschaffen(Anzahl2, Komp2, StoffPfad, ListeVorgaenge1, ListeVorgaenge).
+	beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge1, IstTiefe, MaxTiefe),
+	beschaffen(Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge1, ListeVorgaenge, IstTiefe, MaxTiefe),
+	!.
 
-listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1], [Anz2, Komp2], [Anz3, Komp3]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
 	Anzahl2 is Anz2 * AnzahlRaffinaden,
 	Anzahl3 is Anz3 * AnzahlRaffinaden,
-	beschaffen(Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2),
-	beschaffen(Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3),
-	beschaffen(Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge).
+	beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2, IstTiefe, MaxTiefe),
+	beschaffen(Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3, IstTiefe, MaxTiefe),
+	beschaffen(Strategie, Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge, IstTiefe, MaxTiefe),
+	!.
 
-listeBeschaffen(AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1], [Anz2, Komp2], [Anz3, Komp3], [Anz4, Komp4]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
 	Anzahl2 is Anz2 * AnzahlRaffinaden,
 	Anzahl3 is Anz3 * AnzahlRaffinaden,
 	Anzahl4 is Anz4 * AnzahlRaffinaden,
-	beschaffen(Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2),
-	beschaffen(Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3),
-	beschaffen(Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge4),
-	beschaffen(Anzahl4, Komp4, StoffPfad, ListeVorgaenge4, ListeVorgaenge).
+	beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2, IstTiefe, MaxTiefe),
+	beschaffen(Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3, IstTiefe, MaxTiefe),
+	beschaffen(Strategie, Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge4, IstTiefe, MaxTiefe),
+	beschaffen(Strategie, Anzahl4, Komp4, StoffPfad, ListeVorgaenge4, ListeVorgaenge, IstTiefe, MaxTiefe),
+	!.
 	
+maxTiefeVerringern(MaxTiefe) :-
+	maxTiefe(MaxTiefeVorher),
+	MaxTiefeVorher > MaxTiefe,
+	retract(maxTiefe(_)),
+	assertz(maxTiefe(MaxTiefe)),
+	!.
+
+maxTiefeVerringern(MaxTiefe) :-
+	maxTiefe(MaxTiefeVorher),
+	MaxTiefeVorher = MaxTiefe,
+	!.
+		

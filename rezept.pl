@@ -1656,7 +1656,7 @@ raffinerieRezeptHatKeineFertigungsZeit(Stoff, Komponenten) :-
 
 nichtHerstellbar(Stoff) :-
 	stoff:stoff(_, Stoff, _),
-	\+sammlung:sammelbar(Stoff, _, _),
+	\+sammlung:sammelbar(Stoff, _),
 	\+sammlung:rezeptBekannt(Stoff),
 	\+rezept(_, _,[_,Stoff], _).
 

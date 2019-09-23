@@ -1,13 +1,18 @@
 :- module(reisen, [bildeReiseZeiten/2, fuegeReiseOperationenEin/4]).
 
-/* Die Berechnung erfolgt auf Basis eines Sternverkehrs immer über die Hauptbasis */
-
+/* Die Berechnung erfolgt auf Basis eines Sternverkehrs immer über die Hauptbasis 
+   Reisezeiten sind: Planetenziel ermitteln, Torziel anwählen, Tortransport, laufen zum Ziel, fahren zum Ziel,
+                     einsteigen, aussteigen, fliegen, warpen, Karte ansehen
+*/
 transportArt(exoFahrzeug).
-transportArt(gateWarp).
+transportArt(torWarp).
 transportArt(raumschiffBooster). 
 transportArt(raumschiffImpuls).
 transportArt(raumschiffWarp).
 transportArt(laufen).
+transportArt(schnellLaufen).
+transportArt(raketenStiefelHopser).
+transportArt(boosterHopser).
 
 bauenNurInFrachter(flottenKommandoRaum). /* Plausicheck bei Eingabemaske Stoff <-> Spielerort */
 bauenNurInFrachter(frachterKorridor).
@@ -80,7 +85,7 @@ vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, _, VorgangsOrt, VorgaengeBi
 	
 vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
 	ReiseOrtBisher \= VorgangsOrt, 
-	append([[1, [reisen, 1], [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2).
+	append([[1, reisen, [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2).
 
 vorgangsOrtModifikationRaffinerieen(Groesste, VorgangsOrt, ModOrt) :-
 	(VorgangsOrt = ortKleineRaffinerie; VorgangsOrt = ortMittlereRaffinerie; VorgangsOrt = ortGrosseRaffinerie) ->
@@ -97,12 +102,12 @@ bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
 	assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung)).
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
-	Vorgang = [_, [bauen, _], _, _],
+	Vorgang = [_, bauen, _, _],
 	spielStatus:vorhaben(_, _, bauen, VorgangsOrt),
 	!.
 		
 vorgangsOrt(Groesste, Vorgang, VorgangsOrt) :-
-	Vorgang = [_, [raffinieren, _], Komponenten, _],
+	Vorgang = [_, raffinieren, Komponenten, _],
 	length(Komponenten, AnzKomponenten),
 	AnzKomponenten = 1,
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
@@ -118,7 +123,7 @@ vorgangsOrt(Groesste, Vorgang, VorgangsOrt) :-
 	!.
 	
 vorgangsOrt(Groesste, Vorgang, VorgangsOrt) :-
-	Vorgang = [_, [raffinieren, _], Komponenten, _],
+	Vorgang = [_, raffinieren, Komponenten, _],
 	length(Komponenten, AnzKomponenten),
 	AnzKomponenten = 2,
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
@@ -132,7 +137,7 @@ vorgangsOrt(Groesste, Vorgang, VorgangsOrt) :-
 	!.
 	
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
-	Vorgang = [_, [raffinieren, _], Komponenten, _],
+	Vorgang = [_, raffinieren, Komponenten, _],
 	length(Komponenten, AnzKomponenten),
 	AnzKomponenten = 3,
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
@@ -141,13 +146,13 @@ vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	!.
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
-	Vorgang = [_, [Operation1, _], _, _],
-	sammelAktion:sammelAktion(Operation1, VorgangsOrt),
+	Vorgang = [_, Operation, _, _],
+	sammelAktion:sammelAktion(Operation, VorgangsOrt),
 	!.
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
-	Vorgang = [_, [Operation1, _], _, _],
-	wandelAktion:wandelAktion(Operation1, VorgangsOrt),
+	Vorgang = [_, Operation, _, _],
+	wandelAktion:wandelAktion(Operation, VorgangsOrt),
 	!.
 
  

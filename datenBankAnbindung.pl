@@ -46,7 +46,7 @@ datenNachAccessSpeichern :-
 	odbc_free_statement(Statement3),
 		
     /* sammlung */
-	odbc_prepare(noMansSkyDb, 'Insert into sammlung(SammelAktion, Stoff, HauptZeit, NebenZeit) values (?, ?, ?, ?);', [varchar(255), varchar(255), integer, integer], Statement4),
+	odbc_prepare(noMansSkyDb, 'Insert into sammlung(SammelAktion, Stoff, HauptZeit, NebenZeit, RuestZeit) values (?, ?, ?, ?, ?);', [varchar(255), varchar(255), integer, integer, integer], Statement4),
 	forall(sammlung:sammlung(SammelAktion, Stoff, HauptZeit, NebenZeit), odbc_execute(Statement4, [SammelAktion, Stoff, HauptZeit, NebenZeit])),
 	odbc_close_statement(Statement4),
 	odbc_free_statement(Statement4),
