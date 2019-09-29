@@ -19,16 +19,14 @@ produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	Wert is EinzelWert * Anzahl, 
 	memberchk([_, Stoff], Komponenten).
 
-/* Declarationen */
-/* 
 
-*/
-	
-testMinimaleSammlung :-
+
+/* TESTS */
+testOptimierteSammlung :-
 	stoff:stoff(_, Stoff, _, _),
-	minimaleSammlungLoesung(1, Stoff),
+	optimierungsZiel(OptZiel),
+	optimierteLoesung(OptZiel, 1, Stoff),
 	fail.
-
 
 testStoffNichtSammelbar(Stoff) :-
  	stoff:stoff(_, Stoff, _),
@@ -48,19 +46,4 @@ testRezepte(FehlOperation, FehlOpProdukt,
 	format('Fertigungszeiten ok~n').
 	
 testStoff :-
-	format('Eingangsstoffe testen '),
-	\+stoff:fehlerInputStoffNichtDefiniert(_),
-	format('ok~n'),
-	format('Ausgangsstoffe testen '),
-	\+stoff:fehlerOutputStoffNichtDefiniert(_),
-	format('ok~n'),
-	format('Wertangaben testen '),
-	\+stoff:produktNichtBewertet(_),
-	format('ok~n'),
-	format('Doppelte testen '),
-	\+stoff:doppelteInStoff,
-	format('ok~n'),
-	format('Verwendung testen~n'),
-	\+stoff:stoffNichtVerwendet(_),
-	format('ok~n').
-	
+	stoff:testAll.
