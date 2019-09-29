@@ -49,5 +49,5 @@ stoffErlangen(Request) :-
         format('</table>'),
 	    format('<hr>~n', []),
 	    !,
-	    \+main:optimierteLoesung(Ziel, Anzahl, Stoff) -> ausgabe:nichtHerstellBar(Stoff); true/* */
+	    \+main:optimierteLoesung(Ziel, Anzahl, Stoff) -> \+ausgabe:nichtHerstellBar(Ziel, Stoff); true/* */
         .

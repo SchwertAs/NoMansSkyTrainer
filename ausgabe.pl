@@ -1,4 +1,4 @@
-:- module(ausgabe, [printMinSammlungForm/7]).
+:- module(ausgabe, [printMinSammlungForm/7, nichtHerstellBar/2]).
 
 printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
 	format('<table width="25%" border="1">
@@ -37,10 +37,29 @@ printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung
 	ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	format('</table>~n').
 
-nichtHerstellBar(Stoff) :-
+nichtHerstellBar(Ziel, Stoff) :-
 	stoff:stoff(_, Stoff, Wert),
-	format('<h3>Stoff kann nicht hergestellt werden. Kaufwert ca. ~k</h3>', Wert).
-	
+	format('<h3>~k kann nicht hergestellt werden, ~nKaufpreis ca. ~k u~n</h3>', [Stoff, Wert]),
+	format('<h3>Begründung:~n</h3>'),
+	(suchAlgorithmus:ersterNichtBeschaffbarerStoff(Ziel, ErsterNichtBeschaffbarerStoff, Vorgaenge);
+	 format('<h3>Stoff kann weder gesammelt noch hergestellt werden.</h3>')
+	),
+	ErsterNichtBeschaffbarerStoff \= none,
+	format('<h3>Die Komponente ~k kann für den folgenden Bauplanversuch nicht beschafft werden:~n</h3>', [ErsterNichtBeschaffbarerStoff]),
+	format('<table width="100%" border="1">
+			  <caption>
+			    <h2>Aktionsreihenfolge</h2>
+			  </caption>
+			  <tr>
+			    <th scope="col">Anweisung&nbsp;</th>
+			    <th scope="col">Operation&nbsp;</th>
+			    <th scope="col">Ergebnis&nbsp;</th>
+			  </tr>~n'),
+	ausgabeVorgaenge(Vorgaenge),
+	format('</table>~n'),
+	fail.
+
+
 ausgabeSammlung(SammelSet) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	SammelSet = SammelSet0.
