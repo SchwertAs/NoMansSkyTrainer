@@ -11,39 +11,37 @@ server(Port) :-
         http_server(http_dispatch, [port(Port)]).
 
 
-:- http_handler('/', rootForm, []).
+:- http_handler('/stoffErlangenAusWahl', stoffErlangenAusWahl, []).
 :- http_handler('/favicon.ico', dummy, []).
 
-rootForm(_Request) :-
+stoffErlangenAusWahl(_Request) :-
 	baueOptionsFeld('auswahlRohStoff', [rohStoff, rohUndKochStoff], OptionList1),
 	baueOptionsFeld('auswahlProdukt', [produkt, produktUndKochStoff], OptionList2),
 	baueOptionsFeld('auswahlBau', [basisBauEndStoff], OptionList3),
 	baueOptionsFeld('auswahlModul', [modul], OptionList4),
 	baueOptionsFeld('auswahlGericht', [kochStoff, produktUndKochStoff, rohUndKochStoff], OptionList5),
 	baueFelderMenge(FelderMenge),
-	HtmlString = [
-	  form([action='/stoffErlangen', method='post'], 
-	       	[  	h1(['Empfohlene Handlungen um bestimmten Stoff zu erhalten']),
-		        p([], [\[FelderMenge]]),
-		        
+	TermerizedBody = [
+		\['<header>'],
+	    h1(['Empfohlene Handlungen um bestimmten Stoff zu erhalten']),
+	    \['</header>'],
+		\['<formSpace>'],       
+	    form([action='/stoffErlangen', method='post'], 
+	       	[  	p([], [\[FelderMenge]]),
 			  	h2(['Anzahl']),
 			    p([], [input([name='anzahl', type='text', value='', size='24'])]),
-			    h2(['Rohstoffe']),
-		        p([], OptionList1),
-			    h2(['Produkte']),
-		        p([], OptionList2),
-			    h2(['Basis-Bauteile']),
-		        p([], OptionList3),
-			    h2(['Module']),
-		        p([], OptionList4),
-			    h2(['Gerichte']),
-		        p([], OptionList5),
+			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
+			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
+			       tr([td(OptionList1), td(OptionList2), td(OptionList3), td(OptionList4), td(OptionList5)])
+			      ]),
 		        p([], [input([name='submit', type='submit', value='OK'])])
 	      	]
-	      )
+	      ),
+		\['</formSpace>']     
 	],
-	reply_html_page(
-	title('stoffErlangenDialog'), HtmlString
+	holeCssAlsStyle(StyleString),
+	TermerizedHead = [\[StyleString], title('stoffErlangenDialog')],
+	reply_html_page(TermerizedHead, TermerizedBody
 	).
 
         
@@ -89,5 +87,33 @@ baueFelderMenge(FelderMenge) :-
         </label>
      </fieldset>'.
 	
+holeCssAlsStyle(StyleString) :-
+	StyleString = '<style>
+body {
+    margin: 0 auto;
+    max-width: 85em;	
+    display: grid;
+  	grid-template-columns: repeat(3, 1fr); 
+	}
+header {
+	grid-column: 1 / span 3;
+	grid-row: 1 / auto;
+    }
+formSpace {
+	grid-column: 1 / span 3;
+	grid-row: 2 / 3;
+	}
+
+header,
+formSpace {
+	background: #ebf5d7;
+	border-color: #8db243;
+	border-radius: 0px 0.5em 0.5em;
+	border: 1px solid;
+	padding: .5em;
+	margin: .5em;
+}
+</style>'.
+
 dummy(_)  :-
 	format('').
