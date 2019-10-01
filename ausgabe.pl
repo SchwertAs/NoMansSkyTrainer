@@ -1,220 +1,153 @@
-:- module(ausgabe, [printMinSammlungForm/7, nichtHerstellBar/2]).
+:- module(ausgabe, [ausgabeSammlung/3, ausgabeVorgaenge/3, ausgabeSummen/6 ]).
 
-printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
-	format('<table width="25%" border="1">
-			  <caption>
-			    <h2>Stückliste</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">Anzahl&nbsp;</th>
-			    <th scope="col">Stoff&nbsp;</th>
-			  </tr>~n'
-			),
-	ausgabeSammlung(SammelSet),
-	format('</table>~n'),
-	format('<hr>~n', []),
-	format('<table width="100%" border="1">
-			  <caption>
-			    <h2>Aktionsreihenfolge</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">Anweisung&nbsp;</th>
-			    <th scope="col">Operation&nbsp;</th>
-			    <th scope="col">Ergebnis&nbsp;</th>
-			  </tr>~n'),
-	ausgabeVorgaenge(Vorgaenge),
-	format('</table>~n'),
-	format('<hr>~n', []),
-	format('<table width="35%" border="1">
-			  <caption>
-			    <h2>Summenwerte</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">Summenwert&nbsp;</th>
-			    <th scope="col">Anzahl&nbsp;</th>
-			    <th scope="col">Einheit&nbsp;</th>
-			  </tr>~n'),
-	ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
-	format('</table>~n').
-
-nichtHerstellBar(Ziel, Stoff) :-
-	stoff:stoff(_, Stoff, Wert),
-	format('<h3>~k kann nicht hergestellt werden, ~nKaufpreis ca. ~k u~n</h3>', [Stoff, Wert]),
-	format('<h3>Begründung:~n</h3>'),
-	(suchAlgorithmus:ersterNichtBeschaffbarerStoff(Ziel, ErsterNichtBeschaffbarerStoff, Vorgaenge);
-	 format('<h3>Stoff kann weder gesammelt noch hergestellt werden.</h3>')
-	),
-	ErsterNichtBeschaffbarerStoff \= none,
-	format('<h3>Die Komponente ~k kann für den folgenden Bauplanversuch nicht beschafft werden:~n</h3>', [ErsterNichtBeschaffbarerStoff]),
-	format('<table width="100%" border="1">
-			  <caption>
-			    <h2>Aktionsreihenfolge</h2>
-			  </caption>
-			  <tr>
-			    <th scope="col">Anweisung&nbsp;</th>
-			    <th scope="col">Operation&nbsp;</th>
-			    <th scope="col">Ergebnis&nbsp;</th>
-			  </tr>~n'),
-	ausgabeVorgaenge(Vorgaenge),
-	format('</table>~n'),
-	fail.
-
-
-ausgabeSammlung(SammelSet) :-
+ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
-	SammelSet = SammelSet0.
+	SammelSet = SammelSet0,
+	SammelListDanach = SammelList.
 	
-ausgabeSammlung(SammelSet) :-
+ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	get_dict(Stoff, SammelSet, Vorgang),
 	Vorgang = [Operation, _],
 	Operation = bekannt,
-	format('<tr>~n'),
-	format('<td>~k&nbsp;</td>~n', 1),
-	format('<td>~k&nbsp;</td>~n', Stoff),
-	format('</tr>~n'),
+	atom_string(Stoff, StoffString),
+	append(SammelList, [sam('1', StoffString)], SammelList0),
 	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
-	ausgabeSammlung(SammelSetDanach),
+	ausgabeSammlung(SammelSetDanach, SammelList0, SammelListDanach),
 	!. 
 
-ausgabeSammlung(SammelSet) :-
+ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	get_dict(Stoff, SammelSet, Vorgang),
 	Vorgang = [Operation, SammelAnzahl],
 	Operation \= bekannt,
-	format('<tr>~n'),
-	format('<td>~k&nbsp;</td>~n', SammelAnzahl),
-	format('<td>~k&nbsp;</td>~n', Stoff),
-	format('</tr>~n'),
+	number_string(SammelAnzahl, SammelAnzahlString),
+	atom_string(Stoff, StoffString),
+	append(SammelList, [sam(SammelAnzahlString, StoffString)], SammelList0),
 	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
-	ausgabeSammlung(SammelSetDanach),
+	ausgabeSammlung(SammelSetDanach, SammelList0, SammelListDanach),
 	!. 
-    
-ausgabeVorgaenge(Vorgaenge) :-
-	gebeAus(Vorgaenge).
 
-gebeAus(Vorgaenge) :-
+ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
+	gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach).
+
+gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [],
+	VorgaengePred = VorgaengePredDanach,
 	!.
 	
-gebeAus(Vorgaenge) :-
+gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [WandelAnz, Operation, Komponenten, [ProduktAnzahl, Produkt]],
 	wandelAktion:wandelAktion(Operation, _),
-	format('<tr>~n'),
-	format('<td>Führen Sie ', []),
-	format('~k', WandelAnz),
-	format(' mal '),
-	format('~k', Operation),
-	format(' von '),
-	format('~k', Produkt),
-	format(' unter Verwendung von '),
-	gebeKomponenteAus(Komponenten),
-	format(' aus'),
-	format('.~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>~n', Operation),
-	format('<td>'),
-	format('~k ', ProduktAnzahl),
-	format('Einheiten ~k', Produkt),
-	format('~n&nbsp;</td>'),
-	format('</tr>~n'),
-	gebeAus(Rest),
+	
+	gebeKomponenteAus(Komponenten, '', KompPred),
+	atom_string(WandelAnz, WandelAnzString),
+	atom_string(Operation, OperationString),
+	atom_string(Produkt, ProduktString),
+
+ 	string_concat('Führen Sie ', WandelAnzString, Anweisung0),
+ 	string_concat(Anweisung0, ' mal ', Anweisung1),
+ 	string_concat(Anweisung1, OperationString, Anweisung2),
+ 	string_concat(Anweisung2, ' von ', Anweisung3),
+ 	string_concat(Anweisung3, ProduktString, Anweisung4),
+ 	string_concat(Anweisung4, ' unter Verwendung von ', Anweisung5),
+ 	string_concat(Anweisung5, KompPred, Anweisung6),
+ 	string_concat(Anweisung6, ' aus', Anweisung),
+
+    bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis),
+	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
+	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge) :-
+gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [_, Operation, _, [_, Produkt]],
 	Operation = bekannt,
-	format('<tr>~n'),
-	format('<td>'),
-	format('Das ~k ist bekannt.', Produkt),
-	format('~n&nbsp;</td>'),
-	format('<td>&nbsp;</td>~n'),
-	format('<td>~n&nbsp;</td>'),
-	format('</tr>~n'),
-	gebeAus(Rest),
+	atom_string(Produkt, ProduktString),
+	string_concat('Das ', ProduktString, Anweisung0),
+	string_concat(Anweisung0, ' ist bekannt.', Anweisung),
+	append(VorgaengePred, [vorg(Anweisung, Operation, '')], VorgaengePred0),
+	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge) :-
+gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [WandelAnz, Operation, _, [_, Produkt]],
 	sammelAktion:sammelAktion(Operation, _),
-	format('<tr>~n'),
-	format('<td>'),
-	format('Erlangen Sie ~k ', WandelAnz),
-	format('Einheiten ~k mit ', Produkt),
-	format('~k', Operation),
-	format('.~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>~n', Operation),
-	format('<td>'),
-	format('~k ', WandelAnz),
-	format('Einheiten ~k', Produkt),
-	format('~n&nbsp;</td>'),
-	format('</tr>~n'),
-	gebeAus(Rest),
+	atom_string(WandelAnz, WandelAnzString),
+	atom_string(Operation, OperationString),
+	atom_string(Produkt, ProduktString),
+
+ 	string_concat('Erlangen Sie ', WandelAnzString, Anweisung0),
+ 	string_concat(Anweisung0, ' Einheiten ', Anweisung1),
+ 	string_concat(Anweisung1, ProduktString, Anweisung2),
+ 	string_concat(Anweisung2, ' mit ', Anweisung3),
+ 	string_concat(Anweisung3, OperationString, Anweisung),
+ 	bildeErgebnis(WandelAnz, Produkt, Ergebnis),
+ 	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
+	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge) :-
+gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [_, Operation, [[_, _], [_, Nach]], [_, Produkt]],
 	Operation = reisen,
-	format('<tr>~n'),
-	format('<td>'),
-	format('Bitte ~k Sie nach ', Operation),
-	format('~k.', Nach),
-	format('~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>~n', Operation),
-	format('<td>'),
-	format('in ~k ', Nach),
-	format('~k~n&nbsp;', Produkt),
-	format('</tr>~n'),
-	gebeAus(Rest),
+	atom_string(Nach, NachString),
+	atom_string(Produkt, ProduktString),
+
+ 	string_concat('Bitte reisen Sie nach ', NachString, Anweisung),
+ 	
+ 	string_concat('in ', NachString, Ergebnis0),
+ 	string_concat(Ergebnis0, ' ', Ergebnis1),
+ 	string_concat(Ergebnis1, ProduktString, Ergebnis),
+
+ 	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
+	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge) :-
+gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ _ | Rest], 
-	gebeAus(Rest),
+	gebeAus(Rest, VorgaengePred, VorgaengePredDanach),
 	!.		 
 
-gebeKomponenteAus(Komponenten) :-
-	Komponenten = [].
+bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis) :-
+	atom_string(ProduktAnzahl, ProduktAnzahlString),
+	atom_string(Produkt, ProduktString),
+ 	string_concat(ProduktAnzahlString, ' Einheiten ', Ergebnis0),
+ 	string_concat(Ergebnis0, ProduktString, Ergebnis).	
+
+gebeKomponenteAus(Komponenten, KompPred, KompPredDanach) :-
+	Komponenten = [],
+	KompPredDanach = KompPred.
 	
-gebeKomponenteAus(Komponenten) :-
+gebeKomponenteAus(Komponenten, KompPred, KompPredDanach) :-
 	Komponenten = [ Kopf | Rest ],
 	Kopf = [Anzahl, Stoff],
-	format('~k x ', Anzahl),
-	format('~k', Stoff),
-	(Rest \= [], format(', '); format(' ')),
-	gebeKomponenteAus(Rest),
+	atom_string(Anzahl, AnzahlString),
+	atom_string(Stoff, StoffString),
+	string_concat(KompPred, AnzahlString, KompPred0),
+	string_concat(KompPred0, ' x ', KompPred1),
+	string_concat(KompPred1, StoffString, KompPred2),
+	(Rest \= [], string_concat(KompPred2, ', ', KompPred3); string_concat(KompPred2, '', KompPred3)),
+	gebeKomponenteAus(Rest, KompPred3, KompPredDanach),
 	!.
-	
-ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWertEndProdukt) :-
-	
-	format('<tr>~n<td>Sammeln Gesamtbedarf~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', GesamtZahl),
-	format('<td>Stück~n&nbsp;</td>~n</tr>'),
-    format('<tr>~n<td>Gesamtwert Sammlung~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', GesamtWertSammlung),
-	format('<td>Units~n&nbsp;</td>~n</tr>'),
-    format('<tr>~n<td>GesamtZeitAufwand~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', GesamtZeit),
-	format('<td>1/100 sec~n&nbsp;</td>~n</tr>'),
-    format('<tr>~n<td>Kosten Eingangsstoffe~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', GesamtKosten),
-	format('<td>Units~n&nbsp;</td>~n</tr>'),
-    format('<tr>~n<td>Gesamtwert Endstoff~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', GesamtWertEndProdukt),
-	format('<td>Units~n&nbsp;</td>~n</tr>'),
-    MehrWert is GesamtWertEndProdukt - GesamtKosten,
-    format('<tr>~n<td>Mehrwert~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', MehrWert),
-	format('<td>Units~n&nbsp;</td>~n</tr>'),
-	berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn),
-    format('<tr>~n<td>Stundenlohn~n&nbsp;</td>'),
-	format('<td>~k~n&nbsp;</td>', StundenLohn),
-	format('<td>Units/Stunde~n&nbsp;</td>~n</tr>').
 
-	berechneStundenLohn(GesamtZeit, _, StundenLohn) :-
+ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWertEndProdukt, SummenPred) :-
+    MehrWert is GesamtWertEndProdukt - GesamtKosten,
+	berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn),
+
+	SummenPred0 =[sum('Sammeln Gesamtbedarf', GesamtZahl, 'Stück')],
+	append(SummenPred0, [sum('Gesamtwert Sammlung', GesamtWertSammlung, 'Units')], SummenPred1),
+	append(SummenPred1, [sum('GesamtZeitAufwand', GesamtZeit, '1/100 sec')], SummenPred2),
+	append(SummenPred2, [sum('Kosten Eingangsstoffe', GesamtKosten, 'Units')], SummenPred3),
+	append(SummenPred3, [sum('Gesamtwert Endstoff', GesamtWertEndProdukt, 'Units')], SummenPred4),
+	append(SummenPred4, [sum('Mehrwert', MehrWert, 'Units')], SummenPred5),
+	append(SummenPred5, [sum('Stundenlohn', StundenLohn, 'Units/Stunde')], SummenPred).
+
+berechneStundenLohn(GesamtZeit, _, StundenLohn) :-
 		GesamtZeit = 0,
 		StundenLohn = 0.
 	
-	berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn) :-
+berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn) :-
 	StundenLohn is round(MehrWert * 360000 / GesamtZeit).
+	
+	
