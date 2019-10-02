@@ -834,7 +834,7 @@ rezept(kochen, [[1, gefroreneKnollen], [1, schrecklicherBrei]],[1, eisSchreie], 
 rezept(kochen, [[1, frostKristall], [1, schrecklicherBrei]],[1, eisSchreie], 260).
 
 Obsolet weil larvenkern nicht mehr kochbar
-rezept(kochen, [[1, verarbeiteterZucker], [1, larvenKern]],[1, delikatesBaiser], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, larvenKern]],[1, delikatessBaiser], 260).
 rezept(kochen, [[1, larvenKern], [1, wuerzigerKaese]],[1, fluesterndesOmelett], 260).
 rezept(kochen, [[1, larvenKern]],[1, gebackeneEier], 260).
 rezept(kochen, [[1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
@@ -849,7 +849,7 @@ rezept(kochen, [[1, klebrigeButter], [1, larvenKern], [1, verfeinertesMehl]],[1,
 rezept(kochen, [[1, klebrigeProtoButter], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
 rezept(kochen, [[1, protoButterMitHonig], [1, larvenKern], [1, verfeinertesMehl]],[1, heulenderTeig], 260).
 rezept(kochen, [[1, sahne], [1, larvenKern], [1, verarbeiteterZucker]],[1, monstroeserPudding], 260).
-rezept(kochen, [[1, delikatesBaiser], [1, larvenKern], [1, verfeinertesMehl]],[1, windenderAufgewuehlterTeig], 260).
+rezept(kochen, [[1, delikatessBaiser], [1, larvenKern], [1, verfeinertesMehl]],[1, windenderAufgewuehlterTeig], 260).
 rezept(kochen, [[1, holzApfel], [1, heulenderTeig]],[1, apfelKuchenVerlorenerSeelen], 260).
 rezept(kochen, [[1, bitterSuesserKakao], [1, heulenderTeig]],[1, heimgesuchteSchokoTraeume], 260).
 rezept(kochen, [[1, heulenderTeig], [1, knusperKaramell]],[1, heulenderKaramellKuchen], 260).
@@ -945,8 +945,8 @@ rezept(kochen, [[1, mordit], [1, innereienBeutel]],[1, blutigesOrgan], 260).
 rezept(kochen, [[1, teig]],[1, brot], 260).
 rezept(kochen, [[1, geschlageneButter], [1, geschlageneButter]],[1, bratOel], 260).
 rezept(kochen, [[1, sahne], [1, sahne]],[1, cremigeSosse], 260).
-rezept(kochen, [[1, verarbeiteterZucker], [1, kreaturenEi]],[1, delikatesBaiser], 260).
-rezept(kochen, [[1, verarbeiteterZucker], [1, grosseEier]],[1, delikatesBaiser], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, kreaturenEi]],[1, delikatessBaiser], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, grosseEier]],[1, delikatessBaiser], 260).
 rezept(kochen, [[1, klobigerDonut], [1, sternenPudding]],[1, derStellarator], 260).
 rezept(kochen, [[1, cremigeSosse], [1, geheimnisVollerFleischEintopf]],[1, dickerFleischEintopf], 260).
 rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeButter], [1, kreaturenEi]],[1, dickerSuesserTeig], 260).
@@ -980,8 +980,8 @@ rezept(kochen, [[1, klebrigerPudding], [1, anormaleMarmelade], [1, gefroreneKnol
 rezept(kochen, [[1, dickerSuesserTeig], [1, sahne], [1, anormaleMarmelade]],[1, ewigerHonigKuchen], 260).
 rezept(kochen, [[1, kuchenTeig], [1, sahne], [1, anormaleMarmelade]],[1, ewigerKuchen], 260).
 rezept(kochen, [[1, extraFluffigerTeig], [1, sahne], [1, anormaleMarmelade]],[1, ewigesMarmeladenBiskuit], 260).
-rezept(kochen, [[1, verfeinertesMehl], [1, delikatesBaiser], [1, kreaturenEi]],[1, extraFluffigerTeig], 260).
-rezept(kochen, [[1, verfeinertesMehl], [1, delikatesBaiser], [1, grosseEier]],[1, extraFluffigerTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, delikatessBaiser], [1, kreaturenEi]],[1, extraFluffigerTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, delikatessBaiser], [1, grosseEier]],[1, extraFluffigerTeig], 260).
 rezept(kochen, [[1, fleischigeWurzeln], [1, fleischigeWurzeln]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, fleischigeWurzeln], [1, geduenstetesGemuese]],[1, fasrigerEintopf], 260).
 rezept(kochen, [[1, fleischigeWurzeln], [1, impulsBohnen]],[1, fasrigerEintopf], 260).
@@ -1037,10 +1037,10 @@ rezept(kochen, [[1, mordit]], [1, fleischFlocken], 260).
 rezept(kochen, [[1, fleischFlocken]],[1, fleischigeStuecke], 260).
 rezept(kochen, [[1, geheimnisVollerFleischEintopf], [1, wohlSchmeckendeSosse]],[1, fleischMitGewurzKruste], 260).
 rezept(kochen, [[1, extraFluffigerTeig], [1, knusperKaramell]],[1, fluffigeKaramellFreude], 260).
-rezept(kochen, [[1, kuchenTeig], [1, klebrigerHonig]],[1, fragwuerdigSuesserKuchen], 260).
-rezept(kochen, [[1, kuchenTeig], [1, klebrigeButter]],[1, fragwuerdigSuesserKuchen], 260).
-rezept(kochen, [[1, dickerSuesserTeig], [1, klebrigerHonig]],[1, fragwuerdigSuesserKuchen], 260).
-rezept(kochen, [[1, dickerSuesserTeig], [1, klebrigeButter]],[1, fragwuerdigSuesserKuchen], 260).
+rezept(kochen, [[1, kuchenTeig], [1, klebrigerHonig]],[1, fragwuerdigerSuesserKuchen], 260).
+rezept(kochen, [[1, kuchenTeig], [1, klebrigeButter]],[1, fragwuerdigerSuesserKuchen], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, klebrigerHonig]],[1, fragwuerdigerSuesserKuchen], 260).
+rezept(kochen, [[1, dickerSuesserTeig], [1, klebrigeButter]],[1, fragwuerdigerSuesserKuchen], 260).
 rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, kaktusGelee]],[1, fruchtEisCreme], 260).
 rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen], [1, kaktusGelee]],[1, fruchtEisCreme], 260).
 rezept(kochen, [[1, klebrigerPudding], [1, frostKristall], [1, fellKnaeuelGelee]],[1, fruchtEisCreme], 260).
@@ -1267,7 +1267,6 @@ rezept(kochen, [[1, grahBeere]],[1, verarbeiteterZucker], 260).
 rezept(kochen, [[1, kaktusNektar]],[1, verarbeiteterZucker], 260).
 rezept(kochen, [[1, suessWurzel]],[1, verarbeiteterZucker], 260).
 rezept(kochen, [[1, beinFleisch]],[1, verarbeitetesFleisch], 260).
-rezept(kochen, [[1, diploStuecke]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, fleischigeFluegel]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, fleischigeStuecke]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, innereienBeutel]],[1, verarbeitetesFleisch], 260).
@@ -1295,7 +1294,7 @@ rezept(kochen, [[1, katzenLeber], [1, tortenBoden]],[1, zaeheOrganPaste], 260).
 
 /* nicht verifiziert wegen fehlender Zutaten */
 /* riesenEi fehlt */
-rezept(kochen, [[1, verarbeiteterZucker], [1, riesenEi]],[1, delikatesBaiser], 260).
+rezept(kochen, [[1, verarbeiteterZucker], [1, riesenEi]],[1, delikatessBaiser], 260).
 rezept(kochen, [[1, riesenEi]],[1, gebackeneEier], 260).
 rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeProtoButter], [1, riesenEi]],[1, dickerSuesserTeig], 260).
 rezept(kochen, [[1, riesenEi], [1, gesuessteProtoButter], [1, verfeinertesMehl]],[1, protoTeig], 260).
@@ -1304,9 +1303,10 @@ rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeButter], [1, riesenEi]],[1, d
 rezept(kochen, [[1, riesenEi], [1, sahne], [1, verarbeiteterZucker]],[1, klebrigerPudding], 260).
 rezept(kochen, [[1, riesenEi], [1, gesuessteButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
 rezept(kochen, [[1, riesenEi], [1, honigButter], [1, verfeinertesMehl]],[1, kuchenTeig], 260).
-rezept(kochen, [[1, verfeinertesMehl], [1, delikatesBaiser], [1, riesenEi]],[1, extraFluffigerTeig], 260).
+rezept(kochen, [[1, verfeinertesMehl], [1, delikatessBaiser], [1, riesenEi]],[1, extraFluffigerTeig], 260).
 
 /* diploStuecke fehlt */
+rezept(kochen, [[1, diploStuecke]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, diploStuecke], [1, tortenBoden]],[1, geheimnisVolleFleischPastete], 260).
 rezept(kochen, [[1, diploStuecke], [1, diploStuecke]],[1, geheimnisVollerFleischEintopf], 260).
 rezept(kochen, [[1, diploStuecke], [1, fleischigeFluegel]],[1, geheimnisVollerFleischEintopf], 260).
@@ -1657,7 +1657,6 @@ raffinerieRezeptHatKeineFertigungsZeit(Stoff, Komponenten) :-
 nichtHerstellbar(Stoff) :-
 	stoff:stoff(_, Stoff, _),
 	\+sammlung:sammelbar(Stoff, _),
-	\+sammlung:rezeptBekannt(Stoff),
 	\+rezept(_, _,[_,Stoff], _).
 
 rezeptDoppelt(Operation, Komponenten, Produkt) :-

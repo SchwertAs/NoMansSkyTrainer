@@ -20,18 +20,19 @@ stoffErlangenAusWahl(_Request) :-
 	baueOptionsFeld('auswahlBau', [basisBauEndStoff], OptionList3),
 	baueOptionsFeld('auswahlModul', [modul], OptionList4),
 	baueOptionsFeld('auswahlGericht', [kochStoff, produktUndKochStoff, rohUndKochStoff], OptionList5),
+
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], ['Auswahl für empfohlene Handlungen um bestimmten Stoff zu erhalten']),
+	    h1([align(center)], ['Auswahl fÃ¼r empfohlene Handlungen um bestimmten Stoff zu erhalten']),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/stoffErlangen'), method('post')], 
-	       	[  	fieldset([name('fieldSet1')], [legend(['Möglichst wenig']),
+	       	[  	fieldset([name('fieldSet1')], [legend(['MÃ¶glichst wenig']),
 	       					p([input([type(radio), name('optimierungsZiel'), id('optimierungsZiel'), value('minimaleZeit')]),
 	       					   label([for('Zeitverbrauch')])
 	       					  ]),
 	       					p([input([type(radio), checked(true), name('optimierungsZiel'), id('optimierungsZielSammelZahl'), value('minimaleSammlung')]),
-	       					   label([for('Sammlungsgegenstände')])
+	       					   label([for('SammlungsgegenstÃ¤nde')])
 	       					  ]),
 	       					p([
 	       					   input([type(radio), name('optimierungsZiel'), id('optimierungsZielSammelKosten'), value('minimaleKosten')]),
@@ -41,6 +42,7 @@ stoffErlangenAusWahl(_Request) :-
 	       		/* [\[FelderMenge]]), */
 			  	h2(['Anzahl']),
 			    p(input([name('anzahl'), type('text'), value(''), size='24'])),
+
 			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
 			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
 			       tr([td(OptionList1), td(OptionList2), td(OptionList3), td(OptionList4), td(OptionList5)])
@@ -69,7 +71,7 @@ baueOptionsFeld(FeldName, StoffKlassen, OptionList) :-
 baueOptionen(StoffKlassen, Optionen) :-
 	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe),
 	sort(Stoffe, StoffeSet),
-	BisherList = '<option>Bitte wählen</option>',
+	BisherList = '<option>Bitte wÃ¤hlen</option>',
 	baueOption(StoffeSet, BisherList, Optionen).
 	
 baueOption(StoffList, BisherList, NextList) :-
@@ -118,6 +120,7 @@ formSpace,
 button1Space,
 button2Space,
 button3Space {
+
 	background: #ebf5d7;
 	border-color: #8db243;
 	border-radius: 0px 0.5em 0.5em;

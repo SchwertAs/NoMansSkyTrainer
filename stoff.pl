@@ -46,12 +46,24 @@ stoff(rohStoff, zytoPhosphat, 201).
 
 /* =============================== hergestellte Produkte ================ */
 /* herstellen mit Fabrikrezept oder Questrezept, verkaufen */
+stoff(komponente, antiMaterie, 5233).
+stoff(komponente, antiMaterieGehaeuse, 6500).
+stoff(komponente, diWasserStoffGelee, 200).
+stoff(komponente, hermetischesSiegel, 800).
+stoff(komponente, ionenAkku, 200).
+stoff(komponente, kobaltSpiegel, 20500).
+stoff(komponente, lebensErhaltungsGel, 200).
+stoff(komponente, metallPlatten, 800).
+stoff(komponente, mikroProzessor, 2000).
+stoff(komponente, natriumDiode, 3500).
+stoff(komponente, salzRefaktor, 30500).
+stoff(komponente, sauerStoffFilter, 615).
+stoff(komponente, sauerStoffKapsel, 350).
+stoff(komponente, raumSchiffStartTreibStoff, 450).
+
 stoff(produkt, angereicherterKohlenStoff, 50000).
-stoff(produkt, antiMaterie, 5233).
-stoff(produkt, antiMaterieGehaeuse, 6500).
 stoff(produkt, aronium, 25000).
 stoff(produkt, chlorGitter, 6150).
-stoff(produkt, diWasserStoffGelee, 200).
 stoff(produkt, fluessigSprengStoff, 800500).
 stoff(produkt, fortschrittlicherIonenAkku, 500).
 stoff(produkt, fregattenTreibStoff100to, 40000).
@@ -64,36 +76,25 @@ stoff(produkt, glas, 13000).
 stoff(produkt, grantine, 25000).
 stoff(produkt, halbLeiter, 320000).
 stoff(produkt, heissesEis, 320000).
-stoff(produkt, hermetischesSiegel, 800).
 stoff(produkt, herox, 25000).
 stoff(produkt, hitzeKondensator, 50000).
 stoff(produkt, hydrothermaleTreibStoffZelle, 7200).
 stoff(produkt, instabilesGel, 50000).
 stoff(produkt, instabilesNatrium, 12300).
 stoff(produkt, instabilesPlasma, 5750).
-stoff(produkt, ionenAkku, 200).
 stoff(produkt, iridesit, 150000).
 stoff(produkt, kabelBaum, 50000).
-stoff(produkt, kobaltSpiegel, 20500).
 stoff(produkt, kohlenStoffKristall, 3600).
 stoff(produkt, kryogenKammer, 3800000).
 stoff(produkt, kryoPumpe, 4500000).
 stoff(produkt, lebendesGlas, 566000).
-stoff(produkt, lebensErhaltungsGel, 200).
 stoff(produkt, lemmium, 25000).
 stoff(produkt, magnoGold, 25000).
-stoff(produkt, metallPlatten, 800).
-stoff(produkt, mikroProzessor, 2000).
-stoff(produkt, natriumDiode, 3500).
 stoff(produkt, organischerKatalysator, 320000).
 stoff(produkt, polyFaser, 130000).
 stoff(produkt, projektilMunition, 50).
 stoff(produkt, quantumProzessor, 4400000).
-stoff(produkt, raumSchiffStartTreibStoff, 450).
 stoff(produkt, saeure, 188000).
-stoff(produkt, salzRefaktor, 30500).
-stoff(produkt, sauerStoffFilter, 615).
-stoff(produkt, sauerStoffKapsel, 350).
 stoff(produkt, schaltPlatte, 916250).
 stoff(produkt, schmierMittel, 110000).
 stoff(produkt, seltenesMetallElement, 4200).
@@ -106,12 +107,15 @@ stoff(produkt, supraLeiter, 1500000).
 stoff(produkt, tetraKobalt, 6150).
 stoff(produkt, thermischesKondensat, 50000).
 stoff(produkt, tragbarerReaktor, 4200000).
+stoff(produkt, verteidigungsBeleg, 10000).
 stoff(produkt, warpZelle, 11733).
 stoff(produkt, warpHyperKern, 46750).
 
-stoff(produkt, atlasPassV1, 0).
-stoff(produkt, atlasPassV2, 0).
-stoff(produkt, atlasPassV3, 0).
+stoff(pass, atlasPassV1, 0).
+stoff(pass, atlasPassV2, 0).
+stoff(pass, atlasPassV3, 0).
+stoff(pass, fabrikUeberschreibungsEinheit, 0).
+stoff(handelsWare, fregattenForschungsModul, 95000).
 
 /* =============================== Ausruestung ========================== */
 /* ------------------------------- Anzugmodule -------------------------- */
@@ -665,12 +669,9 @@ stoff(basisBauEndStoff, zylinder, 0).
 /* nur kaufen und verkaufen */
 stoff(handelsWare, absprungKapselKoordinaten, 85000).
 stoff(handelsWare, protokollEntschluesselungsCode, 85000).
-stoff(handelsWare, fabrikUeberschreibungsEinheit, 0).
-stoff(handelsWare, fregattenForschungsModul, 0).
 stoff(handelsWare, geborgeneDaten, 50000).
 stoff(handelsWare, nanitHaufen, -1).
 stoff(handelsWare, navigationsDaten, 1000).
-stoff(handelsWare, verteidigungsBeleg, 0).
 stoff(handelsWare, antiHaftKolben, 6000).
 stoff(handelsWare, ausrangierteSchaltPlatte, 1000).
 stoff(handelsWare, autonomePositionierungsEinheit, 30000).
@@ -717,7 +718,7 @@ stoff(kuriositaet, beutelGift, 11685).
 stoff(kuriositaet, eiweissPerle, 9025).
 stoff(kuriositaet, gravitinoBall, 12445).
 stoff(kuriositaet, wirbelWuerfel, 5800).
-stoff(kuriositaet, divergenzWuerfel, 0).
+stoff(kuriositaet, divergenzWuerfel, 1).
 stoff(kuriositaet, dunkleMaterie, 1000).
 stoff(kuriositaet, endeDerDaemmerung, 1000).
 stoff(kuriositaet, gedankenBogen, 1000).
@@ -741,7 +742,7 @@ stoff(kuriositaet, sturmKristall, 129150).
 stoff(kuriositaet, tritiumHyperCluster, 3280).
 stoff(kuriositaet, umhuellterSchatten, 1000).
 stoff(kuriositaet, vierfachServo, 20000).
-stoff(kuriositaet, vykenTafel, 0).
+stoff(kuriositaet, vykenTafel, 1).
 stoff(kuriositaet, zustandsPhase, 1000).
 
 
@@ -1500,34 +1501,35 @@ stoffInFunktionErgebnisStoff(Stoff) :-
 
 fehlerInputStoffNichtDefiniert(Stoff) :-
 	stoffInFunktionEingangsStoff(Stoff),
-	\+stoff(_, Stoff, _, _),
-	format('falscher Eingangs-Stoff: ~k~n', Stoff).
+	\+stoff(_, Stoff, _),
+	format('~nfalscher Eingangs-Stoff: ~k~n', Stoff).
 
 fehlerOutputStoffNichtDefiniert(Stoff) :-
 	stoffInFunktionErgebnisStoff(Stoff),
-	\+stoff(_, Stoff, _, _),
-	format('falscher Produkt-Stoff: ~k~n', Stoff).
+	\+stoff(_, Stoff, _),
+	format('~nfalscher Produkt-Stoff: ~k~n', Stoff).
 
 produktNichtBewertet(Stoff) :-
-	stoff(StoffArt, Stoff, Wert, _),
-	basisBauEndStoff \= StoffArt,
-	modul \= StoffArt,
-	bauRezept \= StoffArt,
-	Wert = 0.
+	stoff(StoffArt, Stoff, Wert),
+	/* wenn kaufbar oder verkaufbar */
+	(stoffKlasse:stoffKlasse(StoffArt, _, true, _, _); stoffKlasse:stoffKlasse(StoffArt, _, _, true, _)),
+	Wert = 0,
+	format('~nElement(e) ~k ist nicht bewertet~n', Stoff)
+	.
 
 stoffNichtVerwendet(Stoff) :-
-	stoff(_, Stoff, _, _),
+	stoff(_, Stoff, _),
 	\+stoffInFunktionErgebnisStoff(Stoff),
 	\+stoffInFunktionEingangsStoff(Stoff),
-	format('Element(e) ~k ist nicht verwendet~n', Stoff),
+	format('~nElement(e) ~k ist nicht verwendet~n', Stoff),
 	fail.
 	
 doppelteInStoff :-
-	findall(Stoff0, stoff(_, Stoff0, _, _), StoffListe),
+	findall(Stoff0, stoff(_, Stoff0, _), StoffListe),
 	sort(StoffListe, Sorted),
 	dubChk(StoffListe, Sorted, Doppelte),
 	Doppelte \= [],
-	format('Element(e) ~k ist/sind doppelt~n', [Doppelte]).
+	format('~nElement(e) ~k ist/sind doppelt~n', [Doppelte]).
 
 dubChk(List, SortedList, Doppelte) :-
 	SortedList = [],
@@ -1537,3 +1539,21 @@ dubChk(List, SortedList, Doppelte) :-
 	SortedList = [ Kopf | SortedRest ],
 	selectchk(Kopf, List, RestList),
 	dubChk(RestList, SortedRest, Doppelte). 
+
+testAll :-	
+	format('Eingangsstoffe testen '),
+	\+stoff:fehlerInputStoffNichtDefiniert(_),
+	format('ok~n'),
+	format('Ausgangsstoffe testen '),
+	\+stoff:fehlerOutputStoffNichtDefiniert(_),
+	format('ok~n'),
+	format('Wertangaben testen '),
+	\+stoff:produktNichtBewertet(_),
+	format('ok~n'),
+	format('Doppelte testen '),
+	\+stoff:doppelteInStoff,
+	format('ok~n'),
+	format('Verwendung testen~n'),
+	\+stoff:stoffNichtVerwendet(_),
+	format('ok~n').
+	

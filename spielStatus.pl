@@ -17,10 +17,13 @@ spielStatusInit :-
 	
 	/* Basisausbau */
 	,assertz(spielStatus(torWarpVerfügbar))
+	,assertz(spielStatus(atmosphaerenAnlageSauerStoffVorhanden))
+	,assertz(spielStatus(atmosphaerenAnlageStickStoffVorhanden))
+	,assertz(spielStatus(kaufTerminalVorhanden))
 	
 	/* Bewegungsmöglichkeiten, Umgebung */ 
 	,assertz(spielStatus(raumSchiffIstFlott))
-	,assertz(spielStatus(exoFahrzeugIstFlott))
+	,assertz(spielStatus(exoFahrzeugMinenLaser))
 	,assertz(spielStatus(aussenPostenVerfügbar))
 	,assertz(spielStatus(frachterVorhanden))
 	,assertz(spielStatus(sphaereRufbar)) 
@@ -29,6 +32,8 @@ spielStatusInit :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
 	,abolish(systemAusstattung/2)
 	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageSauerStoff], 536)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageStickStoff], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWald], 1500)) /* fix */

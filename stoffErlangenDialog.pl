@@ -19,16 +19,16 @@ stoffErlangen(Request) :-
       optimierungsZiel(Ziel, [])
     ]),
     ((
-      (Stoff1 \= 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff1);
-      (Stoff1 = 'Bitte w‰hlen', Stoff2 \= 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff2);
-      (Stoff1 = 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 \= 'Bitte w‰hlen', Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff3);
-      (Stoff1 = 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', Stoff4 \= 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff4);
-      (Stoff1 = 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', Stoff4 = 'Bitte w‰hlen', Stoff5 \= 'Bitte w‰hlen', Stoff = Stoff5)
+      (Stoff1 \= 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff1);
+      (Stoff1 = 'Bitte w√§hlen', Stoff2 \= 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff2);
+      (Stoff1 = 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 \= 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff3);
+      (Stoff1 = 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 \= 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff4);
+      (Stoff1 = 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 \= 'Bitte w√§hlen', Stoff = Stoff5)
      );
-     (Stoff1 == 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = nil,
+     (Stoff1 == 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = nil,
       phrase(html([p('Bitte eine Auswahl treffen!')]), Tok), print_html(Tok), !, fail
      );
-     phrase(html([p('Bitte nur eine Auswahl treffen! Bei den nicht benˆtigten Auswahlen muss "Bitte w‰hlen" eingestellt sein')]), Tok), print_html(Tok), !, fail
+     phrase(html([p('Bitte nur eine Auswahl treffen! Bei den nicht ben√∂tigten Auswahlen muss "Bitte w√§hlen" eingestellt sein')]), Tok), print_html(Tok), !, fail
     ),
     atom_number(AtomAnzahl, Anzahl),
     
@@ -67,7 +67,7 @@ printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZah
 				   	   ])
 			       ]),
     		table( [width('25%'), border(1)], 
-		           [caption(h2('St¸ckliste')),
+		           [caption(h2('St√ºckliste')),
 		            tr([th([scope('col')],['Anzahl']),
 		            	th([scope('col')],['Stoff'])
 		               ]),
@@ -129,4 +129,3 @@ nichtHerstellBar(Stoff) :-
 	stoff:stoff(_, Stoff, Wert),
 	phrase(html([h3('Stoff kann nicht hergestellt werden. Kaufwert ca. '),  '~k', Wert]), Tok), print_html(Tok).
 
-    			   
