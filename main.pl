@@ -1,4 +1,4 @@
-:- module(main, [optimierteLoesung/3]).
+:- module(main, []).
 
 startServer :-
 	spielStatus:spielStatusInit,
@@ -7,11 +7,6 @@ startServer :-
 	format('Zum Server beenden Taste drücken!', []),
 	get_single_char(_).
 
-
-optimierteLoesung(OptimierungsZiel, Anzahl, Stoff) :-  
-	\+suchAlgorithmus:baue(OptimierungsZiel, Anzahl, Stoff),
-	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
-	ausgabe:printMinSammlungForm(SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
