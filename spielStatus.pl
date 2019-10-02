@@ -1,13 +1,15 @@
-:- module(spielStatus, [spielStatus/1, spielStatus:systemAusstattung/2, vorhaben/4]).
+:- module(spielStatus, [systeme/2, spielStatus/1, systemAusstattung/2, vorhaben/4]).
 
 :- dynamic(spielStatus/1).
-:- dynamic(spielStatus:systemAusstattung/2).
+:- dynamic(systeme/2).
+:- dynamic(systemAusstattung/2).
 :- dynamic(vorhaben/4).
 
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
 spielStatusInit :-  
-	abolish(spielerStatus/1)
+	abolish(systeme/2),
+	abolish(spielStatus/1)
 	,assertz(spielStatus(minenLaser))
 	,assertz(spielStatus(verbesserterMinenLaser))
 	,assertz(spielStatus(terrainFormer))

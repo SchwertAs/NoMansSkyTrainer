@@ -20,21 +20,34 @@ stoffErlangenAusWahl(_Request) :-
 	baueOptionsFeld('auswahlBau', [basisBauEndStoff], OptionList3),
 	baueOptionsFeld('auswahlModul', [modul], OptionList4),
 	baueOptionsFeld('auswahlGericht', [kochStoff, produktUndKochStoff, rohUndKochStoff], OptionList5),
-	baueFelderMenge(FelderMenge),
+
 	TermerizedBody = [
 		\['<header>'],
-	    h1(['Empfohlene Handlungen um bestimmten Stoff zu erhalten']),
+	    h1([align(center)], ['Auswahl f√ºr empfohlene Handlungen um bestimmten Stoff zu erhalten']),
 	    \['</header>'],
 		\['<formSpace>'],       
-	    form([action='/stoffErlangen', method='post'], 
-	       	[  	p([], [\[FelderMenge]]),
+	    form([action('/stoffErlangen'), method('post')], 
+	       	[  	fieldset([name('fieldSet1')], [legend(['M√∂glichst wenig']),
+	       					p([input([type(radio), name('optimierungsZiel'), id('optimierungsZiel'), value('minimaleZeit')]),
+	       					   label([for('Zeitverbrauch')])
+	       					  ]),
+	       					p([input([type(radio), checked(true), name('optimierungsZiel'), id('optimierungsZielSammelZahl'), value('minimaleSammlung')]),
+	       					   label([for('Sammlungsgegenst√§nde')])
+	       					  ]),
+	       					p([
+	       					   input([type(radio), name('optimierungsZiel'), id('optimierungsZielSammelKosten'), value('minimaleKosten')]),
+							   label([for('Kosten')])
+	       					  ])
+	       		         ]),
+	       		/* [\[FelderMenge]]), */
 			  	h2(['Anzahl']),
-			    p([], [input([name='anzahl', type='text', value='', size='24'])]),
+			    p(input([name('anzahl'), type('text'), value(''), size='24'])),
+
 			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
 			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
 			       tr([td(OptionList1), td(OptionList2), td(OptionList3), td(OptionList4), td(OptionList5)])
 			      ]),
-		        p([], [input([name='submit', type='submit', value='OK'])])
+			    p(input([name('submit'), type('submit'), value('OK')]))
 	      	]
 	      ),
 		\['</formSpace>']     
@@ -43,7 +56,6 @@ stoffErlangenAusWahl(_Request) :-
 	TermerizedHead = [\[StyleString], title('stoffErlangenDialog')],
 	reply_html_page(TermerizedHead, TermerizedBody
 	).
-
         
 baueOptionsFeld(FeldName, StoffKlassen, OptionList) :-
 	ListString1 = '<select name="',
@@ -59,7 +71,7 @@ baueOptionsFeld(FeldName, StoffKlassen, OptionList) :-
 baueOptionen(StoffKlassen, Optionen) :-
 	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe),
 	sort(Stoffe, StoffeSet),
-	BisherList = '<option>Bitte w‰hlen</option>',
+	BisherList = '<option>Bitte w√§hlen</option>',
 	baueOption(StoffeSet, BisherList, Optionen).
 	
 baueOption(StoffList, BisherList, NextList) :-
@@ -72,20 +84,6 @@ baueOption(StoffList, BisherList, NextList) :-
 	string_concat(BisherList, StoffString, BisherList2),
 	baueOption(Rest, BisherList2, NextList).
 	
-baueFelderMenge(FelderMenge) :-
-	FelderMenge = '<h3>Optimierungsstrategie</h3>
-     <fieldset>
-        <legend>Mˆglichst wenig</legend>
-        <label for="Zeitverbrauch">
-            <input type="radio" name="optimierungsZiel" id="optimierungsZielZeit" value="minimaleZeit"> Zeitverbrauch
-        </label>
-        <label for="Sammlungsgegenst‰nde">
-            <input type="radio" checked="true" name="optimierungsZiel" id="optimierungsZielSammelZahl" value="minimaleSammlung"> Sammlungsgegenst‰nde
-        </label>
-        <label for="Kosten">
-            <input type="radio" name="optimierungsZiel" id="optimierungsZielSammelKosten" value="minimaleKosten"> Kosten
-        </label>
-     </fieldset>'.
 	
 holeCssAlsStyle(StyleString) :-
 	StyleString = '<style>
@@ -94,18 +92,35 @@ body {
     max-width: 85em;	
     display: grid;
   	grid-template-columns: repeat(3, 1fr); 
+  	grid-template-rows: 160px auto, 30px; 
 	}
 header {
-	grid-column: 1 / span 3;
-	grid-row: 1 / auto;
+	grid-column: 1 / 4;
+	grid-row: 1;
     }
 formSpace {
-	grid-column: 1 / span 3;
-	grid-row: 2 / 3;
+	grid-column: 1 / 4;
+	grid-row: 2;
+	}
+button1Space {
+	grid-column: 1;
+	grid-row: 3;
+	}
+button2Space {
+	grid-column: 2;
+	grid-row: 3;
+	}
+button3Space {
+	grid-column: 3;
+	grid-row: 3;
 	}
 
 header,
-formSpace {
+formSpace,
+button1Space,
+button2Space,
+button3Space {
+
 	background: #ebf5d7;
 	border-color: #8db243;
 	border-radius: 0px 0.5em 0.5em;
