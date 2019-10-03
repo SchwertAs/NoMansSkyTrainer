@@ -1,14 +1,14 @@
-:- module(spielStatus, [systeme/2, spielStatus/1, systemAusstattung/2, vorhaben/4]).
+:- module(spielStatus, [planeten/2, systeme/2, spielStatus/1, systemAusstattung/2, vorhaben/4]).
 
 :- dynamic(spielStatus/1).
 :- dynamic(systeme/2).
+:- dynamic(planeten/2).
 :- dynamic(systemAusstattung/2).
 :- dynamic(vorhaben/4).
 
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
 spielStatusInit :-  
-	abolish(systeme/2),
 	abolish(spielStatus/1)
 	,assertz(spielStatus(minenLaser))
 	,assertz(spielStatus(verbesserterMinenLaser))
@@ -29,6 +29,10 @@ spielStatusInit :-
 	,assertz(spielStatus(sphaereRufbar)) 
 	,assertz(spielStatus(kampfWille))
 
+	,abolish(systeme/2)
+	,assertz(systeme('System', 'default'))
+	,abolish(planeten/2)
+	,assertz(planeten('System', 'MeinPlanet'))
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
 	,abolish(systemAusstattung/2)
 	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
