@@ -10,81 +10,8 @@
 server(Port) :-
         http_server(http_dispatch, [port(Port)]).
 
-
-:- http_handler('/stoffErlangenAusWahl', stoffErlangenAusWahl, []).
 :- http_handler('/favicon.ico', dummy, []).
 
-stoffErlangenAusWahl(_Request) :-
-	baueOptionsFeld('auswahlRohStoff', [rohStoff, rohUndKochStoff], OptionList1),
-	baueOptionsFeld('auswahlProdukt', [produkt, produktUndKochStoff], OptionList2),
-	baueOptionsFeld('auswahlBau', [basisBauEndStoff], OptionList3),
-	baueOptionsFeld('auswahlModul', [modul], OptionList4),
-	baueOptionsFeld('auswahlGericht', [kochStoff, produktUndKochStoff, rohUndKochStoff], OptionList5),
-
-	TermerizedBody = [
-		\['<header>'],
-	    h1([align(center)], ['Auswahl für empfohlene Handlungen um bestimmten Stoff zu erhalten']),
-	    \['</header>'],
-		\['<formSpace>'],       
-	    form([action('/stoffErlangen'), method('post')], 
-	       	[  	fieldset([name('fieldSet1')], [legend(['Möglichst wenig']),
-	       					p([input([type(radio), name('optimierungsZiel'), id('optimierungsZiel'), value('minimaleZeit')]),
-	       					   label([for('Zeitverbrauch')])
-	       					  ]),
-	       					p([input([type(radio), checked(true), name('optimierungsZiel'), id('optimierungsZielSammelZahl'), value('minimaleSammlung')]),
-	       					   label([for('Sammlungsgegenstände')])
-	       					  ]),
-	       					p([
-	       					   input([type(radio), name('optimierungsZiel'), id('optimierungsZielSammelKosten'), value('minimaleKosten')]),
-							   label([for('Kosten')])
-	       					  ])
-	       		         ]),
-	       		/* [\[FelderMenge]]), */
-			  	h2(['Anzahl']),
-			    p(input([name('anzahl'), type('text'), value(''), size='24'])),
-
-			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
-			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
-			       tr([td(OptionList1), td(OptionList2), td(OptionList3), td(OptionList4), td(OptionList5)])
-			      ]),
-			    p(input([name('submit'), type('submit'), value('OK')]))
-	      	]
-	      ),
-		\['</formSpace>']     
-	],
-	holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('stoffErlangenDialog')],
-	reply_html_page(TermerizedHead, TermerizedBody
-	).
-        
-baueOptionsFeld(FeldName, StoffKlassen, OptionList) :-
-	ListString1 = '<select name="',
-	string_concat(ListString1, FeldName, ListString2),
-	string_concat(ListString2, '" size="1" id="', ListString3),
-	string_concat(ListString3, FeldName, ListString4),
-	string_concat(ListString4, '">~n', ListString5),
-	baueOptionen(StoffKlassen, Options),
-	string_concat(ListString5, Options, ListString6),
-	string_concat(ListString6, '</select>', ListString7),
-	OptionList = [\[ListString7]].
-
-baueOptionen(StoffKlassen, Optionen) :-
-	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe),
-	sort(Stoffe, StoffeSet),
-	BisherList = '<option>Bitte wählen</option>',
-	baueOption(StoffeSet, BisherList, Optionen).
-	
-baueOption(StoffList, BisherList, NextList) :-
-	StoffList = [],
-	BisherList = NextList.
-
-baueOption(StoffList, BisherList, NextList) :-
-	StoffList = [Stoff|Rest],
-	format(string(StoffString), '<option>~k~n', Stoff),
-	string_concat(BisherList, StoffString, BisherList2),
-	baueOption(Rest, BisherList2, NextList).
-	
-	
 holeCssAlsStyle(StyleString) :-
 	StyleString = '<style>
 body {
@@ -129,6 +56,33 @@ button3Space {
 	margin: .5em;
 }
 </style>'.
+
+baueOptionsFeld(FeldName, OptionsWerteListe, OptionList) :-
+	ListString1 = '<select name="',
+	string_concat(ListString1, FeldName, ListString2),
+	string_concat(ListString2, '" size="1" id="', ListString3),
+	string_concat(ListString3, FeldName, ListString4),
+	string_concat(ListString4, '">~n', ListString5),
+	baueOptionen(OptionsWerteListe, Optionen),
+	string_concat(ListString5, Optionen, ListString6),
+	string_concat(ListString6, '</select>', ListString7),
+	OptionList = [\[ListString7]].
+
+baueOptionen(OptionsWerteListe, Optionen) :-
+	sort(OptionsWerteListe, OptionsWerteSet),
+	BisherList = '<option>Bitte w�hlen</option>',
+	baueOption(OptionsWerteSet, BisherList, Optionen).
+	
+baueOption(OptionsWerteSet, BisherList, NextList) :-
+	OptionsWerteSet = [],
+	BisherList = NextList.
+
+baueOption(OptionsWerteSet, BisherList, NextList) :-
+	OptionsWerteSet = [Option|Rest],
+	string_concat('<option>', Option, OptionString0),
+	string_concat(OptionString0, '</option>', OptionString1),
+	string_concat(BisherList, OptionString1, BisherList2),
+	baueOption(Rest, BisherList2, NextList).
 
 dummy(_)  :-
 	format('').

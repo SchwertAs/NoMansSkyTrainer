@@ -1,4 +1,4 @@
-:- module(planetenNamenDialog, [systemNamenDialog/1]).
+:- module(systemNamenDialog, [systemNamenDialog/1]).
 
 :- use_module(library(dcg/basics)).
 :- use_module(library(http/thread_httpd)).

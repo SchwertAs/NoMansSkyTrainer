@@ -4,8 +4,64 @@
 :- use_module(library(http/html_write)).
 :- use_module(library(http/http_parameters)).
 
+:- http_handler('/stoffErlangenAusWahl', stoffErlangenAusWahl, []).
 :- http_handler('/stoffErlangen', stoffErlangen, []).
 
+/* ----------------------  Eingabe Formular ---------------------------------------------------*/
+
+stoffErlangenAusWahl(_Request) :-
+	baueStoffListeFuerStoffKlassen([rohStoff, rohUndKochStoff], Stoffe1),
+	server:baueOptionsFeld('auswahlRohStoff', Stoffe1, OptionList1),
+	baueStoffListeFuerStoffKlassen([produkt, produktUndKochStoff], Stoffe2),
+	server:baueOptionsFeld('auswahlProdukt', Stoffe2, OptionList2),
+	baueStoffListeFuerStoffKlassen([basisBauEndStoff], Stoffe3),
+	server:baueOptionsFeld('auswahlBau', Stoffe3, OptionList3),
+	baueStoffListeFuerStoffKlassen([modul], Stoffe4),
+	server:baueOptionsFeld('auswahlModul', Stoffe4, OptionList4),
+	baueStoffListeFuerStoffKlassen([kochStoff, produktUndKochStoff, rohUndKochStoff], Stoffe5),
+	server:baueOptionsFeld('auswahlGericht', Stoffe5, OptionList5),
+
+	TermerizedBody = [
+		\['<header>'],
+	    h1([align(center)], ['Auswahl f¸r empfohlene Handlungen um bestimmten Stoff zu erhalten']),
+	    \['</header>'],
+		\['<formSpace>'],       
+	    form([action('/stoffErlangen'), method('post')], 
+	       	[  	fieldset([name('fieldSet1')], [legend(['Mˆglichst wenig']),
+	       					p([input([type(radio), name('optimierungsZiel'), id('optimierungsZiel'), value('minimaleZeit')]),
+	       					   label([for('Zeitverbrauch')])
+	       					  ]),
+	       					p([input([type(radio), checked(true), name('optimierungsZiel'), id('optimierungsZielSammelZahl'), value('minimaleSammlung')]),
+	       					   label([for('Sammlungsgegenst‰nde')])
+	       					  ]),
+	       					p([
+	       					   input([type(radio), name('optimierungsZiel'), id('optimierungsZielSammelKosten'), value('minimaleKosten')]),
+							   label([for('Kosten')])
+	       					  ])
+	       		         ]),
+	       		/* [\[FelderMenge]]), */
+			  	h2(['Anzahl']),
+			    p(input([name('anzahl'), type('text'), value(''), size='24'])),
+
+			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
+			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
+			       tr([td(OptionList1), td(OptionList2), td(OptionList3), td(OptionList4), td(OptionList5)])
+			      ]),
+			    p(input([name('submit'), type('submit'), value('OK')]))
+	      	]
+	      ),
+		\['</formSpace>']     
+	],
+	server:holeCssAlsStyle(StyleString),
+	TermerizedHead = [\[StyleString], title('stoffErlangenDialog')],
+	reply_html_page(TermerizedHead, TermerizedBody
+	).
+
+baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
+	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe).
+	
+
+/* ----------------------  Antwort Formular ---------------------------------------------------*/
 stoffErlangen(Request) :-
     member(method(post), Request), !,
     format('Content-type: text/html~n~n', []),
@@ -18,25 +74,42 @@ stoffErlangen(Request) :-
       auswahlGericht(Stoff5, [length > 1]),
       optimierungsZiel(Ziel, [])
     ]),
-    ((
-      (Stoff1 \= 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff1);
-      (Stoff1 = 'Bitte w√§hlen', Stoff2 \= 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff2);
-      (Stoff1 = 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 \= 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff3);
-      (Stoff1 = 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 \= 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = Stoff4);
-      (Stoff1 = 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 \= 'Bitte w√§hlen', Stoff = Stoff5)
+	atom_number(AtomAnzahl, Anzahl),
+    ((stoffAuswahl(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff),
+      ergebnisAusgeben(Anzahl, Ziel, Stoff)
      );
-     (Stoff1 == 'Bitte w√§hlen', Stoff2 = 'Bitte w√§hlen', Stoff3 = 'Bitte w√§hlen', Stoff4 = 'Bitte w√§hlen', Stoff5 = 'Bitte w√§hlen', Stoff = nil,
-      phrase(html([p('Bitte eine Auswahl treffen!')]), Tok), print_html(Tok), !, fail
-     );
-     phrase(html([p('Bitte nur eine Auswahl treffen! Bei den nicht ben√∂tigten Auswahlen muss "Bitte w√§hlen" eingestellt sein')]), Tok), print_html(Tok), !, fail
-    ),
-    atom_number(AtomAnzahl, Anzahl),
-    
-    (optimierteLoesung(Ziel, Anzahl, Stoff);
-     nichtHerstellBar(Stoff)
+     fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5)
     ),
     !.
 
+fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-    
+     ((Stoff1 == 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen',
+         Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen',
+       phrase(html([p('Bitte eine Auswahl treffen!')]), Tok), 
+       print_html(Tok)
+      );
+      (phrase(html([p('Bitte nur eine Auswahl treffen! Bei den nicht benˆtigten Auswahlen muss "Bitte w‰hlen" eingestellt sein')]), Tok),
+       print_html(Tok)
+     )).
+
+
+stoffAuswahl(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
+	((Stoff1 \= 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', 
+		Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff1);
+	 (Stoff1 = 'Bitte w‰hlen', Stoff2 \= 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', 
+		Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff2);
+	 (Stoff1 = 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 \= 'Bitte w‰hlen', 
+		Stoff4 = 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff3);
+	 (Stoff1 = 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', 
+		Stoff4 \= 'Bitte w‰hlen', Stoff5 = 'Bitte w‰hlen', Stoff = Stoff4);
+	 (Stoff1 = 'Bitte w‰hlen', Stoff2 = 'Bitte w‰hlen', Stoff3 = 'Bitte w‰hlen', 
+		Stoff4 = 'Bitte w‰hlen', Stoff5 \= 'Bitte w‰hlen', Stoff = Stoff5)
+	).
+	
+ergebnisAusgeben(Anzahl, Ziel, Stoff) :-
+	optimierteLoesung(Ziel, Anzahl, Stoff);
+	nichtHerstellBar(Stoff).
+	
 
 optimierteLoesung(OptimierungsZiel, Anzahl, Stoff) :-  
 	\+suchAlgorithmus:baue(OptimierungsZiel, Anzahl, Stoff),
@@ -67,7 +140,7 @@ printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZah
 				   	   ])
 			       ]),
     		table( [width('25%'), border(1)], 
-		           [caption(h2('St√ºckliste')),
+		           [caption(h2('St¸ckliste')),
 		            tr([th([scope('col')],['Anzahl']),
 		            	th([scope('col')],['Stoff'])
 		               ]),
@@ -91,7 +164,8 @@ printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZah
 		           ]),
 		  	\['</formSpace>']
 		 ])
-    			   ]), Tok), print_html(Tok).
+    			   ]), Tok), 
+    print_html(Tok).
 
 ausgabeSammlungDcg([]) -->
 	[].
