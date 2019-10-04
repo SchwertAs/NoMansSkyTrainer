@@ -137,7 +137,7 @@ systemNamen(Request) :-
       systemName319(System319, [default('')]), farbe319(Farbe319, [length > 1]),
       systemName320(System320, [default('')]), farbe320(Farbe320, [length > 1])
     ]),
-    abolish(spielStatus:systeme/2),
+    spielStatus:initSysteme,
     (System101 = ''; assertz(spielStatus:systeme(System101, Farbe101))),
     (System102 = ''; assertz(spielStatus:systeme(System102, Farbe102))),
     (System103 = ''; assertz(spielStatus:systeme(System103, Farbe103))),
