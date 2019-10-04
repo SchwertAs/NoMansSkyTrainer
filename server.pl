@@ -25,6 +25,10 @@ header {
 	grid-column: 1 / 4;
 	grid-row: 1;
     }
+redHeader {
+	grid-column: 1 / 4;
+	grid-row: 1;
+    }
 formSpace {
 	grid-column: 1 / 4;
 	grid-row: 2;
@@ -47,7 +51,6 @@ formSpace,
 button1Space,
 button2Space,
 button3Space {
-
 	background: #ebf5d7;
 	border-color: #8db243;
 	border-radius: 0px 0.5em 0.5em;
@@ -55,13 +58,58 @@ button3Space {
 	padding: .5em;
 	margin: .5em;
 }
+
+redHeader {
+	background: #fbD5c7;
+	border-color: #8db243;
+	border-radius: 0px 0.5em 0.5em;
+	border: 1px solid;
+	padding: .5em;
+	margin: .5em;
+}
+
+div.table { 
+  display: table; 
+  width: calc(100% - 10px);
+	border: thin solid #999999;
+	padding: 5px;
+}
+div.table30 { 
+  display: table; 
+  width: calc(30% - 10px);
+	border: thin solid #999999;
+	padding: 5px;
+}div.table50 { 
+  display: table; 
+  width: calc(50% - 10px);
+	border: thin solid #999999;
+	padding: 5px;
+}
+div.tr { 
+  display:table-row; 
+}
+div.th { 
+  display:table-cell; 
+  border:thin solid #CCCCCC; 
+  padding:5px; 
+  font-style:normal;
+  font-variant: normal;
+  font-weight: 300;
+  font-size 18px;
+  font-family: Arial, Helvetica, sans-serif
+}
+div.td { 
+  display:table-cell; 
+  border:thin solid #CCCCCC; 
+  padding:5px; 
+}
 </style>'.
 
-baueOptionsFeld(FeldName, OptionsWerteListe, OptionList) :-
+baueOptionsFeld(FeldName, OptionsWerteListe, Index, OptionList) :-
 	ListString1 = '<select name="',
 	string_concat(ListString1, FeldName, ListString2),
-	string_concat(ListString2, '" size="1" id="', ListString3),
-	string_concat(ListString3, FeldName, ListString4),
+	string_concat(ListString2, '" size="1" tabindex="', ListString3),
+	string_concat(ListString3, Index, ListString4),
 	string_concat(ListString4, '">~n', ListString5),
 	baueOptionen(OptionsWerteListe, Optionen),
 	string_concat(ListString5, Optionen, ListString6),
@@ -83,6 +131,7 @@ baueOption(OptionsWerteSet, BisherList, NextList) :-
 	string_concat(OptionString0, '</option>', OptionString1),
 	string_concat(BisherList, OptionString1, BisherList2),
 	baueOption(Rest, BisherList2, NextList).
+
 
 dummy(_)  :-
 	format('').

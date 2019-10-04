@@ -9,6 +9,13 @@
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
 spielStatusInit :-  
+	initSpielStatus,
+	initSysteme,
+	initPlaneten,
+	initSystemAusstattung,
+	initVorhaben.
+
+initSpielStatus :-
 	abolish(spielStatus/1)
 	,assertz(spielStatus(minenLaser))
 	,assertz(spielStatus(verbesserterMinenLaser))
@@ -27,35 +34,41 @@ spielStatusInit :-
 	,assertz(spielStatus(aussenPostenVerfügbar))
 	,assertz(spielStatus(frachterVorhanden))
 	,assertz(spielStatus(sphaereRufbar)) 
-	,assertz(spielStatus(kampfWille))
+	,assertz(spielStatus(kampfWille)).
 
-	,abolish(systeme/2)
-	,assertz(systeme('System', 'default'))
-	,abolish(planeten/2)
-	,assertz(planeten('System', 'MeinPlanet'))
+initSysteme :-
+	abolish(systeme/2)
+	,assertz(systeme('System', 'default')).
+	
+initPlaneten :-
+	abolish(planeten/2)
+	,assertz(planeten('System', 'MeinPlanet')).
+
+initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
-	,abolish(systemAusstattung/2)
+	abolish(systemAusstattung/2)
 	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageSauerStoff], 536)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageStickStoff], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* fix */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWald], 1500)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWeltRaum], 1431)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortRaumStation], 2914)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageSauerStoff], 536)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageStickStoff], 536)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWasser], 10660)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAussenPosten], 11336)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortNahrungsProzessor], 1100)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortKleineRaffinerie], 1171))
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortMittlereRaffinerie], 1135)) 
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortGrosseRaffinerie], 2400))
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107))
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortForschungsTerminal], 470))
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortKleineRaffinerie], 1171)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortMittlereRaffinerie], 1135)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortGrosseRaffinerie], 2400)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortForschungsTerminal], 470)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 2400)) 
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasis], 2400))
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0))
-	,abolish(vorhaben/4)
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0)).
+
+initVorhaben :-
+	abolish(vorhaben/4)
 	,assertz(vorhaben('System', 'MeinPlanet', bauen, ortWasser))
 	.
 

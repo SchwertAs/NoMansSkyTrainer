@@ -1,4 +1,4 @@
-:- module(planetMondNameDialog, [planetMondNameDialog/1]).
+:- module(planetMondNameDialog, [planetMondNameDialog/1, planetMondName/1]).
 
 :- use_module(library(dcg/basics)).
 :- use_module(library(http/thread_httpd)).
@@ -13,7 +13,7 @@
 
 planetMondNameDialog(_Request) :-
 	findall(System, spielStatus:systeme(System, _), Systeme),
-	server:baueOptionsFeld('auswahlSystem', Systeme, OptionList),
+	server:baueOptionsFeld('auswahlSystem', Systeme, 1, OptionList),
 	TermerizedBody = [
 		\['<header>'],
 	    h1([align(center)], ['Eigenschaften Sternensystem eingeben']),
@@ -64,7 +64,7 @@ planetMondName(Request) :-
      planet4(Planet4, [default('')]), mond1(Mond4, [default('')]),
      planet5(Planet5, [default('')]), mond1(Mond5, [default('')])
     ]),
-    abolish(spielStatus:planeten/2),
+    spielStatus:initPlaneten,
     (Planet1 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet1))),
     (Planet2 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet2))),
     (Planet3 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet3))),
