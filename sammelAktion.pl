@@ -42,8 +42,7 @@ pruefeOperationVorraussetzung(Operation) :-
 pruefeOperationVorraussetzung(Operation) :-
 	Operation = erkaempfen,
 	!,
-	spielStatus:spielStatus(waffeVorhanden),
-	spielStatus:spielStatus(kampfWille).
+	spielStatus:spielStatus(waffeVorhanden).
 
 pruefeOperationVorraussetzung(Operation) :-
 	Operation = raumSchuerfen,

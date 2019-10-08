@@ -53,7 +53,7 @@ stoffErlangenAusWahl(_Request) :-
 		\['</formSpace>']     
 	],
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('stoffErlangenDialog')],
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	reply_html_page(TermerizedHead, TermerizedBody
 	).
 
@@ -121,7 +121,7 @@ printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZah
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
     server:holeCssAlsStyle(StyleString),
-	Head = [\[StyleString], title('stoffErlangenDialog')],
+	Head = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 		phrase(html([head(Head),
 		  body([
 		  	\['<header>'],
