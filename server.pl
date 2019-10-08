@@ -29,6 +29,10 @@ redHeader {
 	grid-column: 1 / 4;
 	grid-row: 1;
     }
+redFormSpace {
+	grid-column: 1 / 4;
+	grid-row: 2;
+	}
 formSpace {
 	grid-column: 1 / 4;
 	grid-row: 2;
@@ -59,7 +63,8 @@ button3Space {
 	margin: .5em;
 }
 
-redHeader {
+redHeader,
+redFormSpace {
 	background: #fbD5c7;
 	border-color: #8db243;
 	border-radius: 0px 0.5em 0.5em;

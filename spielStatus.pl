@@ -1,10 +1,9 @@
-:- module(spielStatus, [planeten/2, systeme/2, spielStatus/1, systemAusstattung/2, vorhaben/4]).
+:- module(spielStatus, [planeten/2, systeme/2, spielStatus/2, systemAusstattung/2]).
 
-:- dynamic(spielStatus/1).
+:- dynamic(spielStatus/2).
 :- dynamic(systeme/2).
 :- dynamic(planeten/2).
 :- dynamic(systemAusstattung/2).
-:- dynamic(vorhaben/4).
 
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
@@ -12,28 +11,18 @@ spielStatusInit :-
 	initSpielStatus,
 	initSysteme,
 	initPlaneten,
-	initSystemAusstattung,
-	initVorhaben.
+	initSystemAusstattung.
 
 initSpielStatus :-
-	abolish(spielStatus/1)
-	/* jetzt aus Dialog
-	,assertz(spielStatus(minenLaser))
-	,assertz(spielStatus(verbesserterMinenLaser))
-	,assertz(spielStatus(terrainFormer))
-	,assertz(spielStatus(waffeVorhanden))
-	,assertz(spielStatus(raumSchiffIstFlott))
-	,assertz(spielStatus(exoFahrzeugMinenLaser))
-	,assertz(spielStatus(frachterVorhanden))
-	,assertz(spielStatus(sphaereRufbar))
-	*/
-	
-	/* Basisausbau */
-	,assertz(spielStatus(torWarpVerfügbar))
-	,assertz(spielStatus(atmosphaerenAnlageSauerStoffVorhanden))
-	,assertz(spielStatus(atmosphaerenAnlageStickStoffVorhanden))
-	,assertz(spielStatus(kaufTerminalVorhanden))	
-	,assertz(spielStatus(aussenPostenVerfügbar))
+	abolish(spielStatus/2)
+	,assertz(spielStatus(minenLaser, default))
+	,assertz(spielStatus(verbesserterMinenLaser, default))
+	,assertz(spielStatus(terrainFormer, default))
+	,assertz(spielStatus(waffeVorhanden, default))
+	,assertz(spielStatus(raumSchiffIstFlott, default))
+	,assertz(spielStatus(exoFahrzeugMinenLaser, default))
+	,assertz(spielStatus(frachterVorhanden, default))
+	,assertz(spielStatus(sphaereRufbar, default))
 	.
 
 initSysteme :-
@@ -66,11 +55,6 @@ initSystemAusstattung :-
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortForschungsTerminal], 470)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 2400)) 
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0)).
-
-initVorhaben :-
-	abolish(vorhaben/4)
-	,assertz(vorhaben('System', 'MeinPlanet', bauen, ortWasser))
-	.
 
 
 /* ------------------------- Rezepte für Wertvolle Dinge ----------------------------- */

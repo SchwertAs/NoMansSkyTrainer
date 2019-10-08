@@ -14,8 +14,8 @@
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 planetenEigenschaftenDialogSystemAuswahl(_Request) :-
-	/* findall(System, (spielStatus:systeme(System, _), System \= 'System'), Systeme),*/
-	findall(System, (spielStatus:systeme(System, _) ), Systeme),
+	findall(System, (spielStatus:systeme(System, _), System \= 'System'), Systeme),
+	/* findall(System, (spielStatus:systeme(System, _) ), Systeme),*/
 	server:baueOptionsFeld('auswahlSystem', Systeme, 2, OptionList),
 	TermerizedBody = [
 		\['<header>'],
@@ -55,7 +55,8 @@ planetenEigenschaftenDialogPlanetAuswahl(Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0])]),
 	((AuswahlSystem = 'Bitte wählen', fehlerBehandlung); 
 	(
-	 findall(Planet, spielStatus:planeten(AuswahlSystem, Planet), Planeten),
+	 findall(Planet, (spielStatus:planeten(AuswahlSystem, Planet), Planet \= 'MeinPlanet'), Planeten),
+	 /* findall(Planet, spielStatus:planeten(AuswahlSystem, Planet), Planeten), */
 	 server:baueOptionsFeld('auswahlPlanet', Planeten, 2, OptionList),
 	
 	 TermerizedBody = [
@@ -251,7 +252,7 @@ tabelleEinrichtungen(
    	    ]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'kleine Raffinerie'),
-   	    	\checkZeitUnitGruppe('raffinerieKlein_vorhanden', KleineRaffinerieVorhandenVal, 301, 'raffinerieKlein_entfernung', KleineRaffinerieEntfernungVal, 302)
+   	    	\checkZeitUnitGruppe('kleineRaffinerie_vorhanden', KleineRaffinerieVorhandenVal, 301, 'kleineRaffinerie_entfernung', KleineRaffinerieEntfernungVal, 302)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Nahrungsprozessor'),
@@ -316,30 +317,30 @@ planetenEigenschaften(Request) :-
      aussenPosten_vorhanden(AussenPostenVorhanden, [default(off)]),
      raumstation_vorhanden(RaumstationVorhanden, [default(off)]),
      
-     raffinerieMittel_vorhanden(RaffinerieMittelVorhanden, [default(off)]),
-     raffinerieGross_vorhanden(RaffinerieGrossVorhanden, [default(off)]),
+     mittlereRaffinerie_vorhanden(RaffinerieMittelVorhanden, [default(off)]),
+     grosseRaffinerie_vorhanden(RaffinerieGrossVorhanden, [default(off)]),
      handelsTerminal_vorhanden(HandelsTerminalVorhanden, [default(off)]),
      
-     raffinerieKlein_vorhanden(RaffinerieKleinVorhanden, [default(off)]),
+     kleineRaffinerie_vorhanden_vorhanden(RaffinerieKleinVorhanden, [default(off)]),
      nahrungsProzessor_vorhanden(NahrungsProzessorVorhanden, [default(off)]),
      basisTerminus_vorhanden(BasisTerminusVorhanden, [default(off)]),
      konstruktionsStation_vorhanden(KonstruktionsStationVorhanden, [default(off)]),
 	 atmosphaerenAnlageSauerStoff_vorhanden(AtmosphaerenAnlageSauerStoffVorhanden, [default(off)]),
 	 atmosphaerenAnlageStickStoff_vorhanden(AtmosphaerenAnlageStickStoffVorhanden, [default(off)]),
 
-     wasser_entfernung(WasserEntfernung, [default(0)]), 
-     aussenPosten_entfernung(AussenPostenEntfernung, [default(0)]),
-     raumstation_entfernung(RaumstationEntfernung, [default(0)]), 
-	 raffinerieMittel_entfernung(RaffinerieMittelEntfernung, [default(0)]),
-	 raffinerieGross_entfernung(RaffinerieGrossEntfernung, [default(0)]),
-	 handelsTerminal_entfernung(HandelsTerminalEntfernung, [default(0)]),
+     wasser_entfernung(WasserEntfernung, [default('Zeit')]), 
+     aussenPosten_entfernung(AussenPostenEntfernung, [default('Zeit')]),
+     raumstation_entfernung(RaumstationEntfernung, [default('Zeit')]), 
+	 mittlereRaffinerie_entfernung(RaffinerieMittelEntfernung, [default('Zeit')]),
+	 grosseRaffinerie_entfernung(RaffinerieGrossEntfernung, [default('Zeit')]),
+	 handelsTerminal_entfernung(HandelsTerminalEntfernung, [default('Zeit')]),
 	 
-     raffinerieKlein_entfernung(RaffinerieKleinEntfernung, [default(0)]),
-     nahrungsProzessor_entfernung(NahrungsProzessorEntfernung, [default(0)]), 
-     basisTerminus_entfernung(BasisTerminusEntfernung, [default(0)]), 
-     konstruktionsStation_entfernung(KonstruktionsStationEntfernung, [default(0)]),
-     atmosphaerenAnlageSauerStoff_entfernung(AtmosphaerenAnlageSauerStoffEntfernung, [default(0)]),
-     atmosphaerenAnlageStickStoff_entfernung(AtmosphaerenAnlageStickStoffEntfernung, [default(0)])
+     kleineRaffinerie_entfernung(RaffinerieKleinEntfernung, [default('Zeit')]),
+     nahrungsProzessor_entfernung(NahrungsProzessorEntfernung, [default('Zeit')]), 
+     basisTerminus_entfernung(BasisTerminusEntfernung, [default('Zeit')]), 
+     konstruktionsStation_entfernung(KonstruktionsStationEntfernung, [default('Zeit')]),
+     atmosphaerenAnlageSauerStoff_entfernung(AtmosphaerenAnlageSauerStoffEntfernung, [default('Zeit')]),
+     atmosphaerenAnlageStickStoff_entfernung(AtmosphaerenAnlageStickStoffEntfernung, [default('Zeit')])
     ]),
     ((WasserVorhanden = on, WasserEntfernung = 'Zeit', fehlerBehandlungGruppe('Wasser'));
      (AussenPostenVorhanden = on, AussenPostenEntfernung = 'Zeit', fehlerBehandlungGruppe('AussenPosten'));
@@ -357,7 +358,6 @@ planetenEigenschaften(Request) :-
       WasserVorhanden = off,
       AussenPostenVorhanden = off,
       RaumstationVorhanden = off,
-      RaumstationVorhanden = off,
       RaffinerieMittelVorhanden = off,
       RaffinerieGrossVorhanden = off,
       HandelsTerminalVorhanden = off,
@@ -370,21 +370,21 @@ planetenEigenschaften(Request) :-
       ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, _], _))),
       gespeichert
      );
-     (  
-      ((WasserEntfernung \= 'Zeit', atom_number(WasserEntfernung, WasserEntfernungNum));
-	   (AussenPostenEntfernung \= 'Zeit', atom_number(AussenPostenEntfernung, AussenPostenEntfernungNum));
-	   (RaumstationEntfernung \= 'Zeit', atom_number(RaumstationEntfernung, RaumstationEntfernungNum));
-	   (RaffinerieMittelEntfernung \= 'Zeit', atom_number(RaffinerieMittelEntfernung, RaffinerieMittelEntfernungNum));
-	   (RaffinerieGrossEntfernung \= 'Zeit', atom_number(RaffinerieGrossEntfernung, RaffinerieGrossEntfernungNum));
-	   (HandelsTerminalEntfernung \= 'Zeit', atom_number(HandelsTerminalEntfernung, HandelsTerminalEntfernungNum));
-	   (RaffinerieKleinEntfernung \= 'Zeit', atom_number(RaffinerieKleinEntfernung, RaffinerieKleinEntfernungNum));
-	   (NahrungsProzessorEntfernung \= 'Zeit', atom_number(NahrungsProzessorEntfernung, NahrungsProzessorEntfernungNum));
-	   (BasisTerminusEntfernung \= 'Zeit', atom_number(BasisTerminusEntfernung, BasisTerminusEntfernungNum));
-	   (KonstruktionsStationEntfernung \= 'Zeit', atom_number(KonstruktionsStationEntfernung, KonstruktionsStationEntfernungNum));
-	   (AtmosphaerenAnlageSauerStoffEntfernung \= 'Zeit', atom_number(AtmosphaerenAnlageSauerStoffEntfernung, AtmosphaerenAnlageSauerStoffEntfernungNum));
-	   (AtmosphaerenAnlageStickStoffEntfernung \= 'Zeit', atom_number(AtmosphaerenAnlageStickStoffEntfernung, AtmosphaerenAnlageStickStoffEntfernungNum))
-	  ),
+     (ausgabe:zeitFeldToNumber(WasserEntfernung, WasserEntfernungNum),
+      ausgabe:zeitFeldToNumber(AussenPostenEntfernung, AussenPostenEntfernungNum),
+      ausgabe:zeitFeldToNumber(RaumstationEntfernung, RaumstationEntfernungNum),
+      ausgabe:zeitFeldToNumber(RaffinerieMittelEntfernung, RaffinerieMittelEntfernungNum),
+      ausgabe:zeitFeldToNumber(RaffinerieGrossEntfernung, RaffinerieGrossEntfernungNum),
+      ausgabe:zeitFeldToNumber(HandelsTerminalEntfernung, HandelsTerminalEntfernungNum),
+      ausgabe:zeitFeldToNumber(RaffinerieKleinEntfernung, RaffinerieKleinEntfernungNum),
+      ausgabe:zeitFeldToNumber(NahrungsProzessorEntfernung, NahrungsProzessorEntfernungNum),
+      ausgabe:zeitFeldToNumber(BasisTerminusEntfernung, BasisTerminusEntfernungNum),
+      ausgabe:zeitFeldToNumber(KonstruktionsStationEntfernung, KonstruktionsStationEntfernungNum),
+      ausgabe:zeitFeldToNumber(AtmosphaerenAnlageSauerStoffEntfernung, AtmosphaerenAnlageSauerStoffEntfernungNum),
+      ausgabe:zeitFeldToNumber(AtmosphaerenAnlageStickStoffEntfernung, AtmosphaerenAnlageStickStoffEntfernungNum),
+      spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung),
       ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, _], _))),
+      assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung)),
       (HauptBasisVorhanden = off; 
        (assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHauptBasis], 0)),
       	assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWald], 1500)),

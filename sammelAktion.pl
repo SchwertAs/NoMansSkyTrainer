@@ -2,6 +2,7 @@
 
 sammelAktion(bekannt, ortSpieler).
 sammelAktion(pfluecken, ortWald).
+sammelAktion(herausSchlagen, ortWald).
 sammelAktion(minenLaserNutzen, ortWald).
 sammelAktion(verbessertenMinenLaserNutzen, ortWald).
 sammelAktion(exoFahrzeugMinenLaserNutzen, ortWald).
@@ -11,7 +12,13 @@ sammelAktion(erkaempfen, ortWald).
 sammelAktion(vonTierErhalten, ortWald).
 sammelAktion(ernten, ortWald).
 sammelAktion(raumSchuerfen, ortWeltRaum).
-sammelAktion(kaufen, ortHandelsTerminal).
+sammelAktion(kaufen, Ort) :-
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	((spielStatus:systemAusstattung([System, Planet, ortHandelsTerminal], _),
+	  Ort = ortHandelsTerminal);
+	 (spielStatus:systemAusstattung([System, Planet, ortRaumStation], _),
+	  Ort = ortRaumStation)
+	).
 
 sammelAktion(ertauchen, ortWasser).
 sammelAktion(unterWasserErkaempfen, ortWasser).
@@ -19,56 +26,57 @@ sammelAktion(unterWasserErkaempfen, ortWasser).
 sammelAktion(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, ortAthmosphaerenAnlageSauerStoff).
 sammelAktion(ausAtmosphaerenAnlageFuerStickStoffGewinnen, ortAthmosphaerenAnlageStickStoff).
 
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = minenLaserNutzen,
+pruefeOperationVorraussetzung(minenLaserNutzen) :-
 	!,
-	spielStatus:spielStatus(minenLaser).
+	\+spielStatus(minenLaser),
+	!.
 	
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = verbessertenMinenLaserNutzen,
+pruefeOperationVorraussetzung(verbessertenMinenLaserNutzen) :-
 	!,
-	spielStatus:spielStatus(verbesserterMinenLaser).
+	\+spielStatus(verbesserterMinenLaser),
+	!.
+
+pruefeOperationVorraussetzung(terrainFormerNutzen) :-
+	!,
+	spielStatus(terrainFormer),
+	!.
+
+pruefeOperationVorraussetzung(jagen) :-
+	!,
+	\+spielStatus(waffeVorhanden),
+	!.
+
+pruefeOperationVorraussetzung(erkaempfen) :-
+	!,
+	\+spielStatus(waffeVorhanden),
+	!.
+
+pruefeOperationVorraussetzung(unterWasserErkaempfen) :-
+	!,
+	\+spielStatus(waffeVorhanden),
+	sammelAktion(unterWasserErkaempfen, Ort),
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, Ort], _),
+	!.
+
+pruefeOperationVorraussetzung(raumSchuerfen) :-
+	!,
+	\+spielStatus(raumSchiffIstFlott),
+	!.
+
+pruefeOperationVorraussetzung(exoFahrzeugMinenLaserNutzen) :-
+	!,
+	\+spielStatus(exoFahrzeugMinenLaser),
+	!.
 
 pruefeOperationVorraussetzung(Operation) :-
-	Operation = terrainFormerNutzen,
-	!,
-	spielStatus:spielStatus(terrainFormer).
-
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = jagen,
-	!,
-	spielStatus:spielStatus(waffeVorhanden).
-
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = erkaempfen,
-	!,
-	spielStatus:spielStatus(waffeVorhanden).
-
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = raumSchuerfen,
-	!,
-	spielStatus:spielStatus(raumSchiffIstFlott).
-
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = exoFahrzeugMinenLaserNutzen,
-	!,
-	spielStatus:spielStatus(exoFahrzeugMinenLaser).
-
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = ausAtmosphaerenAnlageFuerSauerStoffGewinnen,
-	!,
-	spielStatus:spielStatus(atmosphaerenAnlageSauerStoffVorhanden).
-
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = ausAtmosphaerenAnlageFuerStickStoffGewinnen,
-	!,
-	spielStatus:spielStatus(atmosphaerenAnlageStickStoffVorhanden).
-
-pruefeOperationVorraussetzung(Operation) :-
-	Operation = kaufen,
-	!,
-	spielStatus:spielStatus(kaufTerminalVorhanden);
-	spielStatus:spielStatus(torWarpVerfügbar).
+	sammelAktion(Operation, Ort),
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, Ort], _),
+	!.
 
 pruefeOperationVorraussetzung(_) :-
 	true.	
+
+spielStatus(Operation) :-
+	spielStatus:spielStatus(Operation, false).
