@@ -51,7 +51,7 @@ planetMondNameDialog(_Request) :-
 		\['</formSpace>']
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('planetMondNameDialog')],
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
 	reply_html_page(TermerizedHead, TermerizedBody).
 	
 planetMondName(Request) :-
@@ -76,7 +76,7 @@ planetMondName(Request) :-
     (Mond4 = ''; assertz(spielStatus:planeten(AuswahlSystem, Mond4))),
     (Mond5 = ''; assertz(spielStatus:planeten(AuswahlSystem, Mond5))),
     server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('planetMondName')],
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
 	TermerizedBody = [
 		\['<header>'],
 		h3(align(center),'gespeichert!'),

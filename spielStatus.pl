@@ -17,28 +17,28 @@ spielStatusInit :-
 
 initSpielStatus :-
 	abolish(spielStatus/1)
+	/* jetzt aus Dialog
 	,assertz(spielStatus(minenLaser))
 	,assertz(spielStatus(verbesserterMinenLaser))
 	,assertz(spielStatus(terrainFormer))
 	,assertz(spielStatus(waffeVorhanden))
+	,assertz(spielStatus(raumSchiffIstFlott))
+	,assertz(spielStatus(exoFahrzeugMinenLaser))
+	,assertz(spielStatus(frachterVorhanden))
+	,assertz(spielStatus(sphaereRufbar))
+	*/
 	
 	/* Basisausbau */
 	,assertz(spielStatus(torWarpVerfügbar))
 	,assertz(spielStatus(atmosphaerenAnlageSauerStoffVorhanden))
 	,assertz(spielStatus(atmosphaerenAnlageStickStoffVorhanden))
-	,assertz(spielStatus(kaufTerminalVorhanden))
-	
-	/* Bewegungsmöglichkeiten, Umgebung */ 
-	,assertz(spielStatus(raumSchiffIstFlott))
-	,assertz(spielStatus(exoFahrzeugMinenLaser))
+	,assertz(spielStatus(kaufTerminalVorhanden))	
 	,assertz(spielStatus(aussenPostenVerfügbar))
-	,assertz(spielStatus(frachterVorhanden))
-	,assertz(spielStatus(sphaereRufbar)) 
-	,assertz(spielStatus(kampfWille)).
+	.
 
 initSysteme :-
 	abolish(systeme/2)
-	,assertz(systeme('System', 'default')).
+	,assertz(systeme('System', 'gelb')).
 	
 initPlaneten :-
 	abolish(planeten/2)

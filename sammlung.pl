@@ -517,19 +517,19 @@ sammlung(bekannt, zylinderRezept, 0, 0, 0).
 sammlung(bekannt, wuerfelRezept, 0, 0, 0).
 sammlung(bekannt, kugelRezept, 0, 0, 0).
 
-/* Stoffe ohne Gerät zu Fuss wild ernten 
+/* Stoffe ohne Gerät zu Fuss wild ernten */
 sammlung(pfluecken, eiweissPerle, 300, 339, 0).
 sammlung(pfluecken, gravitinoBall, 150, 339, 0).
 sammlung(pfluecken, sturmKristall, 150, 150, 0).
 sammlung(pfluecken, beutelGift, 150, 150, 0).
-*/
+
 
 sammlung(pfluecken, natrium, 8, 10, 0). 
 sammlung(pfluecken, sauerStoff, 8, 9, 0).
 
 
 /* variieren nach Planetentyp kürzere Zeiten bei geeigneterem Habitat */
-/* TODO Planetentyp-Einfluss auf Stückzahl pro Gebinde abbilden 
+/* TODO Planetentyp-Einfluss auf Stückzahl pro Gebinde abbilden */
 sammlung(pfluecken, jadeErbsen, 22, 22, 0).
 sammlung(pfluecken, suessWurzel, 23, 23, 0).
 sammlung(pfluecken, fleischigeWurzeln, 18, 18, 0).
@@ -538,18 +538,18 @@ sammlung(pfluecken, feuerBeere, 15, 15, 0).
 sammlung(pfluecken, grahBeere, 19, 19, 0).
 sammlung(pfluecken, gefroreneKnollen, 38, 17, 0).
 sammlung(pfluecken, hexaBeere, 15, 15, 0).
-*/
+
 
 sammlung(pfluecken, heptaPloidWeizen, 14, 14, 0).
 sammlung(pfluecken, impulsBohnen, 25, 27, 0).
 
-/* Anreise mit Raumschiff zu natürlichem Vorkommen auf Planet 
+/* Anreise mit Raumschiff zu natürlichem Vorkommen auf Planet */
 sammlung(pfluecken, kaktusFleisch, 2, 13, 0).
 sammlung(pfluecken, pilzSchimmel, 10, 10, 0).
 sammlung(pfluecken, solanium, 4, 29, 0).
 sammlung(pfluecken, gammaWurzel, 5, 4, 0).
 sammlung(pfluecken, frostKristall, 4, 4, 0).
-*/
+
 
 sammlung(pfluecken, sternenKnolle, 8, 12, 0).
 
@@ -558,18 +558,18 @@ sammlung(pfluecken, korvaxKonvergenzWuerfel, 20, 20, 0).
 sammlung(pfluecken, nipNipKnospen, 20, 20, 0).
 
 
-/* nutzbare anomalieen (Deko) 
+/* nutzbare anomalieen (Deko) */
 sammlung(pfluecken, defekterSeparator, 150, 150, 0).
 sammlung(pfluecken, lichtBruch, 150, 150, 0).
-*/
 
-/* mit Minenlaser auf Planet 
+
+/* mit Minenlaser auf Planet */
 sammlung(minenLaserNutzen, radon, 87, 7, 0).
 sammlung(minenLaserNutzen, stickStoff, 9, 9, 0).
 sammlung(minenLaserNutzen, schwefelin, 0, 0, 0). 
 sammlung(minenLaserNutzen, ammoniak, 7, 7, 150).
 sammlung(minenLaserNutzen, pilzSchimmel, 1, 1, 150).
-*/
+
 sammlung(minenLaserNutzen, diWasserStoff, 4, 4, 150).
 sammlung(minenLaserNutzen, ferritStaub, 3, 3, 150).
 sammlung(minenLaserNutzen, kobalt, 4, 4, 150).
@@ -580,14 +580,14 @@ sammlung(minenLaserNutzen, sauerStoff, 9, 9, 150).
 /* exofahrzeug minenlaser nutzen */
 sammlung(exoFahrzeugMinenLaserNutzen, sauerStoff, 9, 9, 150).
 
-/* nur sekundärelement 
+/* nur sekundärelement */
 sammlung(minenLaserNutzen, sternenKnolle, 44, 44, 150).
 sammlung(minenLaserNutzen, gammaWurzel, 83, 50, 150).
 sammlung(minenLaserNutzen, natrium, 7, 7, 150).
 sammlung(minenLaserNutzen, paraffinium, 221, 30, 150).
-*/
 
-/* mit Terrainformer abbauen 
+
+/* mit Terrainformer abbauen */
 sammlung(terrainFormerNutzen, ammoniak, 3, 0, 300). 
 sammlung(terrainFormerNutzen, aktiviertesCadmium, 15, 0, 300).
 sammlung(terrainFormerNutzen, aktiviertesEmeril, 8, 0, 300).
@@ -597,7 +597,7 @@ sammlung(terrainFormerNutzen, cadmium, 24, 0, 300).
 sammlung(terrainFormerNutzen, emeril, 24, 0, 300).
 sammlung(terrainFormerNutzen, indium, 20, 0, 300).
 sammlung(terrainFormerNutzen, natrium, 6, 0, 300).
-*/
+
 sammlung(terrainFormerNutzen, kupfer, 3, 0, 300).
 sammlung(terrainFormerNutzen, silikatPulver, 6, 0, 300).
 

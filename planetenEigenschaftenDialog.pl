@@ -33,7 +33,7 @@ planetenEigenschaftenDialogSystemAuswahl(_Request) :-
 		\['</formSpace>']
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('planetMondNameDialog')],
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Auswahl')],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
@@ -74,7 +74,7 @@ planetenEigenschaftenDialogPlanetAuswahl(Request) :-
 	 \['</formSpace>']
 		             ],       
 	 server:holeCssAlsStyle(StyleString),
-	 TermerizedHead = [\[StyleString], title('planetMondNameDialog')],
+	 TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planet-Auswahl')],
 	 reply_html_page(TermerizedHead, TermerizedBody)
 	)).
 
@@ -164,7 +164,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 		 ]),
 	\['</formSpace>']		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('planetMondNameDialog')],
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Eigenschaften')],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 
@@ -433,7 +433,7 @@ planetenEigenschaften(Request) :-
 	  
 gespeichert :-
       server:holeCssAlsStyle(StyleString),
-	  TermerizedHead = [\[StyleString], title('planetMondName')],
+	  TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften gespeichert')],
 	  TermerizedBody = [
 		\['<header>'],
 		h3(align(center),'gespeichert!'),
@@ -443,7 +443,7 @@ gespeichert :-
 
 fehlerBehandlung :-
    	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('planetMondNameDialogErgebnis')],
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center),'bitte eine Auswahl treffen!'),
@@ -455,7 +455,7 @@ fehlerBehandlungGruppe(Gruppe) :-
    	server:holeCssAlsStyle(StyleString),
    	string_concat('Die Einrichtung ', Gruppe, FehlerMeldung0),
    	string_concat(FehlerMeldung0, ' ist als vorhanden gekennzeichnet, aber die Zeitangabe fehlt', FehlerMeldung),
-	TermerizedHead = [\[StyleString], title('planetMondNameDialogErgebnis')],
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),
