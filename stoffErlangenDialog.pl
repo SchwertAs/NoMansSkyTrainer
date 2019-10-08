@@ -10,16 +10,16 @@
 /* ----------------------  Eingabe Formular ---------------------------------------------------*/
 
 stoffErlangenAusWahl(_Request) :-
-	baueStoffListeFuerStoffKlassen([rohStoff, rohUndKochStoff], Stoffe1),
-	server:baueOptionsFeld('auswahlRohStoff', Stoffe1, OptionList1),
-	baueStoffListeFuerStoffKlassen([produkt, produktUndKochStoff], Stoffe2),
-	server:baueOptionsFeld('auswahlProdukt', Stoffe2, OptionList2),
-	baueStoffListeFuerStoffKlassen([basisBauEndStoff], Stoffe3),
-	server:baueOptionsFeld('auswahlBau', Stoffe3, OptionList3),
-	baueStoffListeFuerStoffKlassen([modul], Stoffe4),
-	server:baueOptionsFeld('auswahlModul', Stoffe4, OptionList4),
-	baueStoffListeFuerStoffKlassen([kochStoff, produktUndKochStoff, rohUndKochStoff], Stoffe5),
-	server:baueOptionsFeld('auswahlGericht', Stoffe5, OptionList5),
+	ausgabe:baueStoffListeFuerStoffKlassen([rohStoff, rohUndKochStoff], Stoffe1),
+	server:baueOptionsFeld('auswahlRohStoff', Stoffe1, 2, OptionList1),
+	ausgabe:baueStoffListeFuerStoffKlassen([produkt, produktUndKochStoff], Stoffe2),
+	server:baueOptionsFeld('auswahlProdukt', Stoffe2, 3, OptionList2),
+	ausgabe:baueStoffListeFuerStoffKlassen([basisBauEndStoff], Stoffe3),
+	server:baueOptionsFeld('auswahlBau', Stoffe3, 4, OptionList3),
+	ausgabe:baueStoffListeFuerStoffKlassen([modul], Stoffe4),
+	server:baueOptionsFeld('auswahlModul', Stoffe4, 5, OptionList4),
+	ausgabe:baueStoffListeFuerStoffKlassen([kochStoff, produktUndKochStoff, rohUndKochStoff], Stoffe5),
+	server:baueOptionsFeld('auswahlGericht', Stoffe5, 6, OptionList5),
 
 	TermerizedBody = [
 		\['<header>'],
@@ -41,7 +41,7 @@ stoffErlangenAusWahl(_Request) :-
 	       		         ]),
 	       		/* [\[FelderMenge]]), */
 			  	h2(['Anzahl']),
-			    p(input([name('anzahl'), type('text'), value(''), size='24'])),
+			    p(input([name('anzahl'), type('text'), value(''), size='24', tabindex(1)])),
 
 			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
 			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
@@ -57,15 +57,11 @@ stoffErlangenAusWahl(_Request) :-
 	reply_html_page(TermerizedHead, TermerizedBody
 	).
 
-baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
-	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe).
-	
 
 /* ----------------------  Antwort Formular ---------------------------------------------------*/
 stoffErlangen(Request) :-
     member(method(post), Request), !,
-    format('Content-type: text/html~n~n', []),
-	http_parameters(Request, [
+    http_parameters(Request, [
       anzahl(AtomAnzahl, [default('1')]),
       auswahlRohStoff(Stoff1, [length > 1]),
       auswahlProdukt(Stoff2, [length > 1]),
@@ -76,7 +72,7 @@ stoffErlangen(Request) :-
     ]),
 	atom_number(AtomAnzahl, Anzahl),
     ((stoffAuswahl(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff),
-      ergebnisAusgeben(Anzahl, Ziel, Stoff)
+      ergebnisAusgeben('System', 'MeinPlanet', Anzahl, Ziel, Stoff)
      );
      fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5)
     ),
@@ -106,13 +102,13 @@ stoffAuswahl(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 		Stoff4 = 'Bitte wählen', Stoff5 \= 'Bitte wählen', Stoff = Stoff5)
 	).
 	
-ergebnisAusgeben(Anzahl, Ziel, Stoff) :-
-	optimierteLoesung(Ziel, Anzahl, Stoff);
-	nichtHerstellBar(Stoff).
+ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff) :-
+	optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
+	nichtHerstellBar(Ziel).
 	
 
-optimierteLoesung(OptimierungsZiel, Anzahl, Stoff) :-  
-	\+suchAlgorithmus:baue(OptimierungsZiel, Anzahl, Stoff),
+optimierteLoesung(System, Planet, OptimierungsZiel, Anzahl, Stoff) :-  
+	\+suchAlgorithmus:baue(System, Planet, OptimierungsZiel, Anzahl, Stoff),
 	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	printMinSammlungForm(Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
@@ -120,10 +116,9 @@ printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZah
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
-    server:holeCssAlsStyle(StyleString),
-	Head = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
-		phrase(html([head(Head),
-		  body([
+   	server:holeCssAlsStyle(StyleString),
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	TermerizedBody = [
 		  	\['<header>'],
 		  	h1([align(center)], ['Stoff erlangen']),
 		  	\['</header>'],
@@ -163,9 +158,8 @@ printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZah
 		               \ausgabeSummenDcg(SummenPred)
 		           ]),
 		  	\['</formSpace>']
-		 ])
-    			   ]), Tok), 
-    print_html(Tok).
+		             ],
+	reply_html_page(TermerizedHead, TermerizedBody).
 
 ausgabeSammlungDcg([]) -->
 	[].
@@ -198,8 +192,43 @@ ausgabeSummenDcg([sum(Name, Wert, Einheit) | Rest]) -->
               ])
          ]),
    ausgabeSummenDcg(Rest).
-        
-nichtHerstellBar(Stoff) :-
-	stoff:stoff(_, Stoff, Wert),
-	phrase(html([h3('Stoff kann nicht hergestellt werden. Kaufwert ca. '),  '~k', Wert]), Tok), print_html(Tok).
+
+nichtHerstellBar(Ziel) :-
+	ausgabe:baueBegruendung(Ziel, BegrTupel),
+   	server:holeCssAlsStyle(StyleString),
+   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	TermerizedBody = [
+		\['<redHeader>'],
+		h1(align(center), 'Sammeln oder herstellen nicht möglich.'),
+		\['</redHeader>'],
+		\['<redFormSpace>'],
+		h3('Begründung:'),
+		\ausgabeBegruendungDcg(BegrTupel), 
+		\['</redFormSpace>']
+		            ],
+	reply_html_page(TermerizedHead, TermerizedBody).
+
+ausgabeBegruendungDcg([]) -->
+	[].
+	
+ausgabeBegruendungDcg([begr(FehlStoff, VorgaengePred) | Rest]) -->
+	{ string_concat(FehlStoff, ' kann nicht beschafft werden', Meldung)
+	},
+	html([	table( [width('100%'), border(1)], 
+		           [caption(h3(Meldung)),
+		            tr([th([scope('col')],['Rezeptversuch'])
+		               ]) ,
+			           \ausgabeVorgaengeBegrDcg(VorgaengePred) 
+		           ])
+         ]),
+   ausgabeBegruendungDcg(Rest).
+
+ausgabeVorgaengeBegrDcg([]) -->
+	[].
+	
+ausgabeVorgaengeBegrDcg([vorg(Anweisung, _, _) | Rest]) -->
+	html([ tr([ td(Anweisung)
+              ])
+         ]),
+   ausgabeVorgaengeBegrDcg(Rest).
 

@@ -92,7 +92,6 @@ vorgangsOrtModifikationRaffinerieen(Groesste, VorgangsOrt, ModOrt) :-
 	 ModOrt = Groesste; ModOrt = VorgangsOrt.
 	
 bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
-	spielStatus:vorhaben(System, Planet, _, _),
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung),
 	ermittleGroessteNoetigeRaffinerie(Vorgaenge, ortKleineRaffinerie, Groesste),
 	findall(VorgangsOrt1, (member(Vorgang, Vorgaenge), vorgangsOrt(Groesste, Vorgang, VorgangsOrt1)), VorgangsOrte1),
@@ -103,7 +102,7 @@ bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, bauen, _, _],
-	spielStatus:vorhaben(_, _, bauen, VorgangsOrt),
+	VorgangsOrt = ortSpieler,
 	!.
 		
 vorgangsOrt(Groesste, Vorgang, VorgangsOrt) :-
@@ -170,19 +169,6 @@ reisen(VorgangsOrt, Zeit) :-
 	Zeit is ZurBasisTransferZeit + ZumVorgangTransferZeit.
 
 /* vorhaben auf anderem Planeten */
-/*
-reisen(VorgangsOrt, Zeit) :-
-	spielStatus:systemAusstattung([System1, Planet1, ortSpieler], ZurBasisTransferZeit),
-	vorhaben(System2, Planet2, bauen, OrtBaustelle),
-	System1 = System2,
-	Planet1 \= Planet2,
-	spielStatus:spielStatus(torWarpVerfügbar),
-	spielStatus:systemAusstattung(System1, Planet2, ortRaumStation, TorWarpZeit1),
-	spielStatus:systemAusstattung(System1, Planet2, VorgangsOrt, ZumZielTransferZeit),
-	Zeit is ZurBasisTransferZeit + ZumZielTransferZeit + TorWarpZeit.
-
-*/
-
 /* kaufen mit Teleportreise Raumstation */	
 /* kaufen mit flug gleicher Planet */
 /* kaufen mit flug anderer Planet, gleiches System */

@@ -1,4 +1,4 @@
-:- module(suchAlgorithmus, [baue/3, baueFuerVorfertigung/3, ersterNichtBeschaffbarerStoff/3]).
+:- module(suchAlgorithmus, [baue/5, baueFuerVorfertigung/5, ersterNichtBeschaffbarerStoff/3]).
 
 :- dynamic(loesung/8).
 :- dynamic(maxTiefe/1).
@@ -6,7 +6,7 @@
 :- dynamic(ersterNichtBeschaffbarerStoffGesetzt/1).
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
-baueFuerVorfertigung(Strategie, Anzahl, Stoff) :-
+baueFuerVorfertigung(System, Planet, Strategie, Anzahl, Stoff) :-
 	abolish(loesung/8),
 	abolish(maxTiefe/1),
 	dict_create(SammelSet0, 'SammelStueckliste', []),
@@ -18,7 +18,7 @@ baueFuerVorfertigung(Strategie, Anzahl, Stoff) :-
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
-	arbeitsVorbereitung:bildeAvZeiten(Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
+	arbeitsVorbereitung:bildeAvZeiten(System, Planet, Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
 	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
 	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
 	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
@@ -30,7 +30,7 @@ baueFuerVorfertigung(Strategie, Anzahl, Stoff) :-
 	fail.
 
 /* Subprädikate */
-baue(Strategie, Anzahl, Stoff) :-
+baue(System, Planet, Strategie, Anzahl, Stoff) :-
 	abolish(loesung/8),
 	abolish(ersterNichtBeschaffbarerStoff/3),
 	abolish(maxTiefe/1),
@@ -44,7 +44,7 @@ baue(Strategie, Anzahl, Stoff) :-
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
-	arbeitsVorbereitung:bildeAvZeiten(Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
+	arbeitsVorbereitung:bildeAvZeiten(System, Planet, Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
 	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
 	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
 	statistik:bildeGesamtAufwaende(OptimierteVorgaenge, 0, GesamtEinkaufsAufwand),
@@ -140,27 +140,27 @@ rezeptZulaessig(Operation, _) :-
 	Operation \= raffinieren,
 	!.
 	
-rezeptZulaessig(_, Komponenten) :-
+rezeptZulaessig(raffinieren, Komponenten) :-
+	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	(spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], _); 
 	 spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
 	 spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _)
 	),
-	Komponenten = [[_, _]],
 	!.
 	
-rezeptZulaessig(_, Komponenten) :-
+rezeptZulaessig(raffinieren, Komponenten) :-
+	Komponenten = [[_, _], [_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
 	 spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _)
 	),
-	Komponenten = [[_, _], [_, _]],
 	!.
 
-rezeptZulaessig(_, Komponenten) :-
+rezeptZulaessig(raffinieren, Komponenten) :-
+	Komponenten = [[_, _], [_, _], [_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
-	Komponenten = [[_, _], [_, _], [_, _]],
 	!.
 
 /* ------------------------------------------------------------------------------------------------------------------------- */

@@ -1,5 +1,8 @@
-:- module(ausgabe, [ausgabeSammlung/3, ausgabeVorgaenge/3, ausgabeSummen/6 ]).
+:- module(ausgabe, [ausgabeSammlung/3, ausgabeVorgaenge/3, ausgabeSummen/6, baueBegruendung/2, zeitFeldToNumber/2]).
 
+baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
+	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe).
+	
 ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	SammelSet = SammelSet0,
@@ -27,14 +30,11 @@ ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	!. 
 
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
-	gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach).
-
-gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [],
 	VorgaengePred = VorgaengePredDanach,
 	!.
 	
-gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
+ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [WandelAnz, Operation, Komponenten, [ProduktAnzahl, Produkt]],
 	wandelAktion:wandelAktion(Operation, _),
@@ -55,10 +55,10 @@ gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
     bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis),
 	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
-	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
+	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
+ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [_, Operation, _, [_, Produkt]],
 	Operation = bekannt,
@@ -66,10 +66,10 @@ gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	string_concat('Das ', ProduktString, Anweisung0),
 	string_concat(Anweisung0, ' ist bekannt.', Anweisung),
 	append(VorgaengePred, [vorg(Anweisung, Operation, '')], VorgaengePred0),
-	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
+	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
+ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [WandelAnz, Operation, _, [_, Produkt]],
 	sammelAktion:sammelAktion(Operation, _),
@@ -84,10 +84,10 @@ gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
  	string_concat(Anweisung3, OperationString, Anweisung),
  	bildeErgebnis(WandelAnz, Produkt, Ergebnis),
  	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
-	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
+	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
+ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [_, Operation, [[_, _], [_, Nach]], [_, Produkt]],
 	Operation = reisen,
@@ -101,12 +101,12 @@ gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
  	string_concat(Ergebnis1, ProduktString, Ergebnis),
 
  	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
-	gebeAus(Rest, VorgaengePred0, VorgaengePredDanach),
+	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
-gebeAus(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
+ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ _ | Rest], 
-	gebeAus(Rest, VorgaengePred, VorgaengePredDanach),
+	ausgabeVorgaenge(Rest, VorgaengePred, VorgaengePredDanach),
 	!.		 
 
 bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis) :-
@@ -131,6 +131,25 @@ gebeKomponenteAus(Komponenten, KompPred, KompPredDanach) :-
 	gebeKomponenteAus(Rest, KompPred3, KompPredDanach),
 	!.
 
+baueBegruendung(Ziel, BegrTupel) :-
+	findall(FehlStoffTupel, (suchAlgorithmus:ersterNichtBeschaffbarerStoff(Ziel, FehlStoff, Vorgaenge), 
+	                    FehlStoff \= none,
+	                    FehlStoffTupel=[FehlStoff, Vorgaenge]
+	                    ), FehlStoffTupels),
+	baueBegruendungSub(FehlStoffTupels, [], BegrTupel).
+	
+baueBegruendungSub(BegrTupel, BegrTupelVorher, BegrTupelDanach) :-
+	BegrTupel = [],
+	BegrTupelVorher = BegrTupelDanach,
+	!.
+	
+baueBegruendungSub([BegrTupel|RestBegrTupel], BegrTupelVorher, BegrTupelDanach) :-
+	BegrTupel = [FehlStoff, Vorgaenge],  
+	ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
+	append(BegrTupelVorher, [begr(FehlStoff, VorgaengePred)], BegrTupelPred0),
+	baueBegruendungSub(RestBegrTupel, BegrTupelPred0, BegrTupelDanach).
+
+
 ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWertEndProdukt, SummenPred) :-
     MehrWert is GesamtWertEndProdukt - GesamtKosten,
 	berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn),
@@ -150,4 +169,9 @@ berechneStundenLohn(GesamtZeit, _, StundenLohn) :-
 berechneStundenLohn(GesamtZeit, MehrWert, StundenLohn) :-
 	StundenLohn is round(MehrWert * 360000 / GesamtZeit).
 	
+zeitFeldToNumber(ZeitFeld, _) :-
+	ZeitFeld = 'Zeit'.
 	
+zeitFeldToNumber(ZeitFeld, ZeitFeldZahl) :-
+	ZeitFeld \= 'Zeit', atom_number(ZeitFeld, ZeitFeldZahl).
+		

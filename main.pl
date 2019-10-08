@@ -14,16 +14,18 @@ produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	Wert is EinzelWert * Anzahl, 
 	memberchk([_, Stoff], Komponenten).
 
-
-
 /* TESTS */
 testOptimierteSammlung :-
+	spielStatus:spielStatusInit,
+	sammlung:sammelbarInit, 
 	stoff:stoff(_, Stoff, _, _),
 	optimierungsZiel(OptZiel),
 	optimierteLoesung(OptZiel, 1, Stoff),
 	fail.
 
 testStoffNichtSammelbar(Stoff) :-
+	spielStatus:spielStatusInit,
+	sammlung:sammelbarInit, 
  	stoff:stoff(_, Stoff, _),
 	\+sammlung:sammelbar(Stoff, _).
 	
