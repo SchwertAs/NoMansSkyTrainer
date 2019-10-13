@@ -4,6 +4,7 @@ startServer :-
 	spielStatus:spielStatusInit,
 	sammlung:sammelbarInit, 
 	server:server(8000),
+	debug(myTrace),
 	format('Zum Server beenden Taste drücken!', []),
 	get_single_char(_).
 

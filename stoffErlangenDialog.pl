@@ -1,15 +1,45 @@
 :- module(stoffErlangenDialog, [stoffErlangen/1]).
 
 :- use_module(library(dcg/basics)).
+:- use_module(library(http/thread_httpd)).
+:- use_module(library(http/http_dispatch)).
+:- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
 :- use_module(library(http/http_parameters)).
 
+:- http_handler('/stoffErlangenSystemAusWahl', stoffErlangenSystemAusWahl, []).
+:- http_handler('/stoffErlangenPlanetAusWahl', stoffErlangenPlanetAusWahl, []).
 :- http_handler('/stoffErlangenAusWahl', stoffErlangenAusWahl, []).
 :- http_handler('/stoffErlangen', stoffErlangen, []).
 
-/* ----------------------  Eingabe Formular ---------------------------------------------------*/
+/* -----------------------------------  Systemauswahl ----------------------------------------------- */
+stoffErlangenSystemAusWahl(_Request) :-
+	planetAuswahlDialog:systemAuswahlDialog(
+	  'Stoff erlangen - Aufenthaltsort des Spielers: System auswählen',
+	  '/stoffErlangenPlanetAusWahl').
 
-stoffErlangenAusWahl(_Request) :-
+/* -----------------------------------  Planetauswahl ----------------------------------------------- */
+stoffErlangenPlanetAusWahl(Request) :-
+	planetAuswahlDialog:planetAuswahlDialog(
+	  'Stoff erlangen - Aufenthaltsort des Spielers: Planet auswählen',
+	  '/stoffErlangenAusWahl',
+	  Request
+	).
+
+/* ----------------------  Eingabe Formular ---------------------------------------------------*/
+stoffErlangenAusWahl(Request) :-
+	member(method(post), Request), 
+	!,
+	http_parameters(Request, 
+	[auswahlSystem(AuswahlSystem, [length > 0]),
+	 auswahlPlanet(AuswahlPlanet, [length > 0])
+	]) ,
+	((AuswahlPlanet = 'Bitte wählen', planetAuswahlDialog:fehlerBehandlung); 
+	 stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet)
+	).
+
+	
+stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	ausgabe:baueStoffListeFuerStoffKlassen([rohStoff, rohUndKochStoff], Stoffe1),
 	server:baueOptionsFeld('auswahlRohStoff', Stoffe1, 2, OptionList1),
 	ausgabe:baueStoffListeFuerStoffKlassen([produkt, produktUndKochStoff], Stoffe2),
@@ -27,7 +57,10 @@ stoffErlangenAusWahl(_Request) :-
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/stoffErlangen'), method('post')], 
-	       	[  	fieldset([name('fieldSet1')], [legend(['Möglichst wenig']),
+	       	 [h3('Aufenthaltsort des Spielers'),
+       	      \eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet),  	
+       	      h3('Optimierung'),
+       	      p(fieldset([name('fieldSet1')], [legend(['Möglichst wenig']),
 	       					p([input([type(radio), name('optimierungsZiel'), id('optimierungsZiel'), value('minimaleZeit')]),
 	       					   label([for('Zeitverbrauch')])
 	       					  ]),
@@ -38,30 +71,61 @@ stoffErlangenAusWahl(_Request) :-
 	       					   input([type(radio), name('optimierungsZiel'), id('optimierungsZielSammelKosten'), value('minimaleKosten')]),
 							   label([for('Kosten')])
 	       					  ])
-	       		         ]),
-	       		/* [\[FelderMenge]]), */
-			  	h2(['Anzahl']),
-			    p(input([name('anzahl'), type('text'), value(''), size='24', tabindex(1)])),
-
+	       		         ])
+	       		),
+			  	h3(['gewünschter Stoff']),
+			  	p([label(for('anzahl', 'Anzahl: ')),
+			  	   input([name('anzahl'), type('text'), value(''), size='24', tabindex(1)])
+			  	   
+			  	]),
 			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
 			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
 			       tr([td(OptionList1), td(OptionList2), td(OptionList3), td(OptionList4), td(OptionList5)])
 			      ]),
-			    p(input([name('submit'), type('submit'), value('OK')]))
+			    p(
+		    	table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
+		    	      [td([button([name("submit"), type("submit")], 'OK')]),
+		    		   td([button([name("reset"), type("reset")], 'reset')])
+		    	      ])
+		    	)
 	      	]
 	      ),
 		\['</formSpace>']     
 	],
 	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
-	reply_html_page(TermerizedHead, TermerizedBody
-	).
+	reply_html_page(TermerizedHead, TermerizedBody).
 
+eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
+	html(
+   	  div(class('table50'),[
+   	    div(class('tr'), [
+   	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1),
+   	    	\divInputReadOnly('auswahlPlanet', 'Planet: ', AuswahlPlanet, 2)
+   	  	])
+   	  ])).
+
+divInputReadOnly(Name, LabelText, Value, Index) -->
+	html(
+	div(class('td'), [
+		label([ for(Name)],[LabelText]),
+   	  	input([ name(Name),
+   	  	  		type('text'), 
+   	  	  		size(20), 
+   	  	  		maxlength(20),
+   	  	  		value(Value),
+   	  	  		tabindex(Index),
+   	  	  		readonly(true)
+   	  	  	  ])
+   	  	])
+	).
 
 /* ----------------------  Antwort Formular ---------------------------------------------------*/
 stoffErlangen(Request) :-
     member(method(post), Request), !,
     http_parameters(Request, [
+      auswahlSystem(AuswahlSystem, [length > 0]),
+	  auswahlPlanet(AuswahlPlanet, [length > 0]),
       anzahl(AtomAnzahl, [default('1')]),
       auswahlRohStoff(Stoff1, [length > 1]),
       auswahlProdukt(Stoff2, [length > 1]),
@@ -71,11 +135,14 @@ stoffErlangen(Request) :-
       optimierungsZiel(Ziel, [])
     ]),
 	atom_number(AtomAnzahl, Anzahl),
-    ((stoffAuswahl(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff),
-      ergebnisAusgeben('System', 'MeinPlanet', Anzahl, Ziel, Stoff)
+    ((nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff),
+      ergebnisAusgeben(AuswahlSystem, AuswahlPlanet, Anzahl, Ziel, Stoff)
      );
      fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5)
     ),
+    ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
+    assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], _)),
+    sammlung:sammelbarReInit,
     !.
 
 fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-    
@@ -89,7 +156,7 @@ fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-
      )).
 
 
-stoffAuswahl(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
+nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 	((Stoff1 \= 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 = 'Bitte wählen', 
 		Stoff4 = 'Bitte wählen', Stoff5 = 'Bitte wählen', Stoff = Stoff1);
 	 (Stoff1 = 'Bitte wählen', Stoff2 \= 'Bitte wählen', Stoff3 = 'Bitte wählen', 
@@ -110,9 +177,9 @@ ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff) :-
 optimierteLoesung(System, Planet, OptimierungsZiel, Anzahl, Stoff) :-  
 	\+suchAlgorithmus:baue(System, Planet, OptimierungsZiel, Anzahl, Stoff),
 	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
-	printMinSammlungForm(Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
+	printMinSammlungForm(System, Planet, Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
-printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
+printMinSammlungForm(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
@@ -123,15 +190,19 @@ printMinSammlungForm(Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZah
 		  	h1([align(center)], ['Stoff erlangen']),
 		  	\['</header>'],
 		  	\['<formSpace>'],
-		    table( [width('25%'), border(1)], 
+		    table( [width('35%'), border(1)], 
 				   [caption(h2('Eingaben')),
 					tr([th([scope('col')],['Anzahl']),
 						th([scope('col')],['Gesuchter Stoff']),
-						th([scope('col')],['Ziel'])
+						th([scope('col')],['Optimierung']),
+						th([scope('col')],['System']),
+						th([scope('col')],['Planet'])
 				   	   ]),
 					tr([td(Anzahl),
 				    	td(Stoff),
-				    	td(Ziel)
+				    	td(Ziel),
+				    	td(System),
+				    	td(Planet)
 				   	   ])
 			       ]),
     		table( [width('25%'), border(1)], 

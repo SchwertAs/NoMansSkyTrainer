@@ -4,7 +4,7 @@
 :- dynamic(fertigeLoesung/3).
 :- dynamic(sammlung/7).
 
-/* sammlung('System', 'MeinPlanet', <System>, <Planet>, <SammelAktion>, <Stoff>, <Hauptzeit>, <Nebenzeit>, <Rüstzeit>) */
+/* sammlung(<System>, <Planet>, <SammelAktion>, <Stoff>, <Hauptzeit>, <Nebenzeit>, <Rüstzeit>) */
 initSammlung :-
 	abolish(sammlung/7)
 	,assertz(sammlung('System', 'MeinPlanet', bekannt, saeureRezept, 0, 0, 0))
@@ -801,13 +801,24 @@ sammelbarInit :-
 	
 sammelbarReInit :-
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	(sammlung(System, Planet, _, _, _, _, _), /* abweisen, falls keinerlei Einträge */
+	!,
 	\+sammelbarInitFlach(System, Planet),
-	\+sammelbarVorfertigen(System, Planet).
+	\+sammelbarVorfertigen(System, Planet));
+	( \+sammelbarInitFlach('System', 'MeinPlanet'),
+	  \+sammelbarVorfertigen('System', 'MeinPlanet')
+	
+	).
 	
 sammelbarInitFlach(System, Planet) :-
 	abolish(sammelbar/2),
 	stoff:stoff(_, Stoff, _),
-	sammlung(System, Planet, Operation, Stoff, _, _, _),
+	(sammlung(System, Planet, Operation, Stoff, _, _, _);
+	  /* raumSchuerfen geht auf jedem Planeten */
+	  sammlung('System', 'MeinPlanet', raumSchuerfen, Stoff, _, _, _);
+	  /* rezepte sind auch überall gleich bekannt */
+	  sammlung('System', 'MeinPlanet', bekannt, Stoff, _, _, _)
+	),
 	sammelAktion:pruefeOperationVorraussetzung(Operation),
 	assertz(sammelbar(Stoff, Operation)),
 	fail.

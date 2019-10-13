@@ -79,12 +79,19 @@ div.table {
 	border: thin solid #999999;
 	padding: 5px;
 }
+div.table20 { 
+  display: table; 
+  width: calc(20% - 10px);
+	border: thin solid #999999;
+	padding: 5px;
+}
 div.table30 { 
   display: table; 
   width: calc(30% - 10px);
 	border: thin solid #999999;
 	padding: 5px;
-}div.table50 { 
+}
+div.table50 { 
   display: table; 
   width: calc(50% - 10px);
 	border: thin solid #999999;
@@ -111,11 +118,12 @@ div.td {
 </style>'.
 
 baueOptionsFeld(FeldName, OptionsWerteListe, Index, OptionList) :-
-	ListString1 = '<select name="',
+	string_concat('<select name="', FeldName, ListString0),
+	string_concat(ListString0, '" id="', ListString1),
 	string_concat(ListString1, FeldName, ListString2),
 	string_concat(ListString2, '" size="1" tabindex="', ListString3),
 	string_concat(ListString3, Index, ListString4),
-	string_concat(ListString4, '">~n', ListString5),
+	string_concat(ListString4, '">', ListString5),
 	baueOptionen(OptionsWerteListe, Optionen),
 	string_concat(ListString5, Optionen, ListString6),
 	string_concat(ListString6, '</select>', ListString7),

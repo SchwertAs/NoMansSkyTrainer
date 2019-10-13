@@ -21,27 +21,9 @@ systemNamenDialog(_Request) :-
 		\['<formSpace>'],       
 	    form([action('/systemNamen'), method('post'), id("sternenSystemEingabe")], 
 	       	 [table([width("100%"), border("1"), cellspacing("3"), cellpadding("2")],
-	       	        [tr([td([table([width("100%"), border("1"), cellspacing("1"), cellpadding("1")], 
-	       	                	   [tr([th([scope("col")],['System-Name']),
-	       	                            th([scope("col")],['Farbe'])
-	       	                	       ]),
-	       	                	    \eingabeZeile(FeldNoList1)
-	       	                	   ])
-	       	        	    ]),
-	       	         	 td([table([width("100%"), border("1"), cellspacing("1"), cellpadding("1")], 
-	       	                	   [tr([th([scope("col")],['System-Name']),
-	       	                            th([scope("col")],['Farbe'])
-	       	                	       ]),
-	       	                	    \eingabeZeile(FeldNoList2)
-	       	                	   ])
-	       	        	    ]),
-	       	             td([table([width("100%"), border("1"), cellspacing("1"), cellpadding("1")], 
-	       	                	   [tr([th([scope("col")],['System-Name']),
-	       	                            th([scope("col")],['Farbe'])
-	       	                	       ]),
-	       	                	    \eingabeZeile(FeldNoList3)
-	       	                	   ])
-	       	                ])
+	       	        [tr([td(\innereTabelle(FeldNoList1)),
+	       	             td(\innereTabelle(FeldNoList2)),
+	       	             td(\innereTabelle(FeldNoList3))
 	       	            ])
 	       	        ]),
 			    	table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
@@ -55,10 +37,20 @@ systemNamenDialog(_Request) :-
 	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
-eingabeZeile([]) -->
+innereTabelle(FeldNoList) -->
+	html(
+		[table([width("100%"), border("1"), cellspacing("1"), cellpadding("1")], 
+			   [tr([th([scope("col")],['System-Name']),
+			    th([scope("col")],['Farbe'])
+   	           ]),
+   	           \innereEingabeZeile(FeldNoList)
+   	           ])
+   	    ]).
+	
+innereEingabeZeile([]) -->
 	[].
 
-eingabeZeile([FeldNo|Rest]) -->
+innereEingabeZeile([FeldNo|Rest]) -->
 	html([tr([td(input([name('systemName' + FeldNo), type("text"), maxlength("40")])),
 			  td([select([name('farbe' + FeldNo), size("1")],
 					     [option([selected("selected")],['gelb']),
@@ -69,7 +61,7 @@ eingabeZeile([FeldNo|Rest]) -->
    	   			 ])
    	         ])
    	   ]),
-   	   eingabeZeile(Rest).   	   
+   	   innereEingabeZeile(Rest).   	   
  
 systemNamen(Request) :-
 	member(method(post), Request), !,
