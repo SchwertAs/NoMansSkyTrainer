@@ -17,7 +17,7 @@ logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge) :-
 isSammlung(Vorgang) :-
 	Vorgang = [_, Operation, _, [_, _]],
 	Operation \= bekannt,
-	sammelAktion:sammelAktion(Operation, _),
+	sammelAktion:sammelAktion(Operation),
 	!.
 
 gruppiereSammelvorgaengeNachOrt(Vorgaenge, OptimierteVorgaenge) :-

@@ -99,7 +99,7 @@ planetMondName(Request) :-
      planet4(Planet4, [default('')]), mond1(Mond4, [default('')]),
      planet5(Planet5, [default('')]), mond1(Mond5, [default('')])
     ]),
-    spielStatus:initPlaneten,
+	spielStatus:initPlaneten(AuswahlSystem),
     (Planet1 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet1))),
     (Planet2 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet2))),
     (Planet3 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet3))),
@@ -118,6 +118,4 @@ planetMondName(Request) :-
 		\['</header>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
-    
       
-

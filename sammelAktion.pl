@@ -1,18 +1,34 @@
-:- module(sammelAktion, [sammelAktion/2]).
+:- module(sammelAktion, [sammelOrt/2]).
 
-sammelAktion(bekannt, ortSpieler).
-sammelAktion(pfluecken, ortWald).
-sammelAktion(herausSchlagen, ortWald).
-sammelAktion(minenLaserNutzen, ortWald).
-sammelAktion(verbessertenMinenLaserNutzen, ortWald).
-sammelAktion(exoFahrzeugMinenLaserNutzen, ortWald).
-sammelAktion(terrainFormerNutzen, ortWald).
-sammelAktion(jagen, ortWald).
-sammelAktion(erkaempfen, ortWald).
-sammelAktion(vonTierErhalten, ortWald).
-sammelAktion(ernten, ortWald).
-sammelAktion(raumSchuerfen, ortWeltRaum).
-sammelAktion(kaufen, Ort) :-
+sammelAktion(bekannt).
+sammelAktion(pfluecken).
+sammelAktion(herausSchlagen).
+sammelAktion(minenLaserNutzen).
+sammelAktion(verbessertenMinenLaserNutzen).
+sammelAktion(exoFahrzeugMinenLaserNutzen).
+sammelAktion(terrainFormerNutzen).
+sammelAktion(jagen).
+sammelAktion(erkaempfen).
+sammelAktion(vonTierErhalten).
+sammelAktion(ernten).
+sammelAktion(raumSchuerfen).
+sammelAktion(kaufen).
+sammelAktion(ertauchen).
+sammelAktion(unterWasserErkaempfen).
+
+sammelOrt(bekannt, ortSpieler).
+sammelOrt(pfluecken, ortWald).
+sammelOrt(herausSchlagen, ortWald).
+sammelOrt(minenLaserNutzen, ortWald).
+sammelOrt(verbessertenMinenLaserNutzen, ortWald).
+sammelOrt(exoFahrzeugMinenLaserNutzen, ortWald).
+sammelOrt(terrainFormerNutzen, ortWald).
+sammelOrt(jagen, ortWald).
+sammelOrt(erkaempfen, ortWald). 
+sammelOrt(vonTierErhalten, ortWald).
+sammelOrt(ernten, ortWald).
+sammelOrt(raumSchuerfen, ortWeltRaum).
+sammelOrt(kaufen, Ort) :-
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	((spielStatus:systemAusstattung([System, Planet, ortHandelsTerminal], _),
 	  Ort = ortHandelsTerminal);
@@ -20,11 +36,8 @@ sammelAktion(kaufen, Ort) :-
 	  Ort = ortRaumStation)
 	).
 
-sammelAktion(ertauchen, ortWasser).
-sammelAktion(unterWasserErkaempfen, ortWasser).
-
-sammelAktion(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, ortAthmosphaerenAnlageSauerStoff).
-sammelAktion(ausAtmosphaerenAnlageFuerStickStoffGewinnen, ortAthmosphaerenAnlageStickStoff).
+sammelOrt(ertauchen, ortWasser).
+sammelOrt(unterWasserErkaempfen, ortWasser).
 
 pruefeOperationVorraussetzung(minenLaserNutzen) :-
 	!,
@@ -54,7 +67,7 @@ pruefeOperationVorraussetzung(erkaempfen) :-
 pruefeOperationVorraussetzung(unterWasserErkaempfen) :-
 	!,
 	\+spielStatus(waffeVorhanden),
-	sammelAktion(unterWasserErkaempfen, Ort),
+	sammelOrt(unterWasserErkaempfen, Ort),
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, Ort], _),
 	!.
@@ -70,7 +83,7 @@ pruefeOperationVorraussetzung(exoFahrzeugMinenLaserNutzen) :-
 	!.
 
 pruefeOperationVorraussetzung(Operation) :-
-	sammelAktion(Operation, Ort),
+	sammelOrt(Operation, Ort),
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, Ort], _),
 	!.

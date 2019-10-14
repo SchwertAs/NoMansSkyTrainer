@@ -10,7 +10,7 @@
 spielStatusInit :-  
 	initSpielStatus,
 	initSysteme,
-	initPlaneten,
+	initPlaneten(_),
 	initSystemAusstattung.
 
 initSpielStatus :-
@@ -29,9 +29,9 @@ initSysteme :-
 	abolish(systeme/2)
 	,assertz(systeme('System', 'gelb')).
 	
-initPlaneten :-
-	abolish(planeten/2)
-	,assertz(planeten('System', 'MeinPlanet')).
+initPlaneten(System) :-
+	ignore(retractall(planeten(System, _)))
+	,(atom(System); assertz(planeten('System', 'MeinPlanet'))).
 
 initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */

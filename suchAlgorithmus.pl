@@ -138,6 +138,8 @@ multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, Vorg
 /* ------------------------------------------------------------------------------------------------------------------------- */
 rezeptZulaessig(Operation, _) :-
 	Operation \= raffinieren,
+	Operation \= ausAtmosphaerenAnlageFuerSauerStoffGewinnen,
+	Operation \= ausAtmosphaerenAnlageFuerStickStoffGewinnen,
 	!.
 	
 rezeptZulaessig(raffinieren, Komponenten) :-
@@ -161,6 +163,18 @@ rezeptZulaessig(raffinieren, Komponenten) :-
 	Komponenten = [[_, _], [_, _], [_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
+	!.
+
+rezeptZulaessig(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, Komponenten) :-
+	Komponenten = [[_, _]],
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlageSauerStoff], _),
+	!.
+
+rezeptZulaessig(ausAtmosphaerenAnlageFuerStickStoffGewinnen, Komponenten) :-
+	Komponenten = [[_, _]],
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlageStickStoff], _),
 	!.
 
 /* ------------------------------------------------------------------------------------------------------------------------- */

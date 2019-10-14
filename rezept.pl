@@ -74,6 +74,10 @@ rezept(raffinieren, [[2, kohlenStoff]], [1, verdichteterKohlenStoff], 48 ).
 rezept(raffinieren, [[1, kohlenStoffKristall]], [150, verdichteterKohlenStoff], 2 ).
 rezept(raffinieren, [[1, restSubstanz]], [1, zaeheFluessigkeiten], 154 ).
 
+rezept(ausAtmosphaerenAnlageFuerStickStoffGewinnen, [[1, verdichteterKohlenStoff]], [5, stickStoff], 7220 ).
+rezept(ausAtmosphaerenAnlageFuerStickStoffGewinnen, [[3, kohlenStoff]], [5, stickStoff], 7220 ).
+rezept(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, [[3, verdichteterKohlenStoff]], [5, sauerStoff], 1444 ).
+rezept(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, [[3, kohlenStoff]], [5, sauerStoff], 1444 ).
 
 /* Zwei Komponenten */
 rezept(raffinieren, [[2, pilzSchimmel], [1, salz]], [1, ammoniak], 93 ).
@@ -785,7 +789,7 @@ rezept(bauen, [[20, ferritStaub], [1, wuerfelRezept]], [1, wuerfel], 0 ).
 rezept(bauen, [[20, ferritStaub], [1, kugelRezept]], [1, kugel], 0 ).
 
 /* %%%%%%%%%%%%%%%%%%%%%  Kochrezepte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-/* obsolet weil hypnotisches Auge keine Kochzutat mehr ist.
+
 rezept(kochen, [[1, hypnotischesAuge], [1, hypnotischesAuge]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, hypnotischesAuge], [1, verarbeitetesFleisch]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, hypnotischesAuge], [1, geraeuchertesFleisch]],[1, abgruendigerEintopf], 260).
@@ -806,9 +810,6 @@ rezept(kochen, [[1, hypnotischesAuge], [1, ungiftigerPilz]],[1, abgruendigerEint
 rezept(kochen, [[1, hypnotischesAuge], [1, sievertBohnen]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, hypnotischesAuge], [1, suessWurzel]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, hypnotischesAuge], [1, fleischigeWurzeln]],[1, abgruendigerEintopf], 260).
-rezept(kochen, [[1, gefroreneKnollen], [1, hypnotischesAuge]],[1, eisSchreie], 260).
-rezept(kochen, [[1, frostKristall], [1, hypnotischesAuge]],[1, eisSchreie], 260).
-rezept(kochen, [[1, hypnotischesAuge]],[1, schrecklicherBrei], 260).
 rezept(kochen, [[1, schrecklicherBrei], [1, hypnotischesAuge]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, schrecklicherBrei], [1, schrecklicherBrei]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, schrecklicherBrei], [1, verarbeitetesFleisch]],[1, abgruendigerEintopf], 260).
@@ -830,10 +831,12 @@ rezept(kochen, [[1, schrecklicherBrei], [1, ungiftigerPilz]],[1, abgruendigerEin
 rezept(kochen, [[1, schrecklicherBrei], [1, sievertBohnen]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, schrecklicherBrei], [1, suessWurzel]],[1, abgruendigerEintopf], 260).
 rezept(kochen, [[1, schrecklicherBrei], [1, fleischigeWurzeln]],[1, abgruendigerEintopf], 260).
+rezept(kochen, [[1, gefroreneKnollen], [1, hypnotischesAuge]],[1, eisSchreie], 260).
+rezept(kochen, [[1, frostKristall], [1, hypnotischesAuge]],[1, eisSchreie], 260).
+rezept(kochen, [[1, hypnotischesAuge]],[1, schrecklicherBrei], 260).
 rezept(kochen, [[1, gefroreneKnollen], [1, schrecklicherBrei]],[1, eisSchreie], 260).
 rezept(kochen, [[1, frostKristall], [1, schrecklicherBrei]],[1, eisSchreie], 260).
 
-Obsolet weil larvenkern nicht mehr kochbar
 rezept(kochen, [[1, verarbeiteterZucker], [1, larvenKern]],[1, delikatessBaiser], 260).
 rezept(kochen, [[1, larvenKern], [1, wuerzigerKaese]],[1, fluesterndesOmelett], 260).
 rezept(kochen, [[1, larvenKern]],[1, gebackeneEier], 260).
@@ -890,7 +893,8 @@ rezept(kochen, [[1, gefroreneKnollen], [1, monstroeserPudding]],[1, toedlichKalt
 rezept(kochen, [[1, frostKristall], [1, monstroeserPudding]],[1, toedlichKalteEisCreme], 260).
 rezept(kochen, [[1, monstroeserPudding], [1, kuchenTeig]],[1, schrecklicheklebrigeKoestlichkeit], 260).
 
--- folgende gehen prinzipiell nicht, weil protoSahne und sahne gekocht nur zu einem Folgestoff werden kann !! 
+/* 
+-- folgende gehen prinzipiell nicht, weil protoSahne und sahne gekocht nur zu einem Folgestoff nämlich butter werden kann !! 
 -- nicht möglich: wuerzigerKaese
 rezept(kochen, [[1, sahne]],[1, wuerzigerKaese], 260). 
 rezept(kochen, [[1, tortenBoden], [1, wuerzigerKaese]],[1, kaeseTorte], 260).
@@ -1635,9 +1639,10 @@ rezept(modulInRaumstationErwerben, [[480, nanitHaufen]], [1, exoFahrzeugAntriebM
 rezept(modulInRaumstationErwerben, [[300, nanitHaufen]], [1, exoFahrzeugKanonenModulS], 0 ).
 
 /* ---------------------  Test Prädikate --------------------------------------------- */
+/* in rezepten müssen immer Wandelaktionen angegeben sein */
 integritaetWandelAktion(Op, Produkt) :-
 	rezept(Op, _, [_, Produkt], _),
-	\+wandelAktion:wandelAktion(Op).
+	\+wandelAktion:wandelAktion(Op, _).
 
 integritaetProdukt(Op, Produkt) :-
 	rezept(Op, _, [_, Produkt], _),

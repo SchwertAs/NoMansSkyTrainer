@@ -1,9 +1,9 @@
-:- module(sammlung, [sammelbarReInit/0, sammlung/7, sammelbar/2, fertigeLoesung/3]).
+:- module(sammlung, [sammelbarInit/0, sammelbarReInit/0, sammlung/7, sammelbar/2, fertigeLoesung/3]).
 
 :- dynamic(sammelbar/2).
 :- dynamic(fertigeLoesung/3).
 :- dynamic(sammlung/7).
-
+	
 /* sammlung(<System>, <Planet>, <SammelAktion>, <Stoff>, <Hauptzeit>, <Nebenzeit>, <Rüstzeit>) */
 initSammlung :-
 	abolish(sammlung/7)
@@ -639,29 +639,26 @@ initSammlung :-
 	,assertz(sammlung('System', 'MeinPlanet', raumSchuerfen, platin, 20, 0, 63))
 	
 	/* kaufen */
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, kabelBaum, 150, 1310, 2460))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, salz, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, restSubstanz, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, ionenAkku, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, diWasserStoffGelee, 150, 1310, 1000))
 	,assertz(sammlung('System', 'MeinPlanet', kaufen, ferritStaub, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, sauerStoff, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, ionenAkku, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, kabelBaum, 150, 1310, 2460))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, raumSchiffStartTreibStoff, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, restSubstanz, 150, 1310, 1000))
 	,assertz(sammlung('System', 'MeinPlanet', kaufen, kobalt, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, kobaltSpiegel, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, metallPlatten, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, mikroProzessor, 150, 1310, 1000))
 	,assertz(sammlung('System', 'MeinPlanet', kaufen, natrium, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, kobaltSpiegel, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, diWasserStoffGelee, 150, 1310, 1000))
 	,assertz(sammlung('System', 'MeinPlanet', kaufen, navigationsDaten, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, metallPlatten, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, raumSchiffStartTreibStoff, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, mikroProzessor, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, kobaltSpiegel, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, diWasserStoffGelee, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, metallPlatten, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, raumSchiffStartTreibStoff, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, mikroProzessor, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, sauerStoffKapsel, 150, 1310, 1000))
 	,assertz(sammlung('System', 'MeinPlanet', kaufen, pyrit, 150, 1310, 1000))
-	,assertz(sammlung('System', 'MeinPlanet', kaufen, reinesFerrit, 150, 1310, 1000))
 	,assertz(sammlung('System', 'MeinPlanet', kaufen, pugneum, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, raumSchiffStartTreibStoff, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, reinesFerrit, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, salz, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, sauerStoff, 150, 1310, 1000))
+	,assertz(sammlung('System', 'MeinPlanet', kaufen, sauerStoffKapsel, 150, 1310, 1000))
+	
 
 	/* Aus Anbau */
 	,assertz(sammlung('System', 'MeinPlanet', ernten, frostKristall, 20, 0, 0))
