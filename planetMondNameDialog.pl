@@ -7,13 +7,25 @@
 :- use_module(library(http/html_write)).
 :- use_module(library(http/http_parameters)).
 
+:- http_handler('/planetMondNameSystemAuswahlDialog', planetMondNameSystemAuswahlDialog, []).
 :- http_handler('/planetMondNameDialog', planetMondNameDialog, []).
 :- http_handler('/planetMondName', planetMondName, []).
 
+planetMondNameSystemAuswahlDialog(_Request) :-
+	planetAuswahlDialog:systemAuswahlDialog(
+		'Eigenschaften Sternensystem eingeben', 
+		'/planetMondNameDialog').
+		
+planetMondNameDialog(Request) :-
+	member(method(post), Request), !,
+	http_parameters(Request, 
+	[auswahlSystem(AuswahlSystem, [length > 0])
+	]),
+	(AuswahlSystem = 'Bitte wählen' -> planetAuswahlDialog:fehlerBehandlung; 
+	 planetMondNameAnzeigen(AuswahlSystem)
+	).
 
-planetMondNameDialog(_Request) :-
-	findall(System, spielStatus:systeme(System, _), Systeme),
-	server:baueOptionsFeld('auswahlSystem', Systeme, 1, OptionList),
+planetMondNameAnzeigen(AuswahlSystem) :-
 	TermerizedBody = [
 		\['<header>'],
 	    h1([align(center)], ['Eigenschaften Sternensystem eingeben']),
@@ -21,7 +33,7 @@ planetMondNameDialog(_Request) :-
 		\['<formSpace>'],       
 	    form([action('/planetMondName'), method('post'), name('systemEigenschaftenForm')], 
 	       	 [h3('Sternensystem'),
-	       	  p(OptionList),
+       	  	  \eingabeTabelleReadOnly(AuswahlSystem),
 	       	  h3('Himmelskörpernamen'),
 	       	  table([width("325px"), border("1"), cellspacing("3"), cellpadding("2")],
 	       	        [tr([th([scope(col)], 'Planetenname'), 
@@ -53,6 +65,29 @@ planetMondNameDialog(_Request) :-
 	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
 	reply_html_page(TermerizedHead, TermerizedBody).
+
+eingabeTabelleReadOnly(AuswahlSystem) -->
+	html(
+   	  div(class('table20'),[
+   	    div(class('tr'), [
+   	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1)
+   	  	])
+   	  ])).
+
+divInputReadOnly(Name, LabelText, Value, Index) -->
+	html(
+	div(class('td'), [
+		label([ for(Name)],[LabelText]),
+   	  	input([ name(Name),
+   	  	  		type('text'), 
+   	  	  		size(20), 
+   	  	  		maxlength(20),
+   	  	  		value(Value),
+   	  	  		tabindex(Index),
+   	  	  		readonly(true)
+   	  	  	  ])
+   	  	])
+	).
 	
 planetMondName(Request) :-
 	member(method(post), Request), !,
@@ -64,7 +99,7 @@ planetMondName(Request) :-
      planet4(Planet4, [default('')]), mond1(Mond4, [default('')]),
      planet5(Planet5, [default('')]), mond1(Mond5, [default('')])
     ]),
-    spielStatus:initPlaneten,
+	spielStatus:initPlaneten(AuswahlSystem),
     (Planet1 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet1))),
     (Planet2 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet2))),
     (Planet3 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet3))),
@@ -83,6 +118,4 @@ planetMondName(Request) :-
 		\['</header>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
-    
       
-

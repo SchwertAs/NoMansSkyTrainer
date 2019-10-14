@@ -14,83 +14,18 @@
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 planetenEigenschaftenDialogSystemAuswahl(_Request) :-
-	findall(System, (spielStatus:systeme(System, _), System \= 'System'), Systeme),
-	/* findall(System, (spielStatus:systeme(System, _) ), Systeme),*/
-	server:baueOptionsFeld('auswahlSystem', Systeme, 2, OptionList),
-	TermerizedBody = [
-		\['<header>'],
-	    h1([align(center)], ['Eigenschaften Himmelskörper eingeben: Systemauswahl']),
-	    \['</header>'],
-		\['<formSpace>'],       
-	    form([action('/planetenEigenschaftenDialogPlanetAuswahl'), method('post'), name('planetenEigenschaftenAuswahlSystemForm')], 
-	       	 [h3('Sternensystem'),
-	       	  \eingabeTabelle(OptionList),
-	       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-			    	  [td([button([name("submit"), type("submit")], 'OK')]),
-			    	   td([button([name("reset"), type("reset")], 'reset')])
-			    	  ]))    
-			 ]),
-		\['</formSpace>']
-		             ],       
-	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Auswahl')],
-	reply_html_page(TermerizedHead, TermerizedBody).
-
-eingabeTabelle(OptionList) -->
-	html(
-   	  div(class('table30'),[
-   	    div(class('tr'), [
-   	  	    div(class('td'), [
-   	  	  	label([for('auswahlSystem')],'System: '),
-   	  	  	\OptionList
-   	  	    ]) 
-   	  	])
-   	  ])).
+	planetAuswahlDialog:systemAuswahlDialog(
+	  'Eigenschaften Himmelskörper eingeben: Systemauswahl',
+	  '/planetenEigenschaftenDialogPlanetAuswahl').
 
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetenEigenschaftenDialogPlanetAuswahl(Request) :-
-	member(method(post), Request), !,
-	http_parameters(Request, 
-	[auswahlSystem(AuswahlSystem, [length > 0])]),
-	((AuswahlSystem = 'Bitte wählen', fehlerBehandlung); 
-	(
-	 findall(Planet, (spielStatus:planeten(AuswahlSystem, Planet), Planet \= 'MeinPlanet'), Planeten),
-	 /* findall(Planet, spielStatus:planeten(AuswahlSystem, Planet), Planeten), */
-	 server:baueOptionsFeld('auswahlPlanet', Planeten, 2, OptionList),
-	
-	 TermerizedBody = [
-	 \['<header>'],
-     h1([align(center)], ['Eigenschaften Himmelskörper eingeben']),
-     \['</header>'],
-	 \['<formSpace>'],       
-     form([action('/planetenEigenschaftenDialog'), method('post'), name('planetenEigenschaftenAuswahlPlanetForm')], 
-       	 [h3('Auswahl Himmelskörper'),
-       	  \eingabeTabelle(AuswahlSystem, OptionList),
-       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-		    	  [td([button([name("submit"), type("submit")], 'OK')]),
-		    	   td([button([name("reset"), type("reset")], 'reset')])
-		    	  ]))    
-		 ]),
-	 \['</formSpace>']
-		             ],       
-	 server:holeCssAlsStyle(StyleString),
-	 TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planet-Auswahl')],
-	 reply_html_page(TermerizedHead, TermerizedBody)
-	)).
-
-eingabeTabelle(AuswahlSystem, OptionList) -->
-	html(
-   	  div(class('table50'),[
-   	    div(class('tr'), [
-   	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1),
-   	  	    div(class('td'), [
-   	  	  	label([for('planetenName')],'Planet: '),
-   	  	  	\OptionList
-   	  	    ]) 
-   	  	])
-   	  ])).
-   	  
+	planetAuswahlDialog:planetAuswahlDialog(
+	  'Eigenschaften Himmelskörper eingeben: Himmelskörperauswahl',
+	  '/planetenEigenschaftenDialog',
+	  Request
+	).
 	
 /* -----------------------------------  Eigenschaften eingeben -------------------------------------- */
 planetenEigenschaftenDialog(Request) :-
@@ -99,9 +34,9 @@ planetenEigenschaftenDialog(Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]),
-	(AuswahlPlanet = 'Bitte wählen' -> fehlerBehandlung; 
-	 planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet
-	)).
+	(AuswahlPlanet = 'Bitte wählen' -> planetAuswahlDialog:fehlerBehandlung; 
+	 planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet)
+	).
 
 planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	/* Einlesen vorhandener Werte */
@@ -138,7 +73,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
     h1([align(center)], ['Eigenschaften Himmelskörper eingeben']),
     \['</header>'],
 	\['<formSpace>'],       
-    form([action('/planetenEigenschaften'), method('post'), name('planetenEigenschaftenVorauswahlForm')], 
+    form([action('/planetenEigenschaften'), method('post'), name('planetenEigenschaftenAuswahlForm')], 
        	 [h3('Auswahl Himmelskörper'),
        	  \eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet),
        	  h3('Einrichtungen und ihre Reisezeit von der Hauptbasis'),
@@ -168,7 +103,6 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Eigenschaften')],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
-
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
 	html(
    	  div(class('table50'),[
@@ -177,21 +111,6 @@ eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
    	    	\divInputReadOnly('auswahlPlanet', 'Planet: ', AuswahlPlanet, 2)
    	  	])
    	  ])).
-
-divInputReadOnly(Name, LabelText, Value, Index) -->
-	html(
-	div(class('td'), [
-		label([ for(Name)],[LabelText]),
-   	  	input([ name(Name),
-   	  	  		type('text'), 
-   	  	  		size(20), 
-   	  	  		maxlength(20),
-   	  	  		value(Value),
-   	  	  		tabindex(Index),
-   	  	  		readonly(true)
-   	  	  	  ])
-   	  	])
-	).
 
 tabelleEinrichtungen(
 	HauptBasisVorhandenVal,
@@ -275,6 +194,21 @@ tabelleEinrichtungen(
    	    	\checkZeitUnitGruppe('atmosphaerenAnlageStickStoff_vorhanden', AthmosphaerenAnlageStickStoffVorhandenVal, 313, 'atmosphaerenAnlageStickStoff_entfernung', AthmosphaerenAnlageStickStoffEntfernungVal, 314)
    	  	])
    	  ])).
+
+divInputReadOnly(Name, LabelText, Value, Index) -->
+	html(
+	div(class('td'), [
+		label([ for(Name)],[LabelText]),
+   	  	input([ name(Name),
+   	  	  		type('text'), 
+   	  	  		size(20), 
+   	  	  		maxlength(20),
+   	  	  		value(Value),
+   	  	  		tabindex(Index),
+   	  	  		readonly(true)
+   	  	  	  ])
+   	  	])
+	).
 
 checkZeitUnitGruppe(NameCheck, ValueCheck, IndexCheck, NameZeit, ValueZeit, IndexZeit) -->
 	html(   	  	    
@@ -382,9 +316,13 @@ planetenEigenschaften(Request) :-
       ausgabe:zeitFeldToNumber(KonstruktionsStationEntfernung, KonstruktionsStationEntfernungNum),
       ausgabe:zeitFeldToNumber(AtmosphaerenAnlageSauerStoffEntfernung, AtmosphaerenAnlageSauerStoffEntfernungNum),
       ausgabe:zeitFeldToNumber(AtmosphaerenAnlageStickStoffEntfernung, AtmosphaerenAnlageStickStoffEntfernungNum),
-      spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung),
+      (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung);
+       Entfernung = -1
+      ),
       ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, _], _))),
-      assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung)),
+      (Entfernung = -1;
+       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung))
+      ),
       (HauptBasisVorhanden = off; 
        (assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHauptBasis], 0)),
       	assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWald], 1500)),
@@ -440,16 +378,6 @@ gespeichert :-
 		\['</header>']
 		             ],
 	  reply_html_page(TermerizedHead, TermerizedBody).
-
-fehlerBehandlung :-
-   	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
-	TermerizedBody = [
-		\['<redHeader>'],
-		h3(align(center),'bitte eine Auswahl treffen!'),
-		\['</redHeader>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).
 
 fehlerBehandlungGruppe(Gruppe) :-
    	server:holeCssAlsStyle(StyleString),

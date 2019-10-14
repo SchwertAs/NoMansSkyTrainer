@@ -13,6 +13,7 @@ datenNachAccessSpeichern :-
 	ignore(odbc_query(noMansSkyDb, 'Delete from sammlung;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from sammelAktion;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from ort;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from sammelOrt;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from vorfertigen;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from stoff;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from stoffKlasse;')),
@@ -40,11 +41,17 @@ datenNachAccessSpeichern :-
 	odbc_free_statement(Statement2),
 
     /* sammelAktion */
-	odbc_prepare(noMansSkyDb, 'Insert into sammelAktion (SammelAktion, Ort) values (?, ?);', [varchar(255), varchar(255)], Statement3),
-	forall(sammelAktion:sammelAktion(SammelAktion, Ort), odbc_execute(Statement3, [SammelAktion, Ort])),
+	odbc_prepare(noMansSkyDb, 'Insert into sammelAktion (SammelAktion) values (?);', [varchar(255)], Statement3),
+	forall(sammelAktion:sammelAktion(SammelAktion), odbc_execute(Statement3, [SammelAktion])),
 	odbc_close_statement(Statement3),
 	odbc_free_statement(Statement3),
 		
+    /* sammelOrt */
+	odbc_prepare(noMansSkyDb, 'Insert into sammelOrt (SammelAktion, Ort) values (?, ?);', [varchar(255), varchar(255)], Statement8),
+	forall(sammelAktion:sammelOrt(SammelAktion, Ort), odbc_execute(Statement8, [SammelAktion, Ort])),
+	odbc_close_statement(Statement8),
+	odbc_free_statement(Statement8),
+
     /* sammlung */
 	odbc_prepare(noMansSkyDb, 'Insert into sammlung(System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit, RuestZeit) values (?, ?, ?, ?, ?, ?, ?);', [varchar(255), varchar(255), varchar(255), varchar(255), integer, integer, integer], Statement4),
 	forall(sammlung:sammlung(System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit), odbc_execute(Statement4, [System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit])),

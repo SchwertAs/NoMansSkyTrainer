@@ -1,4 +1,4 @@
-:- module(arbeitsVorbereitung, [bildeAvZeiten/9]).
+:- module(arbeitsVorbereitung, [toRuestHauptNebenZeit/7, bildeAvZeiten/9]).
 
 /* ReiseZeit ist Zeit bis vor Ort des Stoffwechsels
    Hauptzeit ist Abbauzeit pro Stück ohne Haufenwechsel
@@ -43,3 +43,54 @@ bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, 
 	Vorgaenge = [_|Rest],
 	bildeAvZeiten(System, Planet, Rest, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach),
 	!.
+
+/* in der Rüstzeit ist auch die Abrüstzeit drin */
+methodeToRuestZeit(bekannt, 0).
+methodeToRuestZeit(pfluecken, 20).
+methodeToRuestZeit(minenLaserNutzen, 180).
+methodeToRuestZeit(terrainFormerNutzen, 180).
+methodeToRuestZeit(verbessertenMinenLaserNutzen, 180).
+methodeToRuestZeit(jagen, 180).
+methodeToRuestZeit(erkaempfen, 180).
+methodeToRuestZeit(kaufen, 1987).
+methodeToRuestZeit(ernten, 180).
+methodeToRuestZeit(vonTierErhalten, 180).
+methodeToRuestZeit(ertauchen, 180).
+methodeToRuestZeit(unterWasserErkaempfen, 180).
+
+/* Zeit für den Wechsel zwischen zwei Gebinden des Stoffs */
+methodeToNebenZeit(bekannt, 0).
+methodeToNebenZeit(minenLaserNutzen, 40).
+methodeToNebenZeit(terrainFormerNutzen, 40).
+methodeToNebenZeit(verbessertenMinenLaserNutzen, 40).
+methodeToNebenZeit(jagen, 40).
+methodeToNebenZeit(erkaempfen, 40).
+methodeToNebenZeit(kaufen, 30).
+methodeToNebenZeit(ernten, 80).
+methodeToNebenZeit(vonTierErhalten, 40).
+methodeToNebenZeit(ertauchen, 40).
+methodeToNebenZeit(unterWasserErkaempfen, 40).
+
+methodeToHauptZeit(pfluecken, 100).
+
+toRuestHauptNebenZeit(Methode, Anzahl, Dauer, Gebinde, Ruest, Haupt, Neben) :-
+	assertion(sammelAktion:sammelAktion(Methode)),
+	Methode = pfluecken,
+	methodeToRuestZeit(Methode, Ruest0),
+	methodeToHauptZeit(Methode, Haupt0),
+	Neben0 is (Dauer - Ruest0 - (Gebinde * Haupt0)) / (Gebinde - 1),
+	Haupt is Haupt0 / Anzahl,
+	Neben is Neben0 / Anzahl,
+	Ruest is Ruest0 / Anzahl,
+	!.
+	
+toRuestHauptNebenZeit(Methode, Anzahl, Dauer, Gebinde, Ruest, Haupt, Neben) :-
+	assertion(sammelAktion:sammelAktion(Methode)),
+	methodeToRuestZeit(Methode, Ruest0),
+	methodeToNebenZeit(Methode, Neben0),
+	Haupt0 is (Dauer - Ruest0 - (Gebinde - 1) * Neben0) / Gebinde,
+	Haupt is Haupt0 / Anzahl,
+	Neben is Neben0 / Anzahl,
+	Ruest is Ruest0 / Anzahl.
+
+	

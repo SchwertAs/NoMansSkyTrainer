@@ -72,7 +72,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [WandelAnz, Operation, _, [_, Produkt]],
-	sammelAktion:sammelAktion(Operation, _),
+	sammelAktion:sammelAktion(Operation),
 	atom_string(WandelAnz, WandelAnzString),
 	atom_string(Operation, OperationString),
 	atom_string(Produkt, ProduktString),

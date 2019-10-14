@@ -146,7 +146,7 @@ vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
 	Vorgang = [_, Operation, _, _],
-	sammelAktion:sammelAktion(Operation, VorgangsOrt),
+	sammelAktion:sammelOrt(Operation, VorgangsOrt),
 	!.
 
 vorgangsOrt(_, Vorgang, VorgangsOrt) :-
