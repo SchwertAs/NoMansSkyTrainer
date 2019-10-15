@@ -42,7 +42,7 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
     /* einlesen der Eigenschaften */
 	findall([Stoff, Operation, Haupt, Neben, Ruest], sammlung:sammlung(AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest), RecordList),
 	findall([FeldNo], between(1, 60, FeldNo), FeldNoList),
-	outerJoinRecordsWithoutCondition(FeldNoList, RecordList, NumerierteRecordList),
+	outerJoinRecordsWithoutCondition(FeldNoList, RecordList, 1, 5, NumerierteRecordList),
 	TermerizedBody = [
 	\['<header>'],
     h1([align(center)], ['Sammelmöglichkeiten des Himmelskörpers eingeben']), 
@@ -123,19 +123,23 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 		],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
-outerJoinRecordsWithoutCondition(ListOfLists1, ListOfLists2, KombinierteListOfLists) :-
+outerJoinRecordsWithoutCondition(ListOfLists1, ListOfLists2, _, _, KombinierteListOfLists) :-
+	ListOfLists1 = [[]],
+	ListOfLists2 = [[]],
+	KombinierteListOfLists = [[]].
+	
+outerJoinRecordsWithoutCondition(_, _, InnereLaenge1, InnereLaenge2, KombinierteListOfLists) :-
+	InnereLaenge1 = 0,
+	InnereLaenge2 = 0,
+	KombinierteListOfLists = [[]].
+	
+outerJoinRecordsWithoutCondition(ListOfLists1, ListOfLists2, InnereLaenge1, InnereLaenge2, KombinierteListOfLists) :-
 	length(ListOfLists1, Len1),
 	length(ListOfLists2, Len2),
-	Len1 > 0, 
-	Len2 > 0,
-	ListOfLists1 = [Elem1|_],
-	ListOfLists2 = [Elem2|_],
-	length(Elem1, InnerLen1),
-	length(Elem2, InnerLen2),
-	InnerLen1 > 0,
-	InnerLen2 > 0,
-	baueLeerStringList(InnerLen2, [], LeerStringList2),
-	joinLists(ListOfLists1, ListOfLists2, LeerStringList2, 1, Len1, [], KombinierteListOfLists),
+	max_list([Len1, Len2], Max),
+	baueLeerStringList(InnereLaenge1, [], LeerStringList1),
+	baueLeerStringList(InnereLaenge2, [], LeerStringList2),
+	joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, 1, Max, [], KombinierteListOfLists),
 	!.
 
 baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
@@ -148,17 +152,17 @@ baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
 	baueLeerStringList(InnerLen0, LeerStringListDavor0, LeerStringListDanach).
 	
 
-joinLists(_, _, _, RecNo, MaxRecNo, Bisher, Danach) :-
+joinLists(_, _, _, _, RecNo, MaxRecNo, Bisher, Danach) :-
 	RecNo > MaxRecNo,
 	Bisher = Danach.
 	
-joinLists(ListOfLists1, ListOfLists2, LeerStringList2, RecNo, MaxRecNo, Bisher, Danach) :-
-	ListOfLists1 = [Elem1|Rest1],
+joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, RecNo, MaxRecNo, Bisher, Danach) :-
+	((ListOfLists1 = [], Elem1 = LeerStringList1); (ListOfLists1 = [Elem1|Rest1])),
 	((ListOfLists2 = [], Elem2 = LeerStringList2); (ListOfLists2 = [Elem2|Rest2])),
 	append(Elem1, Elem2, KombinierterRecord),
 	append(Bisher, [KombinierterRecord], Bisher0),
 	RecNo0 is RecNo +1,
-	joinLists(Rest1, Rest2, LeerStringList2, RecNo0, MaxRecNo, Bisher0, Danach).
+	joinLists(Rest1, Rest2, LeerStringList1, LeerStringList2, RecNo0, MaxRecNo, Bisher0, Danach).
 	
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
 	html(
@@ -221,7 +225,7 @@ innereEingabeZeile([Record|Rest]) -->
 	      div(class('tr'), [ 
 	      	div(class('td'), \baueOptionsFeld('auswahlRohStoff', FeldNo, 1, SammelStoffe)),
 			div(class('td'), \baueOptionsFeld('methode', FeldNo, 2, SammelAktionen)),
-			div([class('td'), name('Anzahl' + FeldNo)], [input([name('anzahl' + FeldNo), type('number'), min('1'), max('99999'), value(Anzahl)])]),
+			div(class('td'), [input([name('anzahl' + FeldNo), type('number'), min('1'), max('99999'), value(Anzahl)])]),
 			div(class('td'), [input([name('dauer' + FeldNo), type('number'), min('1'), max('99999'), value(Dauer0)])]),
 			div(class('td'), [input([name('gebinde' + FeldNo), type('number'), min('1'), max('30'), value(Gebinde)])])
 		 ])
