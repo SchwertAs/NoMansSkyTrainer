@@ -20,12 +20,13 @@ systemNamenDialog(_Request) :-
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/systemNamen'), method('post'), id("sternenSystemEingabe")], 
-	       	 [table([width("100%"), border("1"), cellspacing("3"), cellpadding("2")],
-	       	        [tr([td(\innereTabelle(FeldNoList1)),
-	       	             td(\innereTabelle(FeldNoList2)),
-	       	             td(\innereTabelle(FeldNoList3))
-	       	            ])
-	       	        ]),
+	       	 [div(class('table'),
+	       	      [div(class('tr'), 
+	       	           [div(class('td'), \innereTabelle(FeldNoList1)),
+	       	            div(class('td'), \innereTabelle(FeldNoList2)),
+	       	            div(class('td'), \innereTabelle(FeldNoList3))
+	       	           ])
+	       	      ]),
 			    	table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
 			    	      [td([button([name("submit"), type("submit")], 'OK')]),
 			    		   td([button([name("reset"), type("reset")], 'reset')])
