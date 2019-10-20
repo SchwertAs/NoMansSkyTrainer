@@ -1,12 +1,56 @@
 :- module(datenBankAnbindung, []).
-datenVonAccessHolen :-
-	/* Dummyfunktion */
-	format('Daten holen~n').
-	 
+
+:- use_module(library(persistency)).
+
+:- persistent
+	sammlungDb(recordNo:nonneg, system:atom, planet:atom, sammelAktion:atom, stoff:atom, hauptZeit:nonneg, nebenZeit:nonneg, ruestZeit:nonneg),
+	spielStatusDb(status:atom, vorhanden:boolean),
+	systemDb(recordNo:nonneg, system:atom, farbe:atom),
+	planetDb(recordNo:nonneg, system:atom, planet:atom),
+	systemAusstattungDb(ortsAngabe:list, entfernung:nonneg).
+
+datenInDbSpeichern :-
+	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
+	
+	retractall_sammlungDb(_, _, _, _, _, _, _, _),
+	retractall_spielStatusDb(_, _),
+	retractall_systemDb(_, _, _),
+	retractall_planetDb(_, _, _),
+	retractall_systemAusstattungDb(_, _),
+	
+	db_sync(gc(always)),
+	
+	forall(sammlung:sammlung(RecordNo2, System2, Planet1, SammelAktion2, Stoff1, Haupt, Neben, Ruest),
+	       assert_sammlungDb(RecordNo2, System2, Planet1, SammelAktion2, Stoff1, Haupt, Neben, Ruest)),
+	forall(spielStatus:spielStatus(Feature, Vorhanden), assert_spielStatusDb(Feature, Vorhanden)),
+	forall(spielStatus:systeme(RecordNo, System, Farbe), assert_systemDb(RecordNo, System, Farbe)),
+	forall(spielStatus:planeten(RecordNo1, System1, Planet), assert_planetDb(RecordNo1, System1, Planet)),
+	forall(spielStatus:systemAusstattung(OrtsAngabe, Entfernung), assert_systemAusstattungDb(OrtsAngabe, Entfernung)),
+	
+	db_detach.
+
+datenVonDbHolen :-
+	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
+	db_sync(update),
+	
+	ignore(retractall(sammlung:sammlung(_, _, _, _, _, _, _, _))),
+	ignore(retractall(spielStatus:spielStatus(_, _))),
+	ignore(retractall(spielStatus:systeme(_, _, _))),
+	ignore(retractall(spielStatus:planeten(_, _, _))),
+	ignore(retractall(spielStatus:systemAusstattung(_, _))),
+	
+	forall(sammlungDb(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest),
+	       assertz(sammlung:sammlung(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest))),
+	forall(spielStatusDb(Feature, Vorhanden), assertz(spielStatus:spielStatus(Feature, Vorhanden))),
+	forall(systemDb(RecordNo, SystemName, Farbe), assertz(spielStatus:systeme(RecordNo, SystemName, Farbe))),
+	forall(planetDb(RecordNo1, System, Planet), assertz(spielStatus:planeten(RecordNo1, System, Planet))),
+	forall(systemAusstattungDb(OrtsAngabe, Entfernung), assertz(spielStatus:systemAusstattung(OrtsAngabe, Entfernung))),
+
+	db_detach.	
+
 datenNachAccessSpeichern :-
 	odbc_connect('NoMansSkyDb', Connection, [open(once), alias(noMansSkyDb)]), 
 	ignore(odbc_query(noMansSkyDb, 'Delete from spielStatus;')),
-	
 	ignore(odbc_query(noMansSkyDb, 'Delete from rezept;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from komponentenListe;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from wandelAktion;')),
@@ -82,8 +126,8 @@ datenNachAccessSpeichern :-
 	odbc_free_statement(Statement4),
 
     /* wandelAktion */
-	odbc_prepare(noMansSkyDb, 'Insert into wandelAktion(WandelAktion) values (?);', [varchar(255)], Statement5),
-	forall(wandelAktion:wandelAktion(WandelAktion, _), (odbc_execute(Statement5, [WandelAktion]))),
+	odbc_prepare(noMansSkyDb, 'Insert into wandelAktion(WandelAktion, Ort) values (?, ?);', [varchar(255), varchar(255)], Statement5),
+	forall(wandelAktion:wandelAktion(WandelAktion, Ort), (odbc_execute(Statement5, [WandelAktion, Ort]))),
 	odbc_close_statement(Statement5),
 	odbc_free_statement(Statement5),
 

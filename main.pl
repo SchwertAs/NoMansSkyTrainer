@@ -2,11 +2,13 @@
 
 startServer :-
 	spielStatus:spielStatusInit,
-	sammlung:sammelbarInit, 
+	sammlung:sammelbarInit,
+	datenBankAnbindung:datenVonDbHolen, 
 	server:server(8000),
 	debug(myTrace),
 	format('Zum Server beenden Taste drücken!', []),
-	get_single_char(_).
+	get_single_char(_),
+	datenBankAnbindung:datenInDbSpeichern.
 
 
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
