@@ -11,63 +11,94 @@
 :- http_handler('/spielStatus', spielStatus, []).
 
 spielStatusDialog(_Requese) :-
-		TermerizedBody = [
-		\['<header>'],
-	    h1([align(center)], ['Vorraussetzungen für die Materialsammlung']),
-	    \['</header>'],
-		\['<formSpace>'],       
-	    form([action('/spielStatus'), method('post'), name('spielStatusDialogForm')], 
-	       	 [fieldSet([legend('Multitool-Ausstattung'),
-			       	    table([width("100%"), border("0"), cellspacing("3"), cellpadding("2")],
-			       	          [tr([td([input([name('minenlaser'), type('checkbox'), checked]),
-			       	                   label(for('minenlaser'), 'Minenlaser')
-			       	                  ])
-			       	              ]),
-			       	           tr([td([input([name('verbesserterMinenlaser'), type('checkbox'), checked]),
-			       	                   label(for('verbesserterMinenlaser'), 'verbesserter Minenlaser')
-			       	                  ])
-			       	              ]),
-			       	           tr([td([input([name('terrainFromer'), type('checkbox'), checked]),
-			       	                   label(for('terrainFromer'), 'Terrainformer')
-			       	                  ])
-			       	              ]),
-			       	           tr([td([input([name('waffe'), type('checkbox'), checked]),
-			       	                   label(for('waffe'), 'Waffe')
-			       	                  ])
-			       	              ])
-			       	          ])
-	       	  ]),
-	       	  fieldSet([legend('Bewegungsmöglichkeiten'),
-			       	    table([width("100%"), border("0"), cellspacing("3"), cellpadding("2")],
-			       	          [tr([td([input([name('raumschiff'), type('checkbox'), checked]),
-			       	                   label(for('raumschiff'), 'Raumschiff einsetzbar')
-			       	                  ])
-			       	              ]),
-			       	           tr([td([input([name('exoFahrzeug'), type('checkbox'), checked]),
-			       	                   label(for('exoFahrzeug'), 'Minenlaser auf Exofahrzeug vorhanden')
-			       	                  ])
-			       	              ])
-			       	          ])
-	       	  ]),
-	       	  fieldSet([legend('Umgebung'),
-			       	    table([width("100%"), border("0"), cellspacing("3"), cellpadding("2")],
-			       	          [tr([td([input([name('frachter'), type('checkbox'), checked]),
-			       	                   label(for('frachter'), 'Frachter rufbar')
-			       	                  ])
-			       	              ]),
-			       	           tr([td([input([name('spaere'), type('checkbox'), checked]),
-			       	                   label(for('spaere'), 'Anomalie / Sphäre rufbar')
-			       	                  ])
-			       	              ])
-			       	          ])
-	       	  ]),
-	       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-			    	  [td([button([name("submit"), type("submit")], 'OK')]),
-			    	   td([button([name("reset"), type("reset")], 'reset')])
-			    	  ]))	    ]), /*, 
-    */
-		\['</formSpace>']
-		             ],       
+	(spielStatus:spielStatus(minenLaser, MinenLaser); MinenLaser = true),
+	(spielStatus:spielStatus(verbesserterMinenLaser, VerbesserterMinenLaser); VerbesserterMinenLaser = true),
+	(spielStatus:spielStatus(terrainFormer, TerrainFormer); TerrainFormer = true),
+	(spielStatus:spielStatus(waffeVorhanden, WaffeVorhanden); WaffeVorhanden = true),
+	(spielStatus:spielStatus(raumSchiffIstFlott, RaumSchiffIstFlott); RaumSchiffIstFlott = true),
+	(spielStatus:spielStatus(exoFahrzeugMinenLaser, ExoFahrzeugMinenLaser); ExoFahrzeugMinenLaser = true),
+	(spielStatus:spielStatus(frachterVorhanden, FrachterVorhanden); FrachterVorhanden = true),
+	(spielStatus:spielStatus(sphaereRufbar, SphaereRufbar); SphaereRufbar = true),
+	
+	((MinenLaser = true, MinenLaserChecked = 'checked'); MinenLaserChecked = ''), 
+	((VerbesserterMinenLaser = true, VerbesserterMinenLaserChecked = ' checked'); VerbesserterMinenLaserChecked = ''), 
+	((TerrainFormer = true, TerrainFormerChecked = ' checked'); TerrainFormerChecked = ''), 
+	((WaffeVorhanden = true, WaffeVorhandenChecked = ' checked'); WaffeVorhandenChecked = ''), 
+	((RaumSchiffIstFlott = true, RaumSchiffIstFlottChecked = ' checked'); RaumSchiffIstFlottChecked = ''), 
+	((ExoFahrzeugMinenLaser = true, ExoFahrzeugMinenLaserChecked = ' checked'); ExoFahrzeugMinenLaserChecked = ''), 
+	((FrachterVorhanden = true, FrachterVorhandenChecked = ' checked'); FrachterVorhandenChecked = ''), 
+	((SphaereRufbar = true, SphaereRufbarChecked = ' checked'); SphaereRufbarChecked = ''), 
+	TermerizedBody = [
+	\['<header>'],
+	h1([align(center)], ['Vorraussetzungen für die Materialsammlung']),
+	\['</header>'],
+	\['<formSpace>'],       
+	form([action('/spielStatus'), method('post'), name('spielStatusDialogForm')], 
+	   	 [fieldSet([legend('Multitool-Ausstattung'),
+		       	    div(class('table'),
+		       	        [div(class('tr'), 
+		       	             [div(class('td'), 
+		       	                  [input([name('minenlaser'), type('checkbox'), MinenLaserChecked]),
+		       	                   label(for('minenlaser'), 'Minenlaser')
+		       	                  ])
+		       	             ]),
+		       	             div(class('tr'), 
+		       	                 [div(class('td'),
+		       	                      [input([name('verbesserterMinenlaser'), type('checkbox'), VerbesserterMinenLaserChecked]),
+		       	                       label(for('verbesserterMinenlaser'), 'verbesserter Minenlaser')
+		       	                      ])
+		       	                ]),
+		       	             div(class('tr'), 
+		       	                 [div(class('td'), 
+		       	                      [input([name('terrainFromer'), type('checkbox'), TerrainFormerChecked]),
+		       	                       label(for('terrainFromer'), 'Terrainformer')
+		       	                      ])
+		       	                 ]),
+		       	             div(class('tr'), 
+		       	                 [div(class('td'), 
+		       	                      [input([name('waffe'), type('checkbox'), WaffeVorhandenChecked]),
+		       	                       label(for('waffe'), 'Waffe')
+		       	                      ])
+		       	                 ])
+		       	        ])
+	   	  ]),
+	   	  fieldSet([legend('Bewegungsmöglichkeiten'),
+		       	    div(class('table'),
+		       	          [div(class('tr'),
+		       	               [div(class('td'),
+		       	                    [input([name('raumschiff'), type('checkbox'), RaumSchiffIstFlottChecked]),
+		       	                     label(for('raumschiff'), 'Raumschiff einsetzbar')
+		       	                    ])
+		       	               ]),
+		       	           div(class('tr'),
+		       	               [div(class('td'),
+		       	                    [input([name('exoFahrzeug'), type('checkbox'), ExoFahrzeugMinenLaserChecked]),
+		       	                     label(for('exoFahrzeug'), 'Minenlaser auf Exofahrzeug vorhanden')
+		       	                    ])
+		       	              ])
+		       	          ])
+	   	  ]),
+	   	  fieldSet([legend('Umgebung'),
+		       	    div(class('table'),
+		       	          [div(class('tr'),
+		       	               [div(class('td'),[input([name('frachter'), type('checkbox'), FrachterVorhandenChecked]),
+		       	                    label(for('frachter'), 'Frachter rufbar')
+		       	                   ])
+		       	               ]),
+		       	           div(class('tr'),
+		       	               [div(class('td'),
+		       	                    [input([name('spaere'), type('checkbox'), SphaereRufbarChecked]),
+		       	                     label(for('spaere'), 'Anomalie / Sphäre rufbar')
+		       	                    ])
+		       	               ])
+		       	          ])
+	   	  ]),
+	   	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
+		    	  [td([button([name("submit"), type("submit")], 'OK')]),
+		    	   td([button([name("reset"), type("reset")], 'reset')])
+		    	  ]))	    
+		  ]), 
+	\['</formSpace>']],       
 	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans sky trainer: Vorraussetzungen Materialsammlung')],
 	reply_html_page(TermerizedHead, TermerizedBody).
@@ -86,6 +117,7 @@ spielStatus(Request) :-
 	spaere(Spaere, [default(off)])
     ]),
     spielStatus:initSpielStatus,
+    ignore(retractall(spielStatus:spielStatus(_, _))),
     (MinenLaser = off -> assertz(spielStatus:spielStatus(minenLaser, false)); assertz(spielStatus:spielStatus(minenLaser, true))),
     (VerbesserterMinenlaser = off -> assertz(spielStatus:spielStatus(verbesserterMinenLaser, false)); assertz(spielStatus:spielStatus(verbesserterMinenLaser, true))),
     (TerrainFromer = off -> assertz(spielStatus:spielStatus(terrainFormer, false)); assertz(spielStatus:spielStatus(terrainFormer, true))),

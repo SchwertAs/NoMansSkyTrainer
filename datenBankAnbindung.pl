@@ -11,26 +11,33 @@ datenNachAccessSpeichern :-
 	ignore(odbc_query(noMansSkyDb, 'Delete from komponentenListe;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from wandelAktion;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from sammlung;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from planet;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from system;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from sammelOrt;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from sammelAktion;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from ort;')),
-	ignore(odbc_query(noMansSkyDb, 'Delete from sammelOrt;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from vorfertigen;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from stoff;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from stoffKlasse;')),
 	
+
 	/* stoffKlasse */	
-	odbc_prepare(noMansSkyDb, 'Insert into stoffKlasse(StoffKlasse, Wissen, Verkauf, Kauf) values (?,?,?,?);', [varchar(255), bit, bit, bit], Statement0),
-	forall(stoffKlasse:stoffKlasse(StoffKlasse, Wissen, Verkauf, Kauf), 
+	odbc_prepare(noMansSkyDb, 'Insert into stoffKlasse(StoffKlasse, Wissen, Verkauf, Kauf, InInventarHerstellbar) values (?,?,?,?,?);',
+	             [varchar(255), bit, bit, bit, bit], Statement0),
+	forall(stoffKlasse:stoffKlasse(StoffKlasse, Wissen, Verkauf, Kauf, InInventarHerstellbar), 
 	  (trueFalseToAccessBit(Wissen, WissenBit),
 	   trueFalseToAccessBit(Verkauf, VerkaufBit),
-	   trueFalseToAccessBit(Kauf, KaufBit), 
-	   odbc_execute(Statement0, [StoffKlasse, WissenBit, VerkaufBit, KaufBit]))),
+	   trueFalseToAccessBit(Kauf, KaufBit),
+	   trueFalseToAccessBit(InInventarHerstellbar, InInventarHerstellbarBit),
+	   odbc_execute(Statement0, [StoffKlasse, WissenBit, VerkaufBit, KaufBit, InInventarHerstellbarBit]))),
 	odbc_close_statement(Statement0),
 	odbc_free_statement(Statement0),
 
 	/* stoff */
-	odbc_prepare(noMansSkyDb, 'Insert into stoff (Stoff, Wert, StoffKlasse) values (?, ?, ?);', [varchar(255), integer, varchar(255)], Statement1),
-	forall(stoff:stoff(StoffKlasse, Stoff, Wert), odbc_execute(Statement1, [Stoff, Wert, StoffKlasse])),
+	odbc_prepare(noMansSkyDb, 'Insert into stoff (Stoff, Wert, StoffKlasse) values (?, ?, ?);',
+	             [varchar(255), integer, varchar(255)], Statement1),
+	forall(stoff:stoff(StoffKlasse, Stoff, Wert), 
+	  odbc_execute(Statement1, [Stoff, Wert, StoffKlasse])),
 	odbc_close_statement(Statement1),
 	odbc_free_statement(Statement1),
 
@@ -52,9 +59,25 @@ datenNachAccessSpeichern :-
 	odbc_close_statement(Statement8),
 	odbc_free_statement(Statement8),
 
+	/* system */	
+	odbc_prepare(noMansSkyDb, 'Insert into system(RecordNo, System, Farbe) values (?,?,?);', 
+	             [integer, varchar(255), varchar(255)], Statement9),
+	forall(spielStatus:systeme(RecordNo, SystemName, Farbe), 
+	  odbc_execute(Statement9, [RecordNo, SystemName, Farbe])),
+	odbc_close_statement(Statement9),
+	odbc_free_statement(Statement9),
+	
+	/* planet */	
+	odbc_prepare(noMansSkyDb, 'Insert into planet(RecordNo, System, Planet) values (?,?,?);', 
+	             [integer, varchar(255), varchar(255)], Statement10),
+	forall(spielStatus:planeten(RecordNo, System, Planet), 
+	  odbc_execute(Statement10, [RecordNo, System, Planet])),
+	odbc_close_statement(Statement10),
+	odbc_free_statement(Statement10),
+ 
     /* sammlung */
-	odbc_prepare(noMansSkyDb, 'Insert into sammlung(System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit, RuestZeit) values (?, ?, ?, ?, ?, ?, ?);', [varchar(255), varchar(255), varchar(255), varchar(255), integer, integer, integer], Statement4),
-	forall(sammlung:sammlung(System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit), odbc_execute(Statement4, [System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit])),
+	odbc_prepare(noMansSkyDb, 'Insert into sammlung(RecordNo, System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit, RuestZeit) values (?, ?, ?, ?, ?, ?, ?, ?);', [integer, varchar(255), varchar(255), varchar(255), varchar(255), integer, integer, integer], Statement4),
+	forall(sammlung:sammlung(RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest), odbc_execute(Statement4, [RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest])),
 	odbc_close_statement(Statement4),
 	odbc_free_statement(Statement4),
 
@@ -78,18 +101,24 @@ datenNachAccessSpeichern :-
 	 odbc_execute(Statement6, [KomponentenListe, KomponentenStoff, KomponentenStueckZahl]),
 	 odbc_execute(Statement7, [WandelAktion, KomponentenListe, ProduktStueckZahl, ProduktStoff, Wandelzeit])
 	)),
-
-    /* vorfertigen */
-	odbc_prepare(noMansSkyDb, 'Insert into vorfertigen(Stoff) values (?);', [varchar(255)], Statement8),
-	forall(sammlung:vorfertigen(Stoff), (odbc_execute(Statement8, [Stoff]))),
-	odbc_close_statement(Statement8),
-	odbc_free_statement(Statement8),
-
-
 	odbc_close_statement(Statement6),
 	odbc_free_statement(Statement6),
 	odbc_close_statement(Statement7),
 	odbc_free_statement(Statement7),
+
+    /* vorfertigen */
+	odbc_prepare(noMansSkyDb, 'Insert into vorfertigen(Stoff) values (?);', [varchar(255)], Statement11),
+	forall(sammlung:vorfertigen(Stoff), (odbc_execute(Statement11, [Stoff]))),
+	odbc_close_statement(Statement11),
+	odbc_free_statement(Statement11),
+
+    /* vorfertigen */
+	odbc_prepare(noMansSkyDb, 'Insert into spielStatus(Status, Vorhanden) values (?,?);', [varchar(255), bit], Statement12),
+	forall(spielStatus:spielStatus(Status, Vorhanden), 
+	 (trueFalseToAccessBit(Vorhanden, VorhandenBit), 
+	  odbc_execute(Statement12, [Status, VorhandenBit]))),
+	odbc_close_statement(Statement12),
+	odbc_free_statement(Statement12),
 
 
     /* komponentenListe 

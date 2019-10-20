@@ -15,7 +15,7 @@ bildeAvZeiten(_, _, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitD
 bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, Operation, _, [StueckZahl, Stoff]],
-	sammlung:sammlung(System, Planet, Operation, Stoff, HauptZeit0, NebenZeit0, RuestZeit0),
+	sammlung:sammlung(_, System, Planet, Operation, Stoff, HauptZeit0, NebenZeit0, RuestZeit0),
 	Operation \= kaufen,
 	HauptZeit1 is HauptZeit + (StueckZahl * HauptZeit0), 
 	NebenZeit1 is NebenZeit + ((StueckZahl - 1) * NebenZeit0),
@@ -27,7 +27,7 @@ bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, 
 bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, Operation, _, [_, Stoff]],
-	sammlung:sammlung(System, Planet, Operation, Stoff, HauptZeit0, NebenZeit0, RuestZeit0),
+	sammlung:sammlung(_, System, Planet, Operation, Stoff, HauptZeit0, NebenZeit0, RuestZeit0),
 	Operation = kaufen,
 	HauptZeit1 is HauptZeit + HauptZeit0, 
 	NebenZeit1 is NebenZeit + NebenZeit0,

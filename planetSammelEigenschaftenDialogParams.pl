@@ -1,4 +1,4 @@
-:-module(planetSammelEigenschaftenDialogParams, [getParamList/2]).
+:-module(planetSammelEigenschaftenDialogParams, [planetSammelEigenschaftenDialogParamList/2]).
 
 :- use_module(library(http/http_parameters)).
 
@@ -63,7 +63,7 @@ baueVariablenListe(FeldNrUnten, FeldNrOben, FeldNameRumpf, ListeBisher, ListeDan
 	FeldNo0 is FeldNrUnten + 1,
 	baueVariablenListe(FeldNo0, FeldNrOben, FeldNameRumpf, ListeBisher0, ListeDanach).
 
-getParamList(Request, VarValueList) :-
+planetSammelEigenschaftenDialogParamList(Request, VarValueList) :-
 List =
 [ auswahlSystem(AuswahlSystem,[length>0]),
   auswahlPlanet(AuswahlPlanet,[length>0]),

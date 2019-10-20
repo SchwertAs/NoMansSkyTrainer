@@ -21,6 +21,7 @@
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/server').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/stoffErlangenDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/systemNamenDialog').
+:-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/systemNamenDialogParams').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetAuswahlDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetMondNameDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetenEigenschaftenDialog').

@@ -9,8 +9,7 @@
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 systemAuswahlDialog(HeaderText, Action) :-
-	findall(System, (spielStatus:systeme(System, _), System \= 'System'), Systeme),
-	/* findall(System, (spielStatus:systeme(System, _) ), Systeme),*/
+	findall(System, (spielStatus:systeme(_, System, _), System \= 'System'), Systeme),
 	server:baueOptionsFeld('auswahlSystem', Systeme, 2, OptionList),
 	TermerizedBody = [
 		\['<header>'],
@@ -49,8 +48,7 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0])]),
 	((AuswahlSystem = 'Bitte wählen', fehlerBehandlung); 
 	(
-	 findall(Planet, (spielStatus:planeten(AuswahlSystem, Planet), Planet \= 'MeinPlanet'), Planeten),
-	 /* findall(Planet, spielStatus:planeten(AuswahlSystem, Planet), Planeten), */
+	 findall(Planet, (spielStatus:planeten(_, AuswahlSystem, Planet), Planet \= 'MeinPlanet'), Planeten),
 	 server:baueOptionsFeld('auswahlPlanet', Planeten, 2, OptionList),
 	
 	 TermerizedBody = [
