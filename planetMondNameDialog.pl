@@ -1,7 +1,5 @@
 :- module(planetMondNameDialog, [planetMondNameDialog/1, planetMondName/1]).
 
-:- use_module(library(dcg/basics)).
-:- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
@@ -26,19 +24,13 @@ planetMondNameDialog(Request) :-
 	).
 
 planetMondNameAnzeigen(AuswahlSystem) :-
-	findall(HimmelsKoerper, spielStatus:planeten(AuswahlSystem, HimmelsKoerper), HimmelsKoerperListe),
-	(nth1(1, HimmelsKoerperListe, Planet1); Planet1 = ''),
-	(nth1(2, HimmelsKoerperListe, Planet2); Planet2 = ''),
-	(nth1(3, HimmelsKoerperListe, Planet3); Planet3 = ''),
-	(nth1(4, HimmelsKoerperListe, Planet4); Planet4 = ''),
-	(nth1(5, HimmelsKoerperListe, Planet5); Planet5 = ''),
-	(nth1(6, HimmelsKoerperListe, Planet6); Planet6 = ''),
-	(nth1(7, HimmelsKoerperListe, Planet7); Planet7 = ''),
-	(nth1(8, HimmelsKoerperListe, Planet8); Planet8 = ''),
+	findall([FeldNo1], between(1, 8, FeldNo1), FeldNoList),
+	findall([RecordNo, HimmelsKoerper], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper), HimmelsKoerperListe),
+	ausgabe:joinRecordsByRecordNo(FeldNoList, HimmelsKoerperListe, 1, NumerierteRecordList),
 	TermerizedBody = [
 		\['<header>'],
 	    h1([align(center)], ['Sternensystem: Namen der Himmelskörper eingeben']),
-	    \['</header>'],
+	    \['</header>'] ,
 		\['<formSpace>'],       
 	    form([action('/planetMondName'), method('post'), name('systemEigenschaftenForm')], 
 	       	 [h3('Sternensystem'),
@@ -48,37 +40,14 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	       	        [div(class('tr'), 
 	       	             [div([class('th'), scope("col")], 'Name') 
 	       	             ]),
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet1'), type('text'), class('eingabeFeld'), id('planet1'), size(20), maxlength(20), value(Planet1)])])
+	       	         \innereEingabeZeile(NumerierteRecordList)
 	       	             ]), 
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet2'), type('text'), class('eingabeFeld'), id('planet2'), size(20), maxlength(20), value(Planet2)])])
-	       	             ]), 
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet3'), type('text'), class('eingabeFeld'), id('planet3'), size(20), maxlength(20), value(Planet3)])])
-	       	             ]), 
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet4'), type('text'), class('eingabeFeld'), id('planet4'), size(20), maxlength(20), value(Planet4)])])
-	       	             ]), 
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet5'), type('text'), class('eingabeFeld'), id('planet5'), size(20), maxlength(20), value(Planet5)])])
-	       	             ]), 
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet6'), type('text'), class('eingabeFeld'), id('planet6'), size(20), maxlength(20), value(Planet6)])])
-	       	             ]), 
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet7'), type('text'), class('eingabeFeld'), id('planet7'), size(20), maxlength(20), value(Planet7)])])
-	       	             ]), 
-	       	         div(class('tr'), 
-	       	             [div(class('td'), [input([name('planet8'), type('text'), class('eingabeFeld'), id('planet8'), size(20), maxlength(20), value(Planet8)])])
-	       	             ]) 
-	       	        ]),
 	       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
 			    	  [td([button([name("submit"), type("submit")], 'OK')]),
 			    	   td([button([name("reset"), type("reset")], 'reset')])
 			    	  ]))    
 			 ]),
-		\['</formSpace>']
+		\['</formSpace>'] 
 		             ],       
 	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
@@ -107,6 +76,22 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
    	  	])
 	).
 	
+innereEingabeZeile([]) -->
+	[].
+
+innereEingabeZeile([Record|Rest]) -->
+	{
+		Record = [FeldNo, Planet]
+	},
+	html([div(class('tr'), 
+	          [div(class('td'), 
+	               input([name('planet' + FeldNo), type("text"), maxlength("40"), value(Planet)])
+	              )
+   	          ])
+   	     ]),
+   	     innereEingabeZeile(Rest).   	   
+
+	
 planetMondName(Request) :-
 	member(method(post), Request), !,
 	http_parameters(Request, 
@@ -120,15 +105,15 @@ planetMondName(Request) :-
      planet7(Planet7, [default('')]),
      planet8(Planet8, [default('')])
     ]),
-	spielStatus:initPlaneten(AuswahlSystem),
-    (Planet1 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet1))),
-    (Planet2 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet2))),
-    (Planet3 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet3))),
-    (Planet4 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet4))),
-    (Planet5 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet5))),
-    (Planet6 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet6))),
-    (Planet7 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet7))),
-    (Planet8 = ''; assertz(spielStatus:planeten(AuswahlSystem, Planet8))),
+	spielStatus:reInitPlaneten(AuswahlSystem),
+    (Planet1 = ''; assertz(spielStatus:planeten(1, AuswahlSystem, Planet1))),
+    (Planet2 = ''; assertz(spielStatus:planeten(2, AuswahlSystem, Planet2))),
+    (Planet3 = ''; assertz(spielStatus:planeten(3, AuswahlSystem, Planet3))),
+    (Planet4 = ''; assertz(spielStatus:planeten(4, AuswahlSystem, Planet4))),
+    (Planet5 = ''; assertz(spielStatus:planeten(5, AuswahlSystem, Planet5))),
+    (Planet6 = ''; assertz(spielStatus:planeten(6, AuswahlSystem, Planet6))),
+    (Planet7 = ''; assertz(spielStatus:planeten(7, AuswahlSystem, Planet7))),
+    (Planet8 = ''; assertz(spielStatus:planeten(8, AuswahlSystem, Planet8))),
     server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Himmelskörper-Namen')],
 	TermerizedBody = [

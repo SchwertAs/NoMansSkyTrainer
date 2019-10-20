@@ -174,4 +174,49 @@ zeitFeldToNumber(ZeitFeld, _) :-
 	
 zeitFeldToNumber(ZeitFeld, ZeitFeldZahl) :-
 	ZeitFeld \= 'Zeit', atom_number(ZeitFeld, ZeitFeldZahl).
-		
+
+joinRecordsByRecordNo(ListOfLists1, _, _, KombinierteListOfLists) :-
+	ListOfLists1 = [[]],
+	KombinierteListOfLists = [[]].
+	
+joinRecordsByRecordNo(ListOfLists1, _, InnereLaenge2, _) :-
+	ListOfLists1 = [Elem1|_],
+	length(Elem1, Len),
+	(Len \= 1; InnereLaenge2 < 1),
+	!, fail.
+	
+joinRecordsByRecordNo(ListOfLists1, ListOfLists2, InnereLaenge2, KombinierteListOfLists) :-
+	baueLeerStringList(1, [], LeerStringList1),
+	baueLeerStringList(InnereLaenge2, [], LeerStringList2),
+	joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, [], KombinierteListOfLists),
+	!.
+
+baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
+	InnerLen = 0,
+	LeerStringListDavor = LeerStringListDanach.
+	
+baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
+	append(LeerStringListDavor, [''], LeerStringListDavor0),
+	InnerLen0 is InnerLen - 1,
+	baueLeerStringList(InnerLen0, LeerStringListDavor0, LeerStringListDanach).
+	
+
+joinLists(ListOfLists1, _, _, _, Bisher, Danach) :-
+	ListOfLists1 = [],
+	Bisher = Danach.
+	
+joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, Bisher, Danach) :-
+	ListOfLists1 = [Elem1|Rest1],
+	((ListOfLists2 = [], Elem2 = [0, LeerStringList2]); (ListOfLists2 = [Elem2|_])),
+	Elem1 = [FeldNo|_], Elem2 = [RecordNo|Record],
+	((FeldNo = RecordNo,
+	  append(Elem1, Record, KombinierterRecord),
+	  ListOfLists2 = [_|Rest2]
+	 );
+	 (append(Elem1, LeerStringList2, KombinierterRecord),
+	  Rest2 = ListOfLists2
+	)),	  
+	append(Bisher, [KombinierterRecord], Bisher0),
+	joinLists(Rest1, Rest2, LeerStringList1, LeerStringList2, Bisher0, Danach),
+	!.
+	

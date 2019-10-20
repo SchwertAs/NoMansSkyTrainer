@@ -1,8 +1,8 @@
-:- module(spielStatus, [planeten/2, systeme/2, spielStatus/2, systemAusstattung/2]).
+:- module(spielStatus, [reInitPlaneten/1, planeten/3, systeme/3, spielStatus/2, systemAusstattung/2]).
 
 :- dynamic(spielStatus/2).
-:- dynamic(systeme/2).
-:- dynamic(planeten/2).
+:- dynamic(systeme/3).
+:- dynamic(planeten/3).
 :- dynamic(systemAusstattung/2).
 
 /* Spielkonditionen */
@@ -10,29 +10,32 @@
 spielStatusInit :-  
 	initSpielStatus,
 	initSysteme,
-	initPlaneten(_),
+	initPlaneten,
 	initSystemAusstattung.
 
 initSpielStatus :-
-	abolish(spielStatus/2)
-	,assertz(spielStatus(minenLaser, default))
-	,assertz(spielStatus(verbesserterMinenLaser, default))
-	,assertz(spielStatus(terrainFormer, default))
-	,assertz(spielStatus(waffeVorhanden, default))
-	,assertz(spielStatus(raumSchiffIstFlott, default))
-	,assertz(spielStatus(exoFahrzeugMinenLaser, default))
-	,assertz(spielStatus(frachterVorhanden, default))
-	,assertz(spielStatus(sphaereRufbar, default))
+	abolish(spielStatus/3)
+	,assertz(spielStatus(minenLaser, true))
+	,assertz(spielStatus(verbesserterMinenLaser, true))
+	,assertz(spielStatus(terrainFormer, true))
+	,assertz(spielStatus(waffeVorhanden, true))
+	,assertz(spielStatus(raumSchiffIstFlott, true))
+	,assertz(spielStatus(exoFahrzeugMinenLaser, true))
+	,assertz(spielStatus(frachterVorhanden, true))
+	,assertz(spielStatus(sphaereRufbar, true))
 	.
 
 initSysteme :-
-	abolish(systeme/2)
-	,assertz(systeme('System', 'gelb')).
+	abolish(systeme/3)
+	,assertz(systeme(0, 'System', 'gelb')).
 	
-initPlaneten(System) :-
-	ignore(retractall(planeten(System, _)))
-	,(atom(System); assertz(planeten('System', 'MeinPlanet'))).
-
+initPlaneten :-
+	abolish(planeten/3)
+	,assertz(planeten(0, 'System', 'MeinPlanet')).
+	
+reInitPlaneten(System) :-
+	ignore(retractall(planeten(_, System, _))).
+	
 initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
 	abolish(systemAusstattung/2)

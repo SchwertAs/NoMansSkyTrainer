@@ -40,9 +40,9 @@ planetSammelEigenschaftenDialog(Request) :-
 
 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
     /* einlesen der Eigenschaften */
-	findall([Stoff, Operation, Haupt, Neben, Ruest], sammlung:sammlung(AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest), RecordList),
+	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest], sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest), RecordList),
 	findall([FeldNo], between(1, 60, FeldNo), FeldNoList),
-	outerJoinRecordsWithoutCondition(FeldNoList, RecordList, 1, 5, NumerierteRecordList),
+	ausgabe:joinRecordsByRecordNo(FeldNoList, RecordList, 5, NumerierteRecordList),
 	TermerizedBody = [
 	\['<header>'],
     h1([align(center)], ['Sammelmöglichkeiten des Himmelskörpers eingeben']), 
@@ -123,47 +123,6 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 		],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
-outerJoinRecordsWithoutCondition(ListOfLists1, ListOfLists2, _, _, KombinierteListOfLists) :-
-	ListOfLists1 = [[]],
-	ListOfLists2 = [[]],
-	KombinierteListOfLists = [[]].
-	
-outerJoinRecordsWithoutCondition(_, _, InnereLaenge1, InnereLaenge2, KombinierteListOfLists) :-
-	InnereLaenge1 = 0,
-	InnereLaenge2 = 0,
-	KombinierteListOfLists = [[]].
-	
-outerJoinRecordsWithoutCondition(ListOfLists1, ListOfLists2, InnereLaenge1, InnereLaenge2, KombinierteListOfLists) :-
-	length(ListOfLists1, Len1),
-	length(ListOfLists2, Len2),
-	max_list([Len1, Len2], Max),
-	baueLeerStringList(InnereLaenge1, [], LeerStringList1),
-	baueLeerStringList(InnereLaenge2, [], LeerStringList2),
-	joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, 1, Max, [], KombinierteListOfLists),
-	!.
-
-baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
-	InnerLen = 0,
-	LeerStringListDavor = LeerStringListDanach.
-	
-baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
-	append(LeerStringListDavor, [''], LeerStringListDavor0),
-	InnerLen0 is InnerLen - 1,
-	baueLeerStringList(InnerLen0, LeerStringListDavor0, LeerStringListDanach).
-	
-
-joinLists(_, _, _, _, RecNo, MaxRecNo, Bisher, Danach) :-
-	RecNo > MaxRecNo,
-	Bisher = Danach.
-	
-joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, RecNo, MaxRecNo, Bisher, Danach) :-
-	((ListOfLists1 = [], Elem1 = LeerStringList1); (ListOfLists1 = [Elem1|Rest1])),
-	((ListOfLists2 = [], Elem2 = LeerStringList2); (ListOfLists2 = [Elem2|Rest2])),
-	append(Elem1, Elem2, KombinierterRecord),
-	append(Bisher, [KombinierterRecord], Bisher0),
-	RecNo0 is RecNo +1,
-	joinLists(Rest1, Rest2, LeerStringList1, LeerStringList2, RecNo0, MaxRecNo, Bisher0, Danach).
-	
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
 	html(
    	  div(class('table50'),[
@@ -216,7 +175,7 @@ innereEingabeZeile([Record|Rest]) -->
 	Dauer is Haupt0 + Ruest0,
 	((Dauer = 0, Gebinde = '', Anzahl = '', Dauer0 = ''); (Gebinde = 1, Anzahl = 1, Dauer0 = Dauer)),
 
-	findall(St, (sammlung:sammlung('System', 'MeinPlanet', Op, St, _, _, _), Op \= bekannt), SammelStoffe0),
+	findall(St, (sammlung:sammlung(_, 'System', 'MeinPlanet', Op, St, _, _, _), Op \= bekannt), SammelStoffe0),
 	sort(SammelStoffe0, SammelStoffe1),
 	findall([Stoff0, St0], member(St0, SammelStoffe1), SammelStoffe),
 	findall([Operation0, Aktion], (sammelAktion:sammelAktion(Aktion), Aktion \= bekannt), SammelAktionen)
@@ -262,7 +221,7 @@ baueOption([OptionTupel|Rest]) -->
 
 planetSammelEigenschaften(Request) :-
 	member(method(post), Request), !,
-	planetSammelEigenschaftenDialogParams:getParamList(Request, VarValueList),
+	planetSammelEigenschaftenDialogParams:planetSammelEigenschaftenDialogParamList(Request, VarValueList),
 	GesamtZeilenZahl = 60,
 	\+plausibleEingabe(VarValueList, GesamtZeilenZahl),
     ((nb_getval('ZeileNoFehler', ZeileNoFehler),
@@ -271,7 +230,7 @@ planetSammelEigenschaften(Request) :-
 	 );
 	 (nth1(1, VarValueList, AuswahlSystem),
 	  nth1(2, VarValueList, AuswahlPlanet),
-	  ignore(retractall(sammlung:sammlung(AuswahlSystem, AuswahlPlanet, _, _, _, _, _))),
+	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, _, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList),
       gespeichert
      )
@@ -309,7 +268,7 @@ ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList) :-
 	arbeitsVorbereitung:toRuestHauptNebenZeit(Methode, AnzahlNum, DauerNum, GebindeNum, Ruest, Haupt, Neben),
 	debug(myTrace, 'abspeichern: Sys=~k, Planet=~k, Roh=~k, Meth=~k, Ruest=~k, Haupt=~k, Neben=~k', 
 		[AuswahlSystem, AuswahlPlanet, RohStoff, Methode, Ruest, Haupt, Neben]),
-	assertz(sammlung:sammlung(AuswahlSystem, AuswahlPlanet, Methode, RohStoff, Ruest, Haupt, Neben)),
+	assertz(sammlung:sammlung(ZeileNo, AuswahlSystem, AuswahlPlanet, Methode, RohStoff, Ruest, Haupt, Neben)),
 	fail.
 	
 gespeichert :-
@@ -364,8 +323,8 @@ ajaxSammlungDefault(Request) :-
 	debug(myTrace, 'Methode: ~s', AuswahlMethode),
     format('Content-type: text/plain~n~n'),
     (AuswahlMethode = 'Bitte wählen'; atom_string(Methode, AuswahlMethode)),
-	((sammlung:sammlung(AuswahlSystem, AuswahlPlanet, Methode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, atom_string(Methode, MethodeErgebnis));
-	 (sammlung:sammlung('System', 'MeinPlanet', Methode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, atom_string(Methode, MethodeErgebnis));
+	((sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, Methode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, atom_string(Methode, MethodeErgebnis));
+	 (sammlung:sammlung(_, 'System', 'MeinPlanet', Methode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, atom_string(Methode, MethodeErgebnis));
 	 (Haupt = 0, Ruest = 0, Anzahl = 0, MethodeErgebnis = 'Bitte wählen')
 	),
     debug(myTrace, 'Methode Ergebnis: ~k', MethodeErgebnis),
