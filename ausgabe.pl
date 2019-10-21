@@ -1,4 +1,5 @@
-:- module(ausgabe, [ausgabeSammlung/3, ausgabeVorgaenge/3, ausgabeSummen/6, baueBegruendung/2, zeitFeldToNumber/2]).
+:- module(ausgabe, [ausgabeSammlung/3, ausgabeVorgaenge/3, ausgabeSummen/6, 
+          baueBegruendung/2, zeitFeldToNumber/2, partialList/4, letzesListenElement/2]).
 
 baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
 	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe).
@@ -175,6 +176,33 @@ zeitFeldToNumber(ZeitFeld, _) :-
 zeitFeldToNumber(ZeitFeld, ZeitFeldZahl) :-
 	ZeitFeld \= 'Zeit', atom_number(ZeitFeld, ZeitFeldZahl).
 
+joinRecordsNumbering(ListOfLists1, _, _, KombinierteListOfLists) :-
+	ListOfLists1 = [[]],
+	KombinierteListOfLists = [[]].
+	
+joinRecordsNumbering(ListOfLists1, _, InnereLaenge2, _) :-
+	ListOfLists1 = [Elem1|_],
+	length(Elem1, Len),
+	(Len \= 1; InnereLaenge2 < 1),
+	!, fail.
+	
+joinRecordsNumbering(ListOfLists1, ListOfLists2, InnereLaenge2, KombinierteListOfLists) :-
+	baueLeerStringList(InnereLaenge2, [], LeerStringList2),
+	joinLists(ListOfLists1, ListOfLists2, LeerStringList2, [], KombinierteListOfLists),
+	!.
+	
+joinLists(ListOfLists1, _, _, Bisher, Danach) :-
+	ListOfLists1 = [],
+	Bisher = Danach.
+	
+joinLists(ListOfLists1, ListOfLists2, LeerStringList2, Bisher, Danach) :-
+	ListOfLists1 = [Elem1|Rest1],
+	((ListOfLists2 = [], Record = LeerStringList2, Rest2=[]); (ListOfLists2 = [Record|Rest2])),
+	append(Elem1, Record, KombinierterRecord),
+	append(Bisher, [KombinierterRecord], Bisher0),
+	joinLists(Rest1, Rest2, LeerStringList2, Bisher0, Danach),
+	!.
+	 	
 joinRecordsByRecordNo(ListOfLists1, _, _, KombinierteListOfLists) :-
 	ListOfLists1 = [[]],
 	KombinierteListOfLists = [[]].
@@ -188,7 +216,7 @@ joinRecordsByRecordNo(ListOfLists1, _, InnereLaenge2, _) :-
 joinRecordsByRecordNo(ListOfLists1, ListOfLists2, InnereLaenge2, KombinierteListOfLists) :-
 	baueLeerStringList(1, [], LeerStringList1),
 	baueLeerStringList(InnereLaenge2, [], LeerStringList2),
-	joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, [], KombinierteListOfLists),
+	joinListsByRecordNo(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, [], KombinierteListOfLists),
 	!.
 
 baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
@@ -201,11 +229,11 @@ baueLeerStringList(InnerLen, LeerStringListDavor, LeerStringListDanach) :-
 	baueLeerStringList(InnerLen0, LeerStringListDavor0, LeerStringListDanach).
 	
 
-joinLists(ListOfLists1, _, _, _, Bisher, Danach) :-
+joinListsByRecordNo(ListOfLists1, _, _, _, Bisher, Danach) :-
 	ListOfLists1 = [],
 	Bisher = Danach.
 	
-joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, Bisher, Danach) :-
+joinListsByRecordNo(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, Bisher, Danach) :-
 	ListOfLists1 = [Elem1|Rest1],
 	((ListOfLists2 = [], Elem2 = [0, LeerStringList2]); (ListOfLists2 = [Elem2|_])),
 	Elem1 = [FeldNo|_], Elem2 = [RecordNo|Record],
@@ -217,6 +245,17 @@ joinLists(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2, Bisher, 
 	  Rest2 = ListOfLists2
 	)),	  
 	append(Bisher, [KombinierterRecord], Bisher0),
-	joinLists(Rest1, Rest2, LeerStringList1, LeerStringList2, Bisher0, Danach),
+	joinListsByRecordNo(Rest1, Rest2, LeerStringList1, LeerStringList2, Bisher0, Danach),
 	!.
-	
+	 
+partialList(List, Von, Bis, TeilListe) :-
+	Von > 0,
+	Bis > 0,
+	findall(Elem, (member(Elem, List), nth1(Pos, List, Elem), Pos >= Von, Pos =< Bis), TeilListe).
+
+letzesListenElement(Liste, Ende) :-
+	Liste = [Ende],
+	!.
+
+letzesListenElement([_|Rest], Ende) :-
+	letzesListenElement(Rest, Ende).

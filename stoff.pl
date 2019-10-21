@@ -1227,6 +1227,7 @@ stoff(rohUndKochStoff, sternenKnolle, 32).
 stoff(rohUndKochStoff, verdichteterKohlenStoff, 600).
 
 stoff(produktUndKochStoff, kohlenStoffNanoRohr, 500).
+stoff(produktUndKochStoff, kreaturenKugeln, 20).
 
 stoff(kochStoff, abgruendigerEintopf, 800).
 stoff(kochStoff, alarmierendeTorte, 800).
@@ -1368,7 +1369,6 @@ stoff(kochStoff, klobigerDonut, 800).
 stoff(kochStoff, knusperKaramell, 800).
 stoff(kochStoff, koestlicherGemueseEintopf, 800).
 stoff(kochStoff, kreaturenEi, 800).
-stoff(kochStoff, kreaturenKugeln, 20).
 stoff(kochStoff, kriechendesJuckHonigBiskuit, 7410).
 stoff(kochStoff, kuchenDerSuende, 800).
 stoff(kochStoff, kuchenDerVerlorenen, 800).
