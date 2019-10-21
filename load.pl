@@ -28,4 +28,6 @@
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetSammelEigenschaftenDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetSammelEigenschaftenDialogParams').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/spielStatusDialog').
+:-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/rezepteBekanntDialog').
+:-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/rezepteBekanntDialogParams').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/main').

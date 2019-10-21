@@ -3,21 +3,15 @@
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
-:- use_module(library(http/http_parameters)).
 
 :- http_handler('/systemNamenDialog', systemNamenDialog, []).
 :- http_handler('/systemNamen', systemNamen, []).
 
-partialList(List, Von, Bis, TeilListe) :-
-	Von > 0,
-	Bis > 0,
-	findall(Elem, (member(Elem, List), nth1(Pos, List, Elem), Pos >= Von, Pos =< Bis), TeilListe).
-
 systemNamenDialog(_Request) :-
-	findall([Feld, System, Farbe], (spielStatus:systeme(Feld, System, Farbe), System \= 'System'), SystemList),
-	partialList(SystemList, 1, 20, SystemList1),
-	partialList(SystemList, 21, 40, SystemList2),
-	partialList(SystemList, 41, 60, SystemList3),
+	findall([FeldNo, System, Farbe], (spielStatus:systeme(FeldNo, System, Farbe), System \= 'System'), SystemList),
+	ausgabe:partialList(SystemList, 1, 20, SystemList1),
+	ausgabe:partialList(SystemList, 21, 40, SystemList2),
+	ausgabe:partialList(SystemList, 41, 60, SystemList3),
 	findall([FeldNo1], between(101, 120, FeldNo1), FeldNoList1),
 	findall([FeldNo2], between(201, 220, FeldNo2), FeldNoList2),
 	findall([FeldNo3], between(301, 320, FeldNo3), FeldNoList3),
@@ -30,7 +24,7 @@ systemNamenDialog(_Request) :-
 	    h1([align(center)], ['Eingabe der Sternensysteme']),
 	    \['</header>'],
 		\['<formSpace>'],       
-	    form([action('/systemNamen'), method('post'), id("sternenSystemEingabe"), autocomplet("off")], 
+	    form([action('/systemNamen'), method('post'), autocomplete("off")], 
 	       	 [div(class('table'),
 	       	      [div(class('tr'), 
 	       	           [div(class('td'), \innereTabelle(NumerierteRecordList1)),
@@ -146,21 +140,20 @@ ablegen(GesamtZeilenZahl, VarValueList) :-
 	pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, System, Farbe),
 	gueltigeZeile(System, Farbe),
 	debug(myTrace, 'abspeichern: System=~k, Farbe=~k', [System, Farbe]),
-	debug(myTrace, 'abspeichern: Spalte=~k Zeile=~k', [Spalte, Zeile]),
 	Feld is Spalte * 100 + Zeile,
 	debug(myTrace, 'abspeichern: Feld=~k', [Feld]),
 	assertz(spielStatus:systeme(Feld, System, Farbe)),
 	fail.
 	    
 gespeichert :-
-	   	server:holeCssAlsStyle(StyleString),
-		TermerizedHead = [\[StyleString], title('systemNamenDialog')],
-		TermerizedBody = [
-			\['<header>'],
-			h3(align(center),'gespeichert!'),
-			\['</header>']
-			             ],
-		reply_html_page(TermerizedHead, TermerizedBody).
+   	server:holeCssAlsStyle(StyleString),
+	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
+	TermerizedBody = [
+		\['<header>'],
+		h3(align(center),'gespeichert!'),
+		\['</header>']
+		             ],
+	reply_html_page(TermerizedHead, TermerizedBody).
 
 fehlerZeile(Zeile, Spalte) :-
 	server:holeCssAlsStyle(StyleString),

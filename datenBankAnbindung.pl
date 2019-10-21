@@ -1,4 +1,4 @@
-:- module(datenBankAnbindung, []).
+:- module(datenBankAnbindung, [datenInDbSpeichern/0, datenVonDbHolen/0, datenNachAccessSpeichern/0]).
 
 :- use_module(library(persistency)).
 

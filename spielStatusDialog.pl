@@ -1,7 +1,5 @@
 :- module(spielStatusDialog, [spielStatusDialog/1]).
 
-:- use_module(library(dcg/basics)).
-:- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
@@ -33,7 +31,7 @@ spielStatusDialog(_Requese) :-
 	h1([align(center)], ['Vorraussetzungen für die Materialsammlung']),
 	\['</header>'],
 	\['<formSpace>'],       
-	form([action('/spielStatus'), method('post'), name('spielStatusDialogForm')], 
+	form([action('/spielStatus'), method('post'), autocomplete("off")], 
 	   	 [fieldSet([legend('Multitool-Ausstattung'),
 		       	    div(class('table'),
 		       	        [div(class('tr'), 

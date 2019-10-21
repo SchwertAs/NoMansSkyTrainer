@@ -1,25 +1,23 @@
 :- module(stoffErlangenDialog, [stoffErlangen/1]).
 
-:- use_module(library(dcg/basics)).
-:- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
 :- use_module(library(http/http_parameters)).
 
-:- http_handler('/stoffErlangenSystemAusWahl', stoffErlangenSystemAusWahl, []).
-:- http_handler('/stoffErlangenPlanetAusWahl', stoffErlangenPlanetAusWahl, []).
-:- http_handler('/stoffErlangenAusWahl', stoffErlangenAusWahl, []).
+:- http_handler('/stoffErlangenDialogSystemAusWahl', stoffErlangenDialogSystemAusWahl, []).
+:- http_handler('/stoffErlangenDialogPlanetAusWahl', stoffErlangenDialogPlanetAusWahl, []).
+:- http_handler('/stoffErlangenDialog', stoffErlangenDialog, []).
 :- http_handler('/stoffErlangen', stoffErlangen, []).
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
-stoffErlangenSystemAusWahl(_Request) :-
+stoffErlangenDialogSystemAusWahl(_Request) :-
 	planetAuswahlDialog:systemAuswahlDialog(
 	  'Stoff erlangen - Aufenthaltsort des Spielers: System auswählen',
 	  '/stoffErlangenPlanetAusWahl').
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
-stoffErlangenPlanetAusWahl(Request) :-
+stoffErlangenDialogPlanetAusWahl(Request) :-
 	planetAuswahlDialog:planetAuswahlDialog(
 	  'Stoff erlangen - Aufenthaltsort des Spielers: Planet auswählen',
 	  '/stoffErlangenAusWahl',
@@ -27,7 +25,7 @@ stoffErlangenPlanetAusWahl(Request) :-
 	).
 
 /* ----------------------  Eingabe Formular ---------------------------------------------------*/
-stoffErlangenAusWahl(Request) :-
+stoffErlangenDialog(Request) :-
 	member(method(post), Request), 
 	!,
 	http_parameters(Request, 

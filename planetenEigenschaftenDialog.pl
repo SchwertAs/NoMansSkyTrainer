@@ -1,7 +1,5 @@
 :- module(planetenEigenschaftenDialog, [planetenEigenschaftenDialogSystemAuswahl/1]).
 
-:- use_module(library(dcg/basics)).
-:- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
