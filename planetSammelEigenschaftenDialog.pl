@@ -24,7 +24,8 @@ planetSammelEigenschaftenDialogPlanetAuswahl(Request) :-
 	  '/planetSammelEigenschaftenDialog',
 	  Request
 	).
-	
+
+/* -----------------------------------  Eingabedialog ----------------------------------------------- */	
 planetSammelEigenschaftenDialog(Request) :-
 	member(method(post), Request), !,
 	http_parameters(Request, 
@@ -37,8 +38,12 @@ planetSammelEigenschaftenDialog(Request) :-
 
 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
     /* einlesen der Eigenschaften */
-	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest], sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest), RecordList),
-	findall([FeldNo], between(1, 60, FeldNo), FeldNoList),
+    GesamtZeilenZahl = 130,
+	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest], 
+	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest),
+	        Operation \= bekannt), 
+	        RecordList),
+	findall([FeldNo], between(1, GesamtZeilenZahl, FeldNo), FeldNoList),
 	ausgabe:joinRecordsByRecordNo(FeldNoList, RecordList, 5, NumerierteRecordList),
 	TermerizedBody = [
 	\['<header>'],
@@ -164,12 +169,13 @@ innereEingabeZeile([]) -->
 
 innereEingabeZeile([Record|Rest]) -->
 	{
-	Record = [FeldNo, Stoff, Operation, Haupt, _, Ruest],
+	Record = [FeldNo, Stoff, Operation, Haupt, Neben, Ruest],
 	((Stoff = '', Stoff0 = 'Bitte wählen'); (Stoff0 = Stoff)),
 	((Operation = '', Operation0 = 'Bitte wählen'); (Operation0 = Operation)),
 	((Haupt = '', Haupt0 = 0); (Haupt0 = Haupt)),
+	((Neben = '', Neben0 = 0); (Neben0 = Neben)),
 	((Ruest = '', Ruest0 = 0); (Ruest0 = Ruest)),
-	Dauer is Haupt0 + Ruest0,
+	arbeitsVorbereitung:toDauer(Operation, 1, Ruest0, Haupt0, Neben0, Dauer),
 	((Dauer = 0, Gebinde = '', Anzahl = '', Dauer0 = ''); (Gebinde = 1, Anzahl = 1, Dauer0 = Dauer)),
 
 	findall(St, (sammlung:sammlung(_, 'System', 'MeinPlanet', Op, St, _, _, _), Op \= bekannt), SammelStoffe0),
@@ -177,9 +183,9 @@ innereEingabeZeile([Record|Rest]) -->
 	findall([Stoff0, St0], member(St0, SammelStoffe1), SammelStoffe),
 	findall([Operation0, Aktion], (sammelAktion:sammelAktion(Aktion), Aktion \= bekannt), SammelAktionen)
 	},
-	html([	
+	html([	 
 	      div(class('tr'), [ 
-	      	div(class('td'), \baueOptionsFeld('auswahlRohStoff', FeldNo, 1, SammelStoffe)),
+	      	div(class('td'), [label(FeldNo), \baueOptionsFeld('auswahlRohStoff', FeldNo, 1, SammelStoffe)]),
 			div(class('td'), \baueOptionsFeld('methode', FeldNo, 2, SammelAktionen)),
 			div(class('td'), [input([name('anzahl' + FeldNo), type('number'), min('1'), max('99999'), value(Anzahl)])]),
 			div(class('td'), [input([name('dauer' + FeldNo), type('number'), min('1'), max('99999'), value(Dauer0)])]),
@@ -215,11 +221,11 @@ baueOption([OptionTupel|Rest]) -->
 	]),
 	baueOption(Rest).
 	
-
+/* -----------------------------------  Abspeicherdialog -------------------------------------------- */
 planetSammelEigenschaften(Request) :-
 	member(method(post), Request), !,
 	planetSammelEigenschaftenDialogParams:planetSammelEigenschaftenDialogParamList(Request, VarValueList),
-	GesamtZeilenZahl = 60,
+	GesamtZeilenZahl = 130,
 	\+plausibleEingabe(VarValueList, GesamtZeilenZahl),
     ((nb_getval('ZeileNoFehler', ZeileNoFehler),
       ZeileNoFehler > 0,

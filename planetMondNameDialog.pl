@@ -9,11 +9,13 @@
 :- http_handler('/planetMondNameDialog', planetMondNameDialog, []).
 :- http_handler('/planetMondName', planetMondName, []).
 
+/* ----------------------  Auswahl System  ----------------------------------------------------*/
 planetMondNameSystemAuswahlDialog(_Request) :-
 	planetAuswahlDialog:systemAuswahlDialog(
 		'Eigenschaften Sternensystem eingeben', 
 		'/planetMondNameDialog').
 		
+/* ----------------------  Eingabe Himmelskörper  ---------------------------------------------*/
 planetMondNameDialog(Request) :-
 	member(method(post), Request), !,
 	http_parameters(Request, 
@@ -92,28 +94,29 @@ innereEingabeZeile([Record|Rest]) -->
    	     innereEingabeZeile(Rest).   	   
 
 	
+/* ----------------------  Antwort Formular ---------------------------------------------------*/
 planetMondName(Request) :-
 	member(method(post), Request), !,
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0]),
-     planet1(Planet1, [default('')]),
-     planet2(Planet2, [default('')]),
-     planet3(Planet3, [default('')]),
-     planet4(Planet4, [default('')]),
-     planet5(Planet5, [default('')]),
-     planet6(Planet6, [default('')]),
-     planet7(Planet7, [default('')]),
-     planet8(Planet8, [default('')])
+     planet1(Planet1, [default("")]),
+     planet2(Planet2, [default("")]),
+     planet3(Planet3, [default("")]),
+     planet4(Planet4, [default("")]),
+     planet5(Planet5, [default("")]),
+     planet6(Planet6, [default("")]),
+     planet7(Planet7, [default("")]),
+     planet8(Planet8, [default("")])
     ]),
-	spielStatus:reInitPlaneten(AuswahlSystem),
-    (Planet1 = ''; assertz(spielStatus:planeten(1, AuswahlSystem, Planet1))),
-    (Planet2 = ''; assertz(spielStatus:planeten(2, AuswahlSystem, Planet2))),
-    (Planet3 = ''; assertz(spielStatus:planeten(3, AuswahlSystem, Planet3))),
-    (Planet4 = ''; assertz(spielStatus:planeten(4, AuswahlSystem, Planet4))),
-    (Planet5 = ''; assertz(spielStatus:planeten(5, AuswahlSystem, Planet5))),
-    (Planet6 = ''; assertz(spielStatus:planeten(6, AuswahlSystem, Planet6))),
-    (Planet7 = ''; assertz(spielStatus:planeten(7, AuswahlSystem, Planet7))),
-    (Planet8 = ''; assertz(spielStatus:planeten(8, AuswahlSystem, Planet8))),
+    insUpdDel(AuswahlSystem, Planet1, 1),
+    insUpdDel(AuswahlSystem, Planet2, 2),
+    insUpdDel(AuswahlSystem, Planet3, 3),
+    insUpdDel(AuswahlSystem, Planet4, 4),
+    insUpdDel(AuswahlSystem, Planet5, 5),
+    insUpdDel(AuswahlSystem, Planet6, 6),
+    insUpdDel(AuswahlSystem, Planet7, 7),
+    insUpdDel(AuswahlSystem, Planet8, 8),
+    
     server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Himmelskörper-Namen')],
 	TermerizedBody = [
@@ -122,4 +125,61 @@ planetMondName(Request) :-
 		\['</header>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
-      
+
+
+/* unverändert */
+insUpdDel(System, PlanetNew, RecNo) :-
+	spielStatus:planeten(RecNo, System, PlanetNew),
+	debug(myTrace, 'unverändert: RecNo=~k System=~k Planet=~k', [RecNo, System, PlanetNew]),
+	!.
+
+/* in anderes Zeile verschoben */
+insUpdDel(System, PlanetNew, RecNoNew) :-
+	PlanetNew \= "",
+	\+spielStatus:planeten(RecNoNew, System, PlanetNew),
+	spielStatus:planeten(RecNoOld, System, PlanetNew),
+	debug(myTrace, 'Zeile verschoben: RecNoOld=~k RecNoNew=~k System=~k Planet=~k', [RecNoOld, RecNoNew, System, PlanetNew]),
+	retractall(spielStatus:planeten(RecNoOld, System, PlanetNew)),
+	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew)),
+	!.
+
+/* umbenannt */
+insUpdDel(System, PlanetNew, RecNoNew) :-
+	spielStatus:planeten(RecNoNew, System, PlanetOld),
+	PlanetNew \= "",
+	debug(myTrace, 'Schlüsselupdate: RecNoNew=~k System=~k Planet=~k', [RecNoNew, System, PlanetNew]),
+	forall(sammlung:sammlung(RecNo, System, PlanetOld, Operation, Stoff, Haupt, Neben, Ruest),
+	       assertz(sammlung:sammlung(RecNo, System, PlanetNew, Operation, Stoff, Haupt, Neben, Ruest))
+	      ),
+	retractall(sammlung:sammlung(_, System, PlanetOld, _, _, _, _, _)),
+	forall(spielStatus:systemAusstattung([System, PlanetOld, Ort], Entfernung),
+		   assertz(spielStatus:systemAusstattung([System, PlanetNew, Ort], Entfernung))
+	      ),
+	retractall(spielStatus:systemAusstattung([System, PlanetOld, _], _)),
+	retractall(spielStatus:planeten(RecNoNew, System, PlanetOld)),
+	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew)),
+	!.
+
+/* insert */
+insUpdDel(System, PlanetNew, RecNoNew) :-
+	\+spielStatus:planeten(RecNoNew, _, _),
+	PlanetNew \= "",
+	debug(myTrace, 'insert: RecNoNew=~k System=~k Planet=~k', [RecNoNew, System, PlanetNew]),
+	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew)),
+	sammlung:copyDefaultIfEmpty(System, PlanetNew),
+	spielStatus:copyDefaultIfEmpty(System, PlanetNew),
+	!.
+	
+/* löschen cascade */
+insUpdDel(System, PlanetNew, RecNoNew) :-
+	spielStatus:planeten(RecNoNew, System, PlanetOld),
+	PlanetNew = "",
+	debug(myTrace, 'löschen: RecNoNew=~k System=~k PlanetOld=~k', [RecNoNew, System, PlanetOld]),
+	retractall(sammlung:sammlung(_, System, PlanetOld, _, _, _, _, _)),
+	retractall(spielStatus:systemAusstattung([System, PlanetOld, _], _)),
+	retractall(spielStatus:planeten(RecNoNew, System, _)),
+	!.
+
+insUpdDel(_, PlanetNew, _) :-
+	PlanetNew = "",
+	!.

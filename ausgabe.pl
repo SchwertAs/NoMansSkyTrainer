@@ -237,7 +237,7 @@ joinListsByRecordNo(ListOfLists1, ListOfLists2, LeerStringList1, LeerStringList2
 	ListOfLists1 = [Elem1|Rest1],
 	((ListOfLists2 = [], Elem2 = [0, LeerStringList2]); (ListOfLists2 = [Elem2|_])),
 	Elem1 = [FeldNo|_], Elem2 = [RecordNo|Record],
-	((FeldNo = RecordNo,
+	(((FeldNo = RecordNo; RecordNo = 0),
 	  append(Elem1, Record, KombinierterRecord),
 	  ListOfLists2 = [_|Rest2]
 	 );

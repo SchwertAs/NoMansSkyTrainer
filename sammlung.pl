@@ -1,11 +1,11 @@
-:- module(sammlung, [sammelbarInit/0, sammelbarReInit/0, sammlung/8, sammelbar/2, fertigeLoesung/3]).
+:- module(sammlung, [sammlungInit/0, sammelbarReInit/2, sammlung/8, sammelbar/2, fertigeLoesung/3]).
 
 :- dynamic(sammelbar/2).
 :- dynamic(fertigeLoesung/3).
 :- dynamic(sammlung/8).
 	
 /* sammlung(<RecordNo>, <System>, <Planet>, <SammelAktion>, <Stoff>, <Hauptzeit>, <Nebenzeit>, <Rüstzeit>) */
-initSammlung :-
+sammlungInit :-
 	abolish(sammlung/8)
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, saeureRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, schmierMittelRezept, 0, 0, 0))
@@ -565,9 +565,9 @@ initSammlung :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', herausSchlagen, kohlenStoff, 5, 5, 150))
 	
 	/* mit Minenlaser auf Planet */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, radon, 87, 7, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, stickStoff, 9, 9, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, schwefelin, 0, 0, 0)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, radon, 87, 7, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, stickStoff, 9, 9, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, schwefelin, 87, 7, 150)) 
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, ammoniak, 7, 7, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, pilzSchimmel, 1, 1, 150))
 
@@ -685,9 +685,9 @@ initSammlung :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, warmeProtoMilch, 20, 0, 0))
 	
 	/* Stoff ohne Gerät unter Wasser ernten */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ertauchen, kristallSulfid, 150, 634, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ertauchen, kelpBeutel, 18, 32, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ertauchen, zytoPhosphat, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ertauchen, kristallSulfid, 150, 634, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ertauchen, kelpBeutel, 18, 32, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ertauchen, zytoPhosphat, 20, 0, 150))
 	
 	/* Stoff unter Wasser mit Waffe erbeuten */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', unterWasserErkaempfen, lebendePerle, 150, 680, 0))     /* von gepanzerte Muschel */
@@ -786,37 +786,33 @@ vorfertigen(synthetischerHonig).
 vorfertigen(knusperKaramell).
 
 
-sammelbarInit :-
-	initSammlung,
-	\+sammelbarInitFlach('System', 'MeinPlanet'),
-	\+sammelbarVorfertigen('System', 'MeinPlanet').
-	
-sammelbarReInit :-
-	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	(sammlung(_, System, Planet, _, _, _, _, _), /* abweisen, falls keinerlei Einträge */
-	!,
-	\+sammelbarInitFlach(System, Planet),
-	\+sammelbarVorfertigen(System, Planet));
-	( \+sammelbarInitFlach('System', 'MeinPlanet'),
-	  \+sammelbarVorfertigen('System', 'MeinPlanet')
-	
+copyDefaultIfEmpty(System, Planet) :-
+	findall(Stoff, sammlung(_, System, Planet, _, Stoff, _, _, _), Stoffe),
+	((Stoffe = [],
+	  forall((sammlung(RecNo, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)),
+	      assertz(sammlung(RecNo, System, Planet, Operation, Stoff, Haupt, Neben, Ruest))));
+	  true
 	).
 	
+sammelbarReInit(System, Planet) :-
+	\+sammelbarInitFlach(System, Planet),
+	\+sammelbarVorfertigen(System, Planet).
+	
 sammelbarInitFlach(System, Planet) :-
-	abolish(sammelbar/2),
+	retractall(sammelbar(_, _)),
 	stoff:stoff(_, Stoff, _),
 	(sammlung(_, System, Planet, Operation, Stoff, _, _, _);
 	 /* raumSchuerfen geht auf jedem Planeten */
-	 sammlung(_, 'System', 'MeinPlanet', raumSchuerfen, Stoff, _, _, _);
+	 (Operation = raumSchuerfen, sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, _, _, _));
 	 /* rezepte sind auch überall gleich bekannt */
-	 sammlung(_, 'System', 'MeinPlanet', bekannt, Stoff, _, _, _)
+	 (Operation = bekannt, sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, _, _, _))
 	),
 	sammelAktion:pruefeOperationVorraussetzung(Operation),
 	assertz(sammelbar(Stoff, Operation)),
 	fail.
 	
 sammelbarVorfertigen(System, Planet) :-
-	abolish(fertigeLoesung/3),
+	retractall(fertigeLoesung(_, _, _)),
 	vorfertigen(Stoff),
 	\+generiereFertigeLoesungen(System, Planet, Stoff),
 	fail.
@@ -826,7 +822,4 @@ generiereFertigeLoesungen(System, Planet, Stoff) :-
 	\+suchAlgorithmus:baueFuerVorfertigung(System, Planet, Strategie, 1, Stoff),
 	optimierung:optimierungsStrategie(Strategie, Stoff, _, Vorgaenge, _, _, _, _, _),
 	assertz(fertigeLoesung(Strategie, Stoff, Vorgaenge)),
-	retractall(sammelbar(Stoff, _)),
-	assertz(sammelbar(Stoff, vorfertigen)),
 	fail.
-

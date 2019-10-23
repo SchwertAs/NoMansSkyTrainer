@@ -58,7 +58,7 @@ baue(System, Planet, Strategie, Anzahl, Stoff) :-
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 beschaffen(Strategie, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge, IstTiefe, MaxTiefe) :-
-	sammlung:sammelbar(Stoff, vorfertigen),
+	sammlung:fertigeLoesung(Strategie, Stoff, _),
 	!,
 	append([[Anzahl, vorfertigen, [], [Anzahl, Stoff]]], BisherigeVorgaenge, VorgaengeMitVorfertigung),
 	expandiereVorgaenge(Strategie, VorgaengeMitVorfertigung, [], Vorgaenge),
