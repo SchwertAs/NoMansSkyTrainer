@@ -7,6 +7,7 @@
 :- http_handler('/systemNamenDialog', systemNamenDialog, []).
 :- http_handler('/systemNamen', systemNamen, []).
 
+/* ----------------------  Eingabe Sternensysteme  --------------------------------------------*/
 systemNamenDialog(_Request) :-
 	findall([FeldNo, System, Farbe], (spielStatus:systeme(FeldNo, System, Farbe), System \= 'System'), SystemList),
 	ausgabe:partialList(SystemList, 1, 20, SystemList1),
@@ -24,7 +25,7 @@ systemNamenDialog(_Request) :-
 	    h1([align(center)], ['Eingabe der Sternensysteme']),
 	    \['</header>'],
 		\['<formSpace>'],       
-	    form([action('/systemNamen'), method('post'), autocomplete("off")], 
+	    form([action('/systemNamen'), method('post')], 
 	       	 [div(class('table'),
 	       	      [div(class('tr'), 
 	       	           [div(class('td'), \innereTabelle(NumerierteRecordList1)),
@@ -65,7 +66,7 @@ innereEingabeZeile([Record|Rest]) -->
 	},
 	html([div(class('tr'), 
 	          [div(class('td'), 
-	               input([name('systemName' + FeldNo), type("text"), maxlength("40"), pattern("^(?!System$)\\S*$"), value(System)])
+	               input([name('systemName' + FeldNo), type("text"), maxlength("40"), pattern("^(?!System$).*$"), value(System)])
 	              ),
 			   div(class('td'), \baueOptionsFeld('farbe', FeldNo, SpalteNo, Farben))
    	          ])
@@ -100,6 +101,7 @@ baueOption([OptionTupel|Rest]) -->
 	baueOption(Rest).
 	
 
+/* ----------------------  Antwort Formular ---------------------------------------------------*/
 systemNamen(Request) :-
 	member(method(post), Request), !,
 	systemNamenDialogParams:systemNamenDialogParamList(Request, VarValueList),
@@ -110,8 +112,7 @@ systemNamen(Request) :-
       ZeileNoFehler > 0,
       fehlerZeile(ZeileNoFehler, SpalteNoFehler)
 	 );
-	 (spielStatus:initSysteme,
-	  \+ablegen(GesamtZeilenZahl, VarValueList),
+	 (\+ablegen(GesamtZeilenZahl, VarValueList),
       gespeichert
      )
 	).
@@ -138,13 +139,79 @@ ablegen(GesamtZeilenZahl, VarValueList) :-
 	between(1, 3, Spalte),
 	between(1, GesamtZeilenZahl, Zeile),
 	pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, System, Farbe),
-	gueltigeZeile(System, Farbe),
-	debug(myTrace, 'abspeichern: System=~k, Farbe=~k', [System, Farbe]),
 	Feld is Spalte * 100 + Zeile,
-	debug(myTrace, 'abspeichern: Feld=~k', [Feld]),
-	assertz(spielStatus:systeme(Feld, System, Farbe)),
+	insUpdDel(Feld, System, Farbe),
 	fail.
-	    
+
+/* identisch */
+insUpdDel(Feld, System, Farbe) :-
+	spielStatus:systeme(Feld, System, Farbe),
+	debug(myTrace, 'unverändert: Feld=~k System=~k Farbe=~k', [Feld, System, Farbe]),
+	!.
+	
+/* move evtl. mit update farbe */
+insUpdDel(FeldNeu, System, Farbe) :-
+	spielStatus:systeme(FeldAlt, System, _),
+	FeldNeu \= FeldAlt,
+	System \= "",
+	debug(myTrace, 'verschoben: FeldAlt=~k FeldNeu=~k System=~k', [FeldAlt, FeldNeu, System]),
+	retractall(spielStatus:systeme(FeldAlt, System, _)),
+	assertz(spielStatus:systeme(FeldNeu, System, Farbe)),
+	!.
+	
+/* Attibuts-update */
+insUpdDel(FeldNeu, System, FarbeNeu) :-
+	spielStatus:systeme(FeldNeu, System, _),
+	debug(myTrace, 'Attribut-Update: Feld=~k System=~k Farbe=~k', [FeldNeu, System, FarbeNeu]),
+	retractall(spielStatus:systeme(FeldNeu, System, _)),
+	assertz(spielStatus:systeme(FeldNeu, System, FarbeNeu)),
+	!.
+
+/* Schlüssel-update */
+insUpdDel(FeldNeu, SystemNeu, FarbeNeu) :-
+	spielStatus:systeme(FeldNeu, SystemAlt, _),
+	SystemNeu \= "",
+	SystemNeu \= SystemAlt,
+	debug(myTrace, 'Schlüssel-Update: Feld=~k SystemAlt=~k SystemNeu=~k', [FeldNeu, SystemAlt, SystemNeu]),
+	/* planet updaten */
+	forall(spielStatus:planeten(RecNo0, SystemAlt, Planet0), 
+	 assertz(spielStatus:planeten(RecNo0, SystemNeu, Planet0))
+	),
+	retractall(spielStatus:planeten(_, SystemAlt, _)),
+	/* sammlung updaten */
+	forall(sammlung:sammlung(RecNo1, SystemAlt, Planet1, Operation, Stoff, Haupt, Neben, Ruest),
+	       assertz(sammlung:sammlung(RecNo1, SystemNeu, Planet1, Operation, Stoff, Haupt, Neben, Ruest))
+	      ),
+	retractall(sammlung:sammlung(_, SystemAlt, _, _, _, _, _, _)),
+	/* systemausstattung updaten */
+	forall(spielStatus:systemAusstattung([SystemAlt, Planet2, Ort], Entfernung),
+		   assertz(spielStatus:systemAusstattung([SystemNeu, Planet2, Ort], Entfernung))
+	      ),
+	retractall(spielStatus:systemAusstattung([SystemAlt, _, _], _)),
+	/*  */
+	retractall(spielStatus:systeme(FeldNeu, SystemAlt, _)),
+	assertz(spielStatus:systeme(FeldNeu, SystemNeu, FarbeNeu)),	
+	!.
+
+/* insert */
+insUpdDel(FeldNeu, SystemNeu, FarbeNeu) :-
+	\+spielStatus:systeme(FeldNeu, _, _),
+	SystemNeu \= "",
+	debug(myTrace, 'insert: Feld=~k SystemNeu=~k, FarbeNeu=~k', [FeldNeu, SystemNeu, FarbeNeu]),
+	assertz(spielStatus:systeme(FeldNeu, SystemNeu, FarbeNeu)),
+	!.
+
+/* löschen cascade */
+insUpdDel(FeldNeu, SystemNeu, _) :-
+	spielStatus:systeme(FeldNeu, SystemOld, _),
+	SystemNeu = "",
+	debug(myTrace, 'delete: Feld=~k SystemAlt=~k', [FeldNeu, SystemOld]),
+	retractall(sammlung:sammlung(_, SystemOld, _, _, _, _, _, _)),
+	retractall(spielStatus:systemAusstattung([SystemOld, _, _], _)),
+	retractall(spielStatus:planeten(_, SystemOld, _)),	
+	retractall(spielStatus:systeme(_, SystemOld, _)),	
+	!.
+	
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
@@ -170,11 +237,11 @@ fehlerZeile(Zeile, Spalte) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 gueltigeZeile(System, Farbe) :-
-	System \= '''',
+	System \= "",
 	Farbe \= 'Bitte wählen'.
 
 leereZeile(System, Farbe) :-
-	System = '''',
+	System = "",
 	Farbe = 'Bitte wählen'.
 
 	

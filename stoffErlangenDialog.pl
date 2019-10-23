@@ -14,13 +14,13 @@
 stoffErlangenDialogSystemAusWahl(_Request) :-
 	planetAuswahlDialog:systemAuswahlDialog(
 	  'Stoff erlangen - Aufenthaltsort des Spielers: System auswählen',
-	  '/stoffErlangenPlanetAusWahl').
+	  '/stoffErlangenDialogPlanetAusWahl').
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 stoffErlangenDialogPlanetAusWahl(Request) :-
 	planetAuswahlDialog:planetAuswahlDialog(
 	  'Stoff erlangen - Aufenthaltsort des Spielers: Planet auswählen',
-	  '/stoffErlangenAusWahl',
+	  '/stoffErlangenDialog',
 	  Request
 	).
 
@@ -138,9 +138,6 @@ stoffErlangen(Request) :-
      );
      fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5)
     ),
-    ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
-    assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], _)),
-    sammlung:sammelbarReInit,
     !.
 
 fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-    
@@ -168,16 +165,20 @@ nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 	).
 	
 ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff) :-
-	optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
-	nichtHerstellBar(Ziel).
+    ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
+    assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
+    sammlung:sammelbarReInit(System, Planet),
+	(optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
+	 nichtHerstellBar(Ziel)),
+	!.
 	
 
 optimierteLoesung(System, Planet, OptimierungsZiel, Anzahl, Stoff) :-  
 	\+suchAlgorithmus:baue(System, Planet, OptimierungsZiel, Anzahl, Stoff),
 	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
-	printMinSammlungForm(System, Planet, Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
+	zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
-printMinSammlungForm(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
+zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),

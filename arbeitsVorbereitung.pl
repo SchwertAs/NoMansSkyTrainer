@@ -1,4 +1,4 @@
-:- module(arbeitsVorbereitung, [toRuestHauptNebenZeit/7, bildeAvZeiten/9]).
+:- module(arbeitsVorbereitung, [toDauer/6, toRuestHauptNebenZeit/7, bildeAvZeiten/9]).
 
 /* ReiseZeit ist Zeit bis vor Ort des Stoffwechsels
    Hauptzeit ist Abbauzeit pro Stück ohne Haufenwechsel
@@ -46,17 +46,20 @@ bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, 
 
 /* in der Rüstzeit ist auch die Abrüstzeit drin */
 methodeToRuestZeit(bekannt, 0).
-methodeToRuestZeit(pfluecken, 20).
-methodeToRuestZeit(minenLaserNutzen, 180).
-methodeToRuestZeit(terrainFormerNutzen, 180).
-methodeToRuestZeit(verbessertenMinenLaserNutzen, 180).
-methodeToRuestZeit(jagen, 180).
-methodeToRuestZeit(erkaempfen, 180).
-methodeToRuestZeit(kaufen, 1987).
-methodeToRuestZeit(ernten, 180).
-methodeToRuestZeit(vonTierErhalten, 180).
-methodeToRuestZeit(ertauchen, 180).
-methodeToRuestZeit(unterWasserErkaempfen, 180).
+methodeToRuestZeit(pfluecken, 0).
+methodeToRuestZeit(minenLaserNutzen, 150).
+methodeToRuestZeit(terrainFormerNutzen, 300).
+methodeToRuestZeit(verbessertenMinenLaserNutzen, 150).
+methodeToRuestZeit(exoFahrzeugMinenLaserNutzen, 150).
+methodeToRuestZeit(jagen, 300).
+methodeToRuestZeit(erkaempfen, 300).
+methodeToRuestZeit(kaufen, 1000).
+methodeToRuestZeit(ernten, 0).
+methodeToRuestZeit(vonTierErhalten, 0).
+methodeToRuestZeit(ertauchen, 150).
+methodeToRuestZeit(unterWasserErkaempfen, 0).
+methodeToRuestZeit(herausSchlagen, 150).
+methodeToRuestZeit(raumSchuerfen, 63).
 
 /* Zeit für den Wechsel zwischen zwei Gebinden des Stoffs */
 methodeToNebenZeit(bekannt, 0).
@@ -72,13 +75,18 @@ methodeToNebenZeit(ertauchen, 40).
 methodeToNebenZeit(unterWasserErkaempfen, 40).
 
 methodeToHauptZeit(pfluecken, 100).
+methodeToHauptZeit(ernten, 100).
+methodeToHauptZeit(vonTierErhalten, 100).
+methodeToHauptZeit(unterWasserErkaempfen, 100).
 
 toRuestHauptNebenZeit(Methode, Anzahl, Dauer, Gebinde, Ruest, Haupt, Neben) :-
 	assertion(sammelAktion:sammelAktion(Methode)),
-	Methode = pfluecken,
+	memberchk(Methode, [pfluecken, ernten, vonTierErhalten, unterWasserErkaempfen]),
 	methodeToRuestZeit(Methode, Ruest0),
 	methodeToHauptZeit(Methode, Haupt0),
-	Neben0 is (Dauer - Ruest0 - (Gebinde * Haupt0)) / (Gebinde - 1),
+	((Gebinde > 1, Neben0 is (Dauer - Ruest0 - (Gebinde * Haupt0)) / (Gebinde - 1));
+	 Neben0 = 0
+	),
 	Haupt is Haupt0 / Anzahl,
 	Neben is Neben0 / Anzahl,
 	Ruest is Ruest0 / Anzahl,
@@ -93,4 +101,9 @@ toRuestHauptNebenZeit(Methode, Anzahl, Dauer, Gebinde, Ruest, Haupt, Neben) :-
 	Neben is Neben0 / Anzahl,
 	Ruest is Ruest0 / Anzahl.
 
+toDauer(_, Anzahl, Ruest, Haupt, Neben, Dauer) :-
+	Haupt0 is Haupt * Anzahl,
+	Neben0 is Neben * Anzahl,
+	Ruest0 is Ruest * Anzahl,
+	Dauer is Haupt0 + Neben0 + Ruest0.
 	

@@ -1,4 +1,4 @@
-:- module(spielStatus, [reInitPlaneten/1, planeten/3, systeme/3, spielStatus/2, systemAusstattung/2]).
+:- module(spielStatus, [planeten/3, systeme/3, spielStatus/2, systemAusstattung/2]).
 
 :- dynamic(spielStatus/2).
 :- dynamic(systeme/3).
@@ -33,9 +33,6 @@ initPlaneten :-
 	abolish(planeten/3)
 	,assertz(planeten(0, 'System', 'MeinPlanet')).
 	
-reInitPlaneten(System) :-
-	ignore(retractall(planeten(_, System, _))).
-	
 initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
 	abolish(systemAusstattung/2)
@@ -59,6 +56,13 @@ initSystemAusstattung :-
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 2400)) 
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0)).
 
+copyDefaultIfEmpty(System, Planet) :-
+	findall(Entfernung, systemAusstattung([System, Planet, _], Entfernung), Entfernungen),
+	((Entfernungen = [],
+	  forall(systemAusstattung(['System', 'MeinPlanet', Ort], Entfernung),
+	      assertz(systemAusstattung([System, Planet, Ort], Entfernung))));
+	  true
+	).
 
 /* ------------------------- Rezepte für Wertvolle Dinge ----------------------------- */
 /* Rezeptstoff, Event, Questname */

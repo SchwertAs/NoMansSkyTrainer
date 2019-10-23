@@ -1,8 +1,6 @@
-:- module(main, []).
+:- module(main, [startServer/0, resetDatabase/0]).
 
 startServer :-
-	spielStatus:spielStatusInit,
-	sammlung:sammelbarInit,
 	datenBankAnbindung:datenVonDbHolen, 
 	server:server(8000),
 	debug(myTrace),
@@ -10,7 +8,11 @@ startServer :-
 	get_single_char(_),
 	datenBankAnbindung:datenInDbSpeichern.
 
-
+resetDatabase :-
+	spielStatus:spielStatusInit,
+	sammlung:sammlungInit,
+	datenBankAnbindung:datenInDbSpeichern.
+	
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),
 	stoff:stoff(_, Produkt, EinzelWert), 
