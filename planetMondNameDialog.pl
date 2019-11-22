@@ -108,13 +108,22 @@ planetMondName(Request) :-
      planet7(Planet7, [default("")]),
      planet8(Planet8, [default("")])
     ]),
+    debug(myTrace, 'Auswahlsystem=~k', [AuswahlSystem]),
+    debug(myTrace, 'Planet1=~k', [Planet1]),
     insUpdDel(AuswahlSystem, Planet1, 1),
+    debug(myTrace, 'Planet2=~k', [Planet2]),
     insUpdDel(AuswahlSystem, Planet2, 2),
+    debug(myTrace, 'Planet3=~k', [Planet3]),
     insUpdDel(AuswahlSystem, Planet3, 3),
+    debug(myTrace, 'Planet4=~k', [Planet4]),
     insUpdDel(AuswahlSystem, Planet4, 4),
+    debug(myTrace, 'Planet5=~k', [Planet5]),
     insUpdDel(AuswahlSystem, Planet5, 5),
+    debug(myTrace, 'Planet6=~k', [Planet6]),
     insUpdDel(AuswahlSystem, Planet6, 6),
+    debug(myTrace, 'Planet7=~k', [Planet7]),
     insUpdDel(AuswahlSystem, Planet7, 7),
+    debug(myTrace, 'Planet8=~k', [Planet8]),
     insUpdDel(AuswahlSystem, Planet8, 8),
     
     server:holeCssAlsStyle(StyleString),
@@ -162,7 +171,7 @@ insUpdDel(System, PlanetNew, RecNoNew) :-
 
 /* insert */
 insUpdDel(System, PlanetNew, RecNoNew) :-
-	\+spielStatus:planeten(RecNoNew, _, _),
+	\+spielStatus:planeten(RecNoNew, System, _),
 	PlanetNew \= "",
 	debug(myTrace, 'insert: RecNoNew=~k System=~k Planet=~k', [RecNoNew, System, PlanetNew]),
 	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew)),

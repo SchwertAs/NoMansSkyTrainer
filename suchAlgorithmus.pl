@@ -137,9 +137,7 @@ multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, Vorg
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 rezeptZulaessig(Operation, _) :-
-	Operation \= raffinieren,
-	Operation \= ausAtmosphaerenAnlageFuerSauerStoffGewinnen,
-	Operation \= ausAtmosphaerenAnlageFuerStickStoffGewinnen,
+	memberchk(Operation, [bauen, herstellen, installieren]),
 	!.
 	
 rezeptZulaessig(raffinieren, Komponenten) :-
@@ -176,6 +174,35 @@ rezeptZulaessig(ausAtmosphaerenAnlageFuerStickStoffGewinnen, Komponenten) :-
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlageStickStoff], _),
 	!.
+
+rezeptZulaessig(kochen, Komponenten) :-
+	Komponenten = [[_, _]],
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortNahrungsProzessor], _),
+	!.
+
+rezeptZulaessig(rezeptInAussenPostenErwerben, Komponenten) :-
+	Komponenten = [[_, _]],
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortAussenPosten], _),
+	!.
+rezeptZulaessig(rezeptAmForschungsComputerErwerben, Komponenten) :-
+	Komponenten = [[_, _]],
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortForschungsTerminal], _),
+	!.
+
+rezeptZulaessig(rezeptInAnomalieErwerben, Komponenten) :-
+	Komponenten = [[_, _]],
+	spielStatus:spielStatus(sphaereRufbar, true),
+	!.
+
+rezeptZulaessig(modulInRaumstationErwerben, Komponenten) :-
+	Komponenten = [[_, _]],
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortRaumStation], _),
+	!.
+
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 keinZirkel(Komponenten, StoffPfad, Stoff) :-

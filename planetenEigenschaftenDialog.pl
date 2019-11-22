@@ -253,7 +253,7 @@ planetenEigenschaften(Request) :-
      grosseRaffinerie_vorhanden(RaffinerieGrossVorhanden, [default(off)]),
      handelsTerminal_vorhanden(HandelsTerminalVorhanden, [default(off)]),
      
-     kleineRaffinerie_vorhanden_vorhanden(RaffinerieKleinVorhanden, [default(off)]),
+     kleineRaffinerie_vorhanden(RaffinerieKleinVorhanden, [default(off)]),
      nahrungsProzessor_vorhanden(NahrungsProzessorVorhanden, [default(off)]),
      basisTerminus_vorhanden(BasisTerminusVorhanden, [default(off)]),
      konstruktionsStation_vorhanden(KonstruktionsStationVorhanden, [default(off)]),
