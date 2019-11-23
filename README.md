@@ -10,3 +10,9 @@ Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekomm
 - Unterstützung für Rezeptbeschaffung
 - Kochrezepte enthalten
 - Raffinerierezepte enthalten
+
+#Installation:
+noMansSkyTrainer.exe in beliebiges Verzeichnis auf eigenem Rechner kopieren.
+Start mit Doppelklick auf das Exe im Verezeichnis. Das Verzeichnis muss Schreibrechte haben, damit das Programm seine Datenbank anlegen kann.
+Eventuell kommt eine Meldung von der Firewall, ob man den Port 8000 erlauben möchte. Dem bitte zustimmen.
+Der Server ist nach dem Start unter localhost:8000 erreichbar.
