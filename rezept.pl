@@ -408,7 +408,7 @@ rezept(installieren, [[150, chromatischesMetall], [2, ionenAkku], [50, gold], [1
 /* %%%%%%%%%%%%%%%%%%%%%  Raumschiff-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 rezept(installieren, [[1, warpZelle], [3, tritiumHyperCluster], [100, chromatischesMetall],[1,instabilitaetsAntriebARezept]], [1, instabilitaetsAntriebA], 0 ).
 rezept(installieren, [[3, kohlenStoffKristall], [100, platin], [200, tritium], [1, unterLichtVerstaerkerSRezept]], [1, unterLichtVerstaerkerS], 0 ).
-rezept(installieren, [[1, warpZelle], [220, gold], [4, mikroProzessor], [1, notfallWarpEinheitARezept]], [1, notfallWarpEinheitA], 0 ).
+rezept(installieren, [[1, warpZelle], [220, gold], [4, mikroProzessor], [1, notFallWarpEinheitARezept]], [1, notFallWarpEinheitA], 0 ).
 rezept(installieren, [[1, hermetischesSiegel], [1, metallPlatten], [1, impulsAntriebRezept]], [1, impulsAntrieb], 0 ).
 rezept(installieren, [[1, antiMaterie], [3, kabelBaum], [1, teleportEmpfaengerRezept]], [1, teleportEmpfaenger], 0 ).
 rezept(installieren, [[125, chromatischesMetall], [5, mikroProzessor], [1, hyperAntriebRezept]], [1, hyperAntrieb], 0 ).

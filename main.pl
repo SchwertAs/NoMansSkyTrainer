@@ -38,7 +38,7 @@ testRezepte(FehlOperation, FehlOpProdukt,
 			FehlKomponente,
 			FehlProdukt,
 			FertigungsZeitFehlStoff, FertigungsZeitFehlKomponenten) :-
-	\+rezept:fehlerOperation(FehlOperation, FehlOpProdukt),
+	\+rezept:integritaetWandelAktion(FehlOperation, FehlOpProdukt),
 	format('Operationen ok~n'),
 	\+rezept:komponenteIstKeinStoff(FehlKomponente),
 	format('Komponenten ok~n'),

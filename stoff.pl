@@ -153,6 +153,8 @@ stoff(modul, waermeSchutzModulA, 0).
 stoff(modul, waermeSchutzModulB, 0).
 stoff(modul, waermeSchutzModulKaelteB, 0).
 stoff(modul, unterWasserSchutzModulB, 0).
+stoff(modul, persoenlicheRaffinerie, 0).
+stoff(modul, luftSchubAntriebS, 0).
 
 /* ------------------------------- Raumschiffmodule --------------------- */
 stoff(modul, ablativePanzerungC, 0).
@@ -195,6 +197,9 @@ stoff(modul, zyklotronBalliste, 0).
 stoff(modul, zyklotronModulB, 0).
 stoff(modul, zyklotronModulC, 0).
 stoff(modul, zyklotronModulS, 0).
+stoff(modul, instabilitaetsAntriebA, 0).
+stoff(modul, unterLichtVerstaerkerS, 0).
+stoff(modul, notFallWarpEinheitA, 0).
 
 
 /* ------------------------------- Frachtermodule ----------------------- */
@@ -480,6 +485,8 @@ stoff(basisBauEndStoff, kleineHolzTuer, 0).
 stoff(basisBauEndStoff, kleineHolzWand, 0).
 stoff(basisBauEndStoff, kurzeHolzWand, 0).
 stoff(basisBauEndStoff, schraegeHolzPlatte, 0).
+stoff(basisBauEndStoff, holzDreieck, 0).
+stoff(basisBauEndStoff, kleinesHolzDreieck, 0).
 
 /* ------------------------------- Metallkomponenten -------------------- */
 stoff(basisBauEndStoff, dachInnenEckteilAusMetall, 0).
@@ -505,6 +512,8 @@ stoff(basisBauEndStoff, metallTuer, 0).
 stoff(basisBauEndStoff, metallTuerRahmen, 0).
 stoff(basisBauEndStoff, metallWand, 0).
 stoff(basisBauEndStoff, schraegeMetallPlatte, 0).
+stoff(basisBauEndStoff, metallDreieck, 0).
+stoff(basisBauEndStoff, kleinesMetallDreieck, 0).
 
 /* ------------------------------- Betonkomponenten --------------------- */
 stoff(basisBauEndStoff, betonBodenPlatte, 0).
@@ -530,6 +539,8 @@ stoff(basisBauEndStoff, kleineBetonTuer, 0).
 stoff(basisBauEndStoff, kleineBetonWand, 0).
 stoff(basisBauEndStoff, kurzeBetonWand, 0).
 stoff(basisBauEndStoff, schraegeBetonPlatte, 0).
+stoff(basisBauEndStoff, betonDreieck, 0).
+stoff(basisBauEndStoff, kleinesBetonDreieck, 0).
 
 
 /* =====================  gross vorgefertigt ========================================= */
@@ -591,6 +602,7 @@ stoff(basisBauEndStoff, wasserDichteTuer, 0).
 stoff(basisBauEndStoff, kappillarMuschel, 1000).
 stoff(basisBauEndStoff, lichtBruch, 1000).
 stoff(basisBauEndStoff, defekterSeparator, 1000).
+stoff(basisBauEndStoff, kalziPilz, 1000).
 
 /* =============================== Quecksilber Kauf ===================== */
 stoff(basisBauEndStoff, bronzeneKreaturStatue, 0).
@@ -925,6 +937,11 @@ stoff(bauRezept, geologieKanoneRezept, 0).
 stoff(bauRezept, masseBeschleunigerCRezept, 0).
 stoff(bauRezept, geschossSchmiererCRezept, 0).
 stoff(bauRezept, verstaerkteKartuschenCRezept, 0).
+stoff(bauRezept, persoenlicheRaffinerieRezept, 0).
+stoff(bauRezept, luftSchubAntriebSRezept, 0).
+stoff(bauRezept, instabilitaetsAntriebARezept, 0).
+stoff(bauRezept, unterLichtVerstaerkerSRezept, 0).
+stoff(bauRezept, notFallWarpEinheitARezept, 0).
 
 stoff(bauRezept, basisBergungsKapselRezept, 0).
 stoff(bauRezept, kommunikationsStationRezept, 0).
@@ -1209,6 +1226,12 @@ stoff(bauRezept, stabilerWuerfelRezept, 0).
 stoff(bauRezept, zylinderRezept, 0).
 stoff(bauRezept, wuerfelRezept, 0).
 stoff(bauRezept, kugelRezept, 0).
+stoff(bauRezept, holzDreieckRezept, 0).
+stoff(bauRezept, kleinesHolzDreieckRezept, 0).
+stoff(bauRezept, metallDreieckRezept, 0).
+stoff(bauRezept, kleinesMetallDreieckRezept, 0).
+stoff(bauRezept, betonDreieckRezept, 0).
+stoff(bauRezept, kleinesBetonDreieckRezept, 0).
 
 stoff(rohUndKochStoff, chromatischesMetall, 245).
 stoff(rohUndKochStoff, faecium, 30).
