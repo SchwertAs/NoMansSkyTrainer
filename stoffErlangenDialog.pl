@@ -267,15 +267,28 @@ nichtHerstellBar(Ziel) :-
 	ausgabe:baueBegruendung(Ziel, BegrTupel),
    	server:holeCssAlsStyle(StyleString),
    	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	BegrTupel \= [],
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), 'Sammeln oder herstellen nicht möglich.'),
+		h1(align(center), 'Beschaffen und herstellen nicht möglich.'),
 		\['</redHeader>'],
 		\['<redFormSpace>'],
 		h3('Begründung:'),
 		\ausgabeBegruendungDcg(BegrTupel), 
 		\['</redFormSpace>']
 		            ],
+	reply_html_page(TermerizedHead, TermerizedBody).
+
+nichtHerstellBar(Ziel) :-
+	ausgabe:baueBegruendung(Ziel, _),
+   	server:holeCssAlsStyle(StyleString),
+   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	TermerizedBody = [
+		\['<redHeader>'],
+		h1(align(center), 'Beschaffung nicht möglich, keine Rezepte vorhanden'),
+		\['</redHeader>']
+		],
+	
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 ausgabeBegruendungDcg([]) -->

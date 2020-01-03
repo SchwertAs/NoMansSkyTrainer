@@ -56,7 +56,8 @@ rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept, Checked) :-
 	  stoff:stoff(AuswahlStoffKlasse, Produkt, _),
 	  rezept:rezept(WandelAktion, Komponenten, [_, Produkt], _),
 	  WandelAktion \= raffinieren,
-	  ausgabe:letzesListenElement(Komponenten, [_, Rezept]),
+	  ausgabe:letzesListenElement(Komponenten, Ende),
+	  Ende = [_, Rezept],
 	  sammlung:sammlung(RecNo, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _),
 	  (RecNo = 0 *-> Checked = ''; Checked = ' checked').
 	  

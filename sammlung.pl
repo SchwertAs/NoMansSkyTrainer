@@ -121,6 +121,8 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, effizienteWasserDuesenARezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, verbesserterUebersetzerARezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, perfektionierterUebersetzerSRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, persoenlicheRaffinerieRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, luftSchubAntriebSRezept, 0, 0, 0))
 
 /* %%%%%%%%%%%%%%%%%%%%%  Fahrzeugmodule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, fusionsAntriebRezept, 0, 0, 0))
@@ -193,6 +195,11 @@ sammlungInit :-
 
 /* %%%%%%%%%%%%%%%%%%%%%  Siedlung-Bau-Rezepte nicht erforschbar %%%%%%%%%%%%%%%%%%%%% */
 /* =====================  allgemein ================================================== */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, byteBeatGeraetRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, byteBeatKabelRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, byteBeatSchaltungRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, teleportKabelRezept, 0, 0, 0))
+
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, basisBergungsKapselRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, kommunikationsStationRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, autonomeBergBauEinheitRezept, 0, 0, 0))
@@ -457,6 +464,8 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, grosseElektrischeHolzTuerRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, dachInnenEckteilAusHolzRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, halberHolzBogenRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, holzDreieckRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, kleinesHolzDreieckRezept, 0, 0, 0))
 
 /* =====================  Unterschlüpfe aus Metall (Konstruktionsforschungsstation) == */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, metallWandRezept, 0, 0, 0))
@@ -482,6 +491,8 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, grosseElektrischeMetallTuerRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, dachInnenEckteilAusMetallRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, halberMetallBogenRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, metallDreieckRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, kleinesMetallDreieckRezept, 0, 0, 0))
 
 /* =====================  Unterschlüpfe aus Beton (Konstruktionsforschungsstation) === */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, betonWandRezept, 0, 0, 0))
@@ -507,6 +518,8 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, grosseElektrischeBetonTuerRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, dachInnenEckteilAusBetonRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, halberBetonBogenRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, betonDreieckRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, kleinesBetonDreieckRezept, 0, 0, 0))
 
 /* =====================  Primitive Formen =========================================== */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, grosserKeilRezept, 0, 0, 0))
@@ -620,7 +633,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, innereienBeutel, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, katzenLeber, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, mordit, 20, 400, 300))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, protoWurst, 20, 400, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, protoWurst, 20, 400, 300)) 
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, rohesSteak, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, salzigeFischFilets, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, schreiterWurst, 20, 400, 300))
@@ -630,7 +643,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, pugneum, 12000, 0, 300))      /* von Wächter */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, larvenKern, 9000, 0, 300))       /*  von flüsterndes Ei */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, kampfLaeuferGehirn, 50000, 0, 300))     /* von Kampfläufer */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, unholdRogen, 12000, 0, 300))     /* von ??? */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, unholdRogen, 12000, 0, 300))  /*   von ??? */
 	
 	/* Meteoritenfelder */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, tritium, 2, 0, 63))

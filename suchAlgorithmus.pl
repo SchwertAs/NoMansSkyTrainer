@@ -175,8 +175,7 @@ rezeptZulaessig(ausAtmosphaerenAnlageFuerStickStoffGewinnen, Komponenten) :-
 	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlageStickStoff], _),
 	!.
 
-rezeptZulaessig(kochen, Komponenten) :-
-	Komponenten = [[_, _]],
+rezeptZulaessig(kochen, _) :-
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortNahrungsProzessor], _),
 	!.
