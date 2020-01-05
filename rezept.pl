@@ -1040,6 +1040,16 @@ rezept(kochen, [[1, geraeuchertesFleisch], [1, rohesSteak]],[1, geheimnisVollerF
 rezept(kochen, [[1, geraeuchertesFleisch], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
 rezept(kochen, [[1, geraeuchertesFleisch], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
 rezept(kochen, [[1, geraeuchertesFleisch], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, diploStuecke]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, fleischigeFluegel]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, fleischigeStuecke]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, geraeuchertesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, kohlenStoff]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, protoWurst], [1, mordit]],[1, hackFleisch], 260).
+rezept(kochen, [[1, protoWurst], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
+rezept(kochen, [[1, protoWurst], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
 rezept(kochen, [[1, rohesSteak], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
 rezept(kochen, [[1, rohesSteak], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
 rezept(kochen, [[1, rohesSteak], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
@@ -1057,6 +1067,7 @@ rezept(kochen, [[1, kohlenStoff], [1, fleischigeFluegel]],[1, geraeuchertesFleis
 rezept(kochen, [[1, kohlenStoff], [1, fleischigeStuecke]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, kohlenStoff], [1, innereienBeutel]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, kohlenStoff], [1, katzenLeber]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, kohlenStoff], [1, protoWurst]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, kohlenStoff], [1, rohesSteak]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, kohlenStoff], [1, schreiterWurst]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, kohlenStoff], [1, schuppigesFleisch]],[1, geraeuchertesFleisch], 260).
@@ -1066,6 +1077,7 @@ rezept(kochen, [[1, verdichteterKohlenStoff], [1, fleischigeFluegel]],[1, geraeu
 rezept(kochen, [[1, verdichteterKohlenStoff], [1, fleischigeStuecke]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, verdichteterKohlenStoff], [1, innereienBeutel]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, verdichteterKohlenStoff], [1, katzenLeber]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, protoWurst]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, verdichteterKohlenStoff], [1, rohesSteak]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, verdichteterKohlenStoff], [1, schreiterWurst]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, verdichteterKohlenStoff], [1, schuppigesFleisch]],[1, geraeuchertesFleisch], 260).
@@ -1228,6 +1240,7 @@ rezept(kochen, [[1, kreaturenEi], [1, gesuessteProtoButter], [1, verfeinertesMeh
 rezept(kochen, [[1, grosseEier], [1, gesuessteProtoButter], [1, verfeinertesMehl]],[1, protoTeig], 260).
 rezept(kochen, [[1, kreaturenEi], [1, protoButterMitHonig], [1, verfeinertesMehl]],[1, protoTeig], 260).
 rezept(kochen, [[1, grosseEier], [1, protoButterMitHonig], [1, verfeinertesMehl]],[1, protoTeig], 260).
+rezept(kochen, [[1, protoWurst], [1, tortenBoden]],[1, protoWurstPastete], 260).
 rezept(kochen, [[1, klebrigerPudding], [1, klobigerDonut]],[1, puddingDonut], 260).
 rezept(kochen, [[1, protoTeig], [1, klebrigerPudding]],[1, puddingKuriositaet], 260).
 rezept(kochen, [[1, klebrigerPudding], [1, tortenBoden]],[1, puddingTorte], 260).
@@ -1300,6 +1313,7 @@ rezept(kochen, [[1, fleischigeFluegel]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, fleischigeStuecke]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, innereienBeutel]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, katzenLeber]],[1, verarbeitetesFleisch], 260).
+rezept(kochen, [[1, protoWurst]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, rohesSteak]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, schreiterWurst]],[1, verarbeitetesFleisch], 260).
 rezept(kochen, [[1, schuppigesFleisch]],[1, verarbeitetesFleisch], 260).
@@ -1359,27 +1373,11 @@ rezept(kochen, [[1, diploStuecke], [1, verarbeitetesFleisch]],[1, geheimnisVolle
 rezept(kochen, [[1, kohlenStoff], [1, diploStuecke]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, kohlenStoff], [1, unholdRogen]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, verdichteterKohlenStoff], [1, diploStuecke]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, verdichteterKohlenStoff], [1, unholdRogen]],[1, geraeuchertesFleisch], 260).
 rezept(kochen, [[1, mordit], [1, diploStuecke]],[1, hackFleisch], 260).
-rezept(kochen, [[1, tortenBoden], [1, unholdRogen]],[1, heimgesuchtePastete], 260).
-
-/* protoWurst fehlt */
-rezept(kochen, [[1, geraeuchertesFleisch], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, protoWurst], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, protoWurst], [1, rohesSteak]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, protoWurst], [1, schreiterWurst]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, protoWurst], [1, schuppigesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, protoWurst], [1, verarbeitetesFleisch]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, kohlenStoff], [1, protoWurst]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, diploStuecke], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, fleischigeFluegel], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, fleischigeStuecke], [1, protoWurst]],[1, geheimnisVollerFleischEintopf], 260).
-rezept(kochen, [[1, verdichteterKohlenStoff], [1, protoWurst]],[1, geraeuchertesFleisch], 260).
-rezept(kochen, [[1, mordit], [1, protoWurst]],[1, hackFleisch], 260).
-rezept(kochen, [[1, protoWurst], [1, tortenBoden]],[1, protoWurstPastete], 260).
-rezept(kochen, [[1, protoWurst]],[1, verarbeitetesFleisch], 260).
 
 /* unholdRogen fehlt */
+rezept(kochen, [[1, verdichteterKohlenStoff], [1, unholdRogen]],[1, geraeuchertesFleisch], 260).
+rezept(kochen, [[1, tortenBoden], [1, unholdRogen]],[1, heimgesuchtePastete], 260).
 rezept(kochen, [[1, unholdRogen]],[1, verarbeitetesFleisch], 260).
 
 
