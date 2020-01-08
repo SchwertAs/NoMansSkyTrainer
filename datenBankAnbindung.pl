@@ -32,13 +32,13 @@ datenInDbSpeichern :-
 datenVonDbHolen :-
 	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
 	db_sync(update),
-	
+
 	ignore(retractall(sammlung:sammlung(_, _, _, _, _, _, _, _))),
 	ignore(retractall(spielStatus:spielStatus(_, _))),
 	ignore(retractall(spielStatus:systeme(_, _, _))),
 	ignore(retractall(spielStatus:planeten(_, _, _))),
 	ignore(retractall(spielStatus:systemAusstattung(_, _))),
-	
+
 	forall(sammlungDb(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest),
 	       assertz(sammlung:sammlung(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest))),
 	forall(spielStatusDb(Feature, Vorhanden), assertz(spielStatus:spielStatus(Feature, Vorhanden))),

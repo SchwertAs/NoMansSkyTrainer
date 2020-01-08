@@ -8,7 +8,7 @@
 :- http_handler('/spielStatusDialog', spielStatusDialog, []).
 :- http_handler('/spielStatus', spielStatus, []).
 
-spielStatusDialog(_Requese) :-
+spielStatusDialog(_Request) :-
 	(spielStatus:spielStatus(minenLaser, MinenLaser); MinenLaser = true),
 	(spielStatus:spielStatus(verbesserterMinenLaser, VerbesserterMinenLaser); VerbesserterMinenLaser = true),
 	(spielStatus:spielStatus(terrainFormer, TerrainFormer); TerrainFormer = true),
@@ -107,7 +107,7 @@ spielStatus(Request) :-
 	[
 	minenlaser(MinenLaser, [default(off)]),
 	verbesserterMinenlaser(VerbesserterMinenlaser, [default(off)]),
-	terrainFromer(TerrainFromer, [default(off)]),
+	terrainFormer(TerrainFromer, [default(off)]),
 	waffe(Waffe, [default(off)]),
 	raumschiff(Raumschiff, [default(off)]),
 	exoFahrzeug(ExoFahrzeug, [default(off)]),

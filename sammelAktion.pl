@@ -41,12 +41,12 @@ sammelOrt(unterWasserErkaempfen, ortWasser).
 
 pruefeOperationVorraussetzung(minenLaserNutzen) :-
 	!,
-	\+spielStatus(minenLaser),
+	spielStatus(minenLaser),
 	!.
 	
 pruefeOperationVorraussetzung(verbessertenMinenLaserNutzen) :-
 	!,
-	\+spielStatus(verbesserterMinenLaser),
+	spielStatus(verbesserterMinenLaser),
 	!.
 
 pruefeOperationVorraussetzung(terrainFormerNutzen) :-
@@ -56,17 +56,17 @@ pruefeOperationVorraussetzung(terrainFormerNutzen) :-
 
 pruefeOperationVorraussetzung(jagen) :-
 	!,
-	\+spielStatus(waffeVorhanden),
+	spielStatus(waffeVorhanden),
 	!.
 
 pruefeOperationVorraussetzung(erkaempfen) :-
 	!,
-	\+spielStatus(waffeVorhanden),
+	spielStatus(waffeVorhanden),
 	!.
 
 pruefeOperationVorraussetzung(unterWasserErkaempfen) :-
 	!,
-	\+spielStatus(waffeVorhanden),
+	spielStatus(waffeVorhanden),
 	sammelOrt(unterWasserErkaempfen, Ort),
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, Ort], _),
@@ -74,12 +74,12 @@ pruefeOperationVorraussetzung(unterWasserErkaempfen) :-
 
 pruefeOperationVorraussetzung(raumSchuerfen) :-
 	!,
-	\+spielStatus(raumSchiffIstFlott),
+	spielStatus(raumSchiffIstFlott),
 	!.
 
 pruefeOperationVorraussetzung(exoFahrzeugMinenLaserNutzen) :-
 	!,
-	\+spielStatus(exoFahrzeugMinenLaser),
+	spielStatus(exoFahrzeugMinenLaser),
 	!.
 
 pruefeOperationVorraussetzung(Operation) :-
@@ -92,4 +92,4 @@ pruefeOperationVorraussetzung(_) :-
 	true.	
 
 spielStatus(Operation) :-
-	spielStatus:spielStatus(Operation, false).
+	spielStatus:spielStatus(Operation, true).
