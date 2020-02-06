@@ -51,7 +51,8 @@ rezeptBekanntDialogParamList(Request, VarValueList) :-
 	  rezept115(Rezept115, [default('')]), rezept116(Rezept116, [default('')]), 
 	  rezept117(Rezept117, [default('')]), rezept118(Rezept118, [default('')]), 
 	  rezept119(Rezept119, [default('')]), rezept120(Rezept120, [default('')]), 
-	  rezept121(Rezept121, [default('')]),
+	  rezept121(Rezept121, [default('')]), rezept122(Rezept122, [default('')]), 
+	  rezept123(Rezept123, [default('')]),
 	  rezept201(Rezept201, [default('')]), rezept202(Rezept202, [default('')]), 
 	  rezept203(Rezept203, [default('')]), rezept204(Rezept204, [default('')]), 
 	  rezept205(Rezept205, [default('')]), rezept206(Rezept206, [default('')]), 
@@ -62,7 +63,8 @@ rezeptBekanntDialogParamList(Request, VarValueList) :-
 	  rezept215(Rezept215, [default('')]), rezept216(Rezept216, [default('')]), 
 	  rezept217(Rezept217, [default('')]), rezept218(Rezept218, [default('')]), 
 	  rezept219(Rezept219, [default('')]), rezept220(Rezept220, [default('')]), 
-	  rezept221(Rezept221, [default('')]),
+      rezept221(Rezept221, [default('')]), rezept222(Rezept222, [default('')]), 
+	  rezept223(Rezept223, [default('')]),
 	  rezept301(Rezept301, [default('')]), rezept302(Rezept302, [default('')]), 
 	  rezept303(Rezept303, [default('')]), rezept304(Rezept304, [default('')]), 
 	  rezept305(Rezept305, [default('')]), rezept306(Rezept306, [default('')]), 
@@ -73,7 +75,8 @@ rezeptBekanntDialogParamList(Request, VarValueList) :-
 	  rezept315(Rezept315, [default('')]), rezept316(Rezept316, [default('')]), 
 	  rezept317(Rezept317, [default('')]), rezept318(Rezept318, [default('')]), 
 	  rezept319(Rezept319, [default('')]), rezept320(Rezept320, [default('')]), 
-	  rezept321(Rezept321, [default('')]),
+	  rezept321(Rezept321, [default('')]), rezept322(Rezept322, [default('')]), 
+	  rezept323(Rezept323, [default('')]),
 	  rezept401(Rezept401, [default('')]), rezept402(Rezept402, [default('')]), 
 	  rezept403(Rezept403, [default('')]), rezept404(Rezept404, [default('')]), 
 	  rezept405(Rezept405, [default('')]), rezept406(Rezept406, [default('')]), 
@@ -84,22 +87,23 @@ rezeptBekanntDialogParamList(Request, VarValueList) :-
 	  rezept415(Rezept415, [default('')]), rezept416(Rezept416, [default('')]), 
 	  rezept417(Rezept417, [default('')]), rezept418(Rezept418, [default('')]), 
 	  rezept419(Rezept419, [default('')]), rezept420(Rezept420, [default('')]), 
-	  rezept421(Rezept421, [default('')])
+	  rezept421(Rezept421, [default('')]), rezept422(Rezept422, [default('')]), 
+	  rezept423(Rezept423, [default('')])
 	],
 	http_parameters(Request, List),
 	VarValueList = [
 	 AuswahlStoffKlasse,
 	 Rezept101, Rezept102, Rezept103, Rezept104, Rezept105, Rezept106, Rezept107, Rezept108, 
 	 Rezept109, Rezept110, Rezept111, Rezept112, Rezept113, Rezept114, Rezept115, Rezept116, 
-	 Rezept117, Rezept118, Rezept119, Rezept120, Rezept121,
+	 Rezept117, Rezept118, Rezept119, Rezept120, Rezept121, Rezept122, Rezept123, 
 	 Rezept201, Rezept202, Rezept203, Rezept204, Rezept205, Rezept206, Rezept207, Rezept208, 
 	 Rezept209, Rezept210, Rezept211, Rezept212, Rezept213, Rezept214, Rezept215, Rezept216, 
-	 Rezept217, Rezept218, Rezept219, Rezept220, Rezept221,
+	 Rezept217, Rezept218, Rezept219, Rezept220, Rezept221, Rezept222, Rezept223,
 	 Rezept301, Rezept302, Rezept303, Rezept304, Rezept305, Rezept306, Rezept307, Rezept308, 
 	 Rezept309, Rezept310, Rezept311, Rezept312, Rezept313, Rezept314, Rezept315, Rezept316, 
-	 Rezept317, Rezept318, Rezept319, Rezept320, Rezept321,
+	 Rezept317, Rezept318, Rezept319, Rezept320, Rezept321, Rezept322, Rezept323,
 	 Rezept401, Rezept402, Rezept403, Rezept404, Rezept405, Rezept406, Rezept407, Rezept408, 
 	 Rezept409, Rezept410, Rezept411, Rezept412, Rezept413, Rezept414, Rezept415, Rezept416, 
-	 Rezept417, Rezept418, Rezept419, Rezept420, Rezept421
+	 Rezept417, Rezept418, Rezept419, Rezept420, Rezept421, Rezept422, Rezept423
 	].	
 	

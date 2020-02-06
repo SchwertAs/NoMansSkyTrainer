@@ -7,6 +7,7 @@
 /* sammlung(<RecordNo>, <System>, <Planet>, <SammelAktion>, <Stoff>, <Hauptzeit>, <Nebenzeit>, <Rüstzeit>) */
 sammlungInit :-
 	abolish(sammlung/8)
+/* ------------------------- Rezepte für wertvolle Dinge --------------------- */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, saeureRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, schmierMittelRezept, 0, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, thermischesKondensatRezept, 0, 0, 0))
@@ -167,9 +168,13 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, indiumAntriebSRezept, 0, 0, 0))
 
 /* %%%%%%%%%%%%%%%%%%%%%  Frachter-Module  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, frachterWarpReaktorSigmaCRezept, 0, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, frachterWarpReaktorTauBRezept, 0, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, frachterWarpReaktorThetaARezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, warpKernResonatorRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, verstraerkterWarpSchildCRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, chromatischerWarpSchildBRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, temporalerWarpComputerARezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, plasmaWarpInjektorBRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, realitaetsEntwirrerRezept, 0, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, materieStrahlRezept, 0, 0, 0))
 
 /* %%%%%%%%%%%%%%%%%%%%%  Multiwerkzeug-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, analyseVisierRezept, 0, 0, 0))
@@ -818,7 +823,8 @@ sammelbarInitFlach(System, Planet) :-
 	 /* raumSchuerfen geht auf jedem Planeten */
 	 (Operation = raumSchuerfen, sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, _, _, _));
 	 /* rezepte sind auch überall gleich bekannt */
-	 (Operation = bekannt, sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, _, _, _))
+	 (Operation = bekannt, sammlung(Position, 'System', 'MeinPlanet', Operation, Stoff, _, _, _)),
+	 Position > 0
 	),
 	sammelAktion:pruefeOperationVorraussetzung(Operation),
 	assertz(sammelbar(Stoff, Operation)),

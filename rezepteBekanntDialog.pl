@@ -52,26 +52,50 @@ rezeptBekanntDialog(Request) :-
 	 rezeptBekanntAnzeigen(AuswahlStoffKlasse)
 	).
 	
-rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept, Checked) :-
+rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept) :-
 	  stoff:stoff(AuswahlStoffKlasse, Produkt, _),
 	  rezept:rezept(WandelAktion, Komponenten, [_, Produkt], _),
 	  WandelAktion \= raffinieren,
+	  WandelAktion \= modulInRaumstationErwerben,
 	  ausgabe:letzesListenElement(Komponenten, Ende),
-	  Ende = [_, Rezept],
-	  sammlung:sammlung(RecNo, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _),
-	  (RecNo = 0 *-> Checked = ''; Checked = ' checked').
+	  Ende = [_, Rezept].
 	  
+rezeptSchonBekannt(Rezept, Checked) :-
+	  sammlung:sammlung(RecNo, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _),
+	  ((RecNo = 0, Checked = ''); (RecNo > 0, Checked = ' checked')).
+	
+felderProZeile(RezeptListe, Step) :-
+	length(RezeptListe, RezeptListeLength),
+	((RezeptListeLength mod 4 = 0, Step is RezeptListeLength div 4);
+	  Step is RezeptListeLength div 4 + 1
+    ).
+	
 rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	debug(myTrace, 'AuswahlStoffKlasse=~k', AuswahlStoffKlasse),
-	findall([Rezept, Checked], rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept, Checked), RezeptListe),
-	ausgabe:partialList(RezeptListe, 1, 21, RezeptListe1),
-	ausgabe:partialList(RezeptListe, 22, 42, RezeptListe2),
-	ausgabe:partialList(RezeptListe, 43, 63, RezeptListe3),
-	ausgabe:partialList(RezeptListe, 64, 84, RezeptListe4),
-	findall([FeldNo1], between(101, 121, FeldNo1), FeldNoList1),
-	findall([FeldNo2], between(201, 221, FeldNo2), FeldNoList2),
-	findall([FeldNo3], between(301, 321, FeldNo3), FeldNoList3),
-	findall([FeldNo4], between(401, 421, FeldNo4), FeldNoList4),
+	findall([Rezept, Checked], (rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), rezeptSchonBekannt(Rezept, Checked)), RezeptListe),
+	debug(myTrace, 'Rezeptliste=~k', RezeptListe),
+	felderProZeile(RezeptListe, Step),
+    /* Start- und Endefeld- und Listenpositionsnummern berechnen */
+	RezeptListe1Start is 1, 
+	RezeptListe2Start is RezeptListe1Start + Step,
+	RezeptListe3Start is RezeptListe2Start + Step,
+	RezeptListe4Start is RezeptListe3Start + Step,
+	RezeptListe1End is RezeptListe1Start + Step - 1,
+	RezeptListe2End is RezeptListe2Start + Step - 1,
+	RezeptListe3End is RezeptListe3Start + Step - 1,
+	RezeptListe4End is RezeptListe4Start + Step - 1,
+	ausgabe:partialList(RezeptListe, RezeptListe1Start, RezeptListe1End, RezeptListe1),
+	ausgabe:partialList(RezeptListe, RezeptListe2Start, RezeptListe2End, RezeptListe2),
+	ausgabe:partialList(RezeptListe, RezeptListe3Start, RezeptListe3End, RezeptListe3),
+	ausgabe:partialList(RezeptListe, RezeptListe4Start, RezeptListe4End, RezeptListe4),
+	FeldNoEnd1 is 100 + Step,
+	FeldNoEnd2 is 200 + Step,
+	FeldNoEnd3 is 300 + Step,
+	FeldNoEnd4 is 400 + Step,
+	findall([FeldNo1], between(101, FeldNoEnd1, FeldNo1), FeldNoList1),
+	findall([FeldNo2], between(201, FeldNoEnd2, FeldNo2), FeldNoList2),
+	findall([FeldNo3], between(301, FeldNoEnd3, FeldNo3), FeldNoList3),
+	findall([FeldNo4], between(401, FeldNoEnd4, FeldNo4), FeldNoList4),
 	ausgabe:joinRecordsNumbering(FeldNoList1, RezeptListe1, 2, NumerierteRecordList1),
 	ausgabe:joinRecordsNumbering(FeldNoList2, RezeptListe2, 2, NumerierteRecordList2),
 	ausgabe:joinRecordsNumbering(FeldNoList3, RezeptListe3, 2, NumerierteRecordList3),
@@ -164,32 +188,35 @@ innereEingabeZeile([Record|Rest]) -->
 rezeptBekannt(Request) :-
 	rezeptBekanntDialogParams:rezeptBekanntDialogParamList(Request, VarValueList),
 	VarValueList =[AuswahlStoffKlasse|_], 
-	GesamtZeilenZahl = 21,
-	\+ablegen(AuswahlStoffKlasse, GesamtZeilenZahl, VarValueList),
+	baueRezeptListe(AuswahlStoffKlasse, RezeptListe),
+	\+ablegen(RezeptListe, VarValueList),
     gespeichert.
 
-ablegen(AuswahlStoffKlasse, GesamtZeilenZahl, VarValueList) :-
-	findall(Rezept, rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept, _), RezeptListe),
+baueRezeptListe(AuswahlStoffKlasse, RezeptListe) :-
+	findall(Rezept, rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), RezeptListe).
+	
+ablegen(RezeptListe, VarValueList) :-
+	debug(myTrace, 'abspeichern: VarValueList=~k', [VarValueList]),
+	debug(myTrace, 'abspeichern: RezeptListe=~k', [RezeptListe]),
+	felderProZeile(RezeptListe, Step),
+	GesamtZeilenZahl = 23,
 	between(1, 4, Spalte),
-	between(1, GesamtZeilenZahl, Zeile),
-	pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked),
-	Feld is Spalte * 100 + Zeile,
-	debug(myTrace, 'abspeichern: Rezept=~k Checked=~k Feld=~k', [Rezept, Checked, Feld]),
+	between(1, Step, Zeile),
+	pickeZeile(GesamtZeilenZahl, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked),
 	((Checked = 'on', CheckNum = 1);
 	 (Checked \= 'on', CheckNum = 0)
-	),
-	debug(myTrace, 'abspeichern: CheckNum=~k', [CheckNum]),
-	retractall(sammlung:sammlung(_, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _)),
+	), 
+	ignore(retractall(sammlung:sammlung(_, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _))),
 	assertz(sammlung:sammlung(CheckNum, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
 	fail.
 
-pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked) :-
+pickeZeile(GesamtZeilenZahl, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked) :-
+  	OffsetRezept is (Spalte -1 ) * Step + Zeile,
+    nth1(OffsetRezept, RezeptListe, Rezept),
   	OffsetChecked is 1 + (Spalte - 1) * GesamtZeilenZahl + Zeile,
-  	OffsetRezept is OffsetChecked - 1,
     nth1(OffsetChecked, VarValueList, Checked),
-    nth1(OffsetRezept, RezeptListe, Rezept).
+	debug(myTrace, 'abspeichern: OffsetRezept=~k OffsetChecked=~k Rezept=~k Checked=~k', [OffsetRezept, OffsetChecked, Rezept, Checked]).
 
-	    
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('systemNamenDialog')],

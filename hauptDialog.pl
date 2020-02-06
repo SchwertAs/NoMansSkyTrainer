@@ -52,7 +52,7 @@ hauptDialog(_Request) :-
        	           ]),
        	       div(class('tr'),
        	           [div(class('td'), \baueRef(Versteckt7, '/stoffErlangenDialogSystemAusWahl', 'Optimiertes Vorgehen erhalten')),
-       	            div(class('td'), label('Bekommen Sie eine optimierte Vorgehensweise, für den Erwerb eines bestimmten Stofes!'))
+       	            div(class('td'), label('Bekommen Sie eine optimierte Vorgehensweise, für den Erwerb eines bestimmten Stoffes!'))
        	           ])
        	      ]),
        	      p('Links können zeitweise inaktiv sein, wenn notwendige Daten fehlen. Diese können Sie mit Hilfe der Masken, deren Link hier aktiv ist, eingegeben. Falls Sie die Daten inzwischen eingegeben haben, laden Sie diese Seite erneut (F5 bei Firefox)!')
@@ -60,7 +60,7 @@ hauptDialog(_Request) :-
 	\['</formSpace>']
 	             ],       
 server:holeCssAlsStyle(StyleString),
-TermerizedHead = [\[StyleString], title('systemNamenDialog')],
+TermerizedHead = [\[StyleString], title('hauptDialog')],
 reply_html_page(TermerizedHead, TermerizedBody).
 
 baueRef(Versteckt, Link, Text) -->

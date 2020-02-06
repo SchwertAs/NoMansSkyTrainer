@@ -346,8 +346,8 @@ rezept(herstellen, [[200, diWasserStoff], [200, tritium], [1, fregattenTreibStof
 rezept(herstellen, [[2, vierfachServo], [50, gold], [1, treibStoffOxidantRezept]], [1, treibStoffOxidant], 0).
 rezept(herstellen, [[1, natriumDiode], [50, gold], [1, gedankenKontrollGeraetRezept]], [1, gedankenKontrollGeraet], 0 ).
 rezept(herstellen, [[1, sauerStoffFilter], [50, gold], [1, holografischerAnalysatorRezept]], [1, holografischerAnalysator], 0).
-rezept(herstellen, [[1, kampfLaeuferGehirn], [50, gold], [1, sprengDrohnenRezept]], [1, sprengDrohnen], 0 ). 
 rezept(herstellen, [[2, vierfachServo], [50, gold], [1, mineralKompressorRezept]], [1, mineralKompressor], 0).
+rezept(herstellen, [[1, kampfLaeuferGehirn], [50, gold], [1, sprengDrohnenRezept]], [1, sprengDrohnen], 0 ). 
 
 /* =====================  Questrezepte -------------------------------------------- */
 rezept(herstellen, [[100, chromatischesMetall], [1, gefangeneNanodeRezept]], [1, gefangeneNanode], 0 ).
@@ -436,10 +436,13 @@ rezept(installieren, [[3, tetraKobalt], [2, kabelBaum], [1, dysonPumpeBRezept]],
 rezept(installieren, [[250, emeril], [1, kabelBaum], [1, indiumAntriebSRezept]], [1, indiumAntriebS], 0 ).
 
 /* %%%%%%%%%%%%%%%%%%%%%  Frachter-Module  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-rezept(installieren, [[250, cadmium], [1, sauerStoffFilter], [1, antiMaterieGehaeuse], [1, frachterWarpReaktorSigmaCRezept]], [1, frachterWarpReaktorSigmaC], 0 ).
-rezept(installieren, [[250, emeril], [1, natriumDiode], [1, antiMaterieGehaeuse], [1, frachterWarpReaktorTauBRezept]], [1, frachterWarpReaktorTauB], 0 ).
-rezept(installieren, [[250, indium], [1, salzRefaktor], [1, antiMaterieGehaeuse], [1, frachterWarpReaktorThetaARezept]], [1, frachterWarpReaktorThetaA], 0 ).
-
+rezept(installieren, [[250, cadmium], [1, sauerStoffFilter], [4, antiMaterieGehaeuse], [1, warpKernResonatorRezept]], [1, warpKernResonator], 0).
+rezept(installieren, [[1, warpHyperKern], [2, superOxidKristall], [250, cadmium], [1, verstraerkterWarpSchildCRezept]], [1, verstraerkterWarpSchildC], 0).
+rezept(installieren, [[1, warpHyperKern], [2, chlorGitter], [250, emeril], [1, chromatischerWarpSchildBRezept]], [1, chromatischerWarpSchildB], 0).
+rezept(installieren, [[1, warpHyperKern], [2, tetraKobalt], [250, indium], [1, temporalerWarpComputerARezept]], [1, temporalerWarpComputerA], 0).
+rezept(installieren, [[250, emeril], [1, natriumDiode], [5, antiMaterieGehaeuse], [1, plasmaWarpInjektorBRezept]], [1, plasmaWarpInjektorB], 0).
+rezept(installieren, [[250, indium], [1, salzRefaktor], [6, antiMaterieGehaeuse], [1, realitaetsEntwirrerRezept]], [1, realitaetsEntwirrer], 0).
+rezept(installieren, [[5, antiMaterie], [3, natriumDiode], [10, kabelBaum], [1, materieStrahlRezept]], [1, materieStrahl], 0).
 
 /* %%%%%%%%%%%%%%%%%%%%%  Multiwerkzeug-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 /* von Anfang bekannt */

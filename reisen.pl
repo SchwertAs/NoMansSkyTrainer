@@ -15,14 +15,12 @@ transportArt(raketenStiefelHopser).
 transportArt(boosterHopser).
 
 bauenNurInFrachter(flottenKommandoRaum). /* Plausicheck bei Eingabemaske Stoff <-> Spielerort */
+bauenNurInFrachter(grosserFrachterRaum).
 bauenNurInFrachter(frachterKorridor).
+bauenNurInFrachter(gebogenerFrachterKorridor).
 bauenNurInFrachter(frachterKreuzungDreiFach).
 bauenNurInFrachter(frachterKreuzungVierFach).
 bauenNurInFrachter(frachterTreppe).
-bauenNurInFrachter(frachterHyperAntrieb).
-bauenNurInFrachter(frachterWarpReaktorSigmaC).
-bauenNurInFrachter(frachterWarpReaktorTauB).
-bauenNurInFrachter(frachterWarpReaktorThetaA).
 
 
 domaenenPruefungOrt(Ort) :-

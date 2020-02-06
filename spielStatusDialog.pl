@@ -48,8 +48,8 @@ spielStatusDialog(_Request) :-
 		       	                ]),
 		       	             div(class('tr'), 
 		       	                 [div(class('td'), 
-		       	                      [input([name('terrainFromer'), type('checkbox'), TerrainFormerChecked]),
-		       	                       label(for('terrainFromer'), 'Terrainformer')
+		       	                      [input([name('terrainFormer'), type('checkbox'), TerrainFormerChecked]),
+		       	                       label(for('terrainFormer'), 'Terrainformer')
 		       	                      ])
 		       	                 ]),
 		       	             div(class('tr'), 
@@ -107,7 +107,7 @@ spielStatus(Request) :-
 	[
 	minenlaser(MinenLaser, [default(off)]),
 	verbesserterMinenlaser(VerbesserterMinenlaser, [default(off)]),
-	terrainFormer(TerrainFromer, [default(off)]),
+	terrainFormer(TerrainFormer, [default(off)]),
 	waffe(Waffe, [default(off)]),
 	raumschiff(Raumschiff, [default(off)]),
 	exoFahrzeug(ExoFahrzeug, [default(off)]),
@@ -118,7 +118,7 @@ spielStatus(Request) :-
     ignore(retractall(spielStatus:spielStatus(_, _))),
     (MinenLaser = off -> assertz(spielStatus:spielStatus(minenLaser, false)); assertz(spielStatus:spielStatus(minenLaser, true))),
     (VerbesserterMinenlaser = off -> assertz(spielStatus:spielStatus(verbesserterMinenLaser, false)); assertz(spielStatus:spielStatus(verbesserterMinenLaser, true))),
-    (TerrainFromer = off -> assertz(spielStatus:spielStatus(terrainFormer, false)); assertz(spielStatus:spielStatus(terrainFormer, true))),
+    (TerrainFormer = off -> assertz(spielStatus:spielStatus(terrainFormer, false)); assertz(spielStatus:spielStatus(terrainFormer, true))),
     (Waffe = off -> assertz(spielStatus:spielStatus(waffeVorhanden, false)); assertz(spielStatus:spielStatus(waffeVorhanden, true))),
     (Raumschiff = off -> assertz(spielStatus:spielStatus(raumSchiffIstFlott, false)); assertz(spielStatus:spielStatus(raumSchiffIstFlott, true))),
     (ExoFahrzeug = off -> assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, false)); assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, true))),

@@ -204,10 +204,13 @@ stoff(modul, notFallWarpEinheitA, 0).
 
 
 /* ------------------------------- Frachtermodule ----------------------- */
-stoff(modul, frachterHyperAntrieb, 0).
-stoff(modul, frachterWarpReaktorSigmaC, 0).
-stoff(modul, frachterWarpReaktorTauB, 0).
-stoff(modul, frachterWarpReaktorThetaA, 0).
+stoff(modul, warpKernResonator, 0).
+stoff(modul, verstraerkterWarpSchildC, 0).
+stoff(modul, chromatischerWarpSchildB, 0).
+stoff(modul, temporalerWarpComputerA, 0).
+stoff(modul, plasmaWarpInjektorB, 0).
+stoff(modul, realitaetsEntwirrer, 0).
+stoff(modul, materieStrahl, 0).
 
 /* ------------------------------- Fregatten-Module ------------------ */
 stoff(modul, gedankenKontrollGeraet, 0).
@@ -792,7 +795,6 @@ stoff(artefakt, hochtechnologischeGyroskope, 2634518).
 stoff(artefakt, gekeimteSaegeKelchBlattVerschnitte, 800237).
 
 stoff(bauRezept, byteBeatGeraetRezept, 0).
-
 stoff(bauRezept, saeureRezept, 0).
 stoff(bauRezept, schmierMittelRezept, 0).
 stoff(bauRezept, thermischesKondensatRezept, 0).
@@ -864,6 +866,13 @@ stoff(bauRezept, gedankenKontrollGeraetRezept, 0).
 stoff(bauRezept, holografischerAnalysatorRezept, 0).
 stoff(bauRezept, sprengDrohnenRezept, 0).
 stoff(bauRezept, mineralKompressorRezept, 0).
+stoff(bauRezept, warpKernResonatorRezept, 0).
+stoff(bauRezept, verstraerkterWarpSchildCRezept, 0).
+stoff(bauRezept, chromatischerWarpSchildBRezept, 0).
+stoff(bauRezept, temporalerWarpComputerARezept, 0).
+stoff(bauRezept, plasmaWarpInjektorBRezept, 0).
+stoff(bauRezept, realitaetsEntwirrerRezept, 0).
+stoff(bauRezept, materieStrahlRezept, 0).
 stoff(bauRezept, gefangeneNanodeRezept, 0).
 stoff(bauRezept, umhuellterSchattenRezept, 0).
 stoff(bauRezept, nooSphaerischKugelRezept, 0).
@@ -877,6 +886,7 @@ stoff(bauRezept, herzDerSonneRezept, 0).
 stoff(bauRezept, sternenSamenRezept, 0).
 stoff(bauRezept, seelenEngineRezept, 0).
 stoff(bauRezept, gedankenBogenRezept, 0).
+
 
 stoff(bauRezept, lebensErhaltungRezept, 0).
 stoff(bauRezept, gefahrGutSchutzHandschuhRezept, 0).
@@ -937,9 +947,6 @@ stoff(bauRezept, fragmentSuperAufladerBRezept, 0).
 stoff(bauRezept, nichtlineareOptikBRezept, 0).
 stoff(bauRezept, dysonPumpeBRezept, 0).
 stoff(bauRezept, indiumAntriebSRezept, 0).
-stoff(bauRezept, frachterWarpReaktorSigmaCRezept, 0).
-stoff(bauRezept, frachterWarpReaktorTauBRezept, 0).
-stoff(bauRezept, frachterWarpReaktorThetaARezept, 0).
 stoff(bauRezept, analyseVisierRezept, 0).
 stoff(bauRezept, scannerRezept, 0).
 stoff(bauRezept, terrainManipulatorRezept, 0).
