@@ -643,6 +643,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, salzigeFischFilets, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, schreiterWurst, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, schuppigesFleisch, 20, 400, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, zaeheFluessigkeiten, 20, 400, 300)) /* versteinerter Planet */
 	
 	/* bei Zerstörung von Wesen */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, pugneum, 12000, 0, 300))      /* von Wächter */
