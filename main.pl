@@ -44,6 +44,10 @@ testRezepte(FehlOperation, FehlOpProdukt,
 	format('Komponenten ok~n'),
 	\+rezept:produktIstKeinStoff(FehlProdukt),
 	format('Produkte ok~n'),
+	\+rezept:rezeptDoppelt(FehlOperation, FehlKomponente, FehlProdukt),
+	format('keine Doppelten ok~n'),
+	\+rezept:gleicheZutaten(FehlKomponente),
+	format('keine gleichen Zutaten ok~n'),
 	\+rezept:raffinerieRezeptHatKeineFertigungsZeit(FertigungsZeitFehlStoff,FertigungsZeitFehlKomponenten),
 	format('Fertigungszeiten ok~n').
 	
