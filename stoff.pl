@@ -43,6 +43,13 @@ stoff(rohStoff, uran, 248).
 stoff(rohStoff, verrostetesMetall, 20).
 stoff(rohStoff, zaeheFluessigkeiten, 20).
 stoff(rohStoff, zytoPhosphat, 201).
+stoff(rohStoff, tritiumHyperCluster, 3280).
+stoff(rohStoff, geode, 3280).
+stoff(rohStoff, kampfLaeuferGehirn, 35000).
+stoff(rohStoff, lebendePerle, 4798).
+stoff(rohStoff, goldKlumpen, 3280).
+stoff(rohStoff, sturmKristall, 129150).
+stoff(rohStoff, kristallSulfid, 7410).
 
 /* =============================== hergestellte Produkte ================ */
 /* herstellen mit Fabrikrezept oder Questrezept, verkaufen */
@@ -619,7 +626,7 @@ stoff(basisBauEndStoff, tFoermigerGlasTunnel, 0).
 stoff(basisBauEndStoff, xFoermigerGlasTunnel, 0).
 
 /* =============================== anormale Materialien ================= */
-/*
+
 stoff(stoerung, kappillarMuschel, 1000).
 stoff(stoerung, lichtBruch, 1000).
 stoff(stoerung, defekterSeparator, 1000).
@@ -627,8 +634,8 @@ stoff(stoerung, kalziPilz, 1000).
 stoff(stoerung, terbiumWachstum, 1000).
 stoff(stoerung, verknoecherterStern, 1000).
 stoff(stoerung, elektrischerWuerfel, 1000).
-stoff(stoerung, klappenWirbleSaeule, 1000).
-*/
+stoff(stoerung, klapperWirbleSaeule, 1000).
+
 
 /* =============================== Quecksilber Kauf ===================== */
 /*
@@ -672,9 +679,6 @@ stoff(kleidung, spaerlicherHorizontHelm, 0).
 stoff(basisBauEndStoff, feuerWerkGruen, 0).
 stoff(basisBauEndStoff, feuerWerkBlau, 0).
 stoff(basisBauEndStoff, feuerWerkRot, 0).
-
-
-stoff(handelsWare, zuckendesEi, 9600).
 
 stoff(basisBauEndStoff, meeresGestein, 0).
 stoff(basisBauEndStoff, terrarium, 0). 
@@ -748,6 +752,8 @@ stoff(basisBauEndStoff, wuerfel, 0).
 stoff(basisBauEndStoff, zylinder, 0).
 
 /* nur kaufen und verkaufen */
+stoff(handelsWare, zuckendesEi, 9600).
+
 stoff(handelsWare, absprungKapselKoordinaten, 85000).
 stoff(handelsWare, protokollEntschluesselungsCode, 85000).
 stoff(handelsWare, geborgeneDaten, 50000).
@@ -801,7 +807,6 @@ stoff(handelsWare, kuehlMittelTank, 200000).
 stoff(handelsWare, verstaerkteRohre, 50000).
 stoff(handelsWare, ehemalsNeutzlicheFedern, 1000).
 
-
 stoff(produkt, herzDerSonne, 10e00).
 stoff(produkt, modifizierteQuanten, 1000).
 stoff(produkt, novaeRegenerat, 1000).
@@ -827,17 +832,10 @@ stoff(kuriositaet, beutelGift, 11685).
 stoff(kuriositaet, eiweissPerle, 9025).
 stoff(kuriositaet, gravitinoBall, 12445).
 stoff(kuriositaet, divergenzWuerfel, 3015).
-stoff(kuriositaet, geode, 3280).
-stoff(kuriositaet, goldKlumpen, 3280).
 stoff(kuriositaet, hadalKern, 92625).
-stoff(kuriositaet, kampfLaeuferGehirn, 35000).
 stoff(kuriositaet, korvaxKonvergenzWuerfel, 13063).
 stoff(kuriositaet, kristallFragment, 3280).
-stoff(kuriositaet, kristallSulfid, 7410).
-stoff(kuriositaet, lebendePerle, 4798).
 stoff(kuriositaet, nipNipKnospen, 17776).
-stoff(kuriositaet, sturmKristall, 129150).
-stoff(kuriositaet, tritiumHyperCluster, 3280).
 stoff(kuriositaet, vierfachServo, 20000).
 stoff(kuriositaet, vykenTafel, 1250).
 
@@ -1693,6 +1691,7 @@ stoffNichtVerwendet(Stoff) :-
 	StoffArt \= basisBauEndStoff,
 	StoffArt \= kuriositaet,
 	StoffArt \= artefakt,
+	StoffArt \= stoerung,
 	\+stoffInFunktionErgebnisStoff(Stoff),
 	\+stoffInFunktionEingangsStoff(Stoff),
 	format('~nElement(e) ~k ist nicht verwendet~n', Stoff),

@@ -12,4 +12,5 @@ wandelAktion(rezeptInAussenPostenErwerben, ortAussenPosten).
 wandelAktion(rezeptAmForschungsComputerErwerben, ortForschungsTerminal).
 wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).
 wandelAktion(modulInRaumstationErwerben, ortRaumStation).
+wandelAktion(zerlegen, ortSpieler).
 

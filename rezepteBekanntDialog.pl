@@ -55,8 +55,9 @@ rezeptBekanntDialog(Request) :-
 rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept) :-
 	  stoff:stoff(AuswahlStoffKlasse, Produkt, _),
 	  rezept:rezept(WandelAktion, Komponenten, [_, Produkt], _),
-	  WandelAktion \= raffinieren,
-	  WandelAktion \= modulInRaumstationErwerben,
+	  (WandelAktion = herstellen;
+	  WandelAktion = installieren;
+	  WandelAktion = bauen),
 	  ausgabe:letzesListenElement(Komponenten, Ende),
 	  Ende = [_, Rezept].
 	  
