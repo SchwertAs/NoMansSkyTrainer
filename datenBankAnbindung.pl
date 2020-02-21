@@ -121,7 +121,8 @@ datenNachAccessSpeichern :-
  
     /* sammlung */
 	odbc_prepare(noMansSkyDb, 'Insert into sammlung(RecordNo, System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit, RuestZeit) values (?, ?, ?, ?, ?, ?, ?, ?);', [integer, varchar(255), varchar(255), varchar(255), varchar(255), integer, integer, integer], Statement4),
-	forall(sammlung:sammlung(RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest), odbc_execute(Statement4, [RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest])),
+	forall(sammlung:sammlung(RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest), 
+	  odbc_execute(Statement4, [RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest])),
 	odbc_close_statement(Statement4),
 	odbc_free_statement(Statement4),
 
@@ -135,7 +136,7 @@ datenNachAccessSpeichern :-
 	odbc_prepare(noMansSkyDb, 'Insert into komponentenListe(KomponentenListe, Stoff, StueckZahl) values (?, ?, ?);', 
 	  [varchar(255), varchar(255), integer], Statement6),
 	odbc_prepare(noMansSkyDb, 'Insert into rezept(WandelAktion, KomponentenListe, ProduktStueckZahl, Produkt, Wandelzeit) values (?, ?, ?, ?, ?);', 
-	  [varchar(255), varchar(255), integer, varchar(255), integer], Statement7),
+	  [varchar(255), varchar(255), integer, varchar(255), real], Statement7), 
 	forall(rezept:rezept(WandelAktion, Komponenten, Produkt, Wandelzeit), 
 	(Produkt = [ProduktStueckZahl, ProduktStoff],
 	 maplist(nth1(2), Komponenten, KomponentenStoffe),

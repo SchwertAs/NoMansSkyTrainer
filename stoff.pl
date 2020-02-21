@@ -67,6 +67,7 @@ stoff(komponente, salzRefaktor, 30500).
 stoff(komponente, sauerStoffFilter, 615).
 stoff(komponente, sauerStoffKapsel, 350).
 stoff(komponente, raumSchiffStartTreibStoff, 450).
+stoff(komponente, vierfachServo, 20000).
 
 stoff(produkt, angereicherterKohlenStoff, 50000).
 stoff(produkt, aronium, 25000).
@@ -807,7 +808,7 @@ stoff(handelsWare, kuehlMittelTank, 200000).
 stoff(handelsWare, verstaerkteRohre, 50000).
 stoff(handelsWare, ehemalsNeutzlicheFedern, 1000).
 
-stoff(produkt, herzDerSonne, 10e00).
+stoff(produkt, herzDerSonne, 1000).
 stoff(produkt, modifizierteQuanten, 1000).
 stoff(produkt, novaeRegenerat, 1000).
 stoff(produkt, zustandsPhase, 1000).
@@ -836,7 +837,6 @@ stoff(kuriositaet, hadalKern, 92625).
 stoff(kuriositaet, korvaxKonvergenzWuerfel, 13063).
 stoff(kuriositaet, kristallFragment, 3280).
 stoff(kuriositaet, nipNipKnospen, 17776).
-stoff(kuriositaet, vierfachServo, 20000).
 stoff(kuriositaet, vykenTafel, 1250).
 
 

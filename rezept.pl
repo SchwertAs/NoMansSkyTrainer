@@ -347,7 +347,7 @@ rezept(herstellen, [[200, diWasserStoff], [200, tritium], [1, fregattenTreibStof
 rezept(herstellen, [[2, vierfachServo], [50, gold], [1, treibStoffOxidantRezept]], [1, treibStoffOxidant], 0).
 rezept(herstellen, [[1, natriumDiode], [50, gold], [1, gedankenKontrollGeraetRezept]], [1, gedankenKontrollGeraet], 0 ).
 rezept(herstellen, [[1, sauerStoffFilter], [50, gold], [1, holografischerAnalysatorRezept]], [1, holografischerAnalysator], 0).
-rezept(herstellen, [[2, vierfachServo], [50, gold], [1, mineralKompressorRezept]], [1, mineralKompressor], 0).
+rezept(herstellen, [[1, kobaltSpiegel], [50, gold], [1, mineralKompressorRezept]], [1, mineralKompressor], 0).
 rezept(herstellen, [[1, kampfLaeuferGehirn], [50, gold], [1, sprengDrohnenRezept]], [1, sprengDrohnen], 0 ). 
 
 /* =====================  Questrezepte -------------------------------------------- */
@@ -1732,7 +1732,6 @@ rezept(modulInRaumstationErwerben, [[480, nanitHaufen]], [1, exoFahrzeugBoostMod
 rezept(modulInRaumstationErwerben, [[480, nanitHaufen]], [1, humboldtAntriebsModulS], 0 ).
 rezept(modulInRaumstationErwerben, [[140, nanitHaufen]], [1, exoFahrzeugBoostModulB], 0 ).
 rezept(modulInRaumstationErwerben, [[480, nanitHaufen]], [1, exoFahrzeugAntriebModulS], 0 ).
-rezept(modulInRaumstationErwerben, [[300, nanitHaufen]], [1, exoFahrzeugKanonenModulS], 0 ).
 
 /* ------------------------------- zerlegen -------------------------- */
 rezept(zerlegen, [[1, goldKlumpen]], [48, gold], 0 ).

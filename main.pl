@@ -25,7 +25,12 @@ testOptimierteSammlung :-
 	sammlung:sammlungInit,
 	sammlung:sammelbarReInit('System', 'MeinPlanet'),
 	!,
-	stoff:stoff(_, Stoff, _),
+	stoff:stoff(StoffArt, Stoff, _),
+	StoffArt \= pass,
+	StoffArt \= stoerung,	
+	StoffArt \= handelsWare,	
+	StoffArt \= kuriositaet,	
+	StoffArt \= artefakt,	
 	optimierung:optimierungsZiel(OptimierungsZiel),
 	\+suchTest(Stoff, OptimierungsZiel),
 	format('~k mit ~k not ok~n', [Stoff, OptimierungsZiel]),
@@ -47,7 +52,8 @@ testStoffNichtSammelbar(Stoff) :-
 
 testAll :-
 	testRezepte(_, _, _, _, _, _),
-	testStoff.
+	testStoff,
+	testOptimierteSammlung.
 	
 testRezepte(FehlOperation, FehlOpProdukt, 
 			FehlKomponente,

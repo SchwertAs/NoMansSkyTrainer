@@ -152,7 +152,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kobaltSpiegel, 150, 1310, 1000))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, metallPlatten, 150, 1310, 1000))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, mikroProzessor, 150, 1310, 1000))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, natrium, 150, 1310, 1000))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sternenSeide, 150, 1310, 1000))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, navigationsDaten, 150, 1310, 1000))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, pyrit, 150, 1310, 1000))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, pugneum, 150, 1310, 1000))

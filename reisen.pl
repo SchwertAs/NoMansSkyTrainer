@@ -85,9 +85,8 @@ vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt
 	ReiseOrtBisher \= VorgangsOrt, 
 	append([[1, reisen, [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2).
 
-vorgangsOrtModifikationRaffinerieen(Groesste, VorgangsOrt, ModOrt) :-
-	(VorgangsOrt = ortKleineRaffinerie; VorgangsOrt = ortMittlereRaffinerie; VorgangsOrt = ortGrosseRaffinerie) ->
-	 ModOrt = Groesste; ModOrt = VorgangsOrt.
+vorgangsOrtModifikationRaffinerieen(GroessteBisher, RaffinerieOrtNeu, ModOrt) :-
+	(raffinerieOrtGroesser(GroessteBisher, RaffinerieOrtNeu)) -> ModOrt = RaffinerieOrtNeu; ModOrt = GroessteBisher.
 	
 bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung),
