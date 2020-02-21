@@ -36,42 +36,18 @@ testOptimierteSammlung :-
 	format('~k mit ~k not ok~n', [Stoff, OptimierungsZiel]),
 	fail.
 
+suchTest(Stoff, _) :-
+	sammlung:sammlung(_, _, _, _, Stoff, _, _, _).
+	
 suchTest(Stoff, OptimierungsZiel) :-
 	\+suchAlgorithmus:baue('System', 'MeinPlanet', OptimierungsZiel, 1, Stoff),
 	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, _SammelSet, _Vorgaenge, _MinimalSammelZahl, _GesamtWertSammlung, _MinimalZeit, _HandelswertSammlung, _Erloes)
 	.
 
-suchTest(Stoff, _) :-
-	sammlung:sammelbar(Stoff, _).
 	
-testStoffNichtSammelbar(Stoff) :-
-	spielStatus:spielStatusInit,
-	sammlung:sammlungInit, 
- 	stoff:stoff(_, Stoff, _),
-	\+sammlung:sammelbar(Stoff, _).
-
 testAll :-
-	testRezepte(_, _, _, _, _, _),
-	testStoff,
+	rezept:testAll(_, _, _, _, _, _),
+	stoff:testAll,
 	testOptimierteSammlung.
 	
-testRezepte(FehlOperation, FehlOpProdukt, 
-			FehlKomponente,
-			FehlProdukt,
-			FertigungsZeitFehlStoff, FertigungsZeitFehlKomponenten) :-
-	format('testRezepte Start~n'),
-	\+rezept:integritaetWandelAktion(FehlOperation, FehlOpProdukt),
-	format('Operationen ok~n'),
-	\+rezept:komponenteIstKeinStoff(FehlKomponente),
-	format('Komponenten ok~n'),
-	\+rezept:produktIstKeinStoff(FehlProdukt),
-	format('Produkte ok~n'),
-	\+rezept:rezeptDoppelt(FehlOperation, FehlKomponente, FehlProdukt),
-	format('keine Doppelten ok~n'),
-	\+rezept:gleicheZutaten(FehlKomponente),
-	format('keine gleichen Zutaten ok~n'),
-	\+rezept:raffinerieRezeptHatKeineFertigungsZeit(FertigungsZeitFehlStoff,FertigungsZeitFehlKomponenten),
-	format('Fertigungszeiten ok~n').
 	
-testStoff :-
-	stoff:testAll.

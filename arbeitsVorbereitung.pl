@@ -37,6 +37,24 @@ bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, 
 	),
 	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
 	!.
+	
+/* raffinieren Rüstzeit pro charge */
+bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+	Vorgaenge = [Kopf|Rest],
+	Kopf = [_, Operation, _, [AnzahlRaffiniert, Stoff]],
+	Operation = raffinieren,
+	rezept:rezept(Operation, Komponenten, [_, Stoff], ZeitProAusgabeStueck),
+	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	HauptZeit1 is HauptZeit + HauptZeit0, 
+	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
+	NebenZeit1 is NebenZeit + NebenZeit0, 
+	/* Je mehr Komponenten desto mehr Rüstzeit */
+	length(Komponenten, KomponentenZahl),
+	/* Raffinerie öffnen, Komponenten aussuchen und plazieren, starten, Ausgabefach entleeren */
+	RuestZeit0 is 290 + 620 * KomponentenZahl + 250 + 588,
+	RuestZeit1 is RuestZeit + RuestZeit0,
+	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	!.
 
 /* nicht sammelbar */
 bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
@@ -60,6 +78,7 @@ methodeToRuestZeit(ertauchen, 150).
 methodeToRuestZeit(unterWasserErkaempfen, 0).
 methodeToRuestZeit(herausSchlagen, 150).
 methodeToRuestZeit(raumSchuerfen, 63).
+methodeToRuestZeit(raffinieren, 63). /* für eine Komponente */
 
 /* Zeit für den Wechsel zwischen zwei Gebinden des Stoffs */
 methodeToNebenZeit(bekannt, 0).

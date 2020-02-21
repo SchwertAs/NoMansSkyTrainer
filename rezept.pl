@@ -1,4 +1,4 @@
-:- module(rezept, [rezept/4]).
+:- module(rezept, [rezept/4, testAll/6]).
 
 /* Komponenten, AusgabeBestand, Dauer
 [[Anzahl, Stoff]], [Anzahl, Produkt], Dauer in 1/100 pro Ergebnis-Stück */
@@ -45,8 +45,8 @@ rezept(raffinieren, [[1, zaeheFluessigkeiten]], [1, lebenderSchleim], 60.0 ).
 rezept(raffinieren, [[1, hypnotischesAuge]], [1, lebenderSchleim], 0.30 ).
 rezept(raffinieren, [[2, reinesFerrit]], [1, magnetisiertesFerrit], 24.27 ).
 rezept(raffinieren, [[3, faecium]], [2, mordit], 36.0 ).
-rezept(raffinieren, [[5, platin]], [1, nanitHaufen], 24.0 ).
-rezept(raffinieren, [[10, pugneum]], [1, nanitHaufen], 25.0 ).
+rezept(raffinieren, [[35, platin]], [1, nanitHaufen], 24.0 ).
+rezept(raffinieren, [[25, pugneum]], [1, nanitHaufen], 12.0 ).
 rezept(raffinieren, [[5, unkontrollierbarerSchimmel]], [1, nanitHaufen], 60.0 ).
 rezept(raffinieren, [[1, kuerbisKnolle]], [1, natrium], 24.0 ).
 rezept(raffinieren, [[1, natriumNitrat]], [2, natrium], 12.1 ).
@@ -1806,3 +1806,22 @@ gleicheZutaten(VergleichKomponentenListe) :-
 	maplist(nth1(2), VergleichKomponentenListe, VergleichsKomponenten),
 	permutation(SuchKomponenten, VergleichsKomponenten),
 	!.
+	
+testAll(FehlOperation, FehlOpProdukt, 
+			FehlKomponente,
+			FehlProdukt,
+			FertigungsZeitFehlStoff, FertigungsZeitFehlKomponenten) :-
+	format('testRezepte Start~n'),
+	\+rezept:integritaetWandelAktion(FehlOperation, FehlOpProdukt),
+	format('Operationen ok~n'),
+	\+rezept:komponenteIstKeinStoff(FehlKomponente),
+	format('Komponenten ok~n'),
+	\+rezept:produktIstKeinStoff(FehlProdukt),
+	format('Produkte ok~n'),
+	\+rezept:rezeptDoppelt(FehlOperation, FehlKomponente, FehlProdukt),
+	format('keine Doppelten ok~n'),
+	\+rezept:gleicheZutaten(FehlKomponente),
+	format('keine gleichen Zutaten ok~n'),
+	\+rezept:raffinerieRezeptHatKeineFertigungsZeit(FertigungsZeitFehlStoff,FertigungsZeitFehlKomponenten),
+	format('Fertigungszeiten ok~n').
+	
