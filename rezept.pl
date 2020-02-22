@@ -73,8 +73,14 @@ rezept(raffinieren, [[2, kohlenStoff]], [1, verdichteterKohlenStoff], 18.0 ).
 rezept(raffinieren, [[1, kohlenStoffKristall]], [150, verdichteterKohlenStoff], 0.57 ).
 rezept(raffinieren, [[1, restSubstanz]], [1, zaeheFluessigkeiten], 60.0 ).
 
-rezept(ausAtmosphaerenAnlageFuerStickStoffGewinnen, [[1, verdichteterKohlenStoff]], [5, stickStoff], 722.5 ).
-rezept(ausAtmosphaerenAnlageFuerStickStoffGewinnen, [[3, kohlenStoff]], [5, stickStoff], 722.5 ).
+rezept(ausAtmosphaerenAnlageGewinnen, [[1, verdichteterKohlenStoff]], [5, stickStoff], 722.5 ). /* lush and toxic planets */
+rezept(ausAtmosphaerenAnlageGewinnen, [[3, kohlenStoff]], [5, stickStoff], 722.5 ).
+rezept(ausAtmosphaerenAnlageGewinnen, [[1, verdichteterKohlenStoff]], [5, radon], 722.5 ).      /* irradiated and frozen planets */
+rezept(ausAtmosphaerenAnlageGewinnen, [[3, kohlenStoff]], [5, radon], 722.5 ).
+rezept(ausAtmosphaerenAnlageGewinnen, [[1, verdichteterKohlenStoff]], [5, sauerStoff], 722.5 ). /* exotic planets */
+rezept(ausAtmosphaerenAnlageGewinnen, [[3, kohlenStoff]], [5, sauerStoff], 722.5 ).
+rezept(ausAtmosphaerenAnlageGewinnen, [[1, verdichteterKohlenStoff]], [5, schwefelin], 722.5 ). /* hot and barren planets */
+rezept(ausAtmosphaerenAnlageGewinnen, [[3, kohlenStoff]], [5, schwefelin], 722.5 ).
 rezept(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, [[3, verdichteterKohlenStoff]], [5, sauerStoff], 288.2 ).
 rezept(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, [[3, kohlenStoff]], [5, sauerStoff], 288.2 ).
 
@@ -2039,7 +2045,7 @@ rezept(zerlegen, [[1, geode]], [1, tetraKobalt], 0 ).
 rezept(synthetisieren, [[300, queckSilber], [1, feuerWerkGruenRezept]], [1, feuerWerkGruen], 0 ).
 */
 
-/* ------------------------------- anbauen -------------------- 
+/* ------------------------------- anbauen -------------------- */
 rezept(anbauen, [[1, pilzGeflecht]], [1, pilzSchimmel], 1440000 ).
 rezept(anbauen, [[1, frostWurz]], [1, frostKristall], 360000 ).
 rezept(anbauen, [[1, gammaGras]], [1, gammaWurzel], 1440000 ).
@@ -2052,7 +2058,7 @@ rezept(anbauen, [[1, gravitinoWirt]], [1, gravitinoBall], 720000 ).
 rezept(anbauen, [[1, giftIgel]], [1, beutelGift], 1200000 ).
 rezept(anbauen, [[1, eiweissPerlenKugel]], [1, eiweissPerle], 480000 ).
 rezept(anbauen, [[1, nipNip]], [1, nipNipKnospen], 0 ).
-*/
+
 
 /* ---------------------  Test Prädikate --------------------------------------------- */
 /* in rezepten müssen immer Wandelaktionen angegeben sein */

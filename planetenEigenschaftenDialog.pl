@@ -50,8 +50,8 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortNahrungsProzessor], NahrungsProzessorEntfernungValNum) -> NahrungsProzessorVorhandenVal=true; NahrungsProzessorVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortBasisTerminus], BasisTerminusEntfernungValNum) -> BasisTerminusVorhandenVal=true; BasisTerminusVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortForschungsTerminal], ForschungsTerminalEntfernungValNum) -> ForschungsTerminalVorhandenVal=true; ForschungsTerminalVorhandenVal=false),
-	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAthmosphaerenAnlageSauerStoff], AthmosphaerenAnlageSauerStoffEntfernungValNum) -> AthmosphaerenAnlageSauerStoffVal=true; AthmosphaerenAnlageSauerStoffVal=false),
-	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAthmosphaerenAnlageStickStoff], AthmosphaerenAnlageStickStoffEntfernungValNum) -> AthmosphaerenAnlageStickStoffVorhandenVal=true; AthmosphaerenAnlageStickStoffVorhandenVal=false)
+	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSauerstoffVearbeiter], SauerstoffVearbeiterEntfernungValNum) -> SauerstoffVearbeiterVal=true; SauerstoffVearbeiterVal=false),
+	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAthmosphaerenAnlage], AthmosphaerenAnlageStickStoffEntfernungValNum) -> AthmosphaerenAnlageStickStoffVorhandenVal=true; AthmosphaerenAnlageStickStoffVorhandenVal=false)
 	),
 	(var(WasserEntfernungValNum) -> WasserEntfernungVal = 'Zeit'; number_string(WasserEntfernungValNum, WasserEntfernungVal)),
 	(var(AussenPostenEntfernungValNum) -> AussenPostenEntfernungVal = 'Zeit'; number_string(AussenPostenEntfernungValNum, AussenPostenEntfernungVal)),
@@ -63,7 +63,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	(var(NahrungsProzessorEntfernungValNum) -> NahrungsProzessorEntfernungVal = 'Zeit'; number_string(NahrungsProzessorEntfernungValNum, NahrungsProzessorEntfernungVal)),
 	(var(BasisTerminusEntfernungValNum) -> BasisTerminusEntfernungVal = 'Zeit'; number_string(BasisTerminusEntfernungValNum, BasisTerminusEntfernungVal)),
 	(var(ForschungsTerminalEntfernungValNum) -> ForschungsTerminalEntfernungVal = 'Zeit'; number_string(ForschungsTerminalEntfernungValNum, ForschungsTerminalEntfernungVal)),
-	(var(AthmosphaerenAnlageSauerStoffEntfernungValNum) -> AthmosphaerenAnlageSauerStoffEntfernungVal = 'Zeit'; number_string(AthmosphaerenAnlageSauerStoffEntfernungValNum, AthmosphaerenAnlageSauerStoffEntfernungVal)),
+	(var(SauerstoffVearbeiterEntfernungValNum) -> SauerstoffVearbeiterEntfernungVal = 'Zeit'; number_string(SauerstoffVearbeiterEntfernungValNum, SauerstoffVearbeiterEntfernungVal)),
 	(var(AthmosphaerenAnlageStickStoffEntfernungValNum) -> AthmosphaerenAnlageStickStoffEntfernungVal = 'Zeit'; number_string(AthmosphaerenAnlageStickStoffEntfernungValNum, AthmosphaerenAnlageStickStoffEntfernungVal)),
 
 	TermerizedBody = [
@@ -88,7 +88,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 			NahrungsProzessorVorhandenVal, NahrungsProzessorEntfernungVal,
 			BasisTerminusVorhandenVal, BasisTerminusEntfernungVal,
 			ForschungsTerminalVorhandenVal, ForschungsTerminalEntfernungVal,
-			AthmosphaerenAnlageSauerStoffVal, AthmosphaerenAnlageSauerStoffEntfernungVal,
+			SauerstoffVearbeiterVal, SauerstoffVearbeiterEntfernungVal,
 			AthmosphaerenAnlageStickStoffVorhandenVal, AthmosphaerenAnlageStickStoffEntfernungVal
        	  ),
        	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
@@ -122,7 +122,7 @@ tabelleEinrichtungen(
 	NahrungsProzessorVorhandenVal, NahrungsProzessorEntfernungVal,
 	BasisTerminusVorhandenVal, BasisTerminusEntfernungVal,
 	ForschungsTerminalVorhandenVal, ForschungsTerminalEntfernungVal,
-	AthmosphaerenAnlageSauerStoffVal, AthmosphaerenAnlageSauerStoffEntfernungVal,
+	SauerstoffVearbeiterVal, SauerstoffVearbeiterEntfernungVal,
 	AthmosphaerenAnlageStickStoffVorhandenVal, AthmosphaerenAnlageStickStoffEntfernungVal
     ) -->
 	html(div(class('table50'),[
@@ -184,12 +184,12 @@ tabelleEinrichtungen(
    	    	\checkZeitUnitGruppe('konstruktionsStation_vorhanden', ForschungsTerminalVorhandenVal, 309, 'konstruktionsStation_entfernung', ForschungsTerminalEntfernungVal, 310)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), 'Atmosphaerenanlage Sauerstoff'),
-   	    	\checkZeitUnitGruppe('atmosphaerenAnlageSauerStoff_vorhanden', AthmosphaerenAnlageSauerStoffVal, 311, 'atmosphaerenAnlageSauerStoff_entfernung', AthmosphaerenAnlageSauerStoffEntfernungVal, 312)
+   	    	div(class('th'), 'Sauerstoff Verarbeiter'),
+   	    	\checkZeitUnitGruppe('atmosphaerenAnlageSauerStoff_vorhanden', SauerstoffVearbeiterVal, 311, 'atmosphaerenAnlageSauerStoff_entfernung', SauerstoffVearbeiterEntfernungVal, 312)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), 'Atmosphaerenanlage Stickstoff'),
-   	    	\checkZeitUnitGruppe('atmosphaerenAnlageStickStoff_vorhanden', AthmosphaerenAnlageStickStoffVorhandenVal, 313, 'atmosphaerenAnlageStickStoff_entfernung', AthmosphaerenAnlageStickStoffEntfernungVal, 314)
+   	    	div(class('th'), 'Atmosphaerenanlage'),
+   	    	\checkZeitUnitGruppe('atmosphaerenAnlage_vorhanden', AthmosphaerenAnlageStickStoffVorhandenVal, 313, 'atmosphaerenAnlage_entfernung', AthmosphaerenAnlageStickStoffEntfernungVal, 314)
    	  	])
    	  ])).
 
@@ -258,7 +258,7 @@ planetenEigenschaften(Request) :-
      basisTerminus_vorhanden(BasisTerminusVorhanden, [default(off)]),
      konstruktionsStation_vorhanden(KonstruktionsStationVorhanden, [default(off)]),
 	 atmosphaerenAnlageSauerStoff_vorhanden(AtmosphaerenAnlageSauerStoffVorhanden, [default(off)]),
-	 atmosphaerenAnlageStickStoff_vorhanden(AtmosphaerenAnlageStickStoffVorhanden, [default(off)]),
+	 atmosphaerenAnlage_vorhanden(AtmosphaerenAnlageVorhanden, [default(off)]),
 
      wasser_entfernung(WasserEntfernung, [default('Zeit')]), 
      aussenPosten_entfernung(AussenPostenEntfernung, [default('Zeit')]),
@@ -272,7 +272,7 @@ planetenEigenschaften(Request) :-
      basisTerminus_entfernung(BasisTerminusEntfernung, [default('Zeit')]), 
      konstruktionsStation_entfernung(KonstruktionsStationEntfernung, [default('Zeit')]),
      atmosphaerenAnlageSauerStoff_entfernung(AtmosphaerenAnlageSauerStoffEntfernung, [default('Zeit')]),
-     atmosphaerenAnlageStickStoff_entfernung(AtmosphaerenAnlageStickStoffEntfernung, [default('Zeit')])
+     atmosphaerenAnlage_entfernung(AtmosphaerenAnlageEntfernung, [default('Zeit')])
     ]),
     ((WasserVorhanden = on, WasserEntfernung = 'Zeit', fehlerBehandlungGruppe('Wasser'));
      (AussenPostenVorhanden = on, AussenPostenEntfernung = 'Zeit', fehlerBehandlungGruppe('AussenPosten'));
@@ -285,7 +285,7 @@ planetenEigenschaften(Request) :-
      (BasisTerminusVorhanden = on, BasisTerminusEntfernung = 'Zeit', fehlerBehandlungGruppe('Basisterminus'));
      (KonstruktionsStationVorhanden = on, KonstruktionsStationEntfernung = 'Zeit', fehlerBehandlungGruppe('Konstruktionsstation'));
      (AtmosphaerenAnlageSauerStoffVorhanden = on, AtmosphaerenAnlageSauerStoffEntfernung = 'Zeit', fehlerBehandlungGruppe('Atmosphaerenanlagesauerstoff'));
-     (AtmosphaerenAnlageStickStoffVorhanden = on, AtmosphaerenAnlageStickStoffEntfernung = 'Zeit', fehlerBehandlungGruppe('Atmosphaerenanlagestickstoff'));
+     (AtmosphaerenAnlageVorhanden = on, AtmosphaerenAnlageEntfernung = 'Zeit', fehlerBehandlungGruppe('Atmosphaerenanlagestickstoff'));
      (HauptBasisVorhanden = off,
       WasserVorhanden = off,
       AussenPostenVorhanden = off,
@@ -298,7 +298,7 @@ planetenEigenschaften(Request) :-
       BasisTerminusVorhanden = off,
       KonstruktionsStationVorhanden = off,
       AtmosphaerenAnlageSauerStoffVorhanden = off,
-      AtmosphaerenAnlageStickStoffVorhanden = off,
+      AtmosphaerenAnlageVorhanden = off,
       ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, _], _))),
       gespeichert
      );
@@ -313,7 +313,7 @@ planetenEigenschaften(Request) :-
       ausgabe:zeitFeldToNumber(BasisTerminusEntfernung, BasisTerminusEntfernungNum),
       ausgabe:zeitFeldToNumber(KonstruktionsStationEntfernung, KonstruktionsStationEntfernungNum),
       ausgabe:zeitFeldToNumber(AtmosphaerenAnlageSauerStoffEntfernung, AtmosphaerenAnlageSauerStoffEntfernungNum),
-      ausgabe:zeitFeldToNumber(AtmosphaerenAnlageStickStoffEntfernung, AtmosphaerenAnlageStickStoffEntfernungNum),
+      ausgabe:zeitFeldToNumber(AtmosphaerenAnlageEntfernung, AtmosphaerenAnlageEntfernungNum),
       (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung);
        Entfernung = -1
       ),
@@ -358,10 +358,10 @@ planetenEigenschaften(Request) :-
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortForschungsTerminal], KonstruktionsStationEntfernungNum))
       ),
       (AtmosphaerenAnlageSauerStoffVorhanden= off; 
-       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAthmosphaerenAnlageSauerStoff], AtmosphaerenAnlageSauerStoffEntfernungNum))
+       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSauerstoffVearbeiter], AtmosphaerenAnlageSauerStoffEntfernungNum))
       ),
-      (AtmosphaerenAnlageStickStoffVorhanden= off; 
-       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAthmosphaerenAnlageStickStoff], AtmosphaerenAnlageStickStoffEntfernungNum))
+      (AtmosphaerenAnlageVorhanden= off; 
+       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAthmosphaerenAnlage], AtmosphaerenAnlageEntfernungNum))
       ), 
 	  gespeichert
 	)).

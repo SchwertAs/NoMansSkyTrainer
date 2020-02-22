@@ -20,4 +20,4 @@ ort(ortFrachter).
 ort(ortSpieler).
 ort(ortBasis).
 ort(ortAthmosphaerenAnlageSauerStoff).
-ort(ortAthmosphaerenAnlageStickStoff).
+ort(ortAthmosphaerenAnlage).

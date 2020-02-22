@@ -1,4 +1,4 @@
-:- module(server, [server/1]).
+:- module(server, [server/1, holeCssAlsStyle/1, baueOptionsFeld/4]).
 
 :- use_module(library(dcg/basics)).
 :- use_module(library(http/thread_httpd)).
@@ -49,6 +49,14 @@ button3Space {
 	grid-column: 3;
 	grid-row: 3;
 	}
+
+#compactText {
+  font-family:Arial,sans-serif; 
+  font-size: 1em; 
+  color:black;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  }
 
 header,
 formSpace,
@@ -144,7 +152,6 @@ baueOption(OptionsWerteSet, BisherList, NextList) :-
 	string_concat(OptionString0, '</option>', OptionString1),
 	string_concat(BisherList, OptionString1, BisherList2),
 	baueOption(Rest, BisherList2, NextList).
-
 
 dummy(_)  :-
 	format('').

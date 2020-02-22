@@ -74,7 +74,7 @@ beschaffen(Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaen
 	length(StoffPfad, Len),
 	Len =< MaxTiefe0, 
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], _),
-	rezeptZulaessig(Operation, Komponenten),
+	rezeptZulaessig(Operation, Komponenten, Stoff),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
 	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
 	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),
@@ -136,11 +136,11 @@ multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, Vorg
 	multipliziereVorgangsWerte(RestVorgaenge, Faktor, VorgaengeMultipliziertBisher1, VorgaengeMultipliziert).   
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
-rezeptZulaessig(Operation, _) :-
+rezeptZulaessig(Operation, _, _) :-
 	memberchk(Operation, [bauen, herstellen, installieren]),
 	!.
 	
-rezeptZulaessig(raffinieren, Komponenten) :-
+rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	(spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], _); 
@@ -149,7 +149,7 @@ rezeptZulaessig(raffinieren, Komponenten) :-
 	),
 	!.
 	
-rezeptZulaessig(raffinieren, Komponenten) :-
+rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
@@ -157,46 +157,50 @@ rezeptZulaessig(raffinieren, Komponenten) :-
 	),
 	!.
 
-rezeptZulaessig(raffinieren, Komponenten) :-
+rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _], [_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
 	!.
 
-rezeptZulaessig(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, Komponenten) :-
+rezeptZulaessig(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlageSauerStoff], _),
 	!.
 
-rezeptZulaessig(ausAtmosphaerenAnlageFuerStickStoffGewinnen, Komponenten) :-
+rezeptZulaessig(ausAtmosphaerenAnlageGewinnen, Komponenten, Stoff) :-
 	Komponenten = [[_, _]],
+	/* es muss eine Atmospherenanlage auf dem Planeten geben */
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlageStickStoff], _),
+	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlage], _),
+	spielStatus:planeten(_, System, Planet, AtmospherenArt),
+	Stoff = AtmospherenArt,
 	!.
 
-rezeptZulaessig(kochen, _) :-
+rezeptZulaessig(kochen, _, _) :-
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortNahrungsProzessor], _),
 	!.
 
-rezeptZulaessig(rezeptInAussenPostenErwerben, Komponenten) :-
+rezeptZulaessig(rezeptInAussenPostenErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortAussenPosten], _),
 	!.
-rezeptZulaessig(rezeptAmForschungsComputerErwerben, Komponenten) :-
+	
+rezeptZulaessig(rezeptAmForschungsComputerErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortForschungsTerminal], _),
 	!.
 
-rezeptZulaessig(rezeptInAnomalieErwerben, Komponenten) :-
+rezeptZulaessig(rezeptInAnomalieErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:spielStatus(sphaereRufbar, true),
 	!.
 
-rezeptZulaessig(modulInRaumstationErwerben, Komponenten) :-
+rezeptZulaessig(modulInRaumstationErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, ortRaumStation], _),

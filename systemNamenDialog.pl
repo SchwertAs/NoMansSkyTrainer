@@ -174,10 +174,10 @@ insUpdDel(FeldNeu, SystemNeu, FarbeNeu) :-
 	SystemNeu \= SystemAlt,
 	debug(myTrace, 'Schlüssel-Update: Feld=~k SystemAlt=~k SystemNeu=~k', [FeldNeu, SystemAlt, SystemNeu]),
 	/* planet updaten */
-	forall(spielStatus:planeten(RecNo0, SystemAlt, Planet0), 
-	 assertz(spielStatus:planeten(RecNo0, SystemNeu, Planet0))
+	forall(spielStatus:planeten(RecNo0, SystemAlt, Planet0, AtmospherenTyp), 
+	 assertz(spielStatus:planeten(RecNo0, SystemNeu, Planet0, AtmospherenTyp))
 	),
-	retractall(spielStatus:planeten(_, SystemAlt, _)),
+	retractall(spielStatus:planeten(_, SystemAlt, _, _)),
 	/* sammlung updaten */
 	forall(sammlung:sammlung(RecNo1, SystemAlt, Planet1, Operation, Stoff, Haupt, Neben, Ruest),
 	       assertz(sammlung:sammlung(RecNo1, SystemNeu, Planet1, Operation, Stoff, Haupt, Neben, Ruest))
@@ -208,7 +208,7 @@ insUpdDel(FeldNeu, SystemNeu, _) :-
 	debug(myTrace, 'delete: Feld=~k SystemAlt=~k', [FeldNeu, SystemOld]),
 	retractall(sammlung:sammlung(_, SystemOld, _, _, _, _, _, _)),
 	retractall(spielStatus:systemAusstattung([SystemOld, _, _], _)),
-	retractall(spielStatus:planeten(_, SystemOld, _)),	
+	retractall(spielStatus:planeten(_, SystemOld, _, _)),	
 	retractall(spielStatus:systeme(_, SystemOld, _)),	
 	!.
 	

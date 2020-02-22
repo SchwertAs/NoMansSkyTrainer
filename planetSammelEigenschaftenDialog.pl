@@ -57,12 +57,11 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	       	             [div(class('td'), \innereTabelle(NumerierteRecordList))
 	       	             ])
 	       	        ]),
-       	  p(['Zeitmessungen beginnen direkt vor der Sammelquelle und enden, sobald die Quelle erschöpft ist.   ',
-       	  'Dann die Art der Gewinnung und die Zahl der damit gewonnenen Stoffe eingeben!   ',
-       	  'Die Sekundärelemente nur eingeben, wenn das die einzige Möglichkeit auf dem Himmelskörper ist, den Stoff zu gewinnen!   ',
-       	  'Es genügt die Angabe der schnellsten Methode.    ',
-       	  'Stoffe, die nicht gewonnen werden können, auch nicht eingeben! '
-       	  ]),
+       	  p(id(compactText), ['Zeitmessungen beginnen direkt vor der Sammelquelle und enden, sobald die Quelle erschöpft ist.']),
+		  p(id(compactText), ['Dann die Art der Gewinnung und die Zahl der damit gewonnenen Stoffe eingeben!']),
+		  p(id(compactText), ['Die Sekundärelemente nur eingeben, wenn das die einzige Möglichkeit auf dem Himmelskörper ist, den Stoff zu gewinnen!']),
+       	  p(id(compactText), ['Es genügt die Angabe der schnellsten Methode.']),
+       	  p(id(compactText), ['Stoffe, die nicht gewonnen werden können, auch nicht eingeben!']),
        	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
 		    	  [td([button([name("submit"), type("submit")], 'OK')]),
 		    	   td([button([name("reset"), type("reset")], 'reset')])
@@ -185,8 +184,8 @@ innereEingabeZeile([Record|Rest]) -->
 	},
 	html([	 
 	      div(class('tr'), [ 
-	      	div(class('td'), [label(FeldNo), \baueOptionsFeld('auswahlRohStoff', FeldNo, 1, SammelStoffe)]),
-			div(class('td'), \baueOptionsFeld('methode', FeldNo, 2, SammelAktionen)),
+	      	div(class('td'), [label(FeldNo), \baueOptionsFeldMitVorwahl('auswahlRohStoff', FeldNo, 1, SammelStoffe)]),
+			div(class('td'), \baueOptionsFeldMitVorwahl('methode', FeldNo, 2, SammelAktionen)),
 			div(class('td'), [input([name('anzahl' + FeldNo), type('number'), min('1'), max('99999'), value(Anzahl)])]),
 			div(class('td'), [input([name('dauer' + FeldNo), type('number'), min('1'), max('99999'), value(Dauer0)])]),
 			div(class('td'), [input([name('gebinde' + FeldNo), type('number'), min('1'), max('30'), value(Gebinde)])])
@@ -194,7 +193,7 @@ innereEingabeZeile([Record|Rest]) -->
    	   ]),
    	   innereEingabeZeile(Rest).   	   
 
-baueOptionsFeld(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
+baueOptionsFeldMitVorwahl(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	{
 		Index is FeldNo mod 100 + StartIndex,
 		OptionsWerteListe = [[Wert,_]|_],
@@ -203,14 +202,14 @@ baueOptionsFeld(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	html([select([name(FeldName + FeldNo), id(FeldName + FeldNo), class("Nachschlagen"), size("1"), maxlength(20), tabindex(Index)],
 			     [
 			      OptionText,
-			      \baueOption(OptionsWerteListe)
+			      \baueOptionMitVorwahl(OptionsWerteListe)
    	        	 ])
 	]).
 
-baueOption([]) -->
+baueOptionMitVorwahl([]) -->
 	[].
  
-baueOption([OptionTupel|Rest]) -->
+baueOptionMitVorwahl([OptionTupel|Rest]) -->
 	{
 		OptionTupel = [Wert, Option],
 		atom_string(Option, OptionText),
@@ -219,7 +218,7 @@ baueOption([OptionTupel|Rest]) -->
 	html([
 		OptionText0
 	]),
-	baueOption(Rest).
+	baueOptionMitVorwahl(Rest).
 	
 /* -----------------------------------  Abspeicherdialog -------------------------------------------- */
 planetSammelEigenschaften(Request) :-

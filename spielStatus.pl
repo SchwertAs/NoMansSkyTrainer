@@ -1,8 +1,8 @@
-:- module(spielStatus, [planeten/3, systeme/3, spielStatus/2, systemAusstattung/2]).
+:- module(spielStatus, [planeten/4, systeme/3, spielStatus/2, systemAusstattung/2]).
 
 :- dynamic(spielStatus/2).
 :- dynamic(systeme/3).
-:- dynamic(planeten/3).
+:- dynamic(planeten/4).
 :- dynamic(systemAusstattung/2).
 
 /* Spielkonditionen */
@@ -31,7 +31,9 @@ initSysteme :-
 	
 initPlaneten :-
 	abolish(planeten/3)
-	,assertz(planeten(0, 'System', 'MeinPlanet')).
+	/* Bezeichnung und Atmospherentyp */
+	/* System, Planet, oneOf(stickStoff, schwefelin, radon, sauerStoff) */
+	,assertz(planeten(0, 'System', 'MeinPlanet', 'stickStoff')).
 	
 initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
@@ -43,7 +45,7 @@ initSystemAusstattung :-
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortRaumStation], 2914)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageSauerStoff], 536)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageStickStoff], 536)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlage], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWasser], 10660)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAussenPosten], 11336)) /* aus Maske */

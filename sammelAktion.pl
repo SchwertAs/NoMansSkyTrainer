@@ -39,32 +39,32 @@ sammelOrt(kaufen, Ort) :-
 sammelOrt(ertauchen, ortWasser).
 sammelOrt(unterWasserErkaempfen, ortWasser).
 
-pruefeOperationVorraussetzung(minenLaserNutzen) :-
+pruefeSammelAktionVorraussetzung(minenLaserNutzen) :-
 	!,
 	spielStatus(minenLaser),
 	!.
 	
-pruefeOperationVorraussetzung(verbessertenMinenLaserNutzen) :-
+pruefeSammelAktionVorraussetzung(verbessertenMinenLaserNutzen) :-
 	!,
 	spielStatus(verbesserterMinenLaser),
 	!.
 
-pruefeOperationVorraussetzung(terrainFormerNutzen) :-
+pruefeSammelAktionVorraussetzung(terrainFormerNutzen) :-
 	!,
 	spielStatus(terrainFormer),
 	!.
 
-pruefeOperationVorraussetzung(jagen) :-
+pruefeSammelAktionVorraussetzung(jagen) :-
 	!,
 	spielStatus(waffeVorhanden),
 	!.
 
-pruefeOperationVorraussetzung(erkaempfen) :-
+pruefeSammelAktionVorraussetzung(erkaempfen) :-
 	!,
 	spielStatus(waffeVorhanden),
 	!.
 
-pruefeOperationVorraussetzung(unterWasserErkaempfen) :-
+pruefeSammelAktionVorraussetzung(unterWasserErkaempfen) :-
 	!,
 	spielStatus(waffeVorhanden),
 	sammelOrt(unterWasserErkaempfen, Ort),
@@ -72,23 +72,23 @@ pruefeOperationVorraussetzung(unterWasserErkaempfen) :-
 	spielStatus:systemAusstattung([System, Planet, Ort], _),
 	!.
 
-pruefeOperationVorraussetzung(raumSchuerfen) :-
+pruefeSammelAktionVorraussetzung(raumSchuerfen) :-
 	!,
 	spielStatus(raumSchiffIstFlott),
 	!.
 
-pruefeOperationVorraussetzung(exoFahrzeugMinenLaserNutzen) :-
+pruefeSammelAktionVorraussetzung(exoFahrzeugMinenLaserNutzen) :-
 	!,
 	spielStatus(exoFahrzeugMinenLaser),
 	!.
 
-pruefeOperationVorraussetzung(Operation) :-
+pruefeSammelAktionVorraussetzung(Operation) :-
 	sammelOrt(Operation, Ort),
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	spielStatus:systemAusstattung([System, Planet, Ort], _),
 	!.
 
-pruefeOperationVorraussetzung(_) :-
+pruefeSammelAktionVorraussetzung(_) :-
 	true.	
 
 spielStatus(Operation) :-

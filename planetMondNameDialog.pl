@@ -27,8 +27,8 @@ planetMondNameDialog(Request) :-
 
 planetMondNameAnzeigen(AuswahlSystem) :-
 	findall([FeldNo1], between(1, 8, FeldNo1), FeldNoList),
-	findall([RecordNo, HimmelsKoerper], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper), HimmelsKoerperListe),
-	ausgabe:joinRecordsByRecordNo(FeldNoList, HimmelsKoerperListe, 1, NumerierteRecordList),
+	findall([RecordNo, HimmelsKoerper, AtmosphaerenTyp], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper, AtmosphaerenTyp), HimmelsKoerperListe),
+	ausgabe:joinRecordsByRecordNo(FeldNoList, HimmelsKoerperListe, 2, NumerierteRecordList),
 	TermerizedBody = [
 		\['<header>'],
 	    h1([align(center)], ['Sternensystem: Namen der Himmelskörper eingeben']),
@@ -40,15 +40,21 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	       	  h3('Planeten und Monde'),
 	       	  div(class('table20'),
 	       	        [div(class('tr'), 
-	       	             [div([class('th'), scope("col")], 'Name') 
+	       	             [div([class('th'), scope("col")], 'Name'),
+	       	              div([class('th'), scope("col")], 'Atmospherentyp')
 	       	             ]),
 	       	         \innereEingabeZeile(NumerierteRecordList)
 	       	             ]), 
+			       	  p(id(compactText), ['Der Atmospherentyp gibt an welches Gas die Atmospherenanlage auf diesem Planeten produziert.']),
+			       	  p(id(compactText), ['Auf gemäßigten und giftigen Planeten produziert die Anlage Stickstoff.']),
+			       	  p(id(compactText), ['Auf radioaktiven und frostigen Planeten produziert die Anlage Radon.']),
+			       	  p(id(compactText), ['Auf heißen und auf kargen Planeten produziert die Anlage Schwefelin.']),
+			       	  p(id(compactText), ['Auf Scherbenplaneten produziert die Anlage Sauerstoff.']),
 	       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
 			    	  [td([button([name("submit"), type("submit")], 'OK')]),
 			    	   td([button([name("reset"), type("reset")], 'reset')])
-			    	  ]))    
-			 ]),
+			    	  ]))
+ 			 ]),
 		\['</formSpace>'] 
 		             ],       
 	server:holeCssAlsStyle(StyleString),
@@ -83,20 +89,63 @@ innereEingabeZeile([]) -->
 
 innereEingabeZeile([Record|Rest]) -->
 	{
-		Record = [FeldNo, Planet]
+		Record = [FeldNo, Planet, AtmosphaerenTyp],
+		((AtmosphaerenTyp = '', AtmosphaerenTyp0 = 'Bitte wählen'); (AtmosphaerenTyp0 = AtmosphaerenTyp)),
+		findall([AtmosphaerenTyp0, AtTyp], (select(AtTyp, [stickStoff, schwefelin, radon, sauerStoff],_)), AtmosphaerenTypen)
 	},
 	html([div(class('tr'), 
-	          [div(class('td'), 
-	               input([name('planet' + FeldNo), type("text"), maxlength("40"), value(Planet)])
-	              )
+	          [div(class('td'), input([name('planet' + FeldNo), type("text"), maxlength("40"), value(Planet)])
+	              ),
+	           div(class('td'), \baueOptionsFeldMitVorwahl('atmosphaerenTyp', FeldNo, 2, AtmosphaerenTypen)
+	              )  
    	          ])
    	     ]),
    	     innereEingabeZeile(Rest).   	   
 
-	
+baueOptionsFeldMitVorwahl(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
+	{
+		Index is FeldNo mod 100 + StartIndex,
+		OptionsWerteListe = [[Wert,_]|_],
+		((Wert = '', OptionText = option(selected, 'Bitte wählen')); (OptionText = option('Bitte wählen')))
+	},
+	html([select([name(FeldName + FeldNo), id(FeldName + FeldNo), class("Nachschlagen"), size("1"), maxlength(20), tabindex(Index)],
+			     [
+			      OptionText,
+			      \baueOptionMitVorwahl(OptionsWerteListe)
+   	        	 ])
+	]).
+
+baueOptionMitVorwahl([]) -->
+	[].
+ 
+baueOptionMitVorwahl([OptionTupel|Rest]) -->
+	{
+		OptionTupel = [Wert, Option],
+		atom_string(Option, OptionText),
+		((Wert = Option, OptionText0 = option(selected(selected), OptionText)); (OptionText0 = option(OptionText)))
+	},
+	html([
+		OptionText0
+	]),
+	baueOptionMitVorwahl(Rest).
+
 /* ----------------------  Antwort Formular ---------------------------------------------------*/
 planetMondName(Request) :-
 	member(method(post), Request), !,
+	planetMondNameParamList(Request, VarValueList),
+	GesamtZeilenZahl = 8,
+	\+plausibleEingabe(VarValueList, GesamtZeilenZahl),
+    ((nb_getval('ZeileNoFehler', ZeileNoFehler),
+      ZeileNoFehler > 0,
+      fehlerZeile(ZeileNoFehler)
+	 );
+	 (nth1(1, VarValueList, AuswahlSystem),
+	  \+ablegen(AuswahlSystem, GesamtZeilenZahl, VarValueList),
+      gespeichert
+     )
+	).
+
+planetMondNameParamList(Request, VarValueList) :-
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0]),
      planet1(Planet1, [default("")]),
@@ -106,26 +155,75 @@ planetMondName(Request) :-
      planet5(Planet5, [default("")]),
      planet6(Planet6, [default("")]),
      planet7(Planet7, [default("")]),
-     planet8(Planet8, [default("")])
+     planet8(Planet8, [default("")]),
+     atmosphaerenTyp1(AtmosphaerenTyp1, [default("")]),
+     atmosphaerenTyp2(AtmosphaerenTyp2, [default("")]),
+     atmosphaerenTyp3(AtmosphaerenTyp3, [default("")]),
+     atmosphaerenTyp4(AtmosphaerenTyp4, [default("")]),
+     atmosphaerenTyp5(AtmosphaerenTyp5, [default("")]),
+     atmosphaerenTyp6(AtmosphaerenTyp6, [default("")]),
+     atmosphaerenTyp7(AtmosphaerenTyp7, [default("")]),
+     atmosphaerenTyp8(AtmosphaerenTyp8, [default("")])
     ]),
+	VarValueList = [AuswahlSystem,
+	 Planet1, Planet2, Planet3, Planet4, Planet5, Planet6, Planet7, Planet8,
+	 AtmosphaerenTyp1, AtmosphaerenTyp2, AtmosphaerenTyp3, AtmosphaerenTyp4, AtmosphaerenTyp5, AtmosphaerenTyp6, AtmosphaerenTyp7, AtmosphaerenTyp8
+	].
+	
+plausibleEingabe(VarValueList, GesamtZeilenZahl) :-
+	nb_setval('ZeileNoFehler', 0),
+	between(1, GesamtZeilenZahl, ZeileNo),
+	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, Planet, AtmosphaerenTyp),
+	\+leereZeile(Planet, AtmosphaerenTyp),
+	\+gueltigeZeile(Planet, AtmosphaerenTyp),
+	nb_setval('ZeileNoFehler', ZeileNo),
+	!, fail.
+
+pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, Planet, AtmosphaerenTyp) :-
+  	OffsetPlanet is 1 + 0 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetAtmosphaerenTyp is 1 + 1 * GesamtZeilenZahl + ZeilenZahl,
+    nth1(OffsetPlanet, VarValueList, Planet),
+    nth1(OffsetAtmosphaerenTyp, VarValueList, AtmosphaerenTyp).
+
+leereZeile(Planet, AtmosphaerenTyp) :-
+	Planet = "",
+	AtmosphaerenTyp = 'Bitte wählen'.
+
+gueltigeZeile(Planet, _) :-
+	Planet \="".
+
+fehlerZeile(FeldNo) :-
+	server:holeCssAlsStyle(StyleString),
+	ZeileNo is FeldNo mod 100,
+   	string_concat('Die Zeile ', ZeileNo, FehlerMeldung0),
+   	string_concat(FehlerMeldung0, ' ist unvollständig', FehlerMeldung),
+	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneingabe Fehler')],
+	TermerizedBody = [
+		\['<redHeader>'],
+		h3(align(center), FehlerMeldung),
+		\['</redHeader>']
+		             ],
+	reply_html_page(TermerizedHead, TermerizedBody).
+
+ablegen(AuswahlSystem, GesamtZeilenZahl, VarValueList) :-
+	between(1, GesamtZeilenZahl, ZeileNo),
+	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, Planet, AtmosphaerenTyp0),
+	gueltigeZeile(Planet, AtmosphaerenTyp0),
+	defaultBehandlung(AtmosphaerenTyp0, AtmosphaerenTyp),
     debug(myTrace, 'Auswahlsystem=~k', [AuswahlSystem]),
-    debug(myTrace, 'Planet1=~k', [Planet1]),
-    insUpdDel(AuswahlSystem, Planet1, 1),
-    debug(myTrace, 'Planet2=~k', [Planet2]),
-    insUpdDel(AuswahlSystem, Planet2, 2),
-    debug(myTrace, 'Planet3=~k', [Planet3]),
-    insUpdDel(AuswahlSystem, Planet3, 3),
-    debug(myTrace, 'Planet4=~k', [Planet4]),
-    insUpdDel(AuswahlSystem, Planet4, 4),
-    debug(myTrace, 'Planet5=~k', [Planet5]),
-    insUpdDel(AuswahlSystem, Planet5, 5),
-    debug(myTrace, 'Planet6=~k', [Planet6]),
-    insUpdDel(AuswahlSystem, Planet6, 6),
-    debug(myTrace, 'Planet7=~k', [Planet7]),
-    insUpdDel(AuswahlSystem, Planet7, 7),
-    debug(myTrace, 'Planet8=~k', [Planet8]),
-    insUpdDel(AuswahlSystem, Planet8, 8),
-    
+    debug(myTrace, 'Planet=~k AtmosphaerenTyp=~k', [Planet, AtmosphaerenTyp]),
+    insUpdDel(AuswahlSystem, Planet, 1, AtmosphaerenTyp),
+	fail.
+
+defaultBehandlung(AtmosphaerenTyp0, AtmosphaerenTyp) :-
+	AtmosphaerenTyp0 = 'Bitte wählen',
+	AtmosphaerenTyp = '',
+	!.
+	
+defaultBehandlung(AtmosphaerenTyp0, AtmosphaerenTyp) :-
+	AtmosphaerenTyp = AtmosphaerenTyp0.
+	
+gespeichert :-
     server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Himmelskörper-Namen')],
 	TermerizedBody = [
@@ -135,28 +233,40 @@ planetMondName(Request) :-
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
-
 /* unverändert */
-insUpdDel(System, PlanetNew, RecNo) :-
-	spielStatus:planeten(RecNo, System, PlanetNew),
-	debug(myTrace, 'unverändert: RecNo=~k System=~k Planet=~k', [RecNo, System, PlanetNew]),
+insUpdDel(System, PlanetNew, RecNo, AtmosphaerenTyp) :-
+	gueltigeZeile(PlanetNew, AtmosphaerenTyp),
+	spielStatus:planeten(RecNo, System, PlanetNew, AtmosphaerenTyp),
+	debug(myTrace, 'unverändert: RecNo=~k System=~k Planet=~k AtmosphaerenTyp=~k', [RecNo, System, PlanetNew, AtmosphaerenTyp]),
+	!.
+
+/* attribut-update */
+insUpdDel(System, PlanetNew, RecNo, AtmosphaerenTyp) :-
+	gueltigeZeile(PlanetNew, AtmosphaerenTyp),
+	spielStatus:planeten(RecNo, System, PlanetNew, AtmosphaerenTyp0),
+	AtmosphaerenTyp0 \= AtmosphaerenTyp,
+	debug(myTrace, 'Attribut-Update: RecNo=~k System=~k Planet=~k AtmosphaerenTyp=~k', [RecNo, System, PlanetNew, AtmosphaerenTyp]),
+	retractall(spielStatus:planeten(RecNo, System, PlanetNew, _)),
+	assertz(spielStatus:planeten(RecNo, System, PlanetNew, AtmosphaerenTyp)),
 	!.
 
 /* in anderes Zeile verschoben */
-insUpdDel(System, PlanetNew, RecNoNew) :-
+insUpdDel(System, PlanetNew, RecNoNew, AtmosphaerenTyp) :-
+	gueltigeZeile(PlanetNew, AtmosphaerenTyp),
 	PlanetNew \= "",
-	\+spielStatus:planeten(RecNoNew, System, PlanetNew),
-	spielStatus:planeten(RecNoOld, System, PlanetNew),
-	debug(myTrace, 'Zeile verschoben: RecNoOld=~k RecNoNew=~k System=~k Planet=~k', [RecNoOld, RecNoNew, System, PlanetNew]),
-	retractall(spielStatus:planeten(RecNoOld, System, PlanetNew)),
-	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew)),
+	\+spielStatus:planeten(RecNoNew, System, PlanetNew, _),
+	spielStatus:planeten(RecNoOld, System, PlanetNew, _),
+	debug(myTrace, 'Zeile verschoben: RecNoOld=~k RecNoNew=~k System=~k Planet=~k AtmosphaerenTyp=~k', [RecNoOld, RecNoNew, System, PlanetNew, AtmosphaerenTyp]),
+	retractall(spielStatus:planeten(RecNoOld, System, PlanetNew, _)),
+	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew, AtmosphaerenTyp)),
 	!.
 
 /* umbenannt */
-insUpdDel(System, PlanetNew, RecNoNew) :-
-	spielStatus:planeten(RecNoNew, System, PlanetOld),
+insUpdDel(System, PlanetNew, RecNoNew, AtmosphaerenTyp) :-
+	gueltigeZeile(PlanetNew, AtmosphaerenTyp),
+	spielStatus:planeten(RecNoNew, System, PlanetOld, _),
 	PlanetNew \= "",
-	debug(myTrace, 'Schlüsselupdate: RecNoNew=~k System=~k Planet=~k', [RecNoNew, System, PlanetNew]),
+	debug(myTrace, 'Schlüsselupdate: RecNoNew=~k System=~k Planet=~k AtmosphaerenTyp=~k', [RecNoNew, System, PlanetNew, AtmosphaerenTyp]),
 	forall(sammlung:sammlung(RecNo, System, PlanetOld, Operation, Stoff, Haupt, Neben, Ruest),
 	       assertz(sammlung:sammlung(RecNo, System, PlanetNew, Operation, Stoff, Haupt, Neben, Ruest))
 	      ),
@@ -165,30 +275,34 @@ insUpdDel(System, PlanetNew, RecNoNew) :-
 		   assertz(spielStatus:systemAusstattung([System, PlanetNew, Ort], Entfernung))
 	      ),
 	retractall(spielStatus:systemAusstattung([System, PlanetOld, _], _)),
-	retractall(spielStatus:planeten(RecNoNew, System, PlanetOld)),
-	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew)),
+	retractall(spielStatus:planeten(RecNoNew, System, PlanetOld, _)),
+	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew, AtmosphaerenTyp)),
 	!.
 
 /* insert */
-insUpdDel(System, PlanetNew, RecNoNew) :-
-	\+spielStatus:planeten(RecNoNew, System, _),
+insUpdDel(System, PlanetNew, RecNoNew, AtmosphaerenTyp) :-
+	gueltigeZeile(PlanetNew, AtmosphaerenTyp),
+	\+spielStatus:planeten(RecNoNew, System, _, _),
 	PlanetNew \= "",
-	debug(myTrace, 'insert: RecNoNew=~k System=~k Planet=~k', [RecNoNew, System, PlanetNew]),
-	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew)),
+	debug(myTrace, 'insert: RecNoNew=~k System=~k Planet=~k AtmosphaerenTyp=~k', [RecNoNew, System, PlanetNew, AtmosphaerenTyp]),
+	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew, AtmosphaerenTyp)),
 	sammlung:copyDefaultIfEmpty(System, PlanetNew),
 	spielStatus:copyDefaultIfEmpty(System, PlanetNew),
 	!.
 	
 /* löschen cascade */
-insUpdDel(System, PlanetNew, RecNoNew) :-
-	spielStatus:planeten(RecNoNew, System, PlanetOld),
+insUpdDel(System, PlanetNew, RecNoNew, AtmosphaerenTyp) :-
+	gueltigeZeile(PlanetNew, AtmosphaerenTyp),
+	spielStatus:planeten(RecNoNew, System, PlanetOld, _),
 	PlanetNew = "",
 	debug(myTrace, 'löschen: RecNoNew=~k System=~k PlanetOld=~k', [RecNoNew, System, PlanetOld]),
 	retractall(sammlung:sammlung(_, System, PlanetOld, _, _, _, _, _)),
 	retractall(spielStatus:systemAusstattung([System, PlanetOld, _], _)),
-	retractall(spielStatus:planeten(RecNoNew, System, _)),
+	retractall(spielStatus:planeten(RecNoNew, System, _, _)),
 	!.
 
-insUpdDel(_, PlanetNew, _) :-
+/* ungenutze zeilen skippen */
+insUpdDel(_, PlanetNew, _, _) :-
 	PlanetNew = "",
 	!.
+

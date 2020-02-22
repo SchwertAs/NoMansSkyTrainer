@@ -45,7 +45,7 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0])]),
 	((AuswahlSystem = 'Bitte wählen', fehlerBehandlung); 
 	(
-	 findall(Planet, (spielStatus:planeten(_, AuswahlSystem, Planet), Planet \= 'MeinPlanet'), Planeten),
+	 findall(Planet, (spielStatus:planeten(_, AuswahlSystem, Planet, _), Planet \= 'MeinPlanet'), Planeten),
 	 server:baueOptionsFeld('auswahlPlanet', Planeten, 2, OptionList),
 	
 	 TermerizedBody = [

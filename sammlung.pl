@@ -311,7 +311,7 @@ sammelbarInitFlach(System, Planet) :-
 	 (Operation = bekannt, sammlung(Position, 'System', 'MeinPlanet', Operation, Stoff, _, _, _)),
 	 Position > 0
 	),
-	sammelAktion:pruefeOperationVorraussetzung(Operation),
+	sammelAktion:pruefeSammelAktionVorraussetzung(Operation),
 	assertz(sammelbar(Stoff, Operation)),
 	fail.
 	
