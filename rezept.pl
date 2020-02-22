@@ -478,6 +478,7 @@ rezept(bauen, [[20, reinesFerrit], [1, kommunikationsStationRezept]], [1, kommun
 rezept(bauen, [[100, uran], [2, metallPlatten], [1, fortschrittlicherIonenAkku], [1, autonomeBergBauEinheitRezept]], [1, autonomeBergBauEinheit], 0).
 rezept(bauen, [[5, ammoniak], [2, metallPlatten], [2, hermetischesSiegel], [1, atmosphaerenVerarbeitungsAnlageRezept]], [1, atmosphaerenVerarbeitungsAnlage], 0).
 rezept(bauen, [[1, metallPlatten], [1, kohlenStoffNanoRohr], [1, nachrichtenModulRezept]], [1, nachrichtenModul], 0).
+rezept(bauen, [[5, metallPlatten], [5, sauerStoffKapsel], [3, diWasserStoffGelee], [1, sauerStoffVerarbeiterRezept]], [1, sauerStoffVerarbeiter], 0).
 
 /* =====================  tragbar ==================================================== */
 rezept(bauen, [[40, chromatischesMetall], [1, basisComputerRezept]], [1, basisComputer], 0 ).
@@ -561,7 +562,16 @@ rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, phosphor], [1, 
 
 /* ---------------------  Anomalie  -------------------------------------------------- */
 rezept(bauen, [[2, metallPlatten], [1, hermetischesSiegel], [25, natrium], [1, naehrStoffProzessorRezept]], [1, naehrStoffProzessor], 0).
-rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelterRezept]], [1, lagerBehaelter], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter0Rezept]], [1, lagerBehaelter0], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter1Rezept]], [1, lagerBehaelter1], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter2Rezept]], [1, lagerBehaelter2], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter3Rezept]], [1, lagerBehaelter3], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter4Rezept]], [1, lagerBehaelter4], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter5Rezept]], [1, lagerBehaelter5], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter6Rezept]], [1, lagerBehaelter6], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter7Rezept]], [1, lagerBehaelter7], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter8Rezept]], [1, lagerBehaelter8], 0).
+rezept(bauen, [[50, magnetisiertesFerrit], [20, natrium], [1, lagerBehaelter9Rezept]], [1, lagerBehaelter9], 0).
 rezept(bauen, [[10, ferritStaub], [1, aussehenModifikatorRezept]], [1, aussehenModifikator], 0 ).
 rezept(bauen, [[10, metallPlatten], [2, ionenAkku], [2, mikroProzessor], [1, landeFeldRezept]], [1, landeFeld], 0).
 rezept(bauen, [[4, metallPlatten], [2, polyFaser], [50, faecium], [1, nutzTierEinheitRezept]], [1, nutzTierEinheit], 0).
@@ -751,6 +761,7 @@ rezept(bauen, [[20, kohlenStoff], [1, annaeherungsSchalterRezept]], [1, annaeher
 rezept(bauen, [[20, kohlenStoff], [1, schalterRezept]], [1, schalter], 0).
 rezept(bauen, [[25, ferritStaub], [15, ionisiertesKobalt], [1, energieUmkehrerRezept]], [1, energieUmkehrer], 0).
 rezept(bauen, [[2, metallPlatten], [60, magnetisiertesFerrit], [75, chromatischesMetall], [1, elektroMagnetischerGeneratorRezept]], [1, elektroMagnetischerGenerator], 0).
+
 
 /* =====================  Landwirtschaftsmodule ====================================== */
 rezept(bauen, [[30, reinesFerrit], [20, ionisiertesKobalt], [20, kohlenStoff], [1, hydroKulturTrogRezept]], [1, hydroKulturTrog], 0).
@@ -1449,9 +1460,13 @@ rezept(rezeptInAussenPostenErwerben, [[120, nanitHaufen]], [1, schildGitterBReze
 rezept(rezeptInAussenPostenErwerben, [[90, nanitHaufen]], [1, laufIonisatorCRezept], 0 ).
 rezept(rezeptInAussenPostenErwerben, [[120, nanitHaufen]], [1, sauerStoffWiederVerwerterCRezept], 0 ).
 
-/* =====================  Forschungscomputer ========================================= */
+/* =====================  Forschungscomputer klein =================================== */
 /* ---------------------  Unterschlüpfe aus Holz ---------------------------------- */
+rezept(rezeptAmForschungsComputerErwerben, [[0, geborgeneDaten]], [1, holzWandRezept], 0 ).
+rezept(rezeptAmForschungsComputerErwerben, [[0, geborgeneDaten]], [1, holzBodenPlatteRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[1, geborgeneDaten]], [1, duenneHolzWandRezept], 0 ).
+rezept(rezeptAmForschungsComputerErwerben, [[0, geborgeneDaten]], [1, holzTuerRahmenRezept], 0 ).
+rezept(rezeptAmForschungsComputerErwerben, [[0, geborgeneDaten]], [1, holzDachRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[3, geborgeneDaten]], [1, glasPlatteMitHolzRahmenRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[1, geborgeneDaten]], [1, holzRampeRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[1, geborgeneDaten]], [1, kleineHolzPlatteRezept], 0 ).
@@ -1526,56 +1541,331 @@ rezept(rezeptAmForschungsComputerErwerben, [[1, geborgeneDaten]], [1, halberBeto
 
 /* ---------------------  zentrale Wohntechnologie -------------------------------- */
 rezept(rezeptAmForschungsComputerErwerben, [[2, geborgeneDaten]], [1, basisTelePorterModulRezept], 0 ).
-rezept(rezeptAmForschungsComputerErwerben, [[2, geborgeneDaten]], [1, bioTreibStoffReaktorRezept], 0 ).
-rezept(rezeptAmForschungsComputerErwerben, [[2, geborgeneDaten]], [1, speicherSignalRezept], 0 ).
+rezept(rezeptAmForschungsComputerErwerben, [[1, geborgeneDaten]], [1, bioTreibStoffReaktorRezept], 0 ).
+rezept(rezeptAmForschungsComputerErwerben, [[1, geborgeneDaten]], [1, speicherSignalRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[5, geborgeneDaten]], [1, gesundheitsStationRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[1, geborgeneDaten]], [1, signalBoosterRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[3, geborgeneDaten]], [1, batterieRezept], 0 ).
 rezept(rezeptAmForschungsComputerErwerben, [[8, geborgeneDaten]], [1, solarModulRezept], 0 ).
 
 /* =====================  Anomalie =================================================== */
+/* =====================  Konstruktionsterminal groß ================================= */
 /* ------------------------------- grosse Vorfertigungen ---------------- */
 rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, zylindrischerRaumRezept], 0 ).
 rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, quadratischerRaumRezept], 0 ).
 rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, geraderKorridorRezept], 0 ).
 rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, tuerRezept], 0 ).
 rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, fundamentRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, lFoermigerKorridorRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, korridorMitGlasDachRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lFoermigerKorridorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, korridorMitGlasDachRezept], 0 ).
 rezept(rezeptInAnomalieErwerben, [[8, geborgeneDaten]], [1, holoTuerRezept], 0 ).
 rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, zugangsRampeRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, pflasterungRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, viererFundamentStrebeRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, fundamentStrebeRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, zylindrischerRaumRahmenRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, tFoermigerKorridorRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, xFoermigerKorridorRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, korridorFensterRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, bioKuppelRaumRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, gebogenerKorridorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, pflasterungRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, viererFundamentStrebeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, fundamentStrebeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, zylindrischerRaumRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, tFoermigerKorridorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, xFoermigerKorridorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, korridorFensterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, bioKuppelRaumRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, gebogenerKorridorRezept], 0 ).
 rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, leiterRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, pflasterungVierFachRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, pflasterungPodestRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, grossesGlasPaneelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, pflasterungVierFachRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, pflasterungPodestRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, grossesGlasPaneelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
 
-/* ------------------------------- kleine Vorfertigungen ---------------- 
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, aussichtsKugelRezept], 0 ).
-*/
+/* ------------------------------- kleine Vorfertigungen ---------------- */
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, wuerfelFoermigerRaumRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelRaumFundamentStrebeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, gewoelbteWuerfelFoermigeWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, wuerfelFoermigerGlasRaumRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelFoermigerRaumRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelFoermigerRaumBodenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelRaumViererFundamentStrebeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, innenTreppenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelFoermigeInnenWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, wuerfelFoermigerDachAufsatzRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, gewoelbtesWuerfelFoermigesDachRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelFoermigesFensterEckigRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelFoermigesFensterRundRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, infraStrukturLeiterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelFoermigeInnenTuerRezept], 0 ).
+
+/* ------------------------------- Technologiemodule -------------------- */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, speicherSignalRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, terminalDesGalaktischenMarktesRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, nachrichtenModulRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, gesundheitsStationRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, basisTelePorterModulRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, naehrStoffProzessorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, lichtBoxRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kommunikationsStationRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, gefahrenSchutzEinheitRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, aussehenModifikatorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, landeFeldRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, tragbareRaffinerieRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, nutzTierEinheitRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, automatischerFuettererRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, leuchtBodenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, geraeuschBoxRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, kugelErzeugerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, kurzStreckenTelePorterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, mittlereRaffinerieRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, byteBeatGeraetRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, byteBeatSchaltungRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, grosseRaffinerieRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[20, geborgeneDaten]], [1, antiMaterieReaktorRezept], 0 ).
+
+/* ------------------------------- Transportmodule ---------------------- */
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, roamerGeoBuchtRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, nomadenGeoBuchtRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, exoFahrzeugRufStationRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, nautilonKammerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, pilgerGeoBuchtRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, kolossGeoBuchtRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, rennInitiatorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, rennHindernisRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, rennKraftVerstaerkerRezept], 0 ).
+
+/* ------------------------------- Wasser Konstruktion ------------------ */
+rezept(rezeptInAnomalieErwerben, [[6, geborgeneDaten]], [1, tiefSeeKammerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, meeresUnterSchlupfRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, glasTunnelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[6, geborgeneDaten]], [1, quadratischeTiefSeeKammerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, wasserDichteTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, lFoermigerGlasTunnelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, vertikalerGlasTunnelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, mondTeichBodenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, tFoermigerGlasTunnelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, xFoermigerGlasTunnelRezept], 0 ).
+
+/* ------------------------------- Motiv Designs 1 ---------------------- */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivStilisiertesRRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivRundPipetteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivBuegelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo0Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivSchildErstochenerVogelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivFaltungDuennDickRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivZiegelSteineRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivRadioAktivGrauRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivGrabSteinRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivHelloGamesRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo1Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo2Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivSchildGrünerMannRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivSchildKorvaxRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo3Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo5Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo7Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo9Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo4Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo6Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivNo8Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivFroschSackRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, motivLaemmchenRezept], 0 ).
+
+/* ------------------------------- Dekorative Module 1 ------------------ */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wandBildSchirmRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wandVentilatorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, gruenerWandBildSchirmRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, schubLadenSchrankRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wandEinheitRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, lagerModulRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, deckenPaneelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, techBedienFeldRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, serverRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kanisterRegalRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleineKisteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, schliessFachRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, verschlosseneKisteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, flachesModulRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, seitenModulRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, regalModulRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, roboterArmRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, waffenRegalRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, oszilloskopRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, achtEckSchrankRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, fassFoermigerFabrikatorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, hoherSchrankRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kistenFoermigerFabrikatorRezept], 0 ).
+
+/* ------------------------------- Dekorative Module 2 ------------------ */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, schalenSitzStuhlRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, stuhlEckigRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, flagge1Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, tischRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, bettRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, stuhlFriseurRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, sofaRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, flagge2Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wandFlagge1], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, tischSechsEckigRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, einfacherSchreibTischRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, ergonomischesSofaRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, eckSofaRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, flagge3Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, flagge4Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wandFlagge3Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wandFlagge2Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, bodenMatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, grosseMonitorStationRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, gewoelbterTischRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, monitorStationRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, arbeitsPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, leichterTischRezept], 0 ).
+
+/* ------------------------------- Lichter ------------------------------ */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, lichtHandLampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, weisseLeuchteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, lichtStehLampeEckigRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, laborLampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, blaueLeuchteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, roteLeuchteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, lichtStehLampeRundRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, lichtStehLampeSchirmRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, deckenLeuchteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, gelbeLeuchteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, grueneLeuchteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, pinkeLeuchteRezept], 0 ).
+
+/* ------------------------------- Industriemodule ---------------------- */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, bioTreibStoffReaktorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, mineralienExtraktorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wandSchalterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[8, geborgeneDaten]], [1, solarModulRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, batterieRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, gasExtraktorRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, versorgungsDepotRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, versorgungsRohrRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, bodenSchalterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, annaeherungsSchalterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, schalterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, energieUmkehrerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, automatischerSchalterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, elektroMagnetischerGeneratorRezept], 0 ).
+
+/* ------------------------------- Landwirtschaft ----------------------- */
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, hydroKulturTrogRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, topfPflanzeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[10, geborgeneDaten]], [1, grosserHydroKulturTrogRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, pilzGeflechtRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, frostWurzRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, gammaGrasRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, echinoKaktusRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, sternenDornRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, sonnenRebeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, stehenderPflanzenBehaelterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, floraBehaelterHochBeetRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, floraBehaelterKastenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, floraBehaelterTubusRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, giftIgelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, gravitinoWirtRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, magenKrampfBlumeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, morditWurzelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, eiweissPerlenKugelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, nipNipRezept], 0 ).
+
+/* ------------------------------- Unterschlüpfe aus Holz --------------- */
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, holzWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, holzBodenPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, duenneHolzWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, holzTuerRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[0, geborgeneDaten]], [1, holzDachRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, glasPlatteMitHolzRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, holzRampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleineHolzPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, holzDreieckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, schraegeHolzPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleineHolzWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, holzFensterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, holzTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, elektrischeHolzTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, holzDachPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, holzDachEckStueckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, holzBogenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, halbeHolzRampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleinesHolzDreieckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kurzeHolzWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, holzFassadeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, kleineHolzTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, dachInnenEckteilAusHolzRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, halberHolzBogenRezept], 0 ).
+
+/* ------------------------------- Unterschlüpfe aus Metall ------------- */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallBodenPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, duenneMetallWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, metallTuerRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, metallDachRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, glasPlatteMitMetallRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallRampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleineMetallPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallDreieckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, schraegeMetallPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleineMetallWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, metallFensterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, elektrischeMetallTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallDachPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallDachEckStueckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, metallBogenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, halbeMetallRampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleinesMetallDreieckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kurzeMetallWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, metallFassadeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, kleineMetallTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, dachInnenEckteilAusMetallRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, halberMetallBogenRezept], 0 ).
+
+/* ------------------------------- Unterschlüpfe aus Beton -------------- */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonBodenPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, duenneBetonWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, betonTuerRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, betonDachRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, glasPlatteMitBetonRahmenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonRampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleineBetonPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonDreieckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, schraegeBetonPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleineBetonWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonFensterRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, betonTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, elektrischeBetonTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonDachPlatteRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonDachEckStueckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, betonBogenRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, halbeBetonRampeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleinesBetonDreieckRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kurzeBetonWandRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[3, geborgeneDaten]], [1, betonFassadeRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[2, geborgeneDaten]], [1, kleineBetonTuerRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, dachInnenEckteilAusBetonRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, halberBetonBogenRezept], 0 ).
+
+/* ------------------------------- primitive Formen --------------------- */
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, grosserKeilRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kleinerKeilRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, rohrRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, pyramideRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, gebogenesRohrRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, stabilerWuerfelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, zylinderRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, wuerfelRezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[1, geborgeneDaten]], [1, kugelRezept], 0 ).
+
+/* ------------------------------- Lagereinheiten ----------------------- */
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter0Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter1Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter2Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter3Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter4Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter5Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter6Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter7Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter8Rezept], 0 ).
+rezept(rezeptInAnomalieErwerben, [[5, geborgeneDaten]], [1, lagerBehaelter9Rezept], 0 ).
 
 /* ------------------------------- Raumschiffmodule --------------------- */
 rezept(rezeptInAnomalieErwerben, [[460, nanitHaufen]], [1, instabilitaetsAntriebARezept], 0 ).

@@ -305,12 +305,6 @@ stoff(modul, nautilonKanonenModulC, 0).
 stoff(modul, osmotischerGeneratorC, 0).
 stoff(modul, tethysStrahl, 0).
 
-/* =============================== gebaute Technologie ================== */
-/* ------------------------------- Tauschobjekte ------------------------ */
-	
-stoff(basisBauEndStoff, byteBeatGeraet, 0).
-stoff(basisBauEndStoff, byteBeatSchaltung, 0).
-
 /* =============================== Baustoffe ============================ */
 /* ------------------------------- Terminals ---------------------------- */
 stoff(basisBauEndStoff, konstruktionsTerminal, 0).
@@ -353,10 +347,19 @@ stoff(basisBauEndStoff, pilzGeflecht, 0).
 stoff(basisBauEndStoff, sonnenRebe, 0).
 stoff(basisBauEndStoff, sternenDorn, 0).
 stoff(basisBauEndStoff, topfPflanze, 0).
-
+stoff(basisBauEndStoff, stehenderPflanzenBehaelter, 0).
 
 /* ------------------------------- Lager --- ---------------------------- */
-stoff(basisBauEndStoff, lagerBehaelter, 0).
+stoff(basisBauEndStoff, lagerBehaelter0, 0).
+stoff(basisBauEndStoff, lagerBehaelter1, 0).
+stoff(basisBauEndStoff, lagerBehaelter2, 0).
+stoff(basisBauEndStoff, lagerBehaelter3, 0).
+stoff(basisBauEndStoff, lagerBehaelter4, 0).
+stoff(basisBauEndStoff, lagerBehaelter5, 0).
+stoff(basisBauEndStoff, lagerBehaelter6, 0).
+stoff(basisBauEndStoff, lagerBehaelter7, 0).
+stoff(basisBauEndStoff, lagerBehaelter8, 0).
+stoff(basisBauEndStoff, lagerBehaelter9, 0).
 stoff(basisBauEndStoff, verschlosseneKiste, 0).
 
 /* ------------------------------- Exo-Fahrzeug-Stationen --------------- */
@@ -371,7 +374,6 @@ stoff(basisBauEndStoff, rennHindernis, 0).
 stoff(basisBauEndStoff, rennKraftVerstaerker, 0).
 
 /* ------------------------------- Tragbare Technologie ----------------- */
-stoff(basisBauEndStoff, atmosphaerenVerarbeitungsAnlage, 0).
 stoff(basisBauEndStoff, autonomeBergBauEinheit, 0).
 stoff(basisBauEndStoff, basisComputer, 0).
 stoff(basisBauEndStoff, batterie, 0).
@@ -387,20 +389,30 @@ stoff(basisBauEndStoff, tragbareRaffinerie, 0).
 
 /* ------------------------------- Technologie Allgemein ---------------- */
 stoff(basisBauEndStoff, antiMaterieReaktor, 0).
+stoff(basisBauEndStoff, atmosphaerenVerarbeitungsAnlage, 0).
 stoff(basisBauEndStoff, aussehenModifikator, 0).
 stoff(basisBauEndStoff, automatischerFuetterer, 0).
 stoff(basisBauEndStoff, basisBergungsKapsel, 0).
 stoff(basisBauEndStoff, basisTelePorterModul, 0).
 stoff(basisBauEndStoff, gefahrenSchutzEinheit, 0).
+stoff(basisBauEndStoff, geraeuschBox, 0).
 stoff(basisBauEndStoff, gesundheitsStation, 0).
 stoff(basisBauEndStoff, grosseRaffinerie, 0).
 stoff(basisBauEndStoff, kurzStreckenTelePorter, 0).
 stoff(basisBauEndStoff, landeFeld, 0).
+stoff(basisBauEndStoff, leuchtBoden, 0).
+stoff(basisBauEndStoff, lichtBox, 0).
 stoff(basisBauEndStoff, mittlereRaffinerie, 0).
 stoff(basisBauEndStoff, nutzTierEinheit, 0).
 stoff(basisBauEndStoff, terminalDesGalaktischenMarktes, 0).
+stoff(basisBauEndStoff, kugelErzeuger, 0).
+stoff(basisBauEndStoff, sauerStoffVerarbeiter, 0).
+stoff(basisBauEndStoff, byteBeatGeraet, 0).
+stoff(basisBauEndStoff, byteBeatSchaltung, 0).
+
 
 /* ------------------------------- Energietechnologie ------------------- */
+stoff(basisBauEndStoff, automatischerSchalter, 0).
 
 /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Dekoration %%%%%%%%%%%%%%%%%%%%%%%%%%% */
 /* =====================  Motiv Designs ============================================== */
@@ -443,6 +455,7 @@ stoff(basisBauEndStoff, kleineKiste, 0).
 stoff(basisBauEndStoff, schliessFach, 0).
 stoff(basisBauEndStoff, flachesModul, 0).
 stoff(basisBauEndStoff, seitenModul, 0).
+stoff(basisBauEndStoff, lagerModul, 0).
 stoff(basisBauEndStoff, regalModul, 0).
 stoff(basisBauEndStoff, roboterArm, 0).
 stoff(basisBauEndStoff, waffenRegal, 0).
@@ -571,6 +584,7 @@ stoff(basisBauEndStoff, betonFassade, 0).
 stoff(basisBauEndStoff, kleineBetonTuer, 0).
 stoff(basisBauEndStoff, dachInnenEckteilAusBeton, 0).
 stoff(basisBauEndStoff, halberBetonBogen, 0).
+stoff(basisBauEndStoff, kleineBetonPlatte, 0).
 
 /* =====================  gross vorgefertigt ========================================= */
 stoff(basisBauEndStoff, zylindrischerRaum, 0).
@@ -1099,7 +1113,16 @@ stoff(bauRezept, gesundheitsStationRezept, 0).
 stoff(bauRezept, signalBoosterRezept, 0).
 stoff(bauRezept, gefahrenSchutzEinheitRezept, 0).
 stoff(bauRezept, naehrStoffProzessorRezept, 0).
-stoff(bauRezept, lagerBehaelterRezept, 0).
+stoff(bauRezept, lagerBehaelter0Rezept, 0).
+stoff(bauRezept, lagerBehaelter1Rezept, 0).
+stoff(bauRezept, lagerBehaelter2Rezept, 0).
+stoff(bauRezept, lagerBehaelter3Rezept, 0).
+stoff(bauRezept, lagerBehaelter4Rezept, 0).
+stoff(bauRezept, lagerBehaelter5Rezept, 0).
+stoff(bauRezept, lagerBehaelter6Rezept, 0).
+stoff(bauRezept, lagerBehaelter7Rezept, 0).
+stoff(bauRezept, lagerBehaelter8Rezept, 0).
+stoff(bauRezept, lagerBehaelter9Rezept, 0).
 stoff(bauRezept, aussehenModifikatorRezept, 0).
 stoff(bauRezept, landeFeldRezept, 0).
 stoff(bauRezept, nutzTierEinheitRezept, 0).
@@ -1321,6 +1344,15 @@ stoff(bauRezept, metallDreieckRezept, 0).
 stoff(bauRezept, kleinesMetallDreieckRezept, 0).
 stoff(bauRezept, betonDreieckRezept, 0).
 stoff(bauRezept, kleinesBetonDreieckRezept, 0).
+stoff(bauRezept, lichtBoxRezept, 0).
+stoff(bauRezept, leuchtBodenRezept, 0).
+stoff(bauRezept, geraeuschBoxRezept, 0).
+stoff(bauRezept, kugelErzeugerRezept, 0).
+stoff(bauRezept, lagerModulRezept, 0).
+stoff(bauRezept, automatischerSchalterRezept, 0).
+stoff(bauRezept, stehenderPflanzenBehaelterRezept, 0).
+stoff(bauRezept, kleineBetonPlatteRezept, 0).
+stoff(bauRezept, sauerStoffVerarbeiterRezept, 0).
 
 /* für Quecksilber Items */
 stoff(bauRezept, feuerWerkGruenRezept, 0).
