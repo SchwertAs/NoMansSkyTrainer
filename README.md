@@ -20,4 +20,4 @@ Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekomm
 - Start mit Doppelklick auf das Exe im Verzeichnis. Das Verzeichnis muss Schreibrechte haben, damit das Programm seine Datenbank anlegen kann.
 - Eventuell kommt eine Meldung von der Firewall, ob man den Port 8000 erlauben möchte. Dem bitte zustimmen.
 - Die Anwendung ist als Web Server programmiert.
-- Der Anwendungsserver ist nach dem Start dec Exe Files unter http://localhost:8000 erreichbar.
+- Der Anwendungsserver ist nach dem Start des Exe Files unter http://localhost:8000 erreichbar.
