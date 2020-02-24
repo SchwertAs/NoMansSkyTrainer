@@ -30,7 +30,7 @@ initSysteme :-
 	,assertz(systeme(0, 'System', 'gelb')).
 	
 initPlaneten :-
-	abolish(planeten/3)
+	abolish(planeten/4)
 	/* Bezeichnung und Atmospherentyp */
 	/* System, Planet, oneOf(stickStoff, schwefelin, radon, sauerStoff) */
 	,assertz(planeten(0, 'System', 'MeinPlanet', 'stickStoff')).
@@ -39,25 +39,27 @@ initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
 	abolish(systemAusstattung/2)
 	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* fix */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWald], 1500)) /* fix */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWeltRaum], 1431)) /* fix */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortRaumStation], 2914)) /* fix */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlageSauerStoff], 536)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAthmosphaerenAnlage], 536)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWasser], 10660)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAtmosphaerenAnlage], 536)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSauerStoffVearbeiter], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAussenPosten], 11336)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortNahrungsProzessor], 1100)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortKleineRaffinerie], 1171)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortMittlereRaffinerie], 1135)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortGrosseRaffinerie], 2400)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix weil sie gerufen werden kann */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortForschungsTerminal], 470)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 2400)) 
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0)).
-
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortGrosseRaffinerie], 2400)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortKleineRaffinerie], 1171)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortMittlereRaffinerie], 1135)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortNahrungsProzessor], 1100)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortPlantage], 620)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortRaumStation], 2914)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0))
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWald], 1500)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWasser], 10660)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWeltRaum], 1431)) /* fix */
+	.
+	
 copyDefaultIfEmpty(System, Planet) :-
 	findall(Entfernung, systemAusstattung([System, Planet, _], Entfernung), Entfernungen),
 	((Entfernungen = [],

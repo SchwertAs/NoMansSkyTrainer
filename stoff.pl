@@ -51,6 +51,12 @@ stoff(rohStoff, goldKlumpen, 3280).
 stoff(rohStoff, sturmKristall, 129150).
 stoff(rohStoff, kristallSulfid, 7410).
 
+stoff(rohStoff, beutelGift, 11685).
+stoff(rohStoff, eiweissPerle, 9025).
+stoff(rohStoff, gravitinoBall, 12445).
+stoff(rohStoff, nipNipKnospen, 17776).
+
+
 /* =============================== hergestellte Produkte ================ */
 /* herstellen mit Fabrikrezept oder Questrezept, verkaufen */
 stoff(komponente, antiMaterie, 5233).
@@ -117,6 +123,21 @@ stoff(produkt, thermischesKondensat, 50000).
 stoff(produkt, tragbarerReaktor, 4200000).
 stoff(produkt, warpZelle, 11733).
 stoff(produkt, warpHyperKern, 46750).
+
+stoff(produkt, herzDerSonne, 1000).
+stoff(produkt, modifizierteQuanten, 1000).
+stoff(produkt, novaeRegenerat, 1000).
+stoff(produkt, zustandsPhase, 1000).
+stoff(produkt, photischerJade, 1000).
+stoff(produkt, endeDerDaemmerung, 1000).
+stoff(produkt, dunkleMaterie, 1000).
+stoff(produkt, nooSphaerischKugel, 1000).
+stoff(produkt, umhuellterSchatten, 1000).
+stoff(produkt, gefangeneNanode, 1000).
+stoff(produkt, seelenEngine, 1000).
+stoff(produkt, sternenSamen, 1000).
+
+stoff(produkt, gedankenBogen, 1000).
 
 stoff(pass, atlasPassV1, 0).
 stoff(pass, atlasPassV2, 0).
@@ -640,56 +661,6 @@ stoff(basisBauEndStoff, mondTeichBoden, 0).
 stoff(basisBauEndStoff, tFoermigerGlasTunnel, 0).
 stoff(basisBauEndStoff, xFoermigerGlasTunnel, 0).
 
-/* =============================== anormale Materialien ================= */
-
-stoff(stoerung, kappillarMuschel, 1000).
-stoff(stoerung, lichtBruch, 1000).
-stoff(stoerung, defekterSeparator, 1000).
-stoff(stoerung, kalziPilz, 1000).
-stoff(stoerung, terbiumWachstum, 1000).
-stoff(stoerung, verknoecherterStern, 1000).
-stoff(stoerung, elektrischerWuerfel, 1000).
-stoff(stoerung, klapperWirbleSaeule, 1000).
-
-
-/* =============================== Quecksilber Kauf ===================== */
-/*
-stoff(geste, totalVerbluefft, 0).
-stoff(geste, ha, 0).
-stoff(geste, erstaunen, 0).
-stoff(geste, feiern, 0).
-stoff(geste, abwesenderBlick, 0).
-stoff(geste, heroischePose, 0).
-stoff(geste, unglaeubigkeit, 0).
-stoff(geste, keinProblem, 0).
-
-stoff(kleidung, antiMaterieJetpackSpur, 0).
-stoff(kleidung, regenBogenJetpackSpur, 0).
-stoff(kleidung, roteJetpackSpur, 0).
-stoff(kleidung, grueneJetpackSpur, 0).
-stoff(kleidung, blaueJetpackSpur, 0).
-stoff(kleidung, ariadneGesicht, 0).
-stoff(kleidung, kronosGesicht, 0).
-stoff(kleidung, persesGesicht, 0).
-stoff(kleidung, heperosGesicht, 0).
-stoff(kleidung, seleneGesicht, 0).
-stoff(kleidung, tethysGesicht, 0).
-stoff(kleidung, eosGesicht, 0).
-stoff(kleidung, hyperionGesicht, 0).
-stoff(kleidung, heliosGesicht, 0).
-stoff(kleidung, aresGesicht, 0).
-stoff(kleidung, merkurGesicht, 0).
-stoff(kleidung, geminiGesicht, 0).
-stoff(kleidung, gepanzerteSchulterPlatten, 0).
-stoff(kleidung, gepanzerteBrustRuestung, 0).
-stoff(kleidung, gepanzerteGamaschen, 0).
-stoff(kleidung, gepanzerteExoHandschuhe, 0).
-stoff(kleidung, gepanzerteStiefel, 0).
-stoff(kleidung, erstGebrueteterKampfMaske, 0).
-stoff(kleidung, augeDerKorvaxHelm, 0).
-stoff(kleidung, lodernderOrbitHelm, 0).
-stoff(kleidung, spaerlicherHorizontHelm, 0).
-*/
 
 stoff(basisBauEndStoff, feuerWerkGruen, 0).
 stoff(basisBauEndStoff, feuerWerkBlau, 0).
@@ -822,20 +793,56 @@ stoff(handelsWare, kuehlMittelTank, 200000).
 stoff(handelsWare, verstaerkteRohre, 50000).
 stoff(handelsWare, ehemalsNeutzlicheFedern, 1000).
 
-stoff(produkt, herzDerSonne, 1000).
-stoff(produkt, modifizierteQuanten, 1000).
-stoff(produkt, novaeRegenerat, 1000).
-stoff(produkt, zustandsPhase, 1000).
-stoff(produkt, photischerJade, 1000).
-stoff(produkt, endeDerDaemmerung, 1000).
-stoff(produkt, dunkleMaterie, 1000).
-stoff(produkt, nooSphaerischKugel, 1000).
-stoff(produkt, umhuellterSchatten, 1000).
-stoff(produkt, gefangeneNanode, 1000).
-stoff(produkt, seelenEngine, 1000).
-stoff(produkt, sternenSamen, 1000).
+/* =============================== anormale Materialien ================= */
 
-stoff(produkt, gedankenBogen, 1000).
+stoff(stoerung, kappillarMuschel, 1000).
+stoff(stoerung, lichtBruch, 1000).
+stoff(stoerung, defekterSeparator, 1000).
+stoff(stoerung, kalziPilz, 1000).
+stoff(stoerung, terbiumWachstum, 1000).
+stoff(stoerung, verknoecherterStern, 1000).
+stoff(stoerung, elektrischerWuerfel, 1000).
+stoff(stoerung, klapperWirbleSaeule, 1000).
+
+
+/* =============================== Quecksilber Kauf ===================== */
+/*
+stoff(geste, totalVerbluefft, 0).
+stoff(geste, ha, 0).
+stoff(geste, erstaunen, 0).
+stoff(geste, feiern, 0).
+stoff(geste, abwesenderBlick, 0).
+stoff(geste, heroischePose, 0).
+stoff(geste, unglaeubigkeit, 0).
+stoff(geste, keinProblem, 0).
+
+stoff(kleidung, antiMaterieJetpackSpur, 0).
+stoff(kleidung, regenBogenJetpackSpur, 0).
+stoff(kleidung, roteJetpackSpur, 0).
+stoff(kleidung, grueneJetpackSpur, 0).
+stoff(kleidung, blaueJetpackSpur, 0).
+stoff(kleidung, ariadneGesicht, 0).
+stoff(kleidung, kronosGesicht, 0).
+stoff(kleidung, persesGesicht, 0).
+stoff(kleidung, heperosGesicht, 0).
+stoff(kleidung, seleneGesicht, 0).
+stoff(kleidung, tethysGesicht, 0).
+stoff(kleidung, eosGesicht, 0).
+stoff(kleidung, hyperionGesicht, 0).
+stoff(kleidung, heliosGesicht, 0).
+stoff(kleidung, aresGesicht, 0).
+stoff(kleidung, merkurGesicht, 0).
+stoff(kleidung, geminiGesicht, 0).
+stoff(kleidung, gepanzerteSchulterPlatten, 0).
+stoff(kleidung, gepanzerteBrustRuestung, 0).
+stoff(kleidung, gepanzerteGamaschen, 0).
+stoff(kleidung, gepanzerteExoHandschuhe, 0).
+stoff(kleidung, gepanzerteStiefel, 0).
+stoff(kleidung, erstGebrueteterKampfMaske, 0).
+stoff(kleidung, augeDerKorvaxHelm, 0).
+stoff(kleidung, lodernderOrbitHelm, 0).
+stoff(kleidung, spaerlicherHorizontHelm, 0).
+*/
 
 /* ausgraben, pflücken, für Ansehen schenken, verkaufen */
 stoff(kuriositaet, gekNip, 20625).
@@ -843,14 +850,10 @@ stoff(kuriositaet, gekRelikt, 23375).
 stoff(kuriositaet, korvaxGehaeuse, 22000).
 stoff(kuriositaet, vyKeenBildnis, 24750).
 stoff(kuriositaet, vyKeenDolch, 11688).
-stoff(kuriositaet, beutelGift, 11685).
-stoff(kuriositaet, eiweissPerle, 9025).
-stoff(kuriositaet, gravitinoBall, 12445).
 stoff(kuriositaet, divergenzWuerfel, 3015).
 stoff(kuriositaet, hadalKern, 92625).
 stoff(kuriositaet, korvaxKonvergenzWuerfel, 13063).
 stoff(kuriositaet, kristallFragment, 3280).
-stoff(kuriositaet, nipNipKnospen, 17776).
 stoff(kuriositaet, vykenTafel, 1250).
 
 

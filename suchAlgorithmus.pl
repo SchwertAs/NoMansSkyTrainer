@@ -163,17 +163,17 @@ rezeptZulaessig(raffinieren, Komponenten, _) :-
 	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
 	!.
 
-rezeptZulaessig(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, Komponenten, _) :-
+rezeptZulaessig(ausSauerStoffVearbeiterGewinnen, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlageSauerStoff], _),
+	spielStatus:systemAusstattung([System, Planet, ortSauerStoffVearbeiter], _),
 	!.
 
 rezeptZulaessig(ausAtmosphaerenAnlageGewinnen, Komponenten, Stoff) :-
 	Komponenten = [[_, _]],
 	/* es muss eine Atmospherenanlage auf dem Planeten geben */
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	spielStatus:systemAusstattung([System, Planet, ortAthmosphaerenAnlage], _),
+	spielStatus:systemAusstattung([System, Planet, ortAtmosphaerenAnlage], _),
 	spielStatus:planeten(_, System, Planet, AtmospherenArt),
 	Stoff = AtmospherenArt,
 	!.

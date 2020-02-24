@@ -26,7 +26,7 @@ sammelOrt(terrainFormerNutzen, ortWald).
 sammelOrt(jagen, ortWald).
 sammelOrt(erkaempfen, ortWald). 
 sammelOrt(vonTierErhalten, ortWald).
-sammelOrt(ernten, ortWald).
+sammelOrt(ernten, ortPlantage).
 sammelOrt(raumSchuerfen, ortWeltRaum).
 sammelOrt(kaufen, Ort) :-
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
@@ -39,12 +39,13 @@ sammelOrt(kaufen, Ort) :-
 sammelOrt(ertauchen, ortWasser).
 sammelOrt(unterWasserErkaempfen, ortWasser).
 
-pruefeSammelAktionVorraussetzung(minenLaserNutzen) :-
+/* Vorraussetzungen im Multiwerkzeug */
+pruefeSammelAktionVorraussetzung(System, Planet, minenLaserNutzen) :-
 	!,
 	spielStatus(minenLaser),
 	!.
 	
-pruefeSammelAktionVorraussetzung(verbessertenMinenLaserNutzen) :-
+pruefeSammelAktionVorraussetzung(System, Planet, verbessertenMinenLaserNutzen) :-
 	!,
 	spielStatus(verbesserterMinenLaser),
 	!.
@@ -64,14 +65,7 @@ pruefeSammelAktionVorraussetzung(erkaempfen) :-
 	spielStatus(waffeVorhanden),
 	!.
 
-pruefeSammelAktionVorraussetzung(unterWasserErkaempfen) :-
-	!,
-	spielStatus(waffeVorhanden),
-	sammelOrt(unterWasserErkaempfen, Ort),
-	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	spielStatus:systemAusstattung([System, Planet, Ort], _),
-	!.
-
+/* Vorraussetzungen ohne Ortseinschränkung */
 pruefeSammelAktionVorraussetzung(raumSchuerfen) :-
 	!,
 	spielStatus(raumSchiffIstFlott),
@@ -80,6 +74,22 @@ pruefeSammelAktionVorraussetzung(raumSchuerfen) :-
 pruefeSammelAktionVorraussetzung(exoFahrzeugMinenLaserNutzen) :-
 	!,
 	spielStatus(exoFahrzeugMinenLaser),
+	!.
+
+/* Vorraussetzungen in Planetenausstattung */
+pruefeSammelAktionVorraussetzung(unterWasserErkaempfen) :-
+	!,
+	spielStatus(waffeVorhanden),
+	sammelOrt(unterWasserErkaempfen, Ort),
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, Ort], _),
+	!.
+
+pruefeSammelAktionVorraussetzung(ernten) :-
+	!,
+	sammelOrt(ernten, Ort),
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, Ort], _),
 	!.
 
 pruefeSammelAktionVorraussetzung(Operation) :-

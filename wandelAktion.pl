@@ -6,8 +6,8 @@ wandelAktion(herstellen, ortSpieler).
 wandelAktion(installieren, ortSpieler).
 wandelAktion(kochen, ortNahrungsProzessor).
 wandelAktion(raffinieren, nil).  /* sonderlocke mit Ortsauswahl */
-wandelAktion(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, ortAthmosphaerenAnlageSauerStoff).
-wandelAktion(ausAtmosphaerenAnlageGewinnen, ortAthmosphaerenAnlage).
+wandelAktion(ausSauerStoffVearbeiterGewinnen, ortSauerStoffVearbeiter).
+wandelAktion(ausAtmosphaerenAnlageGewinnen, ortAtmosphaerenAnlage).
 wandelAktion(rezeptInAussenPostenErwerben, ortAussenPosten).
 wandelAktion(rezeptAmForschungsComputerErwerben, ortForschungsTerminal).
 wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).

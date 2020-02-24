@@ -81,8 +81,8 @@ rezept(ausAtmosphaerenAnlageGewinnen, [[1, verdichteterKohlenStoff]], [5, sauerS
 rezept(ausAtmosphaerenAnlageGewinnen, [[3, kohlenStoff]], [5, sauerStoff], 722.5 ).
 rezept(ausAtmosphaerenAnlageGewinnen, [[1, verdichteterKohlenStoff]], [5, schwefelin], 722.5 ). /* hot and barren planets */
 rezept(ausAtmosphaerenAnlageGewinnen, [[3, kohlenStoff]], [5, schwefelin], 722.5 ).
-rezept(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, [[3, verdichteterKohlenStoff]], [5, sauerStoff], 288.2 ).
-rezept(ausAtmosphaerenAnlageFuerSauerStoffGewinnen, [[3, kohlenStoff]], [5, sauerStoff], 288.2 ).
+rezept(ausSauerStoffVearbeiterGewinnen, [[3, verdichteterKohlenStoff]], [5, sauerStoff], 288.2 ).
+rezept(ausSauerStoffVearbeiterGewinnen, [[3, kohlenStoff]], [5, sauerStoff], 288.2 ).
 
 /* Zwei Komponenten */
 rezept(raffinieren, [[2, pilzSchimmel], [1, salz]], [1, ammoniak], 37.0 ).
@@ -2044,21 +2044,6 @@ rezept(zerlegen, [[1, geode]], [1, tetraKobalt], 0 ).
 /* ------------------------------- synthetisieren -------------------- 
 rezept(synthetisieren, [[300, queckSilber], [1, feuerWerkGruenRezept]], [1, feuerWerkGruen], 0 ).
 */
-
-/* ------------------------------- anbauen -------------------- */
-rezept(anbauen, [[1, pilzGeflecht]], [1, pilzSchimmel], 1440000 ).
-rezept(anbauen, [[1, frostWurz]], [1, frostKristall], 360000 ).
-rezept(anbauen, [[1, gammaGras]], [1, gammaWurzel], 1440000 ).
-rezept(anbauen, [[1, echinoKaktus]], [1, kaktusFleisch], 5760000 ).
-rezept(anbauen, [[1, sternenDorn]], [1, sternenKnolle], 1440000 ).
-rezept(anbauen, [[1, sonnenRebe]], [1, solanium], 5760000 ).
-rezept(anbauen, [[1, morditWurzel]], [1, mordit], 2880000 ).
-rezept(anbauen, [[1, magenKrampfBlume]], [1, faecium], 1440000 ).
-rezept(anbauen, [[1, gravitinoWirt]], [1, gravitinoBall], 720000 ).
-rezept(anbauen, [[1, giftIgel]], [1, beutelGift], 1200000 ).
-rezept(anbauen, [[1, eiweissPerlenKugel]], [1, eiweissPerle], 480000 ).
-rezept(anbauen, [[1, nipNip]], [1, nipNipKnospen], 0 ).
-
 
 /* ---------------------  Test Prädikate --------------------------------------------- */
 /* in rezepten müssen immer Wandelaktionen angegeben sein */

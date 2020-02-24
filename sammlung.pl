@@ -18,7 +18,6 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, eiweissPerle, 300, 339, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, gravitinoBall, 150, 339, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sturmKristall, 150, 150, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, beutelGift, 150, 150, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, natrium, 8, 10, 0)) 
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sauerStoff, 8, 9, 0))
 
@@ -163,16 +162,18 @@ sammlungInit :-
 	
 
 	/* Aus Anbau */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, frostKristall, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, beutelGift, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, eiweissPerle, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, faecium, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, frostKristall, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, gammaWurzel, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, gravitinoBall, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, pilzSchimmel, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, faecium, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, kaktusFleisch, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, sternenKnolle, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, mordit, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, mordit, 20, 0, 0))	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, nipNipKnospen, 20, 0, 0))	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, pilzSchimmel, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, solanium, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, sternenKnolle, 20, 0, 0))
 	
 	/* aus Tierhaltung */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, faecium, 20, 0, 0))
