@@ -11,7 +11,9 @@ wandelAktion(ausAtmosphaerenAnlageGewinnen, ortAtmosphaerenAnlage).
 wandelAktion(rezeptInAussenPostenErwerben, ortAussenPosten).
 wandelAktion(rezeptAmForschungsComputerErwerben, ortForschungsTerminal).
 wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).
+wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).
+wandelAktion(rezeptInFabrikErwerben, ortWald).
+wandelAktion(rezeptInFrachterErwerben, ortFrachter).
 wandelAktion(modulInRaumstationErwerben, ortRaumStation).
 wandelAktion(zerlegen, ortSpieler).
-wandelAktion(anbauen, ortSpieler).
 

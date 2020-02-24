@@ -12,6 +12,7 @@ bildeAvZeiten(_, _, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitD
 	RuestZeitDanach = RuestZeit,
 	!.
 
+/* Sammelvorgänge */
 bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, Operation, _, [StueckZahl, Stoff]],
@@ -31,18 +32,37 @@ bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, 
 	Operation = kaufen,
 	HauptZeit1 is HauptZeit + HauptZeit0, 
 	NebenZeit1 is NebenZeit + NebenZeit0,
-	/* beim Ersten Kauf Terminal öffnenn -> Rüstzeit */
+	/* beim Ersten Kauf Terminal öffnen -> Rüstzeit */
 	((RuestZeit = 0, RuestZeit1 is RuestZeit + RuestZeit0);
 	 (RuestZeit \= 0, RuestZeit1 = RuestZeit)
 	),
 	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
 	!.
-	
-/* raffinieren Rüstzeit pro charge */
+
+/* Stoffwandlungen */
+/* modul erwerben */
+bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+	Vorgaenge = [Kopf|Rest],
+	Kopf = [_, Operation, _, [_, Stoff]],
+	Operation = modulInRaumstationErwerben,
+	rezept:rezept(Operation, _, [AnzahlRaffiniert, Stoff], ZeitProAusgabeStueck),
+	/* Seite anwählen, klicken */
+	HauptZeit1 is HauptZeit + AnzahlRaffiniert * ZeitProAusgabeStueck, 
+	NebenZeit0 is 0,
+	NebenZeit1 is NebenZeit + NebenZeit0,
+	/* beim Ersten Kauf Terminal öffnen -> Rüstzeit ist Händler ansprechen, Dialog durchklicken, schließen */
+	RuestZeit0 is 150 + 680  + 110,
+	((RuestZeit = 0, RuestZeit1 is RuestZeit + RuestZeit0);
+	 (RuestZeit \= 0, RuestZeit1 = RuestZeit)
+	),
+	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	!.
+
+/* raffinieren Rüstzeit nur für eine Charge */
 bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, Operation, _, [AnzahlRaffiniert, Stoff]],
-	Operation = raffinieren,
+	(Operation = raffinieren; Operation = kochen),
 	rezept:rezept(Operation, Komponenten, [_, Stoff], ZeitProAusgabeStueck),
 	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
 	HauptZeit1 is HauptZeit + HauptZeit0, 
@@ -56,7 +76,86 @@ bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, 
 	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
 	!.
 
-/* nicht sammelbar */
+bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+	Vorgaenge = [Kopf|Rest],
+	Kopf = [_, Operation, _, [AnzahlRaffiniert, Stoff]],
+	Operation = herstellen,
+	rezept:rezept(Operation, _	, [_, Stoff], ZeitProAusgabeStueck),
+	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	HauptZeit1 is HauptZeit + HauptZeit0, 
+	/* einmalig zurückfahren, "mehr herstellen" ausführen */
+	NebenZeit0 is 150 + AnzahlRaffiniert * 80,
+	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
+	NebenZeit1 is NebenZeit + NebenZeit0, 
+	/* Je mehr Komponenten desto mehr Rüstzeit */
+	/* Inventar öffnen, auf Seite navigieren (Durchschnittszeit), aussuchen, klicken, Inventar schließen	 */
+	RuestZeit0 is 70 + 50 + 420 + 15 + 70, /* insgesamt */
+	RuestZeit1 is RuestZeit + RuestZeit0,
+	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	!.
+
+bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+	Vorgaenge = [Kopf|Rest],
+	Kopf = [_, Operation, _, [AnzahlRaffiniert, Stoff]],
+	Operation = bauen,
+	rezept:rezept(Operation, _, [_, Stoff], ZeitProAusgabeStueck),
+	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	HauptZeit1 is HauptZeit + HauptZeit0, 
+	NebenZeit0 is 0, 
+	NebenZeit1 is NebenZeit + NebenZeit0, 
+	/* Baumenü öffnen, alle Ebenen zurück (alternative Esc Esc (115/100 sec) ist ungebräuchlich) */
+	RuestZeit0 is 50 + 250,
+	RuestZeit1 is RuestZeit + RuestZeit0,
+	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	!.
+
+bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+	Vorgaenge = [Kopf|Rest],
+	Kopf = [_, Operation, _, [AnzahlRaffiniert, Stoff]],
+	(Operation = ausSauerStoffVearbeiterGewinnen; Operation = ausAtmosphaerenAnlageGewinnen),
+	rezept:rezept(Operation, _, [_, Stoff], ZeitProAusgabeStueck),
+	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	HauptZeit1 is HauptZeit + HauptZeit0, 
+	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
+	NebenZeit1 is NebenZeit + NebenZeit0, 
+	/* Atmospherenanlage öffnen, Treibstoff plazieren, Ausgabefach entleeren */
+	RuestZeit0 is 290 + 620 + 588,
+	RuestZeit1 is RuestZeit + RuestZeit0,
+	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	!.
+
+bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+	Vorgaenge = [Kopf|Rest],
+	Kopf = [_, Operation, _, [AnzahlRaffiniert, Stoff]],
+	(Operation = rezeptInAnomalieErwerben; Operation = modulInRaumstationErwerben, rezeptInFabrikErwerben),
+	rezept:rezept(Operation, _, [_, Stoff], ZeitProAusgabeStueck),
+	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	HauptZeit1 is HauptZeit + HauptZeit0, 
+	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
+	NebenZeit1 is NebenZeit + NebenZeit0, 
+	/* Händler ansprechen, Dialog durchklicken, schließen */
+	RuestZeit0 is 150 + 680 + 110, 
+	RuestZeit1 is RuestZeit + RuestZeit0,
+	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	!.
+
+bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+	Vorgaenge = [Kopf|Rest],
+	Kopf = [_, Operation, _, [AnzahlRaffiniert, Stoff]],
+	Operation = rezeptInAnomalieForschungsComputerErwerben,
+	rezept:rezept(Operation, _, [_, Stoff], ZeitProAusgabeStueck),
+	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	HauptZeit1 is HauptZeit + HauptZeit0, 
+	/* auf gewünschte Seite blättern (Durchschnittlich 300 wenn man nur vorwärts blättert) */
+	NebenZeit0 is 300, /* chargenwechsel nicht berücksichtigt */
+	NebenZeit1 is NebenZeit + NebenZeit0, 
+	/* Terminal öffnen, Terminal schließen */
+	RuestZeit0 is 150 + 680 + 110, /* 1440 gesamt */
+	RuestZeit1 is RuestZeit + RuestZeit0,
+	bildeAvZeiten(System, Planet, Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	!.
+
+/* vorgang ohne AV Bewertung */
 bildeAvZeiten(System, Planet, Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
 	Vorgaenge = [_|Rest],
 	bildeAvZeiten(System, Planet, Rest, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach),
@@ -78,7 +177,6 @@ methodeToRuestZeit(ertauchen, 150).
 methodeToRuestZeit(unterWasserErkaempfen, 0).
 methodeToRuestZeit(herausSchlagen, 150).
 methodeToRuestZeit(raumSchuerfen, 63).
-methodeToRuestZeit(raffinieren, 63). /* für eine Komponente */
 
 /* Zeit für den Wechsel zwischen zwei Gebinden des Stoffs */
 methodeToNebenZeit(bekannt, 0).

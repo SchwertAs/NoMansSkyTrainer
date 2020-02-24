@@ -22,3 +22,7 @@ ort(ortBasis).
 ort(ortSauerStoffVearbeiter).
 ort(ortAtmosphaerenAnlage).
 ort(ortPlantage).
+
+domaenenPruefungOrt(Ort) :-
+	ort(Ort) -> true; throw(error(domain_error(ort, Ort), _)).
+

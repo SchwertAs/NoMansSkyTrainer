@@ -40,12 +40,12 @@ sammelOrt(ertauchen, ortWasser).
 sammelOrt(unterWasserErkaempfen, ortWasser).
 
 /* Vorraussetzungen im Multiwerkzeug */
-pruefeSammelAktionVorraussetzung(System, Planet, minenLaserNutzen) :-
+pruefeSammelAktionVorraussetzung(minenLaserNutzen) :-
 	!,
 	spielStatus(minenLaser),
 	!.
 	
-pruefeSammelAktionVorraussetzung(System, Planet, verbessertenMinenLaserNutzen) :-
+pruefeSammelAktionVorraussetzung(verbessertenMinenLaserNutzen) :-
 	!,
 	spielStatus(verbesserterMinenLaser),
 	!.

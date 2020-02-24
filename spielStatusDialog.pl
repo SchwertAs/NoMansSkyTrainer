@@ -80,7 +80,7 @@ spielStatusDialog(_Request) :-
 		       	    div(class('table'),
 		       	          [div(class('tr'),
 		       	               [div(class('td'),[input([name('frachter'), type('checkbox'), FrachterVorhandenChecked]),
-		       	                    label(for('frachter'), 'Frachter rufbar')
+		       	                    label(for('frachter'), 'Frachter vorhanden')
 		       	                   ])
 		       	               ]),
 		       	           div(class('tr'),

@@ -56,6 +56,12 @@ stoff(rohStoff, eiweissPerle, 9025).
 stoff(rohStoff, gravitinoBall, 12445).
 stoff(rohStoff, nipNipKnospen, 17776).
 
+stoff(rohStoff, fabrikUeberschreibungsEinheit, 50000).
+stoff(rohStoff, verteidigungsBeleg, 10000).
+stoff(rohStoff, geborgenesFregattenModul, 95000).
+stoff(rohStoff, lagerErweiterung, 95000).
+stoff(rohStoff, nanitHaufen, -1).
+
 
 /* =============================== hergestellte Produkte ================ */
 /* herstellen mit Fabrikrezept oder Questrezept, verkaufen */
@@ -142,11 +148,6 @@ stoff(produkt, gedankenBogen, 1000).
 stoff(pass, atlasPassV1, 0).
 stoff(pass, atlasPassV2, 0).
 stoff(pass, atlasPassV3, 0).
-stoff(pass, fabrikUeberschreibungsEinheit, 0).
-stoff(pass, geborgenesFregattenModul, 95000).
-stoff(pass, lagerErweiterung, 95000).
-stoff(pass, verteidigungsBeleg, 10000).
-
 /* =============================== Ausruestung ========================== */
 /* ------------------------------- Anzugmodule -------------------------- */
 stoff(modul, belueftungsMembranB, 0).
@@ -743,7 +744,6 @@ stoff(handelsWare, zuckendesEi, 9600).
 stoff(handelsWare, absprungKapselKoordinaten, 85000).
 stoff(handelsWare, protokollEntschluesselungsCode, 85000).
 stoff(handelsWare, geborgeneDaten, 50000).
-stoff(handelsWare, nanitHaufen, -1).
 stoff(handelsWare, queckSilber, -1).
 stoff(handelsWare, navigationsDaten, 1000).
 stoff(handelsWare, antiHaftKolben, 6000).

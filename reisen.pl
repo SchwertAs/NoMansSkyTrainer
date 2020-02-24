@@ -23,19 +23,31 @@ bauenNurInFrachter(frachterKreuzungVierFach).
 bauenNurInFrachter(frachterTreppe).
 
 
-domaenenPruefungOrt(Ort) :-
-	ort(Ort) -> true; throw(error(domain_error(ort, Ort), _)).
+fuegeReiseOperationenEin(Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
+	/* ermittelt größte nötige Raffinerie für alle Vorgänge */
+	/* dadurch wird nur eine Reise für Raffinieren benötigt */
+	ermittleGroessteNoetigeRaffinerie(Vorgaenge, ortKleineRaffinerie, GroessteFuerAlleVorgaengeNoetigeRaffinerie),
+	fuegeReiseOperationenEinSub(GroessteFuerAlleVorgaengeNoetigeRaffinerie, Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach).
 
+fuegeReiseOperationenEinSub(_, Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
+	Vorgaenge = [],
+	VorgaengeDanach = VorgaengeBisher,
+	!.
 
-fuegeReiseOperationenEin(Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
-	ermittleGroessteNoetigeRaffinerie(Vorgaenge, ortKleineRaffinerie, Groesste),
-	fuegeReiseOperationenEinSub(Groesste, Vorgaenge, ortSpieler, VorgaengeBisher, VorgaengeDanach).
-	
+fuegeReiseOperationenEinSub(Groesste, Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
+	Vorgaenge = [Vorgang | RestVorgaenge], 
+	vorgangsOrt(Groesste, Vorgang, VorgangsOrt),
+	vorgangAnfuegenWennVerschiedeneOrte([Vorgang], ReiseOrtBisher, VorgangsOrt, ErweiterterVorgang, ReiseOrtBisherDanach),
+	append(VorgaengeBisher, ErweiterterVorgang, VorgaengeBisher1),
+	fuegeReiseOperationenEinSub(Groesste, RestVorgaenge, ReiseOrtBisherDanach, VorgaengeBisher1, VorgaengeDanach),
+	!.
+		
+
 ermittleGroessteNoetigeRaffinerie(Vorgaenge, GroessteBisherige, Groesste) :-
 	Vorgaenge = [],
 	Groesste = GroessteBisherige,
 	!.
-	
+
 ermittleGroessteNoetigeRaffinerie(Vorgaenge, GroessteBisherige, Groesste) :-
 	Vorgaenge = [Vorgang | RestVorgaenge], 
 	vorgangsOrt(GroessteBisherige, Vorgang, VorgangsOrt),
@@ -59,31 +71,21 @@ raffinerieOrtGroesser(OrtBisher, OrtNeu) :-
 raffinerieOrtGroesser(OrtBisher, OrtNeu) :-
 	OrtBisher = ortMittlereRaffinerie, 
 	OrtNeu = ortGrosseRaffinerie.
-	
-fuegeReiseOperationenEinSub(_, Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
-	Vorgaenge = [],
-	VorgaengeDanach = VorgaengeBisher,
-	!.
 
-fuegeReiseOperationenEinSub(Groesste, Vorgaenge, ReiseOrtBisher, VorgaengeBisher, VorgaengeDanach) :-
-	Vorgaenge = [Vorgang | RestVorgaenge], 
-	vorgangsOrt(Groesste, Vorgang, VorgangsOrt),
-	vorgangAnfuegenWennVerschiedeneOrte([Vorgang], ReiseOrtBisher, VorgangsOrt, ErweiterterVorgang),
-	append(VorgaengeBisher, ErweiterterVorgang, VorgaengeBisher1),
-	fuegeReiseOperationenEinSub(Groesste, RestVorgaenge, VorgangsOrt, VorgaengeBisher1, VorgaengeDanach),
-	!.
-		
-vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2, ReiseOrtBisherDanach) :-
 	ReiseOrtBisher = VorgangsOrt,
-	VorgaengeBisher2 = VorgaengeBisher.
+	VorgaengeBisher2 = VorgaengeBisher,
+	ReiseOrtBisherDanach = ReiseOrtBisher.
 
-vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, _, VorgangsOrt, VorgaengeBisher2) :-
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2, ReiseOrtBisherDanach) :-
 	VorgangsOrt = ortSpieler,
-	VorgaengeBisher2 = VorgaengeBisher.
+	VorgaengeBisher2 = VorgaengeBisher,
+	ReiseOrtBisherDanach = ReiseOrtBisher.
 	
-vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2) :-
-	ReiseOrtBisher \= VorgangsOrt, 
-	append([[1, reisen, [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2).
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2, ReiseOrtBisherDanach) :-
+	append([[1, reisen, [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2),
+	ReiseOrtBisherDanach = VorgangsOrt.
+
 
 vorgangsOrtModifikationRaffinerieen(GroessteBisher, RaffinerieOrtNeu, ModOrt) :-
 	(raffinerieOrtGroesser(GroessteBisher, RaffinerieOrtNeu)) -> ModOrt = RaffinerieOrtNeu; ModOrt = GroessteBisher.

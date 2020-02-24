@@ -73,8 +73,9 @@ felderProZeile(RezeptListe, Step) :-
 	
 rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	debug(myTrace, 'AuswahlStoffKlasse=~k', AuswahlStoffKlasse),
-	findall([Rezept, Checked], (rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), rezeptSchonBekannt(Rezept, Checked)), RezeptListe),
-	debug(myTrace, 'Rezeptliste=~k', RezeptListe),
+	findall([Rezept, Checked], (rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), rezeptSchonBekannt(Rezept, Checked)), RezeptListe0),
+	debug(myTrace, 'Rezeptliste=~k', RezeptListe0),
+	sort(RezeptListe0, RezeptListe),
 	felderProZeile(RezeptListe, Step),
     /* Start- und Endefeld- und Listenpositionsnummern berechnen */
 	RezeptListe1Start is 1, 

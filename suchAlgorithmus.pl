@@ -19,7 +19,7 @@ baueFuerVorfertigung(System, Planet, Strategie, Anzahl, Stoff) :-
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
 	arbeitsVorbereitung:bildeAvZeiten(System, Planet, Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
-	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
+	logistik:sammelVorgaengeZusammenfassen(Vorgaenge, OptimierteVorgaenge),
 	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
 	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
 	GesamtZeitAufwand is GesamtHauptZeit + GesamtNebenZeit + GesamtRuestZeit + GesamtReiseZeit, 
@@ -45,7 +45,7 @@ baue(System, Planet, Strategie, Anzahl, Stoff) :-
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
 	arbeitsVorbereitung:bildeAvZeiten(System, Planet, Vorgaenge, 0, GesamtHauptZeit, 0, GesamtNebenZeit, 0, GesamtRuestZeit),
-	logistik:logistikOptimierungReisen(Vorgaenge, OptimierteVorgaenge),
+	logistik:sammelVorgaengeZusammenfassen(Vorgaenge, OptimierteVorgaenge),
 	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
 	statistik:bildeGesamtAufwaende(OptimierteVorgaenge, 0, GesamtEinkaufsAufwand),
 	GesamtZeitAufwand is GesamtHauptZeit + GesamtNebenZeit + GesamtRuestZeit + GesamtReiseZeit, 
@@ -137,7 +137,7 @@ multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, Vorg
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
 rezeptZulaessig(Operation, _, _) :-
-	memberchk(Operation, [bauen, herstellen, installieren]),
+	memberchk(Operation, [bauen, herstellen, installieren, rezeptInFabrikErwerben]),
 	!.
 	
 rezeptZulaessig(raffinieren, Komponenten, _) :-
@@ -195,9 +195,16 @@ rezeptZulaessig(rezeptAmForschungsComputerErwerben, Komponenten, _) :-
 	spielStatus:systemAusstattung([System, Planet, ortForschungsTerminal], _),
 	!.
 
-rezeptZulaessig(rezeptInAnomalieErwerben, Komponenten, _) :-
+rezeptZulaessig(WandlungsArt, Komponenten, _) :-
+	(WandlungsArt = rezeptInAnomalieErwerben; WandlungsArt = rezeptInAnomalieForschungsComputerErwerben),
 	Komponenten = [[_, _]],
 	spielStatus:spielStatus(sphaereRufbar, true),
+	!.
+
+rezeptZulaessig(WandlungsArt, Komponenten, _) :-
+	WandlungsArt = rezeptInFrachterErwerben,
+	Komponenten = [[_, _]],
+	spielStatus:spielStatus(frachterVorhanden, true),
 	!.
 
 rezeptZulaessig(modulInRaumstationErwerben, Komponenten, _) :-

@@ -90,18 +90,20 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, Operation, [[_, _], [_, Nach]], [_, Produkt]],
+	Kopf = [_, Operation, [[_, Von], [_, Nach]], [_, Produkt]],
 	Operation = reisen,
 	atom_string(Nach, NachString),
+	atom_string(Von, VonString),
 	atom_string(Produkt, ProduktString),
 
- 	string_concat('Bitte reisen Sie nach ', NachString, Anweisung),
- 	
+ 	string_concat('Bitte reisen Sie von ', VonString, Anweisung0),
+ 	string_concat(Anweisung0, ' nach ', Anweisung1),
+ 	string_concat(Anweisung1, NachString, Anweisung2), 
  	string_concat('in ', NachString, Ergebnis0),
  	string_concat(Ergebnis0, ' ', Ergebnis1),
  	string_concat(Ergebnis1, ProduktString, Ergebnis),
 
- 	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
+ 	append(VorgaengePred, [vorg(Anweisung2, Operation, Ergebnis)], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
