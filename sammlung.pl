@@ -1,7 +1,6 @@
-:- module(sammlung, [sammlungInit/0, sammelbarReInit/2, sammlung/8, sammelbar/2, fertigeLoesung/3]).
+:- module(sammlung, [sammlungInit/0, vorgefertigeLoesungenErstellen/2, sammlung/8, fertigeLoesung/5]).
 
-:- dynamic(sammelbar/2).
-:- dynamic(fertigeLoesung/3).
+:- dynamic(fertigeLoesung/5).
 :- dynamic(sammlung/8).
 	
 baueRezepte :-
@@ -298,23 +297,9 @@ copyDefaultIfEmpty(System, Planet) :-
 	  true
 	).
 	
-sammelbarReInit(System, Planet) :-
-	\+sammelbarInitFlach(System, Planet),
+vorgefertigeLoesungenErstellen(System, Planet) :-
 	\+sammelbarVorfertigen(System, Planet).
 	
-sammelbarInitFlach(System, Planet) :-
-	retractall(sammelbar(_, _)),
-	stoff:stoff(_, Stoff, _),
-	(sammlung(_, System, Planet, Operation, Stoff, _, _, _);
-	 /* raumSchuerfen geht auf jedem Planeten */
-	 (Operation = raumSchuerfen, sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, _, _, _));
-	 /* rezepte sind auch überall gleich bekannt */
-	 (Operation = bekannt, sammlung(Position, 'System', 'MeinPlanet', Operation, Stoff, _, _, _)),
-	 Position > 0
-	),
-	sammelAktion:pruefeSammelAktionVorraussetzung(Operation),
-	assertz(sammelbar(Stoff, Operation)),
-	fail.
 	
 sammelbarVorfertigen(System, Planet) :-
 	retractall(fertigeLoesung(_, _, _)),
@@ -326,5 +311,5 @@ generiereFertigeLoesungen(System, Planet, Stoff) :-
 	optimierung:optimierungsZiel(Strategie),
 	\+suchAlgorithmus:baueFuerVorfertigung(System, Planet, Strategie, 1, Stoff),
 	optimierung:optimierungsStrategie(Strategie, Stoff, _, Vorgaenge, _, _, _, _, _),
-	assertz(fertigeLoesung(Strategie, Stoff, Vorgaenge)),
+	assertz(fertigeLoesung(System, Planet, Strategie, Stoff, Vorgaenge)),
 	fail.

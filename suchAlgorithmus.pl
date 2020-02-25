@@ -12,7 +12,7 @@ baueFuerVorfertigung(System, Planet, Strategie, Anzahl, Stoff) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
 	assertz(maxTiefe(99)),
-	beschaffen(Strategie, Anzahl, Stoff, [], [], Vorgaenge, 0, MaxTiefe),
+	beschaffen(System, Planet, Strategie, Anzahl, Stoff, [], [], Vorgaenge, 0, MaxTiefe),
 	maxTiefeVerringern(MaxTiefe),
 	dict_create(SammelSet1, 'SammelStueckliste', []),
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
@@ -38,7 +38,7 @@ baue(System, Planet, Strategie, Anzahl, Stoff) :-
 	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
 	assertz(ersterNichtBeschaffbarerStoff(Strategie, none, [])),
 	assertz(maxTiefe(99)),
-	beschaffen(Strategie, Anzahl, Stoff, [], [], Vorgaenge, 0, MaxTiefe),
+	beschaffen(System, Planet, Strategie, Anzahl, Stoff, [], [], Vorgaenge, 0, MaxTiefe),
 	maxTiefeVerringern(MaxTiefe),
 	dict_create(SammelSet1, 'SammelStueckliste', []),
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
@@ -57,19 +57,19 @@ baue(System, Planet, Strategie, Anzahl, Stoff) :-
 	fail.
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
-beschaffen(Strategie, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge, IstTiefe, MaxTiefe) :-
-	sammlung:fertigeLoesung(Strategie, Stoff, _),
+beschaffen(System, Planet, Strategie, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge, IstTiefe, MaxTiefe) :-
+	sammlung:fertigeLoesung(System, Planet, Strategie, Stoff, _),
 	!,
 	append([[Anzahl, vorfertigen, [], [Anzahl, Stoff]]], BisherigeVorgaenge, VorgaengeMitVorfertigung),
-	expandiereVorgaenge(Strategie, VorgaengeMitVorfertigung, [], Vorgaenge),
+	expandiereVorgaenge(System, Planet, Strategie, VorgaengeMitVorfertigung, [], Vorgaenge),
 	ignore(MaxTiefe = IstTiefe). 
 
-beschaffen(_, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge, IstTiefe, MaxTiefe) :-
-	sammlung:sammelbar(Stoff, Operation),
+beschaffen(System, Planet, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge, IstTiefe, MaxTiefe) :-
+	sammlung:sammlung(_, System, Planet, Operation, Stoff, _, _, _),
 	append([[Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
 	ignore(MaxTiefe = IstTiefe).
 
-beschaffen(Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge, IstTiefe, MaxTiefe) :-
+beschaffen(System, Planet, Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge, IstTiefe, MaxTiefe) :-
 	maxTiefe(MaxTiefe0),
 	length(StoffPfad, Len),
 	Len =< MaxTiefe0, 
@@ -84,30 +84,30 @@ beschaffen(Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaen
 	IstTiefe0 is IstTiefe + 1,
 	abolish(ersterNichtBeschaffbarerStoffGesetzt/1),	
 	assertz(ersterNichtBeschaffbarerStoffGesetzt(false)),	
-	listeBeschaffen(Strategie, IstTiefe0, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfadDanach, ListeVorgaenge0, ListeVorgaenge),
+	listeBeschaffen(System, Planet, Strategie, IstTiefe0, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfadDanach, ListeVorgaenge0, ListeVorgaenge),
 	ignore(MaxTiefe = IstTiefe0). 
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
-expandiereVorgaenge(_, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
+expandiereVorgaenge(_, _, _, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [],
 	VorgaengeExpandiert = VorgaengeExpandiertTmp,
 	!.
 	
-expandiereVorgaenge(Strategie, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
+expandiereVorgaenge(System, Planet, Strategie, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest], 
 	Kopf \= [_, vorfertigen, _, [_, _]],
 	append(VorgaengeExpandiertTmp, [Kopf], VorgaengeExpandiertDanach),
-	expandiereVorgaenge(Strategie, Rest, VorgaengeExpandiertDanach, VorgaengeExpandiert),
+	expandiereVorgaenge(System, Planet, Strategie, Rest, VorgaengeExpandiertDanach, VorgaengeExpandiert),
 	!.
 
-expandiereVorgaenge(Strategie, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
+expandiereVorgaenge(System, Planet, Strategie, Vorgaenge, VorgaengeExpandiertTmp, VorgaengeExpandiert) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [Anzahl, vorfertigen, _, [_, Stoff]],
-	sammlung:fertigeLoesung(Strategie, Stoff, VorgaengeDanach0),
+	sammlung:fertigeLoesung(System, Planet, Strategie, Stoff, VorgaengeDanach0),
 	ermittleNoetigenRezeptMultiplikator(VorgaengeDanach0, Anzahl, Faktor),
 	multipliziereVorgangsWerte(VorgaengeDanach0, Faktor, [], VorgaengeDanach1), 
-	expandiereVorgaenge(Strategie, VorgaengeDanach1, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
-	expandiereVorgaenge(Strategie, Rest, VorgaengeExpandiert0, VorgaengeExpandiert),
+	expandiereVorgaenge(System, Planet, Strategie, VorgaengeDanach1, VorgaengeExpandiertTmp, VorgaengeExpandiert0),
+	expandiereVorgaenge(System, Planet, Strategie, Rest, VorgaengeExpandiert0, VorgaengeExpandiert),
 	!.
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
@@ -259,58 +259,58 @@ baueBegruendung(Strategie, Komp, ListeBisherigerVorgaenge) :-
 	fail.
 	
 /*---------------------------------------------------------------*/
-listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(System, Planet, Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
-	(beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
 	),
 	!.
 
-listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(System, Planet, Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1], [Anz2, Komp2]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
 	Anzahl2 is Anz2 * AnzahlRaffinaden,
-	(beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge1, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge1, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
 	),
-	(beschaffen(Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge1, ListeVorgaenge, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge1, ListeVorgaenge, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge)
 	),
 	!.
 
-listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(System, Planet, Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1], [Anz2, Komp2], [Anz3, Komp3]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
 	Anzahl2 is Anz2 * AnzahlRaffinaden,
 	Anzahl3 is Anz3 * AnzahlRaffinaden,
-	(beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
 	),
-	(beschaffen(Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge)
 	),
-	(beschaffen(Strategie, Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp3, ListeBisherigerVorgaenge)
 	),
 	!.
 
-listeBeschaffen(Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
+listeBeschaffen(System, Planet, Strategie, IstTiefe, MaxTiefe, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1], [Anz2, Komp2], [Anz3, Komp3], [Anz4, Komp4]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
 	Anzahl2 is Anz2 * AnzahlRaffinaden,
 	Anzahl3 is Anz3 * AnzahlRaffinaden,
 	Anzahl4 is Anz4 * AnzahlRaffinaden,
-	(beschaffen(Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl1, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
 	),
-	(beschaffen(Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl2, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge)
 	),
-	(beschaffen(Strategie, Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge4, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl3, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge4, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp3, ListeBisherigerVorgaenge)
 	),
-	(beschaffen(Strategie, Anzahl4, Komp4, StoffPfad, ListeVorgaenge4, ListeVorgaenge, IstTiefe, MaxTiefe);
+	(beschaffen(System, Planet, Strategie, Anzahl4, Komp4, StoffPfad, ListeVorgaenge4, ListeVorgaenge, IstTiefe, MaxTiefe);
 	 baueBegruendung(Strategie, Komp4, ListeBisherigerVorgaenge)
 	),
 	!.

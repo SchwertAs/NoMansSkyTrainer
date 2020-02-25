@@ -167,7 +167,7 @@ nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff) :-
     ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
     assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
-    sammlung:sammelbarReInit(System, Planet),
+    sammlung:vorgefertigeLoesungenErstellen(System, Planet),
 	(optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
 	 nichtHerstellBar(Ziel)),
 	!.
