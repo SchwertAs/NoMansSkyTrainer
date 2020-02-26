@@ -181,6 +181,8 @@ methodeToRuestZeit(raumSchuerfen, 63).
 /* Zeit für den Wechsel zwischen zwei Gebinden des Stoffs */
 methodeToNebenZeit(bekannt, 0).
 methodeToNebenZeit(minenLaserNutzen, 40).
+methodeToNebenZeit(herausSchlagen, 40).
+methodeToNebenZeit(raumSchuerfen, 120).
 methodeToNebenZeit(terrainFormerNutzen, 40).
 methodeToNebenZeit(verbessertenMinenLaserNutzen, 40).
 methodeToNebenZeit(jagen, 40).
