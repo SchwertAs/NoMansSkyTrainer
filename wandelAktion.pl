@@ -16,4 +16,4 @@ wandelAktion(rezeptInFabrikErwerben, ortWald).
 wandelAktion(rezeptInFrachterErwerben, ortFrachter).
 wandelAktion(modulInRaumstationErwerben, ortRaumStation).
 wandelAktion(zerlegen, ortSpieler).
-
+wandelAktion(inEinfacherRaffinerieRaffinieren, nil).  /* sonderlocke mit Ortsauswahl */

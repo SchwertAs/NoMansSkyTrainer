@@ -3,74 +3,143 @@
 /* Komponenten, AusgabeBestand, Dauer
 [[Anzahl, Stoff]], [Anzahl, Produkt], Dauer in 1/100 pro Ergebnis-Stück */
 
+/* ---------------------  Einfächige Raffinerie-Rezepte --------------------------------------- */
+rezept(inEinfacherRaffinerieRaffinieren, [[0.13, kohlenStoff], [1, diWasserStoffGelee]], [50, diWasserStoff], 0.8 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.11, kohlenStoff], [5, tritium]], [1, diWasserStoff], 33.3 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[20.0, kohlenStoff], [30, diWasserStoff]], [1, diWasserStoffGelee], 6000 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.33, kohlenStoff], [1, chlorGitter]], [150, chlor], 0.67 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [2, salz]], [1, chlor], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.067, kohlenStoff], [1, aktiviertesCadmium]], [2, chromatischesMetall], 10.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.053, kohlenStoff], [1, aktiviertesEmeril]], [3, chromatischesMetall], 5.33 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, aktiviertesIndium]], [4, chromatischesMetall], 3.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [1, aktiviertesKupfer]], [1, chromatischesMetall], 24.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.093, kohlenStoff], [1, cadmium]], [1, chromatischesMetall], 28.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.053, kohlenStoff], [2, emeril]], [3, chromatischesMetall], 5.33 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.033, kohlenStoff], [2, indium]], [4, chromatischesMetall], 2.5 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [2, kupfer]], [1, chromatischesMetall], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [3, mordit]], [1, faecium], 24.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [1, ammoniak]], [1, ferritStaub], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [1, dioxit]], [1, ferritStaub], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [1, paraffinium]], [1, ferritStaub], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [1, phosphor]], [1, ferritStaub], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [1, pyrit]], [1, ferritStaub], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [1, uran]], [1, ferritStaub], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.21, kohlenStoff], [1, verrostetesMetall]], [2, ferritStaub], 31.7 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[1.67, kohlenStoff], [40, silikatPulver]], [1, glas], 500 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.4, kohlenStoff], [1, grantine]], [125, gold], 0.96 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.03, kohlenStoff], [1, lebendePerle]], [100, gold], 0.10 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.4, kohlenStoff], [1, lemmium]], [125, gold], 0.96 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, magnoGold]], [125, gold], 0.96 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [2, kobalt]], [1, ionisiertesKobalt], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.2, kohlenStoff], [1, tetraKobalt]], [150, ionisiertesKobalt], 0.4 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, ionisiertesKobalt]], [2, kobalt], 6.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[10.0, kohlenStoff], [40, frostKristall]], [1, glas], 3000 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, gammaWurzel]], [2, kohlenStoff], 6.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, kaktusFleisch]], [2, kohlenStoff], 6.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, pilzSchimmel]], [2, kohlenStoff], 6.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.027, kohlenStoff], [1, sauerStoff]], [1, kohlenStoff], 8.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, sternenKnolle]], [2, kohlenStoff], 6.00 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, solanium]], [2, kohlenStoff], 6.00 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.4, kohlenStoff], [1, zaeheFluessigkeiten]], [1, lebenderSchleim], 60.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.001, kohlenStoff], [1, hypnotischesAuge]], [1, lebenderSchleim], 0.30 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.16, kohlenStoff], [2, reinesFerrit]], [1, magnetisiertesFerrit], 24.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.24, kohlenStoff], [3, faecium]], [2, mordit], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [35, platin]], [1, nanitHaufen], 24.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [25, pugneum]], [1, nanitHaufen], 12.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.4, kohlenStoff], [5, unkontrollierbarerSchimmel]], [1, nanitHaufen], 60.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [1, kuerbisKnolle]], [1, natrium], 24.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [1, natriumNitrat]], [2, natrium], 12.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.2, kohlenStoff], [1, instabilesNatrium]], [150, natriumNitrat], 0.4 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.067, kohlenStoff], [1, kristallSulfid]], [50, natriumNitrat], 0.4 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.13, kohlenStoff], [2, natrium]], [1, natriumNitrat], 40.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.42, kohlenStoff], [1, iridesit]], [250, platin], 0.50 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.42, kohlenStoff], [1, geoDesit]], [250, platin], 0.50 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [1, gold]], [1, pyrit], 24.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.33, kohlenStoff], [3, schwefelin]], [1, radon], 33.3 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.04, kohlenStoff], [1, ferritStaub]], [1, reinesFerrit], 12.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.053, kohlenStoff], [1, magnetisiertesFerrit]], [2, reinesFerrit], 8.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.067, kohlenStoff], [1, seltenesMetallElement]], [150, reinesFerrit], 0.4 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [1, chlor]], [2, salz], 12.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.08, kohlenStoff], [1, kelpBeutel]], [1, sauerStoff], 24.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.067, kohlenStoff], [1, superOxidKristall]], [150, sauerStoff], 0.4 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [3, stickStoff]], [1, schwefelin], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.42, kohlenStoff], [1, aronium]], [250, silber], 0.50 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.42, kohlenStoff], [1, herox]], [250, silber], 0.50 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.42, kohlenStoff], [1, strassenKoeterBronze]], [250, silber], 0.50 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.12, kohlenStoff], [3, radon]], [1, stickStoff], 36.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.2, kohlenStoff], [1, lebenderSchleim]], [1, unkontrollierbarerSchimmel], 60.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.06, kohlenStoff], [2, kohlenStoff]], [1, verdichteterKohlenStoff], 18.0 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.067, kohlenStoff], [1, kohlenStoffKristall]], [150, verdichteterKohlenStoff], 0.4 ).
+rezept(inEinfacherRaffinerieRaffinieren, [[0.2, kohlenStoff], [1, restSubstanz]], [1, zaeheFluessigkeiten], 60.0 ).
+
 /* ---------------------  Raffinerie-Rezepte --------------------------------------- */
 /* Eine Komponente */
-rezept(raffinieren, [[1, diWasserStoffGelee]], [50, diWasserStoff], 1.6 ).
-rezept(raffinieren, [[5, tritium]], [1, diWasserStoff], 37.7 ).
+rezept(raffinieren, [[1, diWasserStoffGelee]], [50, diWasserStoff], 0.8 ).
+rezept(raffinieren, [[5, tritium]], [1, diWasserStoff], 33.3 ).
 rezept(raffinieren, [[30, diWasserStoff]], [1, diWasserStoffGelee], 6000 ).
-rezept(raffinieren, [[1, chlorGitter]], [150, chlor], 0.00025 ).
-rezept(raffinieren, [[2, salz]], [1, chlor], 36.6 ).
+rezept(raffinieren, [[1, chlorGitter]], [150, chlor], 0.67 ).
+rezept(raffinieren, [[2, salz]], [1, chlor], 36.0 ).
 rezept(raffinieren, [[1, aktiviertesCadmium]], [2, chromatischesMetall], 10.0 ).
-rezept(raffinieren, [[1, aktiviertesEmeril]], [3, chromatischesMetall], 5.77 ).
-rezept(raffinieren, [[1, aktiviertesIndium]], [4, chromatischesMetall], 3.165 ).
-rezept(raffinieren, [[1, aktiviertesKupfer]], [1, chromatischesMetall], 24.7 ).
-rezept(raffinieren, [[1, cadmium]], [1, chromatischesMetall], 28.46 ).
-rezept(raffinieren, [[2, emeril]], [3, chromatischesMetall], 5.51 ).
-rezept(raffinieren, [[2, indium]], [4, chromatischesMetall], 2.67 ).
-rezept(raffinieren, [[2, kupfer]], [1, chromatischesMetall], 36.48 ).
-rezept(raffinieren, [[3, mordit]], [1, faecium], 24.7 ).
-rezept(raffinieren, [[1, ammoniak]], [1, ferritStaub], 36.4 ).
-rezept(raffinieren, [[1, dioxit]], [2, ferritStaub], 36.9 ).
-rezept(raffinieren, [[1, paraffinium]], [1, ferritStaub], 36.9 ).
-rezept(raffinieren, [[1, phosphor]], [1, ferritStaub], 37.8 ).
-rezept(raffinieren, [[1, pyrit]], [1, ferritStaub], 36.7 ).
-rezept(raffinieren, [[1, uran]], [1, ferritStaub], 37.3 ).
+rezept(raffinieren, [[1, aktiviertesEmeril]], [3, chromatischesMetall], 5.33 ).
+rezept(raffinieren, [[1, aktiviertesIndium]], [4, chromatischesMetall], 3.0 ).
+rezept(raffinieren, [[1, aktiviertesKupfer]], [1, chromatischesMetall], 24.0 ).
+rezept(raffinieren, [[1, cadmium]], [1, chromatischesMetall], 28.0 ).
+rezept(raffinieren, [[2, emeril]], [3, chromatischesMetall], 5.33 ).
+rezept(raffinieren, [[2, indium]], [4, chromatischesMetall], 2.5 ).
+rezept(raffinieren, [[2, kupfer]], [1, chromatischesMetall], 36.0 ).
+rezept(raffinieren, [[3, mordit]], [1, faecium], 24.0 ).
+rezept(raffinieren, [[1, ammoniak]], [1, ferritStaub], 36.0 ).
+rezept(raffinieren, [[1, dioxit]], [2, ferritStaub], 36.0 ).
+rezept(raffinieren, [[1, paraffinium]], [1, ferritStaub], 36.0 ).
+rezept(raffinieren, [[1, phosphor]], [1, ferritStaub], 36.0 ).
+rezept(raffinieren, [[1, pyrit]], [1, ferritStaub], 36.0 ).
+rezept(raffinieren, [[1, uran]], [1, ferritStaub], 36.0 ).
 rezept(raffinieren, [[1, verrostetesMetall]], [2, ferritStaub], 33.1 ).
-rezept(raffinieren, [[40, silikatPulver]], [1, glas], 524 ).
-rezept(raffinieren, [[1, grantine]], [125, gold], 1.00 ).
+rezept(raffinieren, [[40, silikatPulver]], [1, glas], 500 ).
+rezept(raffinieren, [[1, grantine]], [125, gold], 0.96 ).
 rezept(raffinieren, [[1, lebendePerle]], [100, gold], 0.10 ).
-rezept(raffinieren, [[1, lemmium]], [125, gold], 1.01 ).
-rezept(raffinieren, [[1, magnoGold]], [125, gold], 1.00 ).
-rezept(raffinieren, [[2, kobalt]], [1, ionisiertesKobalt], 37.1 ).
-rezept(raffinieren, [[1, tetraKobalt]], [150, ionisiertesKobalt], 0.536 ).
-rezept(raffinieren, [[1, ionisiertesKobalt]], [2, kobalt], 6.22 ).
-rezept(raffinieren, [[40, frostKristall]], [1, glas], 3030 ).
-rezept(raffinieren, [[1, gammaWurzel]], [2, kohlenStoff], 6.14 ).
-rezept(raffinieren, [[1, kaktusFleisch]], [2, kohlenStoff], 6.00 ).
-rezept(raffinieren, [[1, pilzSchimmel]], [2, kohlenStoff], 6.00 ).
-rezept(raffinieren, [[1, sauerStoff]], [1, kohlenStoff], 8.31 ).
-rezept(raffinieren, [[1, sternenKnolle]], [2, kohlenStoff], 6.00 ).
-rezept(raffinieren, [[1, solanium]], [2, kohlenStoff], 6.00 ).
+rezept(raffinieren, [[1, lemmium]], [125, gold], 0.96 ).
+rezept(raffinieren, [[1, magnoGold]], [125, gold], 0.96 ).
+rezept(raffinieren, [[2, kobalt]], [1, ionisiertesKobalt], 36.0 ).
+rezept(raffinieren, [[1, tetraKobalt]], [150, ionisiertesKobalt], 0.4 ).
+rezept(raffinieren, [[1, ionisiertesKobalt]], [2, kobalt], 6.0 ).
+rezept(raffinieren, [[40, frostKristall]], [1, glas], 3000 ).
+rezept(raffinieren, [[1, gammaWurzel]], [2, kohlenStoff], 6.0 ).
+rezept(raffinieren, [[1, kaktusFleisch]], [2, kohlenStoff], 6.0 ).
+rezept(raffinieren, [[1, pilzSchimmel]], [2, kohlenStoff], 6.0 ).
+rezept(raffinieren, [[1, sauerStoff]], [1, kohlenStoff], 8.0 ).
+rezept(raffinieren, [[1, sternenKnolle]], [2, kohlenStoff], 6.0 ).
+rezept(raffinieren, [[1, solanium]], [2, kohlenStoff], 6.0 ).
 rezept(raffinieren, [[1, zaeheFluessigkeiten]], [1, lebenderSchleim], 60.0 ).
 rezept(raffinieren, [[1, hypnotischesAuge]], [1, lebenderSchleim], 0.30 ).
-rezept(raffinieren, [[2, reinesFerrit]], [1, magnetisiertesFerrit], 24.27 ).
+rezept(raffinieren, [[2, reinesFerrit]], [1, magnetisiertesFerrit], 24.0 ).
 rezept(raffinieren, [[3, faecium]], [2, mordit], 36.0 ).
 rezept(raffinieren, [[35, platin]], [1, nanitHaufen], 24.0 ).
 rezept(raffinieren, [[25, pugneum]], [1, nanitHaufen], 12.0 ).
 rezept(raffinieren, [[5, unkontrollierbarerSchimmel]], [1, nanitHaufen], 60.0 ).
 rezept(raffinieren, [[1, kuerbisKnolle]], [1, natrium], 24.0 ).
-rezept(raffinieren, [[1, natriumNitrat]], [2, natrium], 12.1 ).
-rezept(raffinieren, [[1, instabilesNatrium]], [150, natriumNitrat], 0.567 ).
-rezept(raffinieren, [[1, kristallSulfid]], [50, natriumNitrat], 0.78 ).
+rezept(raffinieren, [[1, natriumNitrat]], [2, natrium], 12.0 ).
+rezept(raffinieren, [[1, instabilesNatrium]], [150, natriumNitrat], 0.4 ).
+rezept(raffinieren, [[1, kristallSulfid]], [50, natriumNitrat], 0.4 ).
 rezept(raffinieren, [[2, natrium]], [1, natriumNitrat], 40.0 ).
 rezept(raffinieren, [[1, iridesit]], [250, platin], 0.50 ).
 rezept(raffinieren, [[1, geoDesit]], [250, platin], 0.50 ).
 rezept(raffinieren, [[1, gold]], [1, pyrit], 24.0 ).
 rezept(raffinieren, [[3, schwefelin]], [1, radon], 33.3 ).
 rezept(raffinieren, [[1, ferritStaub]], [1, reinesFerrit], 12.0 ).
-rezept(raffinieren, [[1, magnetisiertesFerrit]], [2, reinesFerrit], 7.99 ).
-rezept(raffinieren, [[1, seltenesMetallElement]], [150, reinesFerrit], 0.569 ).
-rezept(raffinieren, [[1, chlor]], [2, salz], 11.99 ).
-rezept(raffinieren, [[1, kelpBeutel]], [1, sauerStoff], 23.9 ).
-rezept(raffinieren, [[1, superOxidKristall]], [150, sauerStoff], 0.56 ).
+rezept(raffinieren, [[1, magnetisiertesFerrit]], [2, reinesFerrit], 8.0 ).
+rezept(raffinieren, [[1, seltenesMetallElement]], [150, reinesFerrit], 0.4 ).
+rezept(raffinieren, [[1, chlor]], [2, salz], 12.0).
+rezept(raffinieren, [[1, kelpBeutel]], [1, sauerStoff], 24.0 ).
+rezept(raffinieren, [[1, superOxidKristall]], [150, sauerStoff], 0.4 ).
 rezept(raffinieren, [[3, stickStoff]], [1, schwefelin], 36.0 ).
 rezept(raffinieren, [[1, aronium]], [250, silber], 0.50 ).
-rezept(raffinieren, [[1, herox]], [250, silber], 0.42 ).
+rezept(raffinieren, [[1, herox]], [250, silber], 0.5 ).
 rezept(raffinieren, [[1, strassenKoeterBronze]], [250, silber], 0.50 ).
-rezept(raffinieren, [[3, radon]], [1, stickStoff], 38.1 ).
+rezept(raffinieren, [[3, radon]], [1, stickStoff], 36.0 ).
 rezept(raffinieren, [[1, lebenderSchleim]], [1, unkontrollierbarerSchimmel], 60.0 ).
 rezept(raffinieren, [[2, kohlenStoff]], [1, verdichteterKohlenStoff], 18.0 ).
-rezept(raffinieren, [[1, kohlenStoffKristall]], [150, verdichteterKohlenStoff], 0.57 ).
+rezept(raffinieren, [[1, kohlenStoffKristall]], [150, verdichteterKohlenStoff], 0.4 ).
 rezept(raffinieren, [[1, restSubstanz]], [1, zaeheFluessigkeiten], 60.0 ).
 
 rezept(ausAtmosphaerenAnlageGewinnen, [[1, verdichteterKohlenStoff]], [5, stickStoff], 722.5 ). /* lush and toxic planets */
@@ -564,7 +633,11 @@ rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, uran], [1, gesu
 rezept(bauen, [[1, metallPlatten], [1, kohlenStoffNanoRohr], [15, natrium], [1, signalBoosterRezept]], [1, signalBooster], 0).
 rezept(bauen, [[60, magnetisiertesFerrit], [100, verdichteterKohlenStoff], [1, batterieRezept]], [1, batterie], 0).
 rezept(bauen, [[2, metallPlatten], [75, chromatischesMetall], [50, gold], [1, solarModulRezept]], [1, solarModul], 0).
-rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, phosphor], [1, gefahrenSchutzEinheitRezept]], [1, gefahrenSchutzEinheit], 0).
+rezept(bauen, [[5, natrium], [1, lichtBoxRezept]], [1, lichtBox], 0).
+rezept(bauen, [[5, natrium], [1, leuchtBodenRezept]], [1, leuchtBoden], 0).
+rezept(bauen, [[2, metallPlatten], [2, ionenAkku], [40, phosphor], [1, geraeuschBoxRezept]], [1, geraeuschBox], 0).
+rezept(bauen, [[5, metallPlatten], [4, ionenAkku], [100, paraffinium], [1, kugelErzeugerRezept]], [1, kugelErzeuger], 0).
+
 
 /* ---------------------  Anomalie  -------------------------------------------------- */
 rezept(bauen, [[2, metallPlatten], [1, hermetischesSiegel], [25, natrium], [1, naehrStoffProzessorRezept]], [1, naehrStoffProzessor], 0).
@@ -1832,7 +1905,7 @@ rezept(rezeptInAnomalieForschungsComputerErwerben, [[2, geborgeneDaten]], [1, be
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[2, geborgeneDaten]], [1, betonDachRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[3, geborgeneDaten]], [1, glasPlatteMitBetonRahmenRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, betonRampeRezept], 270 ).
-rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, kleineBetonPlatteRezept], 270 ).
+rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, kleineBetonBodenPlatteRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, betonDreieckRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, schraegeBetonPlatteRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, kleineBetonWandRezept], 270 ).

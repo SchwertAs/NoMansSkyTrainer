@@ -76,7 +76,8 @@ beschaffen(System, Planet, Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaen
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], _),
 	rezeptZulaessig(Operation, Komponenten, Stoff),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
-	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
+	ceiling(Anzahl, Anzahl0),
+	divmod(Anzahl0, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
 	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),
 	AnzahlRaffiniert is AnzahlRaffinaden * AnzahlRezeptErgebnis,
 	append([[AnzahlRaffinaden, Operation, Komponenten, [AnzahlRaffiniert, Stoff]]], BisherigeVorgaenge, ListeVorgaenge0),
@@ -139,12 +140,22 @@ multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, Vorg
 rezeptZulaessig(Operation, _, _) :-
 	memberchk(Operation, [bauen, herstellen, installieren, rezeptInFabrikErwerben]),
 	!.
+
+rezeptZulaessig(inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
+	Komponenten = [[_, _], [_, _]],
+	spielStatus:spielStatus(anzugRaffinerie, true),
+	!.
+
+rezeptZulaessig(inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
+	Komponenten = [[_, _], [_, _]],
+	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
+	spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], _), 
+	!.
 	
 rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _]],
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	(spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], _); 
-	 spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
+	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
 	 spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _)
 	),
 	!.

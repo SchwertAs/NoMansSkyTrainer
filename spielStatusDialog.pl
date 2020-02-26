@@ -13,6 +13,7 @@ spielStatusDialog(_Request) :-
 	(spielStatus:spielStatus(verbesserterMinenLaser, VerbesserterMinenLaser); VerbesserterMinenLaser = true),
 	(spielStatus:spielStatus(terrainFormer, TerrainFormer); TerrainFormer = true),
 	(spielStatus:spielStatus(waffeVorhanden, WaffeVorhanden); WaffeVorhanden = true),
+	(spielStatus:spielStatus(anzugRaffinerie, AnzugRaffinerie); AnzugRaffinerie = true),
 	(spielStatus:spielStatus(raumSchiffIstFlott, RaumSchiffIstFlott); RaumSchiffIstFlott = true),
 	(spielStatus:spielStatus(exoFahrzeugMinenLaser, ExoFahrzeugMinenLaser); ExoFahrzeugMinenLaser = true),
 	(spielStatus:spielStatus(frachterVorhanden, FrachterVorhanden); FrachterVorhanden = true),
@@ -22,6 +23,7 @@ spielStatusDialog(_Request) :-
 	((VerbesserterMinenLaser = true, VerbesserterMinenLaserChecked = ' checked'); VerbesserterMinenLaserChecked = ''), 
 	((TerrainFormer = true, TerrainFormerChecked = ' checked'); TerrainFormerChecked = ''), 
 	((WaffeVorhanden = true, WaffeVorhandenChecked = ' checked'); WaffeVorhandenChecked = ''), 
+	((AnzugRaffinerie = true, AnzugRaffinerieChecked = ' checked'); AnzugRaffinerieChecked = ''), 
 	((RaumSchiffIstFlott = true, RaumSchiffIstFlottChecked = ' checked'); RaumSchiffIstFlottChecked = ''), 
 	((ExoFahrzeugMinenLaser = true, ExoFahrzeugMinenLaserChecked = ' checked'); ExoFahrzeugMinenLaserChecked = ''), 
 	((FrachterVorhanden = true, FrachterVorhandenChecked = ' checked'); FrachterVorhandenChecked = ''), 
@@ -32,7 +34,7 @@ spielStatusDialog(_Request) :-
 	\['</header>'],
 	\['<formSpace>'],       
 	form([action('/spielStatus'), method('post'), autocomplete("off")], 
-	   	 [fieldSet([legend('Multitool-Ausstattung'),
+	   	 [fieldSet([legend('Ausstattung'),
 		       	    div(class('table'),
 		       	        [div(class('tr'), 
 		       	             [div(class('td'), 
@@ -56,6 +58,12 @@ spielStatusDialog(_Request) :-
 		       	                 [div(class('td'), 
 		       	                      [input([name('waffe'), type('checkbox'), WaffeVorhandenChecked]),
 		       	                       label(for('waffe'), 'Waffe')
+		       	                      ])
+		       	                 ]),
+		       	             div(class('tr'), 
+		       	                 [div(class('td'), 
+		       	                      [input([name('anzugRaffinerie'), type('checkbox'), AnzugRaffinerieChecked]),
+		       	                       label(for('anzugRaffinerie'), 'Anzug-Raffinerie')
 		       	                      ])
 		       	                 ])
 		       	        ])
@@ -109,6 +117,7 @@ spielStatus(Request) :-
 	verbesserterMinenlaser(VerbesserterMinenlaser, [default(off)]),
 	terrainFormer(TerrainFormer, [default(off)]),
 	waffe(Waffe, [default(off)]),
+	anzugRaffinerie(AnzugRaffinerie, [default(off)]),
 	raumschiff(Raumschiff, [default(off)]),
 	exoFahrzeug(ExoFahrzeug, [default(off)]),
 	frachter(Frachter, [default(off)]),
@@ -120,6 +129,7 @@ spielStatus(Request) :-
     (VerbesserterMinenlaser = off -> assertz(spielStatus:spielStatus(verbesserterMinenLaser, false)); assertz(spielStatus:spielStatus(verbesserterMinenLaser, true))),
     (TerrainFormer = off -> assertz(spielStatus:spielStatus(terrainFormer, false)); assertz(spielStatus:spielStatus(terrainFormer, true))),
     (Waffe = off -> assertz(spielStatus:spielStatus(waffeVorhanden, false)); assertz(spielStatus:spielStatus(waffeVorhanden, true))),
+    (AnzugRaffinerie = off -> assertz(spielStatus:spielStatus(anzugRaffinerie, false)); assertz(spielStatus:spielStatus(anzugRaffinerie, true))),
     (Raumschiff = off -> assertz(spielStatus:spielStatus(raumSchiffIstFlott, false)); assertz(spielStatus:spielStatus(raumSchiffIstFlott, true))),
     (ExoFahrzeug = off -> assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, false)); assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, true))),
     (Frachter = off -> assertz(spielStatus:spielStatus(frachterVorhanden, false)); assertz(spielStatus:spielStatus(frachterVorhanden, true))),

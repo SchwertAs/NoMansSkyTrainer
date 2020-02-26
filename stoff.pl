@@ -1354,7 +1354,7 @@ stoff(bauRezept, kugelErzeugerRezept, 0).
 stoff(bauRezept, lagerModulRezept, 0).
 stoff(bauRezept, automatischerSchalterRezept, 0).
 stoff(bauRezept, stehenderPflanzenBehaelterRezept, 0).
-stoff(bauRezept, kleineBetonPlatteRezept, 0).
+stoff(bauRezept, kleineBetonBodenPlatteRezept, 0).
 stoff(bauRezept, sauerStoffVerarbeiterRezept, 0).
 
 /* für Quecksilber Items */
