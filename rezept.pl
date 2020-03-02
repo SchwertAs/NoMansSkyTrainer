@@ -841,6 +841,8 @@ rezept(bauen, [[5, natrium], [1, grueneLeuchteRezept]], [1, grueneLeuchte], 0 ).
 rezept(bauen, [[5, natrium], [1, roteLeuchteRezept]], [1, roteLeuchte], 0 ).
 
 /* =====================  Quecksilber ================================================ */
+rezept(bauen, [[40, kohlenStoff], [1, mineralBogenRezept]], [1, mineralBogen], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, edelSteinFelsRezept]], [1, edelSteinFels], 0 ).
 rezept(bauen, [[40, kohlenStoff], [1, meeresGesteinRezept]], [1, meeresGestein], 0 ).
 rezept(bauen, [[2, glas], [50, faecium], [50, mordit], [1, terrariumRezept]], [1, terrarium], 0 ).
 rezept(bauen, [[40, kohlenStoff], [1, segelPalmeRezept]], [1, segelPalme], 0 ).

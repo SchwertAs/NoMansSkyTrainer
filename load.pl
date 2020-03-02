@@ -26,6 +26,7 @@
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetAuswahlDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetMondNameDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetenEigenschaftenDialog').
+:-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetSammelEigenschaftenDefaults').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetSammelEigenschaftenDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/planetSammelEigenschaftenDialogParams').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/spielStatusDialog').

@@ -32,8 +32,8 @@ initSysteme :-
 initPlaneten :-
 	abolish(planeten/4)
 	/* Bezeichnung und Atmospherentyp */
-	/* System, Planet, oneOf(stickStoff, schwefelin, radon, sauerStoff) */
-	,assertz(planeten(0, 'System', 'MeinPlanet', 'stickStoff')).
+	/* System, Planet, oneOf(planetSammelEigenschaftenDefaults:planetenTyp(Typ)) */
+	,assertz(planeten(0, 'System', 'MeinPlanet', giftig)).
 	
 initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */

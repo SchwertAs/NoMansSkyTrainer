@@ -50,6 +50,7 @@ stoff(rohStoff, lebendePerle, 4798).
 stoff(rohStoff, goldKlumpen, 3280).
 stoff(rohStoff, sturmKristall, 129150).
 stoff(rohStoff, kristallSulfid, 7410).
+stoff(rohStoff, kristallFragment, 3280).
 
 stoff(rohStoff, beutelGift, 11685).
 stoff(rohStoff, eiweissPerle, 9025).
@@ -667,6 +668,12 @@ stoff(basisBauEndStoff, feuerWerkGruen, 0).
 stoff(basisBauEndStoff, feuerWerkBlau, 0).
 stoff(basisBauEndStoff, feuerWerkRot, 0).
 
+stoff(basisBauEndStoff, galaktischerHubBanner, 0).
+stoff(basisBauEndStoff, spezialistPoloBanner, 0).
+stoff(basisBauEndStoff, priesterEntitaetNadaBanner, 0).
+stoff(basisBauEndStoff, mineralBogen, 0).
+stoff(basisBauEndStoff, edelSteinFels, 0).
+
 stoff(basisBauEndStoff, meeresGestein, 0).
 stoff(basisBauEndStoff, terrarium, 0). 
 stoff(basisBauEndStoff, segelPalme, 0).
@@ -793,16 +800,21 @@ stoff(handelsWare, kuehlMittelTank, 200000).
 stoff(handelsWare, verstaerkteRohre, 50000).
 stoff(handelsWare, ehemalsNeutzlicheFedern, 1000).
 
+stoff(handelsWare, unmoeglicheSporen, 151488). 
+stoff(handelsWare, sichWindendeSpulen, 3280). 
+
 /* =============================== anormale Materialien ================= */
 
-stoff(stoerung, kappillarMuschel, 1000).
-stoff(stoerung, lichtBruch, 1000).
+stoff(stoerung, blasenBallen, 1000).
 stoff(stoerung, defekterSeparator, 1000).
+stoff(stoerung, elektrischerWuerfel, 1000).
+stoff(stoerung, kabelKapsel, 1000).
 stoff(stoerung, kalziPilz, 1000).
+stoff(stoerung, kappillarMuschel, 1000).
+stoff(stoerung, klapperWirbleSaeule, 1000).
+stoff(stoerung, lichtBruch, 1000).
 stoff(stoerung, terbiumWachstum, 1000).
 stoff(stoerung, verknoecherterStern, 1000).
-stoff(stoerung, elektrischerWuerfel, 1000).
-stoff(stoerung, klapperWirbleSaeule, 1000).
 
 
 /* =============================== Quecksilber Kauf ===================== */
@@ -853,24 +865,41 @@ stoff(kuriositaet, vyKeenDolch, 11688).
 stoff(kuriositaet, divergenzWuerfel, 3015).
 stoff(kuriositaet, hadalKern, 92625).
 stoff(kuriositaet, korvaxKonvergenzWuerfel, 13063).
-stoff(kuriositaet, kristallFragment, 3280).
 stoff(kuriositaet, vykenTafel, 1250).
 
 
-/* ausgraben, pflücken, verkaufen */
-stoff(artefakt, schmutzigeKnochenFragmente, 104981).
-stoff(artefakt, fortgeschritteneProzessoren, 1747804).
-stoff(artefakt, beschaedigteGetriebe, 264901).
+/* Artefakte */
+stoff(artefakt, abgeplatzteTeilSkelette, 113626).
+stoff(artefakt, ameisenRoggenZwiebeln, 113626).
 stoff(artefakt, aussergewoehnlicheDrehmomentErzeuger, 1269186).
 stoff(artefakt, behaelterMitUraltenMetallteilen, 766945).
+stoff(artefakt, behaelterMitAnzestralenJuwelen, 472674).
+stoff(artefakt, beschaedigteGetriebe, 264901).
+stoff(artefakt, boxMitSchoenenBohnen, 576690).
 stoff(artefakt, faszinierendeKnochenFragmente, 61510).
-stoff(artefakt, gebrocheneSkelettFragmente, 74000).
 stoff(artefakt, frischeFlutPalmenSprossen, 118669).
-stoff(artefakt, uralterSchluessel, 1000).
-stoff(artefakt, wasserBefleckteBooster, 253794).
-stoff(artefakt, ruhendeVersuchungsWurzVerschnitte, 189244).
-stoff(artefakt, hochtechnologischeGyroskope, 2634518).
+stoff(artefakt, fortgeschritteneProzessoren, 1747804).
+stoff(artefakt, gebrocheneSkelettFragmente, 74000).
+stoff(artefakt, gefroreneLarve, 231677).
+stoff(artefakt, gekeimteMoschusFarnFruechte, 560298).
 stoff(artefakt, gekeimteSaegeKelchBlattVerschnitte, 800237).
+stoff(artefakt, heimgesuchteLarve, 344217).
+stoff(artefakt, hochtechnologischeGyroskope, 2634518).
+stoff(artefakt, konservierteKrabbenRückenWirbel, 1161711).
+stoff(artefakt, merkwürdigeKnochenFragmente, 97540).
+stoff(artefakt, ruhendeVersuchungsWurzVerschnitte, 189244).
+stoff(artefakt, schmutzigeKnochen, 115190).
+stoff(artefakt, schmutzigeKnochenFragmente, 104981).
+stoff(artefakt, schrecklicheUeberreste, 179193).
+stoff(artefakt, summendeGetriebe, 837741).
+stoff(artefakt, unheimlicheKerne, 560798).
+stoff(artefakt, uralterSchluessel, 1000).
+stoff(artefakt, uranfaenglicheTrilobitRippen, 227643).
+stoff(artefakt, verschmolzeneTafel, 515718).
+stoff(artefakt, wasserBefleckteBooster, 253794).
+stoff(artefakt, verschlisseneKnochen, 92417).
+stoff(artefakt, zusammenStellungAusVonVykeeStammendenKuriositaeten, 200892).
+
 
 stoff(bauRezept, byteBeatGeraetRezept, 0).
 stoff(bauRezept, saeureRezept, 0).
@@ -1358,6 +1387,14 @@ stoff(bauRezept, kleineBetonBodenPlatteRezept, 0).
 stoff(bauRezept, sauerStoffVerarbeiterRezept, 0).
 
 /* für Quecksilber Items */
+/* diese Items sind noch nicht (27.02.20) baubar Rezepte jedoch käuflich
+stoff(bauRezept, galaktischerHubBannerRezept, 0).
+stoff(bauRezept, spezialistPoloBannerRezept, 0).
+stoff(bauRezept, priesterEntitaetNadaBannerRezept, 0).
+*/
+
+stoff(bauRezept, mineralBogenRezept, 0).
+stoff(bauRezept, edelSteinFelsRezept, 0).
 stoff(bauRezept, feuerWerkGruenRezept, 0).
 stoff(bauRezept, feuerWerkBlauRezept, 0).
 stoff(bauRezept, feuerWerkRotRezept, 0).

@@ -87,7 +87,7 @@ sammlungInit :-
 
 
 	/* mit Terrainformer abbauen */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, ammoniak, 3, 0, 300)) 
+	/* nach Systemfarbe */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, aktiviertesCadmium, 15, 0, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, aktiviertesEmeril, 8, 0, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, aktiviertesIndium, 46, 0, 300))
@@ -95,10 +95,30 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, cadmium, 24, 0, 300))	
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, emeril, 24, 0, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, indium, 20, 0, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, kupfer, 3, 0, 300))
+	
+	/* nach Planetentyp */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, ammoniak, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, dioxit, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, paraffinium, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, phosphor, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, pyrit, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, uran, 3, 0, 300)) 
+
+	/* Als zweite Resource */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, gold, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, salz, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, verrostetesMetall, 3, 0, 300)) 
+	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, magnetisiertesFerrit, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, reinesFerrit, 3, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, silber, 3, 0, 300)) 
+	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, kobalt, 3, 0, 300)) 
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, natrium, 6, 0, 300))
 	
-	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, kupfer, 3, 0, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, silikatPulver, 6, 0, 300))
+	
 	
 	/* mit Terrainformer ausgraben */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, schmutzigeKnochenFragmente, 300, 0, 300))
@@ -138,6 +158,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, platin, 20, 0, 63))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, tritiumHyperCluster, 20, 0, 63))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, goldKlumpen, 20, 0, 63))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, unmoeglicheSporen, 20, 0, 63))
 	
 	/* kaufen */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, diWasserStoffGelee, 150, 1310, 250 ))
@@ -197,7 +218,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', unterWasserErkaempfen, hypnotischesAuge, 4500, 0, 0)) /* von abyssal horror */
 	.
 
-/* Vorfertigen Rohstoffe */
+/* Liste der Rohstoffe, die vorgefertigt werden sollen */
 vorfertigen(diWasserStoff).
 vorfertigen(sauerStoff).
 vorfertigen(kupfer).
@@ -288,20 +309,25 @@ vorfertigen(wuerzigerKaese).
 vorfertigen(synthetischerHonig).																		
 vorfertigen(knusperKaramell).
 
-
+/*
+baueDefaults(System, Planet, DefaultStoffe) :-
+	spielStatus:planeten(_, System, Planet, PlanetenTyp),
+	findall(Stoff, planetSammelEigenschaftenDefaults:sammelDefaultPlanetenTyp(_0, _1, _2)
+*/ 
 copyDefaultIfEmpty(System, Planet) :-
 	findall(Stoff, sammlung(_, System, Planet, _, Stoff, _, _, _), Stoffe),
 	((Stoffe = [],
 	  forall((sammlung(RecNo, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)),
-	      assertz(sammlung(RecNo, System, Planet, Operation, Stoff, Haupt, Neben, Ruest))));
+	      assertz(sammlung(RecNo, System, Planet, Operation, Stoff, Haupt, Neben, Ruest))
+	        ));
 	  true
 	).
 	
 vorgefertigeLoesungenErstellen(System, Planet) :-
-	\+sammelbarVorfertigen(System, Planet).
+	\+alleVorfertigen(System, Planet).
 	
 	
-sammelbarVorfertigen(System, Planet) :-
+alleVorfertigen(System, Planet) :-
 	retractall(fertigeLoesung(_, _, _)),
 	vorfertigen(Stoff),
 	\+generiereFertigeLoesungen(System, Planet, Stoff),
