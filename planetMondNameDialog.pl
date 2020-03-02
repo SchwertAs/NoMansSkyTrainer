@@ -91,7 +91,8 @@ innereEingabeZeile([Record|Rest]) -->
 	{
 		Record = [FeldNo, Planet, PlanetenTyp],
 		((PlanetenTyp = '', PlanetenTyp0 = 'Bitte wählen'); (PlanetenTyp0 = PlanetenTyp)),
-		findall([PlanetenTyp0, PlanTyp], planetSammelEigenschaftenDefaults:planetenTyp(PlanTyp), PlanetenTypen)
+		findall([PlanetenTyp0, PlanTyp], planetSammelEigenschaftenDefaults:planetenGruppePlanetenTyp(PlanTyp, _), PlanetenTypen0),
+		sort(PlanetenTypen0, PlanetenTypen)
 	},
 	html([div(class('tr'), 
 	          [div(class('td'), input([name('planet' + FeldNo), type("text"), maxlength("40"), value(Planet)])

@@ -309,11 +309,15 @@ vorfertigen(wuerzigerKaese).
 vorfertigen(synthetischerHonig).																		
 vorfertigen(knusperKaramell).
 
+
 /*
 baueDefaults(System, Planet, DefaultStoffe) :-
+	spielStatus:systeme(_, System, Farbe),
+	findall([SammelAktion0, Stoff0, planetSammelEigenschaftenDefaults:sammelDefaultSystemTyp(Farbe, SammelAktion0, Stoff0), StoffListe0)
 	spielStatus:planeten(_, System, Planet, PlanetenTyp),
 	findall(Stoff, planetSammelEigenschaftenDefaults:sammelDefaultPlanetenTyp(_0, _1, _2)
-*/ 
+*/
+
 copyDefaultIfEmpty(System, Planet) :-
 	findall(Stoff, sammlung(_, System, Planet, _, Stoff, _, _, _), Stoffe),
 	((Stoffe = [],
