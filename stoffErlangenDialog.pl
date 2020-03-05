@@ -107,7 +107,8 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	html(
 	div(class('td'), [
 		label([ for(Name)],[LabelText]),
-   	  	input([ name(Name),
+   	  	input([ class(text40Format),
+   	  	        name(Name),
    	  	  		type('text'), 
    	  	  		size(20), 
    	  	  		maxlength(20),
@@ -167,7 +168,6 @@ nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff) :-
     ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
     assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
-    sammlung:vorgefertigeLoesungenErstellen(System, Planet),
 	(optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
 	 nichtHerstellBar(Ziel)),
 	!.

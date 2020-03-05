@@ -153,7 +153,8 @@ bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
 	findall(EinzelZeit, (member(VorgangsOrt2, VorgangsOrte1), reisen(VorgangsOrt2, EinzelZeit)), EinzelZeiten),
 	sum_list(EinzelZeiten, ReiseZeit),
 	retract(spielStatus:systemAusstattung([_, _, ortSpieler], _)),
-	assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung)).
+	assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], Entfernung)),
+	!.
 	
 reisen(VorgangsOrt, Zeit) :-
 	VorgangsOrt = ortSpieler,

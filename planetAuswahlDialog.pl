@@ -29,7 +29,7 @@ systemAuswahlDialog(HeaderText, Action) :-
 
 eingabeTabelle(OptionList) -->
 	html(
-   	  div(class('table20'),[
+   	  div(class('table30'),[
    	    div(class('tr'), [
    	  	    div(class('td'), [
    	  	  	label([for('auswahlSystem')],'System: '),
@@ -84,7 +84,8 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	html(
 	div(class('td'), [
 		label([ for(Name)],[LabelText]),
-   	  	input([ name(Name),
+   	  	input([ class(text40Format),
+   	  	        name(Name),
    	  	  		type('text'), 
    	  	  		size(20), 
    	  	  		maxlength(20),

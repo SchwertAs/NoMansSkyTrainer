@@ -7,18 +7,25 @@ baueRezepte :-
 	stoff:stoff(bauRezept, Rezept, _),
 	assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
 	fail.
-		
+
+komponenten :-
+	stoff:stoff(komponente, Stoff, _),
+	assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, Stoff, 150, 1310, 250 )),
+	fail.
+			
 /* sammlung(<RecordNo>, <System>, <Planet>, <SammelAktion>, <Stoff>, <Hauptzeit>, <Nebenzeit>, <Rüstzeit>) */
 sammlungInit :-
-	abolish(sammlung:sammlung/8),
-	\+sammlung:baueRezepte
+	abolish(sammlung/8),
+	\+baueRezepte,
+	\+komponenten
 
 /* Stoffe ohne Gerät zu Fuss wild ernten */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, natrium, 8, 10, 0)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sauerStoff, 8, 9, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, eiweissPerle, 300, 339, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, gravitinoBall, 150, 339, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sturmKristall, 150, 150, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, natrium, 8, 10, 0)) 
-	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sauerStoff, 8, 9, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, tetraKobalt, 150, 150, 0))
 
 
 /* variieren nach Planetentyp kürzere Zeiten bei geeigneterem Habitat */
@@ -41,12 +48,8 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, gammaWurzel, 5, 4, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, frostKristall, 4, 4, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sternenKnolle, 8, 12, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sturmKristall, 150, 150, 0))
 
 /*------------ noch offen ------------- */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, korvaxKonvergenzWuerfel, 20, 20, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, nipNipKnospen, 20, 20, 0))
-
 	/* nutzbare anomalieen (Deko) */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, kappillarMuschel, 150, 150, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, lichtBruch, 150, 150, 0))
@@ -74,6 +77,14 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, kuerbisKnolle, 5, 5, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, sauerStoff, 9, 9, 150))
 
+	/* verbesserter Minenlaser */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, verdichteterKohlenStoff, 12, 0, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, reinesFerrit, 3, 0, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, natriumNitrat, 3, 0, 150))
+
+	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, paraffinium, 3, 0, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, mordit, 3, 0, 150))
+	
 	/* exofahrzeug minenlaser nutzen */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', exoFahrzeugMinenLaserNutzen, sauerStoff, 9, 9, 150))
 
@@ -121,14 +132,7 @@ sammlungInit :-
 	
 	
 	/* mit Terrainformer ausgraben */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, schmutzigeKnochenFragmente, 300, 0, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, geborgeneDaten, 300, 0, 300))
-	
-	/* verbesserter Minenlaser */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, verdichteterKohlenStoff, 12, 0, 150))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, reinesFerrit, 3, 0, 150))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, paraffinium, 3, 0, 150))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', verbessertenMinenLaserNutzen, mordit, 3, 0, 150))
 	
 	/* Jagd (mit Glutspeer, ein Schuss = tot, Aufladen ist Nebenzeit) */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', jagen, beinFleisch, 20, 400, 300))
@@ -158,21 +162,12 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, platin, 20, 0, 63))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, tritiumHyperCluster, 20, 0, 63))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, goldKlumpen, 20, 0, 63))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, unmoeglicheSporen, 20, 0, 63))
 	
 	/* kaufen */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, diWasserStoffGelee, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, ferritStaub, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, ionenAkku, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kabelBaum, 150, 1310, 2460))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, raumSchiffStartTreibStoff, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, restSubstanz, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kobalt, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kobaltSpiegel, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, metallPlatten, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, mikroProzessor, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sternenSeide, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, navigationsDaten, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, pyrit, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, pugneum, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, reinesFerrit, 150, 1310, 250 ))
@@ -310,19 +305,21 @@ vorfertigen(synthetischerHonig).
 vorfertigen(knusperKaramell).
 
 
-/*
-baueDefaults(System, Planet, DefaultStoffe) :-
+baueDefaults(System, Planet, DefaultSammelArten) :-
 	spielStatus:systeme(_, System, Farbe),
-	findall([SammelAktion0, Stoff0, planetSammelEigenschaftenDefaults:sammelDefaultSystemTyp(Farbe, SammelAktion0, Stoff0), StoffListe0)
-	spielStatus:planeten(_, System, Planet, PlanetenTyp),
-	findall(Stoff, planetSammelEigenschaftenDefaults:sammelDefaultPlanetenTyp(_0, _1, _2)
-*/
+	findall([SammelAktion0, Stoff0], planetSammelEigenschaftenDefaults:sammelDefaultSystemTyp(Farbe, SammelAktion0, Stoff0), SammelArt0),
+	spielStatus:planeten(_, System, Planet, PlanetenGruppe),
+	planetenTypen:planetenGruppePlanetenTyp(PlanetenGruppe, PlanetenTyp),
+	findall([SammelAktion1, Stoff1], planetSammelEigenschaftenDefaults:sammelDefaultPlanetenTyp(PlanetenTyp, SammelAktion1, Stoff1), SammelArt1),
+	append(SammelArt0, SammelArt1, DefaultSammelArten),
+	!.
 
 copyDefaultIfEmpty(System, Planet) :-
-	findall(Stoff, sammlung(_, System, Planet, _, Stoff, _, _, _), Stoffe),
+	findall(Stoff0, sammlung(_, System, Planet, _, Stoff0, _, _, _), Stoffe),
 	((Stoffe = [],
-	  forall((sammlung(RecNo, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)),
-	      assertz(sammlung(RecNo, System, Planet, Operation, Stoff, Haupt, Neben, Ruest))
+	  baueDefaults(System, Planet, DefaultStoffe),
+	  forall((select([Operation, Stoff], DefaultStoffe, _), sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)),
+	      assertz(sammlung(0, System, Planet, Operation, Stoff, Haupt, Neben, Ruest))
 	        ));
 	  true
 	).
@@ -332,13 +329,14 @@ vorgefertigeLoesungenErstellen(System, Planet) :-
 	
 	
 alleVorfertigen(System, Planet) :-
-	retractall(fertigeLoesung(_, _, _)),
 	vorfertigen(Stoff),
 	\+generiereFertigeLoesungen(System, Planet, Stoff),
+	debug(myTrace, 'Stoff: ~k generiert', Stoff),
 	fail.
 	
 generiereFertigeLoesungen(System, Planet, Stoff) :-
 	optimierung:optimierungsZiel(Strategie),
+	ignore(retractall(fertigeLoesung(System, Planet, Strategie, Stoff, _))),
 	\+suchAlgorithmus:baueFuerVorfertigung(System, Planet, Strategie, 1, Stoff),
 	optimierung:optimierungsStrategie(Strategie, Stoff, _, Vorgaenge, _, _, _, _, _),
 	assertz(fertigeLoesung(System, Planet, Strategie, Stoff, Vorgaenge)),

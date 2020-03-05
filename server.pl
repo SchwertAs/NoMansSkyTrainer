@@ -54,9 +54,13 @@ button3Space {
   font-family:Arial,sans-serif; 
   font-size: 1em; 
   color:black;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
   }
+
+.text40Format {
+  width: 30ch;
+}
 
 header,
 formSpace,
@@ -67,8 +71,8 @@ button3Space {
 	border-color: #8db243;
 	border-radius: 0px 0.5em 0.5em;
 	border: 1px solid;
-	padding: .5em;
-	margin: .5em;
+	padding: 0.5em;
+	margin: 0.5em;
 }
 
 redHeader,
@@ -77,33 +81,33 @@ redFormSpace {
 	border-color: #8db243;
 	border-radius: 0px 0.5em 0.5em;
 	border: 1px solid;
-	padding: .5em;
-	margin: .5em;
+	padding: 0.5em;
+	margin: 0.5em;
 }
 
 div.table { 
   display: table; 
-  width: calc(100% - 10px);
+  width: calc(100% - 0.6em);
 	border: thin solid #999999;
-	padding: 5px;
+	padding: 0.3em;
 }
 div.table20 { 
   display: table; 
-  width: calc(20% - 10px);
+  width: calc(20% - 0.6em);
 	border: thin solid #999999;
-	padding: 5px;
+	padding: 0.3em;
 }
 div.table30 { 
   display: table; 
-  width: calc(30% - 10px);
+  width: calc(30% - 0.6em);
 	border: thin solid #999999;
-	padding: 5px;
+	padding: 0.3em;
 }
 div.table50 { 
   display: table; 
-  width: calc(50% - 10px);
+  width: calc(50% - 0.6em);
 	border: thin solid #999999;
-	padding: 5px;
+	padding: 0.3em;
 }
 div.tr { 
   display:table-row; 
@@ -121,12 +125,12 @@ div.th {
 div.td { 
   display:table-cell; 
   border:thin solid #CCCCCC; 
-  padding:5px; 
+  padding:0.3em; 
 }
 </style>'.
 
 baueOptionsFeld(FeldName, OptionsWerteListe, Index, OptionList) :-
-	string_concat('<select name="', FeldName, ListString0),
+	string_concat('<select class="text40Format" name="', FeldName, ListString0),
 	string_concat(ListString0, '" id="', ListString1),
 	string_concat(ListString1, FeldName, ListString2),
 	string_concat(ListString2, '" size="1" tabindex="', ListString3),

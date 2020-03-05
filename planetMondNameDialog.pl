@@ -27,7 +27,8 @@ planetMondNameDialog(Request) :-
 
 planetMondNameAnzeigen(AuswahlSystem) :-
 	findall([FeldNo1], between(1, 8, FeldNo1), FeldNoList),
-	findall([RecordNo, HimmelsKoerper, PlanetenTyp], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper, PlanetenTyp), HimmelsKoerperListe),
+	findall([RecordNo, HimmelsKoerper, PlanetenTyp], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper, PlanetenTyp), HimmelsKoerperListe0),
+	sort(HimmelsKoerperListe0, HimmelsKoerperListe),
 	ausgabe:joinRecordsByRecordNo(FeldNoList, HimmelsKoerperListe, 2, NumerierteRecordList),
 	TermerizedBody = [
 		\['<header>'],
@@ -38,7 +39,7 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	       	 [h3('Sternensystem'),
        	  	  \eingabeTabelleReadOnly(AuswahlSystem),
 	       	  h3('Planeten und Monde'),
-	       	  div(class('table20'),
+	       	  div(class('table50'),
 	       	        [div(class('tr'), 
 	       	             [div([class('th'), scope("col")], 'Name'),
 	       	              div([class('th'), scope("col")], 'Planetentyp')
@@ -63,7 +64,7 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 
 eingabeTabelleReadOnly(AuswahlSystem) -->
 	html(
-   	  div(class('table20'),[
+   	  div(class('table30'),[
    	    div(class('tr'), [
    	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1)
    	  	])
@@ -73,10 +74,11 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	html(
 	div(class('td'), [
 		label([ for(Name)],[LabelText]),
-   	  	input([ name(Name),
+   	  	input([ class(text40Format),
+   	  	        name(Name),
    	  	  		type('text'), 
-   	  	  		size(20), 
-   	  	  		maxlength(20),
+   	  	  		size(40), 
+   	  	  		maxlength(40),
    	  	  		value(Value),
    	  	  		tabindex(Index),
    	  	  		readonly(true)
@@ -91,11 +93,11 @@ innereEingabeZeile([Record|Rest]) -->
 	{
 		Record = [FeldNo, Planet, PlanetenTyp],
 		((PlanetenTyp = '', PlanetenTyp0 = 'Bitte wählen'); (PlanetenTyp0 = PlanetenTyp)),
-		findall([PlanetenTyp0, PlanTyp], planetSammelEigenschaftenDefaults:planetenGruppePlanetenTyp(PlanTyp, _), PlanetenTypen0),
+		findall([PlanetenTyp0, PlanTyp], planetenTypen:planetenGruppePlanetenTyp(PlanTyp, _), PlanetenTypen0),
 		sort(PlanetenTypen0, PlanetenTypen)
 	},
 	html([div(class('tr'), 
-	          [div(class('td'), input([name('planet' + FeldNo), type("text"), maxlength("40"), value(Planet)])
+	          [div(class('td'), input([class(text40Format), name('planet' + FeldNo), type("text"), maxlength("40"), value(Planet)])
 	              ),
 	           div(class('td'), \baueOptionsFeldMitVorwahl('planetenTyp', FeldNo, 2, PlanetenTypen)
 	              )  
@@ -216,7 +218,7 @@ ablegen(AuswahlSystem, GesamtZeilenZahl, VarValueList) :-
 	defaultBehandlung(PlanetenTyp0, PlanetenTyp),
     debug(myTrace, 'Auswahlsystem=~k', [AuswahlSystem]),
     debug(myTrace, 'Planet=~k PlanetenTyp=~k', [Planet, PlanetenTyp]),
-    insUpdDel(AuswahlSystem, Planet, 1, PlanetenTyp),
+    insUpdDel(AuswahlSystem, Planet, ZeileNo, PlanetenTyp),
 	fail.
 
 defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-

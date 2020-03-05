@@ -137,7 +137,8 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	html(
 	div(class('td'), [
 		label([ for(Name)],[LabelText]),
-   	  	input([ name(Name),
+   	  	input([ class(text40Format),
+   	  	        name(Name),
    	  			id(Name),
    	  	  		type('text'), 
    	  	  		size(20), 
@@ -234,7 +235,8 @@ planetSammelEigenschaften(Request) :-
 	  nth1(2, VarValueList, AuswahlPlanet),
 	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, _, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList),
-      gespeichert
+      gespeichert,
+      sammlung:vorgefertigeLoesungenErstellen(AuswahlSystem, AuswahlPlanet)
      )
 	).
     

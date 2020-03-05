@@ -66,7 +66,7 @@ innereEingabeZeile([Record|Rest]) -->
 	},
 	html([div(class('tr'), 
 	          [div(class('td'), 
-	               input([name('systemName' + FeldNo), type("text"), maxlength("40"), pattern("^(?!System$).*$"), value(System)])
+	               input([class(text40Format), name('systemName' + FeldNo), type("text"), maxlength("40"), pattern("^(?!System$).*$"), value(System)])
 	              ),
 			   div(class('td'), \baueOptionsFeld('farbe', FeldNo, SpalteNo, Farben))
    	          ])
