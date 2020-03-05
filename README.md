@@ -10,6 +10,7 @@ Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekomm
 - Unterstützung für Rezeptbeschaffung
 - Kochrezepte enthalten
 - Raffinerierezepte enthalten
+- Sammelmöglichkeiten spezifisch für den Planetentyp
 
 # Installation:
 - Der Trainer benötigt eine SWI Prolog Installation. 
@@ -21,3 +22,7 @@ Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekomm
 - Eventuell kommt eine Meldung von der Firewall, ob man den Port 8000 erlauben möchte. Dem bitte zustimmen.
 - Die Anwendung ist als Web Server programmiert.
 - Der Anwendungsserver ist nach dem Start des Exe Files unter http://localhost:8000 erreichbar.
+- Durch weiteren Tastendruck im Konsolenfenster wird der Server wieder beendet
+
+# Deinstallation
+Das Verzeichnis mit noMansSkyTrainer.exe komplett löschen. Der Trainer ist damit vollständig entfernt. Wenn gewünscht kann auch das Prolog System mit Hilfe der Systemsteuerung (Syatemsteuerung->Apps->SWI-Prolog x.x.x->Deinstalllieren) entfernt werden.
