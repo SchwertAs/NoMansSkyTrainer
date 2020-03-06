@@ -894,9 +894,9 @@ rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneAstronautenStatueRe
 rezept(bauen, [[30, reinesFerrit], [30, gold], [1, goldeneAstronautenStatueRezept]], [1, goldeneAstronautenStatue], 0 ).
 
 /* =====================  Quecksilbersynthese =========================================== */
-rezept(bauen, [[50, queckSilber], [1, feuerWerkGruenRezept]], [1, feuerWerkGruen], 0 ).
-rezept(bauen, [[50, queckSilber], [1, feuerWerkBlauRezept]], [1, feuerWerkBlau], 0 ).
-rezept(bauen, [[50, queckSilber], [1, feuerWerkRotRezept]], [1, feuerWerkRot], 0 ).
+rezept(bauen, [[50, queckSilber]], [1, feuerWerkGruen], 0 ).
+rezept(bauen, [[50, queckSilber]], [1, feuerWerkBlau], 0 ).
+rezept(bauen, [[50, queckSilber]], [1, feuerWerkRot], 0 ).
 
 /* =====================  Industriemodule ============================================ */
 rezept(bauen, [[1, metallPlatten], [40, sauerStoff], [1, treibStoffReaktorRezept]], [1, treibStoffReaktor], 0).

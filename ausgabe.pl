@@ -37,7 +37,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [WandelAnz, Operation, Komponenten, [ProduktAnzahl, Produkt]],
+	Kopf = [_, _, WandelAnz, Operation, Komponenten, [ProduktAnzahl, Produkt]],
 	wandelAktion:wandelAktion(Operation, _),
 	
 	gebeKomponenteAus(Komponenten, '', KompPred),
@@ -61,7 +61,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, Operation, _, [_, Produkt]],
+	Kopf = [_, _, _, Operation, _, [_, Produkt]],
 	Operation = bekannt,
 	atom_string(Produkt, ProduktString),
 	string_concat('Das ', ProduktString, Anweisung0),
@@ -72,7 +72,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [WandelAnz, Operation, _, [_, Produkt]],
+	Kopf = [_, _, WandelAnz, Operation, _, [_, Produkt]],
 	sammelAktion:sammelAktion(Operation),
 	atom_string(WandelAnz, WandelAnzString),
 	atom_string(Operation, OperationString),
@@ -90,20 +90,36 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, Operation, [[_, Von], [_, Nach]], [_, Produkt]],
+	Kopf = [_, _, _, Operation, [[_, VonOrt], [_, NachOrt]], [_, Produkt]],
 	Operation = reisen,
-	atom_string(Nach, NachString),
+	
+	VonOrt = [System, Planet, Von],
+	atom_string(System, SystemString),
+	atom_string(Planet, PlanetString),
 	atom_string(Von, VonString),
+	NachOrt = [SystemNach, PlanetNach, Nach],
+	atom_string(SystemNach, SystemNachString),
+	atom_string(PlanetNach, PlanetNachString),
+	atom_string(Nach, NachString),
 	atom_string(Produkt, ProduktString),
 
- 	string_concat('Bitte reisen Sie von ', VonString, Anweisung0),
- 	string_concat(Anweisung0, ' nach ', Anweisung1),
- 	string_concat(Anweisung1, NachString, Anweisung2), 
+ 	string_concat('Bitte reisen Sie von System ', SystemString, Anweisung0),
+ 	string_concat(Anweisung0, ' Planet ', Anweisung1),
+ 	string_concat(Anweisung1, PlanetString, Anweisung2),
+ 	string_concat(Anweisung2, ' ', Anweisung3),
+ 	string_concat(Anweisung3, VonString, Anweisung4),
+ 	string_concat(Anweisung4, ' nach System ', Anweisung5),
+ 	string_concat(Anweisung5, SystemNachString, Anweisung6), 
+ 	string_concat(Anweisung6, ' Planet ', Anweisung7),
+ 	string_concat(Anweisung7, PlanetNachString, Anweisung8), 
+ 	string_concat(Anweisung8, ' ', Anweisung9),
+ 	string_concat(Anweisung9, NachString, Anweisung10),
+	
  	string_concat('in ', NachString, Ergebnis0),
  	string_concat(Ergebnis0, ' ', Ergebnis1),
  	string_concat(Ergebnis1, ProduktString, Ergebnis),
 
- 	append(VorgaengePred, [vorg(Anweisung2, Operation, Ergebnis)], VorgaengePred0),
+ 	append(VorgaengePred, [vorg(Anweisung10, Operation, Ergebnis)], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 

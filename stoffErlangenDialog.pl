@@ -144,13 +144,32 @@ stoffErlangen(Request) :-
 fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-    
      ((Stoff1 == 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 = 'Bitte wählen',
          Stoff4 = 'Bitte wählen', Stoff5 = 'Bitte wählen',
-       phrase(html([p('Bitte eine Auswahl treffen!')]), Tok), 
-       print_html(Tok)
+       einenWaehlen
       );
-      (phrase(html([p('Bitte nur eine Auswahl treffen! Bei den nicht benötigten Auswahlen muss "Bitte wählen" eingestellt sein')]), Tok),
-       print_html(Tok)
+      (nurEinenWaehlen
      )).
 
+einenWaehlen() :-
+	server:holeCssAlsStyle(StyleString),
+   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	TermerizedBody = [
+		\['<redHeader>'],
+		h1(align(center), 'Bitte genau eine Auswahl treffen!'),
+		\['</redHeader>']
+		],
+	
+	reply_html_page(TermerizedHead, TermerizedBody).
+
+nurEinenWaehlen() :-
+	server:holeCssAlsStyle(StyleString),
+   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	TermerizedBody = [
+		\['<redHeader>'],
+		h1(align(center), 'Bitte nur eine Auswahl treffen! Bei den nicht benötigten Eingaben muss "Bitte wählen" eingestellt sein!'),
+		\['</redHeader>']
+		],
+	
+	reply_html_page(TermerizedHead, TermerizedBody).
 
 nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 	((Stoff1 \= 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 = 'Bitte wählen', 
@@ -279,13 +298,12 @@ nichtHerstellBar(Ziel) :-
 		            ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
-nichtHerstellBar(Ziel) :-
-	ausgabe:baueBegruendung(Ziel, _),
+nichtHerstellBar(_) :-
    	server:holeCssAlsStyle(StyleString),
    	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), 'Beschaffung nicht möglich, keine Rezepte vorhanden'),
+		h1(align(center), 'Beschaffung nicht möglich und keine Rezepte vorhanden'),
 		\['</redHeader>']
 		],
 	

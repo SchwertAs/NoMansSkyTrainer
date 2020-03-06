@@ -1,7 +1,7 @@
 :- module(wandelAktion, [wandelAktion/2]).
    
 /* mögliche Stoffwandelaktionen */
-wandelAktion(bauen, nil).
+wandelAktion(bauen, ortHauptBasis).
 wandelAktion(herstellen, ortSpieler).
 wandelAktion(installieren, ortSpieler).
 wandelAktion(kochen, ortNahrungsProzessor).
@@ -11,7 +11,7 @@ wandelAktion(ausAtmosphaerenAnlageGewinnen, ortAtmosphaerenAnlage).
 wandelAktion(rezeptInAussenPostenErwerben, ortAussenPosten).
 wandelAktion(rezeptAmForschungsComputerErwerben, ortForschungsTerminal).
 wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).
-wandelAktion(rezeptInAnomalieErwerben, ortAnomalie).
+wandelAktion(rezeptInAnomalieForschungsComputerErwerben, ortAnomalie).
 wandelAktion(rezeptInFabrikErwerben, ortWald).
 wandelAktion(rezeptInFrachterErwerben, ortFrachter).
 wandelAktion(modulInRaumstationErwerben, ortRaumStation).

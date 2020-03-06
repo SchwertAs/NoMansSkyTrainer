@@ -207,6 +207,7 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	div(class('td'), [
 		label([ for(Name)],[LabelText]),
    	  	input([ name(Name),
+   	  	  		class(text40Format),
    	  	  		type('text'), 
    	  	  		size(20), 
    	  	  		maxlength(20),

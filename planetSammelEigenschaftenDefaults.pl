@@ -155,6 +155,8 @@ sammelDefaultPlanetenTyp(_, jagen, schuppigesFleisch).
 
 /* erkämpfen */
 sammelDefaultPlanetenTyp(_, erkaempfen, pugneum).
+sammelDefaultPlanetenTyp(_, erkaempfen, vierfachServo).
+sammelDefaultPlanetenTyp(_, erkaempfen, kampfLaeuferGehirn).
 sammelDefaultPlanetenTyp(tot, erkaempfen, larvenKern).
 
 /* raumschürfen */

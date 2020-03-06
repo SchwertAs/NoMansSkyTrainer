@@ -45,7 +45,7 @@ initSystemAusstattung :-
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix weil sie gerufen werden kann */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortForschungsTerminal], 470)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 2400)) 
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 5100)) /* fix: von Basis bis Brücke Frachter */ 
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortGrosseRaffinerie], 2400)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* fix */

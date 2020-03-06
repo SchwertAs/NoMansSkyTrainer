@@ -153,6 +153,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, pugneum, 12000, 0, 300))      /* von Wächter */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, larvenKern, 9000, 0, 300))       /*  von flüsterndes Ei */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, kampfLaeuferGehirn, 50000, 0, 300))     /* von Kampfläufer */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, vierfachServo, 1180, 0, 300))     /* von Kampfkäfer */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', erkaempfen, unholdRogen, 12000, 0, 300))  /*   von ??? */
 	
 	/* Meteoritenfelder */
@@ -191,14 +192,14 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, sternenKnolle, 20, 0, 0))
 	
 	/* aus Tierhaltung */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, faecium, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, frischeMilch, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, holzApfel, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, faecium, 6, 19, 5))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, frischeMilch, 90, 160, 30))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, holzApfel, 550, 150, 1180))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, klebrigerHonig, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, leopardenFrucht, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, leopardenFrucht, 550, 150, 1180))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, regisFett, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, wildeMilch, 20, 0, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, riesenEi, 20, 0, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, riesenEi, 550, 150, 1180))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, kreaturenEi, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, grosseEier, 20, 0, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, warmeProtoMilch, 20, 0, 0))

@@ -7,7 +7,8 @@
 	spielStatusDb(status:atom, vorhanden:boolean),
 	systemDb(recordNo:nonneg, system:atom, farbe:atom),
 	planetDb(recordNo:nonneg, system:atom, planet:atom, atmospherenTyp:atom),
-	systemAusstattungDb(ortsAngabe:list, entfernung:nonneg).
+	systemAusstattungDb(ortsAngabe:list, entfernung:nonneg),
+	fertigeLoesungDb(system:atom, planet:atom, strategie:atom, stoff:atom, vorgaenge:list).
 
 datenInDbSpeichern :-
 	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
@@ -17,6 +18,7 @@ datenInDbSpeichern :-
 	retractall_systemDb(_, _, _),
 	retractall_planetDb(_, _, _, _),
 	retractall_systemAusstattungDb(_, _),
+	retractall_fertigeLoesungDb(_, _, _, _, _),
 	
 	db_sync(gc(always)),
 	
@@ -26,6 +28,8 @@ datenInDbSpeichern :-
 	forall(spielStatus:systeme(RecordNo, System, Farbe), assert_systemDb(RecordNo, System, Farbe)),
 	forall(spielStatus:planeten(RecordNo1, System1, Planet, AtmospherenTyp), assert_planetDb(RecordNo1, System1, Planet, AtmospherenTyp)),
 	forall(spielStatus:systemAusstattung(OrtsAngabe, Entfernung), assert_systemAusstattungDb(OrtsAngabe, Entfernung)),
+	forall(sammlung:fertigeLoesung(System3, Planet3, Strategie3, Stoff3, Vorgaenge3), 
+	       assert_fertigeLoesungDb(System3, Planet3, Strategie3, Stoff3, Vorgaenge3)),
 	
 	db_detach.
 
@@ -38,6 +42,7 @@ datenVonDbHolen :-
 	ignore(retractall(spielStatus:systeme(_, _, _))),
 	ignore(retractall(spielStatus:planeten(_, _, _, _))),
 	ignore(retractall(spielStatus:systemAusstattung(_, _))),
+	ignore(retractall(sammlung:fertigeLoesung(_, _, _, _, _))),
 
 	forall(sammlungDb(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest),
 	       assertz(sammlung:sammlung(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest))),
@@ -45,6 +50,8 @@ datenVonDbHolen :-
 	forall(systemDb(RecordNo, SystemName, Farbe), assertz(spielStatus:systeme(RecordNo, SystemName, Farbe))),
 	forall(planetDb(RecordNo1, System, Planet, AtmospherenTyp), assertz(spielStatus:planeten(RecordNo1, System, Planet, AtmospherenTyp))),
 	forall(systemAusstattungDb(OrtsAngabe, Entfernung), assertz(spielStatus:systemAusstattung(OrtsAngabe, Entfernung))),
+	forall(fertigeLoesungDb(System3, Planet3, Strategie3, Stoff3, Vorgaenge3), 
+	       assertz(sammlung:fertigeLoesung(System3, Planet3, Strategie3, Stoff3, Vorgaenge3))),
 
 	db_detach.	
 
@@ -52,7 +59,7 @@ datenNachAccessSpeichern :-
 	odbc_connect('NoMansSkyDb', Connection, [open(once), alias(noMansSkyDb)]), 
 	ignore(odbc_query(noMansSkyDb, 'Delete from spielStatus;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from rezept;')),
-	ignore(odbc_query(noMansSkyDb, 'Delete from komponentenListe;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from rezeptKomponente;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from wandelAktion;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from sammlung;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from planet;')),
@@ -63,6 +70,9 @@ datenNachAccessSpeichern :-
 	ignore(odbc_query(noMansSkyDb, 'Delete from vorfertigen;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from stoff;')),
 	ignore(odbc_query(noMansSkyDb, 'Delete from stoffKlasse;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from vorgangKomponente;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from vorgang;')),
+	ignore(odbc_query(noMansSkyDb, 'Delete from fertigeLoesung;')),
 	
 
 	/* stoffKlasse */	
@@ -112,15 +122,16 @@ datenNachAccessSpeichern :-
 	odbc_free_statement(Statement9),
 	
 	/* planet */	
-	odbc_prepare(noMansSkyDb, 'Insert into planet(RecordNo, System, Planet, AtmospherenTyp) values (?,?,?,?);', 
+	odbc_prepare(noMansSkyDb, 'Insert into planet(RecordNo, System, Planet, PlanetenGruppe) values (?,?,?,?);', 
 	             [integer, varchar(255), varchar(255), varchar(255)], Statement10),
-	forall(spielStatus:planeten(RecordNo, System, Planet, AtmospherenTyp), 
-	  odbc_execute(Statement10, [RecordNo, System, Planet, AtmospherenTyp])),
+	forall(spielStatus:planeten(RecordNo, System, Planet, PlanetenGruppe), 
+	  odbc_execute(Statement10, [RecordNo, System, Planet, PlanetenGruppe])),
 	odbc_close_statement(Statement10),
 	odbc_free_statement(Statement10),
  
     /* sammlung */
-	odbc_prepare(noMansSkyDb, 'Insert into sammlung(RecordNo, System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit, RuestZeit) values (?, ?, ?, ?, ?, ?, ?, ?);', [integer, varchar(255), varchar(255), varchar(255), varchar(255), integer, integer, integer], Statement4),
+	odbc_prepare(noMansSkyDb, 'Insert into sammlung(RecordNo, System, Planet, SammelAktion, Stoff, HauptZeit, NebenZeit, RuestZeit) values (?, ?, ?, ?, ?, ?, ?, ?);', 
+	             [integer, varchar(255), varchar(255), varchar(255), varchar(255), integer, integer, integer], Statement4),
 	forall(sammlung:sammlung(RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest), 
 	  odbc_execute(Statement4, [RecordNo, System, Planet, SammelAktion, Stoff, Haupt, Neben, Ruest])),
 	odbc_close_statement(Statement4),
@@ -133,8 +144,8 @@ datenNachAccessSpeichern :-
 	odbc_free_statement(Statement5),
 
     /* rezept */
-	odbc_prepare(noMansSkyDb, 'Insert into komponentenListe(KomponentenListe, Stoff, StueckZahl) values (?, ?, ?);', 
-	  [varchar(255), varchar(255), integer], Statement6),
+	odbc_prepare(noMansSkyDb, 'Insert into rezeptKomponente(KomponentenListe, Stoff, StueckZahl) values (?, ?, ?);', 
+	  [varchar(255), varchar(255), real], Statement6),
 	odbc_prepare(noMansSkyDb, 'Insert into rezept(WandelAktion, KomponentenListe, ProduktStueckZahl, Produkt, Wandelzeit) values (?, ?, ?, ?, ?);', 
 	  [varchar(255), varchar(255), integer, varchar(255), real], Statement7), 
 	forall(rezept:rezept(WandelAktion, Komponenten, Produkt, Wandelzeit), 
@@ -157,7 +168,7 @@ datenNachAccessSpeichern :-
 	odbc_close_statement(Statement11),
 	odbc_free_statement(Statement11),
 
-    /* vorfertigen */
+    /* spielStatus */
 	odbc_prepare(noMansSkyDb, 'Insert into spielStatus(Status, Vorhanden) values (?,?);', [varchar(255), bit], Statement12),
 	forall(spielStatus:spielStatus(Status, Vorhanden), 
 	 (trueFalseToAccessBit(Vorhanden, VorhandenBit), 
@@ -165,13 +176,36 @@ datenNachAccessSpeichern :-
 	odbc_close_statement(Statement12),
 	odbc_free_statement(Statement12),
 
+    /* fertigeLoesung */
+	odbc_prepare(noMansSkyDb, 'Insert into vorgangKomponente(FertigeLoesungId, VorgangId, Id, StueckZahl, Stoff) values (?, ?, ?, ?, ?);', 
+	  [integer, integer, integer, real, varchar(255)], Statement13),
+	odbc_prepare(noMansSkyDb, 'Insert into vorgang(FertigeLoesungId, Id, System, Planet, VorgangsWiederholungsZahl, Operation, ErgebnisStueckZahl, ErgebnisStoff) values (?, ?, ?, ?, ?, ?, ?, ?);', 
+	  [integer, integer, varchar(255), varchar(255), integer, varchar(255), integer, varchar(255)], Statement14),
+	odbc_prepare(noMansSkyDb, 'Insert into fertigeLoesung(Id, System, Planet, Strategie, Stoff) values (?, ?, ?, ?, ?);', 
+	             [integer, varchar(255), varchar(255), varchar(255), varchar(255)], Statement15),
+	findall([System3, Planet3, Strategie3, Stoff3, Vorgaenge3], sammlung:fertigeLoesung(System3, Planet3, Strategie3, Stoff3, Vorgaenge3), Loesungen),
+	length(Loesungen, AnzLoesungen),
+	forall(between(1, AnzLoesungen, LoesNummer),
+	(nth1(LoesNummer, Loesungen, [System3, Planet3, Strategie3, Stoff3, Vorgaenge3]),
+	 odbc_execute(Statement15, [LoesNummer, System3, Planet3, Strategie3, Stoff3]),
+	 length(Vorgaenge3, AnzVorg),
+	 forall(between(1, AnzVorg, VorgNummer),
+	 (nth1(VorgNummer, Vorgaenge3, [System4, Planet4, VorgangsWiederholungsZahl, Operation, Komponenten, [ErgebnisStueckZahl, ErgebnisStoff]]),
+	  odbc_execute(Statement14, [LoesNummer, VorgNummer, System4, Planet4, VorgangsWiederholungsZahl, Operation, ErgebnisStueckZahl, ErgebnisStoff]),
+	  length(Komponenten, AnzKomp),	
+	  forall(between(1, AnzKomp, KompNummer),
+	  (nth1(KompNummer, Komponenten, [KomponentenStueckZahl, KomponentenStoff]),
+	   odbc_execute(Statement13, [LoesNummer, VorgNummer, KompNummer, KomponentenStueckZahl, KomponentenStoff])
+	  ))
+	 ))
+	)), 
+	odbc_close_statement(Statement13),
+	odbc_close_statement(Statement14),
+	odbc_close_statement(Statement15),
+	odbc_free_statement(Statement13),
+	odbc_free_statement(Statement14),
+	odbc_free_statement(Statement15),
 
-    /* komponentenListe 
-	odbc_prepare(noMansSkyDb, 'Insert into komponentenListe(KomponentenListe, Stoff, StueckZahl) values (?, ?);', [varchar(255), varchar(255)], Statement7),
-	forall(buildKomponenten(KomponentenListe, Stoff), odbc_execute(Statement7, [KomponentenListe, Stoff])),
-	odbc_close_statement(Statement7),
-	odbc_free_statement(Statement7),
-*/
 	odbc_disconnect(Connection).
 
 trueFalseToAccessBit(TrueFalse, AccessBit) :-

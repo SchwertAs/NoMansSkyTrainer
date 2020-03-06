@@ -11,7 +11,7 @@
 
 rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
 	findall(Klasse, (stoffKlasse:stoffKlasse(Klasse, _, _, _, _),
-	(Klasse = produkt; Klasse = modul; Klasse = komponente; Klasse = produktUndKochStoff)), Klassen),
+	(Klasse = produkt; Klasse = modul; Klasse = komponente; Klasse = produktUndKochStoff; Klasse = basisBauEndStoff)), Klassen),
 	server:baueOptionsFeld('auswahlStoffKlasse', Klassen, 2, OptionList),
 	TermerizedBody = [
 		\['<header>'],
@@ -67,16 +67,17 @@ rezeptSchonBekannt(Rezept, Checked) :-
 	
 felderProZeile(RezeptListe, Step) :-
 	length(RezeptListe, RezeptListeLength),
-	((RezeptListeLength mod 4 = 0, Step is RezeptListeLength div 4);
-	  Step is RezeptListeLength div 4 + 1
+	divmod(RezeptListeLength, 4, Quotient, Rest),
+	((Rest = 0, Step = Quotient);
+	  Step is Quotient + 1
     ).
 	
 rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	debug(myTrace, 'AuswahlStoffKlasse=~k', AuswahlStoffKlasse),
 	findall([Rezept, Checked], (rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), rezeptSchonBekannt(Rezept, Checked)), RezeptListe0),
-	debug(myTrace, 'Rezeptliste=~k', RezeptListe0),
 	sort(RezeptListe0, RezeptListe),
 	felderProZeile(RezeptListe, Step),
+	debug(myTrace, 'Step= ~k, Rezeptliste=~k', [Step, RezeptListe]),
     /* Start- und Endefeld- und Listenpositionsnummern berechnen */
 	RezeptListe1Start is 1, 
 	RezeptListe2Start is RezeptListe1Start + Step,
@@ -142,6 +143,7 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	div(class('td'), [
 		label([ for(Name)],[LabelText]),
    	  	input([ name(Name),
+   	  	  		class(text40Format),
    	  	  		type('text'), 
    	  	  		size(20), 
    	  	  		maxlength(20),
@@ -195,13 +197,15 @@ rezeptBekannt(Request) :-
     gespeichert.
 
 baueRezeptListe(AuswahlStoffKlasse, RezeptListe) :-
-	findall(Rezept, rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), RezeptListe).
+	findall(Rezept, rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), RezeptListe0),
+	sort(RezeptListe0, RezeptListe).
 	
 ablegen(RezeptListe, VarValueList) :-
 	debug(myTrace, 'abspeichern: VarValueList=~k', [VarValueList]),
 	debug(myTrace, 'abspeichern: RezeptListe=~k', [RezeptListe]),
 	felderProZeile(RezeptListe, Step),
-	GesamtZeilenZahl = 23,
+	length(RezeptListe, GesamtZeilenZahl),
+	debug(myTrace, 'abspeichern: ZeilenZahl=~k', [GesamtZeilenZahl]),
 	between(1, 4, Spalte),
 	between(1, Step, Zeile),
 	pickeZeile(GesamtZeilenZahl, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked),

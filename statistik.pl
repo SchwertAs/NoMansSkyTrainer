@@ -2,14 +2,14 @@
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [_, Operation, _, [_, _]],
+	Kopf = [_, _, _, Operation, _, [_, _]],
 	\+sammelAktion:sammelAktion(Operation),
 	bildeSammelSet(Rest, SammelSet, NextSammelSet),
 	!.
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [_, Operation, _, [Anz1, Stoff1]],
+	Kopf = [_, _, _, Operation, _, [Anz1, Stoff1]],
 	sammelAktion:sammelAktion(Operation),
 	get_dict(Stoff1, SammelSet, Vorgang1),
 	Vorgang1 = [_, Anz0],
@@ -21,7 +21,7 @@ bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 
 bildeSammelSet(Vorgaenge, SammelSet, NextSammelSet) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [_, Operation, _, [Anz1, Stoff1]],
+	Kopf = [_, _, _, Operation, _, [Anz1, Stoff1]],
 	sammelAktion:sammelAktion(Operation),
 	\+get_dict(Stoff1, SammelSet, _),
 	Vorgang = [Operation, Anz1],
@@ -76,7 +76,7 @@ bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 
 bildeGesamtAufwaende(Vorgaenge, Aufwand, AufwandDanach) :-
 	Vorgaenge = [Kopf|Rest],
-	Kopf = [_, kaufen, _, [ Anzahl, Stoff]],
+	Kopf = [_, _, _, kaufen, _, [ Anzahl, Stoff]],
 	stoff:stoff(_, Stoff, Wert),
 	Aufwand0 is Aufwand + (Anzahl * Wert),
 	bildeGesamtAufwaende(Rest, Aufwand0, AufwandDanach),
