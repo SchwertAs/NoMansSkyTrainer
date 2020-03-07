@@ -194,13 +194,13 @@ ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff) :-
 
 optimierteLoesung(System, Planet, OptimierungsZiel, Anzahl, Stoff) :-  
 	\+suchAlgorithmus:baue(System, Planet, OptimierungsZiel, Anzahl, Stoff),
-	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
-	zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
+	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
+	zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
-zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
+zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
-	ausgabe:ausgabeSummen(MinimalSammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
+	ausgabe:ausgabeSummen(SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	TermerizedBody = [

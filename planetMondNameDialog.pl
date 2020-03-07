@@ -214,7 +214,6 @@ fehlerZeile(FeldNo) :-
 ablegen(AuswahlSystem, GesamtZeilenZahl, VarValueList) :-
 	between(1, GesamtZeilenZahl, ZeileNo),
 	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, Planet, PlanetenTyp0),
-	gueltigeZeile(Planet, PlanetenTyp0),
 	defaultBehandlung(PlanetenTyp0, PlanetenTyp),
     debug(myTrace, 'Auswahlsystem=~k', [AuswahlSystem]),
     debug(myTrace, 'Planet=~k PlanetenTyp=~k', [Planet, PlanetenTyp]),
@@ -297,8 +296,7 @@ insUpdDel(System, PlanetNew, RecNoNew, PlanetenTyp) :-
 	!.
 	
 /* löschen cascade */
-insUpdDel(System, PlanetNew, RecNoNew, PlanetenTyp) :-
-	gueltigeZeile(PlanetNew, PlanetenTyp),
+insUpdDel(System, PlanetNew, RecNoNew, _) :-
 	spielStatus:planeten(RecNoNew, System, PlanetOld, _),
 	PlanetNew = "",
 	debug(myTrace, 'löschen: RecNoNew=~k System=~k PlanetOld=~k', [RecNoNew, System, PlanetOld]),

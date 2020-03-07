@@ -34,16 +34,17 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [],
 	VorgaengePred = VorgaengePredDanach,
 	!.
-	
+
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [_, _, WandelAnz, Operation, Komponenten, [ProduktAnzahl, Produkt]],
 	wandelAktion:wandelAktion(Operation, _),
-	
+	arbeitsVorbereitung:bildeAvZeiten([Kopf], 0, GesamtVorgaengeZeit),
+	bildeOperation(GesamtVorgaengeZeit, Operation, OperationStringMaske),
 	gebeKomponenteAus(Komponenten, '', KompPred),
 	atom_string(WandelAnz, WandelAnzString),
-	atom_string(Operation, OperationString),
 	atom_string(Produkt, ProduktString),
+	atom_string(Operation, OperationString),
 
  	string_concat('Führen Sie ', WandelAnzString, Anweisung0),
  	string_concat(Anweisung0, ' mal ', Anweisung1),
@@ -55,7 +56,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
  	string_concat(Anweisung6, ' aus', Anweisung),
 
     bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis),
-	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
+	append(VorgaengePred, [vorg(Anweisung, OperationStringMaske, Ergebnis)], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
@@ -72,9 +73,13 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, _, WandelAnz, Operation, _, [_, Produkt]],
+	Kopf = [System, Planet, _, Operation, _, [ProduktAnzahl, Produkt]],
 	sammelAktion:sammelAktion(Operation),
-	atom_string(WandelAnz, WandelAnzString),
+	sammlung:sammlung(_, System, Planet, Operation, Produkt, HauptZeit, NebenZeit, RuestZeit),
+	debug(myTrace, 'ausgabeVorgaenge: HauptZeit=~k NebenZeit=~k RuestZeit=~k', [HauptZeit, NebenZeit, RuestZeit]),
+	Zeit is (ProduktAnzahl * HauptZeit + RuestZeit + (ProduktAnzahl - 1) * NebenZeit),
+	bildeOperation(Zeit, Operation, OperationStringMaske),
+	atom_string(ProduktAnzahl, WandelAnzString),
 	atom_string(Operation, OperationString),
 	atom_string(Produkt, ProduktString),
 
@@ -83,8 +88,8 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
  	string_concat(Anweisung1, ProduktString, Anweisung2),
  	string_concat(Anweisung2, ' mit ', Anweisung3),
  	string_concat(Anweisung3, OperationString, Anweisung),
- 	bildeErgebnis(WandelAnz, Produkt, Ergebnis),
- 	append(VorgaengePred, [vorg(Anweisung, Operation, Ergebnis)], VorgaengePred0),
+ 	bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis),
+ 	append(VorgaengePred, [vorg(Anweisung, OperationStringMaske, Ergebnis)], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
@@ -92,12 +97,19 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [_, _, _, Operation, [[_, VonOrt], [_, NachOrt]], [_, Produkt]],
 	Operation = reisen,
-	
 	VonOrt = [System, Planet, Von],
+	NachOrt = [SystemNach, PlanetNach, Nach],
+	
+	retractall(spielStatus:systemAusstattung([_, _, ortSimulationsSpieler], _)),
+	assertz(spielStatus:systemAusstattung([System, Planet, ortSimulationsSpieler], 0)),
+	retractall(reisen:letzterOrt(_, _, _)),
+	assertz(reisen:letzterOrt(System, Planet, ortHauptBasis)),
+	reisen:reisen(NachOrt, ReiseZeit),
+	bildeOperation(ReiseZeit, Operation, OperationString),
+	
 	atom_string(System, SystemString),
 	atom_string(Planet, PlanetString),
 	atom_string(Von, VonString),
-	NachOrt = [SystemNach, PlanetNach, Nach],
 	atom_string(SystemNach, SystemNachString),
 	atom_string(PlanetNach, PlanetNachString),
 	atom_string(Nach, NachString),
@@ -119,7 +131,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
  	string_concat(Ergebnis0, ' ', Ergebnis1),
  	string_concat(Ergebnis1, ProduktString, Ergebnis),
 
- 	append(VorgaengePred, [vorg(Anweisung10, Operation, Ergebnis)], VorgaengePred0),
+ 	append(VorgaengePred, [vorg(Anweisung10, OperationString, Ergebnis)], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
@@ -128,6 +140,12 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	ausgabeVorgaenge(Rest, VorgaengePred, VorgaengePredDanach),
 	!.		 
 
+bildeOperation(Zeit, Operation, OperationString) :-
+	atom_string(Zeit, ZeitString),
+	atom_string(Operation, OperationString0),
+	string_concat(ZeitString, ' 1/100 sec ', OperationString1),
+	string_concat(OperationString1, OperationString0, OperationString).
+		
 bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis) :-
 	atom_string(ProduktAnzahl, ProduktAnzahlString),
 	atom_string(Produkt, ProduktString),

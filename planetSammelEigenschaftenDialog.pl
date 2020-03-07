@@ -235,8 +235,8 @@ planetSammelEigenschaften(Request) :-
 	  nth1(2, VarValueList, AuswahlPlanet),
 	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, _, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList),
-      gespeichert,
-      sammlung:vorgefertigeLoesungenErstellen(AuswahlSystem, AuswahlPlanet)
+      sammlung:vorgefertigeLoesungenErstellen(AuswahlSystem, AuswahlPlanet),
+      gespeichert
      )
 	).
     
@@ -269,7 +269,7 @@ ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList) :-
 	between(1, GesamtZeilenZahl, ZeileNo),
 	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, RohStoff, Methode, AnzahlNum, DauerNum, GebindeNum),
 	gueltigeZeile(RohStoff, Methode, DauerNum, AnzahlNum, GebindeNum),
-	arbeitsVorbereitung:toRuestHauptNebenZeit(Methode, AnzahlNum, DauerNum, GebindeNum, Ruest, Haupt, Neben),
+	arbeitsVorbereitung:toRuestHauptNebenZeit(RohStoff, Methode, AnzahlNum, DauerNum, GebindeNum, Haupt, Neben, Ruest),
 	debug(myTrace, 'abspeichern: ZeileNo=~k Sys=~k, Planet=~k, Roh=~k, Meth=~k, Ruest=~k, Haupt=~k, Neben=~k', 
 		[ZeileNo, AuswahlSystem, AuswahlPlanet, RohStoff, Methode, Ruest, Haupt, Neben]),
 	assertz(sammlung:sammlung(ZeileNo, AuswahlSystem, AuswahlPlanet, Methode, RohStoff, Ruest, Haupt, Neben)),

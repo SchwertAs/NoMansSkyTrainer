@@ -1,132 +1,116 @@
-:- module(arbeitsVorbereitung, [toDauer/6, toRuestHauptNebenZeit/7, bildeAvZeiten/7]).
+:- module(arbeitsVorbereitung, [toDauer/6, toRuestHauptNebenZeit/8, bildeAvZeiten/3]).
 
 /* ReiseZeit ist Zeit bis vor Ort des Stoffwechsels / Sammelns
    Hauptzeit ist Abbauzeit pro Stück ohne Haufenwechsel
    Nebenzeiten sind: laufen zwischen den Haufen, Werkzeug ausrichten, Kaufobjekt suchen, Kaufzahl einstellen, Wild nachsetzen
    Ruestzeiten sind: beladen, entladen, Werkzeug ziehen, Kaufterminal öffnen, Multiwerkzeugwechsel
 */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [],
-	HauptZeitDanach = HauptZeit,
-	NebenZeitDanach = NebenZeit,
-	RuestZeitDanach = RuestZeit,
+	ZeitDanach = Zeit,
 	!.
 
 /* Sammelvorgänge */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [System, Planet, _, Operation, _, [StueckZahl, Stoff]],
 	sammlung:sammlung(_, System, Planet, Operation, Stoff, HauptZeit0, NebenZeit0, RuestZeit0),
 	Operation \= kaufen,
-	HauptZeit1 is HauptZeit + (StueckZahl * HauptZeit0), 
-	NebenZeit1 is NebenZeit + ((StueckZahl - 1) * NebenZeit0),
-	RuestZeit1 is RuestZeit + RuestZeit0,
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	Zeit1 is Zeit + (StueckZahl * HauptZeit0), 
+	Zeit2 is Zeit1 + ((StueckZahl - 1) * NebenZeit0),
+	Zeit3 is Zeit2 + RuestZeit0,
+	bildeAvZeiten(Rest, Zeit3, ZeitDanach),
 	!.
 
-/* kaufen Rüstzeit nur für ersten Kaufvorgang */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+/* kaufen */
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [System, Planet, _, Operation, _, [_, Stoff]],
 	sammlung:sammlung(_, System, Planet, Operation, Stoff, HauptZeit0, NebenZeit0, RuestZeit0),
 	Operation = kaufen,
-	HauptZeit1 is HauptZeit + HauptZeit0, 
-	NebenZeit1 is NebenZeit + NebenZeit0,
-	/* beim Ersten Kauf Terminal öffnen -> Rüstzeit */
-	((RuestZeit = 0, RuestZeit1 is RuestZeit + RuestZeit0);
-	 (RuestZeit \= 0, RuestZeit1 = RuestZeit)
-	),
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	Zeit1 is Zeit + HauptZeit0, 
+	Zeit2 is Zeit1 + NebenZeit0,
+	Zeit3 is Zeit2 + RuestZeit0,
+	bildeAvZeiten(Rest, Zeit3, ZeitDanach),
 	!.
 
 /* Stoffwandlungen */
 /* modul erwerben */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, _, _, Operation, _, [_, Stoff]],
 	Operation = modulInRaumstationErwerben,
 	rezept:rezept(Operation, _, [AnzahlGekauft, Stoff], ZeitProAusgabeStueck),
 	/* Seite anwählen, klicken */
-	HauptZeit1 is HauptZeit + AnzahlGekauft * ZeitProAusgabeStueck, 
-	NebenZeit0 is 0,
-	NebenZeit1 is NebenZeit + NebenZeit0,
-	/* beim Ersten Kauf Terminal öffnen -> Rüstzeit ist Händler ansprechen, Dialog durchklicken, schließen */
+	Zeit1 is Zeit + AnzahlGekauft * ZeitProAusgabeStueck, 
+	/* Terminal öffnen -> Rüstzeit ist Händler ansprechen, Dialog durchklicken, schließen */
 	RuestZeit0 is 150 + 680  + 110,
-	((RuestZeit = 0, RuestZeit1 is RuestZeit + RuestZeit0);
-	 (RuestZeit \= 0, RuestZeit1 = RuestZeit)
-	),
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	Zeit2 is Zeit1 + RuestZeit0,
+	bildeAvZeiten(Rest, Zeit2, ZeitDanach),
 	!.
 
 /* raffinieren Rüstzeit nur für eine Charge */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, _, _, Operation, _, [AnzahlRaffiniert, Stoff]],
-	(Operation = raffinieren; Operation = kochen),
+	(Operation = raffinieren; Operation = inEinfacherRaffinerieRaffinieren; Operation = kochen),
 	rezept:rezept(Operation, Komponenten, [_, Stoff], ZeitProAusgabeStueck),
-	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
-	HauptZeit1 is HauptZeit + HauptZeit0, 
-	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
-	NebenZeit1 is NebenZeit + NebenZeit0, 
+	HauptZeit is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	Zeit1 is Zeit + HauptZeit, 
 	/* Je mehr Komponenten desto mehr Rüstzeit */
 	length(Komponenten, KomponentenZahl),
 	/* Raffinerie öffnen, Komponenten aussuchen und plazieren, starten, Ausgabefach entleeren */
-	RuestZeit0 is 290 + 620 * KomponentenZahl + 250 + 588,
-	RuestZeit1 is RuestZeit + RuestZeit0,
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	RuestZeit is 290 + 620 * KomponentenZahl + 250 + 588,
+	Zeit2 is Zeit1 + RuestZeit,
+	bildeAvZeiten(Rest, Zeit2, ZeitDanach),
 	!.
 
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, _, _, Operation, _, [AnzahlRaffiniert, Stoff]],
 	Operation = herstellen,
 	rezept:rezept(Operation, _	, [_, Stoff], ZeitProAusgabeStueck),
-	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
-	HauptZeit1 is HauptZeit + HauptZeit0, 
+	HauptZeit is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	Zeit1 is Zeit + HauptZeit, 
 	/* einmalig zurückfahren, "mehr herstellen" ausführen */
-	NebenZeit0 is 150 + AnzahlRaffiniert * 80,
-	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
-	NebenZeit1 is NebenZeit + NebenZeit0, 
+	NebenZeit is 150 + AnzahlRaffiniert * 80,
+	Zeit2 is Zeit1 + NebenZeit, 
 	/* Je mehr Komponenten desto mehr Rüstzeit */
 	/* Inventar öffnen, auf Seite navigieren (Durchschnittszeit), aussuchen, klicken, Inventar schließen	 */
-	RuestZeit0 is 70 + 50 + 420 + 15 + 70, /* insgesamt */
-	RuestZeit1 is RuestZeit + RuestZeit0,
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	RuestZeit is 70 + 50 + 420 + 15 + 70, /* insgesamt */
+	Zeit3 is Zeit2 + RuestZeit,
+	bildeAvZeiten(Rest, Zeit3, ZeitDanach),
 	!.
 
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, _, _, Operation, _, [AnzahlRaffiniert, Stoff]],
 	Operation = bauen,
 	rezept:rezept(Operation, _, [_, Stoff], ZeitProAusgabeStueck),
-	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
-	HauptZeit1 is HauptZeit + HauptZeit0, 
-	NebenZeit0 is 0, 
-	NebenZeit1 is NebenZeit + NebenZeit0, 
+	HauptZeit is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	Zeit1 is Zeit + HauptZeit, 
 	/* Baumenü öffnen, alle Ebenen zurück (alternative Esc Esc (115/100 sec) ist ungebräuchlich) */
-	RuestZeit0 is 50 + 250,
-	RuestZeit1 is RuestZeit + RuestZeit0,
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	RuestZeit is 50 + 250,
+	Zeit2 is Zeit1 + RuestZeit,
+	bildeAvZeiten(Rest, Zeit2, ZeitDanach),
 	!.
 
 /* nur das leeren der Anlagen wird betrachte, die Produktionszeit ist unabhängig */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, _, _, Operation, _, [AnzahlRaffiniert, Stoff]],
 	(Operation = ausSauerStoffVearbeiterGewinnen; Operation = ausAtmosphaerenAnlageGewinnen),
 	rezept:rezept(Operation, _, [_, Stoff], ZeitProAusgabeStueck),
-	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
-	HauptZeit1 is HauptZeit + HauptZeit0, 
-	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
-	NebenZeit1 is NebenZeit + NebenZeit0, 
+	HauptZeit is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	Zeit1 is Zeit + HauptZeit, 
 	/* Atmospherenanlage öffnen, Treibstoff plazieren, Ausgabefach entleeren */
-	RuestZeit0 is 290 + 620 + 588,
-	RuestZeit1 is RuestZeit + RuestZeit0,
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	RuestZeit is 290 + 620 + 588,
+	Zeit2 is Zeit1 + RuestZeit,
+	bildeAvZeiten(Rest, Zeit2, ZeitDanach),
 	!.
 
 /* Zeit zur Suche und Aufbruch der Fabrik nicht berücksichtigt */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [Kopf|Rest],
 	Kopf = [_, _, _, Operation, _, [AnzahlRaffiniert, Stoff]],
 	(Operation = rezeptInAnomalieErwerben; 
@@ -134,21 +118,19 @@ bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach,
 	 Operation = rezeptInAnomalieForschungsComputerErwerben	 
 	),
 	rezept:rezept(Operation, _, [_, Stoff], ZeitProAusgabeStueck),
-	HauptZeit0 is AnzahlRaffiniert * ZeitProAusgabeStueck,
-	HauptZeit1 is HauptZeit + HauptZeit0, 
-	NebenZeit0 is 0, /* chargenwechsel nicht berücksichtigt */
-	NebenZeit1 is NebenZeit + NebenZeit0, 
+	HauptZeit is AnzahlRaffiniert * ZeitProAusgabeStueck,
+	Zeit1 is Zeit + HauptZeit, 
 	/* Händler / Terminal ansprechen / öffnen, Dialog durchklicken, schließen */
-	RuestZeit0 is 150 + 680 + 110, 
-	RuestZeit1 is RuestZeit + RuestZeit0,
-	bildeAvZeiten(Rest, HauptZeit1, HauptZeitDanach, NebenZeit1, NebenZeitDanach, RuestZeit1, RuestZeitDanach),
+	RuestZeit is 150 + 680 + 110, 
+	Zeit2 is Zeit1 + RuestZeit,
+	bildeAvZeiten(Rest, Zeit2, ZeitDanach),
 	!.
 
 
 /* vorgang ohne AV Bewertung */
-bildeAvZeiten(Vorgaenge, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach) :-
+bildeAvZeiten(Vorgaenge, Zeit, ZeitDanach) :-
 	Vorgaenge = [_|Rest],
-	bildeAvZeiten(Rest, HauptZeit, HauptZeitDanach, NebenZeit, NebenZeitDanach, RuestZeit, RuestZeitDanach),
+	bildeAvZeiten(Rest, Zeit, ZeitDanach),
 	!.
 
 /* in der Rüstzeit ist auch die Abrüstzeit drin */
@@ -188,27 +170,28 @@ methodeToHauptZeit(ernten, 100).
 methodeToHauptZeit(vonTierErhalten, 100).
 methodeToHauptZeit(unterWasserErkaempfen, 100).
 
-toRuestHauptNebenZeit(Methode, Anzahl, Dauer, Gebinde, Ruest, Haupt, Neben) :-
-	assertion(sammelAktion:sammelAktion(Methode)),
-	memberchk(Methode, [pfluecken, ernten, vonTierErhalten, unterWasserErkaempfen]),
-	methodeToRuestZeit(Methode, Ruest0),
-	methodeToHauptZeit(Methode, Haupt0),
-	((Gebinde > 1, Neben0 is (Dauer - Ruest0 - (Gebinde * Haupt0)) / (Gebinde - 1));
-	 Neben0 = 0
-	),
-	Haupt is Haupt0 / Anzahl,
-	Neben is Neben0 / Anzahl,
-	Ruest is Ruest0 / Anzahl,
+/* aus Eingaben berechnen wenn möglich */
+toRuestHauptNebenZeit(_, _, Anzahl, Dauer, Gebinde, Haupt, Neben, Ruest) :-
+	Gebinde > 1,
+	AnzahlHauptZeiten is Gebinde,
+	AnzahlNebenZeiten is Gebinde - 1,
+	AnzahlRuestZeiten is 1,
+	AnteileSumme is AnzahlHauptZeiten + AnzahlNebenZeiten + AnzahlRuestZeiten,
+	DauerEinStueck is Dauer / Anzahl,
+	Haupt is DauerEinStueck * AnteileSumme / AnzahlHauptZeiten,
+	Neben is DauerEinStueck * AnteileSumme / AnzahlNebenZeiten,
+	Ruest is DauerEinStueck * AnteileSumme / AnzahlRuestZeiten,
 	!.
 	
-toRuestHauptNebenZeit(Methode, Anzahl, Dauer, Gebinde, Ruest, Haupt, Neben) :-
-	assertion(sammelAktion:sammelAktion(Methode)),
-	methodeToRuestZeit(Methode, Ruest0),
-	methodeToNebenZeit(Methode, Neben0),
-	Haupt0 is (Dauer - Ruest0 - (Gebinde - 1) * Neben0) / Gebinde,
-	Haupt is Haupt0 / Anzahl,
-	Neben is Neben0 / Anzahl,
-	Ruest is Ruest0 / Anzahl.
+/* aus gemessenen Default Werten ermitteln */
+toRuestHauptNebenZeit(Stoff, Methode, Anzahl, Dauer, _, Haupt, Neben, Ruest) :-
+	sammlung:sammlung(0, 'System', 'MeinPlanet', Methode, Stoff, AnzahlHauptZeiten, AnzahlNebenZeiten, AnzahlRuestZeiten),
+	AnteileSumme is AnzahlHauptZeiten + AnzahlNebenZeiten + AnzahlRuestZeiten,
+	DauerEinStueck is Dauer / Anzahl,
+	Haupt is DauerEinStueck * AnteileSumme / AnzahlHauptZeiten,
+	Neben is DauerEinStueck * AnteileSumme / AnzahlNebenZeiten,
+	Ruest is DauerEinStueck * AnteileSumme / AnzahlRuestZeiten,
+	!.
 
 toDauer(_, Anzahl, Ruest, Haupt, Neben, Dauer) :-
 	Haupt0 is Haupt * Anzahl,
