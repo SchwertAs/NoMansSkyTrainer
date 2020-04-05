@@ -76,7 +76,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Kopf = [System, Planet, _, Operation, _, [ProduktAnzahl, Produkt]],
 	sammelAktion:sammelAktion(Operation),
 	sammlung:sammlung(_, System, Planet, Operation, Produkt, HauptZeit, NebenZeit, RuestZeit),
-	debug(myTrace, 'ausgabeVorgaenge: HauptZeit=~k NebenZeit=~k RuestZeit=~k', [HauptZeit, NebenZeit, RuestZeit]),
+	debug(myTrace, 'ausgabeVorgaenge: System=~k Planet=~k Operation=~k Produkt=~k HauptZeit=~k NebenZeit=~k RuestZeit=~k', [System, Planet, Operation, Produkt, HauptZeit, NebenZeit, RuestZeit]),
 	Zeit is (ProduktAnzahl * HauptZeit + RuestZeit + (ProduktAnzahl - 1) * NebenZeit),
 	bildeOperation(Zeit, Operation, OperationStringMaske),
 	atom_string(ProduktAnzahl, WandelAnzString),

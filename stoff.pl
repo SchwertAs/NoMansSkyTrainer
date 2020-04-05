@@ -235,6 +235,7 @@ stoff(modul, zyklotronModulS, 0).
 stoff(modul, instabilitaetsAntriebA, 0).
 stoff(modul, unterLichtVerstaerkerS, 0).
 stoff(modul, notFallWarpEinheitA, 0).
+stoff(modul, poloFigur, 0).
 
 
 /* ------------------------------- Frachtermodule ----------------------- */
@@ -716,6 +717,10 @@ stoff(basisBauEndStoff, silberneGekStatue, 0).
 stoff(basisBauEndStoff, goldeneGekStatue, 0).
 stoff(basisBauEndStoff, anomalieMotiv, 0).
 stoff(basisBauEndStoff, galaktischerHubMotiv, 0).
+stoff(basisBauEndStoff, umschlingenderBaum, 0).
+stoff(basisBauEndStoff, regenSchirmBaum, 0).
+stoff(basisBauEndStoff, windenderStrauch, 0).
+stoff(basisBauEndStoff, nadaFigur, 0).
 stoff(basisBauEndStoff, zustimmendeHandbewegungMotiv, 0).
 stoff(basisBauEndStoff, bronzeneKreaturStatue, 0).
 stoff(basisBauEndStoff, silberneKreaturStatue, 0).
@@ -1439,6 +1444,11 @@ stoff(bauRezept, silberneGekStatueRezept, 0).
 stoff(bauRezept, goldeneGekStatueRezept, 0).
 stoff(bauRezept, anomalieMotivRezept, 0).
 stoff(bauRezept, galaktischerHubMotivRezept, 0).
+stoff(bauRezept, umschlingenderBaumRezept, 0).
+stoff(bauRezept, regenSchirmBaumRezept, 0).
+stoff(bauRezept, windenderStrauchRezept, 0).
+stoff(bauRezept, nadaFigurRezept, 0).
+stoff(bauRezept, poloFigurRezept, 0).
 stoff(bauRezept, zustimmendeHandbewegungMotivRezept, 0).
 stoff(bauRezept, bronzeneKreaturStatueRezept, 0).
 stoff(bauRezept, silberneKreaturStatueRezept, 0).

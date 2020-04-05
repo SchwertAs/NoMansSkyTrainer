@@ -46,12 +46,9 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	       	             ]),
 	       	         \innereEingabeZeile(NumerierteRecordList)
 	       	             ]), 
-			       	  p(id(compactText), ['Der Atmospherentyp gibt an welches Gas die Atmospherenanlage auf diesem Planeten produziert.']),
-			       	  p(id(compactText), ['Auf gemäßigten und giftigen Planeten produziert die Anlage Stickstoff.']),
-			       	  p(id(compactText), ['Auf radioaktiven und frostigen Planeten produziert die Anlage Radon.']),
-			       	  p(id(compactText), ['Auf heißen und auf kargen Planeten produziert die Anlage Schwefelin.']),
-			       	  p(id(compactText), ['Auf Scherbenplaneten produziert die Anlage Sauerstoff.']),
-	       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
+			       	  p(id(compactText), ['Der Planetentyp wird beim Scan aus dem Weltraum angezeigt.']),
+			       	  p(id(compactText), ['Alternativ steht er auch in der Entdeckungsliste. Im Fenster wenn man mit der Maus über den Planetennamen fährt.']),
+			       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
 			    	  [td([button([name("submit"), type("submit")], 'OK')]),
 			    	   td([button([name("reset"), type("reset")], 'reset')])
 			    	  ]))

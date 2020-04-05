@@ -578,6 +578,7 @@ rezept(installieren, [[3, seltenesMetallElement], [2, kabelBaum], [1, fragmentSu
 rezept(installieren, [[1, instabilesNatrium], [2, kabelBaum], [1, nichtlineareOptikBRezept]], [1, nichtlineareOptikB], 0).
 rezept(installieren, [[3, tetraKobalt], [2, kabelBaum], [1, dysonPumpeBRezept]], [1, dysonPumpeB], 0).
 rezept(installieren, [[250, emeril], [1, kabelBaum], [1, indiumAntriebSRezept]], [1, indiumAntriebS], 0 ).
+rezept(installieren, [[10, kohlenStoff], [1, poloFigurRezept]], [1, poloFigur], 0 ).
 
 /* %%%%%%%%%%%%%%%%%%%%%  Frachter-Module  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 rezept(installieren, [[250, cadmium], [1, sauerStoffFilter], [4, antiMaterieGehaeuse], [1, warpKernResonatorRezept]], [1, warpKernResonator], 0).
@@ -885,6 +886,10 @@ rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneGekStatueRezept]], 
 rezept(bauen, [[30, reinesFerrit], [30, gold], [1, goldeneGekStatueRezept]], [1, goldeneGekStatue], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, anomalieMotivRezept]], [1, anomalieMotiv], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, galaktischerHubMotivRezept]], [1, galaktischerHubMotiv], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, umschlingenderBaumRezept]], [1, umschlingenderBaum], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, regenSchirmBaumRezept]], [1, regenSchirmBaum], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, windenderStrauchRezept]], [1, windenderStrauch], 0 ).
+rezept(bauen, [[20, kohlenStoff], [1, nadaFigurRezept]], [1, nadaFigur], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, zustimmendeHandbewegungMotivRezept]], [1, zustimmendeHandbewegungMotiv], 0 ).
 rezept(bauen, [[15, reinesFerrit], [15, kupfer], [1, bronzeneKreaturStatueRezept]], [1, bronzeneKreaturStatue], 0 ).
 rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneKreaturStatueRezept]], [1, silberneKreaturStatue], 0 ).

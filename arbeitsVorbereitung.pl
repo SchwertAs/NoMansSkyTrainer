@@ -178,19 +178,22 @@ toRuestHauptNebenZeit(_, _, Anzahl, Dauer, Gebinde, Haupt, Neben, Ruest) :-
 	AnzahlRuestZeiten is 1,
 	AnteileSumme is AnzahlHauptZeiten + AnzahlNebenZeiten + AnzahlRuestZeiten,
 	DauerEinStueck is Dauer / Anzahl,
-	Haupt is DauerEinStueck * AnteileSumme / AnzahlHauptZeiten,
-	Neben is DauerEinStueck * AnteileSumme / AnzahlNebenZeiten,
-	Ruest is DauerEinStueck * AnteileSumme / AnzahlRuestZeiten,
+	Haupt0 is DauerEinStueck * AnzahlHauptZeiten / AnteileSumme,
+	Neben0 is DauerEinStueck * AnzahlNebenZeiten / AnteileSumme,
+	Ruest0 is DauerEinStueck * AnzahlRuestZeiten / AnteileSumme,
+	round(Haupt0, Haupt),
+	round(Neben0, Neben),
+	round(Ruest0, Ruest),
 	!.
-	
-/* aus gemessenen Default Werten ermitteln */
-toRuestHauptNebenZeit(Stoff, Methode, Anzahl, Dauer, _, Haupt, Neben, Ruest) :-
-	sammlung:sammlung(0, 'System', 'MeinPlanet', Methode, Stoff, AnzahlHauptZeiten, AnzahlNebenZeiten, AnzahlRuestZeiten),
-	AnteileSumme is AnzahlHauptZeiten + AnzahlNebenZeiten + AnzahlRuestZeiten,
+
+toRuestHauptNebenZeit(_, _, Anzahl, Dauer, Gebinde, Haupt, Neben, Ruest) :-
+	Gebinde = 1,
 	DauerEinStueck is Dauer / Anzahl,
-	Haupt is DauerEinStueck * AnteileSumme / AnzahlHauptZeiten,
-	Neben is DauerEinStueck * AnteileSumme / AnzahlNebenZeiten,
-	Ruest is DauerEinStueck * AnteileSumme / AnzahlRuestZeiten,
+	Haupt0 is DauerEinStueck / 2,
+	Ruest0 is DauerEinStueck / 2,
+	round(Haupt0, Haupt),
+	Neben is 0,
+	round(Ruest0, Ruest),
 	!.
 
 toDauer(_, Anzahl, Ruest, Haupt, Neben, Dauer) :-
