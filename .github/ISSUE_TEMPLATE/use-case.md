@@ -7,32 +7,32 @@ assignees: ''
 
 ---
 
-**Primärakteur**
+### Primärakteur
 Wer verfolgt das Ziel?
 
-**Umfang (Scope)**
+### Umfang (Scope)
 Was genau ist das zur Diskussion stehende System
 
-**Ebene**
+### Ebene
 liegt das Ziel auf einer Hohen oder niedrigen Ebene? (Überblicksziel, Anwenderziel, Subfunktion)
 
-**Stakeholder und Interessen**
+### Stakeholder und Interessen
 Welche Akteure haben Interesse an der Funktion und was soll sie aus Ihrer Sicht leisten
 
-**Vorbedingungen**
+### Vorbedingungen
 Welche Bedingungen garantiert das System vor Beginn des use-case Ablaufs
 
-**Trigger**
+### Trigger
 Welches Ereignis löst den Use-Case Ablauf aus?
 
-**Standardablauf**
+### Standardablauf
 Die Schritte hierarchisch numeriert in Form von <wer macht was [mit was/wem]> angeben.
 
-**Erweiterungen**
+### Erweiterungen
 Numeriert angeben, was passiert in einer Variante des Use-Case Ablaufs (2a ist z. B. die Numerierung der ersten Variante des zweiten Schrittes des Standardablaufes)?
 
-**Invariante**
+### Invariante
 Was garantiert das System mindestens, auch wenn das Ziel des Use-Case nicht erreicht werden kann?
 
-**Nachbedingungen**
+### Nachbedingungen
 Welche Interessen der Stakeholder sind nach erfolgreichem Ablauf des Use-Case erfüllt?

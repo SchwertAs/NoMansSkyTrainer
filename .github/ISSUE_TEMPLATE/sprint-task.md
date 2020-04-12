@@ -7,11 +7,11 @@ assignees: ''
 
 ---
 
-**Modifikation**
+#### Modifikation
 Welche Modifikation ist angestrebt?
 
-**Arbeitsschritt**
+#### Arbeitsschritt
 Beschreibung der einzelnen erforderlichen Arbeitsgänge
 
-**Abnahmekriterium**
+#### Abnahmekriterium**
 Welcher Test muss bestanden werden um die erfolgreiche Modifikation nachzuweisen?

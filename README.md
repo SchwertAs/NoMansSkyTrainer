@@ -1,5 +1,5 @@
 # NoMansSkyTrainer
-Expertensystem für das Spiel No Man's Sky (©Hello Games). Gibt Tipps wie man schnell im Spiel vorwärts kommt.
+Kleines Helferlein für das Spiel No Man's Sky (©Hello Games). Gibt Tipps wie man optimal im Spiel vorwärts kommt.
 Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekommen sind mit dem Programm direkt erreichbar. Mit konkreten Handlungsanweisungen unterstützt das Programm den Spieler. Die Tipps berücksichtigt dabei die jeweilige Lage im Spiel.
 - Eingabe der Spielsituation über konfortable Dialoge
 - Übersichtliche Ausgabe der Handlungsanweisungen
@@ -10,6 +10,8 @@ Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekomm
 - Unterstützung für Rezeptbeschaffung
 - Kochrezepte enthalten
 - Raffinerierezepte enthalten
+- Sammelmöglichkeiten spezifisch für den Planetentyp
+- Genaue Angabe was fehlt, wenn Stoff nicht herstellbar 
 
 # Installation:
 - Der Trainer benötigt eine SWI Prolog Installation. 
@@ -21,3 +23,7 @@ Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekomm
 - Eventuell kommt eine Meldung von der Firewall, ob man den Port 8000 erlauben möchte. Dem bitte zustimmen.
 - Die Anwendung ist als Web Server programmiert.
 - Der Anwendungsserver ist nach dem Start des Exe Files unter http://localhost:8000 erreichbar.
+- Durch weiteren Tastendruck im Konsolenfenster wird der Server wieder beendet
+
+# Deinstallation
+Das Verzeichnis mit noMansSkyTrainer.exe komplett löschen. Der Trainer ist damit vollständig entfernt. Wenn gewünscht kann auch das Prolog System mit Hilfe der Systemsteuerung (Syatemsteuerung->Apps->SWI-Prolog x.x.x->Deinstalllieren) entfernt werden.
