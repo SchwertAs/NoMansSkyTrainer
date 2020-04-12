@@ -28,6 +28,7 @@ spielStatusDialog(_Request) :-
 	((ExoFahrzeugMinenLaser = true, ExoFahrzeugMinenLaserChecked = ' checked'); ExoFahrzeugMinenLaserChecked = ''), 
 	((FrachterVorhanden = true, FrachterVorhandenChecked = ' checked'); FrachterVorhandenChecked = ''), 
 	((SphaereRufbar = true, SphaereRufbarChecked = ' checked'); SphaereRufbarChecked = ''), 
+	assertz(spielStatus:spielStatus(konfiguriert, false)),
 	TermerizedBody = [
 	\['<header>'],
 	h1([align(center)], ['Vorraussetzungen für die Materialsammlung']),
@@ -123,7 +124,6 @@ spielStatus(Request) :-
 	frachter(Frachter, [default(off)]),
 	spaere(Spaere, [default(off)])
     ]),
-    spielStatus:initSpielStatus,
     ignore(retractall(spielStatus:spielStatus(_, _))),
     (MinenLaser = off -> assertz(spielStatus:spielStatus(minenLaser, false)); assertz(spielStatus:spielStatus(minenLaser, true))),
     (VerbesserterMinenlaser = off -> assertz(spielStatus:spielStatus(verbesserterMinenLaser, false)); assertz(spielStatus:spielStatus(verbesserterMinenLaser, true))),
@@ -134,7 +134,7 @@ spielStatus(Request) :-
     (ExoFahrzeug = off -> assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, false)); assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, true))),
     (Frachter = off -> assertz(spielStatus:spielStatus(frachterVorhanden, false)); assertz(spielStatus:spielStatus(frachterVorhanden, true))),
     (Spaere = off -> assertz(spielStatus:spielStatus(sphaereRufbar, false)); assertz(spielStatus:spielStatus(sphaereRufbar, true))),
-
+	assertz(spielStatus:spielStatus(konfiguriert, true)),
     server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans sky trainer: Vorraussetzungen Materialsammlung')],
 	TermerizedBody = [

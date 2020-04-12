@@ -14,7 +14,7 @@ spielStatusInit :-
 	initSystemAusstattung.
 
 initSpielStatus :-
-	abolish(spielStatus/3)
+	abolish(spielStatus/2)
 	,assertz(spielStatus(minenLaser, true))
 	,assertz(spielStatus(verbesserterMinenLaser, true))
 	,assertz(spielStatus(terrainFormer, true))
@@ -23,6 +23,7 @@ initSpielStatus :-
 	,assertz(spielStatus(exoFahrzeugMinenLaser, true))
 	,assertz(spielStatus(frachterVorhanden, true))
 	,assertz(spielStatus(sphaereRufbar, true))
+	,assertz(spielStatus(konfiguriert, false))
 	.
 
 initSysteme :-
