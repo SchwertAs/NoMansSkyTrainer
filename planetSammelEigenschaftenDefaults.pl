@@ -185,6 +185,24 @@ sammelDefaultPlanetenTyp(_, kaufen, sternenSeide).
 sammelDefaultPlanetenTyp(_, kaufen, raumSchiffStartTreibStoff).
 sammelDefaultPlanetenTyp(_, kaufen, vierfachServo).
 
+/* ernten */
+sammelDefaultPlanetenTyp(_, ernten, beutelGift).
+sammelDefaultPlanetenTyp(_, ernten, eiweissPerle).
+sammelDefaultPlanetenTyp(_, ernten, faecium).
+sammelDefaultPlanetenTyp(_, ernten, frostKristall).
+sammelDefaultPlanetenTyp(_, ernten, frostKristall).
+sammelDefaultPlanetenTyp(_, ernten, gammaWurzel).
+sammelDefaultPlanetenTyp(_, ernten, gravitinoBall).
+sammelDefaultPlanetenTyp(_, ernten, kaktusFleisch).
+sammelDefaultPlanetenTyp(_, ernten, mordit).
+sammelDefaultPlanetenTyp(_, ernten, nipNipKnospen).
+sammelDefaultPlanetenTyp(_, ernten, pilzSchimmel).
+sammelDefaultPlanetenTyp(_, ernten, solanium).
+sammelDefaultPlanetenTyp(_, ernten, sternenKnolle).
+
+sammelDefaultPlanetenTyp(_, herausSchlagen, kohlenStoff).
+sammelDefaultPlanetenTyp(_, exoFahrzeugMinenLaserNutzen, sauerStoff).
+
 /* aus Tierhaltung */
 sammelDefaultPlanetenTyp(PlanetenTyp, vonTierErhalten, faecium) :-
 	PlanetenTyp \= tot.

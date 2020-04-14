@@ -109,6 +109,12 @@ div.table50 {
 	border: thin solid #999999;
 	padding: 0.3em;
 }
+div.table70 { 
+  display: table; 
+  width: calc(70% - 0.6em);
+	border: thin solid #999999;
+	padding: 0.3em;
+}
 div.tr { 
   display:table-row; 
 }

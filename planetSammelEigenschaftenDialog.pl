@@ -6,6 +6,7 @@
 
 :- http_handler('/planetSammelEigenschaftenDialogSystemAuswahl', planetSammelEigenschaftenDialogSystemAuswahl, []).
 :- http_handler('/planetSammelEigenschaftenDialogPlanetAuswahl', planetSammelEigenschaftenDialogPlanetAuswahl, []).
+:- http_handler('/planetSammelEigenschaftenDialogSammelArtAuswahl', planetSammelEigenschaftenDialogSammelArtAuswahl, []).
 :- http_handler('/planetSammelEigenschaftenDialog', planetSammelEigenschaftenDialog, []).
 :- http_handler('/planetSammelEigenschaften', planetSammelEigenschaften, []).
 :- http_handler('/AjaxSammlungDefault', ajaxSammlungDefault, []).
@@ -21,27 +22,67 @@ planetSammelEigenschaftenDialogSystemAuswahl(_Request) :-
 planetSammelEigenschaftenDialogPlanetAuswahl(Request) :-
 	planetAuswahlDialog:planetAuswahlDialog(
 	  'Eigenschaften Himmelskörper eingeben: Himmelskörperauswahl',
+	  '/planetSammelEigenschaftenDialogSammelArtAuswahl',
+	  Request
+	).
+
+planetSammelEigenschaftenDialogSammelArtAuswahl(Request) :-
+	sammelArtAuswahlDialog(
+	  'Sammelart eingeben: Himmelskörperauswahl',
 	  '/planetSammelEigenschaftenDialog',
 	  Request
 	).
+
+/* -----------------------------------  Sammelartauswahl ----------------------------------------------- */
+sammelArtAuswahlDialog(HeaderText, Action, Request) :-
+	member(method(post), Request), !,
+	http_parameters(Request, 
+	[auswahlSystem(AuswahlSystem, [length > 0]),
+	 auswahlPlanet(AuswahlPlanet, [length > 0])
+	]),
+	((AuswahlPlanet = 'Bitte wählen', planetAuswahlDialog:fehlerBehandlung); 
+	(
+	 findall(SammelArt, (sammelAktion:sammelAktion(SammelArt), SammelArt \= bekannt), SammelArten),
+	 server:baueOptionsFeld('auswahlSammelArt', SammelArten, 2, OptionList),
+	
+	 TermerizedBody = [
+	 \['<header>'],
+     h1([align(center)], [HeaderText]),
+     \['</header>'],
+	 \['<formSpace>'],       
+     form([action(Action), method('post'), name('sammelArtAuswahlForm')], 
+       	 [h3('Auswahl Sammelart'),
+       	  \sammelArtAnzeige(AuswahlSystem, AuswahlPlanet, OptionList),
+       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
+		    	  [td([button([name("submit"), type("submit")], 'OK')]),
+		    	   td([button([name("reset"), type("reset")], 'reset')])
+		    	  ]))    
+		 ]),
+	 \['</formSpace>']
+		             ],       
+	 server:holeCssAlsStyle(StyleString),
+	 TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planet-Auswahl')],
+	 reply_html_page(TermerizedHead, TermerizedBody)
+	)).
 
 /* -----------------------------------  Eingabedialog ----------------------------------------------- */	
 planetSammelEigenschaftenDialog(Request) :-
 	member(method(post), Request), !,
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0]),
-	 auswahlPlanet(AuswahlPlanet, [length > 0])
+	 auswahlPlanet(AuswahlPlanet, [length > 0]),
+	 auswahlSammelArt(AuswahlSammelArt, [length > 0])
 	]),
-	(AuswahlPlanet = 'Bitte wählen' -> planetAuswahlDialog:fehlerBehandlung; 
-	 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet)
+	(AuswahlSammelArt = 'Bitte wählen' -> planetAuswahlDialog:fehlerBehandlung; 
+	 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt)
 	).
 
-planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
+planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt) :-
     /* einlesen der Eigenschaften */
-    GesamtZeilenZahl = 137,
+    GesamtZeilenZahl = 25,
 	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest], 
 	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest),
-	        Operation \= bekannt), 
+	        Operation = AuswahlSammelArt), 
 	        RecordList),
 	findall([FeldNo], between(1, GesamtZeilenZahl, FeldNo), FeldNoList),
 	ausgabe:joinRecordsByRecordNo(FeldNoList, RecordList, 5, NumerierteRecordList),
@@ -51,7 +92,7 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
     \['</header>'],
 	\['<formSpace>'],       
     form([action('/planetSammelEigenschaften'), method('post'), name('planetenSammelEigenschaftenAuswahlForm')], 
-       	 [\eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet),
+       	 [\eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt),
        	  div([class('table')],
 	       	        [div(class('tr'), 
 	       	             [div(class('td'), \innereTabelle(NumerierteRecordList))
@@ -124,15 +165,29 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 		],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
-eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
+eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt) -->
 	html(
-   	  div(class('table50'),[
+   	  div(class('table70'),[
    	    div(class('tr'), [
    	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1),
-   	    	\divInputReadOnly('auswahlPlanet', 'Planet: ', AuswahlPlanet, 2)
+   	    	\divInputReadOnly('auswahlPlanet', 'Planet: ', AuswahlPlanet, 2),
+   	    	\divInputReadOnly('auswahlSammelArt', 'Sammelart: ', AuswahlSammelArt, 3)
    	  	])
    	  ])).
 
+sammelArtAnzeige(AuswahlSystem, AuswahlPlanet, OptionList) -->
+	html(
+   	  div(class('table70'),[
+   	    div(class('tr'), [
+   	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1),
+   	    	\divInputReadOnly('auswahlPlanet', 'Planet: ', AuswahlPlanet, 2),
+   	  	    div(class('td'), [
+   	  	  	label([for('SammelArt')],'Sammelart: '),
+   	  	  	\OptionList
+   	  	    ]) 
+   	  	])
+   	  ])).
+   	  
 divInputReadOnly(Name, LabelText, Value, Index) -->
 	html(
 	div(class('td'), [
@@ -225,7 +280,7 @@ baueOptionMitVorwahl([OptionTupel|Rest]) -->
 planetSammelEigenschaften(Request) :-
 	member(method(post), Request), !,
 	planetSammelEigenschaftenDialogParams:planetSammelEigenschaftenDialogParamList(Request, VarValueList),
-	GesamtZeilenZahl = 137,
+	GesamtZeilenZahl = 25,
 	\+plausibleEingabe(VarValueList, GesamtZeilenZahl),
     ((nb_getval('ZeileNoFehler', ZeileNoFehler),
       ZeileNoFehler > 0,
@@ -233,7 +288,8 @@ planetSammelEigenschaften(Request) :-
 	 );
 	 (nth1(1, VarValueList, AuswahlSystem),
 	  nth1(2, VarValueList, AuswahlPlanet),
-	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, _, _, _, _, _))),
+	  nth1(3, VarValueList, AuswahlSammelArt),
+	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList),
       sammlung:vorgefertigeLoesungenErstellen(AuswahlSystem, AuswahlPlanet),
       gespeichert
@@ -251,11 +307,12 @@ plausibleEingabe(VarValueList, GesamtZeilenZahl) :-
 	
    
 pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, RohStoff, Methode, AnzahlNum, DauerNum, GebindeNum) :-
-  	OffsetRohStoff is 2 + 0 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetMethode is 2 + 1 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetAnzahl is 2 + 2 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetDauer is 2 + 3 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetGebinde is 2 + 4 * GesamtZeilenZahl + ZeilenZahl,
+	OffsetAuswahlen = 3,
+  	OffsetRohStoff is OffsetAuswahlen + 0 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetMethode is OffsetAuswahlen + 1 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetAnzahl is OffsetAuswahlen + 2 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetDauer is OffsetAuswahlen + 3 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetGebinde is OffsetAuswahlen + 4 * GesamtZeilenZahl + ZeilenZahl,
     nth1(OffsetRohStoff, VarValueList, RohStoff),
     nth1(OffsetMethode, VarValueList, Methode),
     nth1(OffsetAnzahl, VarValueList, Anzahl),
