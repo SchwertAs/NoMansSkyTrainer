@@ -4,19 +4,16 @@
 
 baueParameterListen(FeldNrUnten, FeldNrOben, PredListeDanach) :-
 	baueParameterListe(FeldNrUnten, FeldNrOben, 'auswahlRohStoff', '[length > 0]', "", PredList1),
-	baueParameterListe(FeldNrUnten, FeldNrOben, 'methode', '[length > 0]', "", PredList2),
-	baueParameterListe(FeldNrUnten, FeldNrOben, 'anzahl', '[default(''0'')]', "", PredList3),
-	baueParameterListe(FeldNrUnten, FeldNrOben, 'dauer', '[default(''0'')]', "", PredList4),
-	baueParameterListe(FeldNrUnten, FeldNrOben, 'gebinde', '[default(''0'')]', "", PredList5),
+	baueParameterListe(FeldNrUnten, FeldNrOben, 'anzahl', '[default(''0'')]', "", PredList2),
+	baueParameterListe(FeldNrUnten, FeldNrOben, 'dauer', '[default(''0'')]', "", PredList3),
+	baueParameterListe(FeldNrUnten, FeldNrOben, 'gebinde', '[default(''0'')]', "", PredList4),
 	
 	string_concat(PredList1, ', ', PredListeDanach0),
 	string_concat(PredListeDanach0, PredList2, PredListeDanach1),
 	string_concat(PredListeDanach1, ', ', PredListeDanach2),
 	string_concat(PredListeDanach2, PredList3, PredListeDanach3),
 	string_concat(PredListeDanach3, ', ', PredListeDanach4),
-	string_concat(PredListeDanach4, PredList4, PredListeDanach5),
-	string_concat(PredListeDanach5, ', ', PredListeDanach6),
-	string_concat(PredListeDanach6, PredList5, PredListeDanach).
+	string_concat(PredListeDanach4, PredList4, PredListeDanach).
 	
 baueParameterListe(FeldNrUnten, FeldNrOben, _, _, PredListeBisher, PredListeDanach) :-
 	FeldNrUnten > FeldNrOben,
@@ -38,18 +35,15 @@ baueParameterListe(FeldNrUnten, FeldNrOben, FeldNameRumpf, FeldOptionen, PredLis
 
 baueVariablenListen(FeldNrUnten, FeldNrOben, ListeDanach) :-
 	baueVariablenListe(FeldNrUnten, FeldNrOben, 'auswahlRohStoff', "", VarList1),
-	baueVariablenListe(FeldNrUnten, FeldNrOben, 'methode', "", VarList2),
-	baueVariablenListe(FeldNrUnten, FeldNrOben, 'anzahl', "", VarList3),
-	baueVariablenListe(FeldNrUnten, FeldNrOben, 'dauer', "", VarList4),
-	baueVariablenListe(FeldNrUnten, FeldNrOben, 'gebinde', "", VarList5),
+	baueVariablenListe(FeldNrUnten, FeldNrOben, 'anzahl', "", VarList2),
+	baueVariablenListe(FeldNrUnten, FeldNrOben, 'dauer', "", VarList3),
+	baueVariablenListe(FeldNrUnten, FeldNrOben, 'gebinde', "", VarList4),
 	string_concat(VarList1, ', ' , Danach0),
 	string_concat(Danach0, VarList2 , Danach1),
 	string_concat(Danach1, ', ' , Danach2),
 	string_concat(Danach2, VarList3 , Danach3),
 	string_concat(Danach3, ', ' , Danach4),
-	string_concat(Danach4, VarList4 , Danach5),
-	string_concat(Danach5, ', ' , Danach6),
-	string_concat(Danach6, VarList5 , ListeDanach).
+	string_concat(Danach4, VarList4 , ListeDanach).
 		
 baueVariablenListe(FeldNrUnten, FeldNrOben, _, ListeBisher, ListeDanach) :-
 	FeldNrUnten > FeldNrOben,
@@ -79,15 +73,6 @@ auswahlRohStoff19(AuswahlRohStoff19, [length > 0]), auswahlRohStoff20(AuswahlRoh
 auswahlRohStoff21(AuswahlRohStoff21, [length > 0]), auswahlRohStoff22(AuswahlRohStoff22, [length > 0]), 
 auswahlRohStoff23(AuswahlRohStoff23, [length > 0]), auswahlRohStoff24(AuswahlRohStoff24, [length > 0]), 
 auswahlRohStoff25(AuswahlRohStoff25, [length > 0]), 
-methode1(Methode1, [length > 0]), methode2(Methode2, [length > 0]), methode3(Methode3, [length > 0]), 
-methode4(Methode4, [length > 0]), methode5(Methode5, [length > 0]), methode6(Methode6, [length > 0]), 
-methode7(Methode7, [length > 0]), methode8(Methode8, [length > 0]), methode9(Methode9, [length > 0]), 
-methode10(Methode10, [length > 0]), methode11(Methode11, [length > 0]), methode12(Methode12, [length > 0]), 
-methode13(Methode13, [length > 0]), methode14(Methode14, [length > 0]), methode15(Methode15, [length > 0]), 
-methode16(Methode16, [length > 0]), methode17(Methode17, [length > 0]), methode18(Methode18, [length > 0]), 
-methode19(Methode19, [length > 0]), methode20(Methode20, [length > 0]), methode21(Methode21, [length > 0]), 
-methode22(Methode22, [length > 0]), methode23(Methode23, [length > 0]), methode24(Methode24, [length > 0]), 
-methode25(Methode25, [length > 0]), 
 anzahl1(Anzahl1, [default('0')]), anzahl2(Anzahl2, [default('0')]), anzahl3(Anzahl3, [default('0')]), 
 anzahl4(Anzahl4, [default('0')]), anzahl5(Anzahl5, [default('0')]), anzahl6(Anzahl6, [default('0')]), 
 anzahl7(Anzahl7, [default('0')]), anzahl8(Anzahl8, [default('0')]), anzahl9(Anzahl9, [default('0')]), 
@@ -124,9 +109,6 @@ AuswahlRohStoff7, AuswahlRohStoff8, AuswahlRohStoff9, AuswahlRohStoff10, Auswahl
 AuswahlRohStoff13, AuswahlRohStoff14, AuswahlRohStoff15, AuswahlRohStoff16, AuswahlRohStoff17, AuswahlRohStoff18, 
 AuswahlRohStoff19, AuswahlRohStoff20, AuswahlRohStoff21, AuswahlRohStoff22, AuswahlRohStoff23, AuswahlRohStoff24, 
 AuswahlRohStoff25, 
-Methode1, Methode2, Methode3, Methode4, Methode5, Methode6, Methode7, Methode8, Methode9, Methode10, Methode11, 
-Methode12, Methode13, Methode14, Methode15, Methode16, Methode17, Methode18, Methode19, Methode20, Methode21, 
-Methode22, Methode23, Methode24, Methode25, 
 Anzahl1, Anzahl2, Anzahl3, Anzahl4, Anzahl5, Anzahl6, Anzahl7, Anzahl8, Anzahl9, Anzahl10, Anzahl11, Anzahl12, 
 Anzahl13, Anzahl14, Anzahl15, Anzahl16, Anzahl17, Anzahl18, Anzahl19, Anzahl20, Anzahl21, Anzahl22, Anzahl23, 
 Anzahl24, Anzahl25, 

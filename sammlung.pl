@@ -212,6 +212,11 @@ sammlungInit :-
 	/* Stoff unter Wasser mit Waffe erbeuten */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', unterWasserErkaempfen, lebendePerle, 150, 680, 0))     /* von gepanzerte Muschel */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', unterWasserErkaempfen, hypnotischesAuge, 4500, 0, 0)) /* von abyssal horror */
+
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ausAtmosphaerenAnlageGewinnen, schwefelin, 1450, 150, 630))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ausAtmosphaerenAnlageGewinnen, radon, 1450, 150, 630))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ausAtmosphaerenAnlageGewinnen, stickStoff, 1450, 150, 630))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', ausAtmosphaerenAnlageGewinnen, sauerStoff, 290, 150, 630))
 	.
 
 /* Liste der Rohstoffe, die vorgefertigt werden sollen */

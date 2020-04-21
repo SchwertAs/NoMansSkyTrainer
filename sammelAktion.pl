@@ -1,6 +1,7 @@
 :- module(sammelAktion, [sammelOrt/2]).
 
 sammelAktion(bekannt).
+sammelAktion(ausAtmosphaerenAnlageGewinnen).
 sammelAktion(erkaempfen).
 sammelAktion(ernten).
 sammelAktion(ertauchen).

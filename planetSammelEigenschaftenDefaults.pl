@@ -231,6 +231,10 @@ sammelDefaultPlanetenTyp(_, ertauchen, kristallSulfid).
 sammelDefaultPlanetenTyp(_, unterWasserErkaempfen, lebendePerle).
 sammelDefaultPlanetenTyp(_, unterWasserErkaempfen, hypnotischesAuge).
 
+sammelDefaultPlanetenTyp(_, verbessertenMinenLaserNutzen, natriumNitrat).
+sammelDefaultPlanetenTyp(_, verbessertenMinenLaserNutzen, verdichteterKohlenStoff).
+sammelDefaultPlanetenTyp(_, verbessertenMinenLaserNutzen, reinesFerrit).
+
 /* Gasgewinnung */
 sammelDefaultPlanetenTyp(gemaessigt, ausAtmosphaerenAnlageGewinnen, stickStoff).
 sammelDefaultPlanetenTyp(giftig, ausAtmosphaerenAnlageGewinnen, stickStoff).

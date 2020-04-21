@@ -26,6 +26,7 @@ planetSammelEigenschaftenDialogPlanetAuswahl(Request) :-
 	  Request
 	).
 
+/* -----------------------------------  Sammelartauswahl -------------------------------------------- */
 planetSammelEigenschaftenDialogSammelArtAuswahl(Request) :-
 	sammelArtAuswahlDialog(
 	  'Sammelart eingeben: Himmelskörperauswahl',
@@ -33,7 +34,7 @@ planetSammelEigenschaftenDialogSammelArtAuswahl(Request) :-
 	  Request
 	).
 
-/* -----------------------------------  Sammelartauswahl ----------------------------------------------- */
+/* -----------------------------------  Sammelartauswahl -------------------------------------------- */
 sammelArtAuswahlDialog(HeaderText, Action, Request) :-
 	member(method(post), Request), !,
 	http_parameters(Request, 
@@ -115,19 +116,19 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
 		for(var i=0; i < rohs.length; i++) {
 			rohs[i].addEventListener("change", Auswaehlen);
 		}	
-		var system = document.getElementById("auswahlSystem");
-		var planet = document.getElementById("auswahlPlanet");
 	}
 	catch(err) {
 		alert(err.message);
 	}
 	
 	function Auswaehlen() {
-		var rohstoff = this.parentNode.parentNode.childNodes[1].childNodes[1];
-		var methode = this.parentNode.parentNode.childNodes[3].childNodes[1];
-		var anzahl = this.parentNode.parentNode.childNodes[5].childNodes[0];
-		var dauer = this.parentNode.parentNode.childNodes[7].childNodes[0];
-		var gebinde = this.parentNode.parentNode.childNodes[9].childNodes[0];
+		var system = document.getElementById("auswahlSystem");
+		var planet = document.getElementById("auswahlPlanet");
+		var methode = document.getElementById("auswahlSammelArt");
+		var rohstoff = this.parentNode.parentNode.childNodes[1].childNodes[2];
+		var anzahl = this.parentNode.parentNode.childNodes[3].childNodes[0];
+		var dauer = this.parentNode.parentNode.childNodes[5].childNodes[0];
+		var gebinde = this.parentNode.parentNode.childNodes[7].childNodes[0];
 		
 		var request = new XMLHttpRequest();
 		request.addEventListener("load", function(event) {
@@ -136,9 +137,6 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
 		    var par1Tupel = parameter[1].split(''='');
 		    var par2Tupel = parameter[2].split(''='');
 		    var par3Tupel = parameter[3].split(''='');
-		    if(methode.value == ''Bitte wählen'') {
-		    	methode.value = par0Tupel[1];
-		    }
 		    if(anzahl.value == "" && dauer.value == "" && gebinde.value == "") {
 		    	anzahl.value = par1Tupel[1];
 		    	dauer.value = par2Tupel[1];
@@ -147,10 +145,10 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
 		}
 		); 
 		if(rohstoff.value != ''Bitte wählen'' ) {
-			var req = "AjaxSammlungDefault?auswahlRohStoff=" + rohstoff.value
-			     + "&" + "auswahlSystem=" + system.value
-			     + "&" + "auswahlPlanet=" + planet.value
-			     + "&" + "auswahlMethode=" + methode.value;
+			var req = "AjaxSammlungDefault?ajaxMethode=" + methode.value
+			     + "&" + "ajaxSystem=" + system.value
+			     + "&" + "ajaxPlanet=" + planet.value
+			     + "&" + "ajaxRohStoff=" + rohstoff.value;
 			request.open("GET", req);
 			request.send();
 		}
@@ -210,7 +208,6 @@ innereTabelle(NumerierteRecordList) -->
 		[div(class('table'), 
 			   [div(class('tr'), 
 			   [div([class('th'), scope("col")],['Rohstoff']),
-			    div([class('th'), scope("col")],['Methode']),
 			    div([class('th'), scope("col")],['Anzahl']),
 			    div([class('th'), scope("col")],['Dauer 1/100 s']),
 			    div([class('th'), scope("col")],['Gebindezahl'])
@@ -226,24 +223,21 @@ innereEingabeZeile([Record|Rest]) -->
 	{
 	Record = [FeldNo, Stoff, Operation, Haupt, Neben, Ruest],
 	((Stoff = '', Stoff0 = 'Bitte wählen'); (Stoff0 = Stoff)),
-	((Operation = '', Operation0 = 'Bitte wählen'); (Operation0 = Operation)),
 	((Haupt = '', Haupt0 = 0); (Haupt0 = Haupt)),
 	((Neben = '', Neben0 = 0); (Neben0 = Neben)),
 	((Ruest = '', Ruest0 = 0); (Ruest0 = Ruest)),
-	arbeitsVorbereitung:toDauer(Operation, 1, Ruest0, Haupt0, Neben0, Dauer),
-	((Dauer = 0, Gebinde = '', Anzahl = '', Dauer0 = ''); (Gebinde = 1, Anzahl = 1, Dauer0 = Dauer)),
+	arbeitsVorbereitung:toDauer(Operation, 1, Ruest0, Haupt0, Neben0, Dauer0),
+	((Dauer0 = 0, Gebinde = '', Anzahl = '', Dauer = ''); (Gebinde = 1, Anzahl = 1, Dauer = Dauer0)),
 
 	findall(St, (sammlung:sammlung(_, 'System', 'MeinPlanet', Op, St, _, _, _), Op \= bekannt), SammelStoffe0),
 	sort(SammelStoffe0, SammelStoffe1),
-	findall([Stoff0, St0], member(St0, SammelStoffe1), SammelStoffe),
-	findall([Operation0, Aktion], (sammelAktion:sammelAktion(Aktion), Aktion \= bekannt), SammelAktionen)
+	findall([Stoff0, St0], member(St0, SammelStoffe1), SammelStoffe)
 	},
 	html([	 
 	      div(class('tr'), [ 
 	      	div(class('td'), [label(FeldNo), \baueOptionsFeldMitVorwahl('auswahlRohStoff', FeldNo, 1, SammelStoffe)]),
-			div(class('td'), \baueOptionsFeldMitVorwahl('methode', FeldNo, 2, SammelAktionen)),
 			div(class('td'), [input([name('anzahl' + FeldNo), type('number'), min('1'), max('99999'), value(Anzahl)])]),
-			div(class('td'), [input([name('dauer' + FeldNo), type('number'), min('1'), max('99999'), value(Dauer0)])]),
+			div(class('td'), [input([name('dauer' + FeldNo), type('number'), min('1'), max('99999'), value(Dauer)])]),
 			div(class('td'), [input([name('gebinde' + FeldNo), type('number'), min('1'), max('30'), value(Gebinde)])])
 		 ])
    	   ]),
@@ -286,11 +280,12 @@ planetSammelEigenschaften(Request) :-
       ZeileNoFehler > 0,
       fehlerZeile(ZeileNoFehler)
 	 );
-	 (nth1(1, VarValueList, AuswahlSystem),
+	 (
+	  nth1(1, VarValueList, AuswahlSystem),
 	  nth1(2, VarValueList, AuswahlPlanet),
-	  nth1(3, VarValueList, AuswahlSammelArt),
+	  nth1(3, VarValueList, AuswahlSammelArt),	
 	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, _, _, _, _))),
-	  \+ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList),
+	  \+ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarValueList),
       sammlung:vorgefertigeLoesungenErstellen(AuswahlSystem, AuswahlPlanet),
       gespeichert
      )
@@ -299,22 +294,20 @@ planetSammelEigenschaften(Request) :-
 plausibleEingabe(VarValueList, GesamtZeilenZahl) :-
 	nb_setval('ZeileNoFehler', 0),
 	between(1, GesamtZeilenZahl, ZeileNo),
-	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, RohStoff, Methode, AnzahlNum, DauerNum, GebindeNum),
-	\+leereZeile(RohStoff, Methode, DauerNum, AnzahlNum, GebindeNum),
-	\+gueltigeZeile(RohStoff, Methode, DauerNum, AnzahlNum, GebindeNum),
+	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, RohStoff, AnzahlNum, DauerNum, GebindeNum),
+	\+leereZeile(RohStoff, DauerNum, AnzahlNum, GebindeNum),
+	\+gueltigeZeile(RohStoff, DauerNum, AnzahlNum, GebindeNum),
 	nb_setval('ZeileNoFehler', ZeileNo),
 	!, fail.
 	
    
-pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, RohStoff, Methode, AnzahlNum, DauerNum, GebindeNum) :-
+pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, RohStoff, AnzahlNum, DauerNum, GebindeNum) :-
 	OffsetAuswahlen = 3,
   	OffsetRohStoff is OffsetAuswahlen + 0 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetMethode is OffsetAuswahlen + 1 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetAnzahl is OffsetAuswahlen + 2 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetDauer is OffsetAuswahlen + 3 * GesamtZeilenZahl + ZeilenZahl,
-    OffsetGebinde is OffsetAuswahlen + 4 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetAnzahl is OffsetAuswahlen + 1 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetDauer is OffsetAuswahlen + 2 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetGebinde is OffsetAuswahlen + 3 * GesamtZeilenZahl + ZeilenZahl,
     nth1(OffsetRohStoff, VarValueList, RohStoff),
-    nth1(OffsetMethode, VarValueList, Methode),
     nth1(OffsetAnzahl, VarValueList, Anzahl),
     nth1(OffsetDauer, VarValueList, Dauer),
     nth1(OffsetGebinde, VarValueList, Gebinde),
@@ -322,14 +315,14 @@ pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, RohStoff, Methode, Anzahl
 	atom_number(Dauer, DauerNum),
 	atom_number(Gebinde, GebindeNum).
 
-ablegen(AuswahlSystem, AuswahlPlanet, GesamtZeilenZahl, VarValueList) :-
+ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarValueList) :-
 	between(1, GesamtZeilenZahl, ZeileNo),
-	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, RohStoff, Methode, AnzahlNum, DauerNum, GebindeNum),
-	gueltigeZeile(RohStoff, Methode, DauerNum, AnzahlNum, GebindeNum),
-	arbeitsVorbereitung:toRuestHauptNebenZeit(RohStoff, Methode, AnzahlNum, DauerNum, GebindeNum, Haupt, Neben, Ruest),
+	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, RohStoff, AnzahlNum, DauerNum, GebindeNum),
+	gueltigeZeile(RohStoff, DauerNum, AnzahlNum, GebindeNum),
+	arbeitsVorbereitung:toRuestHauptNebenZeit(RohStoff, AuswahlSammelArt, AnzahlNum, DauerNum, GebindeNum, Haupt, Neben, Ruest),
 	debug(myTrace, 'abspeichern: ZeileNo=~k Sys=~k, Planet=~k, Roh=~k, Meth=~k, Ruest=~k, Haupt=~k, Neben=~k', 
-		[ZeileNo, AuswahlSystem, AuswahlPlanet, RohStoff, Methode, Ruest, Haupt, Neben]),
-	assertz(sammlung:sammlung(ZeileNo, AuswahlSystem, AuswahlPlanet, Methode, RohStoff, Ruest, Haupt, Neben)),
+		[ZeileNo, AuswahlSystem, AuswahlPlanet, RohStoff, AuswahlSammelArt, Ruest, Haupt, Neben]),
+	assertz(sammlung:sammlung(ZeileNo, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, RohStoff, Ruest, Haupt, Neben)),
 	fail.
 	
 gespeichert :-
@@ -355,40 +348,38 @@ fehlerZeile(FeldNo) :-
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 	
-gueltigeZeile(RohStoff, Methode, Dauer, Anzahl, Gebinde) :-
+gueltigeZeile(RohStoff, Dauer, Anzahl, Gebinde) :-
 	RohStoff \= 'Bitte wählen',
-	Methode \= 'Bitte wählen',
 	Dauer > 0,
 	Anzahl > 0,
 	Gebinde > 0.
 
-leereZeile(RohStoff, Methode, Dauer, Anzahl, Gebinde) :-
+leereZeile(RohStoff, Dauer, Anzahl, Gebinde) :-
 	RohStoff = 'Bitte wählen',
-	Methode = 'Bitte wählen',
 	Dauer = 0,
 	Anzahl = 0,
 	Gebinde = 0.
 
+/* -----------------------------------  Callback fuer vorausgefuellte Felder ------------------------ */
 ajaxSammlungDefault(Request) :-
 	debug(myTrace, '~k', 'ajaxSammlungDefault aufgerufen'),
 	member(method(get), Request), !, 
 	http_parameters(Request, 
-	[auswahlSystem(AuswahlSystem, [length > 0]),
-	 auswahlPlanet(AuswahlPlanet, [length > 0]),
-	 auswahlRohStoff(AuswahlRohStoff, [length > 0]),
-	 auswahlMethode(AuswahlMethode, [length > 0])
+	[ajaxRohStoff(AuswahlRohStoff, [length > 0]),
+	 ajaxSystem(AuswahlSystem, [length > 0]),
+	 ajaxPlanet(AuswahlPlanet, [length > 0]),
+	 ajaxMethode(AuswahlMethode, [length > 0])
 	]), !,
 	debug(myTrace, 'System: ~k', AuswahlSystem),
 	debug(myTrace, 'Planet: ~k', AuswahlPlanet),
 	debug(myTrace, 'Rohstoff: ~k', AuswahlRohStoff),
 	debug(myTrace, 'Methode: ~s', AuswahlMethode),
     format('Content-type: text/plain~n~n'),
-    (AuswahlMethode = 'Bitte wählen'; atom_string(Methode, AuswahlMethode)),
-	((sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, Methode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, atom_string(Methode, MethodeErgebnis));
-	 (sammlung:sammlung(_, 'System', 'MeinPlanet', Methode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, atom_string(Methode, MethodeErgebnis));
-	 (Haupt = 0, Ruest = 0, Anzahl = 0, MethodeErgebnis = 'Bitte wählen')
+    ((sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlMethode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1);
+	 (sammlung:sammlung(_, 'System', 'MeinPlanet', AuswahlMethode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1);
+	 (Haupt = 0, Ruest = 0, Anzahl = 0)
 	),
-    debug(myTrace, 'Methode Ergebnis: ~k', MethodeErgebnis),
+    debug(myTrace, 'Haupt: ~k, Ruest: ~k', [Haupt, Ruest]),
 	Dauer is round(Haupt + Ruest),
-	format('methode=~s&anzahl=~k&dauer=~k&gebinde=~k',[MethodeErgebnis, Anzahl, Dauer, 1]).
+	format('methode=~s&anzahl=~k&dauer=~k&gebinde=~k',[AuswahlMethode, Anzahl, Dauer, 1]).
 
