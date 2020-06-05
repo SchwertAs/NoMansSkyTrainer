@@ -224,6 +224,7 @@ rezept(ausSauerStoffVearbeiterGewinnen, [[3, kohlenStoff]], [5, sauerStoff], 288
 /* Zwei Komponenten */
 rezept(raffinieren, [[2, pilzSchimmel], [1, salz]], [1, ammoniak], 37.0 ).
 rezept(raffinieren, [[2, paraffinium], [1, ferritStaub]], [1, ammoniak], 37.3 ).
+rezept(raffinieren, [[2, paraffinium], [1, reinesFerrit]], [1, ammoniak], 36.0 ).
 rezept(raffinieren, [[1, diWasserStoff], [1, stickStoff]], [1, ammoniak], 16.0 ).
 rezept(raffinieren, [[1, chromatischesMetall], [1, cadmium]], [4, cadmium], 10.5 ).
 rezept(raffinieren, [[2, sauerStoff], [2, salz]], [5, chlor], 7.2).
@@ -534,20 +535,41 @@ rezept(installieren, [[3, kabelBaum],[2, korvaxKonvergenzWuerfel],[50, platin], 
 
 
 /* %%%%%%%%%%%%%%%%%%%%%  Fahrzeugmodule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/* Roamer, Koloss, Pilger, Nomad */
 rezept(installieren, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel], [1, fusionsAntriebRezept]], [1, fusionsAntrieb], 0).
-rezept(installieren, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel], [1, humboldtAntriebRezept]], [1, humboldtAntrieb], 0).
+rezept(installieren, [[80, dioxit], [2, hermetischesSiegel], [1, kabelBaum], [1, thermalPufferRezept]], [1, thermalPuffer], 0).
+rezept(installieren, [[80, phosphor], [50, uran], [1, kabelBaum], [1, megaWattHeizungRezept]], [1, megaWattHeizung], 0).
+rezept(installieren, [[160, kupfer], [5, kohlenStoffNanoRohr], [1, kabelBaum], [1, luftFilterEinheitRezept]], [1, luftFilterEinheit], 0).
+rezept(installieren, [[50, ionisiertesKobalt], [95, deuterium], [1, kabelBaum], [1, neutronenAbschirmungRezept]], [1, neutronenAbschirmung], 0).
+rezept(installieren, [[3, sturmKristall], [2, mikroProzessor], [2, kabelBaum], [1, ikarusTreibStoffSystemRezept]], [1, ikarusTreibStoffSystem], 0).
 rezept(installieren, [[50, chromatischesMetall], [1, mikroProzessor], [1, exoFahrzeugSignalBoosterRezept]], [1, exoFahrzeugSignalBooster], 0).
+rezept(installieren, [[100, chromatischesMetall], [2, ionenAkku], [2, mikroProzessor], [1, fortgeschrittenerSignalBoosterBRezept]], [1, fortgeschrittenerSignalBoosterB], 0).
+rezept(installieren, [[150, chromatischesMetall], [2, ionenAkku], [50, gold], [1, exoFahrzeugSignalBoosterUpgradeTauARezept]], [1, exoFahrzeugSignalBoosterUpgradeTauA], 0).
 rezept(installieren, [[50, chromatischesMetall], [15, magnetisiertesFerrit], [2, kohlenStoffNanoRohr], [1, exoFahrzeugBeschleunigungsModulRezept]], [1, exoFahrzeugBeschleunigungsModul], 0).
-rezept(installieren, [[100, chromatischesMetall], [25, magnetisiertesFerrit], [2, sauerStoffKapsel]], [1, exoFahrzeugMinenLaser], 0).
-rezept(installieren, [[150, chromatischesMetall], [6, lebendePerle], [2, chlorGitter], [1, osmotischerGeneratorCRezept]], [1, osmotischerGeneratorC], 0).
-rezept(installieren, [[1, salzRefaktor], [3, kristallSulfid], [50, ferritStaub], [1, hochleistungsSonarRezept]], [1, hochleistungsSonar], 0).
-rezept(installieren, [[50, magnetisiertesFerrit], [100, chlor], [10, lebendePerle], [1, tethysStrahlRezept]], [1, tethysStrahl], 0).
-rezept(installieren, [[100, chlor], [6, kristallSulfid], [2, lebendePerle], [1, nautilonKanoneRezept]], [1, nautilonKanone], 0).
-rezept(installieren, [[100, chromatischesMetall], [2, ionenAkku], [2, mikroProzessor], [1, exoFahrzeugSignalBoosterUpgradeSigmaBRezept]], [1, exoFahrzeugSignalBoosterUpgradeSigmaB], 0).
+rezept(installieren, [[100, chromatischesMetall], [25, magnetisiertesFerrit], [2, sauerStoffKapsel], [1, exoFahrzeugMinenLaserRezept]], [1, exoFahrzeugMinenLaser], 0).
 rezept(installieren, [[50, chromatischesMetall], [50, pugneum], [1, exoFahrzeugMinenLaserUpgradeSigmaARezept]], [1, exoFahrzeugMinenLaserUpgradeSigmaA], 0).
 rezept(installieren, [[50, pugneum], [100, kupfer], [1, exoFahrzeugBordKanoneRezept]], [1, exoFahrzeugBordKanone], 0).
-rezept(installieren, [[150, chromatischesMetall], [2, ionenAkku], [50, gold], [1, exoFahrzeugSignalBoosterUpgradeTauARezept]], [1, exoFahrzeugSignalBoosterUpgradeTauA], 0).
+rezept(installieren, [[50, magnetisiertesFerrit], [50, paraffinium], [1, kabelBaum]], [1, driftAufhaengungA], 0).
+rezept(installieren, [[50, magnetisiertesFerrit], [50, tritium], [1, kabelBaum]], [1, haftungsVerstaerkungsAufhaengungA], 0).
+rezept(installieren, [[50, magnetisiertesFerrit], [50, dioxit], [1, kabelBaum]], [1, rutschAufhaengungA], 0).
 
+/* Nautilus */
+rezept(installieren, [[25, magnetisiertesFerrit], [2, sauerStoffKapsel], [1, humboldtAntriebRezept]], [1, humboldtAntrieb], 0).
+rezept(installieren, [[1, salzRefaktor], [3, kristallSulfid], [50, ferritStaub], [1, hochleistungsSonarRezept]], [1, hochleistungsSonar], 0).
+rezept(installieren, [[150, chromatischesMetall], [6, lebendePerle], [2, chlorGitter], [1, osmotischerGeneratorCRezept]], [1, osmotischerGeneratorC], 0).
+rezept(installieren, [[50, magnetisiertesFerrit], [100, chlor], [10, lebendePerle], [1, tethysStrahlRezept]], [1, tethysStrahl], 0).
+rezept(installieren, [[100, chlor], [6, kristallSulfid], [2, lebendePerle], [1, nautilonKanoneRezept]], [1, nautilonKanone], 0).
+
+/* Minotaurus */
+rezept(installieren, [[2, warpHyperKern], [5, metallPlatten], [1, kabelBaum], [1, daidalosAntriebRezept]], [1, daidalosAntrieb], 0).
+rezept(installieren, [[3, sturmKristall], [2, mikroProzessor], [2, kabelBaum], [1, umweltKontrollEinheitRezept]], [1, umweltKontrollEinheit], 0).
+rezept(installieren, [[75, chromatischesMetall], [50, gold], [1, kabelBaum], [1, minotaurusRadarAnlageRezept]], [1, minotaurusRadarAnlage], 0).
+rezept(installieren, [[80, chromatischesMetall], [65, diWasserStoff], [1, kabelBaum], [1, minotaurusLaserRezept]], [1, minotaurusLaser], 0).
+rezept(installieren, [[1, superOxidKristall], [4, metallPlatten], [6, kohlenStoffNanoRohr], [1, ariadnesFlammeRezept]], [1, ariadnesFlamme], 0).
+rezept(installieren, [[2, gravitinoBall], [1, kobaltSpiegel], [1, minotaurusPraezisionsLaserRezept]], [1, minotaurusPraezisionsLaser], 0).
+rezept(installieren, [[50, pugneum], [200, projektilMunition], [1, kabelBaum], [1, minotaurusKanoneRezept]], [1, minotaurusKanone], 0).
+rezept(installieren, [[100, silikatPulver], [40, kobalt], [1, kabelBaum], [1, minotaurusBohrerRezept]], [1, minotaurusBohrer], 0).
+rezept(installieren, [[40, magnetisiertesFerrit], [1, saeure], [1, kabelBaum], [1, selbstSchmierendeServosRezept]], [1, selbstSchmierendeServos], 0).
 
 /* %%%%%%%%%%%%%%%%%%%%%  Raumschiff-Module %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 rezept(installieren, [[1, warpZelle], [3, tritiumHyperCluster], [100, chromatischesMetall],[1,instabilitaetsAntriebARezept]], [1, instabilitaetsAntriebA], 0 ).
@@ -696,12 +718,12 @@ rezept(bauen, [[50, reinesFerrit], [1, wuerfelFoermigeInnenTuerRezept]], [1, wue
 /* =====================  Technologiemodule ========================================== */
 /* ---------------------  Konstruktionsforschungsstation ----------------------------- */
 rezept(bauen, [[4, metallPlatten], [2, kohlenStoffNanoRohr], [40, natrium], [1, basisTelePorterModulRezept]], [1, basisTelePorterModul], 0).
-rezept(bauen, [[1, metallPlatten], [40, sauerStoff], [1, bioTreibStoffReaktorRezept]], [1, bioTreibStoffReaktor], 0).
+rezept(bauen, [[1, metallPlatten], [25, sauerStoff], [1, bioTreibStoffReaktorRezept]], [1, bioTreibStoffReaktor], 0).
 rezept(bauen, [[2, metallPlatten], [15, natriumNitrat], [1, speicherSignalRezept]], [1, speicherSignal], 0).
 rezept(bauen, [[1, metallPlatten], [20, ionisiertesKobalt], [50, uran], [1, gesundheitsStationRezept]], [1, gesundheitsStation], 0).
 rezept(bauen, [[1, metallPlatten], [1, kohlenStoffNanoRohr], [15, natrium], [1, signalBoosterRezept]], [1, signalBooster], 0).
 rezept(bauen, [[60, magnetisiertesFerrit], [100, verdichteterKohlenStoff], [1, batterieRezept]], [1, batterie], 0).
-rezept(bauen, [[2, metallPlatten], [75, chromatischesMetall], [50, gold], [1, solarModulRezept]], [1, solarModul], 0).
+rezept(bauen, [[1, metallPlatten], [50, chromatischesMetall], [30, gold], [1, solarModulRezept]], [1, solarModul], 0).
 rezept(bauen, [[5, natrium], [1, lichtBoxRezept]], [1, lichtBox], 0).
 rezept(bauen, [[5, natrium], [1, leuchtBodenRezept]], [1, leuchtBoden], 0).
 rezept(bauen, [[2, metallPlatten], [2, ionenAkku], [40, phosphor], [1, geraeuschBoxRezept]], [1, geraeuschBox], 0).
@@ -737,6 +759,7 @@ rezept(bauen, [[100, magnetisiertesFerrit], [4, ionenAkku], [1, antiMaterie], [1
 rezept(bauen, [[5, metallPlatten], [4, kristallSulfid], [100, salz], [1, nautilonKammerRezept]], [1, nautilonKammer], 0).
 rezept(bauen, [[5, metallPlatten], [4, ionenAkku], [100, paraffinium], [1, pilgerGeoBuchtRezept]], [1, pilgerGeoBucht], 0).
 rezept(bauen, [[100, paraffinium], [5, metallPlatten], [4, ionenAkku], [1, kolossGeoBuchtRezept]], [1, kolossGeoBucht], 0).
+rezept(bauen, [[100, paraffinium], [5, metallPlatten], [4, ionenAkku], [1, minotaurusGeoBuchtRezept]], [1, minotaurusGeoBucht], 0).
 rezept(bauen, [[2, mikroProzessor], [5, metallPlatten], [1, ionenAkku], [1, rennInitiatorRezept]], [1, rennInitiator], 0).
 rezept(bauen, [[5, metallPlatten], [1, rennHindernisRezept]], [1, rennHindernis], 0 ).
 rezept(bauen, [[5, metallPlatten], [2, diWasserStoffGelee], [1, rennKraftVerstaerkerRezept]], [1, rennKraftVerstaerker], 0).
@@ -842,9 +865,20 @@ rezept(bauen, [[5, natrium], [1, grueneLeuchteRezept]], [1, grueneLeuchte], 0 ).
 rezept(bauen, [[5, natrium], [1, roteLeuchteRezept]], [1, roteLeuchte], 0 ).
 
 /* =====================  Quecksilber ================================================ */
+rezept(bauen, [[40, kohlenStoff], [1, robusterStrauchRezept]], [1, robusterStrauch], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, gefrorenerPflanzenBehaelterRezept]], [1, gefrorenerPflanzenBehaelter], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, uraltesNadelGehoelzRezept]], [1, uraltesNadelGehoelz], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, blasenBildenderPilzRezept]], [1, blasenBildenderPilz], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, wachsameWoelbungRezept]], [1, wachsameWoelbung], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, tentakelSpitzeRezept]], [1, tentakelSpitze], 0 ).
+rezept(bauen, [[0, kohlenStoff], [1, poloFigurRezept]], [1, poloFigur], 0 ).
+rezept(bauen, [[20, kohlenStoff], [1, nadaFigurRezept]], [1, nadaFigur], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, windenderStrauchRezept]], [1, windenderStrauch], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, regenSchirmBaumRezept]], [1, regenSchirmBaum], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, umschlingenderBaumRezept]], [1, umschlingenderBaum], 0 ).
+rezept(bauen, [[40, kohlenStoff], [1, meeresGesteinRezept]], [1, meeresGestein], 0 ).
 rezept(bauen, [[40, kohlenStoff], [1, mineralBogenRezept]], [1, mineralBogen], 0 ).
 rezept(bauen, [[40, kohlenStoff], [1, edelSteinFelsRezept]], [1, edelSteinFels], 0 ).
-rezept(bauen, [[40, kohlenStoff], [1, meeresGesteinRezept]], [1, meeresGestein], 0 ).
 rezept(bauen, [[2, glas], [50, faecium], [50, mordit], [1, terrariumRezept]], [1, terrarium], 0 ).
 rezept(bauen, [[40, kohlenStoff], [1, segelPalmeRezept]], [1, segelPalme], 0 ).
 rezept(bauen, [[40, kohlenStoff], [1, kugelBaumRezept]], [1, kugelBaum], 0 ).
@@ -865,13 +899,13 @@ rezept(bauen, [[15, reinesFerrit], [15, kupfer], [1, bronzeneJaegerStatueRezept]
 rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneJaegerStatueRezept]], [1, silberneJaegerStatue], 0 ).
 rezept(bauen, [[30, reinesFerrit], [30, gold], [1, goldeneJaegerStatueRezept]], [1, goldeneJaegerStatue], 0 ).
 rezept(bauen, [[30, reinesFerrit], [30, platin], [1, expansionsWuerfelGeraetRezept]], [1, expansionsWuerfelGeraet], 0 ).
-rezept(bauen, [[30, pugneum], [30, platin], [1, roboterBegleiterRezept]], [1, roboterBegleiter], 0 ).
 rezept(bauen, [[30, reinesFerrit], [30, platin], [1, kugelHologrammGeraetRezept]], [1, kugelHologrammGeraet], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, artemisMotivRezept]], [1, artemisMotiv], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, nullMotivRezept]], [1, nullMotiv], 0 ).
 rezept(bauen, [[80, kohlenStoff], [1, fruechteBaumRezept]], [1, fruechteBaum], 0 ).
 rezept(bauen, [[80, kohlenStoff], [1, spindelBaumRezept]], [1, spindelBaum], 0 ).
 rezept(bauen, [[80, kohlenStoff], [1, immerGruenBaumRezept]], [1, immerGruenBaum], 0 ).
+rezept(bauen, [[30, pugneum], [30, platin], [1, roboterBegleiterRezept]], [1, roboterBegleiter], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, apolloMotivRezept]], [1, apolloMotiv], 0 ).
 rezept(bauen, [[15, reinesFerrit], [15, kupfer], [1, bronzeneDiploStatueRezept]], [1, bronzeneDiploStatue], 0 ).
 rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneDiploStatueRezept]], [1, silberneDiploStatue], 0 ).
@@ -886,10 +920,6 @@ rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneGekStatueRezept]], 
 rezept(bauen, [[30, reinesFerrit], [30, gold], [1, goldeneGekStatueRezept]], [1, goldeneGekStatue], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, anomalieMotivRezept]], [1, anomalieMotiv], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, galaktischerHubMotivRezept]], [1, galaktischerHubMotiv], 0 ).
-rezept(bauen, [[40, kohlenStoff], [1, umschlingenderBaumRezept]], [1, umschlingenderBaum], 0 ).
-rezept(bauen, [[40, kohlenStoff], [1, regenSchirmBaumRezept]], [1, regenSchirmBaum], 0 ).
-rezept(bauen, [[40, kohlenStoff], [1, windenderStrauchRezept]], [1, windenderStrauch], 0 ).
-rezept(bauen, [[20, kohlenStoff], [1, nadaFigurRezept]], [1, nadaFigur], 0 ).
 rezept(bauen, [[20, kohlenStoff], [1, zustimmendeHandbewegungMotivRezept]], [1, zustimmendeHandbewegungMotiv], 0 ).
 rezept(bauen, [[15, reinesFerrit], [15, kupfer], [1, bronzeneKreaturStatueRezept]], [1, bronzeneKreaturStatue], 0 ).
 rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneKreaturStatueRezept]], [1, silberneKreaturStatue], 0 ).
@@ -898,15 +928,10 @@ rezept(bauen, [[15, reinesFerrit], [15, kupfer], [1, bronzeneAstronautenStatueRe
 rezept(bauen, [[20, reinesFerrit], [20, silber], [1, silberneAstronautenStatueRezept]], [1, silberneAstronautenStatue], 0 ).
 rezept(bauen, [[30, reinesFerrit], [30, gold], [1, goldeneAstronautenStatueRezept]], [1, goldeneAstronautenStatue], 0 ).
 
-/* =====================  Quecksilbersynthese =========================================== */
-rezept(bauen, [[50, queckSilber]], [1, feuerWerkGruen], 0 ).
-rezept(bauen, [[50, queckSilber]], [1, feuerWerkBlau], 0 ).
-rezept(bauen, [[50, queckSilber]], [1, feuerWerkRot], 0 ).
-
 /* =====================  Industriemodule ============================================ */
-rezept(bauen, [[1, metallPlatten], [40, sauerStoff], [1, treibStoffReaktorRezept]], [1, treibStoffReaktor], 0).
 rezept(bauen, [[5, metallPlatten], [100, chromatischesMetall], [1, mineralienExtraktorRezept]], [1, mineralienExtraktor], 0).
 rezept(bauen, [[25, ferritStaub], [25, ionisiertesKobalt], [1, wandSchalterRezept]], [1, wandSchalter], 0).
+rezept(bauen, [[1, metallPlatten], [30, gold], [40, chromatischesMetall], [1, elektrischeTarneinheitRezept]], [1, elektrischeTarneinheit], 0).
 rezept(bauen, [[5, metallPlatten], [100, chromatischesMetall], [1, gasExtraktorRezept]], [1, gasExtraktor], 0).
 rezept(bauen, [[10, metallPlatten], [1, versorgungsDepotRezept]], [1, versorgungsDepot], 0).
 rezept(bauen, [[25, ferritStaub], [10, kohlenStoff], [1, versorgungsRohrRezept]], [1, versorgungsRohr], 0).
@@ -915,7 +940,6 @@ rezept(bauen, [[20, kohlenStoff], [1, annaeherungsSchalterRezept]], [1, annaeher
 rezept(bauen, [[20, kohlenStoff], [1, schalterRezept]], [1, schalter], 0).
 rezept(bauen, [[25, ferritStaub], [15, ionisiertesKobalt], [1, energieUmkehrerRezept]], [1, energieUmkehrer], 0).
 rezept(bauen, [[2, metallPlatten], [60, magnetisiertesFerrit], [75, chromatischesMetall], [1, elektroMagnetischerGeneratorRezept]], [1, elektroMagnetischerGenerator], 0).
-
 
 /* =====================  Landwirtschaftsmodule ====================================== */
 rezept(bauen, [[30, reinesFerrit], [20, ionisiertesKobalt], [20, kohlenStoff], [1, hydroKulturTrogRezept]], [1, hydroKulturTrog], 0).
@@ -1773,8 +1797,9 @@ rezept(rezeptInAnomalieForschungsComputerErwerben, [[20, geborgeneDaten]], [1, a
 
 /* ------------------------------- Transportmodule ---------------------- */
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, roamerGeoBuchtRezept], 270 ).
-rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, nomadenGeoBuchtRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, exoFahrzeugRufStationRezept], 270 ).
+rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, nomadenGeoBuchtRezept], 270 ).
+rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, minotaurusGeoBuchtRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, nautilonKammerRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, pilgerGeoBuchtRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, kolossGeoBuchtRezept], 270 ).
@@ -1887,6 +1912,7 @@ rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, pi
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, bioTreibStoffReaktorRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, mineralienExtraktorRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, wandSchalterRezept], 270 ).
+rezept(rezeptInAnomalieForschungsComputerErwerben, [[1, geborgeneDaten]], [1, elektrischeTarneinheitRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[8, geborgeneDaten]], [1, solarModulRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[3, geborgeneDaten]], [1, batterieRezept], 270 ).
 rezept(rezeptInAnomalieForschungsComputerErwerben, [[10, geborgeneDaten]], [1, gasExtraktorRezept], 270 ).
@@ -2080,17 +2106,30 @@ rezept(rezeptInAnomalieErwerben, [[180, nanitHaufen]], [1, geschossSchmiererCRez
 rezept(rezeptInAnomalieErwerben, [[180, nanitHaufen]], [1, verstaerkteKartuschenCRezept], 500 ).
 
 /* ------------------------------- Exofahrzeugmodule -------------------- */
+rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, megaWattHeizungRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, luftFilterEinheitRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, neutronenAbschirmungRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, thermalPufferRezept], 500 ).
 rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, exoFahrzeugSignalBoosterRezept], 500 ).
 rezept(rezeptInAnomalieErwerben, [[180, nanitHaufen]], [1, exoFahrzeugBeschleunigungsModulRezept], 500 ).
 rezept(rezeptInAnomalieErwerben, [[180, nanitHaufen]], [1, exoFahrzeugMinenLaserRezept], 500 ).
-rezept(rezeptInAnomalieErwerben, [[350, nanitHaufen]], [1, osmotischerGeneratorCRezept], 500 ).
 rezept(rezeptInAnomalieErwerben, [[10, nanitHaufen]], [1, hochleistungsSonarRezept], 500 ).
-rezept(rezeptInAnomalieErwerben, [[450, nanitHaufen]], [1, tethysStrahlRezept], 500 ).
-rezept(rezeptInAnomalieErwerben, [[250, nanitHaufen]], [1, nautilonKanoneRezept], 500 ).
-rezept(rezeptInAnomalieErwerben, [[210, nanitHaufen]], [1, exoFahrzeugSignalBoosterUpgradeSigmaBRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[210, nanitHaufen]], [1, fortgeschrittenerSignalBoosterBRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, ikarusTreibStoffSystemRezept], 500 ).
 rezept(rezeptInAnomalieErwerben, [[210, nanitHaufen]], [1, exoFahrzeugMinenLaserUpgradeSigmaARezept], 500 ).
 rezept(rezeptInAnomalieErwerben, [[210, nanitHaufen]], [1, exoFahrzeugBordKanoneRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, minotaurusRadarAnlageRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[180, nanitHaufen]], [1, minotaurusLaserRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[350, nanitHaufen]], [1, osmotischerGeneratorCRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[450, nanitHaufen]], [1, tethysStrahlRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[250, nanitHaufen]], [1, nautilonKanoneRezept], 500 ).
 rezept(rezeptInAnomalieErwerben, [[320, nanitHaufen]], [1, exoFahrzeugSignalBoosterUpgradeTauARezept], 500 ).
+
+rezept(rezeptInAnomalieErwerben, [[210, nanitHaufen]], [1, minotaurusPraezisionsLaserRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[210, nanitHaufen]], [1, minotaurusKanoneRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[210, nanitHaufen]], [1, minotaurusBohrerRezept], 500 ).
+rezept(rezeptInAnomalieErwerben, [[120, nanitHaufen]], [1, selbstSchmierendeServosRezept], 500 ).
+
 
 /* ------------------------------- Fabrikrezepte erwerben ---------------------------- */
 rezept(rezeptInFabrikErwerben, [[1, fabrikUeberschreibungsEinheit]], [1, lebensErhaltungsGelRezept], 0 ).

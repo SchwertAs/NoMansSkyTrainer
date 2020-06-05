@@ -64,25 +64,35 @@ beschaffen(System, Planet, Strategie, Anzahl, Stoff, _, BisherigeVorgaenge, Vorg
 	!. 
 
 /* sammelbares einbauen (sammeln auf eigenem Planeten hat immer Vorrang (cut)) */
+/* bekannte Rezepte */
+beschaffen(System, Planet, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
+	sammlung:sammlung(1, 'System', 'MeinPlanet', bekannt, Stoff, _, _, _),
+	append([[System, Planet, Anzahl, bekannt, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
+	!.
+
+/* auf aktuellem Planeten sammeln */
 beschaffen(System, Planet, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammlung:sammlung(_, System, Planet, Operation, Stoff, _, _, _),
 	sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Operation),
 	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
 	!.
 
+/* in aktuellem System sammeln */
 beschaffen(System, _, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammlung:sammlung(_, System, Planet, Operation, Stoff, _, _, _),
 	System \= 'System',
-	Planet = 'MeinPlanet',
 	sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Operation),
-	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge).
+	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
+	!.
 
+/* in anderem System sammeln */
 beschaffen(_, _, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammlung:sammlung(_, System, Planet, Operation, Stoff, _, _, _),
 	System \= 'System', 
 	Planet \= 'MeinPlanet',
 	sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Operation),
-	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge).
+	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
+	!.
 
 /* aus rezept erbauen */
 beschaffen(System, Planet, Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-

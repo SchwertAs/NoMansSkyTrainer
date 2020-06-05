@@ -300,27 +300,50 @@ stoff(modul, verstaerkteKartuschenC, 0).
 stoff(modul, wellenFormWiederVerwerterB, 0).
 
 /* ------------------------------- Exo-Fahrzeugmodule ------------------- */
+/* immer vorhanden */
+stoff(modul, driftAufhaengungA, 0).
+stoff(modul, haftungsVerstaerkungsAufhaengungA, 0).
+stoff(modul, rutschAufhaengungA, 0).
+
+/* erforschbar */
+stoff(modul, fusionsAntrieb, 0).
+stoff(modul, humboldtAntrieb, 0).
+stoff(modul, megaWattHeizung, 0).
+stoff(modul, luftFilterEinheit, 0).
+stoff(modul, neutronenAbschirmung, 0).
+stoff(modul, thermalPuffer, 0).
+stoff(modul, exoFahrzeugSignalBooster, 0).
+stoff(modul, exoFahrzeugBeschleunigungsModul, 0).
+stoff(modul, exoFahrzeugMinenLaser, 0).
+stoff(modul, daidalosAntrieb, 0).
+stoff(modul, hochleistungsSonar, 0).
+stoff(modul, fortgeschrittenerSignalBoosterB, 0).
+stoff(modul, ikarusTreibStoffSystem, 0).
+stoff(modul, exoFahrzeugMinenLaserUpgradeSigmaA, 0).
+stoff(modul, exoFahrzeugBordKanone, 0).
+stoff(modul, umweltKontrollEinheit, 0).
+stoff(modul, minotaurusRadarAnlage, 0).
+stoff(modul, minotaurusLaser, 0).
+stoff(modul, ariadnesFlamme, 0).
+stoff(modul, minotaurusPraezisionsLaser, 0).
+stoff(modul, minotaurusKanone, 0).
+stoff(modul, minotaurusBohrer, 0).
+stoff(modul, selbstSchmierendeServos, 0).
+
+/* Kaufmodule */
 stoff(modul, exoFahrzeugAntriebModulC, 0).
 stoff(modul, exoFahrzeugAntriebModulS, 0).
-stoff(modul, exoFahrzeugBeschleunigungsModul, 0).
 stoff(modul, exoFahrzeugBoostModulB, 0).
 stoff(modul, exoFahrzeugBoostModulC, 0).
 stoff(modul, exoFahrzeugBoostModulS, 0).
-stoff(modul, exoFahrzeugBordKanone, 0).
 stoff(modul, exoFahrzeugKanonenModulC, 0).
 stoff(modul, exoFahrzeugKanonenModulB, 0).
 stoff(modul, exoFahrzeugKanonenModulS, 0).
 stoff(modul, exoFahrzeugLaserModulC, 0).
 stoff(modul, exoFahrzeugLaserModulB, 0).
 stoff(modul, exoFahrzeugLaserModulS, 0).
-stoff(modul, exoFahrzeugMinenLaser, 0).
-stoff(modul, exoFahrzeugMinenLaserUpgradeSigmaA, 0).
-stoff(modul, exoFahrzeugSignalBooster, 0).
 stoff(modul, exoFahrzeugSignalBoosterUpgradeSigmaB, 0).
 stoff(modul, exoFahrzeugSignalBoosterUpgradeTauA, 0).
-stoff(modul, fusionsAntrieb, 0).
-stoff(modul, hochleistungsSonar, 0).
-stoff(modul, humboldtAntrieb, 0).
 stoff(modul, humboldtAntriebsModulC, 0).
 stoff(modul, humboldtAntriebsModulS, 0).
 stoff(modul, nautilonKanone, 0).
@@ -393,6 +416,7 @@ stoff(basisBauEndStoff, exoFahrzeugRufStation, 0).
 stoff(basisBauEndStoff, nautilonKammer, 0).
 stoff(basisBauEndStoff, pilgerGeoBucht, 0).
 stoff(basisBauEndStoff, kolossGeoBucht, 0).
+stoff(basisBauEndStoff, minotaurusGeoBucht, 0).
 stoff(basisBauEndStoff, rennInitiator, 0).
 stoff(basisBauEndStoff, rennHindernis, 0).
 stoff(basisBauEndStoff, rennKraftVerstaerker, 0).
@@ -403,6 +427,7 @@ stoff(basisBauEndStoff, basisComputer, 0).
 stoff(basisBauEndStoff, batterie, 0).
 stoff(basisBauEndStoff, konstruktionsForschungsStation, 0).
 stoff(basisBauEndStoff, bioTreibStoffReaktor, 0).
+stoff(basisBauEndStoff, elektrischeTarneinheit, 0).
 stoff(basisBauEndStoff, kommunikationsStation, 0).
 stoff(basisBauEndStoff, nachrichtenModul, 0).
 stoff(basisBauEndStoff, naehrStoffProzessor, 0).
@@ -675,6 +700,12 @@ stoff(basisBauEndStoff, priesterEntitaetNadaBanner, 0).
 stoff(basisBauEndStoff, mineralBogen, 0).
 stoff(basisBauEndStoff, edelSteinFels, 0).
 
+stoff(basisBauEndStoff, tentakelSpitze, 0).
+stoff(basisBauEndStoff, wachsameWoelbung, 0).
+stoff(basisBauEndStoff, blasenBildenderPilz, 0).
+stoff(basisBauEndStoff, uraltesNadelGehoelz, 0).
+stoff(basisBauEndStoff, gefrorenerPflanzenBehaelter, 0).
+stoff(basisBauEndStoff, robusterStrauch, 0).
 stoff(basisBauEndStoff, meeresGestein, 0).
 stoff(basisBauEndStoff, terrarium, 0). 
 stoff(basisBauEndStoff, segelPalme, 0).
@@ -1023,17 +1054,31 @@ stoff(bauRezept, luftSchubAntriebSRezept, 0).
 
 stoff(bauRezept, fusionsAntriebRezept, 0).
 stoff(bauRezept, humboldtAntriebRezept, 0).
+stoff(bauRezept, megaWattHeizungRezept, 0).
+stoff(bauRezept, luftFilterEinheitRezept, 0).
+stoff(bauRezept, neutronenAbschirmungRezept, 0).
+stoff(bauRezept, thermalPufferRezept, 0).
 stoff(bauRezept, exoFahrzeugSignalBoosterRezept, 0).
 stoff(bauRezept, exoFahrzeugBeschleunigungsModulRezept, 0).
 stoff(bauRezept, exoFahrzeugMinenLaserRezept, 0).
-stoff(bauRezept, osmotischerGeneratorCRezept, 0).
+stoff(bauRezept, daidalosAntriebRezept, 0).
 stoff(bauRezept, hochleistungsSonarRezept, 0).
-stoff(bauRezept, tethysStrahlRezept, 0).
-stoff(bauRezept, nautilonKanoneRezept, 0).
-stoff(bauRezept, exoFahrzeugSignalBoosterUpgradeSigmaBRezept, 0).
+stoff(bauRezept, fortgeschrittenerSignalBoosterBRezept, 0).
+stoff(bauRezept, ikarusTreibStoffSystemRezept, 0).
 stoff(bauRezept, exoFahrzeugMinenLaserUpgradeSigmaARezept, 0).
 stoff(bauRezept, exoFahrzeugBordKanoneRezept, 0).
+stoff(bauRezept, umweltKontrollEinheitRezept, 0).
+stoff(bauRezept, minotaurusRadarAnlageRezept, 0).
+stoff(bauRezept, minotaurusLaserRezept, 0).
+stoff(bauRezept, osmotischerGeneratorCRezept, 0).
+stoff(bauRezept, tethysStrahlRezept, 0).
+stoff(bauRezept, nautilonKanoneRezept, 0).
 stoff(bauRezept, exoFahrzeugSignalBoosterUpgradeTauARezept, 0).
+stoff(bauRezept, ariadnesFlammeRezept, 0).
+stoff(bauRezept, minotaurusPraezisionsLaserRezept, 0).
+stoff(bauRezept, minotaurusKanoneRezept, 0).
+stoff(bauRezept, minotaurusBohrerRezept, 0).
+stoff(bauRezept, selbstSchmierendeServosRezept, 0).
 stoff(bauRezept, impulsAntriebRezept, 0).
 stoff(bauRezept, teleportEmpfaengerRezept, 0).
 stoff(bauRezept, hyperAntriebRezept, 0).
@@ -1145,6 +1190,7 @@ stoff(bauRezept, infraStrukturLeiterRezept, 0).
 stoff(bauRezept, wuerfelFoermigeInnenTuerRezept, 0).
 stoff(bauRezept, basisTelePorterModulRezept, 0).
 stoff(bauRezept, bioTreibStoffReaktorRezept, 0).
+stoff(bauRezept, elektrischeTarneinheitRezept, 0).
 stoff(bauRezept, speicherSignalRezept, 0).
 stoff(bauRezept, gesundheitsStationRezept, 0).
 stoff(bauRezept, signalBoosterRezept, 0).
@@ -1175,6 +1221,7 @@ stoff(bauRezept, exoFahrzeugRufStationRezept, 0).
 stoff(bauRezept, nautilonKammerRezept, 0).
 stoff(bauRezept, pilgerGeoBuchtRezept, 0).
 stoff(bauRezept, kolossGeoBuchtRezept, 0).
+stoff(bauRezept, minotaurusGeoBuchtRezept, 0).
 stoff(bauRezept, rennInitiatorRezept, 0).
 stoff(bauRezept, rennHindernisRezept, 0).
 stoff(bauRezept, rennKraftVerstaerkerRezept, 0).
@@ -1397,6 +1444,12 @@ stoff(bauRezept, spezialistPoloBannerRezept, 0).
 stoff(bauRezept, priesterEntitaetNadaBannerRezept, 0).
 */
 
+stoff(bauRezept, tentakelSpitzeRezept, 0).
+stoff(bauRezept, wachsameWoelbungRezept, 0).
+stoff(bauRezept, blasenBildenderPilzRezept, 0).
+stoff(bauRezept, uraltesNadelGehoelzRezept, 0).
+stoff(bauRezept, gefrorenerPflanzenBehaelterRezept, 0).
+stoff(bauRezept, robusterStrauchRezept, 0).
 stoff(bauRezept, mineralBogenRezept, 0).
 stoff(bauRezept, edelSteinFelsRezept, 0).
 stoff(bauRezept, feuerWerkGruenRezept, 0).

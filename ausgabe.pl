@@ -51,7 +51,7 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
  	string_concat(Anweisung1, OperationString, Anweisung2),
  	string_concat(Anweisung2, ' von ', Anweisung3),
  	string_concat(Anweisung3, ProduktString, Anweisung4),
- 	string_concat(Anweisung4, ' unter Verwendung von ', Anweisung5),
+ 	string_concat(Anweisung4, ' mit ', Anweisung5),
  	string_concat(Anweisung5, KompPred, Anweisung6),
  	string_concat(Anweisung6, ' aus', Anweisung),
 
@@ -76,7 +76,6 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Kopf = [System, Planet, _, Operation, _, [ProduktAnzahl, Produkt]],
 	sammelAktion:sammelAktion(Operation),
 	sammlung:sammlung(_, System, Planet, Operation, Produkt, HauptZeit, NebenZeit, RuestZeit),
-	debug(myTrace, 'ausgabeVorgaenge: System=~k Planet=~k Operation=~k Produkt=~k HauptZeit=~k NebenZeit=~k RuestZeit=~k', [System, Planet, Operation, Produkt, HauptZeit, NebenZeit, RuestZeit]),
 	Zeit is (ProduktAnzahl * HauptZeit + RuestZeit + (ProduktAnzahl - 1) * NebenZeit),
 	bildeOperation(Zeit, Operation, OperationStringMaske),
 	atom_string(ProduktAnzahl, WandelAnzString),

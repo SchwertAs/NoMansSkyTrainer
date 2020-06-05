@@ -197,31 +197,33 @@ rezeptBekannt(Request) :-
     gespeichert.
 
 baueRezeptListe(AuswahlStoffKlasse, RezeptListe) :-
-	findall(Rezept, rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), RezeptListe0),
+	findall(Rezept, (rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), rezeptSchonBekannt(Rezept, _)), RezeptListe0),
 	sort(RezeptListe0, RezeptListe).
 	
 ablegen(RezeptListe, VarValueList) :-
 	debug(myTrace, 'abspeichern: VarValueList=~k', [VarValueList]),
 	debug(myTrace, 'abspeichern: RezeptListe=~k', [RezeptListe]),
 	felderProZeile(RezeptListe, Step),
-	length(RezeptListe, GesamtZeilenZahl),
-	debug(myTrace, 'abspeichern: ZeilenZahl=~k', [GesamtZeilenZahl]),
+	felderProZeile(VarValueList, ParamStep),
+	debug(myTrace, 'abspeichern: ParamStep=~k Step=~k', [ParamStep, Step]),
+	!,
 	between(1, 4, Spalte),
 	between(1, Step, Zeile),
-	pickeZeile(GesamtZeilenZahl, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked),
+	pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked),
 	((Checked = 'on', CheckNum = 1);
 	 (Checked \= 'on', CheckNum = 0)
 	), 
 	ignore(retractall(sammlung:sammlung(_, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _))),
 	assertz(sammlung:sammlung(CheckNum, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
+	CheckNum = 1,
+	debug(myTrace, 'abspeichern: ~k ~k', [Rezept, CheckNum]),
 	fail.
 
-pickeZeile(GesamtZeilenZahl, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked) :-
-  	OffsetRezept is (Spalte -1 ) * Step + Zeile,
+pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked) :-
+  	OffsetRezept is (Spalte - 1 ) * Step + Zeile,
     nth1(OffsetRezept, RezeptListe, Rezept),
-  	OffsetChecked is 1 + (Spalte - 1) * GesamtZeilenZahl + Zeile,
-    nth1(OffsetChecked, VarValueList, Checked),
-	debug(myTrace, 'abspeichern: OffsetRezept=~k OffsetChecked=~k Rezept=~k Checked=~k', [OffsetRezept, OffsetChecked, Rezept, Checked]).
+  	OffsetChecked is 1 + (Spalte - 1) * (ParamStep - 1) + Zeile,
+    nth1(OffsetChecked, VarValueList, Checked).
 
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
