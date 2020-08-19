@@ -66,13 +66,16 @@ sammelDefaultPlanetenTyp(megaExotisch, pfluecken, heptaPloidWeizen).
 sammelDefaultPlanetenTyp(megaExotisch, pfluecken, suessWurzel).
 
 /* Planeten-Goodies */
+sammelDefaultPlanetenTyp(_, pfluecken, gravitinoBall).
 sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, eiweissPerle) :-
-	PlanetenTyp \= tot.
-sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, gravitinoBall) :-
 	PlanetenTyp \= tot.
 sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, sturmKristall) :-
 	PlanetenTyp \= tot.
 sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, tetraKobalt) :- /* unter Wirbelwürfel */
+	PlanetenTyp \= tot.
+sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, natrium) :-
+	PlanetenTyp \= tot.
+sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, sauerStoff) :-
 	PlanetenTyp \= tot.
 
 /* Minenlaser nutzen */
@@ -157,7 +160,7 @@ sammelDefaultPlanetenTyp(_, jagen, schuppigesFleisch).
 sammelDefaultPlanetenTyp(_, erkaempfen, pugneum).
 sammelDefaultPlanetenTyp(_, erkaempfen, vierfachServo).
 sammelDefaultPlanetenTyp(_, erkaempfen, kampfLaeuferGehirn).
-sammelDefaultPlanetenTyp(tot, erkaempfen, larvenKern).
+sammelDefaultPlanetenTyp(_, erkaempfen, larvenKern).
 
 /* raumschürfen */
 sammelDefaultPlanetenTyp(_, raumSchuerfen, tritium).

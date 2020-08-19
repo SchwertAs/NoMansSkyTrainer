@@ -80,7 +80,7 @@ planetSammelEigenschaftenDialog(Request) :-
 
 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt) :-
     /* einlesen der Eigenschaften */
-    GesamtZeilenZahl = 25,
+    GesamtZeilenZahl = 14,
 	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest], 
 	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest),
 	        Operation = AuswahlSammelArt), 
@@ -274,7 +274,8 @@ baueOptionMitVorwahl([OptionTupel|Rest]) -->
 planetSammelEigenschaften(Request) :-
 	member(method(post), Request), !,
 	planetSammelEigenschaftenDialogParams:planetSammelEigenschaftenDialogParamList(Request, VarValueList),
-	GesamtZeilenZahl = 25,
+	GesamtZeilenZahl = 14,
+	debug(myTrace, 'abspeichern: VarValueList=~k GesamtZeilenZahl=~k', [VarValueList, GesamtZeilenZahl]),
 	\+plausibleEingabe(VarValueList, GesamtZeilenZahl),
     ((nb_getval('ZeileNoFehler', ZeileNoFehler),
       ZeileNoFehler > 0,

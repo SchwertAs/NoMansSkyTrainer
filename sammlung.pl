@@ -5,7 +5,7 @@
 	
 baueRezepte :-
 	stoff:stoff(bauRezept, Rezept, _),
-	assertz(sammlung(0, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
+	assertz(sammlung(1, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
 	fail.
 
 komponenten :-
@@ -16,6 +16,7 @@ komponenten :-
 /* sammlung(<RecordNo>, <System>, <Planet>, <SammelAktion>, <Stoff>, <Hauptzeit>, <Nebenzeit>, <Rüstzeit>) */
 sammlungInit :-
 	abolish(sammlung/8),
+	abolish(fertigeLoesung/5),
 	\+baueRezepte,
 	\+komponenten
 
@@ -217,6 +218,13 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ausAtmosphaerenAnlageGewinnen, radon, 1450, 150, 630))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ausAtmosphaerenAnlageGewinnen, stickStoff, 1450, 150, 630))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ausAtmosphaerenAnlageGewinnen, sauerStoff, 290, 150, 630))
+
+	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, lebendesWasser, 20, 0, 63))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', solarStrahlNutzen, fluessigSonne, 20, 400, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', gemuetsStrahlNutzen, fragmentierteQualia, 20, 400, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', verdienen, hexit, 60000, 0, 150))
+	
+	,assertz(fertigeLoesung('System', 'MeinPlanet', dummy, dummy, []))
 	.
 
 /* Liste der Rohstoffe, die vorgefertigt werden sollen */

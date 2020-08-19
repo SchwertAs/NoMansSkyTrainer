@@ -5,6 +5,7 @@ stoffKlasse(rohStoff, false, true, true, false).
 stoffKlasse(komponente, false, true, true, true). 
 stoffKlasse(produkt, false, true, false, true ). 
 stoffKlasse(pass, true, false, false, true). 
+stoffKlasse(verbrauch, false, true, false, false). 
 stoffKlasse(modul, false, false, false, true). 
 stoffKlasse(basisBauEndStoff, false, false, false, false).
 stoffKlasse(stoerung, false, false, false, false).

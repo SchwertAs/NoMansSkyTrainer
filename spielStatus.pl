@@ -19,6 +19,8 @@ initSpielStatus :-
 	,assertz(spielStatus(verbesserterMinenLaser, true))
 	,assertz(spielStatus(terrainFormer, true))
 	,assertz(spielStatus(waffeVorhanden, true))
+	,assertz(spielStatus(solarStrahl, true))
+	,assertz(spielStatus(gemuetsStrahl, true))
 	,assertz(spielStatus(raumSchiffIstFlott, true))
 	,assertz(spielStatus(exoFahrzeugMinenLaser, true))
 	,assertz(spielStatus(frachterVorhanden, true))
@@ -70,8 +72,8 @@ copyDefaultIfEmpty(System, Planet) :-
 	).
 
 /* ------------------------- Rezepte für Wertvolle Dinge ----------------------------- */
-/* Rezeptstoff, Event, Questname */
-/* herstellen */
+/* Rezeptstoff, Event, Questname
+-- herstellen 
 questRezept(raumSchiffStartTreibStoff, vonAnfangAn, erwachen).
 questRezept(warpZelle, vonAnfangAn, erwachen).
 questRezept(ionenAkku, vonAnfangAn, erwachen).
@@ -82,31 +84,31 @@ questRezept(kohlenStoffNanoRohr, vonAnfangAn, erwachen).
 questRezept(projektilMunition, vonAnfangAn, erwachen).
 questRezept(kreaturenKugeln, vonAnfangAn, erwachen).
 
-/* installieren Anzug */
+-- installieren Anzug 
 questRezept(scanner, vonAnfangAn, erwachen).
 questRezept(minenLaser, vonAnfangAn, erwachen).
 questRezept(analyseVisier, vonAnfangAn, erwachen).
 questRezept(blitzWerfer, vonAnfangAn, erwachen).
 
-/* installieren Raumschiff */
+-- installieren Raumschiff 
 questRezept(impulsAntrieb, vonAnfangAn, erwachen).
 questRezept(startSchubDuese, vonAnfangAn, erwachen).
 questRezept(raketenWerfer, vonAnfangAn, erwachen).
 questRezept(deflektorSchild, vonAnfangAn, erwachen).
 questRezept(photonenKanone, vonAnfangAn, erwachen).
 
-/* installieren Fahrzeuge */
+-- installieren Fahrzeuge
 questRezept(fusionsAntrieb, vonAnfangAn, erwachen).
 questRezept(humboldtAntrieb, vonAnfangAn, erwachen).
 
 
-/* bauen */
+-- bauen 
 questRezept(tragbareRaffinerie, vonAnfangAn, erwachen).
 questRezept(tiefSeeKammer, vonAnfangAn, erwachen).
 questRezept(flagge2, vonAnfangAn, erwachen).
 questRezept(metallWand, vonAnfangAn, erwachen).
 
-/* chronologisch */
+-- chronologisch 
 questRezept(basisComputer, signalUntersuchen, erwachen).
 questRezept(konstruktionsForschungsStation, basisDatenComputerAktualisieren, erwachen).
 questRezept(terrainManipulator, signalUntersuchen, erwachen).
@@ -124,5 +126,5 @@ questRezept(fortgeschrittenerMinenLaserA, notSignalOeffnen, alleinInmittenDerSte
 questRezept(hermetischesSiegel, notSignalOeffnen, dieWeltRaumAnomalie).
 questRezept(teleportEmpfaenger, fabrikWiederEinschalten, ersteFabrik).
 questRezept(geoDesit, fabrikWiederEinschalten, zweiteFabrik).
-
+ */
 

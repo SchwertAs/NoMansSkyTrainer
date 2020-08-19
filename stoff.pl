@@ -44,7 +44,8 @@ stoff(rohStoff, verrostetesMetall, 20).
 stoff(rohStoff, zaeheFluessigkeiten, 20).
 stoff(rohStoff, zytoPhosphat, 201).
 stoff(rohStoff, tritiumHyperCluster, 3280).
-stoff(rohStoff, geode, 3280).
+stoff(rohStoff, geodeLand, 3280).
+stoff(rohStoff, geodeHoehle, 3280).
 stoff(rohStoff, kampfLaeuferGehirn, 35000).
 stoff(rohStoff, lebendePerle, 4798).
 stoff(rohStoff, goldKlumpen, 3280).
@@ -57,12 +58,20 @@ stoff(rohStoff, eiweissPerle, 9025).
 stoff(rohStoff, gravitinoBall, 12445).
 stoff(rohStoff, nipNipKnospen, 17776).
 
-stoff(rohStoff, fabrikUeberschreibungsEinheit, 50000).
-stoff(rohStoff, verteidigungsBeleg, 10000).
-stoff(rohStoff, geborgenesFregattenModul, 95000).
-stoff(rohStoff, lagerErweiterung, 95000).
+stoff(rohStoff, fluessigSonne, 16). /* schürfen mit SonnenStrahl */
+stoff(rohStoff, hexit, 654). /* Belohnung Gildenaufträge */
+stoff(rohStoff, lebendesWasser, 16). /* von Kind des Helios bekommen */
+stoff(rohStoff, fragmentierteQualia, 16). /* mit Gemütstrahl erjagen */
+
 stoff(rohStoff, nanitHaufen, -1).
 
+stoff(verbrauch, fabrikUeberschreibungsEinheit, 50000).
+stoff(verbrauch, verteidigungsBeleg, 10000).
+stoff(verbrauch, geborgenesFregattenModul, 95000).
+stoff(verbrauch, lagerErweiterung, 95000).
+stoff(verbrauch, frachtSchott, 95000).
+stoff(verbrauch, reparaturEinheit, 12000).
+stoff(verbrauch, anomalieDetektor, 3280).
 
 /* =============================== hergestellte Produkte ================ */
 /* herstellen mit Fabrikrezept oder Questrezept, verkaufen */
@@ -145,6 +154,16 @@ stoff(produkt, seelenEngine, 1000).
 stoff(produkt, sternenSamen, 1000).
 
 stoff(produkt, gedankenBogen, 1000).
+stoff(produkt, pulsierenderKern, 1616).
+stoff(produkt, bewusstseinsBruecke, 1616).
+stoff(produkt, unmoeglicheMembran, 1616).
+stoff(produkt, glasSamen, 1616).
+
+stoff(biomechanischesKonstrukt, singularitaetsKern, 1616).
+stoff(biomechanischesKonstrukt, verhaertetesGehaeuse, 1616).
+stoff(biomechanischesKonstrukt, ausgewachsenerHerzKnotenPunkt, 1616).
+stoff(biomechanischesKonstrukt, ausgewachsenerNervenStamm, 1616).
+stoff(biomechanischesKonstrukt, seelenKammer, 1616).
 
 stoff(pass, atlasPassV1, 0).
 stoff(pass, atlasPassV2, 0).
@@ -298,6 +317,8 @@ stoff(modul, terrainManipulator, 0).
 stoff(modul, untersuchungsGeraetA, 0).
 stoff(modul, verstaerkteKartuschenC, 0).
 stoff(modul, wellenFormWiederVerwerterB, 0).
+stoff(modul, solarStrahl, 0).
+stoff(modul, gemuetsStrahl, 0).
 
 /* ------------------------------- Exo-Fahrzeugmodule ------------------- */
 /* immer vorhanden */
@@ -342,7 +363,6 @@ stoff(modul, exoFahrzeugKanonenModulS, 0).
 stoff(modul, exoFahrzeugLaserModulC, 0).
 stoff(modul, exoFahrzeugLaserModulB, 0).
 stoff(modul, exoFahrzeugLaserModulS, 0).
-stoff(modul, exoFahrzeugSignalBoosterUpgradeSigmaB, 0).
 stoff(modul, exoFahrzeugSignalBoosterUpgradeTauA, 0).
 stoff(modul, humboldtAntriebsModulC, 0).
 stoff(modul, humboldtAntriebsModulS, 0).
@@ -369,7 +389,6 @@ stoff(basisBauEndStoff, gasExtraktor, 0).
 stoff(basisBauEndStoff, mineralienExtraktor, 0).
 stoff(basisBauEndStoff, schalter, 0).
 stoff(basisBauEndStoff, solarModul, 0).
-stoff(basisBauEndStoff, treibStoffReaktor, 0).
 stoff(basisBauEndStoff, versorgungsDepot, 0).
 stoff(basisBauEndStoff, versorgungsRohr, 0).
 stoff(basisBauEndStoff, wandSchalter, 0).
@@ -633,7 +652,6 @@ stoff(basisBauEndStoff, betonFassade, 0).
 stoff(basisBauEndStoff, kleineBetonTuer, 0).
 stoff(basisBauEndStoff, dachInnenEckteilAusBeton, 0).
 stoff(basisBauEndStoff, halberBetonBogen, 0).
-stoff(basisBauEndStoff, kleineBetonPlatte, 0).
 
 /* =====================  gross vorgefertigt ========================================= */
 stoff(basisBauEndStoff, zylindrischerRaum, 0).
@@ -689,14 +707,14 @@ stoff(basisBauEndStoff, mondTeichBoden, 0).
 stoff(basisBauEndStoff, tFoermigerGlasTunnel, 0).
 stoff(basisBauEndStoff, xFoermigerGlasTunnel, 0).
 
-
+/*
 stoff(basisBauEndStoff, feuerWerkGruen, 0).
 stoff(basisBauEndStoff, feuerWerkBlau, 0).
 stoff(basisBauEndStoff, feuerWerkRot, 0).
-
 stoff(basisBauEndStoff, galaktischerHubBanner, 0).
 stoff(basisBauEndStoff, spezialistPoloBanner, 0).
 stoff(basisBauEndStoff, priesterEntitaetNadaBanner, 0).
+*/
 stoff(basisBauEndStoff, mineralBogen, 0).
 stoff(basisBauEndStoff, edelSteinFels, 0).
 
@@ -1029,7 +1047,10 @@ stoff(bauRezept, herzDerSonneRezept, 0).
 stoff(bauRezept, sternenSamenRezept, 0).
 stoff(bauRezept, seelenEngineRezept, 0).
 stoff(bauRezept, gedankenBogenRezept, 0).
-
+stoff(bauRezept, bewusstseinsBrueckeRezept, 0).
+stoff(bauRezept, pulsierenderKernRezept, 0).
+stoff(bauRezept, unmoeglicheMembranRezept, 0).
+stoff(bauRezept, glasSamenRezept, 0).
 
 stoff(bauRezept, lebensErhaltungRezept, 0).
 stoff(bauRezept, gefahrGutSchutzHandschuhRezept, 0).
@@ -1127,6 +1148,8 @@ stoff(bauRezept, verstaerkteKartuschenCRezept, 0).
 stoff(bauRezept, instabilitaetsAntriebARezept, 0).
 stoff(bauRezept, unterLichtVerstaerkerSRezept, 0).
 stoff(bauRezept, notFallWarpEinheitARezept, 0).
+stoff(bauRezept, solarStrahlRezept, 0).
+stoff(bauRezept, gemuetsStrahlRezept, 0).
 
 stoff(bauRezept, basisBergungsKapselRezept, 0).
 stoff(bauRezept, kommunikationsStationRezept, 0).
@@ -1316,7 +1339,6 @@ stoff(bauRezept, gelbeLeuchteRezept, 0).
 stoff(bauRezept, grueneLeuchteRezept, 0).
 stoff(bauRezept, roteLeuchteRezept, 0).
 stoff(bauRezept, byteBeatSchaltungRezept, 0).
-stoff(bauRezept, treibStoffReaktorRezept, 0).
 stoff(bauRezept, mineralienExtraktorRezept, 0).
 stoff(bauRezept, wandSchalterRezept, 0).
 stoff(bauRezept, solarModulRezept, 0).
@@ -1452,9 +1474,11 @@ stoff(bauRezept, gefrorenerPflanzenBehaelterRezept, 0).
 stoff(bauRezept, robusterStrauchRezept, 0).
 stoff(bauRezept, mineralBogenRezept, 0).
 stoff(bauRezept, edelSteinFelsRezept, 0).
+/*
 stoff(bauRezept, feuerWerkGruenRezept, 0).
 stoff(bauRezept, feuerWerkBlauRezept, 0).
 stoff(bauRezept, feuerWerkRotRezept, 0).
+*/
 stoff(bauRezept, meeresGesteinRezept, 0).
 stoff(bauRezept, terrariumRezept, 0).
 stoff(bauRezept, segelPalmeRezept, 0).
@@ -1861,10 +1885,12 @@ rezeptOhneBauteil(Rezept) :-
 	sub_string(RezeptString, 0, _, 6, StoffString), 
 	atom_string(Stoff, StoffString),
 	\+stoff(basisBauEndStoff, Stoff, _),
+	\+stoff(biomechanischesKonstrukt, Stoff, _),
 	\+stoff(komponente, Stoff, _),
 	\+stoff(modul, Stoff, _),
 	\+stoff(produktUndKochStoff, Stoff, _),
 	\+stoff(pass, Stoff, _),
+	\+stoff(verbrauch, Stoff, _),
 	\+stoff(produkt, Stoff, _),
 	format('~nRezept ~k hat keinen Stoff~n', Rezept).
 

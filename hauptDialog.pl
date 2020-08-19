@@ -7,7 +7,7 @@
 :- http_handler('/', hauptDialog, []).
 
 hauptDialog(_Request) :-
-	(spielStatus:spielStatus(konfiguriert, Konfiguriert); Konfiguriert = false),
+	(spielStatus:spielStatus(konfiguriert, Konfiguriert)),
 	findall(RecNo0, (spielStatus:systeme(RecNo0, _, _), RecNo0 > 0), Systeme),
 	findall(RecNo1, (spielStatus:planeten(RecNo1, _, _, _), RecNo1 > 0), Planeten),
 	((Konfiguriert = false, Versteckt1=true, Versteckt2=true, Versteckt3=true, Versteckt4=true, Versteckt7=true);

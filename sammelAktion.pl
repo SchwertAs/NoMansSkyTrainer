@@ -16,6 +16,9 @@ sammelAktion(terrainFormerNutzen).
 sammelAktion(unterWasserErkaempfen).
 sammelAktion(verbessertenMinenLaserNutzen).
 sammelAktion(vonTierErhalten).
+sammelAktion(solarStrahlNutzen).
+sammelAktion(gemuetsStrahlNutzen).
+sammelAktion(verdienen).
 
 sammelOrt(bekannt, ortSpieler).
 sammelOrt(ernten, ortPlantage).
@@ -34,6 +37,9 @@ sammelOrt(terrainFormerNutzen, ortWald).
 sammelOrt(unterWasserErkaempfen, ortWasser).
 sammelOrt(verbessertenMinenLaserNutzen, ortWald).
 sammelOrt(vonTierErhalten, ortWald).
+sammelOrt(solarStrahlNutzen, ortWald).
+sammelOrt(gemuetsStrahlNutzen, ortWald).
+sammelOrt(verdienen, ortRaumStation).
 
 /* Vorraussetzungen im Multiwerkzeug */
 pruefeSammelAktionVorraussetzung(_System, _Planet, minenLaserNutzen) :-
@@ -68,6 +74,16 @@ pruefeSammelAktionVorraussetzung(_System, _Planet, exoFahrzeugMinenLaserNutzen) 
 	spielStatus(exoFahrzeugMinenLaser),
 	!.
 
+pruefeSammelAktionVorraussetzung(_System, _Planet, solarStrahlNutzen) :-
+	!,
+	spielStatus(solarStrahl),
+	!.
+
+pruefeSammelAktionVorraussetzung(_System, _Planet, gemuetsStrahlNutzen) :-
+	!,
+	spielStatus(gemuetsStrahl),
+	!.
+
 /* Vorraussetzungen in Planetenausstattung */
 pruefeSammelAktionVorraussetzung(System, Planet, kaufen) :-
 	!,
@@ -76,6 +92,7 @@ pruefeSammelAktionVorraussetzung(System, Planet, kaufen) :-
 	 spielStatus:systemAusstattung([System, Planet, ortRaumStation], _)
 	),
 	!.
+
 	
 pruefeSammelAktionVorraussetzung(System, Planet, unterWasserErkaempfen) :-
 	!,

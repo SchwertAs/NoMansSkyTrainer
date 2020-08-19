@@ -13,6 +13,8 @@ spielStatusDialog(_Request) :-
 	(spielStatus:spielStatus(verbesserterMinenLaser, VerbesserterMinenLaser); VerbesserterMinenLaser = true),
 	(spielStatus:spielStatus(terrainFormer, TerrainFormer); TerrainFormer = true),
 	(spielStatus:spielStatus(waffeVorhanden, WaffeVorhanden); WaffeVorhanden = true),
+	(spielStatus:spielStatus(solarStrahl, SolarStrahl); SolarStrahl = true),
+	(spielStatus:spielStatus(gemuetsStrahl, GemuetsStrahl); GemuetsStrahl = true),
 	(spielStatus:spielStatus(anzugRaffinerie, AnzugRaffinerie); AnzugRaffinerie = true),
 	(spielStatus:spielStatus(raumSchiffIstFlott, RaumSchiffIstFlott); RaumSchiffIstFlott = true),
 	(spielStatus:spielStatus(exoFahrzeugMinenLaser, ExoFahrzeugMinenLaser); ExoFahrzeugMinenLaser = true),
@@ -23,6 +25,8 @@ spielStatusDialog(_Request) :-
 	((VerbesserterMinenLaser = true, VerbesserterMinenLaserChecked = ' checked'); VerbesserterMinenLaserChecked = ''), 
 	((TerrainFormer = true, TerrainFormerChecked = ' checked'); TerrainFormerChecked = ''), 
 	((WaffeVorhanden = true, WaffeVorhandenChecked = ' checked'); WaffeVorhandenChecked = ''), 
+	((SolarStrahl = true, SolarStrahlChecked = ' checked'); SolarStrahlChecked = ''), 
+	((GemuetsStrahl = true, GemuetsStrahlChecked = ' checked'); GemuetsStrahlChecked = ''), 
 	((AnzugRaffinerie = true, AnzugRaffinerieChecked = ' checked'); AnzugRaffinerieChecked = ''), 
 	((RaumSchiffIstFlott = true, RaumSchiffIstFlottChecked = ' checked'); RaumSchiffIstFlottChecked = ''), 
 	((ExoFahrzeugMinenLaser = true, ExoFahrzeugMinenLaserChecked = ' checked'); ExoFahrzeugMinenLaserChecked = ''), 
@@ -59,6 +63,18 @@ spielStatusDialog(_Request) :-
 		       	                 [div(class('td'), 
 		       	                      [input([name('waffe'), type('checkbox'), WaffeVorhandenChecked]),
 		       	                       label(for('waffe'), 'Waffe')
+		       	                      ])
+		       	                 ]),
+		       	             div(class('tr'), 
+		       	                 [div(class('td'), 
+		       	                      [input([name('solarStrahl'), type('checkbox'), SolarStrahlChecked]),
+		       	                       label(for('solarStrahl'), 'Solarstrahl')
+		       	                      ])
+		       	                 ]),
+		       	             div(class('tr'), 
+		       	                 [div(class('td'), 
+		       	                      [input([name('gemuetsStrahl'), type('checkbox'), GemuetsStrahlChecked]),
+		       	                       label(for('gemuetsStrahl'), 'Gemütsstrahl')
 		       	                      ])
 		       	                 ]),
 		       	             div(class('tr'), 
@@ -118,6 +134,8 @@ spielStatus(Request) :-
 	verbesserterMinenlaser(VerbesserterMinenlaser, [default(off)]),
 	terrainFormer(TerrainFormer, [default(off)]),
 	waffe(Waffe, [default(off)]),
+	solarStrahl(SolarStrahl, [default(off)]),
+	gemuetsStrahl(GemuetsStrahl, [default(off)]),
 	anzugRaffinerie(AnzugRaffinerie, [default(off)]),
 	raumschiff(Raumschiff, [default(off)]),
 	exoFahrzeug(ExoFahrzeug, [default(off)]),
@@ -129,6 +147,8 @@ spielStatus(Request) :-
     (VerbesserterMinenlaser = off -> assertz(spielStatus:spielStatus(verbesserterMinenLaser, false)); assertz(spielStatus:spielStatus(verbesserterMinenLaser, true))),
     (TerrainFormer = off -> assertz(spielStatus:spielStatus(terrainFormer, false)); assertz(spielStatus:spielStatus(terrainFormer, true))),
     (Waffe = off -> assertz(spielStatus:spielStatus(waffeVorhanden, false)); assertz(spielStatus:spielStatus(waffeVorhanden, true))),
+    (SolarStrahl = off -> assertz(spielStatus:spielStatus(solarStrahl, false)); assertz(spielStatus:spielStatus(solarStrahl, true))),
+    (GemuetsStrahl = off -> assertz(spielStatus:spielStatus(gemuetsStrahl, false)); assertz(spielStatus:spielStatus(gemuetsStrahl, true))),
     (AnzugRaffinerie = off -> assertz(spielStatus:spielStatus(anzugRaffinerie, false)); assertz(spielStatus:spielStatus(anzugRaffinerie, true))),
     (Raumschiff = off -> assertz(spielStatus:spielStatus(raumSchiffIstFlott, false)); assertz(spielStatus:spielStatus(raumSchiffIstFlott, true))),
     (ExoFahrzeug = off -> assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, false)); assertz(spielStatus:spielStatus(exoFahrzeugMinenLaser, true))),

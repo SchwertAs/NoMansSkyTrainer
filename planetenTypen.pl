@@ -99,6 +99,8 @@ planetenGruppePlanetenTyp(trostloserTot, tot).
 
 planetenGruppePlanetenTyp(chromatischerNebel, megaExotisch). 
 planetenGruppePlanetenTyp(toedlicheGrueneAnomalie, megaExotisch). 
+planetenGruppePlanetenTyp(himmelBlauerPlanet, megaExotisch). 
+planetenGruppePlanetenTyp(verlorenerBlauerPlanet, megaExotisch). 
 
 planetenGruppePlanetenTyp(aetzender, giftig). 
 planetenGruppePlanetenTyp(arktischer, frostig). 
