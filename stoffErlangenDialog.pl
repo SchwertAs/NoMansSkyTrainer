@@ -246,7 +246,8 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 		               ]),
 		               \ausgabeSummenDcg(SummenPred)
 		           ]),
-		  	\['</formSpace>']
+			p(\['<a href="/" > Funktionsauswahl </a>']),
+		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
@@ -293,7 +294,8 @@ nichtHerstellBar(Ziel) :-
 		\['</redHeader>'],
 		\['<redFormSpace>'],
 		h3('Begründung:'),
-		\ausgabeBegruendungDcg(BegrTupel), 
+		\ausgabeBegruendungDcg(BegrTupel),
+		p(\['<a href="/" > Funktionsauswahl </a>']),
 		\['</redFormSpace>']
 		            ],
 	reply_html_page(TermerizedHead, TermerizedBody).
@@ -304,7 +306,10 @@ nichtHerstellBar(_) :-
 	TermerizedBody = [
 		\['<redHeader>'],
 		h1(align(center), 'Beschaffung nicht möglich und keine Rezepte vorhanden'),
-		\['</redHeader>']
+		\['</redHeader>'],
+		\['<formSpace>'], 
+		p(\['<a href="/" > Funktionsauswahl </a>']),
+		\['</formSpace>']
 		],
 	
 	reply_html_page(TermerizedHead, TermerizedBody).

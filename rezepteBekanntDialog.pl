@@ -231,6 +231,9 @@ gespeichert :-
 	TermerizedBody = [
 		\['<header>'],
 		h3(align(center),'gespeichert!'),
-		\['</header>']
+		\['</header>'],
+		\['<formSpace>'], 
+		p(\['<a href="/" > Funktionsauswahl </a>']),
+		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
