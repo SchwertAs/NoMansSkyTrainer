@@ -53,6 +53,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortForschungsTerminal], ForschungsTerminalEntfernungValNum) -> ForschungsTerminalVorhandenVal=true; ForschungsTerminalVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSauerStoffVearbeiter], SauerstoffVearbeiterEntfernungValNum) -> SauerstoffVearbeiterVal=true; SauerstoffVearbeiterVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAtmosphaerenAnlage], AtmosphaerenAnlageEntfernungValNum) -> AtmosphaerenAnlageVorhandenVal=true; AtmosphaerenAnlageVorhandenVal=false),
+	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortBergbauEinheit], BergbauEinheitEntfernungValNum) -> BergbauEinheitVorhandenVal=true; BergbauEinheitVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortPlantage], PlantageEntfernungValNum) -> PlantageVorhandenVal=true; PlantageVorhandenVal=false)
 	),
 	(var(WasserEntfernungValNum) -> WasserEntfernungVal = 'Zeit'; number_string(WasserEntfernungValNum, WasserEntfernungVal)),
@@ -67,6 +68,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	(var(ForschungsTerminalEntfernungValNum) -> ForschungsTerminalEntfernungVal = 'Zeit'; number_string(ForschungsTerminalEntfernungValNum, ForschungsTerminalEntfernungVal)),
 	(var(SauerstoffVearbeiterEntfernungValNum) -> SauerstoffVearbeiterEntfernungVal = 'Zeit'; number_string(SauerstoffVearbeiterEntfernungValNum, SauerstoffVearbeiterEntfernungVal)),
 	(var(AtmosphaerenAnlageEntfernungValNum) -> AtmosphaerenAnlageEntfernungVal = 'Zeit'; number_string(AtmosphaerenAnlageEntfernungValNum, AtmosphaerenAnlageEntfernungVal)),
+	(var(BergbauEinheitEntfernungValNum) -> BergbauEinheitEntfernungVal = 'Zeit'; number_string(BergbauEinheitEntfernungValNum, BergbauEinheitEntfernungVal)),
 	(var(PlantageEntfernungValNum) -> PlantageEntfernungVal = 'Zeit'; number_string(PlantageEntfernungValNum, PlantageEntfernungVal)),
 
 	TermerizedBody = [
@@ -93,6 +95,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 			ForschungsTerminalVorhandenVal, ForschungsTerminalEntfernungVal,
 			SauerstoffVearbeiterVal, SauerstoffVearbeiterEntfernungVal,
 			AtmosphaerenAnlageVorhandenVal, AtmosphaerenAnlageEntfernungVal,
+			BergbauEinheitVorhandenVal, BergbauEinheitEntfernungVal,
 			PlantageVorhandenVal, PlantageEntfernungVal			
        	  ),
        	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
@@ -128,6 +131,7 @@ tabelleEinrichtungen(
 	ForschungsTerminalVorhandenVal, ForschungsTerminalEntfernungVal,
 	SauerstoffVearbeiterVal, SauerstoffVearbeiterEntfernungVal,
 	AtmosphaerenAnlageVorhandenVal, AtmosphaerenAnlageEntfernungVal,
+	BergbauEinheitVorhandenVal, BergbauEinheitEntfernungVal,
 	PlantageVorhandenVal, PlantageEntfernungVal
     ) -->
 	html(div(class('table50'),[
@@ -195,6 +199,10 @@ tabelleEinrichtungen(
    	  	div(class('tr'), [
    	    	div(class('th'), 'Atmosphaerenanlage'),
    	    	\checkZeitUnitGruppe('atmosphaerenAnlage_vorhanden', AtmosphaerenAnlageVorhandenVal, 313, 'atmosphaerenAnlage_entfernung', AtmosphaerenAnlageEntfernungVal, 314)
+   	  	]),
+   	  	div(class('tr'), [
+   	    	div(class('th'), 'Bergbaueinheit'),
+   	    	\checkZeitUnitGruppe('bergbauEinheit_vorhanden', BergbauEinheitVorhandenVal, 313, 'bergbauEinheit_entfernung', BergbauEinheitEntfernungVal, 314)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Plantage'),
@@ -269,6 +277,7 @@ planetenEigenschaften(Request) :-
      konstruktionsStation_vorhanden(KonstruktionsStationVorhanden, [default(off)]),
 	 sauerstoffVearbeiter_vorhanden(SauerstoffVearbeiterVorhanden, [default(off)]),
 	 atmosphaerenAnlage_vorhanden(AtmosphaerenAnlageVorhanden, [default(off)]),
+	 bergbauEinheit_vorhanden(BergbauEinheitVorhanden, [default(off)]),
 	 plantage_vorhanden(PlantageVorhanden, [default(off)]),
 
      wasser_entfernung(WasserEntfernung, [default('Zeit')]), 
@@ -284,6 +293,7 @@ planetenEigenschaften(Request) :-
      konstruktionsStation_entfernung(KonstruktionsStationEntfernung, [default('Zeit')]),
      sauerstoffVearbeiter_entfernung(SauerstoffVerarbeiter, [default('Zeit')]),
      atmosphaerenAnlage_entfernung(AtmosphaerenAnlageEntfernung, [default('Zeit')]),
+     bergbauEinheit_entfernung(BergbauEinheitEntfernung, [default('Zeit')]),
      plantage_entfernung(PlantageEntfernung, [default('Zeit')])
     ]),
     ((WasserVorhanden = on, WasserEntfernung = 'Zeit', fehlerBehandlungGruppe('Wasser'));
@@ -297,6 +307,7 @@ planetenEigenschaften(Request) :-
      (BasisTerminusVorhanden = on, BasisTerminusEntfernung = 'Zeit', fehlerBehandlungGruppe('Basisterminus'));
      (KonstruktionsStationVorhanden = on, KonstruktionsStationEntfernung = 'Zeit', fehlerBehandlungGruppe('Konstruktionsstation'));
      (SauerstoffVearbeiterVorhanden = on, SauerstoffVerarbeiter = 'Zeit', fehlerBehandlungGruppe('Sauerstoffverarbeiter'));
+     (BergbauEinheitVorhanden = on, BergbauEinheitEntfernung = 'Zeit', fehlerBehandlungGruppe('Bergbaueinheit'));
      (AtmosphaerenAnlageVorhanden = on, AtmosphaerenAnlageEntfernung = 'Zeit', fehlerBehandlungGruppe('Atmosphaerenanlage'));
      (PlantageVorhanden = on, PlantageEntfernung = 'Zeit', fehlerBehandlungGruppe('Plantage'));
      (HauptBasisVorhanden = off,
@@ -312,6 +323,7 @@ planetenEigenschaften(Request) :-
       KonstruktionsStationVorhanden = off,
       SauerstoffVearbeiterVorhanden = off,
       AtmosphaerenAnlageVorhanden = off,
+      BergbauEinheitVorhanden = off,
       PlantageVorhanden = off,
       ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, _], _))),
       gespeichert
@@ -328,6 +340,7 @@ planetenEigenschaften(Request) :-
       ausgabe:zeitFeldToNumber(KonstruktionsStationEntfernung, KonstruktionsStationEntfernungNum),
       ausgabe:zeitFeldToNumber(SauerstoffVerarbeiter, SauerstoffVerarbeiterNum),
       ausgabe:zeitFeldToNumber(AtmosphaerenAnlageEntfernung, AtmosphaerenAnlageEntfernungNum),
+      ausgabe:zeitFeldToNumber(BergbauEinheitEntfernung, BergbauEinheitEntfernungNum),
       ausgabe:zeitFeldToNumber(PlantageEntfernung, PlantageEntfernungNum),
       (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung);
        Entfernung = -1
@@ -377,6 +390,9 @@ planetenEigenschaften(Request) :-
       ),
       (AtmosphaerenAnlageVorhanden= off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAtmosphaerenAnlage], AtmosphaerenAnlageEntfernungNum))
+      ), 
+      (BergbauEinheitVorhanden= off; 
+       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortBergbauEinheit], BergbauEinheitEntfernungNum))
       ), 
       (PlantageVorhanden= off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortPlantage], PlantageEntfernungNum))

@@ -223,7 +223,44 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', solarStrahlNutzen, fluessigSonne, 20, 400, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', gemuetsStrahlNutzen, fragmentierteQualia, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', verdienen, hexit, 60000, 0, 150))
+
+
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, aktiviertesCadmium, 1450, 0, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, aktiviertesEmeril, 1450, 0, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, aktiviertesIndium, 1450, 0, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, aktiviertesKupfer, 1450, 0, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, cadmium, 1450, 0, 300))	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, emeril, 1450, 0, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, indium, 1450, 0, 300))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, kupfer, 1450, 0, 300))
 	
+	/* nach Planetentyp */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, ammoniak, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, dioxit, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, paraffinium, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, phosphor, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, pyrit, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, uran, 1450, 0, 300)) 
+
+	/* Als zweite Resource */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, gold, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, salz, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, verrostetesMetall, 1450, 0, 300)) 
+	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, magnetisiertesFerrit, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, reinesFerrit, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, silber, 1450, 0, 300)) 
+	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, kobalt, 1450, 0, 300)) 
+	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, natrium, 1450, 0, 300))
+	
+	
+	/* mit Terrainformer ausgraben */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, geborgeneDaten, 300, 0, 300))
+	
+
+
+
 	,assertz(fertigeLoesung('System', 'MeinPlanet', dummy, dummy, []))
 	.
 

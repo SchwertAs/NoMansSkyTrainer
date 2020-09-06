@@ -19,6 +19,7 @@ sammelAktion(vonTierErhalten).
 sammelAktion(solarStrahlNutzen).
 sammelAktion(gemuetsStrahlNutzen).
 sammelAktion(verdienen).
+sammelAktion(vonBergbauEinheitGewinnen).
 
 sammelOrt(bekannt, ortSpieler).
 sammelOrt(ernten, ortPlantage).
@@ -40,6 +41,7 @@ sammelOrt(vonTierErhalten, ortWald).
 sammelOrt(solarStrahlNutzen, ortWald).
 sammelOrt(gemuetsStrahlNutzen, ortWald).
 sammelOrt(verdienen, ortRaumStation).
+sammelOrt(vonBergbauEinheitGewinnen, ortBergbauEinheit).
 
 /* Vorraussetzungen im Multiwerkzeug */
 pruefeSammelAktionVorraussetzung(_System, _Planet, minenLaserNutzen) :-
@@ -82,6 +84,11 @@ pruefeSammelAktionVorraussetzung(_System, _Planet, solarStrahlNutzen) :-
 pruefeSammelAktionVorraussetzung(_System, _Planet, gemuetsStrahlNutzen) :-
 	!,
 	spielStatus(gemuetsStrahl),
+	!.
+
+pruefeSammelAktionVorraussetzung(System, Planet, vonBergbauEinheitGewinnen) :-
+	!,
+	spielStatus:systemAusstattung([System, Planet, ortBergbauEinheit], _),
 	!.
 
 /* Vorraussetzungen in Planetenausstattung */

@@ -43,6 +43,7 @@ initSystemAusstattung :-
 	abolish(systemAusstattung/2)
 	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAtmosphaerenAnlage], 536)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBergbauEinheit], 257)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSauerStoffVearbeiter], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAussenPosten], 11336)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */

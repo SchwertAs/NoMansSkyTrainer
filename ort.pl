@@ -21,6 +21,7 @@ ort(ortSpieler).
 ort(ortBasis).
 ort(ortSauerStoffVearbeiter).
 ort(ortAtmosphaerenAnlage).
+ort(ortBergbauEinheit).
 ort(ortPlantage).
 
 domaenenPruefungOrt(Ort) :-

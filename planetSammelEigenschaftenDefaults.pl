@@ -146,6 +146,11 @@ sammelDefaultPlanetenTyp(PlanetenTyp, terrainFormerNutzen, gold) :-
 /* Tote Planeten zweites Mineral verrostetesMetall */
 sammelDefaultPlanetenTyp(tot, terrainFormerNutzen, verrostetesMetall).
 
+/* Bergbaueinheit */
+sammelDefaultPlanetenTyp(PlanetenTyp, vonBergbauEinheitGewinnen, Stoff) :-
+	sammelDefaultPlanetenTyp(PlanetenTyp, terrainFormerNutzen, Stoff),
+	Stoff \= silikatPulver.
+	
 /* jagen */
 sammelDefaultPlanetenTyp(_, jagen, beinFleisch).
 sammelDefaultPlanetenTyp(_, jagen, fleischigeStuecke).
