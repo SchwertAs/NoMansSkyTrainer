@@ -223,6 +223,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', solarStrahlNutzen, fluessigSonne, 20, 400, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', gemuetsStrahlNutzen, fragmentierteQualia, 20, 400, 300))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', verdienen, hexit, 60000, 0, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', verdienen, nanitHaufen, 60000, 0, 150))
 
 
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, aktiviertesCadmium, 1450, 0, 300))

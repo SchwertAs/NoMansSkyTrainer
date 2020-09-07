@@ -80,7 +80,7 @@ planetSammelEigenschaftenDialog(Request) :-
 
 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt) :-
     /* einlesen der Eigenschaften */
-    GesamtZeilenZahl = 14,
+    GesamtZeilenZahl = 15,
 	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest], 
 	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest),
 	        Operation = AuswahlSammelArt), 

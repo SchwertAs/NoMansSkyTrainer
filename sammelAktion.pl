@@ -31,6 +31,7 @@ sammelOrt(jagen, ortWald).
 sammelOrt(kaufen, ortHandelsTerminal).
 sammelOrt(kaufen, ortRaumStation).
 sammelOrt(kaufen, ortAussenPosten).
+sammelOrt(kaufen, ortHandelsStation).
 sammelOrt(minenLaserNutzen, ortWald).
 sammelOrt(pfluecken, ortWald).
 sammelOrt(raumSchuerfen, ortWeltRaum).
@@ -96,6 +97,7 @@ pruefeSammelAktionVorraussetzung(System, Planet, kaufen) :-
 	!,
 	/* TODO Handelsposten einbringen */
 	(spielStatus:systemAusstattung([System, Planet, ortHandelsTerminal], _);
+	 spielStatus:systemAusstattung([System, Planet, ortHandelsStation], _);
 	 spielStatus:systemAusstattung([System, Planet, ortRaumStation], _)
 	),
 	!.

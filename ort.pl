@@ -10,6 +10,7 @@ ort(ortAnomalie).
 ort(ortRaumStation). 
 ort(ortWasser).
 ort(ortAussenPosten).
+ort(ortHandelsStation).
 ort(ortNahrungsProzessor).
 ort(ortKleineRaffinerie).
 ort(ortMittlereRaffinerie).

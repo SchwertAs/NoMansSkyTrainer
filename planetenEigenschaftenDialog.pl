@@ -47,6 +47,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortMittlereRaffinerie], MittlereRaffinerieEntfernungValNum) -> MittlereRaffinerieVorhandenVal=true; MittlereRaffinerieVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortGrosseRaffinerie], GrosseRaffinerieEntfernungValNum) -> GrosseRaffinerieVorhandenVal=true; GrosseRaffinerieVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHandelsTerminal], HandelsTerminalEntfernungValNum) -> HandelsTerminalVorhandenVal=true; HandelsTerminalVorhandenVal=false),
+	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHandelsStation], HandelsStationEntfernungValNum) -> HandelsStationVorhandenVal=true; HandelsStationVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortKleineRaffinerie], KleineRaffinerieEntfernungValNum) -> KleineRaffinerieVorhandenVal=true; KleineRaffinerieVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortNahrungsProzessor], NahrungsProzessorEntfernungValNum) -> NahrungsProzessorVorhandenVal=true; NahrungsProzessorVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortBasisTerminus], BasisTerminusEntfernungValNum) -> BasisTerminusVorhandenVal=true; BasisTerminusVorhandenVal=false),
@@ -62,6 +63,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	(var(MittlereRaffinerieEntfernungValNum) -> MittlereRaffinerieEntfernungVal = 'Zeit'; number_string(MittlereRaffinerieEntfernungValNum, MittlereRaffinerieEntfernungVal)),
 	(var(GrosseRaffinerieEntfernungValNum) -> GrosseRaffinerieEntfernungVal = 'Zeit'; number_string(GrosseRaffinerieEntfernungValNum, GrosseRaffinerieEntfernungVal)),
 	(var(HandelsTerminalEntfernungValNum) -> HandelsTerminalEntfernungVal = 'Zeit'; number_string(HandelsTerminalEntfernungValNum, HandelsTerminalEntfernungVal)),
+	(var(HandelsStationEntfernungValNum) -> HandelsStationEntfernungVal = 'Zeit'; number_string(HandelsStationEntfernungValNum, HandelsStationEntfernungVal)),
 	(var(KleineRaffinerieEntfernungValNum) -> KleineRaffinerieEntfernungVal = 'Zeit'; number_string(KleineRaffinerieEntfernungValNum, KleineRaffinerieEntfernungVal)),
 	(var(NahrungsProzessorEntfernungValNum) -> NahrungsProzessorEntfernungVal = 'Zeit'; number_string(NahrungsProzessorEntfernungValNum, NahrungsProzessorEntfernungVal)),
 	(var(BasisTerminusEntfernungValNum) -> BasisTerminusEntfernungVal = 'Zeit'; number_string(BasisTerminusEntfernungValNum, BasisTerminusEntfernungVal)),
@@ -89,6 +91,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 			MittlereRaffinerieVorhandenVal, MittlereRaffinerieEntfernungVal,
 			GrosseRaffinerieVorhandenVal, GrosseRaffinerieEntfernungVal,
 			HandelsTerminalVorhandenVal, HandelsTerminalEntfernungVal,
+			HandelsStationVorhandenVal, HandelsStationEntfernungVal,
 			KleineRaffinerieVorhandenVal, KleineRaffinerieEntfernungVal,
 			NahrungsProzessorVorhandenVal, NahrungsProzessorEntfernungVal,
 			BasisTerminusVorhandenVal, BasisTerminusEntfernungVal,
@@ -125,6 +128,7 @@ tabelleEinrichtungen(
 	MittlereRaffinerieVorhandenVal, MittlereRaffinerieEntfernungVal,
 	GrosseRaffinerieVorhandenVal, GrosseRaffinerieEntfernungVal,
 	HandelsTerminalVorhandenVal, HandelsTerminalEntfernungVal,
+	HandelsStationVorhandenVal, HandelsStationEntfernungVal,
 	KleineRaffinerieVorhandenVal, KleineRaffinerieEntfernungVal,
 	NahrungsProzessorVorhandenVal, NahrungsProzessorEntfernungVal,
 	BasisTerminusVorhandenVal, BasisTerminusEntfernungVal,
@@ -154,59 +158,63 @@ tabelleEinrichtungen(
    	  	]),
    	    div(class('tr'), [
    	    	div(class('th'), 'Wasser'),
-   	    	\checkZeitUnitGruppe('wasser_vorhanden', WasserVorhandenVal, 102, 'wasser_entfernung', WasserEntfernungVal, 103)
+   	    	\checkZeitUnitGruppe('wasser_vorhanden', WasserVorhandenVal, 102, 'wasser_entfernung', WasserEntfernungVal, 102)
    	  	]),
    	    div(class('tr'), [
    	    	div(class('th'), 'Auﬂenposten'),
-   	    	\checkZeitUnitGruppe('aussenPosten_vorhanden', AussenPostenVorhandenVal, 104, 'aussenPosten_entfernung', AussenPostenEntfernungVal, 105)
+   	    	\checkZeitUnitGruppe('aussenPosten_vorhanden', AussenPostenVorhandenVal, 103, 'aussenPosten_entfernung', AussenPostenEntfernungVal, 103)
    	  	]),
    	    div(class('tr'), [
    	    	div(class('th'), 'Raumstation'),
-   	    	\checkZeitUnitGruppe('raumstation_vorhanden', RaumstationVorhandenVal, 106, 'raumstation_entfernung', RaumstationEntfernungVal, 107)
+   	    	\checkZeitUnitGruppe('raumstation_vorhanden', RaumstationVorhandenVal, 104, 'raumstation_entfernung', RaumstationEntfernungVal, 104)
    	  	]),
   	    div(class('tr'), [
    	    	div(class('th'), 'Mittlere Raffinerie'),
-   	    	\checkZeitUnitGruppe('mittlereRaffinerie_vorhanden', MittlereRaffinerieVorhandenVal, 108, 'mittlereRaffinerie_entfernung', MittlereRaffinerieEntfernungVal, 109)
+   	    	\checkZeitUnitGruppe('mittlereRaffinerie_vorhanden', MittlereRaffinerieVorhandenVal, 105, 'mittlereRaffinerie_entfernung', MittlereRaffinerieEntfernungVal, 105)
    	    ]),
     	    div(class('tr'), [
    	    	div(class('th'), 'Groﬂe Raffinerie'),
-   	    	\checkZeitUnitGruppe('grosseRaffinerie_vorhanden', GrosseRaffinerieVorhandenVal, 110, 'grosseRaffinerie_entfernung', GrosseRaffinerieEntfernungVal, 111)
+   	    	\checkZeitUnitGruppe('grosseRaffinerie_vorhanden', GrosseRaffinerieVorhandenVal, 106, 'grosseRaffinerie_entfernung', GrosseRaffinerieEntfernungVal, 106)
    	    ]),
    	    div(class('tr'), [
    	    	div(class('th'), 'Handelsterminal'),
-   	    	\checkZeitUnitGruppe('handelsTerminal_vorhanden', HandelsTerminalVorhandenVal, 112, 'handelsTerminal_entfernung', HandelsTerminalEntfernungVal, 113)
+   	    	\checkZeitUnitGruppe('handelsTerminal_vorhanden', HandelsTerminalVorhandenVal, 107, 'handelsTerminal_entfernung', HandelsTerminalEntfernungVal, 107)
+   	    ]),
+   	    div(class('tr'), [
+   	    	div(class('th'), 'Handelsstation'),
+   	    	\checkZeitUnitGruppe('handelsStation_vorhanden', HandelsStationVorhandenVal, 108, 'handelsStation_entfernung', HandelsStationEntfernungVal, 108)
    	    ]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'kleine Raffinerie'),
-   	    	\checkZeitUnitGruppe('kleineRaffinerie_vorhanden', KleineRaffinerieVorhandenVal, 301, 'kleineRaffinerie_entfernung', KleineRaffinerieEntfernungVal, 302)
+   	    	\checkZeitUnitGruppe('kleineRaffinerie_vorhanden', KleineRaffinerieVorhandenVal, 109, 'kleineRaffinerie_entfernung', KleineRaffinerieEntfernungVal, 109)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Nahrungsprozessor'),
-   	    	\checkZeitUnitGruppe('nahrungsProzessor_vorhanden', NahrungsProzessorVorhandenVal, 303, 'nahrungsProzessor_entfernung', NahrungsProzessorEntfernungVal, 304)
+   	    	\checkZeitUnitGruppe('nahrungsProzessor_vorhanden', NahrungsProzessorVorhandenVal, 110, 'nahrungsProzessor_entfernung', NahrungsProzessorEntfernungVal, 110)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Basisterminus'),
-   	    	\checkZeitUnitGruppe('basisTerminus_vorhanden', BasisTerminusVorhandenVal, 307, 'basisTerminus_entfernung', BasisTerminusEntfernungVal, 308)
+   	    	\checkZeitUnitGruppe('basisTerminus_vorhanden', BasisTerminusVorhandenVal, 111, 'basisTerminus_entfernung', BasisTerminusEntfernungVal, 111)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Konstruktionsforschungsstation'),
-   	    	\checkZeitUnitGruppe('konstruktionsStation_vorhanden', ForschungsTerminalVorhandenVal, 309, 'konstruktionsStation_entfernung', ForschungsTerminalEntfernungVal, 310)
+   	    	\checkZeitUnitGruppe('konstruktionsStation_vorhanden', ForschungsTerminalVorhandenVal, 112, 'konstruktionsStation_entfernung', ForschungsTerminalEntfernungVal, 112)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Sauerstoffverarbeiter'),
-   	    	\checkZeitUnitGruppe('sauerstoffVearbeiter_vorhanden', SauerstoffVearbeiterVal, 311, 'sauerstoffVearbeiter_entfernung', SauerstoffVearbeiterEntfernungVal, 312)
+   	    	\checkZeitUnitGruppe('sauerstoffVearbeiter_vorhanden', SauerstoffVearbeiterVal, 113, 'sauerstoffVearbeiter_entfernung', SauerstoffVearbeiterEntfernungVal, 113)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Atmosphaerenanlage'),
-   	    	\checkZeitUnitGruppe('atmosphaerenAnlage_vorhanden', AtmosphaerenAnlageVorhandenVal, 313, 'atmosphaerenAnlage_entfernung', AtmosphaerenAnlageEntfernungVal, 314)
+   	    	\checkZeitUnitGruppe('atmosphaerenAnlage_vorhanden', AtmosphaerenAnlageVorhandenVal, 114, 'atmosphaerenAnlage_entfernung', AtmosphaerenAnlageEntfernungVal, 114)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Bergbaueinheit'),
-   	    	\checkZeitUnitGruppe('bergbauEinheit_vorhanden', BergbauEinheitVorhandenVal, 313, 'bergbauEinheit_entfernung', BergbauEinheitEntfernungVal, 314)
+   	    	\checkZeitUnitGruppe('bergbauEinheit_vorhanden', BergbauEinheitVorhandenVal, 115, 'bergbauEinheit_entfernung', BergbauEinheitEntfernungVal, 115)
    	  	]),
    	  	div(class('tr'), [
    	    	div(class('th'), 'Plantage'),
-   	    	\checkZeitUnitGruppe('plantage_vorhanden', PlantageVorhandenVal, 313, 'plantage_entfernung', PlantageEntfernungVal, 314)
+   	    	\checkZeitUnitGruppe('plantage_vorhanden', PlantageVorhandenVal, 116, 'plantage_entfernung', PlantageEntfernungVal, 117)
    	  	])
    	  ])).
 
@@ -270,6 +278,7 @@ planetenEigenschaften(Request) :-
      mittlereRaffinerie_vorhanden(RaffinerieMittelVorhanden, [default(off)]),
      grosseRaffinerie_vorhanden(RaffinerieGrossVorhanden, [default(off)]),
      handelsTerminal_vorhanden(HandelsTerminalVorhanden, [default(off)]),
+     handelsStation_vorhanden(HandelsStationVorhanden, [default(off)]),
      
      kleineRaffinerie_vorhanden(RaffinerieKleinVorhanden, [default(off)]),
      nahrungsProzessor_vorhanden(NahrungsProzessorVorhanden, [default(off)]),
@@ -286,6 +295,7 @@ planetenEigenschaften(Request) :-
 	 mittlereRaffinerie_entfernung(RaffinerieMittelEntfernung, [default('Zeit')]),
 	 grosseRaffinerie_entfernung(RaffinerieGrossEntfernung, [default('Zeit')]),
 	 handelsTerminal_entfernung(HandelsTerminalEntfernung, [default('Zeit')]),
+	 handelsStation_entfernung(HandelsStationEntfernung, [default('Zeit')]),
 	 
      kleineRaffinerie_entfernung(RaffinerieKleinEntfernung, [default('Zeit')]),
      nahrungsProzessor_entfernung(NahrungsProzessorEntfernung, [default('Zeit')]), 
@@ -302,6 +312,7 @@ planetenEigenschaften(Request) :-
      (RaffinerieMittelVorhanden = on, RaffinerieMittelEntfernung = 'Zeit', fehlerBehandlungGruppe('mittlere Raffinerie'));
      (RaffinerieGrossVorhanden = on, RaffinerieGrossEntfernung = 'Zeit', fehlerBehandlungGruppe('groﬂe Raffinerie'));
      (HandelsTerminalVorhanden = on, HandelsTerminalEntfernung = 'Zeit', fehlerBehandlungGruppe('Handelsterminal'));
+     (HandelsStationVorhanden = on, HandelsStationEntfernung = 'Zeit', fehlerBehandlungGruppe('Handelsstation'));
      (RaffinerieKleinVorhanden = on, RaffinerieKleinEntfernung = 'Zeit', fehlerBehandlungGruppe('kleine Raffinerie'));
      (NahrungsProzessorVorhanden = on, NahrungsProzessorEntfernung = 'Zeit', fehlerBehandlungGruppe('Nahrungsprozessor'));
      (BasisTerminusVorhanden = on, BasisTerminusEntfernung = 'Zeit', fehlerBehandlungGruppe('Basisterminus'));
@@ -317,6 +328,7 @@ planetenEigenschaften(Request) :-
       RaffinerieMittelVorhanden = off,
       RaffinerieGrossVorhanden = off,
       HandelsTerminalVorhanden = off,
+      HandelsStationVorhanden = off,
       RaffinerieKleinVorhanden = off,
       NahrungsProzessorVorhanden = off,
       BasisTerminusVorhanden = off,
@@ -334,6 +346,7 @@ planetenEigenschaften(Request) :-
       ausgabe:zeitFeldToNumber(RaffinerieMittelEntfernung, RaffinerieMittelEntfernungNum),
       ausgabe:zeitFeldToNumber(RaffinerieGrossEntfernung, RaffinerieGrossEntfernungNum),
       ausgabe:zeitFeldToNumber(HandelsTerminalEntfernung, HandelsTerminalEntfernungNum),
+      ausgabe:zeitFeldToNumber(HandelsStationEntfernung, HandelsStationEntfernungNum),
       ausgabe:zeitFeldToNumber(RaffinerieKleinEntfernung, RaffinerieKleinEntfernungNum),
       ausgabe:zeitFeldToNumber(NahrungsProzessorEntfernung, NahrungsProzessorEntfernungNum),
       ausgabe:zeitFeldToNumber(BasisTerminusEntfernung, BasisTerminusEntfernungNum),
@@ -372,6 +385,9 @@ planetenEigenschaften(Request) :-
       ),
       (HandelsTerminalVorhanden = off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHandelsTerminal], HandelsTerminalEntfernungNum))
+      ),
+      (HandelsStationVorhanden = off; 
+       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHandelsStation], HandelsStationEntfernungNum))
       ),
       (RaffinerieKleinVorhanden = off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortKleineRaffinerie], RaffinerieKleinEntfernungNum))
