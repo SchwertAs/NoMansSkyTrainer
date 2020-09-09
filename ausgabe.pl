@@ -290,7 +290,7 @@ letzesListenElement([_|Rest], Ende) :-
 	
 	
 hierarchieGrafik(Vorgaenge, Svg) :-
-  Svg0 = '<svg width=1400 height=450>
+  Svg0 = '<svg width=1300 height=450>
   <defs
     id=defs2>
     <marker
@@ -332,11 +332,11 @@ useFromBeschriftung(Pos, Ebene, Stoff, PosParent, AnzPosesEbene, Use) :-
 	EbeneParent is Ebene - 1,
 	nth1(EbeneParent, AnzPosesEbene, AnzParent),
     breiteBeschriftung(Stoff, Breite),
-    X is (1400 / (Anz + 1)) * Pos - (Breite / 2),
+    X is (1500 / (Anz + 1)) * Pos - (Breite / 2) - 100,
 	Y is 60 * (Ebene - 1),
 	buildUseForBox(X, Y, Stoff, Use1),
 	XArrow is X + (Breite / 2),
-	XParent is (1400 / (AnzParent + 1)) * PosParent,
+	XParent is (1500 / (AnzParent + 1)) * PosParent - 100,
 	Yarrow is Y,
 	YArrowParent is Y - 28,
 	buildUseForArrow(XArrow, XParent, Yarrow, YArrowParent, Use2),
@@ -345,7 +345,7 @@ useFromBeschriftung(Pos, Ebene, Stoff, PosParent, AnzPosesEbene, Use) :-
 useFromBeschriftung(_, Ebene, Stoff, _, _, Use) :-
 	Ebene = 1,
 	breiteBeschriftung(Stoff, Breite),
-    X is 700 - (Breite / 2),
+    X is 750 - (Breite / 2) - 100,
 	buildUseForBox(X, 0, Stoff, Use).
 
 buildUseForBox(X, Y, Stoff, Use) :-
@@ -401,8 +401,33 @@ ebenePos(Vorgaenge, AktuellerVorgang, EbenenPos) :-
 	)).
 	
 breiteBeschriftung(Beschriftung, Breite) :-
-	atom_length(Beschriftung, Breite0),
-	Breite is Breite0 * 8.5.
+	atom_length(Beschriftung, ZeichenZahl),
+	findall(Len, 
+	        (between(1,ZeichenZahl, Index),
+	         string_code(Index, Beschriftung, Code),
+	         lenOfCode(Code, Len)
+		    ), Lens),
+		    sum_list(Lens, Breite0),
+		    Breite is Breite0 + 5.
+
+lenOfCode(Code, Len) :-
+	Code > 64,
+	Code < 91,
+	LenGrossBuchstaben = [12,12,13,13,12,11,14,13,5,9,12,10,15,13,14,12,14,13,12,11,13,12,17,12,12,11],
+	Index is Code - 64, 
+	nth1(Index, LenGrossBuchstaben, Len),
+	!.
+	
+lenOfCode(Code, Len) :-
+	Code > 96,
+    Code < 123, 
+	LenKleinbuchstaben = [10,10,9,10,10,4.8,10,10,4,4,9,4,15,10,10,10,10,6,9,5,10,9,12.9,9,9,9], 
+    Index is Code - 96, 
+    nth1(Index, LenKleinbuchstaben, Len),
+    !.
+    
+lenOfCode(_, Len) :-
+	Len = 0.
 	
 concatSymbols([], Svg0, Svg) :-	
 	Svg0 = Svg.
