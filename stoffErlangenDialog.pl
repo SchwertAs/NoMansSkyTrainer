@@ -1,5 +1,6 @@
 :- module(stoffErlangenDialog, [stoffErlangen/1]).
 
+:- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
@@ -201,6 +202,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
+	ausgabe:hierarchieGrafik(Vorgaenge, Svg),
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	TermerizedBody = [
@@ -230,7 +232,11 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 		               ]),
 			           \ausgabeSammlungDcg(SammelSetPred)
 		           ]),
-            table( [width('100%'), border(1)], 
+		    p([],[]),
+		    table( [width('98%'), border(1)], 
+		           [ tr(\[Svg])
+		           ]),
+		    table( [width('100%'), border(1)], 
 		           [caption(h2('Aktionsreihenfolge')),
 		            tr([th([scope('col')],['Anweisung']),
 		                th([scope('col')],['Operation']),

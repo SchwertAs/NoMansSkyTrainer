@@ -1154,7 +1154,7 @@ rezept(kochen, [[1, faecium], [1, aloeFleisch]],[1, duftendeKraeuter], 250.0).
 rezept(kochen, [[1, faecium], [1, frostKristall]],[1, duftendeKraeuter], 250.0).
 rezept(kochen, [[1, faecium], [1, gammaWurzel]],[1, duftendeKraeuter], 250.0).
 rezept(kochen, [[1, faecium], [1, glasKoerner]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, heptaPloidWeizen]],[1, duftendeKraeuter], 250.0).
+rezept(kochen, [[1, faecium], [1, heptaploidWeizen]],[1, duftendeKraeuter], 250.0).
 rezept(kochen, [[1, faecium], [1, jadeErbsen]],[1, duftendeKraeuter], 250.0).
 rezept(kochen, [[1, faecium], [1, sievertBohnen]],[1, duftendeKraeuter], 250.0).
 rezept(kochen, [[1, faecium], [1, solanium]],[1, duftendeKraeuter], 250.0).
@@ -1580,7 +1580,7 @@ rezept(kochen, [[1, rohesSteak]],[1, verarbeitetesFleisch], 250.0).
 rezept(kochen, [[1, schreiterWurst]],[1, verarbeitetesFleisch], 250.0).
 rezept(kochen, [[1, schuppigesFleisch]],[1, verarbeitetesFleisch], 250.0).
 rezept(kochen, [[1, glasKoerner]],[1, verfeinertesMehl], 250.0).
-rezept(kochen, [[1, heptaPloidWeizen]],[1, verfeinertesMehl], 250.0).
+rezept(kochen, [[1, heptaploidWeizen]],[1, verfeinertesMehl], 250.0).
 rezept(kochen, [[1, kelpReis]],[1, verfeinertesMehl], 250.0).
 rezept(kochen, [[1, frostKristall], [1, grahmeLade], [1, klebrigerPudding]],[1, vyEisCreme], 250.0).
 rezept(kochen, [[1, frostKristall], [1, grahBeere], [1, klebrigerPudding]],[1, vyEisCreme], 250.0).

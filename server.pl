@@ -133,6 +133,47 @@ div.td {
   border:thin solid #CCCCCC; 
   padding:0.3em; 
 }
+.kastenGelb{
+	fill:	rgb(223,172,32);
+	stroke-width:	1px;
+	stroke:	rgb(40,130,225);
+}
+.pfeilLinie{
+	fill:none;fill-rule:	evenodd;
+	stroke:					#000000;
+	stroke-width:			2;
+	stroke-linecap:			butt;
+	stroke-linejoin:		miter;
+	stroke-opacity:			1;
+	stroke-miterlimit:		4;
+	stroke-dasharray:		none;
+	marker-end:				url(#Arrow2Lend)
+}
+.stoffText{
+	font-style:normal;
+	font-weight:normal;
+	font-size:17.63888889px;
+	line-height:125%;
+	font-family:sans-serif;
+	letter-spacing:0px;
+	word-spacing:0px;
+	fill:#000000;
+	fill-opacity:1;
+	stroke:none;
+	stroke-width:0.26458332px;
+	stroke-linecap:butt;
+	stroke-linejoin:miter;
+	stroke-opacity:1;
+	font-stretch:normal;
+	font-variant:normal;
+	text-anchor:start;
+	text-align:center;
+	writing-mode:lr;
+	font-variant-ligatures:normal;
+	font-variant-caps:normal;
+	font-variant-numeric:normal;
+	font-feature-settings:normal;
+}
 </style>'.
 
 baueOptionsFeld(FeldName, OptionsWerteListe, Index, OptionList) :-

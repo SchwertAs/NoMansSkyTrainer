@@ -27,7 +27,7 @@ sammelDefaultPlanetenTyp(exotischMStruktur, pfluecken, verknoecherterStern).
 sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, fleischigeWurzeln) :-
 	PlanetenTyp \= tot.
 	
-sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, heptaPloidWeizen) :-
+sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, heptaploidWeizen) :-
 	PlanetenTyp \= tot.
 	
 sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, suessWurzel) :-
@@ -37,7 +37,7 @@ sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, suessWurzel) :-
 sammelDefaultPlanetenTyp(frostig, pfluecken, frostKristall).
 sammelDefaultPlanetenTyp(frostig, pfluecken, gefroreneKnollen).
 
-sammelDefaultPlanetenTyp(frostig, pfluecken, heptaPloidWeizen).
+sammelDefaultPlanetenTyp(frostig, pfluecken, heptaploidWeizen).
 sammelDefaultPlanetenTyp(frostig, pfluecken, suessWurzel).
 
 sammelDefaultPlanetenTyp(gemaessigt, pfluecken, sternenKnolle).
@@ -62,7 +62,7 @@ sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, hexaBeere) :-
 /* mega exotische Planeten */
 sammelDefaultPlanetenTyp(megaExotisch, pfluecken, hexaBeere).	
 sammelDefaultPlanetenTyp(megaExotisch, pfluecken, fleischigeWurzeln).
-sammelDefaultPlanetenTyp(megaExotisch, pfluecken, heptaPloidWeizen).
+sammelDefaultPlanetenTyp(megaExotisch, pfluecken, heptaploidWeizen).
 sammelDefaultPlanetenTyp(megaExotisch, pfluecken, suessWurzel).
 
 /* Planeten-Goodies */

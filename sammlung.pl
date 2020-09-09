@@ -39,7 +39,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, grahBeere, 19, 19, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, gefroreneKnollen, 38, 17, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, hexaBeere, 15, 15, 0))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, heptaPloidWeizen, 14, 14, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, heptaploidWeizen, 14, 14, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, impulsBohnen, 25, 27, 0))
 
 /* Anreise mit Raumschiff zu natürlichem Vorkommen auf Planet */

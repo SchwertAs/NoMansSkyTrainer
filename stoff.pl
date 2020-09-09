@@ -1646,7 +1646,7 @@ stoff(kochStoff, halbFluessigerKaese, 24000).
 stoff(kochStoff, heimgesuchtePastete, 52000).
 stoff(kochStoff, heimgesuchteSchokoTraeume, 148000).
 stoff(kochStoff, heisseSosse, 7200).
-stoff(kochStoff, heptaPloidWeizen, 800).
+stoff(kochStoff, heptaploidWeizen, 800).
 stoff(kochStoff, heulenderKaramellKuchen, 152300).
 stoff(kochStoff, heulenderTeig, 120000).
 stoff(kochStoff, hexaBeere, 1600).
