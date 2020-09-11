@@ -254,6 +254,9 @@ sammelDefaultPlanetenTyp(frostig, ausAtmosphaerenAnlageGewinnen, radon).
 sammelDefaultPlanetenTyp(PlanetenTyp, ausAtmosphaerenAnlageGewinnen, sauerStoff) :-
 	planetenTypen:planetenTypIstExotisch(PlanetenTyp).
 
+sammelDefaultPlanetenTyp(_, gemuetsStrahlNutzen, fragmentierteQualia).
+sammelDefaultPlanetenTyp(_, solarStrahlNutzen, fluessigSonne).
+sammelDefaultPlanetenTyp(_, verdienen, nanitHaufen).
 
 
 

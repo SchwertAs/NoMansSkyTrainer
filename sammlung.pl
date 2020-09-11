@@ -177,6 +177,21 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sauerStoff, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sauerStoffKapsel, 150, 1310, 250 ))
 	
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, antiMaterie, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, antiMaterieGehaeuse, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, diWasserStoffGelee, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, hermetischesSiegel, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, ionenAkku, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kabelBaum, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kobaltSpiegel, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, lebensErhaltungsGel, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, metallPlatten, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, mikroProzessor, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, natriumDiode, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, salzRefaktor, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sauerStoffFilter, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, raumSchiffStartTreibStoff, 150, 1310, 250 ))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, vierfachServo, 150, 1310, 250 ))
 
 	/* Aus Anbau */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, beutelGift, 20, 0, 0))

@@ -202,7 +202,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
-	ausgabe:hierarchieGrafik(Vorgaenge, Svg),
+	grafischeAusgabe:hierarchieGrafik(Vorgaenge, Svg),
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	TermerizedBody = [
