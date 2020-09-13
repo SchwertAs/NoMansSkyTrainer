@@ -9,20 +9,25 @@
 :- http_handler('/rezeptBekanntDialog', rezeptBekanntDialog, []).
 :- http_handler('/rezeptBekannt', rezeptBekannt, []).
 
+/* ------------------------------------------  Stoffklasse auswählen  --------------------------------------------------------- */
 rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
-	findall(Klasse, (stoffKlasse:stoffKlasse(Klasse, _, _, _, _),
-	(Klasse = produkt; Klasse = modul; Klasse = komponente; Klasse = produktUndKochStoff; Klasse = basisBauEndStoff)), Klassen),
+	findall(TxtKlasse, (stoffKlasse:stoffKlasse(Klasse, _, _, _, _),
+	(Klasse = produkt; Klasse = modul; Klasse = komponente; Klasse = produktUndKochStoff; Klasse = basisBauEndStoff),
+	 textResources:getText(Klasse, TxtKlasse)), Klassen),
 	server:baueOptionsFeld('auswahlStoffKlasse', Klassen, 2, OptionList),
+	textResources:getText(stoffKlassenAuswahl, TxtStoffklassenAuswahl),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], ['Stoffklassen-Auswahl']),
+	    h1([align(center)], [TxtStoffklassenAuswahl]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/rezeptBekanntDialog'), method('post')], 
 	       	 [\eingabeTabelle(OptionList),
 	       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-			    	  [td([button([name("submit"), type("submit")], 'OK')]),
-			    	   td([button([name("reset"), type("reset")], 'reset')])
+			    	  [td([button([name("submit"), type("submit")], TxtOk)]),
+			    	   td([button([name("reset"), type("reset")], TxtReset)])
 			    	  ]))    
 			 ]),
 		\['</formSpace>']
@@ -32,38 +37,44 @@ rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
+	{ textResources:getText(stoffKlasse, TxtStoffKlasse)
+	},
 	html(
    	  div(class('table30'),[
    	    div(class('tr'), [
    	  	    div(class('td'), [
-   	  	  	label([for('auswahlStoffKlasse')],'StoffKlasse: '),
+   	  	  	label([for('auswahlStoffKlasse')], TxtStoffKlasse),
    	  	  	\OptionList
    	  	    ]) 
    	  	])
    	  ])).
 	
+/* ------------------------------------------  Rezepte anzeigen  --------------------------------------------------------- */
 rezeptBekanntDialog(Request) :-
 	member(method(post), Request), !,
 	http_parameters(Request, 
 	[auswahlStoffKlasse(AuswahlStoffKlasse, [length > 0])
 	]),
+	textResources:getText(bitteWaehlen, BitteWaehlen),
 	debug(myTrace, 'AuswahlStoffKlasse=~k', AuswahlStoffKlasse),
-	((AuswahlStoffKlasse = 'Bitte wählen', planetAuswahlDialog:fehlerBehandlung); 
+	((AuswahlStoffKlasse = BitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
 	 rezeptBekanntAnzeigen(AuswahlStoffKlasse)
 	).
 	
-rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept) :-
-	  stoff:stoff(AuswahlStoffKlasse, Produkt, _),
-	  rezept:rezept(WandelAktion, Komponenten, [_, Produkt], _),
-	  (WandelAktion = herstellen;
-	  WandelAktion = installieren;
-	  WandelAktion = bauen),
-	  ausgabe:letzesListenElement(Komponenten, Ende),
-	  Ende = [_, Rezept].
+rezeptVonStoffKlasse(TxtAuswahlStoffKlasse, Rezept) :-
+	/* rückübersetzung in atom Achtung! Texte müssen ein-eindeutig sein */
+	textResources:getText(AuswahlStoffKlasse, TxtAuswahlStoffKlasse),
+	stoff:stoff(AuswahlStoffKlasse, Produkt, _),
+	rezept:rezept(WandelAktion, Komponenten, [_, Produkt], _),
+	(WandelAktion = herstellen;
+	 WandelAktion = installieren;
+	 WandelAktion = bauen),
+	ausgabe:letzesListenElement(Komponenten, Ende),
+	Ende = [_, Rezept].
 	  
 rezeptSchonBekannt(Rezept, Checked) :-
-	  sammlung:sammlung(RecNo, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _),
-	  ((RecNo = 0, Checked = ''); (RecNo > 0, Checked = ' checked')).
+	sammlung:sammlung(RecNo, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _),
+	((RecNo = 0, Checked = ''); (RecNo > 0, Checked = ' checked')).
 	
 felderProZeile(RezeptListe, Step) :-
 	length(RezeptListe, RezeptListeLength),
@@ -103,10 +114,14 @@ rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	ausgabe:joinRecordsNumbering(FeldNoList2, RezeptListe2, 2, NumerierteRecordList2),
 	ausgabe:joinRecordsNumbering(FeldNoList3, RezeptListe3, 2, NumerierteRecordList3),
 	ausgabe:joinRecordsNumbering(FeldNoList4, RezeptListe4, 2, NumerierteRecordList4),
-	 
+	
+	textResources:getText(eingabeBekannteRezepte, TxtEingabeBekannteRezepte),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
+	
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], ['Eingabe bekannte Rezepte']),
+	    h1([align(center)], [TxtEingabeBekannteRezepte]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/rezeptBekannt'), method('post')], 
@@ -120,8 +135,8 @@ rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	       	           ])
 	       	      ]),
 			 table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-			       [td([button([name("submit"), type("submit")], 'OK')]),
-			    		td([button([name("reset"), type("reset")], 'reset')])
+			       [td([button([name("submit"), type("submit")], TxtOk)]),
+			    		td([button([name("reset"), type("reset")], TxtReset)])
 			    	   ])
 			       ]),
 		\['</formSpace>']
@@ -132,7 +147,7 @@ rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 
 eingabeTabelleReadOnly(AuswahlStoffKlasse) -->
 	html(
-   	  div(class('table20'),[
+   	  div(class('table30'),[
    	    div(class('tr'), [
    	    	\divInputReadOnly('auswahlStoffKlasse', 'Stoffklasse: ', AuswahlStoffKlasse, 1)
    	  	])
@@ -178,17 +193,19 @@ innereEingabeZeile([[_, '', _]|_]) -->
 innereEingabeZeile([Record|Rest]) -->
 	{
 		Record = [FeldNo, Stoff, Checked],
-		debug(myTrace, 'Feld=~k Stoff=~k Checked=~k', [FeldNo, Stoff, Checked])
+		textResources:getText(Stoff, TxtStoff),
+		debug(myTrace, 'Feld=~k Stoff=~k Checked=~k', [FeldNo, TxtStoff, Checked])
 	},
 	html([div(class('tr'), 
 	          [div(class('td'), 
 	          	   [input([name('rezept' + FeldNo), type("checkbox"), Checked]),
-	          	    label([for('rezept' + FeldNo)], Stoff)
+	          	    label([for('rezept' + FeldNo)], TxtStoff)
 	               ])
    	          ])
    	     ]),
    	     innereEingabeZeile(Rest).   	   
 
+/* ------------------------------------------  Daten ablegen  --------------------------------------------------------- */
 rezeptBekannt(Request) :-
 	rezeptBekanntDialogParams:rezeptBekanntDialogParamList(Request, VarValueList),
 	VarValueList =[AuswahlStoffKlasse|_], 
@@ -209,10 +226,11 @@ ablegen(RezeptListe, VarValueList) :-
 	!,
 	between(1, 4, Spalte),
 	between(1, Step, Zeile),
-	pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked),
+	pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, TxtRezept, Checked),
 	((Checked = 'on', CheckNum = 1);
 	 (Checked \= 'on', CheckNum = 0)
 	), 
+	textResources:getText(Rezept, TxtRezept),
 	ignore(retractall(sammlung:sammlung(_, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _))),
 	assertz(sammlung:sammlung(CheckNum, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
 	CheckNum = 1,
@@ -228,12 +246,14 @@ pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Ch
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),
+	textResources:getText(gespeichert, TxtGespeichert),
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),'gespeichert!'),
+		h3(align(center),TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).

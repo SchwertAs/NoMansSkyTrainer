@@ -51,6 +51,63 @@ text(de, optimiertesVorgehenErhalten, 'Optimiertes Vorgehen erhalten').
 text(de, optimierteVorgehensweiseErwerbBekommen, 'Bekommen Sie eine optimierte Vorgehensweise, für den Erwerb eines bestimmten Stoffes!').
 text(de, linksZeitweiseInaktiv, 'Links können zeitweise inaktiv sein, wenn notwendige Daten fehlen. Diese können Sie mit Hilfe der Masken, deren Link hier aktiv ist, eingegeben. Falls Sie die Daten inzwischen eingegeben haben, laden Sie diese Seite erneut (F5 bei Firefox)!').
 
+/* Fixtexte SpielStatusDialog */
+text(de, vorraussetzungenMaterialSammlung, 'Vorraussetzungen für die Materialsammlung').
+text(de, ausstattung, 'Ausstattung').
+text(de, minenlaser, 'Minenlaser').
+text(de, verbesserterMinenLaser, 'verbesserter Minenlaser').
+text(de, terrainformer, 'Terrainformer').
+text(de, waffe, 'Waffe').
+text(de, solarStrahl, 'Solarstrahl').
+text(de, gemuetsStrahl, 'Gemütsstrahl').
+text(de, anzugRaffinerie, 'Anzug-Raffinerie').
+text(de, bewegungsmöglichkeiten, 'Bewegungsmöglichkeiten').
+text(de, raumschiffEinsetzbar, 'Raumschiff einsetzbar').
+text(de, minenLaserAufExoFahrzeug, 'Minenlaser auf Exofahrzeug vorhanden').
+text(de, umgebung, 'Umgebung').
+text(de, frachterVorhanden, 'Frachter vorhanden').
+text(de, anomalieSphaereRufbar, 'Anomalie / Sphäre rufbar').
+
+/* Buttons und gespeichert */
+text(de, txtOk, 'OK').
+text(de, txtReset, 'reset').
+text(de, gespeichert, 'gespeichert!').
+text(de, funktionsAuswahl, 'Funktionsauswahl!').
+
+/* Server */
+text(de, bitteWaehlen, 'Bitte wählen').
+
+/* Fixtexte rezeptBekanntAnzeigen */
+text(de, stoffKlassenAuswahl, 'Stoffklassen-Auswahl').
+text(de, stoffKlasse, 'StoffKlasse: ').
+
+/* Fixtexte rezeptBekanntStoffklassenAuswahl */
+text(de, eingabeBekannteRezepte, 'Eingabe bekannte Rezepte').
+
+/* StoffKlassen */
+text(de, rohStoff, 'Rohstoff'). 
+text(de, komponente, 'Komponente'). 
+text(de, produkt, 'Produkt'). 
+text(de, pass, 'Pass'). 
+text(de, verbrauch, 'Verbrauch'). 
+text(de, modul, 'Modul'). 
+text(de, basisBauEndStoff, 'Basis-Baustoff').
+text(de, stoerung, 'Störung').
+text(de, geste, 'Geste').
+text(de, kleidung, 'Kleidung').
+text(de, handelsWare, 'HandelsWare').
+text(de, kuriositaet, 'Kuriosität'). 
+text(de, artefakt, 'Artefakt'). 
+text(de, bauRezept, 'Baurezept'). 
+text(de, rohUndKochStoff, 'Roh- und Kochstoff'). 
+text(de, produktUndKochStoff, 'Produkt und KochStoff'). 
+text(de, kochStoff, 'KochStoff'). 
+text(de, kaufModul, 'Kaufmodul'). 
+text(de, anormaleMaterialien, 'Anormale Materialien'). 
+text(de, gesammelteHandelsWare, 'gesammelte Handelsware'). 
+text(de, relikt, 'Relikt'). 
+text(de, konglomerat, 'Konglomerat'). 
+
 
 /* Sammelaktionen */
 text(de, bekannt, "bekannt").
@@ -1754,3 +1811,15 @@ text(de, ortSauerStoffVerarbeiter, "Sauerstoffverarbeiter").
 text(de, ortAtmosphaerenAnlage, "Atmosphaerenanlage").
 text(de, ortBergbauEinheit, "Bergbaueinheit").
 text(de, ortPlantage, "Plantage").
+
+/* Tests
+	texte überzählig
+	texte fehlend
+		stoffklasse
+		sammelart
+		wandelaktion
+		stoffe
+		ort 
+		
+		ein-eindeutige bezeichner und texte = keine doppelten Bezeichner, keine doppelten Texte
+ */

@@ -18,65 +18,65 @@ hauptDialog(_Request) :-
 	Versteckt5 = false,
 	Versteckt6 = false,
 	debug(myTrace, 'Versteckt1=~k Versteckt2=~k Versteckt3=~k Versteckt4=~k Versteckt5=~k Versteckt6=~k Versteckt7=~k', [Versteckt1, Versteckt2, Versteckt3, Versteckt4, Versteckt5, Versteckt6, Versteckt7]),
-	textResources:getText(funktionsAuswahl, FunktionsAuswahl),
-	textResources:getText(linkZurMaske, LinkZurMaske),
-	textResources:getText(erklaerung, Erklaerung),
-	textResources:getText(vorraussetzungenSammeln, VorraussetzungenSammeln),
-	textResources:getText(welcheMittelStoffeBekommen, WelcheMittelStoffeBekommen),
-	textResources:getText(bekannteRezepteEingeben, BekannteRezepteEingeben),
-	textResources:getText(gibRezepteSpielstand, GibRezepteSpielstand),
-	textResources:getText(sternenSystemeEingeben, SternenSystemeEingeben),
-	textResources:getText(entdeckteErfassen, EntdeckteErfassen),
-	textResources:getText(himmelsKoerperEingeben, HimmelsKoerperEingeben),
-	textResources:getText(planetMondeEingeben, PlanetMondeEingeben),
-	textResources:getText(eigenschaftenHimmelsKoerperEingeben, EigenschaftenHimmelsKoerperEingeben),
-	textResources:getText(ausstattungEingeben, AusstattungEingeben),
-	textResources:getText(sammelDetailsEingeben, SammelDetailsEingeben),
-	textResources:getText(sammelbareResourcenEingeben, SammelbareResourcenEingeben),
-	textResources:getText(optimiertesVorgehenErhalten, OptimiertesVorgehenErhalten),
-	textResources:getText(optimierteVorgehensweiseErwerbBekommen, OptimierteVorgehensweiseErwerbBekommen),
-	textResources:getText(linksZeitweiseInaktiv, LinksZeitweiseInaktiv),
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),
+	textResources:getText(linkZurMaske, TxtLinkZurMaske),
+	textResources:getText(erklaerung, TxtErklaerung),
+	textResources:getText(vorraussetzungenSammeln, TxtVorraussetzungenSammeln),
+	textResources:getText(welcheMittelStoffeBekommen, TxtWelcheMittelStoffeBekommen),
+	textResources:getText(bekannteRezepteEingeben, TxtBekannteRezepteEingeben),
+	textResources:getText(gibRezepteSpielstand, TxtGibRezepteSpielstand),
+	textResources:getText(sternenSystemeEingeben, TxtSternenSystemeEingeben),
+	textResources:getText(entdeckteErfassen, TxtEntdeckteErfassen),
+	textResources:getText(himmelsKoerperEingeben, TxtHimmelsKoerperEingeben),
+	textResources:getText(planetMondeEingeben, TxtPlanetMondeEingeben),
+	textResources:getText(eigenschaftenHimmelsKoerperEingeben, TxtEigenschaftenHimmelsKoerperEingeben),
+	textResources:getText(ausstattungEingeben, TxtAusstattungEingeben),
+	textResources:getText(sammelDetailsEingeben, TxtSammelDetailsEingeben),
+	textResources:getText(sammelbareResourcenEingeben, TxtSammelbareResourcenEingeben),
+	textResources:getText(optimiertesVorgehenErhalten, TxtOptimiertesVorgehenErhalten),
+	textResources:getText(optimierteVorgehensweiseErwerbBekommen, TxtOptimierteVorgehensweiseErwerbBekommen),
+	textResources:getText(linksZeitweiseInaktiv, TxtLinksZeitweiseInaktiv),
 	TermerizedBody = [
 	\['<header>'],
-    h1([align(center)], \[FunktionsAuswahl]),
+    h1([align(center)], \[TxtFunktionsAuswahl]),
     \['</header>'],
 	\['<formSpace>'],
     form([action('/systemNamen'), method('post'), autocomplete("on")], 
        	 [div(class('table'),
        	      [div(class('tr'), 
-       	           [div(class('th'), \[LinkZurMaske]), 
-       	            div(class('th'), \[Erklaerung])
+       	           [div(class('th'), \[TxtLinkZurMaske]), 
+       	            div(class('th'), \[TxtErklaerung])
        	           ]),
        	       div(class('tr'),
-       	           [div(class('td'), \baueRef(Versteckt6, '/spielStatusDialog', VorraussetzungenSammeln)),
-       	            div(class('td'), label(WelcheMittelStoffeBekommen))
+       	           [div(class('td'), \baueRef(Versteckt6, '/spielStatusDialog', TxtVorraussetzungenSammeln)),
+       	            div(class('td'), label(TxtWelcheMittelStoffeBekommen))
        	           ]),
        	       div(class('tr'),
-       	           [div(class('td'), \baueRef(Versteckt5, '/rezeptBekanntDialogStoffKlasseAuswahl', BekannteRezepteEingeben)), 
-       	            div(class('td'), label(GibRezepteSpielstand))
+       	           [div(class('td'), \baueRef(Versteckt5, '/rezeptBekanntDialogStoffKlasseAuswahl', TxtBekannteRezepteEingeben)), 
+       	            div(class('td'), label(TxtGibRezepteSpielstand))
        	           ]),
        	       div(class('tr'), 
-       	           [div(class('td'), \baueRef(Versteckt1, '/systemNamenDialog', SternenSystemeEingeben)), 
-       	            div(class('td'), label(EntdeckteErfassen))
+       	           [div(class('td'), \baueRef(Versteckt1, '/systemNamenDialog', TxtSternenSystemeEingeben)), 
+       	            div(class('td'), label(TxtEntdeckteErfassen))
        	           ]),
        	       div(class('tr'),
-       	           [div(class('td'), \baueRef(Versteckt2, '/planetMondNameSystemAuswahlDialog', HimmelsKoerperEingeben)), 
-       	            div(class('td'), label(PlanetMondeEingeben))
+       	           [div(class('td'), \baueRef(Versteckt2, '/planetMondNameSystemAuswahlDialog', TxtHimmelsKoerperEingeben)), 
+       	            div(class('td'), label(TxtPlanetMondeEingeben))
        	           ]),
        	       div(class('tr'),
-       	           [div(class('td'), \baueRef(Versteckt3, '/planetenEigenschaftenDialogSystemAuswahl', EigenschaftenHimmelsKoerperEingeben)), 
-       	            div(class('td'), label(AusstattungEingeben))
+       	           [div(class('td'), \baueRef(Versteckt3, '/planetenEigenschaftenDialogSystemAuswahl', TxtEigenschaftenHimmelsKoerperEingeben)), 
+       	            div(class('td'), label(TxtAusstattungEingeben))
        	           ]),
        	       div(class('tr'),
-       	           [div(class('td'), \baueRef(Versteckt4, '/planetSammelEigenschaftenDialogSystemAuswahl', SammelDetailsEingeben)), 
-       	            div(class('td'), label(SammelbareResourcenEingeben))
+       	           [div(class('td'), \baueRef(Versteckt4, '/planetSammelEigenschaftenDialogSystemAuswahl', TxtSammelDetailsEingeben)), 
+       	            div(class('td'), label(TxtSammelbareResourcenEingeben))
        	           ]),
        	       div(class('tr'),
-       	           [div(class('td'), \baueRef(Versteckt7, '/stoffErlangenDialogSystemAusWahl', OptimiertesVorgehenErhalten)),
-       	            div(class('td'), label(OptimierteVorgehensweiseErwerbBekommen))
+       	           [div(class('td'), \baueRef(Versteckt7, '/stoffErlangenDialogSystemAusWahl', TxtOptimiertesVorgehenErhalten)),
+       	            div(class('td'), label(TxtOptimierteVorgehensweiseErwerbBekommen))
        	           ])
        	      ]),
-       	      p(LinksZeitweiseInaktiv)
+       	      p(TxtLinksZeitweiseInaktiv)
 		       ]),
 	\['</formSpace>']
 	             ],       

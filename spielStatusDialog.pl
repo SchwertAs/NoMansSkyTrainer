@@ -33,92 +33,110 @@ spielStatusDialog(_Request) :-
 	((FrachterVorhanden = true, FrachterVorhandenChecked = ' checked'); FrachterVorhandenChecked = ''), 
 	((SphaereRufbar = true, SphaereRufbarChecked = ' checked'); SphaereRufbarChecked = ''), 
 	assertz(spielStatus:spielStatus(konfiguriert, false)),
+	textResources:getText(vorraussetzungenMaterialSammlung, VorraussetzungenMaterialSammlung),
+	textResources:getText(ausstattung, TxtAusstattung),
+	textResources:getText(minenlaser, TxtMinenlaser),
+	textResources:getText(verbesserterMinenLaser, TxtVerbesserterMinenLaser),
+	textResources:getText(terrainformer, TxtTerrainformer),
+	textResources:getText(waffe, TxtWaffe),
+	textResources:getText(solarStrahl, TxtSolarStrahl),
+	textResources:getText(gemuetsStrahl, TxtGemuetsStrahl),
+	textResources:getText(anzugRaffinerie, TxtAnzugRaffinerie),
+	textResources:getText(bewegungsmöglichkeiten, TxtBewegungsmöglichkeiten),
+	textResources:getText(raumschiffEinsetzbar, TxtRaumschiffEinsetzbar),
+	textResources:getText(minenLaserAufExoFahrzeug, TxtMinenLaserAufExoFahrzeug),
+	textResources:getText(umgebung, TxtUmgebung),
+	textResources:getText(frachterVorhanden, TxtFrachterVorhanden),
+	textResources:getText(anomalieSphaereRufbar, TxtAnomalieSphaereRufbar),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
+	
 	TermerizedBody = [
 	\['<header>'],
-	h1([align(center)], ['Vorraussetzungen für die Materialsammlung']),
+	h1([align(center)], [VorraussetzungenMaterialSammlung]),
 	\['</header>'],
 	\['<formSpace>'],       
 	form([action('/spielStatus'), method('post'), autocomplete("off")], 
-	   	 [fieldSet([legend('Ausstattung'),
+	   	 [fieldSet([legend(TxtAusstattung),
 		       	    div(class('table'),
 		       	        [div(class('tr'), 
 		       	             [div(class('td'), 
 		       	                  [input([name('minenlaser'), type('checkbox'), MinenLaserChecked]),
-		       	                   label(for('minenlaser'), 'Minenlaser')
+		       	                   label(for('minenlaser'), TxtMinenlaser)
 		       	                  ])
 		       	             ]),
 		       	             div(class('tr'), 
 		       	                 [div(class('td'),
 		       	                      [input([name('verbesserterMinenlaser'), type('checkbox'), VerbesserterMinenLaserChecked]),
-		       	                       label(for('verbesserterMinenlaser'), 'verbesserter Minenlaser')
+		       	                       label(for('verbesserterMinenlaser'), TxtVerbesserterMinenLaser)
 		       	                      ])
 		       	                ]),
 		       	             div(class('tr'), 
 		       	                 [div(class('td'), 
 		       	                      [input([name('terrainFormer'), type('checkbox'), TerrainFormerChecked]),
-		       	                       label(for('terrainFormer'), 'Terrainformer')
+		       	                       label(for('terrainFormer'), TxtTerrainformer)
 		       	                      ])
 		       	                 ]),
 		       	             div(class('tr'), 
 		       	                 [div(class('td'), 
 		       	                      [input([name('waffe'), type('checkbox'), WaffeVorhandenChecked]),
-		       	                       label(for('waffe'), 'Waffe')
+		       	                       label(for('waffe'), TxtWaffe)
 		       	                      ])
 		       	                 ]),
 		       	             div(class('tr'), 
 		       	                 [div(class('td'), 
 		       	                      [input([name('solarStrahl'), type('checkbox'), SolarStrahlChecked]),
-		       	                       label(for('solarStrahl'), 'Solarstrahl')
+		       	                       label(for('solarStrahl'), TxtSolarStrahl)
 		       	                      ])
 		       	                 ]),
 		       	             div(class('tr'), 
 		       	                 [div(class('td'), 
 		       	                      [input([name('gemuetsStrahl'), type('checkbox'), GemuetsStrahlChecked]),
-		       	                       label(for('gemuetsStrahl'), 'Gemütsstrahl')
+		       	                       label(for('gemuetsStrahl'), TxtGemuetsStrahl)
 		       	                      ])
 		       	                 ]),
 		       	             div(class('tr'), 
 		       	                 [div(class('td'), 
 		       	                      [input([name('anzugRaffinerie'), type('checkbox'), AnzugRaffinerieChecked]),
-		       	                       label(for('anzugRaffinerie'), 'Anzug-Raffinerie')
+		       	                       label(for('anzugRaffinerie'), TxtAnzugRaffinerie)
 		       	                      ])
 		       	                 ])
 		       	        ])
 	   	  ]),
-	   	  fieldSet([legend('Bewegungsmöglichkeiten'),
+	   	  fieldSet([legend(TxtBewegungsmöglichkeiten),
 		       	    div(class('table'),
 		       	          [div(class('tr'),
 		       	               [div(class('td'),
 		       	                    [input([name('raumschiff'), type('checkbox'), RaumSchiffIstFlottChecked]),
-		       	                     label(for('raumschiff'), 'Raumschiff einsetzbar')
+		       	                     label(for('raumschiff'), TxtRaumschiffEinsetzbar)
 		       	                    ])
 		       	               ]),
 		       	           div(class('tr'),
 		       	               [div(class('td'),
 		       	                    [input([name('exoFahrzeug'), type('checkbox'), ExoFahrzeugMinenLaserChecked]),
-		       	                     label(for('exoFahrzeug'), 'Minenlaser auf Exofahrzeug vorhanden')
+		       	                     label(for('exoFahrzeug'), TxtMinenLaserAufExoFahrzeug)
 		       	                    ])
 		       	              ])
 		       	          ])
 	   	  ]),
-	   	  fieldSet([legend('Umgebung'),
+	   	  fieldSet([legend(TxtUmgebung),
 		       	    div(class('table'),
 		       	          [div(class('tr'),
 		       	               [div(class('td'),[input([name('frachter'), type('checkbox'), FrachterVorhandenChecked]),
-		       	                    label(for('frachter'), 'Frachter vorhanden')
+		       	                    label(for('frachter'), TxtFrachterVorhanden)
 		       	                   ])
 		       	               ]),
 		       	           div(class('tr'),
 		       	               [div(class('td'),
 		       	                    [input([name('spaere'), type('checkbox'), SphaereRufbarChecked]),
-		       	                     label(for('spaere'), 'Anomalie / Sphäre rufbar')
+		       	                     label(for('spaere'), TxtAnomalieSphaereRufbar)
 		       	                    ])
 		       	               ])
 		       	          ])
 	   	  ]),
 	   	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-		    	  [td([button([name("submit"), type("submit")], 'OK')]),
-		    	   td([button([name("reset"), type("reset")], 'reset')])
+		    	  [td([button([name("submit"), type("submit")], TxtOk)]),
+		    	   td([button([name("reset"), type("reset")], TxtReset)])
 		    	  ]))	    
 		  ]), 
 	\['</formSpace>']],       
@@ -157,13 +175,17 @@ spielStatus(Request) :-
 	assertz(spielStatus:spielStatus(konfiguriert, true)),
 	sammlung:vorgefertigeLoesungenErstellen,
     server:holeCssAlsStyle(StyleString),
+	textResources:getText(gespeichert, TxtGespeichert),
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),
+	
 	TermerizedHead = [\[StyleString], title('No mans sky trainer: Vorraussetzungen Materialsammlung')],
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),'gespeichert!'),
+		h3(align(center),TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])
+		),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
