@@ -287,7 +287,7 @@ planetSammelEigenschaften(Request) :-
 	  nth1(3, VarValueList, AuswahlSammelArt),	
 	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarValueList),
-      sammlung:vorgefertigeLoesungenErstellen(AuswahlSystem, AuswahlPlanet),
+      sammlung:vorgefertigeLoesungenErstellen,
       gespeichert
      )
 	).

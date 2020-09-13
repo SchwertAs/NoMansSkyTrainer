@@ -832,7 +832,7 @@ stoff(handelsWare, ohmschesGel, 15000).
 stoff(handelsWare, optischesLoesungsMittel, 15000).
 stoff(handelsWare, organischeRohre, 30000).
 stoff(handelsWare, polyChromesZirkonium, 30000).
-stoff(handelsWare, quawwntumBeschleuniger, 50000).
+stoff(handelsWare, quantumBeschleuniger, 50000).
 stoff(handelsWare, schmutz, 1000).
 stoff(handelsWare, schweisserSeife, 6000).
 stoff(handelsWare, sechsZackigerEntKoppler, 15000).
@@ -852,7 +852,7 @@ stoff(handelsWare, thermalModule, 100000).
 stoff(handelsWare, handvollZahnRaeder, 10000).
 stoff(handelsWare, kuehlMittelTank, 200000).
 stoff(handelsWare, verstaerkteRohre, 50000).
-stoff(handelsWare, ehemalsNeutzlicheFedern, 1000).
+stoff(handelsWare, ehemalsNuwtzlicheFedern, 1000).
 
 stoff(handelsWare, unmoeglicheSporen, 151488). 
 stoff(handelsWare, sichWindendeSpulen, 3280). 
@@ -939,7 +939,7 @@ stoff(artefakt, gekeimteMoschusFarnFruechte, 560298).
 stoff(artefakt, gekeimteSaegeKelchBlattVerschnitte, 800237).
 stoff(artefakt, heimgesuchteLarve, 344217).
 stoff(artefakt, hochtechnologischeGyroskope, 2634518).
-stoff(artefakt, konservierteKrabbenRückenWirbel, 1161711).
+stoff(artefakt, konservierteKrabbenRueckenWirbel, 1161711).
 stoff(artefakt, merkwürdigeKnochenFragmente, 97540).
 stoff(artefakt, ruhendeVersuchungsWurzVerschnitte, 189244).
 stoff(artefakt, schmutzigeKnochen, 115190).

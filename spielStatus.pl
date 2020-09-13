@@ -1,9 +1,10 @@
-:- module(spielStatus, [planeten/4, systeme/3, spielStatus/2, systemAusstattung/2]).
+:- module(spielStatus, [planeten/4, systeme/3, spielStatus/2, systemAusstattung/2, sprache/1]).
 
 :- dynamic(spielStatus/2).
 :- dynamic(systeme/3).
 :- dynamic(planeten/4).
 :- dynamic(systemAusstattung/2).
+:- dynamic(sprache/1).
 
 /* Spielkonditionen */
 /* Sammelmöglichkeiten */
@@ -11,7 +12,8 @@ spielStatusInit :-
 	initSpielStatus,
 	initSysteme,
 	initPlaneten,
-	initSystemAusstattung.
+	initSystemAusstattung,
+	abolish(sprache/1), assertz(sprache(de)).
 
 initSpielStatus :-
 	abolish(spielStatus/2)
@@ -44,7 +46,7 @@ initSystemAusstattung :-
 	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAtmosphaerenAnlage], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBergbauEinheit], 257)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSauerStoffVearbeiter], 536)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSauerStoffVerarbeiter], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAussenPosten], 11336)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix weil sie gerufen werden kann */

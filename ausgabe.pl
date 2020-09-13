@@ -1,5 +1,6 @@
 :- module(ausgabe, [ausgabeSammlung/3, ausgabeVorgaenge/3, ausgabeSummen/6, 
-          baueBegruendung/2, zeitFeldToNumber/2, partialList/4, letzesListenElement/2]).
+          baueBegruendung/2, zeitFeldToNumber/2, partialList/4, 
+          letzesListenElement/2]).
 
 baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
 	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe).
@@ -13,7 +14,7 @@ ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	get_dict(Stoff, SammelSet, Vorgang),
 	Vorgang = [Operation, _],
 	Operation = bekannt,
-	atom_string(Stoff, StoffString),
+	textResources:getText(Stoff, StoffString),
 	append(SammelList, [sam('1', StoffString)], SammelList0),
 	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
 	ausgabeSammlung(SammelSetDanach, SammelList0, SammelListDanach),
@@ -24,7 +25,7 @@ ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	Vorgang = [Operation, SammelAnzahl],
 	Operation \= bekannt,
 	number_string(SammelAnzahl, SammelAnzahlString),
-	atom_string(Stoff, StoffString),
+	textResources:getText(Stoff, StoffString),
 	append(SammelList, [sam(SammelAnzahlString, StoffString)], SammelList0),
 	del_dict(Stoff, SammelSet, Vorgang, SammelSetDanach),
 	ausgabeSammlung(SammelSetDanach, SammelList0, SammelListDanach),
@@ -43,17 +44,22 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	bildeOperation(GesamtVorgaengeZeit, Operation, OperationStringMaske),
 	gebeKomponenteAus(Komponenten, '', KompPred),
 	atom_string(WandelAnz, WandelAnzString),
-	atom_string(Produkt, ProduktString),
-	atom_string(Operation, OperationString),
+	textResources:getText(Produkt, ProduktString),
+	textResources:getText(Operation, OperationString),
 
- 	string_concat('Führen Sie ', WandelAnzString, Anweisung0),
- 	string_concat(Anweisung0, ' mal ', Anweisung1),
+	textResources:getText(fuerenSie, FS),
+ 	string_concat(FS, WandelAnzString, Anweisung0),
+	textResources:getText(mal, Mal),
+ 	string_concat(Anweisung0, Mal, Anweisung1),
  	string_concat(Anweisung1, OperationString, Anweisung2),
- 	string_concat(Anweisung2, ' von ', Anweisung3),
+ 	textResources:getText(von, Von),
+ 	string_concat(Anweisung2, Von, Anweisung3),
  	string_concat(Anweisung3, ProduktString, Anweisung4),
- 	string_concat(Anweisung4, ' mit ', Anweisung5),
+ 	textResources:getText(mit, Mit),
+ 	string_concat(Anweisung4, Mit, Anweisung5),
  	string_concat(Anweisung5, KompPred, Anweisung6),
- 	string_concat(Anweisung6, ' aus', Anweisung),
+ 	textResources:getText(aus, Aus),
+ 	string_concat(Anweisung6, Aus, Anweisung),
 
     bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis),
 	append(VorgaengePred, [vorg(Anweisung, OperationStringMaske, Ergebnis)], VorgaengePred0),
@@ -64,9 +70,11 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
 	Kopf = [_, _, _, Operation, _, [_, Produkt]],
 	Operation = bekannt,
-	atom_string(Produkt, ProduktString),
-	string_concat('Das ', ProduktString, Anweisung0),
-	string_concat(Anweisung0, ' ist bekannt.', Anweisung),
+	textResources:getText(das, Das),
+	textResources:getText(Produkt, ProduktString),
+	string_concat(Das, ProduktString, Anweisung0),
+	textResources:getText(istBekannt, IB),
+	string_concat(Anweisung0, IB, Anweisung),
 	append(VorgaengePred, [vorg(Anweisung, Operation, '')], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
@@ -79,13 +87,16 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Zeit is (ProduktAnzahl * HauptZeit + RuestZeit + (ProduktAnzahl - 1) * NebenZeit),
 	bildeOperation(Zeit, Operation, OperationStringMaske),
 	atom_string(ProduktAnzahl, WandelAnzString),
-	atom_string(Operation, OperationString),
-	atom_string(Produkt, ProduktString),
+	textResources:getText(Operation, OperationString),
+	textResources:getText(Produkt, ProduktString),
 
- 	string_concat('Erlangen Sie ', WandelAnzString, Anweisung0),
- 	string_concat(Anweisung0, ' Einheiten ', Anweisung1),
+ 	textResources:getText(erlangenSie, ES),
+	string_concat(ES, WandelAnzString, Anweisung0),
+ 	textResources:getText(einheiten, Eh),
+	string_concat(Anweisung0, Eh, Anweisung1),
  	string_concat(Anweisung1, ProduktString, Anweisung2),
- 	string_concat(Anweisung2, ' mit ', Anweisung3),
+ 	textResources:getText(mit, Mit),
+	string_concat(Anweisung2, Mit, Anweisung3),
  	string_concat(Anweisung3, OperationString, Anweisung),
  	bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis),
  	append(VorgaengePred, [vorg(Anweisung, OperationStringMaske, Ergebnis)], VorgaengePred0),
@@ -108,20 +119,23 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	
 	atom_string(SystemNach, SystemNachString),
 	atom_string(PlanetNach, PlanetNachString),
-	atom_string(Nach, NachString),
-	atom_string(Produkt, ProduktString),
-
- 	string_concat('Bitte reisen Sie nach System ', SystemNachString, Anweisung6),
- 	string_concat(Anweisung6, ' Planet ', Anweisung7),
- 	string_concat(Anweisung7, PlanetNachString, Anweisung8), 
- 	string_concat(Anweisung8, ' ', Anweisung9),
- 	string_concat(Anweisung9, NachString, Anweisung10),
+	textResources:getText(Nach, NachString),
+	textResources:getText(Produkt, ProduktString),
+	textResources:getText(bitteReisenSieNachSystem, BRSNS),
+ 	string_concat(BRSNS, SystemNachString, Anweisung6),
+ 	textResources:getText(planet, Plan),
+ 	string_concat(Anweisung6, '-', Anweisung7),
+ 	string_concat(Anweisung7, Plan, Anweisung8),
+ 	string_concat(Anweisung8, PlanetNachString, Anweisung9), 
+ 	string_concat(Anweisung9, ' ', Anweisung10),
+ 	string_concat(Anweisung10, NachString, Anweisung11),
 	
- 	string_concat('in ', NachString, Ergebnis0),
+ 	textResources:getText(in, In),
+ 	string_concat(In, NachString, Ergebnis0),
  	string_concat(Ergebnis0, ' ', Ergebnis1),
  	string_concat(Ergebnis1, ProduktString, Ergebnis),
 
- 	append(VorgaengePred, [vorg(Anweisung10, OperationString, Ergebnis)], VorgaengePred0),
+ 	append(VorgaengePred, [vorg(Anweisung11, OperationString, Ergebnis)], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
@@ -132,14 +146,16 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
 bildeOperation(Zeit, Operation, OperationString) :-
 	atom_string(Zeit, ZeitString),
-	atom_string(Operation, OperationString0),
-	string_concat(ZeitString, ' 1/100 sec ', OperationString1),
+	textResources:getText(Operation, OperationString0),
+	textResources:getText(einHundertstel, EHstl),
+	string_concat(ZeitString, EHstl, OperationString1),
 	string_concat(OperationString1, OperationString0, OperationString).
 		
 bildeErgebnis(ProduktAnzahl, Produkt, Ergebnis) :-
 	atom_string(ProduktAnzahl, ProduktAnzahlString),
-	atom_string(Produkt, ProduktString),
- 	string_concat(ProduktAnzahlString, ' Einheiten ', Ergebnis0),
+	textResources:getText(Produkt, ProduktString),
+ 	textResources:getText(einheiten, EH),
+ 	string_concat(ProduktAnzahlString, EH, Ergebnis0),
  	string_concat(Ergebnis0, ProduktString, Ergebnis).	
 
 gebeKomponenteAus(Komponenten, KompPred, KompPredDanach) :-
@@ -150,7 +166,7 @@ gebeKomponenteAus(Komponenten, KompPred, KompPredDanach) :-
 	Komponenten = [ Kopf | Rest ],
 	Kopf = [Anzahl, Stoff],
 	atom_string(Anzahl, AnzahlString),
-	atom_string(Stoff, StoffString),
+	textResources:getText(Stoff, StoffString),
 	string_concat(KompPred, AnzahlString, KompPred0),
 	string_concat(KompPred0, ' x ', KompPred1),
 	string_concat(KompPred1, StoffString, KompPred2),
@@ -216,7 +232,7 @@ joinRecordsNumbering(ListOfLists1, ListOfLists2, InnereLaenge2, KombinierteListO
 	baueLeerStringList(InnereLaenge2, [], LeerStringList2),
 	joinLists(ListOfLists1, ListOfLists2, LeerStringList2, [], KombinierteListOfLists),
 	!.
-	
+
 joinLists(ListOfLists1, _, _, Bisher, Danach) :-
 	ListOfLists1 = [],
 	Bisher = Danach.
@@ -228,7 +244,7 @@ joinLists(ListOfLists1, ListOfLists2, LeerStringList2, Bisher, Danach) :-
 	append(Bisher, [KombinierterRecord], Bisher0),
 	joinLists(Rest1, Rest2, LeerStringList2, Bisher0, Danach),
 	!.
-	 	
+	
 joinRecordsByRecordNo(ListOfLists1, _, _, KombinierteListOfLists) :-
 	ListOfLists1 = [[]],
 	KombinierteListOfLists = [[]].
@@ -285,4 +301,4 @@ letzesListenElement(Liste, Ende) :-
 
 letzesListenElement([_|Rest], Ende) :-
 	letzesListenElement(Rest, Ende).
-	
+

@@ -23,7 +23,7 @@ produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 testOptimierteSammlung :-
 	spielStatus:spielStatusInit,
 	sammlung:sammlungInit,
-	sammlung:vorgefertigeLoesungenErstellen('System', 'MeinPlanet'),
+	sammlung:vorgefertigeLoesungenErstellen,
 	!,
 	stoff:stoff(StoffArt, Stoff, _),
 	StoffArt \= pass,

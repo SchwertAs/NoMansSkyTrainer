@@ -200,7 +200,7 @@ rezeptZulaessig(System, Planet, raffinieren, Komponenten, _) :-
 
 rezeptZulaessig(System, Planet, ausSauerStoffVearbeiterGewinnen, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	spielStatus:systemAusstattung([System, Planet, ortSauerStoffVearbeiter], _),
+	spielStatus:systemAusstattung([System, Planet, ortSauerStoffVerarbeiter], _),
 	!.
 
 rezeptZulaessig(System, Planet, ausAtmosphaerenAnlageGewinnen, Komponenten, Stoff) :-

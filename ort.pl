@@ -20,7 +20,7 @@ ort(ortForschungsTerminal).
 ort(ortFrachter).
 ort(ortSpieler).
 ort(ortBasis).
-ort(ortSauerStoffVearbeiter).
+ort(ortSauerStoffVerarbeiter).
 ort(ortAtmosphaerenAnlage).
 ort(ortBergbauEinheit).
 ort(ortPlantage).

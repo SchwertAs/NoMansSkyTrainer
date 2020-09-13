@@ -41,20 +41,20 @@ hierarchieGrafik(Vorgaenge, Svg) :-
   </defs>', Svg0),
   string_concat(Svg0, Svg1, Svg01),
   string_concat(Svg01, Svg2, Svg3),
-  string_concat(Svg3, '</svg>', Svg),
-  debug(myTrace, 'Vorgaenge: ~k', [Vorgaenge]).
+  string_concat(Svg3, '</svg>', Svg).
 
 useFromBeschriftung(Pos, Ebene, Stoff, PosParent, AnzPosesEbene, Use) :-
 	Ebene > 1,
 	nth1(Ebene, AnzPosesEbene, Anz),
 	EbeneParent is Ebene - 1,
 	nth1(EbeneParent, AnzPosesEbene, AnzParent),
-    breiteBeschriftung(Stoff, Breite),
-    X is (1500 / (Anz + 1)) * Pos - (Breite / 2) - 100,
+	textResources:getText(Stoff, Beschriftung),
+    breiteBeschriftung(Beschriftung, Breite),
+    X is (1500 / (Anz + 1)) * Pos - (Breite / 2) - 80,
 	Y is 60 * (Ebene - 1),
-	buildUseForBox(X, Y, Stoff, Use1),
+	buildUseForBox(X, Y, Beschriftung, Use1),
 	XArrow is X + (Breite / 2),
-	XParent is (1500 / (AnzParent + 1)) * PosParent - 100,
+	XParent is (1500 / (AnzParent + 1)) * PosParent - 80,
 	Yarrow is Y,
 	YArrowParent is Y - 28,
 	buildUseForArrow(XArrow, XParent, Yarrow, YArrowParent, Use2),
@@ -62,9 +62,10 @@ useFromBeschriftung(Pos, Ebene, Stoff, PosParent, AnzPosesEbene, Use) :-
 
 useFromBeschriftung(_, Ebene, Stoff, _, _, Use) :-
 	Ebene = 1,
-	breiteBeschriftung(Stoff, Breite),
-    X is 750 - (Breite / 2) - 100,
-	buildUseForBox(X, 0, Stoff, Use).
+	textResources:getText(Stoff, Beschriftung),
+    breiteBeschriftung(Beschriftung, Breite),
+    X is 750 - (Breite / 2) - 80,
+	buildUseForBox(X, 0, Beschriftung, Use).
 
 buildUseForBox(X, Y, Stoff, Use) :-
 	string_concat('<use x=', X, Use0),
@@ -84,7 +85,8 @@ buildUseForArrow(X, XParent, Yarrow, YArrowParent, Use) :-
 	string_concat(Use5, YArrowParent, Use6),
 	string_concat(Use6, '" transform=scale(1.0) rotate(0) translate(0,0) /></g>', Use).
 	
-symbolFromBeschriftung(Beschriftung, Symbol) :-
+symbolFromBeschriftung(Stoff, Symbol) :-
+	textResources:getText(Stoff, Beschriftung),
 	string_concat('<symbol id=textbox', Beschriftung, Sym0),
 	string_concat(Sym0, '> <rect class=kastenGelb x=0 y=0 width=', Sym1),
 	breiteBeschriftung(Beschriftung, Breite),
@@ -126,11 +128,11 @@ breiteBeschriftung(Beschriftung, Breite) :-
 	         lenOfCode(Code, Len)
 		    ), Lens),
 		    sum_list(Lens, Breite0),
-		    Breite is Breite0 + 5.
+		    Breite is Breite0 + 10.
 
 lenOfCode(Code, Len) :-
 	Code > 64,
-	Code < 91,
+	Code < 91,         /* A  B  C  D  E  F  G  H  I J K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z */
 	LenGrossBuchstaben = [12,12,13,13,12,11,14,13,5,9,12,10,15,13,14,12,14,13,12,11,13,12,17,12,12,11],
 	Index is Code - 64, 
 	nth1(Index, LenGrossBuchstaben, Len),
@@ -138,12 +140,23 @@ lenOfCode(Code, Len) :-
 	
 lenOfCode(Code, Len) :-
 	Code > 96,
-    Code < 123, 
+    Code < 123,        /* a  b  c d  e  f   g  h  i j k l m  n  o  p  q  r s t u  v w    x y z*/
 	LenKleinbuchstaben = [10,10,9,10,10,4.8,10,10,4,4,9,4,15,10,10,10,10,6,9,5,10,9,12.9,9,9,9], 
     Index is Code - 96, 
     nth1(Index, LenKleinbuchstaben, Len),
     !.
-    
+
+lenOfCode(Code, Len) :-
+	((Code = 32, Len = 10); /* " " */ 
+	 (Code = 228, Len = 10); /* äöüÄÖÜß */ 
+	 (Code = 246, Len = 10);
+	 (Code = 252, Len = 10);
+	 (Code = 196, Len = 12);
+	 (Code = 214, Len = 14);
+	 (Code = 220, Len = 13);
+	 (Code = 223, Len = 11)
+	).
+	
 lenOfCode(_, Len) :-
 	Len = 0.
 	
@@ -153,3 +166,4 @@ concatSymbols([], Svg0, Svg) :-
 concatSymbols([Sym0|Rest], Svg0, Svg) :-
 	string_concat(Svg0, Sym0, Svg1),
 	concatSymbols(Rest, Svg1, Svg).
+	    

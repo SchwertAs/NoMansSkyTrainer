@@ -199,6 +199,7 @@ optimierteLoesung(System, Planet, OptimierungsZiel, Anzahl, Stoff) :-
 	zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
 zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
+	textResources:getText(Stoff, Beschriftung),
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
@@ -219,7 +220,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 						th([scope('col')],['Planet'])
 				   	   ]),
 					tr([td(Anzahl),
-				    	td(Stoff),
+				    	td(Beschriftung),
 				    	td(Ziel),
 				    	td(System),
 				    	td(Planet)
@@ -260,9 +261,9 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 ausgabeSammlungDcg([]) -->
 	[].
 	
-ausgabeSammlungDcg([sam(Anzahl, Stoff) | Rest]) -->
+ausgabeSammlungDcg([sam(Anzahl, Beschriftung) | Rest]) -->
 	html([ tr([ td(Anzahl),
-                td(Stoff)
+                td(Beschriftung)
                   ])
              ]),
         ausgabeSammlungDcg(Rest).

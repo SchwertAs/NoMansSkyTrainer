@@ -52,7 +52,7 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortNahrungsProzessor], NahrungsProzessorEntfernungValNum) -> NahrungsProzessorVorhandenVal=true; NahrungsProzessorVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortBasisTerminus], BasisTerminusEntfernungValNum) -> BasisTerminusVorhandenVal=true; BasisTerminusVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortForschungsTerminal], ForschungsTerminalEntfernungValNum) -> ForschungsTerminalVorhandenVal=true; ForschungsTerminalVorhandenVal=false),
-	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSauerStoffVearbeiter], SauerstoffVearbeiterEntfernungValNum) -> SauerstoffVearbeiterVal=true; SauerstoffVearbeiterVal=false),
+	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSauerStoffVerarbeiter], SauerstoffVearbeiterEntfernungValNum) -> SauerstoffVearbeiterVal=true; SauerstoffVearbeiterVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAtmosphaerenAnlage], AtmosphaerenAnlageEntfernungValNum) -> AtmosphaerenAnlageVorhandenVal=true; AtmosphaerenAnlageVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortBergbauEinheit], BergbauEinheitEntfernungValNum) -> BergbauEinheitVorhandenVal=true; BergbauEinheitVorhandenVal=false),
 	 (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortPlantage], PlantageEntfernungValNum) -> PlantageVorhandenVal=true; PlantageVorhandenVal=false)
@@ -402,7 +402,7 @@ planetenEigenschaften(Request) :-
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortForschungsTerminal], KonstruktionsStationEntfernungNum))
       ),
       (SauerstoffVearbeiterVorhanden= off; 
-       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSauerStoffVearbeiter], SauerstoffVerarbeiterNum))
+       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSauerStoffVerarbeiter], SauerstoffVerarbeiterNum))
       ),
       (AtmosphaerenAnlageVorhanden= off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAtmosphaerenAnlage], AtmosphaerenAnlageEntfernungNum))

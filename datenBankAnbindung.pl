@@ -3,6 +3,7 @@
 :- use_module(library(persistency)).
 
 :- persistent
+	spracheDb(sprache:atom),
 	sammlungDb(recordNo:nonneg, system:atom, planet:atom, sammelAktion:atom, stoff:atom, hauptZeit:nonneg, nebenZeit:nonneg, ruestZeit:nonneg),
 	spielStatusDb(status:atom, vorhanden:boolean),
 	systemDb(recordNo:nonneg, system:atom, farbe:atom),
@@ -13,6 +14,7 @@
 datenInDbSpeichern :-
 	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
 	
+	retractall_spracheDb(_),
 	retractall_sammlungDb(_, _, _, _, _, _, _, _),
 	retractall_spielStatusDb(_, _),
 	retractall_systemDb(_, _, _),
@@ -22,6 +24,7 @@ datenInDbSpeichern :-
 	
 	db_sync(gc(always)),
 	
+	spielStatus:sprache(Sprache), assert_spracheDb(Sprache),
 	forall(sammlung:sammlung(RecordNo2, System2, Planet1, SammelAktion2, Stoff1, Haupt, Neben, Ruest),
 	       assert_sammlungDb(RecordNo2, System2, Planet1, SammelAktion2, Stoff1, Haupt, Neben, Ruest)),
 	forall(spielStatus:spielStatus(Feature, Vorhanden), assert_spielStatusDb(Feature, Vorhanden)),
@@ -37,6 +40,7 @@ datenVonDbHolen :-
 	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
 	db_sync(update),
 
+	ignore(retractall(spielStatus:sprache(_))),
 	ignore(retractall(sammlung:sammlung(_, _, _, _, _, _, _, _))),
 	ignore(retractall(spielStatus:spielStatus(_, _))),
 	ignore(retractall(spielStatus:systeme(_, _, _))),
@@ -44,6 +48,7 @@ datenVonDbHolen :-
 	ignore(retractall(spielStatus:systemAusstattung(_, _))),
 	ignore(retractall(sammlung:fertigeLoesung(_, _, _, _, _))),
 
+	spracheDb(Sprache), assertz(spielStatus:sprache(Sprache)),
 	forall(sammlungDb(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest),
 	       assertz(sammlung:sammlung(RecordNo2, System1, Planet1, SammelAktion2, Stoff2, Haupt, Neben, Ruest))),
 	forall(spielStatusDb(Feature, Vorhanden), assertz(spielStatus:spielStatus(Feature, Vorhanden))),

@@ -1,4 +1,4 @@
-:- module(sammlung, [sammlungInit/0, vorgefertigeLoesungenErstellen/2, sammlung/8, fertigeLoesung/5]).
+:- module(sammlung, [sammlungInit/0, vorgefertigeLoesungenErstellen/0, sammlung/8, fertigeLoesung/5]).
 
 :- dynamic(fertigeLoesung/5).
 :- dynamic(sammlung/8).
@@ -391,8 +391,8 @@ copyDefaultIfEmpty(System, Planet) :-
 	  true
 	).
 	
-vorgefertigeLoesungenErstellen(System, Planet) :-
-	\+alleVorfertigen(System, Planet).
+vorgefertigeLoesungenErstellen :-
+	forall(spielStatus:planeten(_, System, Planet, _), \+alleVorfertigen(System, Planet)).
 	
 	
 alleVorfertigen(System, Planet) :-

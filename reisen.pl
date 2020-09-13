@@ -74,15 +74,24 @@ vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, [System, Planet, VorgangsO
 vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, [System, Planet, VorgangsOrt]) :-
 	Vorgang = [_, _, _, inEinfacherRaffinerieRaffinieren, _, _],
 	NoetigeRaffinerieEingabeFaecher = 2,
-	spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], _),
+	spielStatus:systemAusstattung([System, Planet1, ortSimulationsSpieler], _),
+	((spielStatus:systemAusstattung([System, Planet1, ortKleineRaffinerie], _), Planet = Planet1);
+	 (spielStatus:systemAusstattung([System, Planet2, ortKleineRaffinerie], _), Planet2 \= 'MeinPlanet', Planet = Planet2)
+	),
 	VorgangsOrt = ortKleineRaffinerie,
 	!.
 
 vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, [System, Planet, VorgangsOrt]) :-
 	Vorgang = [_, _, _, raffinieren, _, _],
 	NoetigeRaffinerieEingabeFaecher = 1,
-	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], DistanzMittlereRaffinerie); DistanzMittlereRaffinerie = 99999999999),
-	(spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], DistanzGrosseRaffinerie); DistanzGrosseRaffinerie = 99999999999),
+	spielStatus:systemAusstattung([System, Planet1, ortSimulationsSpieler], _),
+	(((spielStatus:systemAusstattung([System, Planet1, ortMittlereRaffinerie], DistanzMittlereRaffinerie), Planet = Planet1); DistanzMittlereRaffinerie = 99999999999),
+	 ((spielStatus:systemAusstattung([System, Planet1, ortGrosseRaffinerie], DistanzGrosseRaffinerie), Planet = Planet1); DistanzGrosseRaffinerie = 99999999999)
+	 ;
+ 	 ((spielStatus:systemAusstattung([System, Planet2, ortMittlereRaffinerie], DistanzMittlereRaffinerie), Planet2 \= 'MeinPlanet', Planet = Planet2); DistanzMittlereRaffinerie = 99999999999),
+	 ((spielStatus:systemAusstattung([System, Planet2, ortGrosseRaffinerie], DistanzGrosseRaffinerie), Planet2 \= 'MeinPlanet', Planet = Planet2); DistanzGrosseRaffinerie = 99999999999)
+    ),
+    
 	min_member(NaehesteRaffinerie, [[DistanzMittlereRaffinerie, ortMittlereRaffinerie], 
 									[DistanzGrosseRaffinerie, ortGrosseRaffinerie]]),
 	NaehesteRaffinerie = [Distanz, VorgangsOrt0],
@@ -93,8 +102,13 @@ vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, [System, Planet, VorgangsO
 vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, [System, Planet, VorgangsOrt]) :-
 	Vorgang = [_, _, _, raffinieren, _, _],
 	NoetigeRaffinerieEingabeFaecher = 2,
-	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], DistanzMittlereRaffinerie); DistanzMittlereRaffinerie = 99999999999),
-	(spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], DistanzGrosseRaffinerie); DistanzGrosseRaffinerie = 99999999999),
+	spielStatus:systemAusstattung([System, Planet1, ortSimulationsSpieler], _),
+	(((spielStatus:systemAusstattung([System, Planet1, ortMittlereRaffinerie], DistanzMittlereRaffinerie), Planet = Planet1); DistanzMittlereRaffinerie = 99999999999),
+	 ((spielStatus:systemAusstattung([System, Planet1, ortGrosseRaffinerie], DistanzGrosseRaffinerie), Planet = Planet1); DistanzGrosseRaffinerie = 99999999999)
+     ;
+ 	 ((spielStatus:systemAusstattung([System, Planet2, ortMittlereRaffinerie], DistanzMittlereRaffinerie), Planet2 \= 'MeinPlanet', Planet = Planet2); DistanzMittlereRaffinerie = 99999999999),
+	 ((spielStatus:systemAusstattung([System, Planet2, ortGrosseRaffinerie], DistanzGrosseRaffinerie), Planet2 \= 'MeinPlanet', Planet = Planet2); DistanzGrosseRaffinerie = 99999999999)
+    ),
 	min_member(NaehesteRaffinerie, [[DistanzMittlereRaffinerie, ortMittlereRaffinerie], 
 									[DistanzGrosseRaffinerie, ortGrosseRaffinerie]]),
 	NaehesteRaffinerie = [Distanz, VorgangsOrt0],
@@ -105,7 +119,10 @@ vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, [System, Planet, VorgangsO
 vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, [System, Planet, VorgangsOrt]) :-
 	Vorgang = [_, _, _, raffinieren, _, _],
 	NoetigeRaffinerieEingabeFaecher = 3,
-	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
+	spielStatus:systemAusstattung([System, Planet1, ortSimulationsSpieler], _),
+	((spielStatus:systemAusstattung([System, Planet1, ortGrosseRaffinerie], _), Planet = Planet1);
+	 (spielStatus:systemAusstattung([System, Planet2, ortGrosseRaffinerie], _), Planet2 \= 'MeinPlanet', Planet = Planet2)
+	),
 	VorgangsOrt = ortGrosseRaffinerie,
 	!.
 
@@ -273,7 +290,7 @@ fuegeReiseOperationenEinSub(NoetigeRaffinerieEingabeFaecher, Vorgaenge, ReiseOrt
 
 vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, [SystemBisher, PlanetBisher, ReiseOrtBisher], [System, Planet, VorgangsOrt], VorgaengeBisher2, ReiseOrtBisherDanach) :-
 	ReiseOrtBisher = VorgangsOrt,
-	SystemBisher = System,
+	SystemBisher = System, /* Vorgangsort und Aufenthaltsort gleiches System, gleicher Planet */
 	PlanetBisher = Planet,
 	VorgaengeBisher2 = VorgaengeBisher,
 	ReiseOrtBisherDanach = [System, Planet, ReiseOrtBisher].
