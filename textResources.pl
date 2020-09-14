@@ -84,6 +84,21 @@ text(de, stoffKlasse, 'StoffKlasse: ').
 /* Fixtexte rezeptBekanntStoffklassenAuswahl */
 text(de, eingabeBekannteRezepte, 'Eingabe bekannte Rezepte').
 
+/* Fixtexte systemNamenDialog */
+text(de, eingabeSternenSysteme, 'Eingabe der Sternensysteme').
+text(de, systemName, 'System-Name').
+text(de, farbe, 'Farbe').
+text(de, dieZeile, 'Die Zeile ').
+text(de, inSpalte, ' in Spalte ').
+text(de, istUnvollstaendig, ' ist unvollständig').
+
+/* SternFarbe */
+text(de, gelb, 'gelb').
+text(de, rot, 'rot').
+text(de, gruen, 'grün').
+text(de, blau, 'blau').
+
+
 /* StoffKlassen */
 text(de, rohStoff, 'Rohstoff'). 
 text(de, komponente, 'Komponente'). 

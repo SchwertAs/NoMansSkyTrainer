@@ -19,10 +19,13 @@ systemNamenDialog(_Request) :-
 	ausgabe:joinRecordsByRecordNo(FeldNoList1, SystemList1, 2, NumerierteRecordList1),
 	ausgabe:joinRecordsByRecordNo(FeldNoList2, SystemList2, 2, NumerierteRecordList2),
 	ausgabe:joinRecordsByRecordNo(FeldNoList3, SystemList3, 2, NumerierteRecordList3),
+	textResources:getText(eingabeSternenSysteme, TxtEingabeSternenSysteme),	
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
 	
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], ['Eingabe der Sternensysteme']),
+	    h1([align(center)], [TxtEingabeSternenSysteme]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/systemNamen'), method('post')], 
@@ -34,8 +37,8 @@ systemNamenDialog(_Request) :-
 	       	           ])
 	       	      ]),
 			 table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-			       [td([button([name("submit"), type("submit")], 'OK')]),
-			    		td([button([name("reset"), type("reset")], 'reset')])
+			       [td([button([name("submit"), type("submit")], TxtOk)]),
+			    		td([button([name("reset"), type("reset")], TxtReset)])
 			    	   ])
 			       ]),
 		\['</formSpace>']
@@ -45,11 +48,15 @@ systemNamenDialog(_Request) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 innereTabelle(NumerierteRecordList) -->
+	{
+		textResources:getText(systemName, TxtSystemName),	
+		textResources:getText(farbe, TxtFarbe)
+	},
 	html(
 		[div(class('table'), 
 			 [div(class('tr'), 
-			      [div([class('th'), scope("col")], 'System-Name'),
-			       div([class('th'), scope("col")], 'Farbe')
+			      [div([class('th'), scope("col")], TxtSystemName),
+			       div([class('th'), scope("col")], TxtFarbe)
    	              ]),
    	           \innereEingabeZeile(NumerierteRecordList)
    	         ])
@@ -62,7 +69,7 @@ innereEingabeZeile([Record|Rest]) -->
 	{
 		Record = [FeldNo, System, Farbe],
 		SpalteNo is floor(FeldNo / 100),
-		findall([Farbe, Farbe0], member(Farbe0, ['gelb', 'rot', 'gruen']), Farben)
+		findall([Farbe, Farbe0], spielStatus:sternFarbe(Farbe0), Farben)
 	},
 	html([div(class('tr'), 
 	          [div(class('td'), 
@@ -75,9 +82,10 @@ innereEingabeZeile([Record|Rest]) -->
 
 baueOptionsFeld(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	{
+		textResources:getText(bitteWaehlen, TxtBitteWaehlen),
 		Index is (FeldNo mod 100 - 1) * 3 + StartIndex,
 		OptionsWerteListe = [[Wert,_]|_],
-		((Wert = '', OptionText = option(selected, 'Bitte wählen')); (OptionText = option('Bitte wählen')))
+		((Wert = '', OptionText = option(selected, TxtBitteWaehlen)); (OptionText = option(TxtBitteWaehlen)))
 	},
 	html([select([name(FeldName + FeldNo), id(FeldName + FeldNo), class("Nachschlagen"), size("1"), maxlength(20), tabindex(Index)],
 			     [
@@ -92,7 +100,7 @@ baueOption([]) -->
 baueOption([OptionTupel|Rest]) -->
 	{
 		OptionTupel = [Wert, Option],
-		atom_string(Option, OptionText),
+		textResources:getText(Option, OptionText),
 		((Wert = Option, OptionText0 = option(selected, OptionText)); (OptionText0 = option(OptionText)))
 	},
 	html([
@@ -133,7 +141,8 @@ pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, System, Farbe) :-
   	OffsetSystem is 2 * (Spalte - 1) * GesamtZeilenZahl + Zeile,
     OffsetFarbe is 2 * (Spalte - 1) * GesamtZeilenZahl + GesamtZeilenZahl + Zeile,
     nth1(OffsetSystem, VarValueList, System),
-    nth1(OffsetFarbe, VarValueList, Farbe).
+    nth1(OffsetFarbe, VarValueList, TxtFarbe),
+    textResources:getText(Farbe, TxtFarbe).
 
 ablegen(GesamtZeilenZahl, VarValueList) :-
 	between(1, 3, Spalte),
@@ -215,39 +224,45 @@ insUpdDel(FeldNeu, SystemNeu, _) :-
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
+	textResources:getText(gespeichert, TxtGespeichert),
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),'gespeichert!'),
+		h3(align(center),TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 fehlerZeile(Zeile, Spalte) :-
 	server:holeCssAlsStyle(StyleString),
-	string_concat('Die Zeile ', Zeile, FehlerMeldung0),
-	string_concat(FehlerMeldung0, ' in Spalte ', FehlerMeldung1),
+	textResources:getText(dieZeile, TxtDieZeile),
+	textResources:getText(inSpalte, TxtInSpalte),
+	textResources:getText(istUnvollstaendig, TxtIstUnvollstaendig),
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),
+	string_concat(TxtDieZeile, Zeile, FehlerMeldung0),
+	string_concat(FehlerMeldung0, TxtInSpalte, FehlerMeldung1),
 	string_concat(FehlerMeldung1, Spalte, FehlerMeldung2),
-   	string_concat(FehlerMeldung2, ' ist unvollständig', FehlerMeldung),
+   	string_concat(FehlerMeldung2, TxtIstUnvollstaendig, FehlerMeldung),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),
 		\['</redHeader>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 gueltigeZeile(System, Farbe) :-
 	System \= "",
-	Farbe \= 'Bitte wählen'.
+	Farbe \= bitteWaehlen.
 
 leereZeile(System, Farbe) :-
 	System = "",
-	Farbe = 'Bitte wählen'.
+	Farbe = bitteWaehlen.
 
 	

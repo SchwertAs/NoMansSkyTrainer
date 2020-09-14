@@ -1,4 +1,5 @@
-:- module(spielStatus, [planeten/4, systeme/3, spielStatus/2, systemAusstattung/2, sprache/1]).
+:- module(spielStatus, [planeten/4, systeme/3, spielStatus/2, 
+          systemAusstattung/2, sprache/1, sternFarbe/1]).
 
 :- dynamic(spielStatus/2).
 :- dynamic(systeme/3).
@@ -33,6 +34,11 @@ initSpielStatus :-
 initSysteme :-
 	abolish(systeme/3)
 	,assertz(systeme(0, 'System', 'gelb')).
+
+sternFarbe('gelb').
+sternFarbe('rot').
+sternFarbe('gruen').
+sternFarbe('blau').
 	
 initPlaneten :-
 	abolish(planeten/4)

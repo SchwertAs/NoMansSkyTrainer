@@ -176,8 +176,7 @@ spielStatus(Request) :-
 	sammlung:vorgefertigeLoesungenErstellen,
     server:holeCssAlsStyle(StyleString),
 	textResources:getText(gespeichert, TxtGespeichert),
-	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),
-	
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedHead = [\[StyleString], title('No mans sky trainer: Vorraussetzungen Materialsammlung')],
 	TermerizedBody = [
 		\['<header>'],
