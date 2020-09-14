@@ -8,17 +8,20 @@
 systemAuswahlDialog(HeaderText, Action) :-
 	findall(System, (spielStatus:systeme(_, System, _), System \= 'System'), Systeme),
 	server:baueOptionsFeld('auswahlSystem', Systeme, 2, OptionList),
+	textResources:getText(sternensystem, TxtSternensystem),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
 		\['<header>'],
 	    h1([align(center)], [HeaderText]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action(Action), method('post'), name('systemAuswahlForm')], 
-	       	 [h3('Sternensystem'),
+	       	 [h3(TxtSternensystem),
 	       	  \eingabeTabelle(OptionList),
 	       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-			    	  [td([button([name("submit"), type("submit")], 'OK')]),
-			    	   td([button([name("reset"), type("reset")], 'reset')])
+			    	  [td([button([name("submit"), type("submit")], TxtOk)]),
+			    	   td([button([name("reset"), type("reset")], TxtReset)])
 			    	  ]))    
 			 ]),
 		\['</formSpace>']
@@ -28,11 +31,13 @@ systemAuswahlDialog(HeaderText, Action) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
+	{	textResources:getText(system, TxtSystem)
+	},
 	html(
    	  div(class('table30'),[
    	    div(class('tr'), [
    	  	    div(class('td'), [
-   	  	  	label([for('auswahlSystem')],'System: '),
+   	  	  	label([for('auswahlSystem')], TxtSystem),
    	  	  	\OptionList
    	  	    ]) 
    	  	])
@@ -40,10 +45,15 @@ eingabeTabelle(OptionList) -->
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetAuswahlDialog(HeaderText, Action, Request) :-
-	member(method(post), Request), !,
+	member(method(post), Request), 
+	!,
+	textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+	textResources:getText(auswahlHimmelskoerper, TxtAuswahlHimmelskoerper),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0])]),
-	((AuswahlSystem = 'Bitte wählen', fehlerBehandlung); 
+	((AuswahlSystem = TxtBitteWaehlen, fehlerBehandlung); 
 	(
 	 findall(Planet, (spielStatus:planeten(_, AuswahlSystem, Planet, _), Planet \= 'MeinPlanet'), Planeten),
 	 server:baueOptionsFeld('auswahlPlanet', Planeten, 2, OptionList),
@@ -54,11 +64,11 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
      \['</header>'],
 	 \['<formSpace>'],       
      form([action(Action), method('post'), name('planetAuswahlForm')], 
-       	 [h3('Auswahl Himmelskörper'),
+       	 [h3(TxtAuswahlHimmelskoerper),
        	  \planetenAnzeige(AuswahlSystem, OptionList),
        	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-		    	  [td([button([name("submit"), type("submit")], 'OK')]),
-		    	   td([button([name("reset"), type("reset")], 'reset')])
+		    	  [td([button([name("submit"), type("submit")], TxtOk)]),
+		    	   td([button([name("reset"), type("reset")], TxtReset)])
 		    	  ]))    
 		 ]),
 	 \['</formSpace>']
@@ -69,12 +79,15 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	)).
 
 planetenAnzeige(AuswahlSystem, OptionList) -->
+	{ 	textResources:getText(system, TxtSystem),
+		textResources:getText(planet, TxtPlanet)
+	},
 	html(
    	  div(class('table50'),[
    	    div(class('tr'), [
-   	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1),
+   	    	\divInputReadOnly('auswahlSystem', TxtSystem, AuswahlSystem, 1),
    	  	    div(class('td'), [
-   	  	  	label([for('planetenName')],'Planet: '),
+   	  	  	label([for('planetenName')], TxtPlanet),
    	  	  	\OptionList
    	  	    ]) 
    	  	])

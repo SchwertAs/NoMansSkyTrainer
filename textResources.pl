@@ -1,8 +1,8 @@
 :- module(textResources, [getText/2]).
 
 getText(Atom, Text) :-
-	spielStatus:sprache(Sprache),
-	text(Sprache, Atom, Text).
+	spielStatus:sprache(Sprache), 
+	(text(Sprache, Atom, Text); Text = 'default'; Atom = default).
 
 atomToSubstantiv(Stoff, Beschriftung) :-
 	atom_string(Stoff, StoffString),
@@ -15,18 +15,18 @@ atomToSubstantiv(Stoff, Beschriftung) :-
 /* text(<Sprachkennzeichen>, <atom>, <Text>).*/
 /* Fixtexte StoffErlangenDialog*/
 text(de, bitteReisenSieNachSystem, "Bitte reisen Sie nach System: ").
-text(de, planet, " Planet: ").
+text(de, leerPlanet, " Planet: ").
 text(de, fuerenSie, "Führen Sie ").
-text(de, mal, " mal ").
-text(de, von, " von ").
-text(de, mit, " mit ").
-text(de, aus, " aus").
+text(de, leerMal, " mal ").
+text(de, leerVon, " von ").
+text(de, leerMit, " mit ").
+text(de, leerAus, " aus").
 text(de, das, "Das ").
 text(de, in, "in ").
-text(de, istBekannt, " ist bekannt.").
+text(de, leerIstBekannt, " ist bekannt.").
 text(de, erlangenSie, "Erlangen Sie ").
-text(de, einheiten, " Einheiten ").
-text(de, einHundertstel, " 1/100 sec ").
+text(de, leerEinheiten, " Einheiten ").
+text(de, leerEinHundertstel, " 1/100 sec ").
 text(de, reisen, "reisen").
 text(de, angekommen, "angekommen").
 
@@ -92,6 +92,12 @@ text(de, dieZeile, 'Die Zeile ').
 text(de, inSpalte, ' in Spalte ').
 text(de, istUnvollstaendig, ' ist unvollständig').
 
+/* Fixtexte planetAuswahlDialog */
+text(de, sternensystem, 'Sternensystem').
+text(de, system, 'System: ').
+text(de, auswahlHimmelskoerper, 'Auswahl Himmelskörper').
+text(de, planet, 'Planet: ').
+
 /* SternFarbe */
 text(de, gelb, 'gelb').
 text(de, rot, 'rot').
@@ -110,7 +116,7 @@ text(de, basisBauEndStoff, 'Basis-Baustoff').
 text(de, stoerung, 'Störung').
 text(de, geste, 'Geste').
 text(de, kleidung, 'Kleidung').
-text(de, handelsWare, 'HandelsWare').
+text(de, han_lsWare, 'HandelsWare').
 text(de, kuriositaet, 'Kuriosität'). 
 text(de, artefakt, 'Artefakt'). 
 text(de, bauRezept, 'Baurezept'). 
