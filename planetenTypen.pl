@@ -98,7 +98,7 @@ planetenGruppePlanetenTyp(unbelebter, tot).
 planetenGruppePlanetenTyp(trostloserTot, tot).
 
 planetenGruppePlanetenTyp(chromatischerNebel, megaExotisch). 
-planetenGruppePlanetenTyp(toedlicheGrueneAnomalie, megaExotisch). 
+planetenGruppePlanetenTyp(toedlicheGrueneAnomalieMegaExot, megaExotisch). 
 planetenGruppePlanetenTyp(himmelBlauerPlanet, megaExotisch). 
 planetenGruppePlanetenTyp(verlorenerBlauerPlanet, megaExotisch). 
 
@@ -138,7 +138,6 @@ planetenGruppePlanetenTyp(scharfer, giftig).
 planetenGruppePlanetenTyp(sengender, heiss). 
 planetenGruppePlanetenTyp(sengendHeisser, heiss). 
 planetenGruppePlanetenTyp(siedender, heiss). 
-planetenGruppePlanetenTyp(schaedlicher, giftig). 
 planetenGruppePlanetenTyp(staubiger, frostig). 
 planetenGruppePlanetenTyp(sternKorruptionEntdeckt, frostig). 
 planetenGruppePlanetenTyp(superkritischer, radioAktiv). 

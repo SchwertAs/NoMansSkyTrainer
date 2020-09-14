@@ -11,17 +11,19 @@
 
 /* ----------------------  Auswahl System  ----------------------------------------------------*/
 planetMondNameSystemAuswahlDialog(_Request) :-
+	textResources:getText(eigenschaftenSternenSystemEingeben, TxtEigenschaftenSternenSystemEingeben),
 	planetAuswahlDialog:systemAuswahlDialog(
-		'Eigenschaften Sternensystem eingeben', 
+		TxtEigenschaftenSternenSystemEingeben, 
 		'/planetMondNameDialog').
 		
 /* ----------------------  Eingabe Himmelskörper  ---------------------------------------------*/
 planetMondNameDialog(Request) :-
 	member(method(post), Request), !,
+	textResources:getText(bitteWaehlen, TxtBitteWaehlen),
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0])
 	]),
-	(AuswahlSystem = 'Bitte wählen' -> planetAuswahlDialog:fehlerBehandlung; 
+	(AuswahlSystem = TxtBitteWaehlen -> planetAuswahlDialog:fehlerBehandlung; 
 	 planetMondNameAnzeigen(AuswahlSystem)
 	).
 
@@ -30,27 +32,36 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	findall([RecordNo, HimmelsKoerper, PlanetenTyp], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper, PlanetenTyp), HimmelsKoerperListe0),
 	sort(HimmelsKoerperListe0, HimmelsKoerperListe),
 	ausgabe:joinRecordsByRecordNo(FeldNoList, HimmelsKoerperListe, 2, NumerierteRecordList),
+	textResources:getText(sternenSystemNamenHimmelskoerperEingeben, TxtSternenSystemNamenHimmelskoerperEingeben),
+	textResources:getText(sternensystem, TxtSternensystem),
+	textResources:getText(planetenUndMonde, TxtPlanetenUndMonde),
+	textResources:getText(name, TxtName),
+	textResources:getText(planetenTyp, TxtPlanetenTyp),
+	textResources:getText(planetenTypBeiScanAusWeltraumAngezeigt, TxtPlanetenTypBeiScanAusWeltraumAngezeigt),
+	textResources:getText(alternativStehtErAuchInDerEndtdeckungsListe, TxtAlternativStehtErAuchInDerEndtdeckungsListe),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], ['Sternensystem: Namen der Himmelskörper eingeben']),
+	    h1([align(center)], [TxtSternenSystemNamenHimmelskoerperEingeben]),
 	    \['</header>'] ,
 		\['<formSpace>'],       
 	    form([action('/planetMondName'), method('post'), name('systemEigenschaftenForm')], 
-	       	 [h3('Sternensystem'),
+	       	 [h3(TxtSternensystem),
        	  	  \eingabeTabelleReadOnly(AuswahlSystem),
-	       	  h3('Planeten und Monde'),
+	       	  h3(TxtPlanetenUndMonde),
 	       	  div(class('table50'),
 	       	        [div(class('tr'), 
-	       	             [div([class('th'), scope("col")], 'Name'),
-	       	              div([class('th'), scope("col")], 'Planetentyp')
+	       	             [div([class('th'), scope("col")], TxtName),
+	       	              div([class('th'), scope("col")], TxtPlanetenTyp)
 	       	             ]),
 	       	         \innereEingabeZeile(NumerierteRecordList)
 	       	             ]), 
-			       	  p(id(compactText), ['Der Planetentyp wird beim Scan aus dem Weltraum angezeigt.']),
-			       	  p(id(compactText), ['Alternativ steht er auch in der Entdeckungsliste. Im Fenster wenn man mit der Maus über den Planetennamen fährt.']),
+			       	  p(id(compactText), [TxtPlanetenTypBeiScanAusWeltraumAngezeigt]),
+			       	  p(id(compactText), [TxtAlternativStehtErAuchInDerEndtdeckungsListe]),
 			       	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-			    	  [td([button([name("submit"), type("submit")], 'OK')]),
-			    	   td([button([name("reset"), type("reset")], 'reset')])
+			    	  [td([button([name("submit"), type("submit")], TxtOk)]),
+			    	   td([button([name("reset"), type("reset")], TxtReset)])
 			    	  ]))
  			 ]),
 		\['</formSpace>'] 
@@ -89,8 +100,11 @@ innereEingabeZeile([]) -->
 innereEingabeZeile([Record|Rest]) -->
 	{
 		Record = [FeldNo, Planet, PlanetenTyp],
-		((PlanetenTyp = '', PlanetenTyp0 = 'Bitte wählen'); (PlanetenTyp0 = PlanetenTyp)),
-		findall([PlanetenTyp0, PlanTyp], planetenTypen:planetenGruppePlanetenTyp(PlanTyp, _), PlanetenTypen0),
+		textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+		((PlanetenTyp = '', PlanetenTyp0 = TxtBitteWaehlen); (PlanetenTyp0 = PlanetenTyp)),
+		findall([PlanetenTyp0, PlanTyp], 
+			planetenTypen:planetenGruppePlanetenTyp(PlanTyp, _),
+			PlanetenTypen0),
 		sort(PlanetenTypen0, PlanetenTypen)
 	},
 	html([div(class('tr'), 
@@ -104,9 +118,10 @@ innereEingabeZeile([Record|Rest]) -->
 
 baueOptionsFeldMitVorwahl(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	{
+		textResources:getText(bitteWaehlen, TxtBitteWaehlen),
 		Index is FeldNo mod 100 + StartIndex,
 		OptionsWerteListe = [[Wert,_]|_],
-		((Wert = '', OptionText = option(selected, 'Bitte wählen')); (OptionText = option('Bitte wählen')))
+		((Wert = '', OptionText = option(selected, TxtBitteWaehlen)); (OptionText = option(TxtBitteWaehlen)))
 	},
 	html([select([name(FeldName + FeldNo), id(FeldName + FeldNo), class("Nachschlagen"), size("1"), maxlength(20), tabindex(Index)],
 			     [
@@ -121,7 +136,7 @@ baueOptionMitVorwahl([]) -->
 baueOptionMitVorwahl([OptionTupel|Rest]) -->
 	{
 		OptionTupel = [Wert, Option],
-		atom_string(Option, OptionText),
+		textResources:getText(Option, OptionText),
 		((Wert = Option, OptionText0 = option(selected(selected), OptionText)); (OptionText0 = option(OptionText)))
 	},
 	html([
@@ -175,38 +190,41 @@ plausibleEingabe(VarValueList, GesamtZeilenZahl) :-
 	nb_setval('ZeileNoFehler', 0),
 	between(1, GesamtZeilenZahl, ZeileNo),
 	pickeZeile(GesamtZeilenZahl, ZeileNo, VarValueList, Planet, PlanetenTyp),
-    debug(myTrace, 'Plausi: Planet=~k PlanetenTyp=~k', [Planet, PlanetenTyp]),
-	\+leereZeile(Planet, PlanetenTyp),
+    \+leereZeile(Planet, PlanetenTyp),
 	\+gueltigeZeile(Planet, PlanetenTyp),
 	nb_setval('ZeileNoFehler', ZeileNo),
 	!, fail.
 
 pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, Planet, PlanetenTyp) :-
-  	OffsetPlanet is 1 + 0 * GesamtZeilenZahl + ZeilenZahl,
+    OffsetPlanet is 1 + 0 * GesamtZeilenZahl + ZeilenZahl,
     OffsetPlanetenTyp is 1 + 1 * GesamtZeilenZahl + ZeilenZahl,
     nth1(OffsetPlanet, VarValueList, Planet),
-    nth1(OffsetPlanetenTyp, VarValueList, PlanetenTyp).
+    nth1(OffsetPlanetenTyp, VarValueList, PlanetenTyp0),
+    textResources:getText(PlanetenTyp, PlanetenTyp0).
 
 leereZeile(Planet, PlanetenTyp) :-
 	Planet = "",
-	PlanetenTyp = 'Bitte wählen'.
+	PlanetenTyp = bitteWaehlen.
 
 gueltigeZeile(Planet, PlanetenTyp) :-
 	Planet \= "",
-	PlanetenTyp \= 'Bitte wählen'.
+	PlanetenTyp \= bitteWaehlen.
 
 fehlerZeile(FeldNo) :-
 	server:holeCssAlsStyle(StyleString),
 	ZeileNo is FeldNo mod 100,
-   	string_concat('Die Zeile ', ZeileNo, FehlerMeldung0),
-   	string_concat(FehlerMeldung0, ' ist unvollständig', FehlerMeldung),
+   	textResources:getText(dieZeile, TxtDieZeile),	
+	textResources:getText(istUnvollstaendig, TxtIstUnvollstaendig),	
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),	
+	string_concat(TxtDieZeile, ZeileNo, FehlerMeldung0),
+   	string_concat(FehlerMeldung0, TxtIstUnvollstaendig, FehlerMeldung),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneingabe Fehler')],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),
 		\['</redHeader>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
@@ -221,7 +239,8 @@ ablegen(AuswahlSystem, GesamtZeilenZahl, VarValueList) :-
 	fail.
 
 defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-
-	PlanetenTyp0 = 'Bitte wählen',
+	textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+	PlanetenTyp0 = TxtBitteWaehlen,
 	PlanetenTyp = '',
 	!.
 	
@@ -231,12 +250,14 @@ defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-
 gespeichert :-
     server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Himmelskörper-Namen')],
+	textResources:getText(gespeichert, TxtGespeichert),
+	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),'gespeichert!'),
+		h3(align(center), TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).

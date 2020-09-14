@@ -112,9 +112,10 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 fehlerBehandlung :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
+	textResources:getText(bitteEineAuswahlTreffen, TxtBitteEineAuswahlTreffen),
 	TermerizedBody = [
 		\['<redHeader>'],
-		h3(align(center),'bitte eine Auswahl treffen!'),
+		h3(align(center), TxtBitteEineAuswahlTreffen),
 		\['</redHeader>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
