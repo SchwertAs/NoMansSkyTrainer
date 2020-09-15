@@ -3,7 +3,11 @@
           letzesListenElement/2]).
 
 baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
-	findall(St, (select(Sk, StoffKlassen, _), stoff:stoff(Sk, St, _)), Stoffe).
+	findall(St, 
+	  (select(Sk, StoffKlassen, _), 
+	   stoff:stoff(Sk, St0, _),
+	   textResources:getText(St0, St)
+	  ), Stoffe).
 	
 ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
@@ -87,13 +91,13 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Zeit is (ProduktAnzahl * HauptZeit + RuestZeit + (ProduktAnzahl - 1) * NebenZeit),
 	bildeOperation(Zeit, Operation, OperationStringMaske),
 	atom_string(ProduktAnzahl, WandelAnzString),
-	textResources:getText(txtOperation, OperationString),
-	textResources:getText(txtProdukt, ProduktString),
+	textResources:getText(Operation, OperationString),
+	textResources:getText(Produkt, ProduktString),
 
- 	textResources:getText(txtErlangenSie, ES),
-	string_concat(ES, WandelAnzString, Anweisung0),
- 	textResources:getText(txtLeerEinheiten, Eh),
-	string_concat(Anweisung0, Eh, Anweisung1),
+ 	textResources:getText(txtErlangenSie, TxtErlangenSie),
+	string_concat(TxtErlangenSie, WandelAnzString, Anweisung0),
+ 	textResources:getText(txtLeerEinheiten, TxtLeerEinheiten),
+	string_concat(Anweisung0, TxtLeerEinheiten, Anweisung1),
  	string_concat(Anweisung1, ProduktString, Anweisung2),
  	textResources:getText(txtLeerMit, Mit),
 	string_concat(Anweisung2, Mit, Anweisung3),

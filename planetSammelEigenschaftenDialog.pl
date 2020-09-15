@@ -89,16 +89,16 @@ planetSammelEigenschaftenDialog(Request) :-
 	 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt)
 	).
 
-planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt) :-
+planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt0) :-
+	textResources:getText(AuswahlSammelArt, AuswahlSammelArt0),
     /* einlesen der Eigenschaften */
     GesamtZeilenZahl = 15,
-	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest, AuswahlSammelArt], 
-	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest),
-	        Operation = AuswahlSammelArt
+	findall([RecordNo, Stoff, AuswahlSammelArt, Haupt, Neben, Ruest], 
+	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, Stoff, Haupt, Neben, Ruest)
 	       ), 
 	       RecordList),
 	findall([FeldNo], between(1, GesamtZeilenZahl, FeldNo), FeldNoList),
-	ausgabe:joinRecordsByRecordNo(FeldNoList, RecordList, 6, NumerierteRecordList),
+	ausgabe:joinRecordsByRecordNo(FeldNoList, RecordList, 5, NumerierteRecordList),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	textResources:getText(txtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst, TxtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst),
@@ -115,7 +115,7 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
        	 [\eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt),
        	  div([class('table')],
 	       	        [div(class('tr'), 
-	       	             [div(class('td'), \innereTabelle(NumerierteRecordList))
+	       	             [div(class('td'), \innereTabelle(NumerierteRecordList, AuswahlSammelArt, GesamtZeilenZahl))
 	       	             ])
 	       	        ]),
        	  p(id(compactText), [TxtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst]),
@@ -156,21 +156,31 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
 		    var par1Tupel = parameter[1].split(''='');
 		    var par2Tupel = parameter[2].split(''='');
 		    var par3Tupel = parameter[3].split(''='');
-		    if(anzahl.value == "" && dauer.value == "" && gebinde.value == "") {
+		    //console.log("Anzahl %s", par1Tupel[1]);
+		    //console.log("Dauer %s", par2Tupel[1]);
+		    //console.log("Gebindezahl %s", par3Tupel[1]);
+		    if (par1Tupel[1] == "-1")
+		    {
+		    	//console.log("Bedingung1 erfüllt");
+		    	anzahl.value = " ";
+		    	dauer.value = " ";
+		    	gebinde.value = " ";
+		    } else
+		    if(anzahl.value == "" && dauer.value == "" && gebinde.value == "")
+		    {
+		    	//console.log("Bedingung2 erfüllt");
 		    	anzahl.value = par1Tupel[1];
 		    	dauer.value = par2Tupel[1];
 		    	gebinde.value = par3Tupel[1];
-		    }
+		    } 
 		}
 		); 
-		if(rohstoff.value != ''Bitte wählen'' ) {
-			var req = "AjaxSammlungDefault?ajaxMethode=" + methode.value
-			     + "&" + "ajaxSystem=" + system.value
-			     + "&" + "ajaxPlanet=" + planet.value
-			     + "&" + "ajaxRohStoff=" + rohstoff.value;
-			request.open("GET", req);
-			request.send();
-		}
+		var req = "AjaxSammlungDefault?ajaxMethode=" + methode.value
+		     + "&" + "ajaxSystem=" + system.value
+		     + "&" + "ajaxPlanet=" + planet.value
+		     + "&" + "ajaxRohStoff=" + rohstoff.value;
+		request.open("GET", req);
+		request.send();
 	}
 	</script>'
      ]
@@ -222,7 +232,7 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
    	  	])
 	).
 
-innereTabelle(NumerierteRecordList) -->
+innereTabelle(NumerierteRecordList, AuswahlSammelArt, GesamtZeilenZahl) -->
 	html(
 		[div(class('table'), 
 			   [div(class('tr'), 
@@ -231,29 +241,26 @@ innereTabelle(NumerierteRecordList) -->
 			    div([class('th'), scope("col")],['Dauer 1/100 s']),
 			    div([class('th'), scope("col")],['Gebindezahl'])
    	           ]),
-   	           \innereEingabeZeile(NumerierteRecordList)
+   	           \innereEingabeZeile(NumerierteRecordList, AuswahlSammelArt, GesamtZeilenZahl)
    	           ])
    	    ]).
 	
-innereEingabeZeile([]) -->
+innereEingabeZeile([], _, _) -->
 	[].
 
-innereEingabeZeile([Record|Rest]) -->
+innereEingabeZeile([Record|Rest], AuswahlSammelArt, GesamtZeilenZahl) -->
 	{
-	Record = [FeldNo, Stoff, Operation, Haupt, Neben, Ruest, _],
-	((Stoff = '', Stoff0 = 'Bitte wählen'); (Stoff0 = Stoff)),
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
+	Record = [FeldNo, Stoff, Operation, Haupt, Neben, Ruest],
+	((Stoff = '', Stoff0 = TxtBitteWaehlen); (Stoff0 = Stoff)),
 	((Haupt = '', Haupt0 = 0); (Haupt0 = Haupt)),
 	((Neben = '', Neben0 = 0); (Neben0 = Neben)),
 	((Ruest = '', Ruest0 = 0); (Ruest0 = Ruest)),
 	arbeitsVorbereitung:toDauer(Operation, 1, Ruest0, Haupt0, Neben0, Dauer0),
 	((Dauer0 = 0, Gebinde = '', Anzahl = '', Dauer = ''); (Gebinde = 1, Anzahl = 1, Dauer = Dauer0)),
-
-	findall([0, St0], (sammlung:sammlung(_, 'System', 'MeinPlanet', Op, St0, _, _, _), Op = ertauchen), SammelStoffe0),
-	findall([FeldNo2], between(1, 14, FeldNo2), FeldNoList),
-	ausgabe:joinRecordsByRecordNo(FeldNoList, SammelStoffe0, 2, SammelStoffe1),
-	findall(St1, (member(StTup1, SammelStoffe1), StTup1 = [_, St1]), SammelStoffe2),
-	sort(SammelStoffe2, SammelStoffe3),
-	findall([Stoff0, St2], member(St2, SammelStoffe3), SammelStoffe)
+	findall( St, sammlung:sammlung(_, 'System', 'MeinPlanet', AuswahlSammelArt, St, _, _, _), SammelStoffe0),
+	sort(SammelStoffe0, SammelStoffe1),
+	findall([Stoff0, St2], member(St2, SammelStoffe1), SammelStoffe)
 	},
 	html([	 
 	      div(class('tr'), [ 
@@ -263,7 +270,7 @@ innereEingabeZeile([Record|Rest]) -->
 			div(class('td'), [input([name('gebinde' + FeldNo), type('number'), min('1'), max('30'), value(Gebinde)])])
 		 ])
    	   ]),
-   	   innereEingabeZeile(Rest).   	   
+   	   innereEingabeZeile(Rest, AuswahlSammelArt, GesamtZeilenZahl).   	   
 
 baueOptionsFeldMitVorwahl(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	{
@@ -402,21 +409,23 @@ ajaxSammlungDefault(Request) :-
 	debug(myTrace, '~k', 'ajaxSammlungDefault aufgerufen'),
 	member(method(get), Request), !, 
 	http_parameters(Request, 
-	[ajaxRohStoff(AuswahlRohStoff, [length > 0]),
+	[ajaxRohStoff(AuswahlRohStoff0, [length > 0]),
 	 ajaxSystem(AuswahlSystem, [length > 0]),
 	 ajaxPlanet(AuswahlPlanet, [length > 0]),
 	 ajaxMethode(AuswahlMethode, [length > 0])
 	]), !,
+	textResources:getText(AuswahlRohStoff, AuswahlRohStoff0),
 	debug(myTrace, 'System: ~k', AuswahlSystem),
 	debug(myTrace, 'Planet: ~k', AuswahlPlanet),
 	debug(myTrace, 'Rohstoff: ~k', AuswahlRohStoff),
 	debug(myTrace, 'Methode: ~s', AuswahlMethode),
     format('Content-type: text/plain~n~n'),
-    ((sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlMethode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1);
-	 (sammlung:sammlung(_, 'System', 'MeinPlanet', AuswahlMethode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1);
-	 (Haupt = 0, Ruest = 0, Anzahl = 0)
+    ((sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlMethode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, debug(myTrace, 'lokal', []));
+	 (sammlung:sammlung(_, 'System', 'MeinPlanet', AuswahlMethode, AuswahlRohStoff, Haupt, _, Ruest), Anzahl = 1, debug(myTrace, 'allgemein', []));
+	 (AuswahlRohStoff = txtBitteWaehlen, Haupt = -1, Ruest= -1, Anzahl = -1, debug(myTrace, 'leeren', []));
+	 (Haupt = 0, Ruest = 0, Anzahl = 1, debug(myTrace, 'default', []))
 	),
-    debug(myTrace, 'Haupt: ~k, Ruest: ~k', [Haupt, Ruest]),
 	Dauer is round(Haupt + Ruest),
+    debug(myTrace, 'Anzahl: ~k Dauer: ~k', [Anzahl, Dauer]),
 	format('methode=~s&anzahl=~k&dauer=~k&gebinde=~k',[AuswahlMethode, Anzahl, Dauer, 1]).
 

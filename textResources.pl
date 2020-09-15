@@ -24,10 +24,10 @@ atomToSubstantiv(Stoff, Beschriftung) :-
 text(de, txtOk, 'OK').
 text(de, txtReset, 'reset').
 text(de, txtGespeichert, 'gespeichert!').
-text(de, txtFunktionsAuswahl, 'Funktionsauswahl!').
+text(de, txtFunktionsAuswahl, 'Funktionsauswahl').
 text(de, txtBitteWaehlen, 'Bitte wählen').
-text(de, txtSystem, 'System: ').
-text(de, txtPlanet, 'Planet: ').
+text(de, txtSystemDp, 'System: ').
+text(de, txtPlanetDp, 'Planet: ').
 text(de, txtSternensystem, 'Sternensystem').
 
 /* Fixtexte ausgabe */
@@ -44,8 +44,9 @@ text(de, txtLeerIstBekannt, ' ist bekannt.').
 text(de, txtErlangenSie, 'Erlangen Sie ').
 text(de, txtLeerEinheiten, ' Einheiten ').
 text(de, txtLeerEinHundertstel, ' 1/100 sec ').
-text(de, txtReisen, 'reisen').
-text(de, txtAngekommen, 'angekommen').
+
+text(de, reisen, 'reisen').
+text(de, angekommen, 'angekommen').
 
 /* Fixtexte Hauptdialog */
 text(de, txtFunktionsAuswahl, 'Funktionsauswahl').
@@ -146,6 +147,50 @@ text(de, txtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben, 'Dann die Art 
 text(de, txtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen, 'Die Sekundärelemente nur eingeben, wenn das die einzige Möglichkeit auf dem Himmelskörper ist, den Stoff zu gewinnen!').
 text(de, txtEsGenuegtAngabeSchnellsteMethode, 'Es genügt die Angabe der schnellsten Methode.').
 text(de, txtNurStoffeGewonnenWerdenKoennenEingeben, 'Nur Stoffe, die gewonnen werden können, eingeben!').
+
+/* Fixtexte stoffErlangenDialog */
+text(de, txtStoffErlangenAufenthaltsortSpielerSystemAuswählen, 'Stoff erlangen - Aufenthaltsort des Spielers: System auswählen').
+text(de, txtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, 'Stoff erlangen - Aufenthaltsort des Spielers: Planet auswählen').
+text(de, txtAuswahlEmpfohleneHandlungenStoffErhalten, 'Auswahl für empfohlene Handlungen um bestimmten Stoff zu erhalten').
+text(de, txtAufenthaltsOrtSpieler, 'Aufenthaltsort des Spielers').
+text(de, txtOptimierung, 'Optimierung').
+text(de, txtMoeglichstWenig, 'Möglichst wenig').
+text(de, txtZeitverbrauch, 'Zeitverbrauch').
+text(de, txtSammlungsgegenstaende, 'Sammlungsgegenstände').
+text(de, txtKosten, 'Kosten').
+text(de, txtGewuenschterStoff, 'gewünschter Stoff').
+text(de, txtAnzahlDp, 'Anzahl: ').
+text(de, txtRohstoffe, 'Rohstoffe').
+text(de, txtProdukte, 'Produkte').
+text(de, txtBasisBauteile, 'Basis-Bauteile').
+text(de, txtModule, 'Module').
+text(de, txtGerichte, 'Gerichte').
+text(de, txtBitteGenauEineAuswahlTreffen, 'Bitte genau eine Auswahl treffen!').
+text(de, txtBitteNurEineAuswahlTreffen, 'Bitte nur eine Auswahl treffen! Bei den nicht benötigten Eingaben muss "Bitte wählen" eingestellt sein!').
+text(de, txtStoffErlangen, 'Stoff erlangen').
+text(de, txtEingaben, 'Eingaben').
+text(de, txtAnzahl, 'Anzahl').
+text(de, txtGesuchterStoff, 'Gesuchter Stoff').
+text(de, txtOptimierung, 'Optimierung').
+text(de, txtSystem, 'System').
+text(de, txtPlanet, 'Planet').
+text(de, txtStueckliste, 'Stückliste').
+text(de, txtStoff, 'Stoff').
+text(de, txtAktionsreihenfolge, 'Aktionsreihenfolge').
+text(de, txtAnweisung, 'Anweisung').
+text(de, txtOperation, 'Operation').
+text(de, txtErgebnis, 'Ergebnis').
+text(de, txtSummenwerte, 'Summenwerte').
+text(de, txtSummenwert, 'Summenwert').
+text(de, txtEinheit, 'Einheit').
+
+text(de, txtBeschaffenUndHerstellenNichtMoeglich, 'Beschaffen und herstellen nicht möglich.').
+text(de, txtBegruendungDp, 'Begründung').
+text(de, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'Beschaffung nicht möglich und keine Rezepte vorhanden').
+text(de, txtLeerKannNichtBeschafftWerden, ' kann nicht beschafft werden').
+text(de, txtRezeptversuch, 'Rezeptversuch').
+text(de, txtEinheit, 'Einheit').
+text(de, txtEinheit, 'Einheit').
 
 /* --------------------------------------------------------------------------------------- */
 /* Sammelaktionen */
@@ -390,8 +435,8 @@ text(de, verrostetesMetall, 'verrostetes Metall').
 text(de, zaeheFluessigkeiten, 'zähe Flüssigkeiten').
 text(de, zytoPhosphat, 'Zytophosphat').
 text(de, tritiumHyperCluster, 'Tritium Hypercluster').
-text(de, geodeLand, 'Geode').
-text(de, geodeHoehle, 'Geode').
+text(de, geodeLand, 'Geode in Diwasserstoffvorkommen').
+text(de, geodeHoehle, 'Geode in Höhle').
 text(de, kampfLaeuferGehirn, 'Kampfläufergehirn').
 text(de, lebendePerle, 'lebende Perle').
 text(de, goldKlumpen, 'Goldklumpen').

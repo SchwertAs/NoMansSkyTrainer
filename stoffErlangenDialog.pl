@@ -13,27 +13,30 @@
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 stoffErlangenDialogSystemAusWahl(_Request) :-
+	textResources:getText(txtStoffErlangenAufenthaltsortSpielerSystemAuswählen, TxtStoffErlangenAufenthaltsortSpielerSystemAuswählen),
 	planetAuswahlDialog:systemAuswahlDialog(
-	  'Stoff erlangen - Aufenthaltsort des Spielers: System auswählen',
+	  TxtStoffErlangenAufenthaltsortSpielerSystemAuswählen,
 	  '/stoffErlangenDialogPlanetAusWahl').
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 stoffErlangenDialogPlanetAusWahl(Request) :-
+	textResources:getText(txtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, TxtStoffErlangenAufenthaltsortSpielerPlanetAuswählen),
 	planetAuswahlDialog:planetAuswahlDialog(
-	  'Stoff erlangen - Aufenthaltsort des Spielers: Planet auswählen',
+	  TxtStoffErlangenAufenthaltsortSpielerPlanetAuswählen,
 	  '/stoffErlangenDialog',
 	  Request
 	).
 
 /* ----------------------  Eingabe Formular ---------------------------------------------------*/
 stoffErlangenDialog(Request) :-
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	member(method(post), Request), 
 	!,
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]) ,
-	((AuswahlPlanet = 'Bitte wählen', planetAuswahlDialog:fehlerBehandlung); 
+	((AuswahlPlanet = TxtBitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
 	 stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet)
 	).
 
@@ -49,42 +52,58 @@ stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	server:baueOptionsFeld('auswahlModul', Stoffe4, 5, OptionList4),
 	ausgabe:baueStoffListeFuerStoffKlassen([kochStoff, produktUndKochStoff, rohUndKochStoff], Stoffe5),
 	server:baueOptionsFeld('auswahlGericht', Stoffe5, 6, OptionList5),
+	textResources:getText(txtAuswahlEmpfohleneHandlungenStoffErhalten, TxtAuswahlEmpfohleneHandlungenStoffErhalten),
+	textResources:getText(txtAufenthaltsOrtSpieler, TxtAufenthaltsOrtSpieler),
+	textResources:getText(txtOptimierung, TxtOptimierung),
+	textResources:getText(txtMoeglichstWenig, TxtMoeglichstWenig),
+	textResources:getText(txtZeitverbrauch, TxtZeitverbrauch),
+	textResources:getText(txtSammlungsgegenstaende, TxtSammlungsgegenstaende),
+	textResources:getText(txtKosten, TxtKosten),
+	textResources:getText(txtGewuenschterStoff, TxtGewuenschterStoff),
+	textResources:getText(txtAnzahlDp, TxtAnzahl),
+	textResources:getText(txtRohstoffe, TxtRohstoffe),
+	textResources:getText(txtProdukte, TxtProdukte),
+	textResources:getText(txtBasisBauteile, TxtBasisBauteile),
+	textResources:getText(txtModule, TxtModule),
+	textResources:getText(txtGerichte, TxtGerichte),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
 
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], ['Auswahl für empfohlene Handlungen um bestimmten Stoff zu erhalten']),
+	    h1([align(center)], [TxtAuswahlEmpfohleneHandlungenStoffErhalten]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/stoffErlangen'), method('post')], 
-	       	 [h3('Aufenthaltsort des Spielers'),
+	       	 [h3(TxtAufenthaltsOrtSpieler),
        	      \eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet),  	
-       	      h3('Optimierung'),
-       	      p(fieldset([name('fieldSet1')], [legend(['Möglichst wenig']),
+       	      h3(TxtOptimierung),
+       	      p(fieldset([name('fieldSet1')], [legend([TxtMoeglichstWenig]),
 	       					p([input([type(radio), name('optimierungsZiel'), id('optimierungsZiel'), value('minimaleZeit')]),
-	       					   label([for('Zeitverbrauch')])
+	       					   label([for(TxtZeitverbrauch)])
 	       					  ]),
 	       					p([input([type(radio), checked(true), name('optimierungsZiel'), id('optimierungsZielSammelZahl'), value('minimaleSammlung')]),
-	       					   label([for('Sammlungsgegenstände')])
+	       					   label([for(TxtSammlungsgegenstaende)])
 	       					  ]),
 	       					p([
 	       					   input([type(radio), name('optimierungsZiel'), id('optimierungsZielSammelKosten'), value('minimaleKosten')]),
-							   label([for('Kosten')])
+							   label([for(TxtKosten)])
 	       					  ])
 	       		         ])
 	       		),
-			  	h3(['gewünschter Stoff']),
-			  	p([label(for('anzahl', 'Anzahl: ')),
+			  	h3([TxtGewuenschterStoff]),
+			  	p([label(for('anzahl', TxtAnzahl)),
 			  	   input([name('anzahl'), type('text'), value(''), size='24', tabindex(1)])
 			  	   
 			  	]),
 			    table([width('100%'), border(1), cellspacing(3), cellpadding(2)],
-			      [tr([th('Rohstoffe'), th('Produkte'), th('Basis-Bauteile'), th('Module'), th('Gerichte')]),
+			      [tr([th(TxtRohstoffe), th(TxtProdukte), th(TxtBasisBauteile), th(TxtModule), th(TxtGerichte)]),
 			       tr([td(OptionList1), td(OptionList2), td(OptionList3), td(OptionList4), td(OptionList5)])
 			      ]),
 			    p(
 		    	table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-		    	      [td([button([name("submit"), type("submit")], 'OK')]),
-		    		   td([button([name("reset"), type("reset")], 'reset')])
+		    	      [td([button([name("submit"), type("submit")], TxtOk)]),
+		    		   td([button([name("reset"), type("reset")], TxtReset)])
 		    	      ])
 		    	)
 	      	]
@@ -143,51 +162,56 @@ stoffErlangen(Request) :-
     !.
 
 fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-    
-     ((Stoff1 == 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 = 'Bitte wählen',
-         Stoff4 = 'Bitte wählen', Stoff5 = 'Bitte wählen',
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
+     ((Stoff1 == TxtBitteWaehlen, Stoff2 = TxtBitteWaehlen, Stoff3 = TxtBitteWaehlen,
+         Stoff4 = TxtBitteWaehlen, Stoff5 = TxtBitteWaehlen,
        einenWaehlen
       );
       (nurEinenWaehlen
      )).
 
 einenWaehlen() :-
+	textResources:getText(txtBitteGenauEineAuswahlTreffen, TxtBitteGenauEineAuswahlTreffen),
 	server:holeCssAlsStyle(StyleString),
    	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), 'Bitte genau eine Auswahl treffen!'),
+		h1(align(center), TxtBitteGenauEineAuswahlTreffen),
 		\['</redHeader>']
 		],
 	
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 nurEinenWaehlen() :-
+	textResources:getText(txtBitteNurEineAuswahlTreffen, TxtBitteNurEineAuswahlTreffen),
 	server:holeCssAlsStyle(StyleString),
    	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), 'Bitte nur eine Auswahl treffen! Bei den nicht benötigten Eingaben muss "Bitte wählen" eingestellt sein!'),
+		h1(align(center), TxtBitteNurEineAuswahlTreffen),
 		\['</redHeader>']
 		],
 	
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
-	((Stoff1 \= 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 = 'Bitte wählen', 
-		Stoff4 = 'Bitte wählen', Stoff5 = 'Bitte wählen', Stoff = Stoff1);
-	 (Stoff1 = 'Bitte wählen', Stoff2 \= 'Bitte wählen', Stoff3 = 'Bitte wählen', 
-		Stoff4 = 'Bitte wählen', Stoff5 = 'Bitte wählen', Stoff = Stoff2);
-	 (Stoff1 = 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 \= 'Bitte wählen', 
-		Stoff4 = 'Bitte wählen', Stoff5 = 'Bitte wählen', Stoff = Stoff3);
-	 (Stoff1 = 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 = 'Bitte wählen', 
-		Stoff4 \= 'Bitte wählen', Stoff5 = 'Bitte wählen', Stoff = Stoff4);
-	 (Stoff1 = 'Bitte wählen', Stoff2 = 'Bitte wählen', Stoff3 = 'Bitte wählen', 
-		Stoff4 = 'Bitte wählen', Stoff5 \= 'Bitte wählen', Stoff = Stoff5)
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
+	((Stoff1 \= TxtBitteWaehlen, Stoff2 = TxtBitteWaehlen, Stoff3 = TxtBitteWaehlen, 
+		Stoff4 = TxtBitteWaehlen, Stoff5 = TxtBitteWaehlen, Stoff = Stoff1);
+	 (Stoff1 = TxtBitteWaehlen, Stoff2 \= TxtBitteWaehlen, Stoff3 = TxtBitteWaehlen, 
+		Stoff4 = TxtBitteWaehlen, Stoff5 = TxtBitteWaehlen, Stoff = Stoff2);
+	 (Stoff1 = TxtBitteWaehlen, Stoff2 = TxtBitteWaehlen, Stoff3 \= TxtBitteWaehlen, 
+		Stoff4 = TxtBitteWaehlen, Stoff5 = TxtBitteWaehlen, Stoff = Stoff3);
+	 (Stoff1 = TxtBitteWaehlen, Stoff2 = TxtBitteWaehlen, Stoff3 = TxtBitteWaehlen, 
+		Stoff4 \= TxtBitteWaehlen, Stoff5 = TxtBitteWaehlen, Stoff = Stoff4);
+	 (Stoff1 = TxtBitteWaehlen, Stoff2 = TxtBitteWaehlen, Stoff3 = TxtBitteWaehlen, 
+		Stoff4 = TxtBitteWaehlen, Stoff5 \= TxtBitteWaehlen, Stoff = Stoff5)
 	).
 	
-ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff) :-
+ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff0) :-
     ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
     assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
+    textResources:getText(Stoff, Stoff0),
 	(optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
 	 nichtHerstellBar(Ziel)),
 	!.
@@ -205,19 +229,37 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 	ausgabe:ausgabeSummen(SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
 	grafischeAusgabe:hierarchieGrafik(Vorgaenge, Svg),
    	server:holeCssAlsStyle(StyleString),
+	textResources:getText(txtStoffErlangen, TxtStoffErlangen),
+	textResources:getText(txtStoffErlangen, TxtStoffErlangen),
+	textResources:getText(txtEingaben, TxtEingaben),
+	textResources:getText(txtAnzahl, TxtAnzahl),
+	textResources:getText(txtGesuchterStoff, TxtGesuchterStoff),
+	textResources:getText(txtOptimierung, TxtOptimierung),
+	textResources:getText(txtSystem, TxtSystem),
+	textResources:getText(txtPlanet, TxtPlanet),
+	textResources:getText(txtStoff, TxtStoff),
+	textResources:getText(txtStueckliste, TxtStueckliste),
+	textResources:getText(txtAktionsreihenfolge, TxtAktionsreihenfolge),
+	textResources:getText(txtAnweisung, TxtAnweisung),
+	textResources:getText(txtOperation, TxtOperation),
+	textResources:getText(txtErgebnis, TxtErgebnis),
+	textResources:getText(txtSummenwerte, TxtSummenwerte),
+	textResources:getText(txtSummenwert, TxtSummenwert),
+	textResources:getText(txtEinheit, TxtEinheit),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	TermerizedBody = [
 		  	\['<header>'],
-		  	h1([align(center)], ['Stoff erlangen']),
+		  	h1([align(center)], [TxtStoffErlangen]),
 		  	\['</header>'],
 		  	\['<formSpace>'],
 		    table( [width('35%'), border(1)], 
-				   [caption(h2('Eingaben')),
-					tr([th([scope('col')],['Anzahl']),
-						th([scope('col')],['Gesuchter Stoff']),
-						th([scope('col')],['Optimierung']),
-						th([scope('col')],['System']),
-						th([scope('col')],['Planet'])
+				   [caption(h2(TxtEingaben)),
+					tr([th([scope('col')],[TxtAnzahl]),
+						th([scope('col')],[TxtGesuchterStoff]),
+						th([scope('col')],[TxtOptimierung]),
+						th([scope('col')],[TxtSystem]),
+						th([scope('col')],[TxtPlanet])
 				   	   ]),
 					tr([td(Anzahl),
 				    	td(Beschriftung),
@@ -227,9 +269,9 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 				   	   ])
 			       ]),
     		table( [width('25%'), border(1)], 
-		           [caption(h2('Stückliste')),
-		            tr([th([scope('col')],['Anzahl']),
-		            	th([scope('col')],['Stoff'])
+		           [caption(h2(TxtStueckliste)),
+		            tr([th([scope('col')],[TxtAnzahl]),
+		            	th([scope('col')],[TxtStoff])
 		               ]),
 			           \ausgabeSammlungDcg(SammelSetPred)
 		           ]),
@@ -238,22 +280,22 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 		           [ tr(\[Svg])
 		           ]),
 		    table( [width('100%'), border(1)], 
-		           [caption(h2('Aktionsreihenfolge')),
-		            tr([th([scope('col')],['Anweisung']),
-		                th([scope('col')],['Operation']),
-		                th([scope('col')],['Ergebnis'])
+		           [caption(h2(TxtAktionsreihenfolge)),
+		            tr([th([scope('col')],[TxtAnweisung]),
+		                th([scope('col')],[TxtOperation]),
+		                th([scope('col')],[TxtErgebnis])
 		               ]) ,
 			           \ausgabeVorgaengeDcg(VorgaengePred) 
 		           ]),
 		    table( [width('35%'), border(1)],
-		    	   [caption(h2('Summenwerte')),
-		            tr([th([scope('col')],['Summenwert']),
-		                th([scope('col')],['Anzahl']),
-		                th([scope('col')],['Einheit'])
+		    	   [caption(h2(TxtSummenwerte)),
+		            tr([th([scope('col')],[TxtSummenwert]),
+		                th([scope('col')],[TxtAnzahl]),
+		                th([scope('col')],[TxtEinheit])
 		               ]),
 		               \ausgabeSummenDcg(SummenPred)
 		           ]),
-			p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
@@ -295,14 +337,17 @@ nichtHerstellBar(Ziel) :-
    	server:holeCssAlsStyle(StyleString),
    	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
 	BegrTupel \= [],
+	textResources:getText(txtBeschaffenUndHerstellenNichtMoeglich, TxtBeschaffenUndHerstellenNichtMoeglich),
+	textResources:getText(txtBegruendungDp, TxtBegruendungDp),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), 'Beschaffen und herstellen nicht möglich.'),
+		h1(align(center), TxtBeschaffenUndHerstellenNichtMoeglich),
 		\['</redHeader>'],
 		\['<redFormSpace>'],
-		h3('Begründung:'),
+		h3(TxtBegruendungDp),
 		\ausgabeBegruendungDcg(BegrTupel),
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</redFormSpace>']
 		            ],
 	reply_html_page(TermerizedHead, TermerizedBody).
@@ -310,12 +355,14 @@ nichtHerstellBar(Ziel) :-
 nichtHerstellBar(_) :-
    	server:holeCssAlsStyle(StyleString),
    	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	textResources:getText(txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, TxtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), 'Beschaffung nicht möglich und keine Rezepte vorhanden'),
+		h1(align(center), TxtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden),
 		\['</redHeader>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		],
 	
@@ -325,11 +372,13 @@ ausgabeBegruendungDcg([]) -->
 	[].
 	
 ausgabeBegruendungDcg([begr(FehlStoff, VorgaengePred) | Rest]) -->
-	{ string_concat(FehlStoff, ' kann nicht beschafft werden', Meldung)
+	{	textResources:getText(txtLeerKannNichtBeschafftWerden, TxtLeerKannNichtBeschafftWerden),
+		textResources:getText(txtRezeptversuch, TxtRezeptversuch),
+		string_concat(FehlStoff, TxtLeerKannNichtBeschafftWerden, Meldung)
 	},
 	html([	table( [width('100%'), border(1)], 
 		           [caption(h3(Meldung)),
-		            tr([th([scope('col')],['Rezeptversuch'])
+		            tr([th([scope('col')],[TxtRezeptversuch])
 		               ]) ,
 			           \ausgabeVorgaengeBegrDcg(VorgaengePred) 
 		           ])

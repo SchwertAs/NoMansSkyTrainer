@@ -27,6 +27,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, gravitinoBall, 150, 339, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sturmKristall, 150, 150, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, tetraKobalt, 150, 150, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, geodeHoehle, 150, 150, 0))
 
 
 /* variieren nach Planetentyp kürzere Zeiten bei geeigneterem Habitat */
@@ -94,7 +95,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, gammaWurzel, 83, 50, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, natrium, 7, 7, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, paraffinium, 221, 30, 150))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, geode, 221, 30, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, geodeLand, 221, 30, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, kristallFragment, 221, 30, 150))
 
 

@@ -120,8 +120,8 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
-	{	textResources:getText(txtSystem, TxtSystem),
-		textResources:getText(txtPlanet, TxtPlanet)
+	{	textResources:getText(txtSystemDp, TxtSystem),
+		textResources:getText(txtPlanetDp, TxtPlanet)
 	},
 	html(
    	  div(class('table50'),[

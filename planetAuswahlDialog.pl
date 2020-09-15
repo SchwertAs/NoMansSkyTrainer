@@ -31,7 +31,7 @@ systemAuswahlDialog(HeaderText, Action) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
-	{	textResources:getText(txtSystem, TxtSystem)
+	{	textResources:getText(txtSystemDp, TxtSystem)
 	},
 	html(
    	  div(class('table30'),[
@@ -79,8 +79,8 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	)).
 
 planetenAnzeige(AuswahlSystem, OptionList) -->
-	{ 	textResources:getText(txtSystem, TxtSystem),
-		textResources:getText(txtPlanet, TxtPlanet)
+	{ 	textResources:getText(txtSystemDp, TxtSystem),
+		textResources:getText(txtPlanetDp, TxtPlanet)
 	},
 	html(
    	  div(class('table50'),[

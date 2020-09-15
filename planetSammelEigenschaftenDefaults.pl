@@ -86,7 +86,7 @@ sammelDefaultPlanetenTyp(_, minenLaserNutzen, kohlenStoff).
 sammelDefaultPlanetenTyp(_, minenLaserNutzen, sauerStoff).
 sammelDefaultPlanetenTyp(_, minenLaserNutzen, ferritStaub).
 sammelDefaultPlanetenTyp(_, minenLaserNutzen, kristallFragment).
-sammelDefaultPlanetenTyp(_, minenLaserNutzen, geode).
+sammelDefaultPlanetenTyp(_, minenLaserNutzen, geodeLand).
 sammelDefaultPlanetenTyp(_, minenLaserNutzen, faecium).
 sammelDefaultPlanetenTyp(_, minenLaserNutzen, schwefelin).
 sammelDefaultPlanetenTyp(_, minenLaserNutzen, radon).
