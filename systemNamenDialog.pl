@@ -19,7 +19,7 @@ systemNamenDialog(_Request) :-
 	ausgabe:joinRecordsByRecordNo(FeldNoList1, SystemList1, 2, NumerierteRecordList1),
 	ausgabe:joinRecordsByRecordNo(FeldNoList2, SystemList2, 2, NumerierteRecordList2),
 	ausgabe:joinRecordsByRecordNo(FeldNoList3, SystemList3, 2, NumerierteRecordList3),
-	textResources:getText(eingabeSternenSysteme, TxtEingabeSternenSysteme),	
+	textResources:getText(txtEingabeSternenSysteme, TxtEingabeSternenSysteme),	
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	
@@ -49,8 +49,8 @@ systemNamenDialog(_Request) :-
 
 innereTabelle(NumerierteRecordList) -->
 	{
-		textResources:getText(systemName, TxtSystemName),	
-		textResources:getText(farbe, TxtFarbe)
+		textResources:getText(txtSystemName, TxtSystemName),	
+		textResources:getText(txtFarbe, TxtFarbe)
 	},
 	html(
 		[div(class('table'), 
@@ -82,7 +82,7 @@ innereEingabeZeile([Record|Rest]) -->
 
 baueOptionsFeld(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	{
-		textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+		textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 		Index is (FeldNo mod 100 - 1) * 3 + StartIndex,
 		OptionsWerteListe = [[Wert,_]|_],
 		((Wert = '', OptionText = option(selected, TxtBitteWaehlen)); (OptionText = option(TxtBitteWaehlen)))
@@ -224,8 +224,8 @@ insUpdDel(FeldNeu, SystemNeu, _) :-
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
-	textResources:getText(gespeichert, TxtGespeichert),
-	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),	
+	textResources:getText(txtGespeichert, TxtGespeichert),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [
 		\['<header>'],
 		h3(align(center),TxtGespeichert),
@@ -238,10 +238,10 @@ gespeichert :-
 
 fehlerZeile(Zeile, Spalte) :-
 	server:holeCssAlsStyle(StyleString),
-	textResources:getText(dieZeile, TxtDieZeile),
-	textResources:getText(inSpalte, TxtInSpalte),
-	textResources:getText(istUnvollstaendig, TxtIstUnvollstaendig),
-	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),
+	textResources:getText(txtDieZeile, TxtDieZeile),
+	textResources:getText(txtInSpalte, TxtInSpalte),
+	textResources:getText(txtIstUnvollstaendig, TxtIstUnvollstaendig),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	string_concat(TxtDieZeile, Zeile, FehlerMeldung0),
 	string_concat(FehlerMeldung0, TxtInSpalte, FehlerMeldung1),
 	string_concat(FehlerMeldung1, Spalte, FehlerMeldung2),
@@ -259,10 +259,10 @@ fehlerZeile(Zeile, Spalte) :-
 
 gueltigeZeile(System, Farbe) :-
 	System \= "",
-	Farbe \= bitteWaehlen.
+	Farbe \= txtBitteWaehlen.
 
 leereZeile(System, Farbe) :-
 	System = "",
-	Farbe = bitteWaehlen.
+	Farbe = txtBitteWaehlen.
 
 	

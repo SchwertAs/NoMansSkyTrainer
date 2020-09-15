@@ -15,7 +15,7 @@ rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
 	(Klasse = produkt; Klasse = modul; Klasse = komponente; Klasse = produktUndKochStoff; Klasse = basisBauEndStoff),
 	 textResources:getText(Klasse, TxtKlasse)), Klassen),
 	server:baueOptionsFeld('auswahlStoffKlasse', Klassen, 2, OptionList),
-	textResources:getText(stoffKlassenAuswahl, TxtStoffklassenAuswahl),
+	textResources:getText(txtStoffKlassenAuswahl, TxtStoffklassenAuswahl),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
@@ -37,7 +37,7 @@ rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
-	{ textResources:getText(stoffKlasse, TxtStoffKlasse)
+	{ textResources:getText(txtStoffKlasse, TxtStoffKlasse)
 	},
 	html(
    	  div(class('table30'),[
@@ -55,7 +55,7 @@ rezeptBekanntDialog(Request) :-
 	http_parameters(Request, 
 	[auswahlStoffKlasse(AuswahlStoffKlasse, [length > 0])
 	]),
-	textResources:getText(bitteWaehlen, BitteWaehlen),
+	textResources:getText(txtBitteWaehlen, BitteWaehlen),
 	debug(myTrace, 'AuswahlStoffKlasse=~k', AuswahlStoffKlasse),
 	((AuswahlStoffKlasse = BitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
 	 rezeptBekanntAnzeigen(AuswahlStoffKlasse)
@@ -115,7 +115,7 @@ rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	ausgabe:joinRecordsNumbering(FeldNoList3, RezeptListe3, 2, NumerierteRecordList3),
 	ausgabe:joinRecordsNumbering(FeldNoList4, RezeptListe4, 2, NumerierteRecordList4),
 	
-	textResources:getText(eingabeBekannteRezepte, TxtEingabeBekannteRezepte),
+	textResources:getText(txtEingabeBekannteRezepte, TxtEingabeBekannteRezepte),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	
@@ -246,8 +246,8 @@ pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Ch
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
-	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),
-	textResources:getText(gespeichert, TxtGespeichert),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
+	textResources:getText(txtGespeichert, TxtGespeichert),
 	TermerizedBody = [
 		\['<header>'],
 		h3(align(center),TxtGespeichert),

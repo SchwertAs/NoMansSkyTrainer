@@ -189,7 +189,7 @@ baueOptionsFeld(FeldName, OptionsWerteListe, Index, OptionList) :-
 	OptionList = [\[ListString7]].
 
 baueOptionen(OptionsWerteListe, Optionen) :-
-	textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	sort(OptionsWerteListe, OptionsWerteSet),
 	BisherList0 = '<option>',
 	string_concat(BisherList0, TxtBitteWaehlen, BisherList1),

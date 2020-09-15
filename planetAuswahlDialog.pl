@@ -8,7 +8,7 @@
 systemAuswahlDialog(HeaderText, Action) :-
 	findall(System, (spielStatus:systeme(_, System, _), System \= 'System'), Systeme),
 	server:baueOptionsFeld('auswahlSystem', Systeme, 2, OptionList),
-	textResources:getText(sternensystem, TxtSternensystem),
+	textResources:getText(txtSternensystem, TxtSternensystem),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
@@ -31,7 +31,7 @@ systemAuswahlDialog(HeaderText, Action) :-
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
-	{	textResources:getText(system, TxtSystem)
+	{	textResources:getText(txtSystem, TxtSystem)
 	},
 	html(
    	  div(class('table30'),[
@@ -47,8 +47,8 @@ eingabeTabelle(OptionList) -->
 planetAuswahlDialog(HeaderText, Action, Request) :-
 	member(method(post), Request), 
 	!,
-	textResources:getText(bitteWaehlen, TxtBitteWaehlen),
-	textResources:getText(auswahlHimmelskoerper, TxtAuswahlHimmelskoerper),
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
+	textResources:getText(txtAuswahlHimmelskoerper, TxtAuswahlHimmelskoerper),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	http_parameters(Request, 
@@ -79,8 +79,8 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	)).
 
 planetenAnzeige(AuswahlSystem, OptionList) -->
-	{ 	textResources:getText(system, TxtSystem),
-		textResources:getText(planet, TxtPlanet)
+	{ 	textResources:getText(txtSystem, TxtSystem),
+		textResources:getText(txtPlanet, TxtPlanet)
 	},
 	html(
    	  div(class('table50'),[
@@ -112,7 +112,7 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 fehlerBehandlung :-
    	server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
-	textResources:getText(bitteEineAuswahlTreffen, TxtBitteEineAuswahlTreffen),
+	textResources:getText(txtBitteEineAuswahlTreffen, TxtBitteEineAuswahlTreffen),
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), TxtBitteEineAuswahlTreffen),

@@ -2,7 +2,14 @@
 
 getText(Atom, Text) :-
 	spielStatus:sprache(Sprache), 
-	text(Sprache, Atom, Text).
+	text(Sprache, Atom, Text),
+	!.
+
+getText(_, Text) :-
+	Text = 'default'.
+
+getText(Atom, _) :-
+	Atom = default.
 
 atomToSubstantiv(Stoff, Beschriftung) :-
 	atom_string(Stoff, StoffString),
@@ -13,100 +20,154 @@ atomToSubstantiv(Stoff, Beschriftung) :-
 	string_concat(BigCapital, RestLowered, Beschriftung).
 
 /* text(<Sprachkennzeichen>, <atom>, <Text>).*/
-/* Fixtexte StoffErlangenDialog*/
-text(de, bitteReisenSieNachSystem, 'Bitte reisen Sie nach System: ').
-text(de, leerPlanet, ' Planet: ').
-text(de, fuerenSie, 'Führen Sie ').
-text(de, leerMal, ' mal ').
-text(de, leerVon, ' von ').
-text(de, leerMit, ' mit ').
-text(de, leerAus, ' aus').
-text(de, das, 'Das ').
-text(de, in, 'in ').
-text(de, leerIstBekannt, ' ist bekannt.').
-text(de, erlangenSie, 'Erlangen Sie ').
-text(de, leerEinheiten, ' Einheiten ').
-text(de, leerEinHundertstel, ' 1/100 sec ').
-text(de, reisen, 'reisen').
-text(de, angekommen, 'angekommen').
-
-/* Fixtexte Hauptdialog */
-text(de, funktionsAuswahl, 'Funktionsauswahl').
-text(de, linkZurMaske, 'Link zur Maske').
-text(de, erklaerung, 'Erklärung').
-text(de, vorraussetzungenSammeln, 'Voraussetzungen des Sammelns eingeben').
-text(de, welcheMittelStoffeBekommen, 'Geben Sie ein mit welchen Mitteln Sie Stoffe bekommen können!').
-text(de, bekannteRezepteEingeben, 'Bekannte Rezepte eingeben').
-text(de, gibRezepteSpielstand, 'Geben Sie bekannte Rezepte ihres Spielstandes ein!').
-text(de, sternenSystemeEingeben, 'Sternensysteme eingeben').
-text(de, entdeckteErfassen, 'Erfassen Sie alle entdeckten Sternensysteme ihres Spielstandes!').
-text(de, himmelsKoerperEingeben, 'Himmelskörper eingeben').
-text(de, planetMondeEingeben, 'Geben Sie für ein Sternensystem Planeten und Monde ein!').
-text(de, eigenschaftenHimmelsKoerperEingeben, 'Eigenschaften eines Himmelskörpers eingeben').
-text(de, ausstattungEingeben, 'Geben Sie die planetare Ausstattung eines Himmelskörpers wie Basen, Raffinerieen etc. ein!').
-text(de, eigenschaftenHimmelsKoerperEingeben, 'Eigenschaften eines Himmelskörpers eingeben').
-text(de, sammelDetailsEingeben, 'SammelDetails eines Himmelskörpers eingeben').
-text(de, sammelbareResourcenEingeben, 'Geben Sie die sammelbaren Resourcen eines Himmelskörpers ein!').
-text(de, optimiertesVorgehenErhalten, 'Optimiertes Vorgehen erhalten').
-text(de, optimierteVorgehensweiseErwerbBekommen, 'Bekommen Sie eine optimierte Vorgehensweise, für den Erwerb eines bestimmten Stoffes!').
-text(de, linksZeitweiseInaktiv, 'Links können zeitweise inaktiv sein, wenn notwendige Daten fehlen. Diese können Sie mit Hilfe der Masken, deren Link hier aktiv ist, eingegeben. Falls Sie die Daten inzwischen eingegeben haben, laden Sie diese Seite erneut (F5 bei Firefox)!').
-
-/* Fixtexte SpielStatusDialog */
-text(de, vorraussetzungenMaterialSammlung, 'Vorraussetzungen für die Materialsammlung').
-text(de, ausstattung, 'Ausstattung').
-text(de, minenlaser, 'Minenlaser').
-text(de, verbesserterMinenLaser, 'verbesserter Minenlaser').
-text(de, terrainformer, 'Terrainformer').
-text(de, waffe, 'Waffe').
-text(de, solarStrahl, 'Solarstrahl').
-text(de, gemuetsStrahl, 'Gemütsstrahl').
-text(de, anzugRaffinerie, 'Anzug-Raffinerie').
-text(de, bewegungsmöglichkeiten, 'Bewegungsmöglichkeiten').
-text(de, raumschiffEinsetzbar, 'Raumschiff einsetzbar').
-text(de, minenLaserAufExoFahrzeug, 'Minenlaser auf Exofahrzeug vorhanden').
-text(de, umgebung, 'Umgebung').
-text(de, frachterVorhanden, 'Frachter vorhanden').
-text(de, anomalieSphaereRufbar, 'Anomalie / Sphäre rufbar').
-
-/* Buttons und gespeichert */
+/* mehrere Module */
 text(de, txtOk, 'OK').
 text(de, txtReset, 'reset').
-text(de, gespeichert, 'gespeichert!').
-text(de, funktionsAuswahl, 'Funktionsauswahl!').
+text(de, txtGespeichert, 'gespeichert!').
+text(de, txtFunktionsAuswahl, 'Funktionsauswahl!').
+text(de, txtBitteWaehlen, 'Bitte wählen').
+text(de, txtSystem, 'System: ').
+text(de, txtPlanet, 'Planet: ').
+text(de, txtSternensystem, 'Sternensystem').
 
-/* Server */
-text(de, bitteWaehlen, 'Bitte wählen').
+/* Fixtexte ausgabe */
+text(de, txtBitteReisenSieNachSystem, 'Bitte reisen Sie nach System: ').
+text(de, txtLeerPlanet, ' Planet: ').
+text(de, txtFuerenSie, 'Führen Sie ').
+text(de, txtLeerMal, ' mal ').
+text(de, txtLeerVon, ' von ').
+text(de, txtLeerMit, ' mit ').
+text(de, txtLeerAus, ' aus').
+text(de, txtDas, 'Das ').
+text(de, txtIn, 'in ').
+text(de, txtLeerIstBekannt, ' ist bekannt.').
+text(de, txtErlangenSie, 'Erlangen Sie ').
+text(de, txtLeerEinheiten, ' Einheiten ').
+text(de, txtLeerEinHundertstel, ' 1/100 sec ').
+text(de, txtReisen, 'reisen').
+text(de, txtAngekommen, 'angekommen').
+
+/* Fixtexte Hauptdialog */
+text(de, txtFunktionsAuswahl, 'Funktionsauswahl').
+text(de, txtLinkZurMaske, 'Link zur Maske').
+text(de, txtErklaerung, 'Erklärung').
+text(de, txtVorraussetzungenSammeln, 'Voraussetzungen des Sammelns eingeben').
+text(de, txtWelcheMittelStoffeBekommen, 'Geben Sie ein mit welchen Mitteln Sie Stoffe bekommen können!').
+text(de, txtBekannteRezepteEingeben, 'Bekannte Rezepte eingeben').
+text(de, txtGibRezepteSpielstand, 'Geben Sie bekannte Rezepte ihres Spielstandes ein!').
+text(de, txtSternenSystemeEingeben, 'Sternensysteme eingeben').
+text(de, txtEntdeckteErfassen, 'Erfassen Sie alle entdeckten Sternensysteme ihres Spielstandes!').
+text(de, txtHimmelsKoerperEingeben, 'Himmelskörper eingeben').
+text(de, txtPlanetMondeEingeben, 'Geben Sie für ein Sternensystem Planeten und Monde ein!').
+text(de, txtEigenschaftenHimmelsKoerperEingeben, 'Eigenschaften eines Himmelskörpers eingeben').
+text(de, txtAusstattungEingeben, 'Geben Sie die planetare Ausstattung eines Himmelskörpers wie Basen, Raffinerieen etc. ein!').
+text(de, txtEigenschaftenHimmelsKoerperEingeben, 'Eigenschaften eines Himmelskörpers eingeben').
+text(de, txtSammelDetailsEingeben, 'SammelDetails eines Himmelskörpers eingeben').
+text(de, txtSammelbareResourcenEingeben, 'Geben Sie die sammelbaren Resourcen eines Himmelskörpers ein!').
+text(de, txtOptimiertesVorgehenErhalten, 'Optimiertes Vorgehen erhalten').
+text(de, txtOptimierteVorgehensweiseErwerbBekommen, 'Bekommen Sie eine optimierte Vorgehensweise, für den Erwerb eines bestimmten Stoffes!').
+text(de, txtLinksZeitweiseInaktiv, 'Links können zeitweise inaktiv sein, wenn notwendige Daten fehlen. Diese können Sie mit Hilfe der Masken, deren Link hier aktiv ist, eingegeben. Falls Sie die Daten inzwischen eingegeben haben, laden Sie diese Seite erneut (F5 bei Firefox)!').
+
+/* Fixtexte SpielStatusDialog */
+text(de, txtVorraussetzungenMaterialSammlung, 'Vorraussetzungen für die Materialsammlung').
+text(de, txtAusstattung, 'Ausstattung').
+text(de, txtMinenlaser, 'Minenlaser').
+text(de, txtVerbesserterMinenLaser, 'verbesserter Minenlaser').
+text(de, txtTerrainformer, 'Terrainformer').
+text(de, txtWaffe, 'Waffe').
+text(de, txtSolarStrahl, 'Solarstrahl').
+text(de, txtGemuetsStrahl, 'Gemütsstrahl').
+text(de, txtAnzugRaffinerie, 'Anzug-Raffinerie').
+text(de, txtBewegungsmöglichkeiten, 'Bewegungsmöglichkeiten').
+text(de, txtRaumschiffEinsetzbar, 'Raumschiff einsetzbar').
+text(de, txtMinenLaserAufExoFahrzeug, 'Minenlaser auf Exofahrzeug vorhanden').
+text(de, txtUmgebung, 'Umgebung').
+text(de, txtFrachterVorhanden, 'Frachter vorhanden').
+text(de, txtAnomalieSphaereRufbar, 'Anomalie / Sphäre rufbar').
 
 /* Fixtexte rezeptBekanntAnzeigen */
-text(de, stoffKlassenAuswahl, 'Stoffklassen-Auswahl').
-text(de, stoffKlasse, 'StoffKlasse: ').
+text(de, txtStoffKlassenAuswahl, 'Stoffklassen-Auswahl').
+text(de, txtStoffKlasse, 'StoffKlasse: ').
 
 /* Fixtexte rezeptBekanntStoffklassenAuswahl */
-text(de, eingabeBekannteRezepte, 'Eingabe bekannte Rezepte').
+text(de, txtEingabeBekannteRezepte, 'Eingabe bekannte Rezepte').
 
 /* Fixtexte systemNamenDialog */
-text(de, eingabeSternenSysteme, 'Eingabe der Sternensysteme').
-text(de, systemName, 'System-Name').
-text(de, farbe, 'Farbe').
-text(de, dieZeile, 'Die Zeile ').
-text(de, inSpalte, ' in Spalte ').
-text(de, istUnvollstaendig, ' ist unvollständig').
+text(de, txtEingabeSternenSysteme, 'Eingabe der Sternensysteme').
+text(de, txtSystemName, 'System-Name').
+text(de, txtFarbe, 'Farbe').
+text(de, txtDieZeile, 'Die Zeile ').
+text(de, txtInSpalte, ' in Spalte ').
+text(de, txtIstUnvollstaendig, ' ist unvollständig').
 
 /* Fixtexte planetAuswahlDialog */
-text(de, sternensystem, 'Sternensystem').
-text(de, system, 'System: ').
-text(de, auswahlHimmelskoerper, 'Auswahl Himmelskörper').
-text(de, planet, 'Planet: ').
-text(de, bitteEineAuswahlTreffen, 'bitte eine Auswahl treffen!').
+text(de, txtAuswahlHimmelskoerper, 'Auswahl Himmelskörper').
+text(de, txtBitteEineAuswahlTreffen, 'bitte eine Auswahl treffen!').
 
 /* Fixtexte planetMondNameDialog */
-text(de, eigenschaftenSternenSystemEingeben, 'Eigenschaften Sternensystem eingeben').
-text(de, sternenSystemNamenHimmelskoerperEingeben, 'Sternensystem: Namen der Himmelskörper eingeben').
-text(de, planetenUndMonde, 'Name').
-text(de, name, 'Planeten und Monde').
-text(de, planetenTyp, 'Planetentyp').
-text(de, planetenTypBeiScanAusWeltraumAngezeigt, 'Der Planetentyp wird beim Scan aus dem Weltraum angezeigt.').
-text(de, alternativStehtErAuchInDerEndtdeckungsListe, 'Alternativ steht er auch in der Entdeckungsliste. Im Fenster wenn man mit der Maus über den Planetennamen fährt.').
+text(de, txtEigenschaftenSternenSystemEingeben, 'Eigenschaften Sternensystem eingeben').
+text(de, txtSternenSystemNamenHimmelskoerperEingeben, 'Sternensystem: Namen der Himmelskörper eingeben').
+text(de, txtPlanetenUndMonde, 'Name').
+text(de, txtName, 'Planeten und Monde').
+text(de, txtPlanetenTyp, 'Planetentyp').
+text(de, txtPlanetenTypBeiScanAusWeltraumAngezeigt, 'Der Planetentyp wird beim Scan aus dem Weltraum angezeigt.').
+text(de, txtAlternativStehtErAuchInDerEndtdeckungsListe, 'Alternativ steht er auch in der Entdeckungsliste. Im Fenster wenn man mit der Maus über den Planetennamen fährt.').
+
+/* Fixtexte planetEigenschaftenDialog */
+text(de, txtEigenschaftenHimmelsKoerper, 'Eigenschaften Himmelskörper eingeben').
+text(de, txtEigenschaftenHimmelsKoerperEingeben, 'Eigenschaften Himmelskörper eingeben: Systemauswahln').
+text(de, txtEigenschaftenHimmelsKoerperAuswahl, 'Eigenschaften Himmelskörper eingeben: Himmelskörperauswahl').
+text(de, txtEinrichtungenUndIhreReisezeit, 'Einrichtungen und ihre Reisezeit von der Hauptbasis').
+text(de, txtJeweilsDieEinrichtungMit, 'Jeweils die Einrichtung mit der kürzesten Entfernung zur Hauptbasis angeben!').
+text(de, txtHauptBasis, 'Hauptbasis').
+text(de, txtWasser, 'Wasser').
+text(de, txtAussenPosten, 'Außenposten').
+text(de, txtRaumstation, 'Raumstation').
+text(de, txtMittlereRaffinerie, 'Mittlere Raffinerie').
+text(de, txtGroßeRaffinerie, 'Große Raffinerie').
+text(de, txtHandelsterminal, 'Handelsterminal').
+text(de, txtHandelsstation, 'Handelsstation').
+text(de, txtKleineRaffinerie, 'kleine Raffinerie').
+text(de, txtNahrungsprozessor, 'Nahrungsprozessor').
+text(de, txtBasisterminus, 'Basisterminus').
+text(de, txtKonstruktionsforschungsstation, 'Konstruktionsforschungsstation').
+text(de, txtSauerstoffverarbeiter, 'Sauerstoffverarbeiter').
+text(de, txtAtmosphaerenanlage, 'Atmosphärenanlage').
+text(de, txtBergbaueinheit, 'Bergbaueinheit').
+text(de, txtPlantage, 'Plantage').
+
+/* Fixtexte planetSammelEigenschaftenDialog */
+text(de, txtEigenschaftenHimmelskörperEingebenSystemauswahl, 'Eigenschaften Himmelskörper eingeben: Systemauswahl').
+text(de, txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, 'Eigenschaften Himmelskörper eingeben: Himmelskörperauswahl').
+text(de, txtSammelartEingebenHimmelskoerperAuswahl, 'Sammelart eingeben: Himmelskörperauswahl').
+text(de, txtAuswahlSammelart, 'Auswahl Sammelart').
+text(de, txtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst, 'Zeitmessungen beginnen direkt vor der Sammelquelle und enden, sobald die Quelle erschöpft ist.').
+text(de, txtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben, 'Dann die Art der Gewinnung und die Zahl der damit gewonnenen Stoffe eingeben!').
+text(de, txtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen, 'Die Sekundärelemente nur eingeben, wenn das die einzige Möglichkeit auf dem Himmelskörper ist, den Stoff zu gewinnen!').
+text(de, txtEsGenuegtAngabeSchnellsteMethode, 'Es genügt die Angabe der schnellsten Methode.').
+text(de, txtNurStoffeGewonnenWerdenKoennenEingeben, 'Nur Stoffe, die gewonnen werden können, eingeben!').
+
+/* --------------------------------------------------------------------------------------- */
+/* Sammelaktionen */
+text(de, bekannt, 'bekannt').
+text(de, erkaempfen, 'erkämpfen').
+text(de, ernten, 'ernten').
+text(de, ertauchen, 'ertauchen').
+text(de, exoFahrzeugMinenLaserNutzen, 'Exofahrzeugminenlaser nutzen').
+text(de, herausSchlagen, 'herausschlagen').
+text(de, jagen, 'jagen').
+text(de, kaufen, 'kaufen').
+text(de, minenLaserNutzen, 'Minenlaser nutzen').
+text(de, pfluecken, 'pflücken').
+text(de, raumSchuerfen, 'raumschuerfen').
+text(de, terrainFormerNutzen, 'Terrainformer nutzen').
+text(de, unterWasserErkaempfen, 'unter Wasser erkämpfen').
+text(de, verbessertenMinenLaserNutzen, 'verbesserten Minenlaser nutzen').
+text(de, vonTierErhalten, 'von Tier erhalten').
+text(de, solarStrahlNutzen, 'Solarstrahl nutzen').
+text(de, gemuetsStrahlNutzen, 'Gemütsstrahl nutzen').
+text(de, verdienen, 'verdienen').
+text(de, vonBergbauEinheitGewinnen, 'von Bergbaueinheit gewinnen').
 
 
 /* Planetentypen */
@@ -859,7 +920,7 @@ text(de, schraegeBetonPlatte, 'schräge Betonplatte').
 text(de, kleineBetonWand, 'kleine Betonwand').
 text(de, betonFenster, 'Betonfenster').
 text(de, betonTuer, 'Betontür').
-text(de, elektrischeBetonTuer, 'elektrische Betontuer').
+text(de, elektrischeBetonTuer, 'elektrische Betontür').
 text(de, betonDachPlatte, 'Betondachplatte').
 text(de, betonDachEckStueck, 'Betondacheckstück').
 text(de, betonBogen, 'Betonbogen').
@@ -1050,7 +1111,7 @@ text(de, unmoeglicheSporen, 'unmögliche Sporen').
 text(de, sichWindendeSpulen, 'sich windende Spulen').
 text(de, blasenBallen, 'Blasenballen').
 text(de, defekterSeparator, 'defekter Separator').
-text(de, elektrischerWuerfel, 'elektrischer Wuerfel').
+text(de, elektrischerWuerfel, 'elektrischer Würfel').
 text(de, kabelKapsel, 'Kabelkapsel').
 text(de, kalziPilz, 'Kalzipilz').
 text(de, kappillarMuschel, 'Kappillarmuschel').

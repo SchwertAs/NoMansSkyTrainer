@@ -13,23 +13,26 @@
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 planetSammelEigenschaftenDialogSystemAuswahl(_Request) :-
+	textResources:getText(txtEigenschaftenHimmelskörperEingebenSystemauswahl, TxtEigenschaftenHimmelskörperEingebenSystemauswahl),
 	planetAuswahlDialog:systemAuswahlDialog(
-	  'Eigenschaften Himmelskörper eingeben: Systemauswahl',
+	  TxtEigenschaftenHimmelskörperEingebenSystemauswahl,
 	  '/planetSammelEigenschaftenDialogPlanetAuswahl').
 
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetSammelEigenschaftenDialogPlanetAuswahl(Request) :-
+	textResources:getText(txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl),
 	planetAuswahlDialog:planetAuswahlDialog(
-	  'Eigenschaften Himmelskörper eingeben: Himmelskörperauswahl',
+	  TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl,
 	  '/planetSammelEigenschaftenDialogSammelArtAuswahl',
 	  Request
 	).
 
 /* -----------------------------------  Sammelartauswahl -------------------------------------------- */
 planetSammelEigenschaftenDialogSammelArtAuswahl(Request) :-
+	textResources:getText(txtSammelartEingebenHimmelskoerperAuswahl, TxtSammelartEingebenHimmelskoerperAuswahl),
 	sammelArtAuswahlDialog(
-	  'Sammelart eingeben: Himmelskörperauswahl',
+	  TxtSammelartEingebenHimmelskoerperAuswahl,
 	  '/planetSammelEigenschaftenDialog',
 	  Request
 	).
@@ -41,22 +44,29 @@ sammelArtAuswahlDialog(HeaderText, Action, Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]),
-	((AuswahlPlanet = 'Bitte wählen', planetAuswahlDialog:fehlerBehandlung); 
+	((AuswahlPlanet = txtBitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
 	(
-	 findall(SammelArt, (sammelAktion:sammelAktion(SammelArt), SammelArt \= bekannt), SammelArten),
+	 findall(SammelArt, 
+	   (sammelAktion:sammelAktion(SammelArt0), 
+	    SammelArt0 \= bekannt,
+	    textResources:getText(SammelArt0, SammelArt)
+	   )
+	   , SammelArten),
 	 server:baueOptionsFeld('auswahlSammelArt', SammelArten, 2, OptionList),
-	
+	 textResources:getText(txtAuswahlSammelart, TxtAuswahlSammelart),
+	 textResources:getText(txtOk, TxtOk),
+	 textResources:getText(txtReset, TxtReset),
 	 TermerizedBody = [
 	 \['<header>'],
      h1([align(center)], [HeaderText]),
      \['</header>'],
 	 \['<formSpace>'],       
      form([action(Action), method('post'), name('sammelArtAuswahlForm')], 
-       	 [h3('Auswahl Sammelart'),
+       	 [h3(TxtAuswahlSammelart),
        	  \sammelArtAnzeige(AuswahlSystem, AuswahlPlanet, OptionList),
        	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-		    	  [td([button([name("submit"), type("submit")], 'OK')]),
-		    	   td([button([name("reset"), type("reset")], 'reset')])
+		    	  [td([button([name("submit"), type("submit")], TxtOk)]),
+		    	   td([button([name("reset"), type("reset")], TxtReset)])
 		    	  ]))    
 		 ]),
 	 \['</formSpace>']
@@ -68,25 +78,34 @@ sammelArtAuswahlDialog(HeaderText, Action, Request) :-
 
 /* -----------------------------------  Eingabedialog ----------------------------------------------- */	
 planetSammelEigenschaftenDialog(Request) :-
+	 textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	member(method(post), Request), !,
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0]),
 	 auswahlSammelArt(AuswahlSammelArt, [length > 0])
 	]),
-	(AuswahlSammelArt = 'Bitte wählen' -> planetAuswahlDialog:fehlerBehandlung; 
+	(AuswahlSammelArt = TxtBitteWaehlen -> planetAuswahlDialog:fehlerBehandlung; 
 	 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt)
 	).
 
 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt) :-
     /* einlesen der Eigenschaften */
     GesamtZeilenZahl = 15,
-	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest], 
+	findall([RecordNo, Stoff, Operation, Haupt, Neben, Ruest, AuswahlSammelArt], 
 	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, Operation, Stoff, Haupt, Neben, Ruest),
-	        Operation = AuswahlSammelArt), 
-	        RecordList),
+	        Operation = AuswahlSammelArt
+	       ), 
+	       RecordList),
 	findall([FeldNo], between(1, GesamtZeilenZahl, FeldNo), FeldNoList),
-	ausgabe:joinRecordsByRecordNo(FeldNoList, RecordList, 5, NumerierteRecordList),
+	ausgabe:joinRecordsByRecordNo(FeldNoList, RecordList, 6, NumerierteRecordList),
+	textResources:getText(txtOk, TxtOk),
+	textResources:getText(txtReset, TxtReset),
+	textResources:getText(txtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst, TxtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst),
+	textResources:getText(txtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben, TxtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben),
+	textResources:getText(txtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen, TxtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen),
+	textResources:getText(txtEsGenuegtAngabeSchnellsteMethode, TxtEsGenuegtAngabeSchnellsteMethode),
+	textResources:getText(txtNurStoffeGewonnenWerdenKoennenEingeben, TxtNurStoffeGewonnenWerdenKoennenEingeben),
 	TermerizedBody = [
 	\['<header>'],
     h1([align(center)], ['Sammelmöglichkeiten des Himmelskörpers eingeben']), 
@@ -99,14 +118,14 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
 	       	             [div(class('td'), \innereTabelle(NumerierteRecordList))
 	       	             ])
 	       	        ]),
-       	  p(id(compactText), ['Zeitmessungen beginnen direkt vor der Sammelquelle und enden, sobald die Quelle erschöpft ist.']),
-		  p(id(compactText), ['Dann die Art der Gewinnung und die Zahl der damit gewonnenen Stoffe eingeben!']),
-		  p(id(compactText), ['Die Sekundärelemente nur eingeben, wenn das die einzige Möglichkeit auf dem Himmelskörper ist, den Stoff zu gewinnen!']),
-       	  p(id(compactText), ['Es genügt die Angabe der schnellsten Methode.']),
-       	  p(id(compactText), ['Stoffe, die nicht gewonnen werden können, auch nicht eingeben!']),
+       	  p(id(compactText), [TxtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst]),
+		  p(id(compactText), [TxtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben]),
+		  p(id(compactText), [TxtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen]),
+       	  p(id(compactText), [TxtEsGenuegtAngabeSchnellsteMethode]),
+       	  p(id(compactText), [TxtNurStoffeGewonnenWerdenKoennenEingeben]),
        	  p(table([width("12%"), border("0"), cellspacing("3"), cellpadding("2")],
-		    	  [td([button([name("submit"), type("submit")], 'OK')]),
-		    	   td([button([name("reset"), type("reset")], 'reset')])
+		    	  [td([button([name("submit"), type("submit")], TxtOk)]),
+		    	   td([button([name("reset"), type("reset")], TxtReset)])
 		    	  ]))    
 		 ]),
 	\['</formSpace>'],
@@ -221,7 +240,7 @@ innereEingabeZeile([]) -->
 
 innereEingabeZeile([Record|Rest]) -->
 	{
-	Record = [FeldNo, Stoff, Operation, Haupt, Neben, Ruest],
+	Record = [FeldNo, Stoff, Operation, Haupt, Neben, Ruest, _],
 	((Stoff = '', Stoff0 = 'Bitte wählen'); (Stoff0 = Stoff)),
 	((Haupt = '', Haupt0 = 0); (Haupt0 = Haupt)),
 	((Neben = '', Neben0 = 0); (Neben0 = Neben)),
@@ -229,9 +248,12 @@ innereEingabeZeile([Record|Rest]) -->
 	arbeitsVorbereitung:toDauer(Operation, 1, Ruest0, Haupt0, Neben0, Dauer0),
 	((Dauer0 = 0, Gebinde = '', Anzahl = '', Dauer = ''); (Gebinde = 1, Anzahl = 1, Dauer = Dauer0)),
 
-	findall(St, (sammlung:sammlung(_, 'System', 'MeinPlanet', Op, St, _, _, _), Op \= bekannt), SammelStoffe0),
-	sort(SammelStoffe0, SammelStoffe1),
-	findall([Stoff0, St0], member(St0, SammelStoffe1), SammelStoffe)
+	findall([0, St0], (sammlung:sammlung(_, 'System', 'MeinPlanet', Op, St0, _, _, _), Op = ertauchen), SammelStoffe0),
+	findall([FeldNo2], between(1, 14, FeldNo2), FeldNoList),
+	ausgabe:joinRecordsByRecordNo(FeldNoList, SammelStoffe0, 2, SammelStoffe1),
+	findall(St1, (member(StTup1, SammelStoffe1), StTup1 = [_, St1]), SammelStoffe2),
+	sort(SammelStoffe2, SammelStoffe3),
+	findall([Stoff0, St2], member(St2, SammelStoffe3), SammelStoffe)
 	},
 	html([	 
 	      div(class('tr'), [ 
@@ -245,9 +267,10 @@ innereEingabeZeile([Record|Rest]) -->
 
 baueOptionsFeldMitVorwahl(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	{
+		textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 		Index is FeldNo mod 100 + StartIndex,
 		OptionsWerteListe = [[Wert,_]|_],
-		((Wert = '', OptionText = option(selected, 'Bitte wählen')); (OptionText = option('Bitte wählen')))
+		((Wert = '', OptionText = option(selected, TxtBitteWaehlen)); (OptionText = option(TxtBitteWaehlen)))
 	},
 	html([select([name(FeldName + FeldNo), id(FeldName + FeldNo), class("Nachschlagen"), size("1"), maxlength(20), tabindex(Index)],
 			     [
@@ -261,9 +284,10 @@ baueOptionMitVorwahl([]) -->
  
 baueOptionMitVorwahl([OptionTupel|Rest]) -->
 	{
-		OptionTupel = [Wert, Option],
-		atom_string(Option, OptionText),
-		((Wert = Option, OptionText0 = option(selected(selected), OptionText)); (OptionText0 = option(OptionText)))
+		OptionTupel = [VorwahlWert, Option],
+		textResources:getText(Option, OptionText),
+		((VorwahlWert = Option, OptionText0 = option(selected(selected), OptionText)); 
+		 (OptionText0 = option(OptionText)))
 	},
 	html([
 		OptionText0
@@ -308,7 +332,8 @@ pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, RohStoff, AnzahlNum, Daue
     OffsetAnzahl is OffsetAuswahlen + 1 * GesamtZeilenZahl + ZeilenZahl,
     OffsetDauer is OffsetAuswahlen + 2 * GesamtZeilenZahl + ZeilenZahl,
     OffsetGebinde is OffsetAuswahlen + 3 * GesamtZeilenZahl + ZeilenZahl,
-    nth1(OffsetRohStoff, VarValueList, RohStoff),
+    nth1(OffsetRohStoff, VarValueList, RohStoff0),
+    textResources:getText(RohStoff, RohStoff0),
     nth1(OffsetAnzahl, VarValueList, Anzahl),
     nth1(OffsetDauer, VarValueList, Dauer),
     nth1(OffsetGebinde, VarValueList, Gebinde),
@@ -328,41 +353,46 @@ ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarVal
 	
 gespeichert :-
     server:holeCssAlsStyle(StyleString),
+	textResources:getText(txtGespeichert, TxtGespeichert),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),'gespeichert!'),
+		h3(align(center), TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 fehlerZeile(FeldNo) :-
+	textResources:getText(txtDieZeile, TxtDieZeile),
+	textResources:getText(txtIstUnvollstaendig, TxtIstUnvollstaendig),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	server:holeCssAlsStyle(StyleString),
 	ZeileNo is FeldNo mod 100,
-   	string_concat('Die Zeile ', ZeileNo, FehlerMeldung0),
-   	string_concat(FehlerMeldung0, ' ist unvollständig', FehlerMeldung),
+   	string_concat(TxtDieZeile, ZeileNo, FehlerMeldung0),
+   	string_concat(FehlerMeldung0, TxtIstUnvollstaendig, FehlerMeldung),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),
 		\['</redHeader>'],
 		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
+		p(a(['href="/"'],[TxtFunktionsAuswahl])),
 		\['</formSpace>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 	
 gueltigeZeile(RohStoff, Dauer, Anzahl, Gebinde) :-
-	RohStoff \= 'Bitte wählen',
+	RohStoff \= txtBitteWaehlen,
 	Dauer > 0,
 	Anzahl > 0,
 	Gebinde > 0.
 
 leereZeile(RohStoff, Dauer, Anzahl, Gebinde) :-
-	RohStoff = 'Bitte wählen',
+	RohStoff = txtBitteWaehlen,
 	Dauer = 0,
 	Anzahl = 0,
 	Gebinde = 0.

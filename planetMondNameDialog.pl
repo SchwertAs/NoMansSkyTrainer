@@ -11,15 +11,15 @@
 
 /* ----------------------  Auswahl System  ----------------------------------------------------*/
 planetMondNameSystemAuswahlDialog(_Request) :-
-	textResources:getText(eigenschaftenSternenSystemEingeben, TxtEigenschaftenSternenSystemEingeben),
+	textResources:getText(txtEigenschaftenSternenSystemEingeben, TxtEigenschaftenSternenSystemEingeben),
 	planetAuswahlDialog:systemAuswahlDialog(
 		TxtEigenschaftenSternenSystemEingeben, 
-		'/planetMondNameDialog').
+		'/planetMondNameDialog'). 
 		
 /* ----------------------  Eingabe Himmelskörper  ---------------------------------------------*/
 planetMondNameDialog(Request) :-
 	member(method(post), Request), !,
-	textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0])
 	]),
@@ -32,13 +32,13 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	findall([RecordNo, HimmelsKoerper, PlanetenTyp], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper, PlanetenTyp), HimmelsKoerperListe0),
 	sort(HimmelsKoerperListe0, HimmelsKoerperListe),
 	ausgabe:joinRecordsByRecordNo(FeldNoList, HimmelsKoerperListe, 2, NumerierteRecordList),
-	textResources:getText(sternenSystemNamenHimmelskoerperEingeben, TxtSternenSystemNamenHimmelskoerperEingeben),
-	textResources:getText(sternensystem, TxtSternensystem),
-	textResources:getText(planetenUndMonde, TxtPlanetenUndMonde),
-	textResources:getText(name, TxtName),
-	textResources:getText(planetenTyp, TxtPlanetenTyp),
-	textResources:getText(planetenTypBeiScanAusWeltraumAngezeigt, TxtPlanetenTypBeiScanAusWeltraumAngezeigt),
-	textResources:getText(alternativStehtErAuchInDerEndtdeckungsListe, TxtAlternativStehtErAuchInDerEndtdeckungsListe),
+	textResources:getText(txtSternenSystemNamenHimmelskoerperEingeben, TxtSternenSystemNamenHimmelskoerperEingeben),
+	textResources:getText(txtSternensystem, TxtSternensystem),
+	textResources:getText(txtPlanetenUndMonde, TxtPlanetenUndMonde),
+	textResources:getText(txtName, TxtName),
+	textResources:getText(txtPlanetenTyp, TxtPlanetenTyp),
+	textResources:getText(txtPlanetenTypBeiScanAusWeltraumAngezeigt, TxtPlanetenTypBeiScanAusWeltraumAngezeigt),
+	textResources:getText(txtAlternativStehtErAuchInDerEndtdeckungsListe, TxtAlternativStehtErAuchInDerEndtdeckungsListe),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
@@ -100,7 +100,7 @@ innereEingabeZeile([]) -->
 innereEingabeZeile([Record|Rest]) -->
 	{
 		Record = [FeldNo, Planet, PlanetenTyp],
-		textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+		textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 		((PlanetenTyp = '', PlanetenTyp0 = TxtBitteWaehlen); (PlanetenTyp0 = PlanetenTyp)),
 		findall([PlanetenTyp0, PlanTyp], 
 			planetenTypen:planetenGruppePlanetenTyp(PlanTyp, _),
@@ -118,7 +118,7 @@ innereEingabeZeile([Record|Rest]) -->
 
 baueOptionsFeldMitVorwahl(FeldName, FeldNo, StartIndex, OptionsWerteListe) -->
 	{
-		textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+		textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 		Index is FeldNo mod 100 + StartIndex,
 		OptionsWerteListe = [[Wert,_]|_],
 		((Wert = '', OptionText = option(selected, TxtBitteWaehlen)); (OptionText = option(TxtBitteWaehlen)))
@@ -204,18 +204,18 @@ pickeZeile(GesamtZeilenZahl, ZeilenZahl, VarValueList, Planet, PlanetenTyp) :-
 
 leereZeile(Planet, PlanetenTyp) :-
 	Planet = "",
-	PlanetenTyp = bitteWaehlen.
+	PlanetenTyp = txtBitteWaehlen.
 
 gueltigeZeile(Planet, PlanetenTyp) :-
 	Planet \= "",
-	PlanetenTyp \= bitteWaehlen.
+	PlanetenTyp \= txtBitteWaehlen.
 
 fehlerZeile(FeldNo) :-
 	server:holeCssAlsStyle(StyleString),
 	ZeileNo is FeldNo mod 100,
-   	textResources:getText(dieZeile, TxtDieZeile),	
-	textResources:getText(istUnvollstaendig, TxtIstUnvollstaendig),	
-	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),	
+   	textResources:getText(txtDieZeile, TxtDieZeile),	
+	textResources:getText(txtIstUnvollstaendig, TxtIstUnvollstaendig),	
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
 	string_concat(TxtDieZeile, ZeileNo, FehlerMeldung0),
    	string_concat(FehlerMeldung0, TxtIstUnvollstaendig, FehlerMeldung),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneingabe Fehler')],
@@ -239,7 +239,7 @@ ablegen(AuswahlSystem, GesamtZeilenZahl, VarValueList) :-
 	fail.
 
 defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-
-	textResources:getText(bitteWaehlen, TxtBitteWaehlen),
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	PlanetenTyp0 = TxtBitteWaehlen,
 	PlanetenTyp = '',
 	!.
@@ -250,8 +250,8 @@ defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-
 gespeichert :-
     server:holeCssAlsStyle(StyleString),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Himmelskörper-Namen')],
-	textResources:getText(gespeichert, TxtGespeichert),
-	textResources:getText(funktionsAuswahl, TxtFunktionsAuswahl),	
+	textResources:getText(txtGespeichert, TxtGespeichert),
+	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [
 		\['<header>'],
 		h3(align(center), TxtGespeichert),
