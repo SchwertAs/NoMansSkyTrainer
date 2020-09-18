@@ -14,9 +14,9 @@
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 stoffErlangenDialogSystemAusWahl(_Request) :-
 	textResources:getText(txtOptimiertesVorgehenErhalten, TxtOptimiertesVorgehenErhalten),
-	textResources:getText(txtStoffErlangenAufenthaltsortSpielerSystemAuswählen, TxtStoffErlangenAufenthaltsortSpielerSystemAuswählen),
+	textResources:getText(txtSternenSystemEingeben, TxtSternenSystemEingeben),
 	string_concat(TxtOptimiertesVorgehenErhalten, ': ', Txt0),
-	string_concat(Txt0, TxtStoffErlangenAufenthaltsortSpielerSystemAuswählen, TxtHeader),
+	string_concat(Txt0, TxtSternenSystemEingeben, TxtHeader),
 	planetAuswahlDialog:systemAuswahlDialog(
 	  TxtHeader,
 	  '/stoffErlangenDialogPlanetAusWahl').
@@ -24,9 +24,9 @@ stoffErlangenDialogSystemAusWahl(_Request) :-
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 stoffErlangenDialogPlanetAusWahl(Request) :-
 	textResources:getText(txtOptimiertesVorgehenErhalten, TxtOptimiertesVorgehenErhalten),
-	textResources:getText(txtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, TxtStoffErlangenAufenthaltsortSpielerPlanetAuswählen),
+	textResources:getText(txtPlanetAuswaehlen, TxtPlanetAuswaehlen),
 	string_concat(TxtOptimiertesVorgehenErhalten, ': ', Txt0),
-	string_concat(Txt0, TxtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, TxtHeader),
+	string_concat(Txt0, TxtPlanetAuswaehlen, TxtHeader),
 	planetAuswahlDialog:planetAuswahlDialog(
 	  TxtHeader,
 	  '/stoffErlangenDialog',
@@ -66,7 +66,7 @@ stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	textResources:getText(txtSammlungsgegenstaende, TxtSammlungsgegenstaende),
 	textResources:getText(txtKosten, TxtKosten),
 	textResources:getText(txtGewuenschterStoff, TxtGewuenschterStoff),
-	textResources:getText(txtAnzahlDp, TxtAnzahl),
+	textResources:getText(txtAnzahlDp, TxtAnzahlDp),
 	textResources:getText(txtRohstoffe, TxtRohstoffe),
 	textResources:getText(txtProdukte, TxtProdukte),
 	textResources:getText(txtBasisBauteile, TxtBasisBauteile),
@@ -102,7 +102,7 @@ stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	       		         ])
 	       		),
 			  	h3([TxtGewuenschterStoff]),
-			  	p([label(for('anzahl', TxtAnzahl)),
+			  	p([label(for('anzahl', TxtAnzahlDp)),
 			  	   input([name('anzahl'), type('text'), value(''), size='24', tabindex(1)])
 			  	   
 			  	]),
@@ -243,7 +243,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel0, SammelSet, Vorgae
 	textResources:getText(txtStoffErlangen, TxtStoffErlangen),
 	textResources:getText(txtStoffErlangen, TxtStoffErlangen),
 	textResources:getText(txtEingaben, TxtEingaben),
-	textResources:getText(txtAnzahl, TxtAnzahl),
+	textResources:getText(txtGrossAnzahl, TxtGrossAnzahl),
 	textResources:getText(txtGesuchterStoff, TxtGesuchterStoff),
 	textResources:getText(txtOptimierung, TxtOptimierung),
 	textResources:getText(txtSystem, TxtSystem),
@@ -266,7 +266,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel0, SammelSet, Vorgae
 		  	\['<formSpace>'],
 		    table( [width('60%'), border(1)], 
 				   [caption(h2(TxtEingaben)),
-					tr([th([scope('col')],[TxtAnzahl]),
+					tr([th([scope('col')],[TxtGrossAnzahl]),
 						th([scope('col')],[TxtGesuchterStoff]),
 						th([scope('col')],[TxtOptimierung]),
 						th([scope('col')],[TxtSystem]),
@@ -281,7 +281,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel0, SammelSet, Vorgae
 			       ]),
     		table( [width('25%'), border(1)], 
 		           [caption(h2(TxtStueckliste)),
-		            tr([th([scope('col')],[TxtAnzahl]),
+		            tr([th([scope('col')],[TxtGrossAnzahl]),
 		            	th([scope('col')],[TxtStoff])
 		               ]),
 			           \ausgabeSammlungDcg(SammelSetPred)
@@ -301,7 +301,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel0, SammelSet, Vorgae
 		    table( [width('35%'), border(1)],
 		    	   [caption(h2(TxtSummenwerte)),
 		            tr([th([scope('col')],[TxtSummenwert]),
-		                th([scope('col')],[TxtAnzahl]),
+		                th([scope('col')],[TxtGrossAnzahl]),
 		                th([scope('col')],[TxtEinheit])
 		               ]),
 		               \ausgabeSummenDcg(SummenPred)

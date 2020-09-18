@@ -77,9 +77,10 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	textResources:getText(txtDas, Das),
 	textResources:getText(Produkt, ProduktString),
 	string_concat(Das, ProduktString, Anweisung0),
-	textResources:getText(txtLeerIstBekannt, IB),
-	string_concat(Anweisung0, IB, Anweisung),
-	append(VorgaengePred, [vorg(Anweisung, Operation, '')], VorgaengePred0),
+	textResources:getText(txtLeerIstBekannt, TxtLeerIstBekannt),
+	textResources:getText(Operation, TxtOperation),
+	string_concat(Anweisung0, TxtLeerIstBekannt, Anweisung),
+	append(VorgaengePred, [vorg(Anweisung, TxtOperation, '')], VorgaengePred0),
 	ausgabeVorgaenge(Rest, VorgaengePred0, VorgaengePredDanach),
 	!.		
 
@@ -205,13 +206,20 @@ ausgabeSummen(GesamtZahl, GesamtWertSammlung, GesamtZeit, GesamtKosten, GesamtWe
 	textResources:getText(txtUnits, TxtUnits),
 	textResources:getText(txtEinHundertstel, TxtEinHundertstel),
 	textResources:getText(txtUnitsProStunde, TxtUnitsProStunde),
-	SummenPred0 =[sum('Sammeln Gesamtbedarf', GesamtZahl, TxtEinheiten)],
-	append(SummenPred0, [sum('Gesamtwert Sammlung', GesamtWertSammlung, TxtUnits)], SummenPred1),
-	append(SummenPred1, [sum('GesamtZeitAufwand', GesamtZeit, TxtEinHundertstel)], SummenPred2),
-	append(SummenPred2, [sum('Kosten Eingangsstoffe', GesamtKosten, TxtUnits)], SummenPred3),
-	append(SummenPred3, [sum('Gesamtwert Endstoff', GesamtWertEndProdukt, TxtUnits)], SummenPred4),
-	append(SummenPred4, [sum('Mehrwert', MehrWert, TxtUnits)], SummenPred5),
-	append(SummenPred5, [sum('Stundenlohn', StundenLohn, TxtUnitsProStunde)], SummenPred).
+	textResources:getText(txtSammelnGesamtbedarf, TxtSammelnGesamtbedarf),
+	textResources:getText(txtGesamtwertSammlung, TxtGesamtwertSammlung),
+	textResources:getText(txtGesamterZeitAufwand, TxtGesamterZeitAufwand),
+	textResources:getText(txtKostenEingangsstoffe, TxtKostenEingangsstoffe),
+	textResources:getText(txtGesamtwertEndstoff, TxtGesamtwertEndstoff),
+	textResources:getText(txtMehrwert, TxtMehrwert),
+	textResources:getText(txtStundenlohn, TxtStundenlohn),
+	SummenPred0 =[sum(TxtSammelnGesamtbedarf, GesamtZahl, TxtEinheiten)],
+	append(SummenPred0, [sum(TxtGesamtwertSammlung, GesamtWertSammlung, TxtUnits)], SummenPred1),
+	append(SummenPred1, [sum(TxtGesamterZeitAufwand, GesamtZeit, TxtEinHundertstel)], SummenPred2),
+	append(SummenPred2, [sum(TxtKostenEingangsstoffe, GesamtKosten, TxtUnits)], SummenPred3),
+	append(SummenPred3, [sum(TxtGesamtwertEndstoff, GesamtWertEndProdukt, TxtUnits)], SummenPred4),
+	append(SummenPred4, [sum(TxtMehrwert, MehrWert, TxtUnits)], SummenPred5),
+	append(SummenPred5, [sum(TxtStundenlohn, StundenLohn, TxtUnitsProStunde)], SummenPred).
 
 berechneStundenLohn(GesamtZeit, _, StundenLohn) :-
 		GesamtZeit = 0,

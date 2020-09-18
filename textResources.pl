@@ -28,7 +28,8 @@ text(de, txtBitteWaehlen, 'Bitte wählen').
 text(de, txtSystemDp, 'System: ').
 text(de, txtPlanetDp, 'Planet: ').
 text(de, txtSternensystem, 'Sternensystem').
-text(de, txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, 'Himmelskörperauswahl').
+text(de, txtSternenSystemEingeben, 'System auswählen').
+text(de, txtGrossAnzahl, 'Anzahl').
 
 /* Fixtexte ausgabe */
 text(de, txtBitteReisenSieNachSystem, 'Bitte reisen Sie nach System: ').
@@ -39,7 +40,7 @@ text(de, txtLeerVon, ' von ').
 text(de, txtLeerMit, ' mit ').
 text(de, txtLeerAus, ' aus').
 text(de, txtDas, 'Das ').
-text(de, txtIn, 'in ').
+text(de, txtIn, 'In ').
 text(de, txtLeerIstBekannt, ' ist bekannt.').
 text(de, txtErlangenSie, 'Erlangen Sie ').
 text(de, txtLeerEinheiten, ' Stück ').
@@ -48,9 +49,16 @@ text(de, txtEinheiten, 'Stück').
 text(de, txtUnits, 'Units').
 text(de, txtEinHundertstel, '1/100 sec').
 text(de, txtUnitsProStunde, 'Units/Stunde').
-
 text(de, reisen, 'reisen').
 text(de, angekommen, 'angekommen').
+
+text(de, txtSammelnGesamtbedarf, 'Sammeln Gesamtbedarf').
+text(de, txtGesamtwertSammlung, 'Gesamtwert Sammlung').
+text(de, txtGesamterZeitAufwand, 'Gesamter Zeitaufwand').
+text(de, txtKostenEingangsstoffe, 'Kosten Eingangsstoffe').
+text(de, txtGesamtwertEndstoff, 'Gesamtwert Endstoff').
+text(de, txtMehrwert, 'Mehrwert').
+text(de, txtStundenlohn, 'Stundenlohn').
 
 /* Fixtexte Hauptdialog */
 text(de, txtLinkZurMaske, 'Link zur Maske').
@@ -74,7 +82,7 @@ text(de, txtOptimierteVorgehensweiseErwerbBekommen, 'Bekommen Sie eine optimiert
 text(de, txtLinksZeitweiseInaktiv, 'Links können zeitweise inaktiv sein, wenn notwendige Daten fehlen. Diese können Sie mit Hilfe der Masken, deren Link hier aktiv ist, eingegeben. Falls Sie die Daten inzwischen eingegeben haben, laden Sie diese Seite erneut (F5 bei Firefox)!').
 
 /* Fixtexte SpielStatusDialog */
-text(de, txtVorraussetzungenMaterialSammlung, 'Einrichtungen angeben').
+text(de, txtVorraussetzungenMaterialSammlung, 'Einrichtungen').
 text(de, txtAusstattung, 'Ausstattung').
 text(de, txtVerbesserterMinenLaser, 'verbesserter Minenlaser').
 text(de, txtWaffe, 'Waffe').
@@ -86,14 +94,14 @@ text(de, txtFrachterVorhanden, 'Frachter vorhanden').
 text(de, txtAnomalieSphaereRufbar, 'Anomalie / Sphäre rufbar').
 
 /* Fixtexte rezeptBekanntAnzeigen */
-text(de, txtStoffKlassenAuswahl, 'Stoffklasse Auswahl').
+text(de, txtStoffKlassenAuswahl, 'Stoffklasse auswählen').
 text(de, txtStoffKlasse, 'StoffKlasse: ').
 
 /* Fixtexte rezeptBekanntStoffklassenAuswahl */
-text(de, txtEingabeBekannteRezepte, 'Markieren bekannte Rezepte').
+text(de, txtEingabeBekannteRezepte, 'Bekannte Rezepte').
 
 /* Fixtexte systemNamenDialog */
-text(de, txtEingabeSternenSysteme, 'Eingabe von Name und Farbe').
+text(de, txtEingabeSternenSysteme, 'Name und Farbe').
 text(de, txtSystemName, 'System-Name').
 text(de, txtFarbe, 'Farbe').
 text(de, txtDieZeile, 'Die Zeile ').
@@ -105,8 +113,7 @@ text(de, txtAuswahlHimmelskoerper, 'Auswahl Himmelskörper').
 text(de, txtBitteEineAuswahlTreffen, 'bitte eine Auswahl treffen!').
 
 /* Fixtexte planetMondNameDialog */
-text(de, txtEigenschaftenSternenSystemEingeben, 'System auswählen').
-text(de, txtSternenSystemNamenHimmelskoerperEingeben, 'Namen und Typ der Himmelskörper eingeben').
+text(de, txtSternenSystemNamenHimmelskoerperEingeben, 'Name und Typ').
 text(de, txtName, 'Name').
 text(de, txtPlanetenUndMonde, 'Planeten und Monde').
 text(de, txtPlanetenTyp, 'Typ des Himmelskörpers').
@@ -115,7 +122,6 @@ text(de, txtAlternativStehtErAuchInDerEndtdeckungsListe, 'Alternativ steht er au
 
 /* Fixtexte planetEigenschaftenDialog */
 text(de, txtEigenschaftenHimmelsKoerper, 'Einrichtungen und Reisezeiten').
-text(de, txtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, 'Systemauswahl').
 text(de, txtEinrichtungenUndIhreReisezeit, 'Einrichtungen und ihre Reisezeit von der Hauptbasis').
 text(de, txtJeweilsDieEinrichtungMit, 'Jeweils die Einrichtung mit der kürzesten Entfernung zur Hauptbasis angeben!').
 
@@ -124,19 +130,16 @@ text(de, txtSammelartEingebenHimmelskoerperAuswahl, 'Sammelart eingeben').
 text(de, txtAuswahlSammelart, 'Auswahl Sammelart').
 text(de, txtSammelartDp, 'Sammelart: ').
 text(de, txtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst, 'Zeitmessungen beginnen direkt vor der Sammelquelle und enden, sobald die Quelle erschöpft ist.').
-text(de, txtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben, 'Dann die Art der Gewinnung und die Zahl der damit gewonnenen Stoffe eingeben!').
+text(de, txtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben, 'Dann die Zahl der damit gewonnenen Stoffe, die Zahl der genutzten Gebinde und die Zeit dafür eingeben!').
 text(de, txtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen, 'Die Sekundärelemente nur eingeben, wenn das die einzige Möglichkeit auf dem Himmelskörper ist, den Stoff zu gewinnen!').
 text(de, txtEsGenuegtAngabeSchnellsteMethode, 'Es genügt die Angabe der schnellsten Methode.').
 text(de, txtNurStoffeGewonnenWerdenKoennenEingeben, 'Nur Stoffe, die gewonnen werden können, eingeben!').
-text(de, txtSammelmoeglichkeitenHimmelskörperEingeben, 'Sammelmöglichkeiten').
-text(de, txtGrossRohStoff, 'Rohstoff').
-text(de, txtGrossAnzahl, 'Anzahl').
+text(de, txtSammelmoeglichkeitenHimmelskörperEingeben, 'Sammelbarer Stoff und Sammelzeit').
 text(de, txtGrossDauerEinHundertstelSekunden, 'Dauer 1/100 sec').
 text(de, txtGrossGebindeZahl, 'Gebindezahl').
 
 /* Fixtexte stoffErlangenDialog */
-text(de, txtStoffErlangenAufenthaltsortSpielerSystemAuswählen, 'System auswählen').
-text(de, txtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, 'Himmelskörper auswählen').
+text(de, txtPlanetAuswaehlen, 'Himmelskörper auswählen').
 text(de, txtAuswahlEmpfohleneHandlungenStoffErhalten, 'Strategie und gewünschter Stoff').
 text(de, txtOptimierung, 'Optimierung').
 text(de, txtMoeglichstWenig, 'Möglichst wenig').
@@ -154,7 +157,6 @@ text(de, txtBitteGenauEineAuswahlTreffen, 'Bitte genau eine Auswahl treffen!').
 text(de, txtBitteNurEineAuswahlTreffen, 'Bitte nur eine Auswahl treffen! Bei den nicht benötigten Eingaben muss "Bitte wählen" eingestellt sein!').
 text(de, txtStoffErlangen, 'Stoff erlangen').
 text(de, txtEingaben, 'Eingaben').
-text(de, txtAnzahl, 'Anzahl').
 text(de, txtGesuchterStoff, 'Gesuchter Stoff').
 text(de, txtSystem, 'System').
 text(de, txtPlanet, 'Planet').
@@ -168,7 +170,7 @@ text(de, txtSummenwerte, 'Summenwerte').
 text(de, txtSummenwert, 'Summenwert').
 text(de, txtEinheit, 'Einheit').
 text(de, txtBeschaffenUndHerstellenNichtMoeglich, 'Beschaffen und herstellen nicht möglich.').
-text(de, txtBegruendungDp, 'Begründung').
+text(de, txtBegruendungDp, 'Begründung: ').
 text(de, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'Beschaffung nicht möglich und keine Rezepte vorhanden').
 text(de, txtLeerKannNichtBeschafftWerden, ' kann nicht beschafft werden').
 text(de, txtRezeptversuch, 'Rezeptversuch').
@@ -180,9 +182,9 @@ text(de, txtSpracheDp, 'Sprache: ').
 
 /* --------------------------------------------------------------------------------------- */
 /* Optimierung */
-text(de, minimaleSammlung, 'minimale Sammlungsstücke').
-text(de, minimaleZeit, 'minimale Zeit').
-text(de, minimaleKosten, 'minimale Kosten').
+text(de, minimaleSammlung, 'Minimale Sammlungsstücke').
+text(de, minimaleZeit, 'Minimale Zeit').
+text(de, minimaleKosten, 'Minimale Kosten').
 
 /* Planetentypen */
 text(de, aetzender, 'Ätzender Planet'). 
@@ -1707,6 +1709,8 @@ text(de, goldeneKreaturStatueRezept, 'goldene Kreaturstatuerezept').
 text(de, bronzeneAstronautenStatueRezept, 'bronzene Astronautenstatuerezept').
 text(de, silberneAstronautenStatueRezept, 'silberne Astronautenstatuerezept').
 text(de, goldeneAstronautenStatueRezept, 'goldene Astronautenstatuerezept').
+text(de, erinnerungRezept, 'Erinnerungrezept').
+
 text(de, chromatischesMetall, 'chromatisches Metall').
 text(de, faecium, 'Faecium').
 text(de, frostKristall, 'Frostkristall').
@@ -1973,6 +1977,7 @@ text(de, wuerzigerKaese, 'würziger Käse').
 text(de, wuerzigesEis, 'würziges Eis').
 text(de, wurzelSaft, 'Wurzelsaft').
 text(de, zaeheOrganPaste, 'zähe Organpaste').
+text(de, erinnerung, 'Erinnerung').
 
 /* Orte */
 text(de, ortNil, 'Irgendwo').
@@ -1994,12 +1999,13 @@ text(de, ortForschungsTerminal, 'Forschungsterminal').
 text(de, ortFrachter, 'Frachter').
 text(de, ortSpieler, 'Aufenthaltsort Spieler').
 text(de, ortBasis, 'Basis').
-text(de, ortSauerStoffVerarbeiter, 'Sauerstoffverarbeiter').
+text(de, ortSauerStoffVerarbeiter, 'Sauerstoffanlage').
 text(de, ortAtmosphaerenAnlage, 'Atmosphaerenanlage').
 text(de, ortBergbauEinheit, 'Bergbaueinheit').
 text(de, ortPlantage, 'Plantage').
 
 /* ===================================  Englisch ========================================== */
+/* mehrere Module */
 text(en, txtOk, 'OK').
 text(en, txtReset, 'reset').
 text(en, txtGespeichert, 'Saved!').
@@ -2008,29 +2014,38 @@ text(en, txtBitteWaehlen, 'please choose').
 text(en, txtSystemDp, 'System: ').
 text(en, txtPlanetDp, 'Planet: ').
 text(en, txtSternensystem, 'Star system').
-text(en, txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, 'Orb choice').
+text(en, txtSternenSystemEingeben, 'Choose system').
+text(en, txtGrossAnzahl, 'Quantity').
+text(en, txtRohstoffe, 'Raw material').
 
 /* Fixtexte ausgabe */
-text(en, txtBitteReisenSieNachSystem, 'please travel to system: ').
+text(en, txtBitteReisenSieNachSystem, 'Please travel to system: ').
 text(en, txtLeerPlanet, ' planet: ').
-text(en, txtFuerenSie, 'execute ').
+text(en, txtFuerenSie, 'Execute ').
 text(en, txtLeerMal, ' times ').
 text(en, txtLeerVon, ' of ').
 text(en, txtLeerMit, ' with ').
 text(en, txtLeerAus, '').
-text(en, txtDas, 'the ').
-text(en, txtIn, 'in ').
+text(en, txtDas, 'The ').
+text(en, txtIn, 'In ').
 text(en, txtLeerIstBekannt, ' is known.').
-text(en, txtErlangenSie, 'achieve ').
+text(en, txtErlangenSie, 'Achieve ').
 text(en, txtLeerEinheiten, ' pieces ').
 text(en, txtLeerEinHundertstel, ' 1/100 sec ').
 text(en, txtEinheiten, 'pieces').
 text(en, txtUnits, 'units').
 text(en, txtEinHundertstel, '1/100 sec').
 text(en, txtUnitsProStunde, 'units/hour').
-
 text(en, reisen, 'travel').
 text(en, angekommen, 'arrived').
+
+text(en, txtSammelnGesamtbedarf, 'Collected items needed').
+text(en, txtGesamtwertSammlung, 'Collection value total').
+text(en, txtGesamterZeitAufwand, 'Time needed total').
+text(en, txtKostenEingangsstoffe, 'Cost input materials total').
+text(en, txtGesamtwertEndstoff, 'Value product').
+text(en, txtMehrwert, 'Added value').
+text(en, txtStundenlohn, 'Wage rate per hour').
 
 /* Fixtexte Hauptdialog */
 text(en, txtLinkZurMaske, 'Link to screen').
@@ -2054,7 +2069,7 @@ text(en, txtOptimierteVorgehensweiseErwerbBekommen, 'Get optimized approach for 
 text(en, txtLinksZeitweiseInaktiv, 'Links can be timely inactive, when necessary data are missing. These can be entered by means of the screens, whose link is active. If you have already entered this data, reload the screen (F5 with firefox)!').
 
 /* Fixtexte SpielStatusDialog */
-text(en, txtVorraussetzungenMaterialSammlung, 'Specify facilities').
+text(en, txtVorraussetzungenMaterialSammlung, 'Facilities').
 text(en, txtAusstattung, 'Configuration').
 text(en, txtVerbesserterMinenLaser, 'Enhanced Mining Laser').
 text(en, txtTerrainformer, 'Terrain Former').
@@ -2067,14 +2082,14 @@ text(en, txtFrachterVorhanden, 'Freighter existing').
 text(en, txtAnomalieSphaereRufbar, 'Anomaly / sphere callable').
 
 /* Fixtexte rezeptBekanntAnzeigen */
-text(en, txtStoffKlassenAuswahl, 'Material class choice').
+text(en, txtStoffKlassenAuswahl, 'Coose Material class').
 text(en, txtStoffKlasse, 'Material class: ').
 
 /* Fixtexte rezeptBekanntStoffklassenAuswahl */
-text(en, txtEingabeBekannteRezepte, 'Check known formulas').
+text(en, txtEingabeBekannteRezepte, 'Known formulas').
 
 /* Fixtexte systemNamenDialog */
-text(en, txtEingabeSternenSysteme, 'Enter name and color').
+text(en, txtEingabeSternenSysteme, 'Name and color').
 text(en, txtSystemName, 'System name').
 text(en, txtFarbe, 'Color').
 text(en, txtDieZeile, 'The row ').
@@ -2086,8 +2101,7 @@ text(en, txtAuswahlHimmelskoerper, 'Choice of orb').
 text(en, txtBitteEineAuswahlTreffen, 'Please taka a choice!').
 
 /* Fixtexte planetMondNameDialog */
-text(en, txtEigenschaftenSternenSystemEingeben, 'Choose system').
-text(en, txtSternenSystemNamenHimmelskoerperEingeben, 'Enter name and type of orbs').
+text(en, txtSternenSystemNamenHimmelskoerperEingeben, 'Name and type').
 text(en, txtName, 'Name').
 text(en, txtPlanetenUndMonde, 'Planets and moons').
 text(en, txtPlanetenTyp, 'Type of orb').
@@ -2096,7 +2110,6 @@ text(en, txtAlternativStehtErAuchInDerEndtdeckungsListe, 'Alternativ it is shown
 
 /* Fixtexte planetEigenschaftenDialog */
 text(en, txtEigenschaftenHimmelsKoerper, 'Facilities and travel times').
-text(en, txtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, 'System choice').
 text(en, txtEinrichtungenUndIhreReisezeit, 'Facilities and their travel times from the main base').
 text(en, txtJeweilsDieEinrichtungMit, 'Specify each facility with the shortest distance from the main base!').
 
@@ -2105,19 +2118,16 @@ text(en, txtSammelartEingebenHimmelskoerperAuswahl, 'Choice of collecting mode')
 text(en, txtAuswahlSammelart, 'Choice collecting mode').
 text(en, txtSammelartDp, 'Mode: ').
 text(en, txtZeitmessungenBeginnenDirektVorDerSammelQuelleUndEndenSobaldDieQuelleErschoepftIst, 'Time measure begins directly standig at the collecting source and ends as soon as the source has depleted.').
-text(en, txtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben, 'Afterwards enter the mode of exploitation and the quantity of the aquired materials!').
-text(en, txtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen, 'Enter the secondary elements only, if this would be the only method to aquire the material at the orb!').
+text(en, txtDannArtGewinnungUndZahlDamitGewonnenenStoffeEingeben, 'Afterwards enter the quantity of the aquired materials, the time for that and the number of bundles you have exploited!').
+text(en, txtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen, 'Enter the secondary elements only, if this is the only method to aquire the material at the orb!').
 text(en, txtEsGenuegtAngabeSchnellsteMethode, 'Indication of the fastest method is sufficient.').
 text(en, txtNurStoffeGewonnenWerdenKoennenEingeben, 'Enter only materials, that can be aquired!').
-text(en, txtSammelmoeglichkeitenHimmelskörperEingeben, 'Collecting possibilities').
-text(en, txtGrossRohStoff, 'Raw material').
-text(en, txtGrossAnzahl, 'Amount').
+text(en, txtSammelmoeglichkeitenHimmelskörperEingeben, 'Collectable material and collection time').
 text(en, txtGrossDauerEinHundertstelSekunden, 'Duration 1/100 sec').
 text(en, txtGrossGebindeZahl, 'Bundle count').
 
 /* Fixtexte stoffErlangenDialog */
-text(en, txtStoffErlangenAufenthaltsortSpielerSystemAuswählen, 'Choose system').
-text(en, txtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, 'Choose orb').
+text(en, txtPlanetAuswaehlen, 'Choose orb').
 text(en, txtAuswahlEmpfohleneHandlungenStoffErhalten, 'Strategy and desired material').
 text(en, txtOptimierung, 'Improvement').
 text(en, txtMoeglichstWenig, 'as possible ').
@@ -2126,33 +2136,31 @@ text(en, txtSammlungsgegenstaende, 'little clollect items').
 text(en, txtKosten, 'little cost').
 text(en, txtGewuenschterStoff, 'Desired material').
 text(en, txtAnzahlDp, 'Quantity: ').
-text(en, txtRohstoffe, 'Raw materials').
 text(en, txtProdukte, 'Products').
 text(en, txtBasisBauteile, 'Base parts').
 text(en, txtModule, 'Modules').
 text(en, txtGerichte, 'Dish').
 text(en, txtBitteGenauEineAuswahlTreffen, 'please take only one choice!').
 text(en, txtBitteNurEineAuswahlTreffen, 'please take only one choice! input fields not needed have to contain "please choose"!').
-text(en, txtStoffErlangen, 'achieve material').
-text(en, txtEingaben, 'inputs').
-text(en, txtAnzahl, 'quantity').
-text(en, txtGesuchterStoff, 'wanted material').
-text(en, txtSystem, 'system').
-text(en, txtPlanet, 'planet').
-text(en, txtStueckliste, 'parts list').
-text(en, txtStoff, 'material').
-text(en, txtAktionsreihenfolge, 'order of actions').
-text(en, txtAnweisung, 'instruction').
-text(en, txtOperation, 'operation').
-text(en, txtErgebnis, 'result').
-text(en, txtSummenwerte, 'summed values').
-text(en, txtSummenwert, 'sum value').
-text(en, txtEinheit, 'unit').
-text(en, txtBeschaffenUndHerstellenNichtMoeglich, 'sourcing or production not possible.').
-text(en, txtBegruendungDp, 'reason').
+text(en, txtStoffErlangen, 'Achieve material').
+text(en, txtEingaben, 'Inputs').
+text(en, txtGesuchterStoff, 'Wanted material').
+text(en, txtSystem, 'System').
+text(en, txtPlanet, 'Planet').
+text(en, txtStueckliste, 'Parts list').
+text(en, txtStoff, 'Material').
+text(en, txtAktionsreihenfolge, 'Order of actions').
+text(en, txtAnweisung, 'Instruction').
+text(en, txtOperation, 'Operation').
+text(en, txtErgebnis, 'Result').
+text(en, txtSummenwerte, 'Summed values').
+text(en, txtSummenwert, 'Sum value').
+text(en, txtEinheit, 'Unit').
+text(en, txtBeschaffenUndHerstellenNichtMoeglich, 'Sourcing or production not possible.').
+text(en, txtBegruendungDp, 'Reason: ').
 text(en, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'sourcing not possible and no formulas available').
 text(en, txtLeerKannNichtBeschafftWerden, ' cannot be sourced').
-text(en, txtRezeptversuch, 'formula trial').
+text(en, txtRezeptversuch, 'Formula trial').
 
 /* Fixtexte sprachUmschaltung */
 text(en, txtSpracheAuswaehlen, 'Choose language').
@@ -2161,9 +2169,9 @@ text(en, txtSpracheDp, 'Language: ').
 
 /* --------------------------------------------------------------------------------------- */
 /* Optimierung */
-text(en, minimaleSammlung, 'minimale Sammlungsstücke').
-text(en, minimaleZeit, 'minimale Zeit').
-text(en, minimaleKosten, 'minimale Kosten').
+text(en, minimaleSammlung, 'Minimal collection items').
+text(en, minimaleZeit, 'Minimal time').
+text(en, minimaleKosten, 'Minimal cost').
 
 /* Planetentypen */
 text(en, aetzender, 'corrosively planet'). 
@@ -2424,7 +2432,7 @@ text(en, sauerStoffFilter, 'Oxygen Filter').
 text(en, sauerStoffKapsel, 'Oxygen Capsule').
 text(en, raumSchiffStartTreibStoff, 'Starship Launch Fuel').
 text(en, vierfachServo, 'Quad Servo').
-text(en, angereicherterKohlenStoff, 'Condensed Carbon').
+text(en, angereicherterKohlenStoff, 'Enriched Carbon').
 text(en, aronium, 'Aronium').
 text(en, chlorGitter, 'Chloride Lattice').
 text(en, fluessigSprengStoff, 'Liquid Explosive').
@@ -2494,7 +2502,7 @@ text(en, verhaertetesGehaeuse, 'Hardened Shell').
 text(en, ausgewachsenerHerzKnotenPunkt, 'Mature Heart Node').
 text(en, ausgewachsenerNervenStamm, 'Mature Neural Stem').
 text(en, seelenKammer, 'Soul Chamber').
-text(en, atlasPassV1, 'Advanced Ion Battery').
+text(en, atlasPassV1, 'Atlas Pass V1').
 text(en, atlasPassV2, 'Atlas Pass V2').
 text(en, atlasPassV3, 'Atlas Pass V3').
 text(en, belueftungsMembranB, 'Aeration Membrane B').
@@ -2619,8 +2627,8 @@ text(en, kampfVisier, 'Combat Scope').
 text(en, laufIonisatorC, 'Barrel Ionizer C').
 text(en, masseBeschleunigerC, 'Mass Accelerator C').
 text(en, minenLaser, 'Mining Beam').
-text(en, minenLaserModulC, 'Mining Beam Module C').
-text(en, minenLaserModulS, 'Mining Beam Module S').
+text(en, minenLaserModulC, 'Mining Laser Module C').
+text(en, minenLaserModulS, 'Mining Laser Module S').
 text(en, optischerBohrerS, 'Optical Drill S').
 text(en, plasmaWerfer, 'Plasma Resonator').
 text(en, plasmaWerferModulC, 'Plasma Resonator Module C').
@@ -3345,7 +3353,7 @@ text(en, frachterTreppeRezept, 'Freighter Stairs Formula').
 text(en, frachterKreuzungVierFachRezept, 'Freighter Cross Junction Formula').
 text(en, zylindrischerRaumRezept, 'Cylindric Room Formula').
 text(en, quadratischerRaumRezept, 'Square Room Formula').
-text(en, geraderKorridorRezept, 'Straight Corridor').
+text(en, geraderKorridorRezept, 'Straight Corridor Formula').
 text(en, tuerRezept, 'Door Formula').
 text(en, fundamentRezept, 'Foundation Formula').
 text(en, lFoermigerKorridorRezept, 'L Shaped Corridor Formula').
@@ -3377,7 +3385,7 @@ text(en, innenTreppenRezept, 'Interior Stairs Formula').
 text(en, wuerfelFoermigeInnenWandRezept, 'Cuboid Inner Wall Formula').
 text(en, wuerfelFoermigerDachAufsatzRezept, 'Cuboid Cap Formula').
 text(en, gewoelbtesWuerfelFoermigesDachRezept, 'Cuboid Curved Roof Formula').
-text(en, wuerfelFoermigesFensterEckigRezept, 'Cuboid Window Angular').
+text(en, wuerfelFoermigesFensterEckigRezept, 'Cuboid Window Angular Formula').
 text(en, wuerfelFoermigesFensterRundRezept, 'Cuboid Window Round Formula').
 text(en, infraStrukturLeiterRezept, 'Infrastructure Ladder Formula').
 text(en, wuerfelFoermigeInnenTuerRezept, 'Cuboid Inner Door Formula').
@@ -3603,7 +3611,7 @@ text(en, halbeBetonRampeRezept, 'Half Concrete Ramp Formula').
 text(en, kurzeBetonWandRezept, 'Short Concrete Wall Formula').
 text(en, betonFassadeRezept, 'Concrete Frontage Formula').
 text(en, kleineBetonTuerRezept, 'Small Concrete Door Formula').
-text(en, dachInnenEckteilAusBetonRezept, 'Concrete Inner Roof Corner').
+text(en, dachInnenEckteilAusBetonRezept, 'Concrete Inner Roof Corner Formula').
 text(en, halberBetonBogenRezept, 'Concrete Half Arch Formula').
 text(en, grosserKeilRezept, 'Large Wedge Formula').
 text(en, kleinerKeilRezept, 'Small Wedge Formula').
@@ -3690,6 +3698,7 @@ text(en, goldeneKreaturStatueRezept, 'Gold Blob Formula').
 text(en, bronzeneAstronautenStatueRezept, 'Bronze Astronaut Figurine Formula').
 text(en, silberneAstronautenStatueRezept, 'Silver Astronaut Figurine Formula').
 text(en, goldeneAstronautenStatueRezept, 'Gold Astronaut Figurine Formula').
+text(en, erinnerungRezept, 'Memory Formula').
 
 
 text(en, chromatischesMetall, 'Chromatic Metal').
@@ -3785,7 +3794,7 @@ text(en, gequaelterHonigKuchen, 'Tortured Honey Cake').
 text(en, geraeucherteFleischPastete, 'Smokey Meat Pie').
 text(en, geraeuchertesFleisch, 'Smoked Meat').
 text(en, geschlageneButter, 'Churned Butter').
-text(en, geschmorteOrgane, 'Stewed Organs').
+text(en, geschmorteOrgane, 'Devilled Organs').
 text(en, gestampfteWurzelPastete, 'Mushed Root Pie').
 text(en, gesuessteButter, 'Sweetened Butter').
 text(en, gesuessteProtoButter, 'Sweetened Proto-Butter').
@@ -3958,6 +3967,7 @@ text(en, wuerzigerKaese, 'Tangy Cheese').
 text(en, wuerzigesEis, 'Spiced Ice').
 text(en, wurzelSaft, 'Root Juice').
 text(en, zaeheOrganPaste, 'Chewy Organ Pie').
+text(en, erinnerung, 'Memory').
 
 /* Orte */
 text(en, ortNil, 'anywhere').
@@ -3979,8 +3989,8 @@ text(en, ortForschungsTerminal, 'research terminal').
 text(en, ortFrachter, 'freighter').
 text(en, ortSpieler, 'place of player').
 text(en, ortBasis, 'base').
-text(en, ortSauerStoffVerarbeiter, 'oxigen processor').
-text(en, ortAtmosphaerenAnlage, 'atmosphere processor').
+text(en, ortSauerStoffVerarbeiter, 'oxigen harvester plant').
+text(en, ortAtmosphaerenAnlage, 'atmosphere harvester plant').
 text(en, ortBergbauEinheit, 'mining facility').
 text(en, ortPlantage, 'plantation').
 

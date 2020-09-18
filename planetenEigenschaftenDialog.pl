@@ -13,9 +13,9 @@
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 planetenEigenschaftenDialogSystemAuswahl(_Request) :-
 	textResources:getText(txtEigenschaftenHimmelsKoerperEingeben, TxtEigenschaftenHimmelsKoerperEingeben),
-	textResources:getText(txtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl),
+	textResources:getText(txtSternenSystemEingeben, TxtSternenSystemEingeben),
 	string_concat(TxtEigenschaftenHimmelsKoerperEingeben, ': ', Txt0),
-	string_concat(Txt0, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtHeader),
+	string_concat(Txt0, TxtSternenSystemEingeben, TxtHeader),
 	planetAuswahlDialog:systemAuswahlDialog(
 	  TxtHeader,
 	  '/planetenEigenschaftenDialogPlanetAuswahl').
@@ -24,9 +24,9 @@ planetenEigenschaftenDialogSystemAuswahl(_Request) :-
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetenEigenschaftenDialogPlanetAuswahl(Request) :-
 	textResources:getText(txtEigenschaftenHimmelsKoerperEingeben, TxtEigenschaftenHimmelsKoerperEingeben),
-	textResources:getText(txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl),
+	textResources:getText(txtPlanetAuswaehlen, TxtPlanetAuswaehlen),
 	string_concat(TxtEigenschaftenHimmelsKoerperEingeben, ': ', Txt0),
-	string_concat(Txt0, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtHeader),
+	string_concat(Txt0, TxtPlanetAuswaehlen, TxtHeader),
 	planetAuswahlDialog:planetAuswahlDialog(
 	  TxtHeader,
 	  '/planetenEigenschaftenDialog',

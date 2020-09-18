@@ -14,9 +14,9 @@
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 planetSammelEigenschaftenDialogSystemAuswahl(_Request) :-
 	textResources:getText(txtSammelDetailsEingeben, TxtSammelDetailsEingeben),
-	textResources:getText(txtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl),
+	textResources:getText(txtSternenSystemEingeben, TxtSternenSystemEingeben),
 	string_concat(TxtSammelDetailsEingeben, ': ', Txt0),
-	string_concat(Txt0, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtHeader),
+	string_concat(Txt0, TxtSternenSystemEingeben, TxtHeader),
 	planetAuswahlDialog:systemAuswahlDialog(
 	  TxtHeader,
 	  '/planetSammelEigenschaftenDialogPlanetAuswahl').
@@ -25,9 +25,9 @@ planetSammelEigenschaftenDialogSystemAuswahl(_Request) :-
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetSammelEigenschaftenDialogPlanetAuswahl(Request) :-
 	textResources:getText(txtSammelDetailsEingeben, TxtSammelDetailsEingeben),
-	textResources:getText(txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl),
+	textResources:getText(txtPlanetAuswaehlen, TxtPlanetAuswaehlen),
 	string_concat(TxtSammelDetailsEingeben, ': ', Txt0),
-	string_concat(Txt0, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtHeader),
+	string_concat(Txt0, TxtPlanetAuswaehlen, TxtHeader),
 	planetAuswahlDialog:planetAuswahlDialog(
 	  TxtHeader,
 	  '/planetSammelEigenschaftenDialogSammelArtAuswahl',
@@ -256,7 +256,7 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	).
 
 innereTabelle(NumerierteRecordList, AuswahlSammelArt, GesamtZeilenZahl) -->
-	{	textResources:getText(txtGrossRohStoff, TxtGrossRohStoff),
+	{	textResources:getText(rohStoff, TxtGrossRohStoff),
 		textResources:getText(txtGrossAnzahl, TxtGrossAnzahl),
 		textResources:getText(txtGrossDauerEinHundertstelSekunden, TxtGrossDauerEinHundertstelSecunden),
 		textResources:getText(txtGrossGebindeZahl, TxtGrossGebindeZahl)

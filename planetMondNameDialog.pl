@@ -12,9 +12,9 @@
 /* ----------------------  Auswahl System  ----------------------------------------------------*/
 planetMondNameSystemAuswahlDialog(_Request) :-
 	textResources:getText(txtHimmelsKoerperEingeben, TxtHimmelsKoerperEingeben),
-	textResources:getText(txtEigenschaftenSternenSystemEingeben, TxtEigenschaftenSternenSystemEingeben),
+	textResources:getText(txtSternenSystemEingeben, TxtSternenSystemEingeben),
 	string_concat(TxtHimmelsKoerperEingeben, ': ', Txt0),
-	string_concat(Txt0, TxtEigenschaftenSternenSystemEingeben, TxtHeader),
+	string_concat(Txt0, TxtSternenSystemEingeben, TxtHeader),
 
 	planetAuswahlDialog:systemAuswahlDialog(
 		TxtHeader, 
