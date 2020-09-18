@@ -13,26 +13,35 @@
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 planetSammelEigenschaftenDialogSystemAuswahl(_Request) :-
-	textResources:getText(txtEigenschaftenHimmelskörperEingebenSystemauswahl, TxtEigenschaftenHimmelskörperEingebenSystemauswahl),
+	textResources:getText(txtSammelDetailsEingeben, TxtSammelDetailsEingeben),
+	textResources:getText(txtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl),
+	string_concat(TxtSammelDetailsEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtHeader),
 	planetAuswahlDialog:systemAuswahlDialog(
-	  TxtEigenschaftenHimmelskörperEingebenSystemauswahl,
+	  TxtHeader,
 	  '/planetSammelEigenschaftenDialogPlanetAuswahl').
 
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetSammelEigenschaftenDialogPlanetAuswahl(Request) :-
+	textResources:getText(txtSammelDetailsEingeben, TxtSammelDetailsEingeben),
 	textResources:getText(txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl),
+	string_concat(TxtSammelDetailsEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtHeader),
 	planetAuswahlDialog:planetAuswahlDialog(
-	  TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl,
+	  TxtHeader,
 	  '/planetSammelEigenschaftenDialogSammelArtAuswahl',
 	  Request
 	).
 
 /* -----------------------------------  Sammelartauswahl -------------------------------------------- */
 planetSammelEigenschaftenDialogSammelArtAuswahl(Request) :-
+	textResources:getText(txtSammelDetailsEingeben, TxtSammelDetailsEingeben),
 	textResources:getText(txtSammelartEingebenHimmelskoerperAuswahl, TxtSammelartEingebenHimmelskoerperAuswahl),
+	string_concat(TxtSammelDetailsEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtSammelartEingebenHimmelskoerperAuswahl, TxtHeader),
 	sammelArtAuswahlDialog(
-	  TxtSammelartEingebenHimmelskoerperAuswahl,
+	  TxtHeader,
 	  '/planetSammelEigenschaftenDialog',
 	  Request
 	).
@@ -106,9 +115,14 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
 	textResources:getText(txtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen, TxtSekundaerelementeNurEingebenWennEinzigeMöglichkeitStoffGewinnen),
 	textResources:getText(txtEsGenuegtAngabeSchnellsteMethode, TxtEsGenuegtAngabeSchnellsteMethode),
 	textResources:getText(txtNurStoffeGewonnenWerdenKoennenEingeben, TxtNurStoffeGewonnenWerdenKoennenEingeben),
+
+	textResources:getText(txtSammelDetailsEingeben, TxtSammelDetailsEingeben),
+	textResources:getText(txtSammelmoeglichkeitenHimmelskörperEingeben, TxtSammelmoeglichkeitenHimmelskörperEingeben),
+	string_concat(TxtSammelDetailsEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtSammelmoeglichkeitenHimmelskörperEingeben, TxtHeader),
 	TermerizedBody = [
 	\['<header>'],
-    h1([align(center)], ['Sammelmöglichkeiten des Himmelskörpers eingeben']), 
+    h1([align(center)], [TxtHeader]), 
     \['</header>'],
 	\['<formSpace>'],       
     form([action('/planetSammelEigenschaften'), method('post'), name('planetenSammelEigenschaftenAuswahlForm')], 
@@ -193,23 +207,32 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt) -->
+	{	textResources:getText(AuswahlSammelArt, TxtAuswahlSammelArt),
+		textResources:getText(txtSystemDp, TxtSystemDp),
+		textResources:getText(txtPlanetDp, TxtPlanetDp),
+		textResources:getText(txtSammelartDp, TxtSammelartDp)
+	},
 	html(
    	  div(class('table70'),[
    	    div(class('tr'), [
-   	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1),
-   	    	\divInputReadOnly('auswahlPlanet', 'Planet: ', AuswahlPlanet, 2),
-   	    	\divInputReadOnly('auswahlSammelArt', 'Sammelart: ', AuswahlSammelArt, 3)
+   	    	\divInputReadOnly('auswahlSystem', TxtSystemDp, AuswahlSystem, 1),
+   	    	\divInputReadOnly('auswahlPlanet', TxtPlanetDp, AuswahlPlanet, 2),
+   	    	\divInputReadOnly('auswahlSammelArt', TxtSammelartDp, TxtAuswahlSammelArt, 3)
    	  	])
    	  ])).
 
 sammelArtAnzeige(AuswahlSystem, AuswahlPlanet, OptionList) -->
+	{	textResources:getText(txtSammelartDp, TxtSammelartDp),
+		textResources:getText(txtSystemDp, TxtSystemDp),
+		textResources:getText(txtPlanetDp, TxtPlanetDp)
+	},
 	html(
    	  div(class('table70'),[
    	    div(class('tr'), [
-   	    	\divInputReadOnly('auswahlSystem', 'System: ', AuswahlSystem, 1),
-   	    	\divInputReadOnly('auswahlPlanet', 'Planet: ', AuswahlPlanet, 2),
+   	    	\divInputReadOnly('auswahlSystem', TxtSystemDp, AuswahlSystem, 1),
+   	    	\divInputReadOnly('auswahlPlanet', TxtPlanetDp, AuswahlPlanet, 2),
    	  	    div(class('td'), [
-   	  	  	label([for('SammelArt')],'Sammelart: '),
+   	  	  	label([for('SammelArt')],TxtSammelartDp),
    	  	  	\OptionList
    	  	    ]) 
    	  	])
@@ -233,13 +256,18 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	).
 
 innereTabelle(NumerierteRecordList, AuswahlSammelArt, GesamtZeilenZahl) -->
+	{	textResources:getText(txtGrossRohStoff, TxtGrossRohStoff),
+		textResources:getText(txtGrossAnzahl, TxtGrossAnzahl),
+		textResources:getText(txtGrossDauerEinHundertstelSekunden, TxtGrossDauerEinHundertstelSecunden),
+		textResources:getText(txtGrossGebindeZahl, TxtGrossGebindeZahl)
+	},
 	html(
 		[div(class('table'), 
 			   [div(class('tr'), 
-			   [div([class('th'), scope("col")],['Rohstoff']),
-			    div([class('th'), scope("col")],['Anzahl']),
-			    div([class('th'), scope("col")],['Dauer 1/100 s']),
-			    div([class('th'), scope("col")],['Gebindezahl'])
+			   [div([class('th'), scope("col")],[TxtGrossRohStoff]),
+			    div([class('th'), scope("col")],[TxtGrossAnzahl]),
+			    div([class('th'), scope("col")],[TxtGrossDauerEinHundertstelSecunden]),
+			    div([class('th'), scope("col")],[TxtGrossGebindeZahl])
    	           ]),
    	           \innereEingabeZeile(NumerierteRecordList, AuswahlSammelArt, GesamtZeilenZahl)
    	           ])
@@ -365,7 +393,7 @@ gespeichert :-
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center), TxtGespeichert),
+		h1(align(center), TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
 		p(a(['href="/"'],[TxtFunktionsAuswahl])),

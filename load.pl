@@ -20,6 +20,7 @@
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/ausgabe').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/grafischeAusgabe').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/textResources').
+:-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/sprachUmschaltung').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/server').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/hauptDialog').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/stoffErlangenDialog').

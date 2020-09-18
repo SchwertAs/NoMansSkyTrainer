@@ -33,15 +33,19 @@ spielStatusDialog(_Request) :-
 	((FrachterVorhanden = true, FrachterVorhandenChecked = ' checked'); FrachterVorhandenChecked = ''), 
 	((SphaereRufbar = true, SphaereRufbarChecked = ' checked'); SphaereRufbarChecked = ''), 
 	assertz(spielStatus:spielStatus(konfiguriert, false)),
-	textResources:getText(txtVorraussetzungenMaterialSammlung, VorraussetzungenMaterialSammlung),
+	textResources:getText(txtVorraussetzungenSammeln, TxtVorraussetzungenSammeln),
+	textResources:getText(txtVorraussetzungenMaterialSammlung, TxtVorraussetzungenMaterialSammlung),
+	string_concat(TxtVorraussetzungenSammeln, ': ', Txt0),
+	string_concat(Txt0, TxtVorraussetzungenMaterialSammlung, TxtHeader),
+	
 	textResources:getText(txtAusstattung, TxtAusstattung),
-	textResources:getText(txtMinenlaser, TxtMinenlaser),
+	textResources:getText(minenLaser, TxtMinenlaser),
 	textResources:getText(txtVerbesserterMinenLaser, TxtVerbesserterMinenLaser),
-	textResources:getText(txtTerrainformer, TxtTerrainformer),
+	textResources:getText(terrainManipulator, TxtTerrainformer),
 	textResources:getText(txtWaffe, TxtWaffe),
-	textResources:getText(txtSolarStrahl, TxtSolarStrahl),
-	textResources:getText(txtGemuetsStrahl, TxtGemuetsStrahl),
-	textResources:getText(txtAnzugRaffinerie, TxtAnzugRaffinerie),
+	textResources:getText(solarStrahl, TxtSolarStrahl),
+	textResources:getText(gemuetsStrahl, TxtGemuetsStrahl),
+	textResources:getText(tragbareRaffinerie, TxtTragbareRaffinerie),
 	textResources:getText(txtBewegungsmöglichkeiten, TxtBewegungsmöglichkeiten),
 	textResources:getText(txtRaumschiffEinsetzbar, TxtRaumschiffEinsetzbar),
 	textResources:getText(txtMinenLaserAufExoFahrzeug, TxtMinenLaserAufExoFahrzeug),
@@ -53,7 +57,7 @@ spielStatusDialog(_Request) :-
 	
 	TermerizedBody = [
 	\['<header>'],
-	h1([align(center)], [VorraussetzungenMaterialSammlung]),
+	h1([align(center)], [TxtHeader]),
 	\['</header>'],
 	\['<formSpace>'],       
 	form([action('/spielStatus'), method('post'), autocomplete("off")], 
@@ -95,10 +99,10 @@ spielStatusDialog(_Request) :-
 		       	                       label(for('gemuetsStrahl'), TxtGemuetsStrahl)
 		       	                      ])
 		       	                 ]),
-		       	             div(class('tr'), 
+		       	             div(class('tr'),  
 		       	                 [div(class('td'), 
 		       	                      [input([name('anzugRaffinerie'), type('checkbox'), AnzugRaffinerieChecked]),
-		       	                       label(for('anzugRaffinerie'), TxtAnzugRaffinerie)
+		       	                       label(for('anzugRaffinerie'), TxtTragbareRaffinerie)
 		       	                      ])
 		       	                 ])
 		       	        ])
@@ -180,7 +184,7 @@ spielStatus(Request) :-
 	TermerizedHead = [\[StyleString], title('No mans sky trainer: Vorraussetzungen Materialsammlung')],
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),TxtGespeichert),
+		h1(align(center),TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
 		p(a(['href="/"'],[TxtFunktionsAuswahl])

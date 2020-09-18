@@ -506,6 +506,7 @@ rezept(herstellen, [[1, photischerJade], [100, cadmium], [1, zustandsPhaseRezept
 rezept(herstellen, [[1, zustandsPhase], [100, emeril], [1, novaeRegeneratRezept]], [1, novaeRegenerat], 0).
 rezept(herstellen, [[1, novaeRegenerat], [100, indium], [1, modifizierteQuantenRezept]], [1, modifizierteQuanten], 0).
 rezept(herstellen, [[1, modifizierteQuanten], [100, gold], [1, herzDerSonneRezept]], [1, herzDerSonne], 0).
+rezept(herstellen, [[1, herzDerSonne], [16, platin], [1, erinnerungRezept]], [1, erinnerung], 0).
 rezept(herstellen, [[16, platin], [16, tritium], [16, gold], [1, sternenSamenRezept]], [1, sternenSamen], 0 ).
 
 rezept(herstellen, [[3, metallPlatten], [1, lebendePerle], [120, cadmium], [1, seelenEngineRezept]], [1, seelenEngine], 0).

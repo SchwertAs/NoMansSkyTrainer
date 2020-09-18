@@ -19,13 +19,16 @@ systemNamenDialog(_Request) :-
 	ausgabe:joinRecordsByRecordNo(FeldNoList1, SystemList1, 2, NumerierteRecordList1),
 	ausgabe:joinRecordsByRecordNo(FeldNoList2, SystemList2, 2, NumerierteRecordList2),
 	ausgabe:joinRecordsByRecordNo(FeldNoList3, SystemList3, 2, NumerierteRecordList3),
+	textResources:getText(txtSternenSystemeEingeben, TxtSternenSystemeEingeben),
 	textResources:getText(txtEingabeSternenSysteme, TxtEingabeSternenSysteme),	
+	string_concat(TxtSternenSystemeEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEingabeSternenSysteme, TxtHeader),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], [TxtEingabeSternenSysteme]),
+	    h1([align(center)], [TxtHeader]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/systemNamen'), method('post')], 
@@ -228,7 +231,7 @@ gespeichert :-
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),TxtGespeichert),
+		h1(align(center),TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
 		p(a(['href="/"'],[TxtFunktionsAuswahl])),

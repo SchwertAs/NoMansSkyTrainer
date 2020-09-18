@@ -13,16 +13,22 @@
 
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 stoffErlangenDialogSystemAusWahl(_Request) :-
+	textResources:getText(txtOptimiertesVorgehenErhalten, TxtOptimiertesVorgehenErhalten),
 	textResources:getText(txtStoffErlangenAufenthaltsortSpielerSystemAuswählen, TxtStoffErlangenAufenthaltsortSpielerSystemAuswählen),
+	string_concat(TxtOptimiertesVorgehenErhalten, ': ', Txt0),
+	string_concat(Txt0, TxtStoffErlangenAufenthaltsortSpielerSystemAuswählen, TxtHeader),
 	planetAuswahlDialog:systemAuswahlDialog(
-	  TxtStoffErlangenAufenthaltsortSpielerSystemAuswählen,
+	  TxtHeader,
 	  '/stoffErlangenDialogPlanetAusWahl').
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 stoffErlangenDialogPlanetAusWahl(Request) :-
+	textResources:getText(txtOptimiertesVorgehenErhalten, TxtOptimiertesVorgehenErhalten),
 	textResources:getText(txtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, TxtStoffErlangenAufenthaltsortSpielerPlanetAuswählen),
+	string_concat(TxtOptimiertesVorgehenErhalten, ': ', Txt0),
+	string_concat(Txt0, TxtStoffErlangenAufenthaltsortSpielerPlanetAuswählen, TxtHeader),
 	planetAuswahlDialog:planetAuswahlDialog(
-	  TxtStoffErlangenAufenthaltsortSpielerPlanetAuswählen,
+	  TxtHeader,
 	  '/stoffErlangenDialog',
 	  Request
 	).
@@ -52,8 +58,8 @@ stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	server:baueOptionsFeld('auswahlModul', Stoffe4, 5, OptionList4),
 	ausgabe:baueStoffListeFuerStoffKlassen([kochStoff, produktUndKochStoff, rohUndKochStoff], Stoffe5),
 	server:baueOptionsFeld('auswahlGericht', Stoffe5, 6, OptionList5),
-	textResources:getText(txtAuswahlEmpfohleneHandlungenStoffErhalten, TxtAuswahlEmpfohleneHandlungenStoffErhalten),
-	textResources:getText(txtAufenthaltsOrtSpieler, TxtAufenthaltsOrtSpieler),
+	textResources:getText(ortSpieler, TxtAufenthaltsOrtSpieler0),
+	textResources:stringToSubstantiv(TxtAufenthaltsOrtSpieler0, TxtAufenthaltsOrtSpieler),
 	textResources:getText(txtOptimierung, TxtOptimierung),
 	textResources:getText(txtMoeglichstWenig, TxtMoeglichstWenig),
 	textResources:getText(txtZeitverbrauch, TxtZeitverbrauch),
@@ -69,9 +75,13 @@ stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 
+	textResources:getText(txtOptimiertesVorgehenErhalten, TxtOptimiertesVorgehenErhalten),
+	textResources:getText(txtAuswahlEmpfohleneHandlungenStoffErhalten, TxtAuswahlEmpfohleneHandlungenStoffErhalten),
+	string_concat(TxtOptimiertesVorgehenErhalten, ': ', Txt0),
+	string_concat(Txt0, TxtAuswahlEmpfohleneHandlungenStoffErhalten, TxtHeader),
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], [TxtAuswahlEmpfohleneHandlungenStoffErhalten]),
+	    h1([align(center)], [TxtHeader]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/stoffErlangen'), method('post')], 
@@ -222,8 +232,9 @@ optimierteLoesung(System, Planet, OptimierungsZiel, Anzahl, Stoff) :-
 	optimierung:optimierungsStrategie(OptimierungsZiel, Stoff, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes),
 	zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, OptimierungsZiel, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes).
 
-zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
+zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel0, SammelSet, Vorgaenge, SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes) :-
 	textResources:getText(Stoff, Beschriftung),
+	textResources:getText(Ziel0, Ziel),
 	ausgabe:ausgabeSammlung(SammelSet, [], SammelSetPred),
     ausgabe:ausgabeVorgaenge(Vorgaenge, [], VorgaengePred),
 	ausgabe:ausgabeSummen(SammelZahl, GesamtWertSammlung, MinimalZeit, HandelswertSammlung, Erloes, SummenPred),
@@ -253,7 +264,7 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel, SammelSet, Vorgaen
 		  	h1([align(center)], [TxtStoffErlangen]),
 		  	\['</header>'],
 		  	\['<formSpace>'],
-		    table( [width('35%'), border(1)], 
+		    table( [width('60%'), border(1)], 
 				   [caption(h2(TxtEingaben)),
 					tr([th([scope('col')],[TxtAnzahl]),
 						th([scope('col')],[TxtGesuchterStoff]),
@@ -374,7 +385,8 @@ ausgabeBegruendungDcg([]) -->
 ausgabeBegruendungDcg([begr(FehlStoff, VorgaengePred) | Rest]) -->
 	{	textResources:getText(txtLeerKannNichtBeschafftWerden, TxtLeerKannNichtBeschafftWerden),
 		textResources:getText(txtRezeptversuch, TxtRezeptversuch),
-		string_concat(FehlStoff, TxtLeerKannNichtBeschafftWerden, Meldung)
+		textResources:getText(FehlStoff, TxtFehlStoff),
+		string_concat(TxtFehlStoff, TxtLeerKannNichtBeschafftWerden, Meldung)
 	},
 	html([	table( [width('100%'), border(1)], 
 		           [caption(h3(Meldung)),

@@ -11,9 +11,13 @@
 
 /* ----------------------  Auswahl System  ----------------------------------------------------*/
 planetMondNameSystemAuswahlDialog(_Request) :-
+	textResources:getText(txtHimmelsKoerperEingeben, TxtHimmelsKoerperEingeben),
 	textResources:getText(txtEigenschaftenSternenSystemEingeben, TxtEigenschaftenSternenSystemEingeben),
+	string_concat(TxtHimmelsKoerperEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEigenschaftenSternenSystemEingeben, TxtHeader),
+
 	planetAuswahlDialog:systemAuswahlDialog(
-		TxtEigenschaftenSternenSystemEingeben, 
+		TxtHeader, 
 		'/planetMondNameDialog'). 
 		
 /* ----------------------  Eingabe Himmelskörper  ---------------------------------------------*/
@@ -32,7 +36,11 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	findall([RecordNo, HimmelsKoerper, PlanetenTyp], spielStatus:planeten(RecordNo, AuswahlSystem, HimmelsKoerper, PlanetenTyp), HimmelsKoerperListe0),
 	sort(HimmelsKoerperListe0, HimmelsKoerperListe),
 	ausgabe:joinRecordsByRecordNo(FeldNoList, HimmelsKoerperListe, 2, NumerierteRecordList),
+	textResources:getText(txtHimmelsKoerperEingeben, TxtHimmelsKoerperEingeben),
 	textResources:getText(txtSternenSystemNamenHimmelskoerperEingeben, TxtSternenSystemNamenHimmelskoerperEingeben),
+	string_concat(TxtHimmelsKoerperEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtSternenSystemNamenHimmelskoerperEingeben, TxtHeader),
+	
 	textResources:getText(txtSternensystem, TxtSternensystem),
 	textResources:getText(txtPlanetenUndMonde, TxtPlanetenUndMonde),
 	textResources:getText(txtName, TxtName),
@@ -43,7 +51,7 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], [TxtSternenSystemNamenHimmelskoerperEingeben]),
+	    h1([align(center)], [TxtHeader]),
 	    \['</header>'] ,
 		\['<formSpace>'],       
 	    form([action('/planetMondName'), method('post'), name('systemEigenschaftenForm')], 
@@ -254,7 +262,7 @@ gespeichert :-
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center), TxtGespeichert),
+		h1(align(center), TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
 		p(a(['href="/"'],[TxtFunktionsAuswahl])),

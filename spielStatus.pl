@@ -34,12 +34,15 @@ initSpielStatus :-
 initSysteme :-
 	abolish(systeme/3)
 	,assertz(systeme(0, 'System', 'gelb')).
-
+	
 sternFarbe('gelb').
 sternFarbe('rot').
 sternFarbe('gruen').
 sternFarbe('blau').
 	
+moeglicheSprache(de).
+moeglicheSprache(en).
+
 initPlaneten :-
 	abolish(planeten/4)
 	/* Bezeichnung und Atmospherentyp */

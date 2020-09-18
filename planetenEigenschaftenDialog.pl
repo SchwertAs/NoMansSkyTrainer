@@ -13,16 +13,22 @@
 /* -----------------------------------  Systemauswahl ----------------------------------------------- */
 planetenEigenschaftenDialogSystemAuswahl(_Request) :-
 	textResources:getText(txtEigenschaftenHimmelsKoerperEingeben, TxtEigenschaftenHimmelsKoerperEingeben),
+	textResources:getText(txtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl),
+	string_concat(TxtEigenschaftenHimmelsKoerperEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEigenschaftenHimmelsKoerperEingebenSystemAuswahl, TxtHeader),
 	planetAuswahlDialog:systemAuswahlDialog(
-	  TxtEigenschaftenHimmelsKoerperEingeben,
+	  TxtHeader,
 	  '/planetenEigenschaftenDialogPlanetAuswahl').
 
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetenEigenschaftenDialogPlanetAuswahl(Request) :-
-	textResources:getText(txtEigenschaftenHimmelsKoerperAuswahl, TxtEigenschaftenHimmelsKoerperAuswahl),
+	textResources:getText(txtEigenschaftenHimmelsKoerperEingeben, TxtEigenschaftenHimmelsKoerperEingeben),
+	textResources:getText(txtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl),
+	string_concat(TxtEigenschaftenHimmelsKoerperEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEigenschaftenHimmelskoerperEingebenHimmelsKoerperauswahl, TxtHeader),
 	planetAuswahlDialog:planetAuswahlDialog(
-	  TxtEigenschaftenHimmelsKoerperAuswahl,
+	  TxtHeader,
 	  '/planetenEigenschaftenDialog',
 	  Request
 	).
@@ -75,15 +81,20 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	(var(AtmosphaerenAnlageEntfernungValNum) -> AtmosphaerenAnlageEntfernungVal = 'Zeit'; number_string(AtmosphaerenAnlageEntfernungValNum, AtmosphaerenAnlageEntfernungVal)),
 	(var(BergbauEinheitEntfernungValNum) -> BergbauEinheitEntfernungVal = 'Zeit'; number_string(BergbauEinheitEntfernungValNum, BergbauEinheitEntfernungVal)),
 	(var(PlantageEntfernungValNum) -> PlantageEntfernungVal = 'Zeit'; number_string(PlantageEntfernungValNum, PlantageEntfernungVal)),
-	textResources:getText(txtEigenschaftenHimmelsKoerper, TxtEigenschaftenHimmelsKoerper),
 	textResources:getText(txtAuswahlHimmelskoerper, TxtAuswahlHimmelskoerper),
 	textResources:getText(txtEinrichtungenUndIhreReisezeit, TxtEinrichtungenUndIhreReisezeit),
 	textResources:getText(txtJeweilsDieEinrichtungMit, TxtJeweilsDieEinrichtungMit),
+
+	textResources:getText(txtEigenschaftenHimmelsKoerperEingeben, TxtEigenschaftenHimmelsKoerperEingeben),
+	textResources:getText(txtEigenschaftenHimmelsKoerper, TxtEigenschaftenHimmelsKoerper),
+	string_concat(TxtEigenschaftenHimmelsKoerperEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEigenschaftenHimmelsKoerper, TxtHeader),
+
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
 	\['<header>'],
-    h1([align(center)], [TxtEigenschaftenHimmelsKoerper]),
+    h1([align(center)], [TxtHeader]),
     \['</header>'],
 	\['<formSpace>'],       
     form([action('/planetenEigenschaften'), method('post'), name('planetenEigenschaftenAuswahlForm')], 
@@ -149,22 +160,38 @@ tabelleEinrichtungen(
 	BergbauEinheitVorhandenVal, BergbauEinheitEntfernungVal,
 	PlantageVorhandenVal, PlantageEntfernungVal
     ) -->
-	{	textResources:getText(txtHauptBasis, TxtHauptBasis),
-		textResources:getText(txtWasser, TxtWasser),
-		textResources:getText(txtAussenPosten, TxtAussenPosten),
-		textResources:getText(txtRaumstation, TxtRaumstation),
-		textResources:getText(txtMittlereRaffinerie, TxtMittlereRaffinerie),
-		textResources:getText(txtGroﬂeRaffinerie, TxtGroﬂeRaffinerie),
-		textResources:getText(txtHandelsterminal, TxtHandelsterminal),
-		textResources:getText(txtHandelsstation, TxtHandelsstation),
-		textResources:getText(txtKleineRaffinerie, TxtKleineRaffinerie),
-		textResources:getText(txtNahrungsprozessor, TxtNahrungsprozessor),
-		textResources:getText(txtBasisterminus, TxtBasisterminus),
-		textResources:getText(txtKonstruktionsforschungsstation, TxtKonstruktionsforschungsstation),
-		textResources:getText(txtSauerstoffverarbeiter, TxtSauerstoffverarbeiter),
-		textResources:getText(txtAtmosphaerenanlage, TxtAtmosphaerenanlage),
-		textResources:getText(txtBergbaueinheit, TxtBergbaueinheit),
-		textResources:getText(txtPlantage, TxtPlantage)
+	{	textResources:getText(ortHauptBasis, TxtHauptBasis0),
+		textResources:getText(ortWasser, TxtWasser0),
+		textResources:getText(ortAussenPosten, TxtAussenPosten0),
+		textResources:getText(ortRaumStation, TxtRaumStation0),
+		textResources:getText(ortMittlereRaffinerie, TxtMittlereRaffinerie0),
+		textResources:getText(ortGrosseRaffinerie, TxtGrosseRaffinerie0),
+		textResources:getText(ortHandelsTerminal, TxtHandelsTerminal0),
+		textResources:getText(ortHandelsStation, TxtHandelsStation0),
+		textResources:getText(ortKleineRaffinerie, TxtKleineRaffinerie0),
+		textResources:getText(ortNahrungsProzessor, TxtNahrungsProzessor0),
+		textResources:getText(ortBasisTerminus, TxtBasisTerminus0),
+		textResources:getText(ortForschungsTerminal, TxtForschungsTerminal0),
+		textResources:getText(ortSauerStoffVerarbeiter, TxtSauerStoffVerarbeiter0),
+		textResources:getText(ortAtmosphaerenAnlage, TxtAtmosphaerenAnlage0),
+		textResources:getText(ortBergbauEinheit, TxtBergbauEinheit0),
+		textResources:getText(ortPlantage, TxtPlantage0),
+		textResources:stringToSubstantiv(TxtHauptBasis0, TxtHauptBasis),
+		textResources:stringToSubstantiv(TxtWasser0, TxtWasser),
+		textResources:stringToSubstantiv(TxtAussenPosten0, TxtAussenPosten),
+		textResources:stringToSubstantiv(TxtRaumStation0, TxtRaumStation),
+		textResources:stringToSubstantiv(TxtMittlereRaffinerie0, TxtMittlereRaffinerie),
+		textResources:stringToSubstantiv(TxtGrosseRaffinerie0, TxtGrosseRaffinerie),
+		textResources:stringToSubstantiv(TxtHandelsTerminal0, TxtHandelsTerminal),
+		textResources:stringToSubstantiv(TxtHandelsStation0, TxtHandelsStation),
+		textResources:stringToSubstantiv(TxtKleineRaffinerie0, TxtKleineRaffinerie),
+		textResources:stringToSubstantiv(TxtNahrungsProzessor0, TxtNahrungsProzessor),
+		textResources:stringToSubstantiv(TxtBasisTerminus0, TxtBasisTerminus),
+		textResources:stringToSubstantiv(TxtForschungsTerminal0, TxtForschungsTerminal),
+		textResources:stringToSubstantiv(TxtSauerStoffVerarbeiter0, TxtSauerStoffVerarbeiter),
+		textResources:stringToSubstantiv(TxtAtmosphaerenAnlage0, TxtAtmosphaerenAnlage),
+		textResources:stringToSubstantiv(TxtBergbauEinheit0, TxtBergbauEinheit),
+		textResources:stringToSubstantiv(TxtPlantage0, TxtPlantage)		
 	},
 	html(div(class('table50'),[
    	    div(class('tr'), [
@@ -193,7 +220,7 @@ tabelleEinrichtungen(
    	    	\checkZeitUnitGruppe('aussenPosten_vorhanden', AussenPostenVorhandenVal, 103, 'aussenPosten_entfernung', AussenPostenEntfernungVal, 103)
    	  	]),
    	    div(class('tr'), [
-   	    	div(class('th'), TxtRaumstation),
+   	    	div(class('th'), TxtRaumStation),
    	    	\checkZeitUnitGruppe('raumstation_vorhanden', RaumstationVorhandenVal, 104, 'raumstation_entfernung', RaumstationEntfernungVal, 104)
    	  	]),
   	    div(class('tr'), [
@@ -201,15 +228,15 @@ tabelleEinrichtungen(
    	    	\checkZeitUnitGruppe('mittlereRaffinerie_vorhanden', MittlereRaffinerieVorhandenVal, 105, 'mittlereRaffinerie_entfernung', MittlereRaffinerieEntfernungVal, 105)
    	    ]),
     	    div(class('tr'), [
-   	    	div(class('th'), TxtGroﬂeRaffinerie),
+   	    	div(class('th'), TxtGrosseRaffinerie),
    	    	\checkZeitUnitGruppe('grosseRaffinerie_vorhanden', GrosseRaffinerieVorhandenVal, 106, 'grosseRaffinerie_entfernung', GrosseRaffinerieEntfernungVal, 106)
    	    ]),
    	    div(class('tr'), [
-   	    	div(class('th'), TxtHandelsterminal),
+   	    	div(class('th'), TxtHandelsTerminal),
    	    	\checkZeitUnitGruppe('handelsTerminal_vorhanden', HandelsTerminalVorhandenVal, 107, 'handelsTerminal_entfernung', HandelsTerminalEntfernungVal, 107)
    	    ]),
    	    div(class('tr'), [
-   	    	div(class('th'), TxtHandelsstation),
+   	    	div(class('th'), TxtHandelsStation),
    	    	\checkZeitUnitGruppe('handelsStation_vorhanden', HandelsStationVorhandenVal, 108, 'handelsStation_entfernung', HandelsStationEntfernungVal, 108)
    	    ]),
    	  	div(class('tr'), [
@@ -217,27 +244,27 @@ tabelleEinrichtungen(
    	    	\checkZeitUnitGruppe('kleineRaffinerie_vorhanden', KleineRaffinerieVorhandenVal, 109, 'kleineRaffinerie_entfernung', KleineRaffinerieEntfernungVal, 109)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), TxtNahrungsprozessor),
+   	    	div(class('th'), TxtNahrungsProzessor),
    	    	\checkZeitUnitGruppe('nahrungsProzessor_vorhanden', NahrungsProzessorVorhandenVal, 110, 'nahrungsProzessor_entfernung', NahrungsProzessorEntfernungVal, 110)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), TxtBasisterminus),
+   	    	div(class('th'), TxtBasisTerminus),
    	    	\checkZeitUnitGruppe('basisTerminus_vorhanden', BasisTerminusVorhandenVal, 111, 'basisTerminus_entfernung', BasisTerminusEntfernungVal, 111)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), TxtKonstruktionsforschungsstation),
+   	    	div(class('th'), TxtForschungsTerminal),
    	    	\checkZeitUnitGruppe('konstruktionsStation_vorhanden', ForschungsTerminalVorhandenVal, 112, 'konstruktionsStation_entfernung', ForschungsTerminalEntfernungVal, 112)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), TxtSauerstoffverarbeiter),
+   	    	div(class('th'), TxtSauerStoffVerarbeiter),
    	    	\checkZeitUnitGruppe('sauerstoffVearbeiter_vorhanden', SauerstoffVearbeiterVal, 113, 'sauerstoffVearbeiter_entfernung', SauerstoffVearbeiterEntfernungVal, 113)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), TxtAtmosphaerenanlage),
+   	    	div(class('th'), TxtAtmosphaerenAnlage),
    	    	\checkZeitUnitGruppe('atmosphaerenAnlage_vorhanden', AtmosphaerenAnlageVorhandenVal, 114, 'atmosphaerenAnlage_entfernung', AtmosphaerenAnlageEntfernungVal, 114)
    	  	]),
    	  	div(class('tr'), [
-   	    	div(class('th'), TxtBergbaueinheit),
+   	    	div(class('th'), TxtBergbauEinheit),
    	    	\checkZeitUnitGruppe('bergbauEinheit_vorhanden', BergbauEinheitVorhandenVal, 115, 'bergbauEinheit_entfernung', BergbauEinheitEntfernungVal, 115)
    	  	]),
    	  	div(class('tr'), [

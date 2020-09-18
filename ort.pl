@@ -1,7 +1,7 @@
 :- module(ort, [ort/1]).
 
 
-ort(nil).
+ort(ortNil).
 ort(ortHauptBasis).
 ort(ortWald). 
 ort(ortBasisTerminus).

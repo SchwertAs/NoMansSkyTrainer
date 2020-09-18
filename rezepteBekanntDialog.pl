@@ -15,12 +15,15 @@ rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
 	(Klasse = produkt; Klasse = modul; Klasse = komponente; Klasse = produktUndKochStoff; Klasse = basisBauEndStoff),
 	 textResources:getText(Klasse, TxtKlasse)), Klassen),
 	server:baueOptionsFeld('auswahlStoffKlasse', Klassen, 2, OptionList),
-	textResources:getText(txtStoffKlassenAuswahl, TxtStoffklassenAuswahl),
+	textResources:getText(txtBekannteRezepteEingeben, TxtBekannteRezepteEingeben),
+	textResources:getText(txtStoffKlassenAuswahl, TxtStoffKlassenAuswahl),
+	string_concat(TxtBekannteRezepteEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtStoffKlassenAuswahl, TxtHeader),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], [TxtStoffklassenAuswahl]),
+	    h1([align(center)], [TxtHeader]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/rezeptBekanntDialog'), method('post')], 
@@ -114,14 +117,17 @@ rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	ausgabe:joinRecordsNumbering(FeldNoList2, RezeptListe2, 2, NumerierteRecordList2),
 	ausgabe:joinRecordsNumbering(FeldNoList3, RezeptListe3, 2, NumerierteRecordList3),
 	ausgabe:joinRecordsNumbering(FeldNoList4, RezeptListe4, 2, NumerierteRecordList4),
-	
+
+	textResources:getText(txtBekannteRezepteEingeben, TxtBekannteRezepteEingeben),
 	textResources:getText(txtEingabeBekannteRezepte, TxtEingabeBekannteRezepte),
+	string_concat(TxtBekannteRezepteEingeben, ': ', Txt0),
+	string_concat(Txt0, TxtEingabeBekannteRezepte, TxtHeader),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	
 	TermerizedBody = [
 		\['<header>'],
-	    h1([align(center)], [TxtEingabeBekannteRezepte]),
+	    h1([align(center)], [TxtHeader]),
 	    \['</header>'],
 		\['<formSpace>'],       
 	    form([action('/rezeptBekannt'), method('post')], 
@@ -250,7 +256,7 @@ gespeichert :-
 	textResources:getText(txtGespeichert, TxtGespeichert),
 	TermerizedBody = [
 		\['<header>'],
-		h3(align(center),TxtGespeichert),
+		h1(align(center),TxtGespeichert),
 		\['</header>'],
 		\['<formSpace>'], 
 		p(a(['href="/"'],[TxtFunktionsAuswahl])),

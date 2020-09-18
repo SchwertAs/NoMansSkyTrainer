@@ -141,6 +141,7 @@ stoff(produkt, warpZelle, 11733).
 stoff(produkt, warpHyperKern, 46750).
 
 stoff(produkt, herzDerSonne, 1000).
+stoff(produkt, erinnerung, -1).
 stoff(produkt, modifizierteQuanten, 1000).
 stoff(produkt, novaeRegenerat, 1000).
 stoff(produkt, zustandsPhase, 1000).
@@ -171,6 +172,8 @@ stoff(pass, atlasPassV3, 0).
 /* =============================== Ausruestung ========================== */
 /* ------------------------------- Anzugmodule -------------------------- */
 stoff(modul, belueftungsMembranB, 0).
+stoff(modul, bewegungsModulA, 0).
+stoff(modul, bewegungsModulB, 0).
 stoff(modul, bewegungsModulC, 0).
 stoff(modul, bewegungsModulS, 0).
 stoff(modul, effizienteWasserDuesenA, 0).
@@ -852,7 +855,7 @@ stoff(handelsWare, thermalModule, 100000).
 stoff(handelsWare, handvollZahnRaeder, 10000).
 stoff(handelsWare, kuehlMittelTank, 200000).
 stoff(handelsWare, verstaerkteRohre, 50000).
-stoff(handelsWare, ehemalsNuwtzlicheFedern, 1000).
+stoff(handelsWare, ehemalsNuetzlicheFedern, 1000).
 
 stoff(handelsWare, unmoeglicheSporen, 151488). 
 stoff(handelsWare, sichWindendeSpulen, 3280). 
@@ -920,40 +923,6 @@ stoff(kuriositaet, divergenzWuerfel, 3015).
 stoff(kuriositaet, hadalKern, 92625).
 stoff(kuriositaet, korvaxKonvergenzWuerfel, 13063).
 stoff(kuriositaet, vykenTafel, 1250).
-
-
-/* Artefakte */
-stoff(artefakt, abgeplatzteTeilSkelette, 113626).
-stoff(artefakt, ameisenRoggenZwiebeln, 113626).
-stoff(artefakt, aussergewoehnlicheDrehmomentErzeuger, 1269186).
-stoff(artefakt, behaelterMitUraltenMetallteilen, 766945).
-stoff(artefakt, behaelterMitAnzestralenJuwelen, 472674).
-stoff(artefakt, beschaedigteGetriebe, 264901).
-stoff(artefakt, boxMitSchoenenBohnen, 576690).
-stoff(artefakt, faszinierendeKnochenFragmente, 61510).
-stoff(artefakt, frischeFlutPalmenSprossen, 118669).
-stoff(artefakt, fortgeschritteneProzessoren, 1747804).
-stoff(artefakt, gebrocheneSkelettFragmente, 74000).
-stoff(artefakt, gefroreneLarve, 231677).
-stoff(artefakt, gekeimteMoschusFarnFruechte, 560298).
-stoff(artefakt, gekeimteSaegeKelchBlattVerschnitte, 800237).
-stoff(artefakt, heimgesuchteLarve, 344217).
-stoff(artefakt, hochtechnologischeGyroskope, 2634518).
-stoff(artefakt, konservierteKrabbenRueckenWirbel, 1161711).
-stoff(artefakt, merkwürdigeKnochenFragmente, 97540).
-stoff(artefakt, ruhendeVersuchungsWurzVerschnitte, 189244).
-stoff(artefakt, schmutzigeKnochen, 115190).
-stoff(artefakt, schmutzigeKnochenFragmente, 104981).
-stoff(artefakt, schrecklicheUeberreste, 179193).
-stoff(artefakt, summendeGetriebe, 837741).
-stoff(artefakt, unheimlicheKerne, 560798).
-stoff(artefakt, uralterSchluessel, 1000).
-stoff(artefakt, uranfaenglicheTrilobitRippen, 227643).
-stoff(artefakt, verschmolzeneTafel, 515718).
-stoff(artefakt, wasserBefleckteBooster, 253794).
-stoff(artefakt, verschlisseneKnochen, 92417).
-stoff(artefakt, zusammenStellungAusVonVykeeStammendenKuriositaeten, 200892).
-
 
 stoff(bauRezept, byteBeatGeraetRezept, 0).
 stoff(bauRezept, saeureRezept, 0).
@@ -1044,6 +1013,7 @@ stoff(bauRezept, zustandsPhaseRezept, 0).
 stoff(bauRezept, novaeRegeneratRezept, 0).
 stoff(bauRezept, modifizierteQuantenRezept, 0).
 stoff(bauRezept, herzDerSonneRezept, 0).
+stoff(bauRezept, erinnerungRezept, 0).
 stoff(bauRezept, sternenSamenRezept, 0).
 stoff(bauRezept, seelenEngineRezept, 0).
 stoff(bauRezept, gedankenBogenRezept, 0).

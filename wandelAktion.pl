@@ -5,7 +5,7 @@ wandelAktion(bauen, ortHauptBasis).
 wandelAktion(herstellen, ortSpieler).
 wandelAktion(installieren, ortSpieler).
 wandelAktion(kochen, ortNahrungsProzessor).
-wandelAktion(raffinieren, nil).  /* sonderlocke mit Ortsauswahl */
+wandelAktion(raffinieren, ortNil).  /* sonderlocke mit Ortsauswahl */
 wandelAktion(ausSauerStoffVearbeiterGewinnen, ortSauerStoffVerarbeiter).
 wandelAktion(ausAtmosphaerenAnlageGewinnen, ortAtmosphaerenAnlage).
 wandelAktion(rezeptInAussenPostenErwerben, ortAussenPosten).
@@ -16,4 +16,4 @@ wandelAktion(rezeptInFabrikErwerben, ortWald).
 wandelAktion(rezeptInFrachterErwerben, ortFrachter).
 wandelAktion(modulInRaumstationErwerben, ortRaumStation).
 wandelAktion(zerlegen, ortSpieler).
-wandelAktion(inEinfacherRaffinerieRaffinieren, nil).  /* sonderlocke mit Ortsauswahl */
+wandelAktion(inEinfacherRaffinerieRaffinieren, ortNil).  /* sonderlocke mit Ortsauswahl */

@@ -17,10 +17,13 @@ hauptDialog(_Request) :-
 	),
 	Versteckt5 = false,
 	Versteckt6 = false,
+	Versteckt8 = false,
 	debug(myTrace, 'Versteckt1=~k Versteckt2=~k Versteckt3=~k Versteckt4=~k Versteckt5=~k Versteckt6=~k Versteckt7=~k', [Versteckt1, Versteckt2, Versteckt3, Versteckt4, Versteckt5, Versteckt6, Versteckt7]),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	textResources:getText(txtLinkZurMaske, TxtLinkZurMaske),
 	textResources:getText(txtErklaerung, TxtErklaerung),
+	textResources:getText(txtStelleSpracheEin, TxtStelleSpracheEin),
+	textResources:getText(txtSpracheEinstellen, TxtSpracheEinstellen),
 	textResources:getText(txtVorraussetzungenSammeln, TxtVorraussetzungenSammeln),
 	textResources:getText(txtWelcheMittelStoffeBekommen, TxtWelcheMittelStoffeBekommen),
 	textResources:getText(txtBekannteRezepteEingeben, TxtBekannteRezepteEingeben),
@@ -48,6 +51,10 @@ hauptDialog(_Request) :-
        	            div(class('th'), \[TxtErklaerung])
        	           ]),
        	       div(class('tr'),
+       	           [div(class('td'), \baueRef(Versteckt8, '/sprachUmschaltungAuswahl', TxtSpracheEinstellen)),
+       	            div(class('td'), label(TxtStelleSpracheEin))
+       	           ]),
+        	   div(class('tr'),
        	           [div(class('td'), \baueRef(Versteckt6, '/spielStatusDialog', TxtVorraussetzungenSammeln)),
        	            div(class('td'), label(TxtWelcheMittelStoffeBekommen))
        	           ]),
