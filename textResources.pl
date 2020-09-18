@@ -2020,7 +2020,7 @@ text(en, txtRohstoffe, 'Raw material').
 
 /* Fixtexte ausgabe */
 text(en, txtBitteReisenSieNachSystem, 'Please travel to system: ').
-text(en, txtLeerPlanet, ' planet: ').
+text(en, txtLeerPlanet, ' Planet: ').
 text(en, txtFuerenSie, 'Execute ').
 text(en, txtLeerMal, ' times ').
 text(en, txtLeerVon, ' of ').
@@ -2289,7 +2289,7 @@ text(en, blau, 'blue').
 /* StoffKlassen */
 text(en, rohStoff, 'raw material'). 
 text(en, komponente, 'component'). 
-text(en, produkt, 'produkt'). 
+text(en, produkt, 'product'). 
 text(en, pass, 'passport'). 
 text(en, verbrauch, 'consumption'). 
 text(en, modul, 'module'). 
