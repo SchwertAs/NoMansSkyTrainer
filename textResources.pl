@@ -64,7 +64,7 @@ text(de, txtStundenlohn, 'Stundenlohn').
 text(de, txtLinkZurMaske, 'Link zur Maske').
 text(de, txtErklaerung, 'Erklärung').
 text(de, txtSpracheEinstellen, 'Sprache einstellen').
-text(de, txtStelleSpracheEin, 'stellen Sie die Sprache dieser Anwendung ein').
+text(de, txtStelleSpracheEin, 'Stellen Sie die Sprache dieser Anwendung ein').
 text(de, txtVorraussetzungenSammeln, 'Voraussetzungen des Sammelns eingeben').
 text(de, txtWelcheMittelStoffeBekommen, 'Geben Sie ein mit welchen Mitteln Sie Stoffe bekommen können!').
 text(de, txtBekannteRezepteEingeben, 'Bekannte Rezepte eingeben').

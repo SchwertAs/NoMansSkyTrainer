@@ -4,7 +4,7 @@ startServer :-
 	working_directory(CWD, CWD),
 	string_concat(CWD, 'persistenceDb.txt', PersistenzDatenbank),
 	format('Persistenzdb: ~k', [PersistenzDatenbank]),  
-	(\+exists_file(PersistenzDatenbank), resetDatabase(PersistenzDatenbank)),	
+	(\+exists_file(PersistenzDatenbank), resetDatabase(PersistenzDatenbank); true),	
 	datenBankAnbindung:datenVonDbHolen(PersistenzDatenbank), 
 	server:server(8000),
 	debug(myTrace),
