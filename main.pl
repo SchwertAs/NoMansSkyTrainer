@@ -1,17 +1,21 @@
-:- module(main, [startServer/0, resetDatabase/0]).
+:- module(main, [startServer/0, resetDatabase/1]).
 
 startServer :-
-	datenBankAnbindung:datenVonDbHolen, 
+	working_directory(CWD, CWD),
+	string_concat(CWD, 'persistenceDb.txt', PersistenzDatenbank),
+	format('Persistenzdb: ~k', [PersistenzDatenbank]),  
+	(\+exists_file(PersistenzDatenbank), resetDatabase(PersistenzDatenbank)),	
+	datenBankAnbindung:datenVonDbHolen(PersistenzDatenbank), 
 	server:server(8000),
 	debug(myTrace),
 	format('Zum Server beenden Taste drücken!', []),
 	get_single_char(_),
-	datenBankAnbindung:datenInDbSpeichern.
+	datenBankAnbindung:datenInDbSpeichern(PersistenzDatenbank).
 
-resetDatabase :-
+resetDatabase(PersistenzDatenbank) :-
 	spielStatus:spielStatusInit,
 	sammlung:sammlungInit,
-	datenBankAnbindung:datenInDbSpeichern.
+	datenBankAnbindung:datenInDbSpeichern(PersistenzDatenbank).
 	
 produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 	rezept:rezept(_, Komponenten, [Anzahl, Produkt], _),

@@ -1,4 +1,4 @@
-:- module(datenBankAnbindung, [datenInDbSpeichern/0, datenVonDbHolen/0, datenNachAccessSpeichern/0]).
+:- module(datenBankAnbindung, [datenInDbSpeichern/1, datenVonDbHolen/1, datenNachAccessSpeichern/0]).
 
 :- use_module(library(persistency)).
 
@@ -11,8 +11,8 @@
 	systemAusstattungDb(ortsAngabe:list, entfernung:nonneg),
 	fertigeLoesungDb(system:atom, planet:atom, strategie:atom, stoff:atom, vorgaenge:list).
 
-datenInDbSpeichern :-
-	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
+datenInDbSpeichern(PersistenzDatenbank) :-
+	db_attach(PersistenzDatenbank, []),
 	
 	retractall_spracheDb(_),
 	retractall_sammlungDb(_, _, _, _, _, _, _, _),
@@ -36,8 +36,8 @@ datenInDbSpeichern :-
 	
 	db_detach.
 
-datenVonDbHolen :-
-	db_attach('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/persistenceDb.txt', []),
+datenVonDbHolen(PersistenzDatenbank) :-
+	db_attach(PersistenzDatenbank, []),
 	db_sync(update),
 
 	ignore(retractall(spielStatus:sprache(_))),

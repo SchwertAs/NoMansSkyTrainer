@@ -73,7 +73,7 @@ text(de, txtSternenSystemeEingeben, 'Sternensysteme eingeben').
 text(de, txtEntdeckteErfassen, 'Erfassen Sie alle entdeckten Sternensysteme ihres Spielstandes!').
 text(de, txtHimmelsKoerperEingeben, 'Himmelskörper eingeben').
 text(de, txtPlanetMondeEingeben, 'Geben Sie für ein Sternensystem Planeten und Monde ein!').
-text(de, txtAusstattungEingeben, 'Geben Sie die planetare Ausstattung eines Himmelskörpers wie Basen, Raffinerieen etc. ein!').
+text(de, txtAusstattungEingeben, 'Geben Sie die planetare Ausstattung eines Himmelskörpers wie Basen, Raffinerieen ein!').
 text(de, txtEigenschaftenHimmelsKoerperEingeben, 'Eigenschaften eines Himmelskörpers eingeben').
 text(de, txtSammelDetailsEingeben, 'Sammeldetails eines Himmelskörpers eingeben').
 text(de, txtSammelbareResourcenEingeben, 'Geben Sie die sammelbaren Resourcen eines Himmelskörpers ein!').
@@ -2060,7 +2060,7 @@ text(en, txtSternenSystemeEingeben, 'Enter star systems').
 text(en, txtEntdeckteErfassen, 'Record all discovered star systems of your game save.').
 text(en, txtHimmelsKoerperEingeben, 'Enter orbs').
 text(en, txtPlanetMondeEingeben, 'Enter planets and moons of one star system.').
-text(en, txtAusstattungEingeben, 'Enter planetary facilities of a orb like basens, refinery aso.').
+text(en, txtAusstattungEingeben, 'Enter planetary facilities of a orb like basens, refinery.').
 text(en, txtEigenschaftenHimmelsKoerperEingeben, 'Enter properties of a orb').
 text(en, txtSammelDetailsEingeben, 'Enter collecting details of a orb').
 text(en, txtSammelbareResourcenEingeben, 'Enter collectabele resources of a orb.').

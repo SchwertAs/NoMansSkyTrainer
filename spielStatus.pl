@@ -14,7 +14,7 @@ spielStatusInit :-
 	initSysteme,
 	initPlaneten,
 	initSystemAusstattung,
-	abolish(sprache/1), assertz(sprache(de)).
+	abolish(sprache/1), assertz(sprache(en)).
 
 initSpielStatus :-
 	abolish(spielStatus/2)
