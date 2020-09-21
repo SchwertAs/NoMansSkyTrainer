@@ -123,7 +123,9 @@ text(de, txtAlternativStehtErAuchInDerEndtdeckungsListe, 'Alternativ steht er au
 /* Fixtexte planetEigenschaftenDialog */
 text(de, txtEigenschaftenHimmelsKoerper, 'Einrichtungen und Reisezeiten').
 text(de, txtEinrichtungenUndIhreReisezeit, 'Einrichtungen und ihre Reisezeit von der Hauptbasis').
-text(de, txtJeweilsDieEinrichtungMit, 'Jeweils die Einrichtung mit der kürzesten Entfernung zur Hauptbasis angeben!').
+text(de, txtJeweilsDieEinrichtungMit, 'Jeweils die Einrichtung mit der kürzesten Reisezeit zur Hauptbasis angeben!').
+text(de, txtDieEinrichtung, 'Die Einrichtung ').
+text(de, txtVorhandenGekennzeichnet, ' ist als vorhanden gekennzeichnet, aber die Zeitangabe fehlt').
 
 /* Fixtexte planetSammelEigenschaftenDialog */
 text(de, txtSammelartEingebenHimmelskoerperAuswahl, 'Sammelart eingeben').
@@ -1592,7 +1594,7 @@ text(de, schraegeMetallPlatteRezept, 'schräge Metallplatterezept').
 text(de, kleineMetallWandRezept, 'kleine Metallwandrezept').
 text(de, metallFensterRezept, 'Metallfensterrezept').
 text(de, metallTuerRezept, 'Metalltürrezept').
-text(de, elektrischeMetallTuerRezept, 'wlektrische Metalltürrezept').
+text(de, elektrischeMetallTuerRezept, 'ektrische Metalltürrezept').
 text(de, metallDachPlatteRezept, 'Metalldachplatterezept').
 text(de, metallDachEckStueckRezept, 'Metalldacheckstückrezept').
 text(de, metallBogenRezept, 'Metallbogenrezept').
@@ -2111,7 +2113,10 @@ text(en, txtAlternativStehtErAuchInDerEndtdeckungsListe, 'Alternativ it is shown
 /* Fixtexte planetEigenschaftenDialog */
 text(en, txtEigenschaftenHimmelsKoerper, 'Facilities and travel times').
 text(en, txtEinrichtungenUndIhreReisezeit, 'Facilities and their travel times from the main base').
-text(en, txtJeweilsDieEinrichtungMit, 'Specify each facility with the shortest distance from the main base!').
+text(en, txtJeweilsDieEinrichtungMit, 'Specify each facility with has the lowest travel time from the main base!').
+text(en, txtDieEinrichtung, 'The facility ').
+text(en, txtVorhandenGekennzeichnet, ' is marked as existing, but the travel time is missing').
+
 
 /* Fixtexte planetSammelEigenschaftenDialog */
 text(en, txtSammelartEingebenHimmelskoerperAuswahl, 'Choice of collecting mode').
@@ -2351,10 +2356,10 @@ text(en, zerlegen, 'disassemble').
 text(en, inEinfacherRaffinerieRaffinieren, 'refine in simple refinery').
 
 /* Stoffe */
-text(en, aktiviertesCadmium, 'activated Cadmium').
-text(en, aktiviertesEmeril, 'activated Emeril').
-text(en, aktiviertesIndium, 'activated Indium').
-text(en, aktiviertesKupfer, 'activated Copper').
+text(en, aktiviertesCadmium, 'Activated Cadmium').
+text(en, aktiviertesEmeril, 'Activated Emeril').
+text(en, aktiviertesIndium, 'Activated Indium').
+text(en, aktiviertesKupfer, 'Activated Copper').
 text(en, ammoniak, 'Ammonia').
 text(en, cadmium, 'Cadmium').
 text(en, chlor, 'Chlorine').

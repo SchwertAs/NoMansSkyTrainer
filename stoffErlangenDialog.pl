@@ -218,11 +218,11 @@ nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 		Stoff4 = TxtBitteWaehlen, Stoff5 \= TxtBitteWaehlen, Stoff = Stoff5)
 	).
 	
-ergebnisAusgeben(System, Planet, Anzahl, Ziel, Stoff0) :-
+ergebnisAusgeben(System, Planet, Anzahl, Ziel, TxtStoff) :-
     ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
     assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
-    textResources:getText(Stoff, Stoff0),
-	(optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
+    textResources:getText(Stoff, TxtStoff), /* Rücktransformation zu Stoffatom */
+    (optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
 	 nichtHerstellBar(Ziel)),
 	!.
 	

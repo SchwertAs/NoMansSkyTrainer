@@ -232,11 +232,10 @@ ablegen(RezeptListe, VarValueList) :-
 	!,
 	between(1, 4, Spalte),
 	between(1, Step, Zeile),
-	pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, TxtRezept, Checked),
+	pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Checked),
 	((Checked = 'on', CheckNum = 1);
 	 (Checked \= 'on', CheckNum = 0)
 	), 
-	textResources:getText(Rezept, TxtRezept),
 	ignore(retractall(sammlung:sammlung(_, 'System', 'MeinPlanet', bekannt, Rezept, _, _, _))),
 	assertz(sammlung:sammlung(CheckNum, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
 	CheckNum = 1,

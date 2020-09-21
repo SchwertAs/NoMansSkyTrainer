@@ -343,7 +343,8 @@ planetSammelEigenschaften(Request) :-
 	 (
 	  nth1(1, VarValueList, AuswahlSystem),
 	  nth1(2, VarValueList, AuswahlPlanet),
-	  nth1(3, VarValueList, AuswahlSammelArt),	
+	  nth1(3, VarValueList, TxtAuswahlSammelArt),	
+	  textResources:getText(AuswahlSammelArt, TxtAuswahlSammelArt),
 	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarValueList),
       sammlung:vorgefertigeLoesungenErstellen,

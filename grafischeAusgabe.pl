@@ -5,7 +5,7 @@
 hierarchieGrafik(Vorgaenge, Svg) :-
   letzterVorgang(Vorgaenge, LetzterVorgang),
   LetzterVorgang = [_,_,_,_,_,[_, EndStoff]],
-  ebenePos(Vorgaenge, LetzterVorgang, [[1,1,EndStoff, 0]]),
+  baueAnzeigenBaum(Vorgaenge, LetzterVorgang, [[1,1,EndStoff, 0]]),
   findall(Stoff, baum(_, _, Stoff, _), Beschriftungen),
   findall(SvgX, (select(Beschriftung, Beschriftungen, _), symbolFromBeschriftung(Beschriftung, SvgX)), Symbols),
   concatSymbols(Symbols, "", Svg1),
@@ -52,7 +52,7 @@ useFromBeschriftung(Pos, Ebene, Stoff, PosParent, AnzPosesEbene, Use) :-
     breiteBeschriftung(Beschriftung, Breite),
     X is (1500 / (Anz + 1)) * Pos - (Breite / 2) - 80,
 	Y is 60 * (Ebene - 1),
-	buildUseForBox(X, Y, Beschriftung, Use1),
+	buildUseForBox(X, Y, Stoff, Use1),
 	XArrow is X + (Breite / 2),
 	XParent is (1500 / (AnzParent + 1)) * PosParent - 80,
 	Yarrow is Y,
@@ -65,10 +65,10 @@ useFromBeschriftung(_, Ebene, Stoff, _, _, Use) :-
 	textResources:getText(Stoff, Beschriftung),
     breiteBeschriftung(Beschriftung, Breite),
     X is 750 - (Breite / 2) - 80,
-	buildUseForBox(X, 0, Beschriftung, Use).
+	buildUseForBox(X, 0, Stoff, Use).
 
 buildUseForBox(X, Y, Stoff, Use) :-
-	string_concat('<use x=', X, Use0),
+    string_concat('<use x=', X, Use0),
 	string_concat(Use0, ' y=', Use1),
 	string_concat(Use1, Y, Use2),
 	string_concat(Use2, ' xlink:href=#textbox', Use3),
@@ -87,7 +87,7 @@ buildUseForArrow(X, XParent, Yarrow, YArrowParent, Use) :-
 	
 symbolFromBeschriftung(Stoff, Symbol) :-
 	textResources:getText(Stoff, Beschriftung),
-	string_concat('<symbol id=textbox', Beschriftung, Sym0),
+	string_concat('<symbol id=textbox', Stoff, Sym0),
 	string_concat(Sym0, '> <rect class=kastenGelb x=0 y=0 width=', Sym1),
 	breiteBeschriftung(Beschriftung, Breite),
 	atom_string(Breite, BreiteString),
@@ -101,11 +101,11 @@ letzterVorgang(Vorgaenge, LetzterVorgang) :-
 	length(Vorgaenge, LastNo),
 	nth1(LastNo, Vorgaenge, LetzterVorgang).
 
-ebenePos(_, AktuellerVorgang, EbenenPos) :-
+baueAnzeigenBaum(_, AktuellerVorgang, EbenenPos) :-
 	AktuellerVorgang = [_,_,_,_,[],_],
 	forall((select([Pos, Eb, Stoff, PosParent], EbenenPos, _), \+baum(Pos, Eb, Stoff, PosParent)), assertz(baum(Pos, Eb, Stoff, PosParent))).
 	
-ebenePos(Vorgaenge, AktuellerVorgang, EbenenPos) :-
+baueAnzeigenBaum(Vorgaenge, AktuellerVorgang, EbenenPos) :-
 	AktuellerVorgang = [_,_,_,_,Komponenten,_],
 	EbenenPos = [[PosParent, Ebene, _, _]|_],
 	forall(select(KopfKomp, Komponenten, _),
@@ -117,11 +117,11 @@ ebenePos(Vorgaenge, AktuellerVorgang, EbenenPos) :-
 	 append([[NewPos, EbeneNeu, KopfKompStoff, PosParent]], EbenenPos, EbenenPos1),
 	 select(AktuellerVorgang1, Vorgaenge, _),
 	 AktuellerVorgang1 = [_,_,_,_,_,[_,KopfKompStoff]],
-	 ebenePos(Vorgaenge, AktuellerVorgang1, EbenenPos1)
+	 baueAnzeigenBaum(Vorgaenge, AktuellerVorgang1, EbenenPos1)
 	)).
 	
 breiteBeschriftung(Beschriftung, Breite) :-
-	atom_length(Beschriftung, ZeichenZahl),
+	string_length(Beschriftung, ZeichenZahl),
 	findall(Len, 
 	        (between(1,ZeichenZahl, Index),
 	         string_code(Index, Beschriftung, Code),
@@ -140,21 +140,30 @@ lenOfCode(Code, Len) :-
 	
 lenOfCode(Code, Len) :-
 	Code > 96,
-    Code < 123,        /* a  b  c d  e  f   g  h  i j k l m  n  o  p  q  r s t u  v w    x y z*/
-	LenKleinbuchstaben = [10,10,9,10,10,4.8,10,10,4,4,9,4,15,10,10,10,10,6,9,5,10,9,12.9,9,9,9], 
+    Code < 123,         /* a  b  c  d  e   f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v    w  x  y  z */
+	LenKleinbuchstaben = [10,10, 9,10,10,4.8,10,10, 4, 4, 9, 4,15,10,10,10,10, 6, 9, 5,10, 9,12.9, 9, 9, 9], 
     Index is Code - 96, 
     nth1(Index, LenKleinbuchstaben, Len),
     !.
 
 lenOfCode(Code, Len) :-
-	((Code = 32, Len = 10); /* " " */ 
-	 (Code = 228, Len = 10); /* äöüÄÖÜß */ 
-	 (Code = 246, Len = 10);
-	 (Code = 252, Len = 10);
-	 (Code = 196, Len = 12);
-	 (Code = 214, Len = 14);
-	 (Code = 220, Len = 13);
-	 (Code = 223, Len = 11)
+	Code > 47,
+	Code < 58,  /* 0  1  2  3  4  5  6  7  8  9 */
+	LenZiffern = [10, 9,10,10,10,10,10,10,10,10], 
+	Index is Code - 47, 
+	nth1(Index, LenZiffern, Len),
+    !.
+
+lenOfCode(Code, Len) :-
+	((Code = 45, Len = 6, !); /* - */
+	 (Code = 32, Len = 5, !); /* " " */ 
+	 (Code = 228, Len = 10, !); /* äöüÄÖÜß */ 
+	 (Code = 246, Len = 10, !);
+	 (Code = 252, Len = 10, !);
+	 (Code = 196, Len = 12, !);
+	 (Code = 214, Len = 14, !);
+	 (Code = 220, Len = 13, !);
+	 (Code = 223, Len = 11, !)
 	).
 	
 lenOfCode(_, Len) :-

@@ -361,21 +361,21 @@ planetenEigenschaften(Request) :-
      bergbauEinheit_entfernung(BergbauEinheitEntfernung, [default('Zeit')]),
      plantage_entfernung(PlantageEntfernung, [default('Zeit')])
     ]),
-    ((WasserVorhanden = on, WasserEntfernung = 'Zeit', fehlerBehandlungGruppe('Wasser'));
-     (AussenPostenVorhanden = on, AussenPostenEntfernung = 'Zeit', fehlerBehandlungGruppe('AussenPosten'));
-     (RaumstationVorhanden = on, RaumstationEntfernung = 'Zeit', fehlerBehandlungGruppe('Raumstation'));
-     (RaffinerieMittelVorhanden = on, RaffinerieMittelEntfernung = 'Zeit', fehlerBehandlungGruppe('mittlere Raffinerie'));
-     (RaffinerieGrossVorhanden = on, RaffinerieGrossEntfernung = 'Zeit', fehlerBehandlungGruppe('groﬂe Raffinerie'));
-     (HandelsTerminalVorhanden = on, HandelsTerminalEntfernung = 'Zeit', fehlerBehandlungGruppe('Handelsterminal'));
-     (HandelsStationVorhanden = on, HandelsStationEntfernung = 'Zeit', fehlerBehandlungGruppe('Handelsstation'));
-     (RaffinerieKleinVorhanden = on, RaffinerieKleinEntfernung = 'Zeit', fehlerBehandlungGruppe('kleine Raffinerie'));
-     (NahrungsProzessorVorhanden = on, NahrungsProzessorEntfernung = 'Zeit', fehlerBehandlungGruppe('Nahrungsprozessor'));
-     (BasisTerminusVorhanden = on, BasisTerminusEntfernung = 'Zeit', fehlerBehandlungGruppe('Basisterminus'));
-     (KonstruktionsStationVorhanden = on, KonstruktionsStationEntfernung = 'Zeit', fehlerBehandlungGruppe('Konstruktionsstation'));
-     (SauerstoffVearbeiterVorhanden = on, SauerstoffVerarbeiter = 'Zeit', fehlerBehandlungGruppe('Sauerstoffverarbeiter'));
-     (BergbauEinheitVorhanden = on, BergbauEinheitEntfernung = 'Zeit', fehlerBehandlungGruppe('Bergbaueinheit'));
-     (AtmosphaerenAnlageVorhanden = on, AtmosphaerenAnlageEntfernung = 'Zeit', fehlerBehandlungGruppe('Atmosphaerenanlage'));
-     (PlantageVorhanden = on, PlantageEntfernung = 'Zeit', fehlerBehandlungGruppe('Plantage'));
+    ((WasserVorhanden = on, WasserEntfernung = 'Zeit', fehlerBehandlungGruppe(ortWasser));
+     (AussenPostenVorhanden = on, AussenPostenEntfernung = 'Zeit', fehlerBehandlungGruppe(ortAussenPosten));
+     (RaumstationVorhanden = on, RaumstationEntfernung = 'Zeit', fehlerBehandlungGruppe(ortRaumStation));
+     (RaffinerieMittelVorhanden = on, RaffinerieMittelEntfernung = 'Zeit', fehlerBehandlungGruppe(ortMittlereRaffinerie));
+     (RaffinerieGrossVorhanden = on, RaffinerieGrossEntfernung = 'Zeit', fehlerBehandlungGruppe(ortGrosseRaffinerie));
+     (HandelsTerminalVorhanden = on, HandelsTerminalEntfernung = 'Zeit', fehlerBehandlungGruppe(ortHandelsTerminal));
+     (HandelsStationVorhanden = on, HandelsStationEntfernung = 'Zeit', fehlerBehandlungGruppe(ortHandelsStation));
+     (RaffinerieKleinVorhanden = on, RaffinerieKleinEntfernung = 'Zeit', fehlerBehandlungGruppe(ortKleineRaffinerie));
+     (NahrungsProzessorVorhanden = on, NahrungsProzessorEntfernung = 'Zeit', fehlerBehandlungGruppe(ortNahrungsProzessor));
+     (BasisTerminusVorhanden = on, BasisTerminusEntfernung = 'Zeit', fehlerBehandlungGruppe(ortBasisTerminus));
+     (KonstruktionsStationVorhanden = on, KonstruktionsStationEntfernung = 'Zeit', fehlerBehandlungGruppe(ortForschungsTerminal));
+     (SauerstoffVearbeiterVorhanden = on, SauerstoffVerarbeiter = 'Zeit', fehlerBehandlungGruppe(ortSauerStoffVerarbeiter));
+     (BergbauEinheitVorhanden = on, BergbauEinheitEntfernung = 'Zeit', fehlerBehandlungGruppe(ortBergbauEinheit));
+     (AtmosphaerenAnlageVorhanden = on, AtmosphaerenAnlageEntfernung = 'Zeit', fehlerBehandlungGruppe(ortAtmosphaerenAnlage));
+     (PlantageVorhanden = on, PlantageEntfernung = 'Zeit', fehlerBehandlungGruppe(ortPlantage));
      (HauptBasisVorhanden = off,
       WasserVorhanden = off,
       AussenPostenVorhanden = off,
@@ -487,16 +487,16 @@ gespeichert :-
 
 fehlerBehandlungGruppe(Gruppe) :-
    	server:holeCssAlsStyle(StyleString),
-   	string_concat('Die Einrichtung ', Gruppe, FehlerMeldung0),
-   	string_concat(FehlerMeldung0, ' ist als vorhanden gekennzeichnet, aber die Zeitangabe fehlt', FehlerMeldung),
+	textResources:getText(Gruppe, TxtGruppe),
+	textResources:getText(txtDieEinrichtung, TxtDieEinrichtung),
+	textResources:getText(txtVorhandenGekennzeichnet, TxtVorhandenGekennzeichnet),
+   	string_concat(TxtDieEinrichtung, TxtGruppe, FehlerMeldung0),
+   	string_concat(FehlerMeldung0, TxtVorhandenGekennzeichnet, FehlerMeldung),
 	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),
-		\['</redHeader>'],
-		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
-		\['</formSpace>']
+		\['</redHeader>']
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
