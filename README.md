@@ -1,3 +1,5 @@
+**[English version](https://github.com/SchwertAs/NoMansSkyTrainer/wiki)**
+
 # NoMansSkyTrainer
 Kleines Helferlein für das Spiel No Man's Sky (©Hello Games). Gibt Tipps wie man optimal im Spiel vorwärts kommt.
 Ziele wie viel Geld ansammeln, oder einen Stoff mit wenig Grundstoffen zu bekommen sind mit dem Programm direkt erreichbar. Mit konkreten Handlungsanweisungen unterstützt das Programm den Spieler. Die Tipps berücksichtigt dabei die jeweilige Lage im Spiel.

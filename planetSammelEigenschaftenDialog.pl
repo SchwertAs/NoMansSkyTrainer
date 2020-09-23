@@ -48,12 +48,13 @@ planetSammelEigenschaftenDialogSammelArtAuswahl(Request) :-
 
 /* -----------------------------------  Sammelartauswahl -------------------------------------------- */
 sammelArtAuswahlDialog(HeaderText, Action, Request) :-
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	member(method(post), Request), !,
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]),
-	((AuswahlPlanet = txtBitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
+	((AuswahlPlanet = TxtBitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
 	(
 	 findall(SammelArt, 
 	   (sammelAktion:sammelAktion(SammelArt0), 
@@ -87,7 +88,7 @@ sammelArtAuswahlDialog(HeaderText, Action, Request) :-
 
 /* -----------------------------------  Eingabedialog ----------------------------------------------- */	
 planetSammelEigenschaftenDialog(Request) :-
-	 textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
+	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	member(method(post), Request), !,
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0]),
