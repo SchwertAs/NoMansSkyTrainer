@@ -357,7 +357,7 @@ nichtHerstellBar(Ziel) :-
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), TxtBeschaffenUndHerstellenNichtMoeglich),
+		h3(align(center), TxtBeschaffenUndHerstellenNichtMoeglich),
 		\['</redHeader>'],
 		\['<redFormSpace>'],
 		h3(TxtBegruendungDp),
@@ -375,7 +375,7 @@ nichtHerstellBar(_) :-
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), TxtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden),
+		h3(align(center), TxtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden),
 		\['</redHeader>'],
 		\['<formSpace>'], 
 		p(a(['href="/"'],[TxtFunktionsAuswahl])),

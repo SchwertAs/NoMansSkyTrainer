@@ -33,8 +33,12 @@ inDictEinsortieren(DictOrtVorgaenge, Vorgaenge, DictGefuellt) :-
 	
 inDictEinsortieren(DictOrtVorgaenge, Vorgaenge, DictGefuellt) :-
 	Vorgaenge = [Vorgang | RestVorgaenge],
-	reisen:vorgangsOrt(_, Vorgang, [_, _, VorgangsOrt]),
-	insertOrAppend(VorgangsOrt, [Vorgang], DictOrtVorgaenge, DictOrtVorgaenge1),
+	reisen:vorgangsOrt(_, Vorgang, [System, Planet, VorgangsOrt]),
+	string_concat('key', System, DictKey0),
+	string_concat(DictKey0, Planet, DictKey1),
+	string_concat(DictKey1, VorgangsOrt, DictKeyString),
+	string_to_atom(DictKeyString, DictKey),
+	insertOrAppend(DictKey, [Vorgang], DictOrtVorgaenge, DictOrtVorgaenge1),
 	inDictEinsortieren(DictOrtVorgaenge1, RestVorgaenge, DictGefuellt).
 		
 insertOrAppend(Key, Val, Dict, DictDanach) :-
@@ -98,11 +102,11 @@ extrahiereKomponenten(EinVorgang, KomponentenStoffListe) :-
 	maplist(nth1(2), Komponenten, KomponentenStoffListe).
 
 addiereVorgangsWerte(SuchVorgang, VergleichsVorgang, SummenVorgang) :-
-	SuchVorgang = [_, _, Anzahl1, Operation, Komponenten, [ProduktZahl1, Produkt]],
-	VergleichsVorgang = [Anzahl2, Operation, Komponenten, [ProduktZahl2,_]],
+	SuchVorgang = [System, Planet, Anzahl1, Operation, Komponenten, [ProduktZahl1, Produkt]],
+	VergleichsVorgang = [System, Planet, Anzahl2, Operation, Komponenten, [ProduktZahl2,_]],
 	SummenAnzahl is Anzahl1 + Anzahl2,
 	SummenProduktZahl is ProduktZahl1 + ProduktZahl2,
-	SummenVorgang = [SummenAnzahl, Operation, Komponenten, [SummenProduktZahl, Produkt]].
+	SummenVorgang = [System, Planet, SummenAnzahl, Operation, Komponenten, [SummenProduktZahl, Produkt]].
 	
 isBekannt(Vorgang) :-
 	Vorgang = [_, _, _, Operation, _, [_, _]],
