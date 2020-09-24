@@ -47,7 +47,8 @@ systemNamenDialog(_Request) :-
 		\['</formSpace>']
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
+	textResources:getText(txtNoMansSkyTrainerSternensystemeEingeben, TxtNoMansSkyTrainerSternensystemeEingeben),	
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerSternensystemeEingeben)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 innereTabelle(NumerierteRecordList) -->
@@ -226,8 +227,8 @@ insUpdDel(FeldNeu, SystemNeu, _) :-
 	
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
 	textResources:getText(txtGespeichert, TxtGespeichert),
+	TermerizedHead = [\[StyleString], title(TxtGespeichert)],
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [
 		\['<header>'],
@@ -245,11 +246,12 @@ fehlerZeile(Zeile, Spalte) :-
 	textResources:getText(txtInSpalte, TxtInSpalte),
 	textResources:getText(txtIstUnvollstaendig, TxtIstUnvollstaendig),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
+	textResources:getText(txtNoMansSkyTrainerSternensystemeEingeben, TxtNoMansSkyTrainerSternensystemeEingeben),
 	string_concat(TxtDieZeile, Zeile, FehlerMeldung0),
 	string_concat(FehlerMeldung0, TxtInSpalte, FehlerMeldung1),
 	string_concat(FehlerMeldung1, Spalte, FehlerMeldung2),
    	string_concat(FehlerMeldung2, TxtIstUnvollstaendig, FehlerMeldung),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerSternensystemeEingeben)],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),

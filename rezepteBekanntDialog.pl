@@ -36,7 +36,8 @@ rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
 		\['</formSpace>']
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Auswahl')],
+	textResources:getText(txtNoMansSkyTrainerSystemAuswahl, TxtNoMansSkyTrainerSystemAuswahl),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerSystemAuswahl)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
@@ -119,9 +120,9 @@ rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 	ausgabe:joinRecordsNumbering(FeldNoList4, RezeptListe4, 2, NumerierteRecordList4),
 
 	textResources:getText(txtBekannteRezepteEingeben, TxtBekannteRezepteEingeben),
-	textResources:getText(txtEingabeBekannteRezepte, TxtEingabeBekannteRezepte),
+	textResources:getText(txtBekannteRezepte, TxtBekannteRezepte),
 	string_concat(TxtBekannteRezepteEingeben, ': ', Txt0),
-	string_concat(Txt0, TxtEingabeBekannteRezepte, TxtHeader),
+	string_concat(Txt0, TxtBekannteRezepte, TxtHeader),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
 	
@@ -148,7 +149,8 @@ rezeptBekanntAnzeigen(AuswahlStoffKlasse) :-
 		\['</formSpace>']
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('Eingabe bekannte Rezepte')],
+	textResources:getText(txtNoMansSkyTrainerEingabeBekannteRezepte, TxtNoMansSkyTrainerEingabeBekannteRezepte),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerEingabeBekannteRezepte)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlStoffKlasse) -->
@@ -250,7 +252,8 @@ pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Ch
 
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
+	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	textResources:getText(txtGespeichert, TxtGespeichert),
 	TermerizedBody = [

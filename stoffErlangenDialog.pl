@@ -74,7 +74,6 @@ stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	textResources:getText(txtGerichte, TxtGerichte),
 	textResources:getText(txtOk, TxtOk),
 	textResources:getText(txtReset, TxtReset),
-
 	textResources:getText(txtOptimiertesVorgehenErhalten, TxtOptimiertesVorgehenErhalten),
 	textResources:getText(txtAuswahlEmpfohleneHandlungenStoffErhalten, TxtAuswahlEmpfohleneHandlungenStoffErhalten),
 	string_concat(TxtOptimiertesVorgehenErhalten, ': ', Txt0),
@@ -121,7 +120,8 @@ stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 		\['</formSpace>']     
 	],
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	textResources:getText(txtNoNansSkyTrainerStoffErlangen, TxtNoNansSkyTrainerStoffErlangen),
+	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
@@ -183,7 +183,8 @@ fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-
 einenWaehlen() :-
 	textResources:getText(txtBitteGenauEineAuswahlTreffen, TxtBitteGenauEineAuswahlTreffen),
 	server:holeCssAlsStyle(StyleString),
-   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	textResources:getText(txtNoNansSkyTrainerStoffErlangen, TxtNoNansSkyTrainerStoffErlangen),
+   	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h1(align(center), TxtBitteGenauEineAuswahlTreffen),
@@ -195,7 +196,8 @@ einenWaehlen() :-
 nurEinenWaehlen() :-
 	textResources:getText(txtBitteNurEineAuswahlTreffen, TxtBitteNurEineAuswahlTreffen),
 	server:holeCssAlsStyle(StyleString),
-   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	textResources:getText(txtNoNansSkyTrainerStoffErlangen, TxtNoNansSkyTrainerStoffErlangen),
+   	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h1(align(center), TxtBitteNurEineAuswahlTreffen),
@@ -258,7 +260,8 @@ zeigeOptimiertesErgebnis(System, Planet, Anzahl, Stoff, Ziel0, SammelSet, Vorgae
 	textResources:getText(txtSummenwert, TxtSummenwert),
 	textResources:getText(txtEinheit, TxtEinheit),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	textResources:getText(txtNoNansSkyTrainerStoffErlangen, TxtNoNansSkyTrainerStoffErlangen),
+	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	TermerizedBody = [
 		  	\['<header>'],
 		  	h1([align(center)], [TxtStoffErlangen]),
@@ -346,7 +349,8 @@ ausgabeSummenDcg([sum(Name, Wert, Einheit) | Rest]) -->
 nichtHerstellBar(Ziel) :-
 	ausgabe:baueBegruendung(Ziel, BegrTupel),
    	server:holeCssAlsStyle(StyleString),
-   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	textResources:getText(txtNoNansSkyTrainerStoffErlangen, TxtNoNansSkyTrainerStoffErlangen),
+   	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	BegrTupel \= [],
 	textResources:getText(txtBeschaffenUndHerstellenNichtMoeglich, TxtBeschaffenUndHerstellenNichtMoeglich),
 	textResources:getText(txtBegruendungDp, TxtBegruendungDp),
@@ -365,7 +369,8 @@ nichtHerstellBar(Ziel) :-
 
 nichtHerstellBar(_) :-
    	server:holeCssAlsStyle(StyleString),
-   	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Stoff erlangen')],
+	textResources:getText(txtNoNansSkyTrainerStoffErlangen, TxtNoNansSkyTrainerStoffErlangen),
+   	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	textResources:getText(txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, TxtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	TermerizedBody = [

@@ -37,7 +37,8 @@ sprachUmschaltungAuswahl(_Request) :-
 		\['</formSpace>']
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Auswahl')],
+	textResources:getText(txtNoNansSkyTrainerSprachAuswahl, TxtNoNansSkyTrainerSprachAuswahl),
+	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerSprachAuswahl)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
@@ -68,7 +69,8 @@ sprachUmschaltung(Request) :-
 
 gespeichert :-
    	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('systemNamenDialog')],
+	textResources:getText(txtNoNansSkyTrainerSprachAuswahl, TxtNoNansSkyTrainerSprachAuswahl),
+	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerSprachAuswahl)],
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	textResources:getText(txtGespeichert, TxtGespeichert),
 	TermerizedBody = [

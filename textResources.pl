@@ -12,11 +12,11 @@ getText(Atom, _) :-
 	Atom = default.
 
 stringToSubstantiv(StoffString, Substantiv) :-
-	sub_string(StoffString, 0, 1, RestLen, Capital),
+	sub_string(StoffString, 0, 1, RestLen, AnfangsBuchstabe),
 	sub_string(StoffString, 1, RestLen, _, Rest),
-	string_upper(Capital, BigCapital),
+	string_upper(AnfangsBuchstabe, GrossBuchstabe),
 	string_lower(Rest, RestLowered),
-	string_concat(BigCapital, RestLowered, Substantiv).
+	string_concat(GrossBuchstabe, RestLowered, Substantiv).
 
 /* text(<Sprachkennzeichen>, <atom>, <Text>).*/
 /* mehrere Module */
@@ -30,6 +30,12 @@ text(de, txtPlanetDp, 'Planet: ').
 text(de, txtSternensystem, 'Sternensystem').
 text(de, txtSternenSystemEingeben, 'System auswählen').
 text(de, txtGrossAnzahl, 'Anzahl').
+text(de, txtRohstoffe, 'Rohstoffe').
+text(de, txtNoMansSkyTrainerGespeichert, 'Gespeichert').
+text(de, txtNoMansSkyTrainerFehlerInZeile, 'No mans Sky trainer: Fehler in Zeile').
+text(de, txtNoMansSkyTrainerFehlerAuswahl, 'No mans Sky trainer: Fehler Auswahl').
+text(de, txtNoMansSkyTrainerSystemAuswahl, 'No mans Sky trainer: System-Auswahl').
+text(de, txtNoNansSkyTrainerHimmelskoerperEingeben, 'No mans Sky trainer: Himmelskörper eingeben').
 
 /* Fixtexte ausgabe */
 text(de, txtBitteReisenSieNachSystem, 'Bitte reisen Sie nach System: ').
@@ -51,7 +57,6 @@ text(de, txtEinHundertstel, '1/100 sec').
 text(de, txtUnitsProStunde, 'Units/Stunde').
 text(de, reisen, 'reisen').
 text(de, angekommen, 'angekommen').
-
 text(de, txtSammelnGesamtbedarf, 'Sammeln Gesamtbedarf').
 text(de, txtGesamtwertSammlung, 'Gesamtwert Sammlung').
 text(de, txtGesamterZeitAufwand, 'Gesamter Zeitaufwand').
@@ -80,6 +85,7 @@ text(de, txtSammelbareResourcenEingeben, 'Geben Sie die sammelbaren Resourcen ei
 text(de, txtOptimiertesVorgehenErhalten, 'Optimiertes Vorgehen erhalten').
 text(de, txtOptimierteVorgehensweiseErwerbBekommen, 'Bekommen Sie eine optimierte Vorgehensweise, für den Erwerb eines bestimmten Stoffes!').
 text(de, txtLinksZeitweiseInaktiv, 'Links können zeitweise inaktiv sein, wenn notwendige Daten fehlen. Diese können Sie mit Hilfe der Masken, deren Link hier aktiv ist, eingegeben. Falls Sie die Daten inzwischen eingegeben haben, laden Sie diese Seite erneut (F5 bei Firefox)!').
+text(de, txtNoMansSkyTrainerFunktionsAuswahl, 'No Mans Sky Trainer: Funktionsauswahl').
 
 /* Fixtexte SpielStatusDialog */
 text(de, txtVorraussetzungenMaterialSammlung, 'Einrichtungen').
@@ -92,13 +98,15 @@ text(de, txtMinenLaserAufExoFahrzeug, 'Minenlaser auf Exofahrzeug vorhanden').
 text(de, txtUmgebung, 'Umgebung').
 text(de, txtFrachterVorhanden, 'Frachter vorhanden').
 text(de, txtAnomalieSphaereRufbar, 'Anomalie / Sphäre rufbar').
+text(de, txtNoMansSkyTrainerVorraussetzungenMaterialsammlung, 'No mans sky trainer: Vorraussetzungen Materialsammlung').
 
 /* Fixtexte rezeptBekanntAnzeigen */
 text(de, txtStoffKlassenAuswahl, 'Stoffklasse auswählen').
 text(de, txtStoffKlasse, 'StoffKlasse: ').
+text(de, txtNoMansSkyTrainerEingabeBekannteRezepte, 'No mans Sky trainer: Eingabe bekannte Rezepte').
 
 /* Fixtexte rezeptBekanntStoffklassenAuswahl */
-text(de, txtEingabeBekannteRezepte, 'Bekannte Rezepte').
+text(de, txtBekannteRezepte, 'Bekannte Rezepte').
 
 /* Fixtexte systemNamenDialog */
 text(de, txtEingabeSternenSysteme, 'Name und Farbe').
@@ -107,6 +115,7 @@ text(de, txtFarbe, 'Farbe').
 text(de, txtDieZeile, 'Die Zeile ').
 text(de, txtInSpalte, ' in Spalte ').
 text(de, txtIstUnvollstaendig, ' ist unvollständig').
+text(de, txtNoMansSkyTrainerSternensystemeEingeben, 'No mans Sky trainer: Sternensysteme eingeben').
 
 /* Fixtexte planetAuswahlDialog */
 text(de, txtAuswahlHimmelskoerper, 'Auswahl Himmelskörper').
@@ -139,6 +148,8 @@ text(de, txtNurStoffeGewonnenWerdenKoennenEingeben, 'Nur Stoffe, die gewonnen we
 text(de, txtSammelmoeglichkeitenHimmelskörperEingeben, 'Sammelbarer Stoff und Sammelzeit').
 text(de, txtGrossDauerEinHundertstelSekunden, 'Dauer 1/100 sec').
 text(de, txtGrossGebindeZahl, 'Gebindezahl').
+text(de, txtNoNansSkyTrainerAuswahlSammelart, 'No mans Sky trainer: Auswahl Sammelart').
+text(de, txtNoNansSkyTrainerSammelEingabeSammelEigenschaften, 'No mans Sky trainer: Eingabe Sammeleigenschaften').
 
 /* Fixtexte stoffErlangenDialog */
 text(de, txtPlanetAuswaehlen, 'Himmelskörper auswählen').
@@ -150,7 +161,6 @@ text(de, txtSammlungsgegenstaende, 'Sammlungsgegenstände').
 text(de, txtKosten, 'Kosten').
 text(de, txtGewuenschterStoff, 'gewünschter Stoff').
 text(de, txtAnzahlDp, 'Anzahl: ').
-text(de, txtRohstoffe, 'Rohstoffe').
 text(de, txtProdukte, 'Produkte').
 text(de, txtBasisBauteile, 'Basis-Bauteile').
 text(de, txtModule, 'Module').
@@ -176,11 +186,13 @@ text(de, txtBegruendungDp, 'Begründung: ').
 text(de, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'Beschaffung nicht möglich und keine Rezepte vorhanden').
 text(de, txtLeerKannNichtBeschafftWerden, ' kann nicht beschafft werden').
 text(de, txtRezeptversuch, 'Rezeptversuch').
+text(de, txtNoNansSkyTrainerStoffErlangen, 'No Mans Sky Trainer: Stoff erlangen').
 
 /* Fixtexte sprachUmschaltung */
 text(de, txtSprache, 'Sprache').
 text(de, txtSpracheAuswaehlen, 'Sprache auswählen').
 text(de, txtSpracheDp, 'Sprache: ').
+text(de, txtNoNansSkyTrainerSprachAuswahl, 'No mans Sky trainer: Sprachauswahl').
 
 /* --------------------------------------------------------------------------------------- */
 /* Optimierung */
@@ -2019,6 +2031,11 @@ text(en, txtSternensystem, 'Star system').
 text(en, txtSternenSystemEingeben, 'Choose system').
 text(en, txtGrossAnzahl, 'Quantity').
 text(en, txtRohstoffe, 'Raw material').
+text(en, txtNoMansSkyTrainerGespeichert, 'No Mans Sky Trainer: Saved').
+text(en, txtNoMansSkyTrainerFehlerInZeile, 'No mans Sky trainer: Error in Line').
+text(en, txtNoMansSkyTrainerFehlerAuswahl, 'No mans Sky trainer: Error missing choice').
+text(en, txtNoMansSkyTrainerSystemAuswahl, 'No mans Sky trainer: System choice').
+text(en, txtNoMansSkyTrainerHimmelskoerperEingeben, 'No mans Sky trainer: Enter orb').
 
 /* Fixtexte ausgabe */
 text(en, txtBitteReisenSieNachSystem, 'Please travel to system: ').
@@ -2069,6 +2086,7 @@ text(en, txtSammelbareResourcenEingeben, 'Enter collectabele resources of a orb.
 text(en, txtOptimiertesVorgehenErhalten, 'Get optimized approach').
 text(en, txtOptimierteVorgehensweiseErwerbBekommen, 'Get optimized approach for aquiring a certain material.').
 text(en, txtLinksZeitweiseInaktiv, 'Links can be timely inactive, when necessary data are missing. These can be entered by means of the screens, whose link is active. If you have already entered this data, reload the screen (F5 with firefox)!').
+text(en, txtNoMansSkyTrainerFunktionsAuswahl, 'No Mans Sky Trainer: Function choice').
 
 /* Fixtexte SpielStatusDialog */
 text(en, txtVorraussetzungenMaterialSammlung, 'Facilities').
@@ -2082,13 +2100,15 @@ text(en, txtMinenLaserAufExoFahrzeug, 'Mining laser mounted on exo vehicle').
 text(en, txtUmgebung, 'Environment').
 text(en, txtFrachterVorhanden, 'Freighter existing').
 text(en, txtAnomalieSphaereRufbar, 'Anomaly / sphere callable').
+text(en, txtNoMansSkyTrainerVorraussetzungenMaterialsammlung, 'No mans sky trainer: Preconditions Material gathering').
 
 /* Fixtexte rezeptBekanntAnzeigen */
 text(en, txtStoffKlassenAuswahl, 'Coose Material class').
 text(en, txtStoffKlasse, 'Material class: ').
+text(en, txtNoMansSkyTrainerEingabeBekannteRezepte, 'No mans Sky trainer: Entry known formulas').
 
 /* Fixtexte rezeptBekanntStoffklassenAuswahl */
-text(en, txtEingabeBekannteRezepte, 'Known formulas').
+text(en, txtBekannteRezepte, 'Known formulas').
 
 /* Fixtexte systemNamenDialog */
 text(en, txtEingabeSternenSysteme, 'Name and color').
@@ -2097,6 +2117,7 @@ text(en, txtFarbe, 'Color').
 text(en, txtDieZeile, 'The row ').
 text(en, txtInSpalte, ' in column ').
 text(en, txtIstUnvollstaendig, ' is incomplete').
+text(en, txtNoMansSkyTrainerSternensystemeEingeben, 'No mans Sky trainer: Enter Star Systems').
 
 /* Fixtexte planetAuswahlDialog */
 text(en, txtAuswahlHimmelskoerper, 'Choice of orb').
@@ -2117,7 +2138,6 @@ text(en, txtJeweilsDieEinrichtungMit, 'Specify each facility with has the lowest
 text(en, txtDieEinrichtung, 'The facility ').
 text(en, txtVorhandenGekennzeichnet, ' is marked as existing, but the travel time is missing').
 
-
 /* Fixtexte planetSammelEigenschaftenDialog */
 text(en, txtSammelartEingebenHimmelskoerperAuswahl, 'Choice of collecting mode').
 text(en, txtAuswahlSammelart, 'Choice collecting mode').
@@ -2130,6 +2150,8 @@ text(en, txtNurStoffeGewonnenWerdenKoennenEingeben, 'Enter only materials, that 
 text(en, txtSammelmoeglichkeitenHimmelskörperEingeben, 'Collectable material and collection time').
 text(en, txtGrossDauerEinHundertstelSekunden, 'Duration 1/100 sec').
 text(en, txtGrossGebindeZahl, 'Bundle count').
+text(en, txtNoNansSkyTrainerAuswahlSammelart, 'No mans Sky trainer: Choose collection type').
+text(en, txtNoNansSkyTrainerSammelEingabeSammelEigenschaften, 'No mans Sky trainer: Enter collecting properties').
 
 /* Fixtexte stoffErlangenDialog */
 text(en, txtPlanetAuswaehlen, 'Choose orb').
@@ -2166,11 +2188,13 @@ text(en, txtBegruendungDp, 'Reason: ').
 text(en, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'sourcing not possible and no formulas available').
 text(en, txtLeerKannNichtBeschafftWerden, ' cannot be sourced').
 text(en, txtRezeptversuch, 'Formula trial').
+text(en, txtNoNansSkyTrainerStoffErlangen, 'No Mans Sky Trainer: Get optimized approach').
 
 /* Fixtexte sprachUmschaltung */
 text(en, txtSpracheAuswaehlen, 'Choose language').
 text(en, txtSprache, 'Language').
 text(en, txtSpracheDp, 'Language: ').
+text(en, txtNoNansSkyTrainerSprachAuswahl, 'No mans Sky trainer: Language choice').
 
 /* --------------------------------------------------------------------------------------- */
 /* Optimierung */

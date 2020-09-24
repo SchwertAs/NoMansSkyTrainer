@@ -75,7 +75,8 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 		\['</formSpace>'] 
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
+	textResources:getText(txtNoNansSkyTrainerHimmelskoerperEingeben, TxtNoNansSkyTrainerHimmelskoerperEingeben),
+	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerHimmelskoerperEingeben)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlSystem) -->
@@ -229,7 +230,8 @@ fehlerZeile(FeldNo) :-
 	string_concat(FehlerMeldung0, TxtInSpalte, FehlerMeldung1),
 	string_concat(FehlerMeldung1, 1, FehlerMeldung2),
    	string_concat(FehlerMeldung2, TxtIstUnvollstaendig, FehlerMeldung),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneingabe Fehler')],
+   	textResources:getText(txtNoMansSkyTrainerFehlerInZeile, TxtNoMansSkyTrainerFehlerInZeile),	
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFehlerInZeile)],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),
@@ -260,7 +262,8 @@ defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-
 	
 gespeichert :-
     server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Himmelskörper-Namen')],
+	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
 	textResources:getText(txtGespeichert, TxtGespeichert),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
 	TermerizedBody = [

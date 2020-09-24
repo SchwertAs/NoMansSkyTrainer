@@ -145,7 +145,8 @@ spielStatusDialog(_Request) :-
 		  ]), 
 	\['</formSpace>']],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans sky trainer: Vorraussetzungen Materialsammlung')],
+	textResources:getText(txtNoMansSkyTrainerVorraussetzungenMaterialsammlung, TxtNoMansSkyTrainerVorraussetzungenMaterialsammlung),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerVorraussetzungenMaterialsammlung)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 	
 spielStatus(Request) :-
@@ -178,10 +179,14 @@ spielStatus(Request) :-
     (Spaere = off -> assertz(spielStatus:spielStatus(sphaereRufbar, false)); assertz(spielStatus:spielStatus(sphaereRufbar, true))),
 	assertz(spielStatus:spielStatus(konfiguriert, true)),
 	sammlung:vorgefertigeLoesungenErstellen,
+	gespeichert.
+	
+gespeichert :-
     server:holeCssAlsStyle(StyleString),
 	textResources:getText(txtGespeichert, TxtGespeichert),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
-	TermerizedHead = [\[StyleString], title('No mans sky trainer: Vorraussetzungen Materialsammlung')],
+	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
 	TermerizedBody = [
 		\['<header>'],
 		h1(align(center),TxtGespeichert),

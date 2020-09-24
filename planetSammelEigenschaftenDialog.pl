@@ -82,7 +82,8 @@ sammelArtAuswahlDialog(HeaderText, Action, Request) :-
 	 \['</formSpace>']
 		             ],       
 	 server:holeCssAlsStyle(StyleString),
-	 TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planet-Auswahl')],
+	 textResources:getText(txtNoNansSkyTrainerAuswahlSammelart, TxtNoNansSkyTrainerAuswahlSammelart),
+	 TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerAuswahlSammelart)],
 	 reply_html_page(TermerizedHead, TermerizedBody)
 	)).
 
@@ -201,9 +202,10 @@ planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelA
      ]
 	],
 	server:holeCssAlsStyle(StyleString),
+	textResources:getText(txtNoNansSkyTrainerSammelEingabeSammelEigenschaften, TxtNoNansSkyTrainerSammelEingabeSammelEigenschaften),
 	TermerizedHead = [
 		\[StyleString], 
-		title('No mans Sky trainer: System-Sammel-Eigenschaften')    
+		title(TxtNoNansSkyTrainerSammelEingabeSammelEigenschaften)    
 		],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
@@ -392,7 +394,8 @@ gespeichert :-
     server:holeCssAlsStyle(StyleString),
 	textResources:getText(txtGespeichert, TxtGespeichert),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planetennamen')],
+	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
 	TermerizedBody = [
 		\['<header>'],
 		h1(align(center), TxtGespeichert),
@@ -411,7 +414,8 @@ fehlerZeile(FeldNo) :-
 	ZeileNo is FeldNo mod 100,
    	string_concat(TxtDieZeile, ZeileNo, FehlerMeldung0),
    	string_concat(FehlerMeldung0, TxtIstUnvollstaendig, FehlerMeldung),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
+	textResources:getText(txtNoMansSkyTrainerFehlerInZeile, TxtNoMansSkyTrainerFehlerInZeile),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFehlerInZeile)],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),

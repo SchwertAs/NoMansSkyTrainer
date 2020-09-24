@@ -18,7 +18,6 @@ hauptDialog(_Request) :-
 	Versteckt5 = false,
 	Versteckt6 = false,
 	Versteckt8 = false,
-	debug(myTrace, 'Versteckt1=~k Versteckt2=~k Versteckt3=~k Versteckt4=~k Versteckt5=~k Versteckt6=~k Versteckt7=~k', [Versteckt1, Versteckt2, Versteckt3, Versteckt4, Versteckt5, Versteckt6, Versteckt7]),
 	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
 	textResources:getText(txtLinkZurMaske, TxtLinkZurMaske),
 	textResources:getText(txtErklaerung, TxtErklaerung),
@@ -88,7 +87,8 @@ hauptDialog(_Request) :-
 	\['</formSpace>']
 	             ],       
 server:holeCssAlsStyle(StyleString),
-TermerizedHead = [\[StyleString], title('hauptDialog')],
+textResources:getText(txtNoMansSkyTrainerFunktionsAuswahl, TxtNoMansSkyTrainerFunktionsAuswahl),
+TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFunktionsAuswahl)],
 reply_html_page(TermerizedHead, TermerizedBody).
 
 baueRef(Versteckt, Link, Text) -->

@@ -127,7 +127,8 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 		 ]),
 	\['</formSpace>']		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Eigenschaften')],
+	textResources:getText(txtNoMansSkyTrainerHimmelskoerperEingeben, TxtNoMansSkyTrainerHimmelskoerperEingeben),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerHimmelskoerperEingeben)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
@@ -474,7 +475,8 @@ planetenEigenschaften(Request) :-
 	  
 gespeichert :-
       server:holeCssAlsStyle(StyleString),
-	  TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften gespeichert')],
+	  textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
+	  TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
 	  TermerizedBody = [
 		\['<header>'],
 		h3(align(center),'gespeichert!'),
@@ -492,7 +494,8 @@ fehlerBehandlungGruppe(Gruppe) :-
 	textResources:getText(txtVorhandenGekennzeichnet, TxtVorhandenGekennzeichnet),
    	string_concat(TxtDieEinrichtung, TxtGruppe, FehlerMeldung0),
    	string_concat(FehlerMeldung0, TxtVorhandenGekennzeichnet, FehlerMeldung),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
+	textResources:getText(txtNoMansSkyTrainerFehlerInZeile, TxtNoMansSkyTrainerFehlerInZeile),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFehlerInZeile)],
 	TermerizedBody = [
 		\['<redHeader>'],
 		h3(align(center), FehlerMeldung),

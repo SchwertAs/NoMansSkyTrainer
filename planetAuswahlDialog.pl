@@ -27,7 +27,8 @@ systemAuswahlDialog(HeaderText, Action) :-
 		\['</formSpace>']
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: System-Auswahl')],
+	textResources:getText(txtNoMansSkyTrainerSystemAuswahl, TxtNoMansSkyTrainerSystemAuswahl),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerSystemAuswahl)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelle(OptionList) -->
@@ -74,7 +75,8 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	 \['</formSpace>']
 		             ],       
 	 server:holeCssAlsStyle(StyleString),
-	 TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planet-Auswahl')],
+	 textResources:getText(txtNoNansSkyTrainerHimmelskoerperEingeben, TxtNoNansSkyTrainerHimmelskoerperEingeben),
+	 TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerHimmelskoerperEingeben)],
 	 reply_html_page(TermerizedHead, TermerizedBody)
 	)).
 
@@ -111,7 +113,8 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 
 fehlerBehandlung :-
    	server:holeCssAlsStyle(StyleString),
-	TermerizedHead = [\[StyleString], title('No mans Sky trainer: Planeteneigenschaften Fehler')],
+	textResources:getText(txtNoMansSkyTrainerFehlerAuswahl, TxtNoMansSkyTrainerFehlerAuswahl),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFehlerAuswahl)],
 	textResources:getText(txtBitteEineAuswahlTreffen, TxtBitteEineAuswahlTreffen),
 	TermerizedBody = [
 		\['<redHeader>'],
