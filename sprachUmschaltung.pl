@@ -61,25 +61,8 @@ sprachUmschaltung(Request) :-
 	]),
 	textResources:getText(txtBitteWaehlen, BitteWaehlen),
 	debug(myTrace, 'AuswahlSprache=~k', AuswahlSprache),
-	((AuswahlSprache = BitteWaehlen, planetAuswahlDialog:fehlerBehandlung);
+	((AuswahlSprache = BitteWaehlen, server:fehlerBehandlung);
 	 (retractall(spielStatus:sprache(_)),
 	  assertz(spielStatus:sprache(AuswahlSprache)),
-	 gespeichert)
+	 server:gespeichert)
 	).
-
-gespeichert :-
-   	server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtNoNansSkyTrainerSprachAuswahl, TxtNoNansSkyTrainerSprachAuswahl),
-	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerSprachAuswahl)],
-	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
-	textResources:getText(txtGespeichert, TxtGespeichert),
-	TermerizedBody = [
-		\['<header>'],
-		h1(align(center),TxtGespeichert),
-		\['</header>'],
-		\['<formSpace>'], 
-		p(a(['href="/"'],[TxtFunktionsAuswahl])),
-		\['</formSpace>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).
-   

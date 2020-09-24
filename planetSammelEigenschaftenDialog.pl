@@ -54,7 +54,7 @@ sammelArtAuswahlDialog(HeaderText, Action, Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]),
-	((AuswahlPlanet = TxtBitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
+	((AuswahlPlanet = TxtBitteWaehlen, server:fehlerBehandlung); 
 	(
 	 findall(SammelArt, 
 	   (sammelAktion:sammelAktion(SammelArt0), 
@@ -96,7 +96,7 @@ planetSammelEigenschaftenDialog(Request) :-
 	 auswahlPlanet(AuswahlPlanet, [length > 0]),
 	 auswahlSammelArt(AuswahlSammelArt, [length > 0])
 	]),
-	(AuswahlSammelArt = TxtBitteWaehlen -> planetAuswahlDialog:fehlerBehandlung; 
+	(AuswahlSammelArt = TxtBitteWaehlen -> server:fehlerBehandlung; 
 	 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt)
 	).
 
@@ -351,7 +351,7 @@ planetSammelEigenschaften(Request) :-
 	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarValueList),
       sammlung:vorgefertigeLoesungenErstellen,
-      gespeichert
+      server:gespeichert
      )
 	).
     
@@ -390,22 +390,6 @@ ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarVal
 	assertz(sammlung:sammlung(ZeileNo, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, RohStoff, Ruest, Haupt, Neben)),
 	fail.
 	
-gespeichert :-
-    server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtGespeichert, TxtGespeichert),
-	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
-	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
-	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
-	TermerizedBody = [
-		\['<header>'],
-		h1(align(center), TxtGespeichert),
-		\['</header>'],
-		\['<formSpace>'], 
-		p(a(['href="/"'],[TxtFunktionsAuswahl])),
-		\['</formSpace>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).
-
 fehlerZeile(FeldNo) :-
 	textResources:getText(txtDieZeile, TxtDieZeile),
 	textResources:getText(txtIstUnvollstaendig, TxtIstUnvollstaendig),

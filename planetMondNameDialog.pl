@@ -27,7 +27,7 @@ planetMondNameDialog(Request) :-
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0])
 	]),
-	(AuswahlSystem = TxtBitteWaehlen -> planetAuswahlDialog:fehlerBehandlung; 
+	(AuswahlSystem = TxtBitteWaehlen -> server:fehlerBehandlung; 
 	 planetMondNameAnzeigen(AuswahlSystem)
 	).
 
@@ -166,7 +166,7 @@ planetMondName(Request) :-
 	 );
 	 (nth1(1, VarValueList, AuswahlSystem),
 	  \+ablegen(AuswahlSystem, GesamtZeilenZahl, VarValueList),
-      gespeichert
+      server:gespeichert
      )
 	).
 
@@ -260,22 +260,6 @@ defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-
 defaultBehandlung(PlanetenTyp0, PlanetenTyp) :-
 	PlanetenTyp = PlanetenTyp0.
 	
-gespeichert :-
-    server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
-	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
-	textResources:getText(txtGespeichert, TxtGespeichert),
-	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
-	TermerizedBody = [
-		\['<header>'],
-		h1(align(center), TxtGespeichert),
-		\['</header>'],
-		\['<formSpace>'], 
-		p(a(['href="/"'],[TxtFunktionsAuswahl])),
-		\['</formSpace>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).
-
 /* unverändert */
 insUpdDel(System, PlanetNew, RecNo, PlanetenTyp) :-
 	gueltigeZeile(PlanetNew, PlanetenTyp),

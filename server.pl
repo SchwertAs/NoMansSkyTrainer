@@ -1,4 +1,4 @@
-:- module(server, [server/1, holeCssAlsStyle/1, baueOptionsFeld/4]).
+:- module(server, [server/1, holeCssAlsStyle/1, baueOptionsFeld/4, gespeichert/0, fehlerBehandlung/0]).
 
 :- use_module(library(dcg/basics)).
 :- use_module(library(http/thread_httpd)).
@@ -207,5 +207,32 @@ baueOption(OptionsWerteSet, BisherList, NextList) :-
 	string_concat(BisherList, OptionString1, BisherList2),
 	baueOption(Rest, BisherList2, NextList).
 
+gespeichert :-
+      server:holeCssAlsStyle(StyleString),
+	  textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
+	  TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
+	  TermerizedBody = [
+		\['<header>'],
+		h3(align(center),'gespeichert!'),
+		\['</header>'],
+		\['<formSpace>'], 
+		p(\['<a href="/" > Funktionsauswahl </a>']),
+		\['</formSpace>']
+		             ],
+	  reply_html_page(TermerizedHead, TermerizedBody).
+
+fehlerBehandlung :-
+   	server:holeCssAlsStyle(StyleString),
+	textResources:getText(txtNoMansSkyTrainerFehlerAuswahl, TxtNoMansSkyTrainerFehlerAuswahl),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFehlerAuswahl)],
+	textResources:getText(txtBitteEineAuswahlTreffen, TxtBitteEineAuswahlTreffen),
+	TermerizedBody = [
+		\['<redHeader>'],
+		h3(align(center), TxtBitteEineAuswahlTreffen),
+		\['</redHeader>']
+		             ],
+	reply_html_page(TermerizedHead, TermerizedBody).
+
+  	  
 dummy(_)  :-
 	format('').

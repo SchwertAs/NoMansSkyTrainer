@@ -42,7 +42,7 @@ stoffErlangenDialog(Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]) ,
-	((AuswahlPlanet = TxtBitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
+	((AuswahlPlanet = TxtBitteWaehlen, server:fehlerBehandlung); 
 	 stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet)
 	).
 
@@ -167,11 +167,11 @@ stoffErlangen(Request) :-
     ((nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff),
       ergebnisAusgeben(AuswahlSystem, AuswahlPlanet, Anzahl, Ziel, Stoff)
      );
-     fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5)
+     fehlerBehandlungNurEinStoff(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5)
     ),
     !.
 
-fehlerBehandlung(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-    
+fehlerBehandlungNurEinStoff(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5) :-    
 	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
      ((Stoff1 == TxtBitteWaehlen, Stoff2 = TxtBitteWaehlen, Stoff3 = TxtBitteWaehlen,
          Stoff4 = TxtBitteWaehlen, Stoff5 = TxtBitteWaehlen,
@@ -187,7 +187,7 @@ einenWaehlen() :-
    	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), TxtBitteGenauEineAuswahlTreffen),
+		h3(align(center), TxtBitteGenauEineAuswahlTreffen),
 		\['</redHeader>']
 		],
 	
@@ -200,7 +200,7 @@ nurEinenWaehlen() :-
    	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerStoffErlangen)],
 	TermerizedBody = [
 		\['<redHeader>'],
-		h1(align(center), TxtBitteNurEineAuswahlTreffen),
+		h3(align(center), TxtBitteNurEineAuswahlTreffen),
 		\['</redHeader>']
 		],
 	

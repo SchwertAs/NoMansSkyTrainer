@@ -61,7 +61,7 @@ rezeptBekanntDialog(Request) :-
 	]),
 	textResources:getText(txtBitteWaehlen, BitteWaehlen),
 	debug(myTrace, 'AuswahlStoffKlasse=~k', AuswahlStoffKlasse),
-	((AuswahlStoffKlasse = BitteWaehlen, planetAuswahlDialog:fehlerBehandlung); 
+	((AuswahlStoffKlasse = BitteWaehlen, server:fehlerBehandlung); 
 	 rezeptBekanntAnzeigen(AuswahlStoffKlasse)
 	).
 	
@@ -219,7 +219,7 @@ rezeptBekannt(Request) :-
 	VarValueList =[AuswahlStoffKlasse|_], 
 	baueRezeptListe(AuswahlStoffKlasse, RezeptListe),
 	\+ablegen(RezeptListe, VarValueList),
-    gespeichert.
+    server:gespeichert.
 
 baueRezeptListe(AuswahlStoffKlasse, RezeptListe) :-
 	findall(Rezept, (rezeptVonStoffKlasse(AuswahlStoffKlasse, Rezept), rezeptSchonBekannt(Rezept, _)), RezeptListe0),
@@ -249,19 +249,3 @@ pickeZeile(ParamStep, Step, Zeile, Spalte, VarValueList, RezeptListe, Rezept, Ch
     nth1(OffsetRezept, RezeptListe, Rezept),
   	OffsetChecked is 1 + (Spalte - 1) * (ParamStep - 1) + Zeile,
     nth1(OffsetChecked, VarValueList, Checked).
-
-gespeichert :-
-   	server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
-	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
-	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),
-	textResources:getText(txtGespeichert, TxtGespeichert),
-	TermerizedBody = [
-		\['<header>'],
-		h1(align(center),TxtGespeichert),
-		\['</header>'],
-		\['<formSpace>'], 
-		p(a(['href="/"'],[TxtFunktionsAuswahl])),
-		\['</formSpace>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).

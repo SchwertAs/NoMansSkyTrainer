@@ -1,4 +1,4 @@
-:- module(planetAuswahlDialog, [systemAuswahlDialog/2, planetAuswahlDialog/3, fehlerBehandlung/0]).
+:- module(planetAuswahlDialog, [systemAuswahlDialog/2, planetAuswahlDialog/3]).
 
 :- use_module(library(http/http_error)).
 :- use_module(library(http/html_write)).
@@ -54,7 +54,7 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	textResources:getText(txtReset, TxtReset),
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0])]),
-	((AuswahlSystem = TxtBitteWaehlen, fehlerBehandlung); 
+	((AuswahlSystem = TxtBitteWaehlen, server:fehlerBehandlung); 
 	(
 	 findall(Planet, (spielStatus:planeten(_, AuswahlSystem, Planet, _), Planet \= 'MeinPlanet'), Planeten),
 	 server:baueOptionsFeld('auswahlPlanet', Planeten, 2, OptionList),
@@ -110,17 +110,3 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
    	  	  	  ])
    	  	])
 	).
-
-fehlerBehandlung :-
-   	server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtNoMansSkyTrainerFehlerAuswahl, TxtNoMansSkyTrainerFehlerAuswahl),
-	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFehlerAuswahl)],
-	textResources:getText(txtBitteEineAuswahlTreffen, TxtBitteEineAuswahlTreffen),
-	TermerizedBody = [
-		\['<redHeader>'],
-		h3(align(center), TxtBitteEineAuswahlTreffen),
-		\['</redHeader>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).
-
-  	  

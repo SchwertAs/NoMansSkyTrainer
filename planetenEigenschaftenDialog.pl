@@ -41,7 +41,7 @@ planetenEigenschaftenDialog(Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]),
-	(AuswahlPlanet = TxtBitteWaehlen -> planetAuswahlDialog:fehlerBehandlung; 
+	(AuswahlPlanet = TxtBitteWaehlen -> server:fehlerBehandlung; 
 	 planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet)
 	).
 
@@ -469,24 +469,9 @@ planetenEigenschaften(Request) :-
       (PlantageVorhanden= off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortPlantage], PlantageEntfernungNum))
       ), 
-	  gespeichert
+	  server:gespeichert
 	)).
 	  
-	  
-gespeichert :-
-      server:holeCssAlsStyle(StyleString),
-	  textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
-	  TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
-	  TermerizedBody = [
-		\['<header>'],
-		h3(align(center),'gespeichert!'),
-		\['</header>'],
-		\['<formSpace>'], 
-		p(\['<a href="/" > Funktionsauswahl </a>']),
-		\['</formSpace>']
-		             ],
-	  reply_html_page(TermerizedHead, TermerizedBody).
-
 fehlerBehandlungGruppe(Gruppe) :-
    	server:holeCssAlsStyle(StyleString),
 	textResources:getText(Gruppe, TxtGruppe),

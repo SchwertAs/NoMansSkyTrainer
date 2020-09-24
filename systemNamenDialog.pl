@@ -125,7 +125,7 @@ systemNamen(Request) :-
       fehlerZeile(ZeileNoFehler, SpalteNoFehler)
 	 );
 	 (\+ablegen(GesamtZeilenZahl, VarValueList),
-      gespeichert
+      server:gespeichert
      )
 	).
 
@@ -225,21 +225,6 @@ insUpdDel(FeldNeu, SystemNeu, _) :-
 	retractall(spielStatus:systeme(_, SystemOld, _)),	
 	!.
 	
-gespeichert :-
-   	server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtGespeichert, TxtGespeichert),
-	TermerizedHead = [\[StyleString], title(TxtGespeichert)],
-	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
-	TermerizedBody = [
-		\['<header>'],
-		h1(align(center),TxtGespeichert),
-		\['</header>'],
-		\['<formSpace>'], 
-		p(a(['href="/"'],[TxtFunktionsAuswahl])),
-		\['</formSpace>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).
-
 fehlerZeile(Zeile, Spalte) :-
 	server:holeCssAlsStyle(StyleString),
 	textResources:getText(txtDieZeile, TxtDieZeile),

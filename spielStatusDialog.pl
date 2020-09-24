@@ -179,23 +179,5 @@ spielStatus(Request) :-
     (Spaere = off -> assertz(spielStatus:spielStatus(sphaereRufbar, false)); assertz(spielStatus:spielStatus(sphaereRufbar, true))),
 	assertz(spielStatus:spielStatus(konfiguriert, true)),
 	sammlung:vorgefertigeLoesungenErstellen,
-	gespeichert.
-	
-gespeichert :-
-    server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtGespeichert, TxtGespeichert),
-	textResources:getText(txtFunktionsAuswahl, TxtFunktionsAuswahl),	
-	textResources:getText(txtNoMansSkyTrainerGespeichert, TxtNoMansSkyTrainerGespeichert),
-	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerGespeichert)],
-	TermerizedBody = [
-		\['<header>'],
-		h1(align(center),TxtGespeichert),
-		\['</header>'],
-		\['<formSpace>'], 
-		p(a(['href="/"'],[TxtFunktionsAuswahl])
-		),
-		\['</formSpace>']
-		             ],
-	reply_html_page(TermerizedHead, TermerizedBody).
-	
+	server:gespeichert.
 	
