@@ -5,19 +5,28 @@ getText(Atom, Text) :-
 	text(Sprache, Atom, Text),
 	!.
 
-getText(_, Text) :-
-	Text = 'default'.
+getText(Atom, Text) :-
+	string(Text),
+	atom_string(TextAtom, Text),
+	spielStatus:sprache(Sprache), 
+	text(Sprache, Atom, TextAtom).
 
-getText(Atom, _) :-
-	Atom = default.
+getText(_, Text) :-
+	var(Text),
+	Text = default.
 
 stringToSubstantiv(StoffString, Substantiv) :-
+	var(Substantiv),
 	sub_string(StoffString, 0, 1, RestLen, AnfangsBuchstabe),
 	sub_string(StoffString, 1, RestLen, _, Rest),
 	string_upper(AnfangsBuchstabe, GrossBuchstabe),
 	string_lower(Rest, RestLowered),
 	string_concat(GrossBuchstabe, RestLowered, Substantiv).
-
+	
+stringToSubstantiv(StoffString, Substantiv) :-
+	var(StoffString),
+	string_lower(Substantiv, StoffString).
+	
 /* text(<Sprachkennzeichen>, <atom>, <Text>).*/
 /* mehrere Module */
 text(de, txtOk, 'OK').
@@ -35,7 +44,7 @@ text(de, txtNoMansSkyTrainerGespeichert, 'Gespeichert').
 text(de, txtNoMansSkyTrainerFehlerInZeile, 'No mans Sky trainer: Fehler in Zeile').
 text(de, txtNoMansSkyTrainerFehlerAuswahl, 'No mans Sky trainer: Fehler Auswahl').
 text(de, txtNoMansSkyTrainerSystemAuswahl, 'No mans Sky trainer: System-Auswahl').
-text(de, txtNoNansSkyTrainerHimmelskoerperEingeben, 'No mans Sky trainer: Himmelskörper eingeben').
+text(de, txtNoMansSkyTrainerHimmelskoerperEing, 'No mans Sky trainer: Himmelskörper eingeben').
 
 /* Fixtexte ausgabe */
 text(de, txtBitteReisenSieNachSystem, 'Bitte reisen Sie nach System: ').
@@ -183,7 +192,7 @@ text(de, txtSummenwert, 'Summenwert').
 text(de, txtEinheit, 'Einheit').
 text(de, txtBeschaffenUndHerstellenNichtMoeglich, 'Beschaffen und herstellen nicht möglich.').
 text(de, txtBegruendungDp, 'Begründung: ').
-text(de, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'Beschaffung nicht möglich und keine Rezepte vorhanden').
+text(de, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'Beschaffung nicht möglich,keine Rezepte vorhanden oder keine Reisemöglichkeit').
 text(de, txtLeerKannNichtBeschafftWerden, ' kann nicht beschafft werden').
 text(de, txtRezeptversuch, 'Rezeptversuch').
 text(de, txtNoNansSkyTrainerStoffErlangen, 'No Mans Sky Trainer: Stoff erlangen').
@@ -208,7 +217,7 @@ text(de, bedeckter, 'Bedeckter Planet').
 text(de, bluehender, 'Blühender Planet'). 
 text(de, bruehender, 'Brühender Planet'). 
 text(de, desLichts, 'Planet des Lichts'). 
-text(de, chromatischerNebel, 'chromatischer Nebel'). 
+text(de, chromatischerNebel, 'Chromatischer Nebel'). 
 text(de, durchbrochener, 'Durchbrochener Planet'). 
 text(de, eingesponnener, 'Eingesponnener Planet'). 
 text(de, einsamer, 'Einsamer Planet'). 
@@ -300,11 +309,71 @@ text(de, verwilderter, 'Verwilderter Planet').
 text(de, weissGluehender, 'Weißglühender Planet'). 
 text(de, windgepeitschter, 'Windgepeitschter Planet'). 
 text(de, winterlicher, 'Winterlicher Planet'). 
-text(de, wuesten, 'Wuestenplanet'). 
+text(de, wuesten, 'Wüstenplanet'). 
+text(de, wurmbefallener, 'Wurmbefallener Planet'). 
 text(de, zerkluefteter, 'Zerklüfteter Planet'). 
 text(de, zerschmetterter, 'Zerschmetterter Planet'). 
 text(de, zugefrorener, 'Zugefrorener Planet'). 
 
+/* Update vom 22.09.20 */
+text(de, geschmolzener, 'Geschmolzener Planet'). 
+text(de, blut, 'Blutplanet').
+text(de, basalt, 'Basaltplanet').
+text(de, endloserMorast, 'Endloser Morast').
+text(de, feurigeSchreckensWelt, 'Feurige Schreckenswelt').
+
+text(de, azur, 'Azurplanet').
+text(de, heimgesuchterEmeril, 'Heimgesuchter Emerilplanet').
+text(de, himmelBlauer, 'Himmelblauer Planet').
+text(de, nichtFunktionierender, 'Nicht funktionierender Planet').
+text(de, scharlachRoter, 'Scharlachroter Planet').
+text(de, verdammterJade, 'Verdammter Jadeplanet').
+text(de, verlorenerBlauer, 'Verlorener blauer Planet').
+text(de, verlorenerGruener, 'Verlorener grüner Planet').
+text(de, verlorenerRoter, 'Verlorener roter Planet').
+text(de, zensiert, 'Zensierter Planet').
+text(de, infizierter, 'Infizierter Planet').
+text(de, glaeserner, 'Gläserner Planet').
+text(de, duerstender, 'Dürstender Planet').
+text(de, verdammter, 'Verdammter Planet').
+text(de, geloeschter, 'Gelöschter Planet').
+text(de, temporaerer, 'Temporärer Planet').
+text(de, bewoelkter, 'Bewölkter Planet').
+text(de, diesiger, 'Diesiger Planet').
+text(de, dampf, 'Dampfplanet').
+text(de, dunstiger, 'Dunstiger Planet').
+text(de, klammer, 'Klammer Planet').
+text(de, marschLand, 'Marschlandplanet').
+text(de, morastBoden, 'Morastbodenplanet').
+text(de, stinkender, 'Stinkender Planet').
+text(de, trueber, 'Trüber Planet').
+text(de, sumpfGebiet, 'Sumpfgebietplanet').
+text(de, asche, 'Ascheplanet').
+text(de, ascheVerdunkelter, 'Ascheverdunkelter Planet').
+text(de, aufbrechender, 'Aufbrechender Planet').
+text(de, blutroter, 'Blutroter Planet').
+text(de, brutaler, 'Brutaler Planet').
+text(de, drohendeKernExplosion, 'Drohende Kernexplosion Planet').
+text(de, flammenGepeitschter, 'Flammengepeitschter Planet').
+text(de, instabiler, 'Instabiler Planet').
+text(de, lava, 'Lavaplanet').
+text(de, magma, 'Magmaplanet').
+text(de, obsidianPerle, 'Obsidian Perle Planet').
+text(de, tektonischer, 'Tektonischer Planet').
+text(de, vulkanischer, 'Vulkanischer Planet').
+text(de, verseuchter, 'Verseuchter Planet').
+text(de, beschaedigter, 'Beschädigter Planet').
+text(de, mutierter, 'Mutierter Planet').
+text(de, wasser, 'Wasserplanet').
+text(de, versunkener, 'Versunkener Planet').
+text(de, wasserWelt, 'Wasserweltplanet').
+text(de, ozeanischer, 'Ozeanischer Planet').
+text(de, flut, 'Flutplanet').
+text(de, wasserBedeckter, 'WasserBedeckter Planet').
+text(de, aquatischer, 'Aquatischer Planet').
+text(de, meeres, 'Meeresplanet').
+text(de, verseuchtesParadies, 'Verseuchtes Paradies Planet').
+text(de, purpur, 'Purpurplanet').
 
 /* SternFarbe */
 text(de, gelb, 'gelb').
@@ -337,6 +406,7 @@ text(de, gesammelteHandelsWare, 'gesammelte Handelsware').
 text(de, relikt, 'Relikt'). 
 text(de, konglomerat, 'Konglomerat'). 
 text(de, handelsWare, 'Handelsware'). 
+text(de, biomechanischesKonstrukt, 'biomechanisches Konstrukt'). 
 
 
 /* Sammelaktionen */
@@ -450,13 +520,9 @@ text(de, antiMaterieGehaeuse, 'Antimateriegehäuse').
 text(de, diWasserStoffGelee, 'Diwasserstoffgelee').
 text(de, hermetischesSiegel, 'hermetisches Siegel').
 text(de, ionenAkku, 'Ionenakku').
-text(de, kobaltSpiegel, 'Kobaltspiegel').
 text(de, lebensErhaltungsGel, 'Lebenserhaltungsgel').
 text(de, metallPlatten, 'Metallplatten').
 text(de, mikroProzessor, 'Mikroprozessor').
-text(de, natriumDiode, 'Natriumdiode').
-text(de, salzRefaktor, 'Salzrefraktor').
-text(de, sauerStoffFilter, 'Sauerstofffilter').
 text(de, sauerStoffKapsel, 'Sauerstoffkapsel').
 text(de, raumSchiffStartTreibStoff, 'Raumschiffstarttreibstoff').
 text(de, vierfachServo, 'Vierfachservo').
@@ -841,7 +907,7 @@ text(de, schubLadenSchrank, 'Schubladenschrank').
 text(de, wandEinheit, 'Wandeinheit').
 text(de, lagerModulDeko, 'Lagermoduldeko').
 text(de, deckenPaneel, 'Deckenpaneel').
-text(de, techBedienFeld, 'Techbedienfeld').
+text(de, techBedienFeld, 'techBedienFeld').
 text(de, server, 'Server').
 text(de, kanisterRegal, 'Kanisterregal').
 text(de, kleineKiste, 'kleine Kiste').
@@ -879,7 +945,7 @@ text(de, grosseMonitorStation, 'große Monitorstation').
 text(de, gewoelbterTisch, 'gewölbter Tisch').
 text(de, monitorStation, 'Monitorstation').
 text(de, arbeitsPlatte, 'Arbeitsplatte').
-text(de, leichterTisch, 'leichter Tisch').
+text(de, eckSchreibTisch, 'Eckschreibtisch').
 text(de, lichtHandLampe, 'Lichthandlampe').
 text(de, weisseLeuchte, 'weiße Leuchte').
 text(de, lichtStehLampeEckig, 'Licht Stehlampe eckig').
@@ -1206,11 +1272,6 @@ text(de, superOxidKristallRezept, 'Superoxidkristallrezept').
 text(de, raumSchiffStartTreibStoffRezept, 'Raumschiffstarttreibstoffrezept').
 text(de, fortschrittlicherIonenAkkuRezept, 'fortschrittlicher Ionenakkurezept').
 text(de, atlasPassV1Rezept, 'Atlas Pass v1rezept').
-text(de, kobaltSpiegelRezept, 'Kobaltspiegelrezept').
-text(de, salzRefaktorRezept, 'Salzrefaktorrezept').
-text(de, natriumDiodeRezept, 'Natriumdioderezept').
-text(de, sauerStoffFilterRezept, 'Sauerstofffilterrezept').
-text(de, sauerStoffKapselRezept, 'Sauerstoffkapselrezept').
 text(de, hydrothermaleTreibStoffZelleRezept, 'hydrothermale Treibstoffzellerezept').
 text(de, instabilesPlasmaRezept, 'instabiles Plasmarezept').
 text(de, sternenSchildBatterieRezept, 'Sternenschildbatterierezept').
@@ -1224,6 +1285,7 @@ text(de, projektilMunitionRezept, 'Projektilmunitionrezept').
 text(de, antiMaterieRezept, 'Antimaterierezept').
 text(de, antiMaterieGehaeuseRezept, 'Antimateriegehäuserezept').
 text(de, mikroProzessorRezept, 'Mikroprozessorrezept').
+text(de, sauerStoffKapselRezept, 'Sauerstoffkapselrezept').
 text(de, kreaturenKugelnRezept, 'Kreaturenkugelnrezept').
 text(de, fregattenTreibStoff50toRezept, 'Fregattentreibstoff 50 to Rezept').
 text(de, fregattenTreibStoff100toRezept, 'Fregattentreibstoff 100 to Rezept').
@@ -1491,7 +1553,7 @@ text(de, schubLadenSchrankRezept, 'Schubladenschrankrezept').
 text(de, wandEinheitRezept, 'Wandeinheitrezept').
 text(de, lagerModulDekoRezept, 'Lagermoduldekorezept').
 text(de, deckenPaneelRezept, 'Deckenpaneelrezept').
-text(de, techBedienFeldRezept, 'Techbedienfeldrezept').
+text(de, techBedienFeldRezept, 'techBedienFeldrezept').
 text(de, serverRezept, 'Serverrezept').
 text(de, kanisterRegalRezept, 'Kanisterregalrezept').
 text(de, kleineKisteRezept, 'kleine Kisterezept').
@@ -1528,7 +1590,7 @@ text(de, grosseMonitorStationRezept, 'große Monitorstationrezept').
 text(de, gewoelbterTischRezept, 'gewölbter Tischrezept').
 text(de, monitorStationRezept, 'Monitorstationrezept').
 text(de, arbeitsPlatteRezept, 'Arbeitsplatterezept').
-text(de, leichterTischRezept, 'leichter Tischrezept').
+text(de, eckSchreibTischRezept, 'Eckschreibtischrezept').
 text(de, lichtHandLampeRezept, 'Licht Handlampe Rezept').
 text(de, weisseLeuchteRezept, 'weiße Leuchte Rezept').
 text(de, lichtStehLampeEckigRezept, 'Licht Stehlampe eckig Rezept').
@@ -1723,7 +1785,7 @@ text(de, goldeneKreaturStatueRezept, 'goldene Kreaturstatuerezept').
 text(de, bronzeneAstronautenStatueRezept, 'bronzene Astronautenstatuerezept').
 text(de, silberneAstronautenStatueRezept, 'silberne Astronautenstatuerezept').
 text(de, goldeneAstronautenStatueRezept, 'goldene Astronautenstatuerezept').
-text(de, erinnerungRezept, 'Erinnerungrezept').
+text(de, erinnerungRezept, 'Erinnerungsrezept').
 
 text(de, chromatischesMetall, 'chromatisches Metall').
 text(de, faecium, 'Faecium').
@@ -1993,6 +2055,87 @@ text(de, wurzelSaft, 'Wurzelsaft').
 text(de, zaeheOrganPaste, 'zähe Organpaste').
 text(de, erinnerung, 'Erinnerung').
 
+/* verlorener Frachter update */
+text(de, notfallUebertragungsEmpfaenger, 'Notfallübertragungsempfänger').
+text(de, crewSchliessFach, 'Crew Schließfach').
+text(de, notFallHeizung, 'Notfallheizung').
+text(de, notFallBeleuchtung, 'Notfallbeleuchtung').
+text(de, lagerEinheit, 'Lagereinheit').
+text(de, strapazierfaehigesMoebelStueck, 'strapazierfähiges Möbelstück').
+text(de, probenBehaelter, 'Probenbehaelter').
+text(de, grosseLagerEinheit, 'große Lagereinheit').
+text(de, bergungsKiste, 'Bergungskiste').
+text(de, gesicherterAktenKoffer, 'gesicherter Aktenkoffer').
+text(de, crewTruhe, 'Crew Truhe').
+text(de, industrieWerkBank, 'Industriewerkbank').
+text(de, industriePalette, 'Industriepalette').
+text(de, industrieFass, 'Industriefass').
+text(de, crewSchliessFachRezept, 'Crew Schließfachrezept').
+text(de, notFallHeizungRezept, 'Notfallheizungsrezept').
+text(de, notFallBeleuchtungRezept, 'Notfallbeleuchtungsrezept').
+text(de, lagerEinheitRezept, 'Lagereinheitsrezept').
+text(de, strapazierfaehigesMoebelStueckRezept, 'strapazierfähiges Möbelstückrezept').
+text(de, probenBehaelterRezept, 'Probenbehälterrezept').
+text(de, grosseLagerEinheitRezept, 'grosse Lagereinheitrezept').
+text(de, bergungsKisteRezept, 'Bergungskistenrezept').
+text(de, gesicherterAktenKofferRezept, 'gesicherter Aktenkofferrezept').
+text(de, crewTruheRezept, 'Crew Truhenrezept').
+text(de, industrieWerkBankRezept, 'Industriewerkbankrezept').
+text(de, industriePaletteRezept, 'Industriepaletterezept').
+text(de, industrieFassRezept, 'Industriefassrezept').
+
+/* update vom 29.09.20 */
+text(de, leuchtendesMineral, 'leuchtendes Mineral').
+text(de, multiWerkzeugErweiterungsPlatz, 'Multiwerkzeugerweiterungsplatz').
+text(de, reparaturSet, 'Reparaturset').
+text(de, hydraulischeVerkabelung, 'hydraulische Verkabelung').
+text(de, quantenComputer, 'Quantencomputer').
+text(de, magnetischerResonator, 'magnetischer Resonator').
+text(de, solarSpiegel, 'Solarspiegel').
+text(de, aminoKammer, 'Aminokammer').
+
+text(de, atlasFigur, 'Atlasfigur').
+text(de, artemisFigur, 'Artemisfigur').
+text(de, apolloFigur, 'Apollofigur').
+text(de, nullFigur, 'Nullfigur').
+text(de, cadmiumRaumschiffSpur, 'Cadmiumraumschiffspur').
+text(de, emerilRaumschiffSpur, 'Emerilraumschiffspur').
+text(de, goldeneRaumschiffSpur, 'goldene Raumschiffspur').
+text(de, leichterTischRezept, 'leichter Tischrezept').
+text(de, atlasFigurRezept, 'AtlasfigurRezept').
+text(de, artemisFigurRezept, 'Artemisfigurrezept').
+text(de, apolloFigurRezept, 'Apollofigurrezept').
+text(de, nullFigurRezept, 'Nullfigurrezept').
+text(de, cadmiumRaumschiffSpurRezept, 'Cadmiumraumschiffspurrezept').
+text(de, emerilRaumschiffSpurRezept, 'Emerilraumschiffspurrezept').
+text(de, goldeneRaumschiffSpurRezept, 'goldene Raumschiffspurrezept').
+text(de, hydraulischeVerkabelungRezept, 'hydraulische Verkabelungsrezept').
+text(de, quantenComputerRezept, 'Quantencomputerrezept').
+text(de, magnetischerResonatorRezept, 'magnetischer Resonatorrezept').
+text(de, solarSpiegelRezept, 'Solarspiegelrezept').
+text(de, aminoKammerRezept, 'Aminokammerrezept').
+
+text(de, giftSchutzModulC, 'Giftschutzmodul C').
+text(de, giftSchutzModulS, 'Giftschutzmodul S').
+text(de, lebensErhaltungsModulC, 'Lebenserhaltungsmodul C').
+text(de, schildModulB, 'Schildmodul B').
+text(de, schildModulS, 'Schildmodul S').
+text(de, strahlungsSchutzModulC, 'Strahlungsschutzmodul C').
+text(de, waermeSchutzModulC, 'Wärmeschutzmodul C').
+text(de, waermeSchutzModulS, 'Wärmeschutzmodul S').
+text(de, waermeSchutzModulKaelteA, 'Wärmeschutzmodul Kälte A').
+text(de, waermeSchutzModulKaelteC, 'Wärmeschutzmodul Kälte C').
+text(de, waermeSchutzModulKaelteS, 'Wärmeschutzmodul Kälte S').
+text(de, unterWasserSchutzModulA, 'Unterwasserschutzmodul A').
+text(de, unterWasserSchutzModulC, 'Unterwasserschutzmodul C').
+text(de, unterWasserSchutzModulS, 'Unterwasserschutzmodul S').
+text(de, qResonator, 'Q Resonator').
+text(de, impulsWerferQuerschlaegerModul, 'Impulswerferquerschlägermodul').
+text(de, leichterTisch, 'leichter Tisch').
+text(de, pflanzenKanister, 'Pflanzenkanister').
+text(de, pflanzenKanisterRezept, 'Pflanzenkanisterrezept').
+
+
 /* Orte */
 text(de, ortNil, 'Irgendwo').
 text(de, ortHauptBasis, 'Hauptbasis').
@@ -2012,7 +2155,6 @@ text(de, ortHandelsTerminal, 'Handelsterminal').
 text(de, ortForschungsTerminal, 'Forschungsterminal').
 text(de, ortFrachter, 'Frachter').
 text(de, ortSpieler, 'Aufenthaltsort Spieler').
-text(de, ortBasis, 'Basis').
 text(de, ortSauerStoffVerarbeiter, 'Sauerstoffanlage').
 text(de, ortAtmosphaerenAnlage, 'Atmosphaerenanlage').
 text(de, ortBergbauEinheit, 'Bergbaueinheit').
@@ -2035,7 +2177,7 @@ text(en, txtNoMansSkyTrainerGespeichert, 'No Mans Sky Trainer: Saved').
 text(en, txtNoMansSkyTrainerFehlerInZeile, 'No mans Sky trainer: Error in Line').
 text(en, txtNoMansSkyTrainerFehlerAuswahl, 'No mans Sky trainer: Error missing choice').
 text(en, txtNoMansSkyTrainerSystemAuswahl, 'No mans Sky trainer: System choice').
-text(en, txtNoMansSkyTrainerHimmelskoerperEingeben, 'No mans Sky trainer: Enter orb').
+text(en, txtNoMansSkyTrainerHimmelskoerperEing, 'No mans Sky trainer: Enter orb').
 
 /* Fixtexte ausgabe */
 text(en, txtBitteReisenSieNachSystem, 'Please travel to system: ').
@@ -2185,7 +2327,7 @@ text(en, txtSummenwert, 'Sum value').
 text(en, txtEinheit, 'Unit').
 text(en, txtBeschaffenUndHerstellenNichtMoeglich, 'Sourcing or production not possible.').
 text(en, txtBegruendungDp, 'Reason: ').
-text(en, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'sourcing not possible and no formulas available').
+text(en, txtBeschaffungNichtMoeglichUndKeineRezepteVvorhanden, 'sourcing not possible, no formulas available or no travel possibility').
 text(en, txtLeerKannNichtBeschafftWerden, ' cannot be sourced').
 text(en, txtRezeptversuch, 'Formula trial').
 text(en, txtNoNansSkyTrainerStoffErlangen, 'No Mans Sky Trainer: Get optimized approach').
@@ -2218,7 +2360,7 @@ text(en, eisiger, 'icy  planet').
 text(en, eiskalter, 'ice-cold  planet'). 
 text(en, faulender, 'putrescent planet'). 
 text(en, felsiger, 'rocky planet'). 
-text(en, feuchter, 'moisty planet'). 
+text(en, feuchter, 'dampy planet'). 
 text(en, feuriger, 'fiery planet'). 
 text(en, fragmentierter, 'fragmented planet'). 
 text(en, frostiger, 'frosty planet'). 
@@ -2264,7 +2406,7 @@ text(en, schaumiger, 'foamily planet').
 text(en, scherben, 'sharded planet'). 
 text(en, schuppiger, 'flaky planet'). 
 text(en, sechseckiger, 'hexagonal planet'). 
-text(en, sengender, 'Sengender planet'). 
+text(en, sengender, 'searing planet'). 
 text(en, sengendHeisser, 'searing hot planet'). 
 text(en, siedender, 'boiling planet'). 
 text(en, skelettartiger, 'skeleton like planet'). 
@@ -2272,14 +2414,14 @@ text(en, sporiger, 'spory planet').
 text(en, sprudelnder, 'fizzing planet'). 
 text(en, stacheliger, 'prickly planet'). 
 text(en, staubiger, 'dusty planet'). 
-text(en, sternKorruptionEntdeckt, 'Star Corruption discovered'). 
+text(en, sternKorruptionEntdeckt, 'star corruption discovered'). 
 text(en, stickiger, 'stifling planet'). 
 text(en, stuetzen, 'pillar planet'). 
 text(en, superkritischer, 'supercritical planet'). 
 text(en, toedlicheGrueneAnomalie, 'deadly green anomaly'). 
 text(en, toedlicheGrueneAnomalieMegaExot, 'deadly green anomalie exotic'). 
 text(en, toter, 'dead planet'). 
-text(en, trostloser, 'Trostloser planet'). 
+text(en, trostloser, 'dismal planet'). 
 text(en, trostloserTot, 'dismal dead planet').
 text(en, tropischer, 'tropic planet'). 
 text(en, ultramarin, 'ultramarine planet'). 
@@ -2292,7 +2434,6 @@ text(en, verbrannter, 'burnded planet').
 text(en, verfallenerNuklearer, 'declined nuclear planet'). 
 text(en, verdorbener, 'spoiled planet'). 
 text(en, verlassener, 'left planet'). 
-text(en, verlorenerBlauerplanet, 'lost blue planet'). 
 text(en, verkabelter, 'wired planet'). 
 text(en, verkalkter, 'calcified planet'). 
 text(en, verknoecherter, 'ossified planet'). 
@@ -2303,9 +2444,70 @@ text(en, weissGluehender, 'white glowing planet').
 text(en, windgepeitschter, 'windswept planet'). 
 text(en, winterlicher, 'winterly planet'). 
 text(en, wuesten, 'desert planet'). 
+text(en, wurmbefallener, 'worm plagued planet'). 
 text(en, zerkluefteter, 'jagged planet'). 
 text(en, zerschmetterter, 'smashed planet'). 
 text(en, zugefrorener, 'freezed up planet'). 
+
+/* Update vom 22.09.20 */
+text(en, geschmolzener, 'melted Planet'). 
+text(en, blut, 'bloodplanet').
+text(en, basalt, 'basaltplanet').
+text(en, endloserMorast, 'never ending marsh').
+text(en, feurigeSchreckensWelt, 'fiery horror world').
+
+text(en, azur, 'azure planet').
+text(en, heimgesuchterEmeril, 'afflicted emeril planet').
+text(en, himmelBlauer, 'heaven blue planet').
+text(en, nichtFunktionierender, 'not functioning planet').
+text(en, scharlachRoter, 'scarlet planet').
+text(en, verdammterJade, 'damned jadeplanet').
+text(en, verlorenerBlauer, 'lost blue planet').
+text(en, verlorenerGruener, 'lost green planet').
+text(en, verlorenerRoter, 'lost red planet').
+text(en, zensiert, 'redacted planet').
+text(en, infizierter, 'infected planet').
+text(en, glaeserner, 'glassy planet').
+text(en, duerstender, 'thirsting planet').
+text(en, verdammter, 'damned planet').
+text(en, geloeschter, 'deleted planet').
+text(en, temporaerer, 'temporary planet').
+text(en, bewoelkter, 'cloudy planet').
+text(en, diesiger, 'hazy planet').
+text(en, dampf, 'vaporplanet').
+text(en, dunstiger, 'misty planet').
+text(en, klammer, 'moisty planet').
+text(en, marschLand, 'marshland planet').
+text(en, morastBoden, 'quagmireplanet').
+text(en, stinkender, 'stinky planet').
+text(en, trueber, 'dingy planet').
+text(en, sumpfGebiet, 'marsh area planet').
+text(en, asche, 'ash planet').
+text(en, ascheVerdunkelter, 'ash darkened planet').
+text(en, aufbrechender, 'bursting planet').
+text(en, blutroter, 'crimson planet').
+text(en, brutaler, 'brute planet').
+text(en, drohendeKernExplosion, 'imminent core explosion planet').
+text(en, flammenGepeitschter, 'flamme twigged planet').
+text(en, instabiler, 'instable planet').
+text(en, lava, 'lava planet').
+text(en, magma, 'magma planet').
+text(en, obsidianPerle, 'obsidian pearl planet').
+text(en, tektonischer, 'tektonic planet').
+text(en, vulkanischer, 'volcanic planet').
+text(en, verseuchter, 'polluted planet').
+text(en, beschaedigter, 'damaged planet').
+text(en, mutierter, 'mutated planet').
+text(en, wasser, 'water planet').
+text(en, versunkener, 'sunken planet').
+text(en, wasserWelt, 'waterworld planet').
+text(en, ozeanischer, 'oceanic planet').
+text(en, flut, 'flood planet').
+text(en, wasserBedeckter, 'water covered planet').
+text(en, aquatischer, 'aquatic planet').
+text(en, meeres, 'sea planet').
+text(en, verseuchtesParadies, 'polluted paradise planet').
+text(en, purpur, 'purple planet').
 
 
 /* SternFarbe */
@@ -2338,6 +2540,7 @@ text(en, anormaleMaterialien, 'abnormal materials').
 text(en, gesammelteHandelsWare, 'collected merchandise'). 
 text(en, relikt, 'relic'). 
 text(en, konglomerat, 'conglomerate'). 
+text(en, biomechanischesKonstrukt, 'biomechanical Construct'). 
 
 
 /* Sammelaktionen */
@@ -2451,13 +2654,9 @@ text(en, antiMaterieGehaeuse, 'Antimatter Housing').
 text(en, diWasserStoffGelee, 'Di-Hydrogen Jelly').
 text(en, hermetischesSiegel, 'Hermetic Seal').
 text(en, ionenAkku, 'Ion Battery').
-text(en, kobaltSpiegel, 'Cobalt Mirror').
 text(en, lebensErhaltungsGel, 'Life Support Gel').
 text(en, metallPlatten, 'Metal Plating').
 text(en, mikroProzessor, 'Microprocessor').
-text(en, natriumDiode, 'Sodium Diode').
-text(en, salzRefaktor, 'Salt Refractor').
-text(en, sauerStoffFilter, 'Oxygen Filter').
 text(en, sauerStoffKapsel, 'Oxygen Capsule').
 text(en, raumSchiffStartTreibStoff, 'Starship Launch Fuel').
 text(en, vierfachServo, 'Quad Servo').
@@ -2880,7 +3079,7 @@ text(en, grosseMonitorStation, 'Large Monitor').
 text(en, gewoelbterTisch, 'Curved Desk').
 text(en, monitorStation, 'Monitor Station').
 text(en, arbeitsPlatte, 'Worktop').
-text(en, leichterTisch, 'Light Table').
+text(en, eckSchreibTisch, 'Light Table').
 text(en, lichtHandLampe, 'Hand Lamp').
 text(en, weisseLeuchte, 'While Light').
 text(en, lichtStehLampeEckig, 'Angled Foot Lamp').
@@ -3210,11 +3409,6 @@ text(en, superOxidKristallRezept, 'Superoxide Crystal Formula').
 text(en, raumSchiffStartTreibStoffRezept, 'Starship Launch Fuel Formula').
 text(en, fortschrittlicherIonenAkkuRezept, 'Advanced Ion Battery Formula').
 text(en, atlasPassV1Rezept, 'Atlas Pass v1 Formula').
-text(en, kobaltSpiegelRezept, 'Cobalt Mirror Formula').
-text(en, salzRefaktorRezept, 'Salt Refractor Formula').
-text(en, natriumDiodeRezept, 'Sodium Diode Formula').
-text(en, sauerStoffFilterRezept, 'Oxygen Filter Formula').
-text(en, sauerStoffKapselRezept, 'Oxygen Capsule Formula').
 text(en, hydrothermaleTreibStoffZelleRezept, 'hHydrothermal Fuel Cell Formula').
 text(en, instabilesPlasmaRezept, 'Unstable Plasma Formula').
 text(en, sternenSchildBatterieRezept, 'Starshield Battery Formula').
@@ -3228,6 +3422,7 @@ text(en, projektilMunitionRezept, 'Projectile Ammunition Formula').
 text(en, antiMaterieRezept, 'Antimatter Formula').
 text(en, antiMaterieGehaeuseRezept, 'Antimatter Housing Formula').
 text(en, mikroProzessorRezept, 'Microprocessor Formula').
+text(en, sauerStoffKapselRezept, 'Oxygen Capsule Formula').
 text(en, kreaturenKugelnRezept, 'Creature Pellets Formula').
 text(en, fregattenTreibStoff50toRezept, 'Frigate Fuel 50 tonnes Formula').
 text(en, fregattenTreibStoff100toRezept, 'Frigate Fuel 100 tonnes Formula').
@@ -3532,7 +3727,7 @@ text(en, grosseMonitorStationRezept, 'Large Monitor Formula').
 text(en, gewoelbterTischRezept, 'Curved Desk Formula').
 text(en, monitorStationRezept, 'Monitor Station Formula').
 text(en, arbeitsPlatteRezept, 'Worktop Formula').
-text(en, leichterTischRezept, 'Light Table Formula').
+text(en, eckSchreibTischRezept, 'Light Table Formula').
 text(en, lichtHandLampeRezept, 'Hand Lamp Formula').
 text(en, weisseLeuchteRezept, 'While Light Formula').
 text(en, lichtStehLampeEckigRezept, 'Angled Foot Lamp Formula').
@@ -3998,6 +4193,86 @@ text(en, wurzelSaft, 'Root Juice').
 text(en, zaeheOrganPaste, 'Chewy Organ Pie').
 text(en, erinnerung, 'Memory').
 
+/* verlorener Frachter update */
+text(en, notfallUebertragungsEmpfaenger, 'Emergency transmitter').
+text(en, crewSchliessFach, 'Crew locker').
+text(en, notFallHeizung, 'Spare heater').
+text(en, notFallBeleuchtung, 'Spare light').
+text(en, lagerEinheit, 'Storage unit').
+text(en, strapazierfaehigesMoebelStueck, 'hard wearing piece of furniture').
+text(en, probenBehaelter, 'Sample container').
+text(en, grosseLagerEinheit, 'big storage unit').
+text(en, bergungsKiste, 'Recovery chest').
+text(en, gesicherterAktenKoffer, 'secured briefcase').
+text(en, crewTruhe, 'Crew chest').
+text(en, industrieWerkBank, 'Industrial workbench').
+text(en, industriePalette, 'Industrial pallet').
+text(en, industrieFass, 'Industrial barrel').
+text(en, crewSchliessFachRezept, 'Crew locker formula').
+text(en, notFallHeizungRezept, 'Spare heater formula').
+text(en, notFallBeleuchtungRezept, 'Spare light formula').
+text(en, lagerEinheitRezept, 'Locker formula').
+text(en, strapazierfaehigesMoebelStueckRezept, 'hard wearing piece of furniture formula').
+text(en, probenBehaelterRezept, 'Sample container formula').
+text(en, grosseLagerEinheitRezept, 'big storage unit formula').
+text(en, bergungsKisteRezept, 'Recovery chest formula').
+text(en, gesicherterAktenKofferRezept, 'secured briefcase formula').
+text(en, crewTruheRezept, 'Crew chest formula').
+text(en, industrieWerkBankRezept, 'Industrial workbench formula').
+text(en, industriePaletteRezept, 'Industrial pallet formula').
+text(en, industrieFassRezept, 'Industrial barrel formula').
+
+/* update vom 29.09.20 */
+text(en, leuchtendesMineral, 'Glowing mineral').
+text(en, multiWerkzeugErweiterungsPlatz, 'Multitool expansion slot').
+text(en, reparaturSet, 'Repairkit').
+text(en, hydraulischeVerkabelung, 'hydraulic cabling').
+text(en, quantenComputer, 'Quantum computer').
+text(en, magnetischerResonator, 'magnetic resonator').
+text(en, solarSpiegel, 'Solar mirror').
+text(en, aminoKammer, 'Amino chamber').
+
+text(en, atlasFigur, 'Atlasfigurine').
+text(en, artemisFigur, 'Artemisfigurine').
+text(en, apolloFigur, 'Apollofigurine').
+text(en, nullFigur, 'Nullfigurine').
+text(en, cadmiumRaumschiffSpur, 'Cadmium starship track').
+text(en, emerilRaumschiffSpur, 'Emeril starship track').
+text(en, goldeneRaumschiffSpur, 'golden starship track').
+text(en, leichterTischRezept, 'Light table formula').
+text(en, atlasFigurRezept, 'Atlasfigurine formula').
+text(en, artemisFigurRezept, 'Artemisfigurine formula').
+text(en, apolloFigurRezept, 'Apollofigurine formula').
+text(en, nullFigurRezept, 'Nullfigurine formula').
+text(en, cadmiumRaumschiffSpurRezept, 'Cadmium starship track formula').
+text(en, emerilRaumschiffSpurRezept, 'Emeril starship track formula').
+text(en, goldeneRaumschiffSpurRezept, 'goldene  starship track formula').
+text(en, hydraulischeVerkabelungRezept, 'hydraulic cabling formula').
+text(en, quantenComputerRezept, 'Quantum computer formula').
+text(en, magnetischerResonatorRezept, 'magnetic resonator formula').
+text(en, solarSpiegelRezept, 'Solar mirror formula').
+text(en, aminoKammerRezept, 'Amino chamber formula').
+
+text(en, giftSchutzModulC, 'Poison protection module C').
+text(en, giftSchutzModulS, 'Poison protection  module S').
+text(en, lebensErhaltungsModulC, 'Life support module C').
+text(en, schildModulB, 'Shield module B').
+text(en, schildModulS, 'Shield module S').
+text(en, strahlungsSchutzModulC, 'Radiation protection module C').
+text(en, waermeSchutzModulC, 'Heat protection module C').
+text(en, waermeSchutzModulS, 'Heat protection module S').
+text(en, waermeSchutzModulKaelteA, 'Cold protection module A').
+text(en, waermeSchutzModulKaelteC, 'Cold protection module C').
+text(en, waermeSchutzModulKaelteS, 'Cold protection module S').
+text(en, unterWasserSchutzModulA, 'Underwater protection module A').
+text(en, unterWasserSchutzModulC, 'Underwater protection module C').
+text(en, unterWasserSchutzModulS, 'Underwater protection module S').
+text(en, qResonator, 'Q Resonator').
+text(en, impulsWerferQuerschlaegerModul, 'Pulse Splitter ricochet module').
+text(en, leichterTisch, 'light table').
+text(en, pflanzenKanister, 'Plant can').
+text(en, pflanzenKanisterRezept, 'Plant can formula').
+
 /* Orte */
 text(en, ortNil, 'anywhere').
 text(en, ortHauptBasis, 'main base').
@@ -4017,7 +4292,6 @@ text(en, ortHandelsTerminal, 'trade terminal').
 text(en, ortForschungsTerminal, 'research terminal').
 text(en, ortFrachter, 'freighter').
 text(en, ortSpieler, 'place of player').
-text(en, ortBasis, 'base').
 text(en, ortSauerStoffVerarbeiter, 'oxigen harvester plant').
 text(en, ortAtmosphaerenAnlage, 'atmosphere harvester plant').
 text(en, ortBergbauEinheit, 'mining facility').
@@ -4051,7 +4325,7 @@ dubChk(List, SortedList, Doppelte) :-
 
 fehlendeStoffKlassenDa :-
 	spielStatus:moeglicheSprache(Sprache),
-	findall([Sprache, StoffKlasse], stoffKlasse:stoffKlasse(StoffKlasse, _, _, _, _), StoffKlasseListe),
+	findall([Sprache, StoffKlasse], stoffKlasse:stoffKlasse(StoffKlasse), StoffKlasseListe),
 	list_to_set(StoffKlasseListe, StoffKlasseSet),
 	findall([Sprache, TextSchluessel], text(Sprache, TextSchluessel, _), TextSchluesselListe),
 	subtract(StoffKlasseSet, TextSchluesselListe, Fehlende),
@@ -4094,6 +4368,15 @@ fehlendeOrteDa :-
 	Fehlende \= [],
 	format('~nSprache: ~k Fehlende Orte ~k~n', [Sprache, Fehlende]).
 
+fehlendePlanetenTypenDa :-
+	spielStatus:moeglicheSprache(Sprache),
+	findall([Sprache, PlanetenTyp], planetenTypen:planetenGruppePlanetenTyp(PlanetenTyp, _), PlanetenTypListe),
+	list_to_set(PlanetenTypListe, PlanetenTypSet),
+	findall([Sprache, TextSchluessel], text(Sprache, TextSchluessel, _), TextSchluesselListe),
+	subtract(PlanetenTypSet, TextSchluesselListe, Fehlende),
+	Fehlende \= [],
+	format('~nSprache: ~k Fehlende Planetentypen ~k~n', [Sprache, Fehlende]).
+
 testAll :-
 	format('Test Dupletten in Schlüsseln~n', []),
 	\+doppelteSchluesselInText,
@@ -4109,5 +4392,7 @@ testAll :-
 	\+fehlendeStoffeDa,
 	format('Test fehlende Orte~n', []),
 	\+fehlendeOrteDa,
+	format('Test fehlende Planetentypen~n', []),
+	\+fehlendePlanetenTypenDa,
 	format('fertig~n', []).
 	

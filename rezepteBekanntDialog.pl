@@ -11,7 +11,7 @@
 
 /* ------------------------------------------  Stoffklasse auswählen  --------------------------------------------------------- */
 rezeptBekanntDialogStoffKlasseAuswahl(_Request) :-
-	findall(TxtKlasse, (stoffKlasse:stoffKlasse(Klasse, _, _, _, _),
+	findall(TxtKlasse, (stoffKlasse:stoffKlasse(Klasse),
 	(Klasse = produkt; Klasse = modul; Klasse = komponente; Klasse = produktUndKochStoff; Klasse = basisBauEndStoff),
 	 textResources:getText(Klasse, TxtKlasse)), Klassen),
 	server:baueOptionsFeld('auswahlStoffKlasse', Klassen, 2, OptionList),

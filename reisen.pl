@@ -1,4 +1,4 @@
-:- module(reisen, [bildeReiseZeiten/2, fuegeReiseOperationenEin/2]).
+:- module(reisen, [bildeReiseZeiten/4, fuegeReiseOperationenEin/2]).
 
 :- dynamic(letzterOrt/3).
 
@@ -24,7 +24,9 @@ bauenNurInFrachter(frachterKreuzungDreiFach).
 bauenNurInFrachter(frachterKreuzungVierFach).
 bauenNurInFrachter(frachterTreppe).
 
-bildeReiseZeiten(Vorgaenge, ReiseZeit) :-
+bildeReiseZeiten(System, Planet, Vorgaenge, ReiseZeit) :-
+    ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
+    assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
 	noetigeRaffinerieEingabefaecher(Vorgaenge, 0, NoetigeRaffinerieEingabeFaecher),
 	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
 	retractall(letzterOrt(_, _, _)),
@@ -149,12 +151,10 @@ reisen([System, Planet, VorgangsOrt], Zeit) :-
 	VorgangsOrtVorher = VorgangsOrt,
 	Zeit = 0,  /* der Spieler muss nicht zum bereits eingenommenen Ort reisen */
  	!.
- 	
+
 /* vorhaben auf gleichem Planeten; Reise zu Fuﬂ / mit Raumschiff (so wie Eingabe in Planeteneigenschaften eben gemeint war) */
 reisen([System, Planet, VorgangsOrt], Zeit) :-
-	spielStatus:systemAusstattung([System1, Planet1, ortSimulationsSpieler], ZurBasisTransferZeit),
-	System = System1,
-	Planet = Planet1,
+	spielStatus:systemAusstattung([System, Planet, ortSimulationsSpieler], ZurBasisTransferZeit),
 	spielStatus:systemAusstattung([System, Planet, VorgangsOrt], ZumVorgangTransferZeit),
 	/* Spieler bewegen */
 	retractall(spielStatus:systemAusstattung([_, _, ortSimulationsSpieler], _)),
@@ -217,34 +217,34 @@ reisen([System, Planet, VorgangsOrt], Zeit) :-
 /* vorhaben auf anderem Planeten in gleicher Galaxie; Reise mit Raumschiff Warp (ein Hop) */
 reisen([System, Planet, VorgangsOrt], Zeit) :-
 	spielStatus:spielStatus(raumSchiffIstFlott, true),
-	spielStatus:systemAusstattung([System1, Planet1, ortSimulationsSpieler], ZurBasisTransferZeit),
+	spielStatus:systemAusstattung([System1, Planet1, ortSimulationsSpieler], ZurBasisTransferZeit0),
 	spielStatus:systemAusstattung([System1, Planet1, ortWeltRaum], ZumAbflugZeit),
 	WarpTransferZeit = 4100, 
-	spielStatus:systemAusstattung([System, Planet, ortRaumStation], ZurBasisTransferZeit),
+	spielStatus:systemAusstattung([System, Planet, ortRaumStation], ZurBasisTransferZeit1),
 	spielStatus:systemAusstattung([System, Planet, VorgangsOrt], ZumVorgangTransferZeit),
 	/* Spieler bewegen */
 	retractall(spielStatus:systemAusstattung([_, _, ortSimulationsSpieler], _)),
 	assertz(spielStatus:systemAusstattung([System, Planet, ortSimulationsSpieler], ZumVorgangTransferZeit)),
 	retractall(letzterOrt(_, _, _)),
 	assertz(letzterOrt(System, Planet, VorgangsOrt)),
-	Zeit is ZurBasisTransferZeit + ZumAbflugZeit + WarpTransferZeit + ZumVorgangTransferZeit,
+	Zeit is ZurBasisTransferZeit0 + ZurBasisTransferZeit1 + ZumAbflugZeit + WarpTransferZeit + ZumVorgangTransferZeit,
 	!.
 
 /* vorhaben auf anderem Planeten in gleicher Galaxie; Reise mit Frachter Warp (ein Hop) */
 reisen([System, Planet, VorgangsOrt], Zeit) :-
 	spielStatus:spielStatus(raumSchiffIstFlott, true),
 	spielStatus:spielStatus(frachterVorhanden, true),
-	spielStatus:systemAusstattung([System1, Planet1, ortSimulationsSpieler], ZurBasisTransferZeit),
+	spielStatus:systemAusstattung([System1, Planet1, ortSimulationsSpieler], ZurBasisTransferZeit0),
 	spielStatus:systemAusstattung([System1, Planet1, ortFrachter], ZumAbflugZeit),
 	WarpTransferZeit = 3500, 
-	spielStatus:systemAusstattung([System, Planet, ortFrachter], ZurBasisTransferZeit),
+	spielStatus:systemAusstattung([System, Planet, ortFrachter], ZurBasisTransferZeit1),
 	spielStatus:systemAusstattung([System, Planet, VorgangsOrt], ZumVorgangTransferZeit),
 	/* Spieler bewegen */
 	retractall(spielStatus:systemAusstattung([_, _, ortSimulationsSpieler], _)),
 	assertz(spielStatus:systemAusstattung([System, Planet, ortSimulationsSpieler], ZumVorgangTransferZeit)),
 	retractall(letzterOrt(_, _, _)),
 	assertz(letzterOrt(System, Planet, VorgangsOrt)),
-	Zeit is ZurBasisTransferZeit + ZumAbflugZeit + WarpTransferZeit + ZumVorgangTransferZeit,
+	Zeit is ZurBasisTransferZeit0 + ZurBasisTransferZeit1 + ZumAbflugZeit + WarpTransferZeit + ZumVorgangTransferZeit,
 	!.
 
 /* kaufen mit flug gleicher Planet */
@@ -257,7 +257,7 @@ reisen([System, Planet, VorgangsOrt], Zeit) :-
 transferZeit(A, B) :-
 	transferZeit(B, A).
 
-flugZtransferZeiteit(ortBasis, raumSchuerfen, 4500).
+flugZtransferZeiteit(ortHauptBasis, raumSchuerfen, 4500).
 
 transferZeit(3880).
 resourcenAnsammlungSuchen(800).

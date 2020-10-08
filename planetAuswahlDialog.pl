@@ -46,8 +46,6 @@ eingabeTabelle(OptionList) -->
 
 /* -----------------------------------  Planetauswahl ----------------------------------------------- */
 planetAuswahlDialog(HeaderText, Action, Request) :-
-	member(method(post), Request), 
-	!,
 	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	textResources:getText(txtAuswahlHimmelskoerper, TxtAuswahlHimmelskoerper),
 	textResources:getText(txtOk, TxtOk),
@@ -75,8 +73,8 @@ planetAuswahlDialog(HeaderText, Action, Request) :-
 	 \['</formSpace>']
 		             ],       
 	 server:holeCssAlsStyle(StyleString),
-	 textResources:getText(txtNoNansSkyTrainerHimmelskoerperEingeben, TxtNoNansSkyTrainerHimmelskoerperEingeben),
-	 TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerHimmelskoerperEingeben)],
+	 textResources:getText(txtNoMansSkyTrainerHimmelskoerperEing, TxtNoMansSkyTrainerHimmelskoerperEing),
+	 TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerHimmelskoerperEing)],
 	 reply_html_page(TermerizedHead, TermerizedBody)
 	)).
 

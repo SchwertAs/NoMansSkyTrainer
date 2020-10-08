@@ -57,11 +57,13 @@ sammelArtAuswahlDialog(HeaderText, Action, Request) :-
 	((AuswahlPlanet = TxtBitteWaehlen, server:fehlerBehandlung); 
 	(
 	 findall(SammelArt, 
-	   (sammelAktion:sammelAktion(SammelArt0), 
+	   (sammelAktion:sammelAktion(SammelArt0),
 	    SammelArt0 \= bekannt,
+	    sammelAktion:pruefeSammelAktionVorraussetzung(AuswahlSystem, AuswahlPlanet, SammelArt0),
 	    textResources:getText(SammelArt0, SammelArt)
 	   )
-	   , SammelArten),
+	   , SammelArten0),
+	 list_to_ord_set(SammelArten0, SammelArten),
 	 server:baueOptionsFeld('auswahlSammelArt', SammelArten, 2, OptionList),
 	 textResources:getText(txtAuswahlSammelart, TxtAuswahlSammelart),
 	 textResources:getText(txtOk, TxtOk),
@@ -102,8 +104,8 @@ planetSammelEigenschaftenDialog(Request) :-
 
 planetenSammelEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt0) :-
 	textResources:getText(AuswahlSammelArt, AuswahlSammelArt0),
-    /* einlesen der Eigenschaften */
-    GesamtZeilenZahl = 15,
+	/* einlesen der Eigenschaften */
+	GesamtZeilenZahl = 15,
 	findall([RecordNo, Stoff, AuswahlSammelArt, Haupt, Neben, Ruest], 
 	       (sammlung:sammlung(RecordNo, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, Stoff, Haupt, Neben, Ruest)
 	       ), 
@@ -259,7 +261,8 @@ divInputReadOnly(Name, LabelText, Value, Index) -->
 	).
 
 innereTabelle(NumerierteRecordList, AuswahlSammelArt, GesamtZeilenZahl) -->
-	{	textResources:getText(rohStoff, TxtGrossRohStoff),
+	{	
+		textResources:getText(rohStoff, TxtGrossRohStoff),
 		textResources:getText(txtGrossAnzahl, TxtGrossAnzahl),
 		textResources:getText(txtGrossDauerEinHundertstelSekunden, TxtGrossDauerEinHundertstelSecunden),
 		textResources:getText(txtGrossGebindeZahl, TxtGrossGebindeZahl)
@@ -350,7 +353,7 @@ planetSammelEigenschaften(Request) :-
 	  textResources:getText(AuswahlSammelArt, TxtAuswahlSammelArt),
 	  ignore(retractall(sammlung:sammlung(_, AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, _, _, _, _))),
 	  \+ablegen(AuswahlSystem, AuswahlPlanet, AuswahlSammelArt, GesamtZeilenZahl, VarValueList),
-      sammlung:vorgefertigeLoesungenErstellen,
+	  vorfertigen:vorgefertigeLoesungenErstellen,
       server:gespeichert
      )
 	).

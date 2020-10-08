@@ -1,34 +1,69 @@
-:- module(stoffKlasse, [stoffKlasse/5]).
+:- module(stoffKlasse, [stoffKlasse/1]).
 
-/* ermöglichen, lernen, lagern, herstellen, installieren, bauen, zerlegen, bauenAusInventar, abreissen, raffinieren, kochen, kaufen, verkaufen, anziehen */
-stoffKlasse(rohStoff, false, true, true, false). 
-stoffKlasse(komponente, false, true, true, true). 
-stoffKlasse(produkt, false, true, false, true ). 
-stoffKlasse(pass, true, false, false, true). 
-stoffKlasse(verbrauch, false, true, false, false). 
-stoffKlasse(modul, false, false, false, true). 
-stoffKlasse(basisBauEndStoff, false, false, false, false).
-stoffKlasse(stoerung, false, false, false, false).
-stoffKlasse(geste, false, false, false, false).
-stoffKlasse(kleidung, false, false, false, false).
-stoffKlasse(handelsWare, false, true, true, false).
-stoffKlasse(kuriositaet, false, true, false, false). 
-stoffKlasse(artefakt, false, true, false, false). 
-stoffKlasse(bauRezept, true, false, false, false). 
-stoffKlasse(rohUndKochStoff, false, true, true, false). 
-stoffKlasse(produktUndKochStoff, false, true, true, true). 
-stoffKlasse(kochStoff, false, true, false, false). 
+stoffKlasse(rohStoff).   			/* ist sammelbar */
+stoffKlasse(komponente). 			/* nicht sammelbar, bestandteil von Rezept */
+stoffKlasse(produkt).    			/* endstoff in Rezept */
+stoffKlasse(pass).       			/* hergestellt Zugangskontrolle */
+stoffKlasse(verbrauch).  			/* beschaffen und verbrauchen */
+stoffKlasse(modul).      			/* istallieren */
+stoffKlasse(basisBauEndStoff).		/* bauen */
+stoffKlasse(stoerung).          	/* sammeln und aufstellen */
+stoffKlasse(geste).             	/* beschaffen und benutzen */
+stoffKlasse(kleidung).          	/* beschaffen und Aussehen modifizieren */
+stoffKlasse(handelsWare).       	/* beschaffen und verkaufen */
+stoffKlasse(kuriositaet).       	/* beschaffen und verschenken / bei historischen Gebäuden einsetzen */
+stoffKlasse(bauRezept).         	/* beschaffen, Zutat zu Bau */
+stoffKlasse(rohUndKochStoff).   	/* sammelbar, kochbar */
+stoffKlasse(produktUndKochStoff).   /* herstellbar, kochbar */
+stoffKlasse(kochStoff). 			/* kochbar, kochprodukt */
+stoffKlasse(biomechanischesKonstrukt).
 
-/* stoffKlasse(<StoffKlasse>, <Wissen>, <Verkauf>, <Kauf>, <inInventarHerstellbar>).*/
+/* alles was keine Wandelaktion und keine Sammelart ist */
+weitereAktion(verkaufen).
+weitereAktion(amAussehenWandlerEinsetzen).
+weitereAktion(lagern).
+weitereAktion(installieren).
+weitereAktion(verbrauchen).
+weitereAktion(ausfuehren).
+weitereAktion(aufstellen).
+weitereAktion(durchgangsKontrolle).
+weitereAktion(verschenken).
 
-stoffKlasse(kaufModul, false, false, true, false). 
+stoffKlassenAktion(rohStoff, verkaufen).
+stoffKlassenAktion(komponente, verkaufen).
+stoffKlassenAktion(produkt, verkaufen).
+stoffKlassenAktion(verbrauch, verkaufen).
+stoffKlassenAktion(stoerung, verkaufen).
+stoffKlassenAktion(handelsWare, verkaufen).
+stoffKlassenAktion(kuriositaet, verkaufen).
+stoffKlassenAktion(rohUndKochStoff, verkaufen).
+stoffKlassenAktion(produktUndKochStoff, verkaufen).
+stoffKlassenAktion(kochStoff, verkaufen).
+stoffKlassenAktion(kleidung, amAussehenWandlerEinsetzen).
+stoffKlassenAktion(rohStoff, lagern).
+stoffKlassenAktion(komponente, lagern).
+stoffKlassenAktion(produkt, lagern).
+stoffKlassenAktion(pass, lagern).
+stoffKlassenAktion(verbrauch, lagern).
+stoffKlassenAktion(stoerung, lagern).
+stoffKlassenAktion(handelsWare, lagern).
+stoffKlassenAktion(kuriositaet, lagern).
+stoffKlassenAktion(rohUndKochStoff, lagern).
+stoffKlassenAktion(produktUndKochStoff, lagern).
+stoffKlassenAktion(kochStoff, lagern).
+stoffKlassenAktion(modul, installieren).
+stoffKlassenAktion(verbrauch, verbrauchen).
+stoffKlassenAktion(geste, ausfuehren).
+stoffKlassenAktion(basisBauEndStoff, aufstellen).
+stoffKlassenAktion(stoerung, aufstellen).
+stoffKlassenAktion(pass, durchgangsKontrolle).
+stoffKlassenAktion(kuriositaet, verschenken).
 
-stoffKlasse(anormaleMaterialien, false, true, false, false). 
-stoffKlasse(gesammelteHandelsWare, false, true, false, false). 
-stoffKlasse(relikt, false, true, false, false). 
-stoffKlasse(konglomerat, false, true, false, false). 
-
-
-
+testStoffKlassenUsed(NichtBenutzteStoffklassen) :-
+	findall(Kl, stoff:stoff(Kl, _,_), Klassen), 
+	sort(Klassen, KlassenSet), findall(Kli, 
+	stoffKlasse:stoffKlasse(Kli), Klien), 
+	sort(Klien, Kl2Set), 
+	subtract(Kl2Set, KlassenSet, NichtBenutzteStoffklassen).
 
 

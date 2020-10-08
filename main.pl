@@ -1,17 +1,22 @@
 :- module(main, [startServer/0, resetDatabase/1]).
 
 startServer :-
-	working_directory(CWD, CWD),
-	string_concat(CWD, 'persistenceDb.txt', PersistenzDatenbank),
-	format('Persistenzdb: ~k', [PersistenzDatenbank]),  
-	(\+exists_file(PersistenzDatenbank), resetDatabase(PersistenzDatenbank); true),	
+	gebePersistenzDatenbankDateiName(PersistenzDatenbank),
+	(\+exists_file(PersistenzDatenbank), resetDatabase(PersistenzDatenbank); true),
 	datenBankAnbindung:datenVonDbHolen(PersistenzDatenbank), 
 	server:server(8000),
 	debug(myTrace),
 	format('Zum Server beenden Taste drücken!', []),
+	!,
 	get_single_char(_),
 	datenBankAnbindung:datenInDbSpeichern(PersistenzDatenbank).
 
+gebePersistenzDatenbankDateiName(PersistenzDatenbank) :-
+	working_directory(CWD, CWD),
+	string_concat(CWD, 'persistenceDb.txt', PersistenzDatenbank),
+	format('Persistenzdb: ~k', [PersistenzDatenbank]). 
+	
+	
 resetDatabase(PersistenzDatenbank) :-
 	spielStatus:spielStatusInit,
 	sammlung:sammlungInit,
@@ -27,7 +32,7 @@ produktMit(Stoff, Komponenten, Anzahl, Produkt, Wert) :-
 testOptimierteSammlung :-
 	spielStatus:spielStatusInit,
 	sammlung:sammlungInit,
-	sammlung:vorgefertigeLoesungenErstellen,
+	vorfertigen:vorgefertigeLoesungenErstellen,
 	!,
 	stoff:stoff(StoffArt, Stoff, _),
 	StoffArt \= pass,

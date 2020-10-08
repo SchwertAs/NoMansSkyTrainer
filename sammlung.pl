@@ -1,11 +1,13 @@
-:- module(sammlung, [sammlungInit/0, vorgefertigeLoesungenErstellen/0, sammlung/8, fertigeLoesung/5]).
+:- module(sammlung, [sammlungInit/0, sammlungAnOrteAnpassen/2, 
+                     sammlungAnStatusAnpassen/0, copyDefaultIfEmpty/2,
+                     sammlung/8]).
 
-:- dynamic(fertigeLoesung/5).
 :- dynamic(sammlung/8).
 	
 baueRezepte :-
 	stoff:stoff(bauRezept, Rezept, _),
-	assertz(sammlung(1, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
+	((spielStatus:questRezept(Rezept, vonAnfangAn, _) -> RecNo = 1); RecNo = 0),
+	assertz(sammlung(RecNo, 'System', 'MeinPlanet', bekannt, Rezept, 0, 0, 0)),
 	fail.
 
 komponenten :-
@@ -28,6 +30,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, sturmKristall, 150, 150, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, tetraKobalt, 150, 150, 0))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, geodeHoehle, 150, 150, 0))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', pfluecken, faecium, 6, 19, 5))            /* mit Kreaturenkugeln füttern, dann pflücken */
 
 
 /* variieren nach Planetentyp kürzere Zeiten bei geeigneterem Habitat */
@@ -165,6 +168,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, platin, 20, 0, 63))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, tritiumHyperCluster, 20, 0, 63))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, goldKlumpen, 20, 0, 63))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', raumSchuerfen, anomalieDetektor, 20, 0, 63))
 	
 	/* kaufen */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, ferritStaub, 150, 1310, 250 ))
@@ -177,22 +181,7 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, salz, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sauerStoff, 150, 1310, 250 ))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sauerStoffKapsel, 150, 1310, 250 ))
-	
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, antiMaterie, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, antiMaterieGehaeuse, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, diWasserStoffGelee, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, hermetischesSiegel, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, ionenAkku, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kabelBaum, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, kobaltSpiegel, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, lebensErhaltungsGel, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, metallPlatten, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, mikroProzessor, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, natriumDiode, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, salzRefaktor, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, sauerStoffFilter, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, raumSchiffStartTreibStoff, 150, 1310, 250 ))
-	,assertz(sammlung(0, 'System', 'MeinPlanet', kaufen, vierfachServo, 150, 1310, 250 ))
+		
 
 	/* Aus Anbau */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, beutelGift, 20, 0, 0))
@@ -209,7 +198,6 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', ernten, sternenKnolle, 20, 0, 0))
 	
 	/* aus Tierhaltung */
-	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, faecium, 6, 19, 5))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, frischeMilch, 90, 160, 30))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, holzApfel, 550, 150, 1180))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonTierErhalten, klebrigerHonig, 20, 0, 0))
@@ -271,109 +259,13 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, kobalt, 1450, 0, 300)) 
 	,assertz(sammlung(0, 'System', 'MeinPlanet', vonBergbauEinheitGewinnen, natrium, 1450, 0, 300))
 	
-	
 	/* mit Terrainformer ausgraben */
 	,assertz(sammlung(0, 'System', 'MeinPlanet', terrainFormerNutzen, geborgeneDaten, 300, 0, 300))
-	
-
-
 
 	,assertz(fertigeLoesung('System', 'MeinPlanet', dummy, dummy, []))
 	.
 
-/* Liste der Rohstoffe, die vorgefertigt werden sollen */
-vorfertigen(diWasserStoff).
-vorfertigen(sauerStoff).
-vorfertigen(kupfer).
-vorfertigen(pugneum).
-vorfertigen(deuterium).
-vorfertigen(aktiviertesCadmium).
-vorfertigen(aktiviertesEmeril).
-vorfertigen(aktiviertesIndium).
-vorfertigen(aktiviertesKupfer).
-vorfertigen(cadmium).
-vorfertigen(emeril).
-vorfertigen(gammaWurzel).
-vorfertigen(natrium).
-vorfertigen(kobalt).
-vorfertigen(kuerbisKnolle).
-vorfertigen(natriumNitrat).
-vorfertigen(chlor).
-vorfertigen(ferritStaub).
-vorfertigen(chromatischesMetall).
-vorfertigen(ammoniak).
-vorfertigen(kaktusFleisch).
-vorfertigen(kohlenStoff).
-vorfertigen(faecium).
-
-
-/* Basis */
-vorfertigen(paraffinium).
-vorfertigen(dioxit). 
-vorfertigen(salz).
-vorfertigen(phosphor).
-vorfertigen(schwefelin).
-vorfertigen(radon).
-vorfertigen(uran).
-vorfertigen(frostKristall).
-
-/* mittlere agglomeration*/
-vorfertigen(antiMaterie).
-vorfertigen(antiMaterieGehaeuse).
-vorfertigen(glas).
-vorfertigen(grantine).
-vorfertigen(herox).
-vorfertigen(instabilesGel).
-vorfertigen(instabilesNatrium).
-vorfertigen(kohlenStoffKristall).
-vorfertigen(saeure).
-vorfertigen(seltenesMetallElement).
-vorfertigen(stickStoffSalz).
-vorfertigen(superOxidKristall).
-vorfertigen(tetraKobalt).
-vorfertigen(angereicherterKohlenStoff).
-
-vorfertigen(aronium).
-vorfertigen(lemmium).
-vorfertigen(magnoGold).
-vorfertigen(strassenKoeterBronze).
-vorfertigen(chlorGitter).
-
-vorfertigen(thermischesKondensat).
-vorfertigen(organischerKatalysator).
-
-/* kochen */
-vorfertigen(geraeuchertesFleisch).
-vorfertigen(geheimnisVollerFleischEintopf).
-
-vorfertigen(immerBrennendeMarmelade).
-vorfertigen(schlaengelndeMarmelade).
-vorfertigen(kaktusGelee).
-
-vorfertigen(geschlageneButter).
-vorfertigen(protoButter).
-vorfertigen(verfeinertesMehl).
-
-vorfertigen(klebrigerPudding).
-vorfertigen(monstroeserPudding).
-vorfertigen(salzigerPudding).
-
-vorfertigen(protoTeig).
-vorfertigen(heulenderTeig).
-vorfertigen(kuchenTeig).
-vorfertigen(dickerSuesserTeig).
-vorfertigen(extraFluffigerTeig).
-vorfertigen(windenderAufgewuehlterTeig).
-vorfertigen(tortenBoden).
-
-vorfertigen(delikatessBaiser).
-vorfertigen(klobigerDonut).
-vorfertigen(wuerzigerKaese).
-vorfertigen(synthetischerHonig).																		
-vorfertigen(knusperKaramell).
-
-
-baueDefaults(System, Planet, DefaultSammelArten) :-
+ermittleDefaultSammelArtenMitStoffen(System, Planet, DefaultSammelArten) :-
 	spielStatus:systeme(_, System, Farbe),
 	findall([SammelAktion0, Stoff0], planetSammelEigenschaftenDefaults:sammelDefaultSystemTyp(Farbe, SammelAktion0, Stoff0), SammelArt0),
 	spielStatus:planeten(_, System, Planet, PlanetenGruppe),
@@ -382,30 +274,61 @@ baueDefaults(System, Planet, DefaultSammelArten) :-
 	append(SammelArt0, SammelArt1, DefaultSammelArten),
 	!.
 
+/* Bei Anlage eines neuen Planeten */
 copyDefaultIfEmpty(System, Planet) :-
 	findall(Stoff0, sammlung(_, System, Planet, _, Stoff0, _, _, _), Stoffe),
 	((Stoffe = [],
-	  baueDefaults(System, Planet, DefaultStoffe),
-	  forall((select([Operation, Stoff], DefaultStoffe, _), sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)),
-	      assertz(sammlung(0, System, Planet, Operation, Stoff, Haupt, Neben, Ruest))
+	  ermittleDefaultSammelArtenMitStoffen(System, Planet, DefaultSammelArten),
+	  forall((select([Operation, Stoff], DefaultSammelArten, _), 
+	  		  sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Operation),
+	          sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)
+	         ),
+	         assertz(sammlung(0, System, Planet, Operation, Stoff, Haupt, Neben, Ruest)) 
 	        ));
 	  true
-	).
-	
-vorgefertigeLoesungenErstellen :-
-	forall(spielStatus:planeten(_, System, Planet, _), \+alleVorfertigen(System, Planet)).
-	
-	
-alleVorfertigen(System, Planet) :-
-	vorfertigen(Stoff),
-	\+generiereFertigeLoesungen(System, Planet, Stoff),
-	debug(myTrace, 'Stoff: ~k generiert', Stoff),
+	),
+	vorfertigen:vorgefertigeLoesungenErstellen.
+
+defaultsEinfuegenBeiLeerenAktionen(MoeglicheAktionen) :-
+	member(Aktion, MoeglicheAktionen),
+	spielStatus:planeten(_, System, Planet, _),
+	System \= 'System',
+	findall(Stoff, (sammlung(_, System, Planet, Aktion, Stoff, _, _, _)), StoffeMitAktion), 
+	StoffeMitAktion = [],
+	ermittleDefaultSammelArtenMitStoffen(System, Planet, DefaultSammelArten),
+	forall((select([Operation, Stoff], DefaultSammelArten, _), 
+	        sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)
+	       ),
+	       assertz(sammlung(0, System, Planet, Operation, Stoff, Haupt, Neben, Ruest))
+	      ),
 	fail.
+
+sammlungAnStatusAnpassen :-
+	/* aktionen, die noch keine sammlungseinträge haben mit defaults versorgen */
+	findall(Aktion, (spielStatus:spielStatus(Status, true),
+	                 sammelAktion:sammelStatus(Aktion, Status)
+	                ), MoeglicheAktionen),
+	\+defaultsEinfuegenBeiLeerenAktionen(MoeglicheAktionen),
+	findall(Aktion, (spielStatus:spielStatus(Status, false),
+	                 sammelAktion:sammelStatus(Aktion, Status)), UnMoeglicheAktionen),
+	forall((member(Aktion, UnMoeglicheAktionen),
+	        sammlung(_, System, Planet, Aktion, _, _, _, _), 
+	        System \= 'System'
+	       ),
+	       ignore(retractall(sammlung(_, System, Planet, Aktion, _, _, _, _)))
+	      ),
+	vorfertigen:vorgefertigeLoesungenErstellen.	
+	 
+sammlungAnOrteAnpassen(System, Planet) :-
+	/* aktionen, die noch keine sammlungseinträge haben mit defaults versorgen */
+	findall(SammelAktion, (sammelAktion:sammelAktion(SammelAktion), sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, SammelAktion)), WeiterMoeglicheAktionen0),
+	sort(WeiterMoeglicheAktionen0, WeiterMoeglicheAktionen),
+	\+defaultsEinfuegenBeiLeerenAktionen(WeiterMoeglicheAktionen),
+	/* Sammeleinträge von inzwischen unmöglichen Aktionen löschen */
+	findall(SammelAktion, sammelAktion:sammelAktion(SammelAktion), AlleAktionen),
+	subtract(AlleAktionen, WeiterMoeglicheAktionen, UnMoeglicheAktionen),
+	forall(member(Aktion, UnMoeglicheAktionen), 
+	       ignore(retractall(sammlung(_, System, Planet, Aktion, _, _, _, _)))
+	      ),
+	vorfertigen:vorgefertigeLoesungenErstellen.
 	
-generiereFertigeLoesungen(System, Planet, Stoff) :-
-	optimierung:optimierungsZiel(Strategie),
-	ignore(retractall(fertigeLoesung(System, Planet, Strategie, Stoff, _))),
-	\+suchAlgorithmus:baueFuerVorfertigung(System, Planet, Strategie, 1, Stoff),
-	optimierung:optimierungsStrategie(Strategie, Stoff, _, Vorgaenge, _, _, _, _, _),
-	assertz(fertigeLoesung(System, Planet, Strategie, Stoff, Vorgaenge)),
-	fail.

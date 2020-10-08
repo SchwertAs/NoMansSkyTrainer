@@ -18,8 +18,10 @@ planetenTyp(heiss).
 planetenTyp(megaExotisch).
 planetenTyp(radioAktiv).
 planetenTyp(seltsam).
+planetenTyp(sumpfig).
 planetenTyp(tot).
-planetenTyp(trocken).	
+planetenTyp(trocken).
+planetenTyp(vulkanisch).
 	
 planetenTypIstExotisch(PlanetenTypExotisch) :-
 	PlanetenTypExotisch = exotischBlasen;
@@ -40,7 +42,8 @@ planetenTypIstNormal(PlanetenTyp) :-
 	PlanetenTyp = giftig;
 	PlanetenTyp = heiss;
 	PlanetenTyp = radioAktiv;
-	PlanetenTyp = trocken.
+	PlanetenTyp = trocken,
+	PlanetenTyp = sumpfig.
 	
 	
 planetenGruppePlanetenTyp(sprudelnder, exotischBlasen). 
@@ -95,70 +98,144 @@ planetenGruppePlanetenTyp(stickiger, tot).
 planetenGruppePlanetenTyp(toter, tot). 
 planetenGruppePlanetenTyp(unbewohnbarer, tot). 
 planetenGruppePlanetenTyp(unbelebter, tot). 
+  
 planetenGruppePlanetenTyp(trostloserTot, tot).
 
-planetenGruppePlanetenTyp(chromatischerNebel, megaExotisch). 
-planetenGruppePlanetenTyp(toedlicheGrueneAnomalieMegaExot, megaExotisch). 
-planetenGruppePlanetenTyp(himmelBlauerPlanet, megaExotisch). 
-planetenGruppePlanetenTyp(verlorenerBlauerPlanet, megaExotisch). 
+/* noch ungesicherte Planetentypen */
+planetenGruppePlanetenTyp(blut, tot).
+planetenGruppePlanetenTyp(basalt, tot).
 
+planetenGruppePlanetenTyp(azur, megaExotisch). 
+planetenGruppePlanetenTyp(heimgesuchterEmeril, megaExotisch). 
+planetenGruppePlanetenTyp(himmelBlauer, megaExotisch). 
+planetenGruppePlanetenTyp(nichtFunktionierender, megaExotisch). 
+planetenGruppePlanetenTyp(purpur, megaExotisch). 
+planetenGruppePlanetenTyp(scharlachRoter, vulkanisch). 
+planetenGruppePlanetenTyp(toedlicheGrueneAnomalieMegaExot, megaExotisch). 
+planetenGruppePlanetenTyp(ultramarin, megaExotisch). 
+planetenGruppePlanetenTyp(verdammterJade, megaExotisch). 
+planetenGruppePlanetenTyp(verlorenerBlauer, megaExotisch). 
+planetenGruppePlanetenTyp(verlorenerGruener, megaExotisch). 
+planetenGruppePlanetenTyp(verlorenerRoter, megaExotisch).  
+planetenGruppePlanetenTyp(zensiert, megaExotisch). 
+planetenGruppePlanetenTyp(infizierter, megaExotisch). 
+planetenGruppePlanetenTyp(glaeserner, megaExotisch). 
+planetenGruppePlanetenTyp(duerstender, megaExotisch). 
+planetenGruppePlanetenTyp(verdammter, megaExotisch). 
+planetenGruppePlanetenTyp(geloeschter, megaExotisch). 
+planetenGruppePlanetenTyp(temporaerer, megaExotisch). 
+
+planetenGruppePlanetenTyp(bewoelkter, sumpfig). 
+planetenGruppePlanetenTyp(chromatischerNebel, sumpfig). 
+planetenGruppePlanetenTyp(diesiger, sumpfig). 
+planetenGruppePlanetenTyp(dampf, sumpfig). 
+planetenGruppePlanetenTyp(dunstiger, sumpfig). 
+planetenGruppePlanetenTyp(endloserMorast, sumpfig). 
+planetenGruppePlanetenTyp(klammer, sumpfig). 
+planetenGruppePlanetenTyp(marschLand, sumpfig). 
+planetenGruppePlanetenTyp(morastBoden, sumpfig). 
+planetenGruppePlanetenTyp(stinkender, sumpfig). 
+planetenGruppePlanetenTyp(tropischer, sumpfig). 
+planetenGruppePlanetenTyp(trueber, sumpfig). 
+planetenGruppePlanetenTyp(sumpfGebiet, sumpfig). 
+
+planetenGruppePlanetenTyp(asche, vulkanisch). 
+planetenGruppePlanetenTyp(ascheVerdunkelter, vulkanisch). 
+planetenGruppePlanetenTyp(aufbrechender, vulkanisch). 
+planetenGruppePlanetenTyp(blutroter, vulkanisch). 
+planetenGruppePlanetenTyp(brutaler, vulkanisch). 
+planetenGruppePlanetenTyp(drohendeKernExplosion, vulkanisch).
+planetenGruppePlanetenTyp(flammenGepeitschter, vulkanisch). 
+planetenGruppePlanetenTyp(geschmolzener, vulkanisch).
+planetenGruppePlanetenTyp(instabiler, vulkanisch). 
+planetenGruppePlanetenTyp(lava, vulkanisch). 
+planetenGruppePlanetenTyp(magma, vulkanisch). 
+planetenGruppePlanetenTyp(obsidianPerle, vulkanisch).
+planetenGruppePlanetenTyp(tektonischer, vulkanisch). 
+planetenGruppePlanetenTyp(vulkanischer, vulkanisch). 
+
+planetenGruppePlanetenTyp(wurmbefallener, gemaessigt). 
+planetenGruppePlanetenTyp(verseuchter, gemaessigt). 
+planetenGruppePlanetenTyp(beschaedigter, gemaessigt). 
+planetenGruppePlanetenTyp(mutierter, gemaessigt). 
+
+planetenGruppePlanetenTyp(wasser, gemaessigt). 
+planetenGruppePlanetenTyp(versunkener, gemaessigt). 
+planetenGruppePlanetenTyp(wasserWelt, gemaessigt). 
+planetenGruppePlanetenTyp(ozeanischer, gemaessigt). 
+planetenGruppePlanetenTyp(flut, gemaessigt). 
+planetenGruppePlanetenTyp(wasserBedeckter, gemaessigt). 
+planetenGruppePlanetenTyp(aquatischer, gemaessigt). 
+planetenGruppePlanetenTyp(meeres, gemaessigt). 
+
+
+/* Typ gesichert */
 planetenGruppePlanetenTyp(aetzender, giftig). 
+planetenGruppePlanetenTyp(faulender, giftig). 
+planetenGruppePlanetenTyp(giftiger, giftig). 
+planetenGruppePlanetenTyp(saeuerlicher, giftig). 
+planetenGruppePlanetenTyp(schaedlicher, giftig). 
+planetenGruppePlanetenTyp(scharfer, giftig). 
+planetenGruppePlanetenTyp(toedlicheGrueneAnomalie, giftig). 
+planetenGruppePlanetenTyp(ungesunder, giftig).
+planetenGruppePlanetenTyp(verdorbener, giftig). 
+
 planetenGruppePlanetenTyp(arktischer, frostig). 
-planetenGruppePlanetenTyp(ausgetrockneter, trocken). 
-planetenGruppePlanetenTyp(bluehender, gemaessigt). 
-planetenGruppePlanetenTyp(bruehender, heiss). 
 planetenGruppePlanetenTyp(eisiger, frostig). 
 planetenGruppePlanetenTyp(eiskalter, frostig). 
-planetenGruppePlanetenTyp(faulender, giftig). 
-planetenGruppePlanetenTyp(felsiger, trocken). 
-planetenGruppePlanetenTyp(feuchter, gemaessigt). 
-planetenGruppePlanetenTyp(feuriger, heiss). 
 planetenGruppePlanetenTyp(frostiger, frostig). 
-planetenGruppePlanetenTyp(gammaintensiver, radioAktiv). 
+planetenGruppePlanetenTyp(hyperboreisch, frostig). 
 planetenGruppePlanetenTyp(gefrorener, frostig). 
 planetenGruppePlanetenTyp(gefrierender, frostig). 
+planetenGruppePlanetenTyp(staubiger, frostig). 
+planetenGruppePlanetenTyp(sternKorruptionEntdeckt, frostig). 
+planetenGruppePlanetenTyp(ultramarin, frostig). 
+planetenGruppePlanetenTyp(winterlicher, frostig). 
+planetenGruppePlanetenTyp(zugefrorener, frostig). 
+  
+planetenGruppePlanetenTyp(ausgetrockneter, trocken). 
+planetenGruppePlanetenTyp(felsiger, trocken). 
+planetenGruppePlanetenTyp(trostloser, trocken). 
+planetenGruppePlanetenTyp(unwirtlicher, trocken).
+planetenGruppePlanetenTyp(verlassener, trocken). 
+planetenGruppePlanetenTyp(windgepeitschter, trocken). 
+planetenGruppePlanetenTyp(wuesten, trocken). 
+  
+planetenGruppePlanetenTyp(bluehender, gemaessigt). 
+planetenGruppePlanetenTyp(feuchter, gemaessigt). 
 planetenGruppePlanetenTyp(gemaessigter, gemaessigt). 
-planetenGruppePlanetenTyp(giftiger, giftig). 
 planetenGruppePlanetenTyp(gruenender, gemaessigt). 
 planetenGruppePlanetenTyp(gruenlicher, gemaessigt). 
+planetenGruppePlanetenTyp(paradiesischer, gemaessigt). 
+planetenGruppePlanetenTyp(regnerischer, gemaessigt). 
+planetenGruppePlanetenTyp(reichhaltiger, gemaessigt).
+planetenGruppePlanetenTyp(tropischer, gemaessigt). 
+planetenGruppePlanetenTyp(verwilderter, gemaessigt). 
+planetenGruppePlanetenTyp(verseuchtesParadies, gemaessigt). 
+
+planetenGruppePlanetenTyp(feurigeSchreckensWelt, heiss).
 planetenGruppePlanetenTyp(heisser, heiss). 
-planetenGruppePlanetenTyp(hyperboreisch, frostig). 
+planetenGruppePlanetenTyp(sengender, heiss). 
+planetenGruppePlanetenTyp(sengendHeisser, heiss). 
+planetenGruppePlanetenTyp(siedender, heiss). 
+planetenGruppePlanetenTyp(unfruchtbarer, heiss). 
+planetenGruppePlanetenTyp(bruehender, heiss). 
+planetenGruppePlanetenTyp(feuriger, heiss). 
+planetenGruppePlanetenTyp(verbrannter, heiss). 
+planetenGruppePlanetenTyp(weissGluehender, heiss). 
+
+planetenGruppePlanetenTyp(gammaintensiver, radioAktiv). 
 planetenGruppePlanetenTyp(isotopischer, radioAktiv). 
 planetenGruppePlanetenTyp(kontaminierter, radioAktiv). 
 planetenGruppePlanetenTyp(mitHoherEnergie, radioAktiv). 
 planetenGruppePlanetenTyp(mitHoherRadioQuelle, radioAktiv). 
 planetenGruppePlanetenTyp(nuklearer, radioAktiv). 
-planetenGruppePlanetenTyp(paradiesischer, gemaessigt). 
 planetenGruppePlanetenTyp(radioaktiver, radioAktiv). 
-planetenGruppePlanetenTyp(regnerischer, gemaessigt). 
-planetenGruppePlanetenTyp(reichhaltiger, gemaessigt).
-planetenGruppePlanetenTyp(saeuerlicher, giftig). 
-planetenGruppePlanetenTyp(schaedlicher, giftig). 
-planetenGruppePlanetenTyp(scharfer, giftig). 
-planetenGruppePlanetenTyp(sengender, heiss). 
-planetenGruppePlanetenTyp(sengendHeisser, heiss). 
-planetenGruppePlanetenTyp(siedender, heiss). 
-planetenGruppePlanetenTyp(staubiger, frostig). 
-planetenGruppePlanetenTyp(sternKorruptionEntdeckt, frostig). 
 planetenGruppePlanetenTyp(superkritischer, radioAktiv). 
-planetenGruppePlanetenTyp(toedlicheGrueneAnomalie, giftig). 
-planetenGruppePlanetenTyp(trostloser, trocken). 
-planetenGruppePlanetenTyp(tropischer, gemaessigt). 
-planetenGruppePlanetenTyp(ultramarin, frostig). 
-planetenGruppePlanetenTyp(unfruchtbarer, heiss). 
-planetenGruppePlanetenTyp(ungesunder, giftig).
-planetenGruppePlanetenTyp(unwirtlicher, trocken).
-planetenGruppePlanetenTyp(verbrannter, heiss). 
 planetenGruppePlanetenTyp(verfallenerNuklearer, radioAktiv). 
-planetenGruppePlanetenTyp(verdorbener, giftig). 
-planetenGruppePlanetenTyp(verlassener, trocken). 
 planetenGruppePlanetenTyp(verstrahlter, radioAktiv). 
-planetenGruppePlanetenTyp(verwilderter, gemaessigt). 
-planetenGruppePlanetenTyp(weissGluehender, heiss). 
-planetenGruppePlanetenTyp(windgepeitschter, trocken). 
-planetenGruppePlanetenTyp(winterlicher, frostig). 
-planetenGruppePlanetenTyp(wuesten, trocken). 
-planetenGruppePlanetenTyp(zugefrorener, frostig). 
+
+
 
 test :-
 	\+testInKonsistent.

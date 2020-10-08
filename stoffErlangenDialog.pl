@@ -50,7 +50,7 @@ stoffErlangenDialog(Request) :-
 stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 	ausgabe:baueStoffListeFuerStoffKlassen([rohStoff, rohUndKochStoff], Stoffe1),
 	server:baueOptionsFeld('auswahlRohStoff', Stoffe1, 2, OptionList1),
-	ausgabe:baueStoffListeFuerStoffKlassen([produkt, produktUndKochStoff], Stoffe2),
+	ausgabe:baueStoffListeFuerStoffKlassen([produkt, produktUndKochStoff, komponente], Stoffe2),
 	server:baueOptionsFeld('auswahlProdukt', Stoffe2, 3, OptionList2),
 	ausgabe:baueStoffListeFuerStoffKlassen([basisBauEndStoff], Stoffe3),
 	server:baueOptionsFeld('auswahlBau', Stoffe3, 4, OptionList3),
@@ -221,8 +221,6 @@ nurEinStoffGewaehlt(Stoff1, Stoff2, Stoff3, Stoff4, Stoff5, Stoff) :-
 	).
 	
 ergebnisAusgeben(System, Planet, Anzahl, Ziel, TxtStoff) :-
-    ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
-    assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
     textResources:getText(Stoff, TxtStoff), /* Rücktransformation zu Stoffatom */
     (optimierteLoesung(System, Planet, Ziel, Anzahl, Stoff);
 	 nichtHerstellBar(Ziel)),

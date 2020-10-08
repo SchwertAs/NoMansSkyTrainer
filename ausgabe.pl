@@ -3,10 +3,11 @@
           letzesListenElement/2]).
 
 baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
-	findall(St, 
-	  (select(Sk, StoffKlassen, _), 
-	   stoff:stoff(Sk, St0, _),
-	   textResources:getText(St0, St)
+	findall(Stoff, 
+	  (select(Stoffklasse, StoffKlassen, _), 
+	   stoff:stoff(Stoffklasse, Stoff0, _),
+	   textResources:getText(Stoff0, StoffText),
+	   textResources:stringToSubstantiv(StoffText, Stoff)
 	  ), Stoffe).
 	
 ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-

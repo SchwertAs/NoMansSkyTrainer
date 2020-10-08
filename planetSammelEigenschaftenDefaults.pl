@@ -37,9 +37,6 @@ sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, suessWurzel) :-
 sammelDefaultPlanetenTyp(frostig, pfluecken, frostKristall).
 sammelDefaultPlanetenTyp(frostig, pfluecken, gefroreneKnollen).
 
-sammelDefaultPlanetenTyp(frostig, pfluecken, heptaploidWeizen).
-sammelDefaultPlanetenTyp(frostig, pfluecken, suessWurzel).
-
 sammelDefaultPlanetenTyp(gemaessigt, pfluecken, sternenKnolle).
 sammelDefaultPlanetenTyp(gemaessigt, pfluecken, impulsBohnen).
 
@@ -62,8 +59,6 @@ sammelDefaultPlanetenTyp(PlanetenTyp, pfluecken, hexaBeere) :-
 /* mega exotische Planeten */
 sammelDefaultPlanetenTyp(megaExotisch, pfluecken, hexaBeere).	
 sammelDefaultPlanetenTyp(megaExotisch, pfluecken, fleischigeWurzeln).
-sammelDefaultPlanetenTyp(megaExotisch, pfluecken, heptaploidWeizen).
-sammelDefaultPlanetenTyp(megaExotisch, pfluecken, suessWurzel).
 
 /* Planeten-Goodies */
 sammelDefaultPlanetenTyp(_, pfluecken, gravitinoBall).
@@ -99,6 +94,7 @@ sammelDefaultPlanetenTyp(PlanetenTyp, minenLaserNutzen, kuerbisKnolle) :-
 sammelDefaultPlanetenTyp(PlanetenTyp, minenLaserNutzen, kobalt) :-
 	PlanetenTyp \= tot.
 
+/* in Planzen oder Mineralien */
 sammelDefaultPlanetenTyp(gemaessigt, minenLaserNutzen, paraffinium).
 sammelDefaultPlanetenTyp(gemaessigt, minenLaserNutzen, sternenKnolle).
 sammelDefaultPlanetenTyp(radioAktiv, minenLaserNutzen, uran).
@@ -111,13 +107,13 @@ sammelDefaultPlanetenTyp(heiss, minenLaserNutzen, phosphor).
 sammelDefaultPlanetenTyp(heiss, minenLaserNutzen, solanium).
 sammelDefaultPlanetenTyp(trocken, minenLaserNutzen, pyrit).
 sammelDefaultPlanetenTyp(trocken, minenLaserNutzen, kaktusFleisch).
+sammelDefaultPlanetenTyp(vulkanisch, minenLaserNutzen, basalt).
+sammelDefaultPlanetenTyp(vulkanisch, minenLaserNutzen, faecium).
 
 /* verbessertenMinenLaserNutzen */
 sammelDefaultPlanetenTyp(trocken, verbessertenMinenLaserNutzen, verdichteterKohlenStoff).
 sammelDefaultPlanetenTyp(trocken, verbessertenMinenLaserNutzen, reinesFerrit).
 sammelDefaultPlanetenTyp(trocken, verbessertenMinenLaserNutzen, natriumNitrat).
-
-sammelDefaultPlanetenTyp(trocken, exoFahrzeugMinenLaserNutzen, natriumNitrat).
 
 /* Terrainformer nutzen */
 /* dritte Planetenressource (zufällig eine daraus) */
@@ -131,19 +127,21 @@ sammelDefaultPlanetenTyp(_, terrainFormerNutzen, silikatPulver).
 sammelDefaultPlanetenTyp(PlanetenTyp, minenLaserNutzen, geborgeneDaten) :-
 	PlanetenTyp \= tot.
 
-/* zweites Mineral */
+/* zweite Planetenressource */
 sammelDefaultPlanetenTyp(gemaessigt, terrainFormerNutzen, paraffinium).
 sammelDefaultPlanetenTyp(giftig, terrainFormerNutzen, ammoniak).
 sammelDefaultPlanetenTyp(frostig, terrainFormerNutzen, dioxit).
 sammelDefaultPlanetenTyp(heiss, terrainFormerNutzen, phosphor).
 sammelDefaultPlanetenTyp(radioAktiv, terrainFormerNutzen, uran).
 sammelDefaultPlanetenTyp(trocken, terrainFormerNutzen, pyrit).
+sammelDefaultPlanetenTyp(sumpfig, terrainFormerNutzen, faecium).
+sammelDefaultPlanetenTyp(vulkanisch, terrainFormerNutzen, basalt).
 
-/* Exoten zweites Mineral Gold */
+/* Exoten zweite Planetenressource Gold */
 sammelDefaultPlanetenTyp(PlanetenTyp, terrainFormerNutzen, gold) :-
 	planetenTypen:planetenTypIstExotisch(PlanetenTyp).
 
-/* Tote Planeten zweites Mineral verrostetesMetall */
+/* Tote Planeten zweite Planetenressource verrostetesMetall */
 sammelDefaultPlanetenTyp(tot, terrainFormerNutzen, verrostetesMetall).
 
 /* Bergbaueinheit */
@@ -182,13 +180,9 @@ sammelDefaultPlanetenTyp(_, kaufen, diWasserStoffGelee).
 sammelDefaultPlanetenTyp(_, kaufen, hermetischesSiegel).
 sammelDefaultPlanetenTyp(_, kaufen, ionenAkku).
 sammelDefaultPlanetenTyp(_, kaufen, kabelBaum).
-sammelDefaultPlanetenTyp(_, kaufen, kobaltSpiegel).
 sammelDefaultPlanetenTyp(_, kaufen, lebensErhaltungsGel).
 sammelDefaultPlanetenTyp(_, kaufen, metallPlatten).
 sammelDefaultPlanetenTyp(_, kaufen, mikroProzessor).
-sammelDefaultPlanetenTyp(_, kaufen, natriumDiode).
-sammelDefaultPlanetenTyp(_, kaufen, salzRefaktor).
-sammelDefaultPlanetenTyp(_, kaufen, sauerStoffFilter).
 sammelDefaultPlanetenTyp(_, kaufen, sternenSeide).
 sammelDefaultPlanetenTyp(_, kaufen, raumSchiffStartTreibStoff).
 sammelDefaultPlanetenTyp(_, kaufen, vierfachServo).
@@ -209,7 +203,9 @@ sammelDefaultPlanetenTyp(_, ernten, solanium).
 sammelDefaultPlanetenTyp(_, ernten, sternenKnolle).
 
 sammelDefaultPlanetenTyp(_, herausSchlagen, kohlenStoff).
+
 sammelDefaultPlanetenTyp(_, exoFahrzeugMinenLaserNutzen, sauerStoff).
+sammelDefaultPlanetenTyp(trocken, exoFahrzeugMinenLaserNutzen, natriumNitrat).
 
 /* aus Tierhaltung */
 sammelDefaultPlanetenTyp(PlanetenTyp, vonTierErhalten, faecium) :-

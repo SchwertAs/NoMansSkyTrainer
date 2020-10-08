@@ -124,7 +124,9 @@ systemNamen(Request) :-
       ZeileNoFehler > 0,
       fehlerZeile(ZeileNoFehler, SpalteNoFehler)
 	 );
-	 (\+ablegen(GesamtZeilenZahl, VarValueList),
+	 (
+	  \+ablegen(GesamtZeilenZahl, VarValueList),
+	  loescheWeggefalleneSysteme(GesamtZeilenZahl, VarValueList),
       server:gespeichert
      )
 	).
@@ -148,45 +150,52 @@ pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, System, Farbe) :-
     nth1(OffsetFarbe, VarValueList, TxtFarbe),
     textResources:getText(Farbe, TxtFarbe).
 
+loescheWeggefalleneSysteme(GesamtZeilenZahl, VarValueList) :-
+	findall(VorhandenesSystem, spielStatus:systeme(_, VorhandenesSystem, _), VorhandeneSysteme),
+	findall( System, (between(1, 3, Spalte),
+	                  between(1, GesamtZeilenZahl, Zeile),
+	                  pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, System, _),
+					  System \= ""), EingegebeneSysteme0),
+	append(EingegebeneSysteme0, ['System'], EingegebeneSysteme),
+	subtract(VorhandeneSysteme, EingegebeneSysteme, ZuLoeschendeSysteme),
+	forall(member(System, ZuLoeschendeSysteme), loescheSystem(System)).
+
+/* löschen cascade */
+loescheSystem(SystemAlt) :-
+	debug(myTrace, 'delete: SystemAlt=~k', [SystemAlt]),
+	retractall(sammlung:sammlung(_, SystemAlt, _, _, _, _, _, _)),
+	retractall(spielStatus:systemAusstattung([SystemAlt, _, _], _)),
+	retractall(spielStatus:planeten(_, SystemAlt, _, _)),	
+	retractall(spielStatus:systeme(_, SystemAlt, _)).
+	
 ablegen(GesamtZeilenZahl, VarValueList) :-
 	between(1, 3, Spalte),
 	between(1, GesamtZeilenZahl, Zeile),
 	pickeZeile(GesamtZeilenZahl, Zeile, Spalte, VarValueList, System, Farbe),
-	Feld is Spalte * 100 + Zeile,
-	insUpdDel(Feld, System, Farbe),
+	FeldNummer is Spalte * 100 + Zeile,
+	insUpdDel(FeldNummer, System, Farbe),
 	fail.
 
+/* leeres System */
+insUpdDel(_, System, _) :-
+	System = "",
+	debug(myTrace, 'Leeres Feld (wird später gelöscht)', []),
+	!.
+	
 /* identisch */
-insUpdDel(Feld, System, Farbe) :-
-	spielStatus:systeme(Feld, System, Farbe),
-	debug(myTrace, 'unverändert: Feld=~k System=~k Farbe=~k', [Feld, System, Farbe]),
+insUpdDel(FeldNummer, System, Farbe) :-
+	spielStatus:systeme(FeldNummer, System, Farbe),
+	debug(myTrace, 'unverändert: Feld=~k System=~k Farbe=~k', [FeldNummer, System, Farbe]),
 	!.
 	
-/* move evtl. mit update farbe */
-insUpdDel(FeldNeu, System, Farbe) :-
-	spielStatus:systeme(FeldAlt, System, _),
-	FeldNeu \= FeldAlt,
-	System \= "",
-	debug(myTrace, 'verschoben: FeldAlt=~k FeldNeu=~k System=~k', [FeldAlt, FeldNeu, System]),
-	retractall(spielStatus:systeme(FeldAlt, System, _)),
-	assertz(spielStatus:systeme(FeldNeu, System, Farbe)),
-	!.
-	
-/* Attibuts-update */
-insUpdDel(FeldNeu, System, FarbeNeu) :-
-	spielStatus:systeme(FeldNeu, System, _),
-	debug(myTrace, 'Attribut-Update: Feld=~k System=~k Farbe=~k', [FeldNeu, System, FarbeNeu]),
-	retractall(spielStatus:systeme(FeldNeu, System, _)),
-	assertz(spielStatus:systeme(FeldNeu, System, FarbeNeu)),
-	!.
-
-/* Schlüssel-update */
-insUpdDel(FeldNeu, SystemNeu, FarbeNeu) :-
-	spielStatus:systeme(FeldNeu, SystemAlt, _),
+/* Umbenennung System */
+insUpdDel(FeldNummer, SystemNeu, FarbeNeu) :-
 	SystemNeu \= "",
+	\+spielStatus:systeme(_, SystemNeu, _), /* Wenn System schon existiert, keine Umbenennung sondern Verschiebung */
+	spielStatus:systeme(FeldNummer, SystemAlt, FarbeAlt),
 	SystemNeu \= SystemAlt,
-	debug(myTrace, 'Schlüssel-Update: Feld=~k SystemAlt=~k SystemNeu=~k', [FeldNeu, SystemAlt, SystemNeu]),
-	/* planet updaten */
+	debug(myTrace, 'System-Umbenennung: Feld=~k SystemAlt=~k SystemNeu=~k', [FeldNummer, SystemAlt, SystemNeu]),
+	/* Systemname in planet updaten */
 	forall(spielStatus:planeten(RecNo0, SystemAlt, Planet0, AtmospherenTyp), 
 	 assertz(spielStatus:planeten(RecNo0, SystemNeu, Planet0, AtmospherenTyp))
 	),
@@ -202,29 +211,49 @@ insUpdDel(FeldNeu, SystemNeu, FarbeNeu) :-
 	      ),
 	retractall(spielStatus:systemAusstattung([SystemAlt, _, _], _)),
 	/*  */
-	retractall(spielStatus:systeme(FeldNeu, SystemAlt, _)),
-	assertz(spielStatus:systeme(FeldNeu, SystemNeu, FarbeNeu)),	
+	retractall(spielStatus:systeme(FeldNummer, SystemAlt, _)),
+	assertz(spielStatus:systeme(FeldNummer, SystemNeu, FarbeNeu)),	
+	ignore(updFarbe(SystemNeu, FarbeAlt, FarbeNeu)),
 	!.
 
 /* insert */
-insUpdDel(FeldNeu, SystemNeu, FarbeNeu) :-
-	\+spielStatus:systeme(FeldNeu, _, _),
-	SystemNeu \= "",
-	debug(myTrace, 'insert: Feld=~k SystemNeu=~k, FarbeNeu=~k', [FeldNeu, SystemNeu, FarbeNeu]),
-	assertz(spielStatus:systeme(FeldNeu, SystemNeu, FarbeNeu)),
+insUpdDel(FeldNummerNeu, SystemNeu, FarbeNeu) :-
+	\+spielStatus:systeme(_, SystemNeu, _),
+	debug(myTrace, 'insert: FeldNummerNeu=~k SystemNeu=~k, FarbeNeu=~k', [FeldNummerNeu, SystemNeu, FarbeNeu]),
+	assertz(spielStatus:systeme(FeldNummerNeu, SystemNeu, FarbeNeu)),
 	!.
 
-/* löschen cascade */
-insUpdDel(FeldNeu, SystemNeu, _) :-
-	spielStatus:systeme(FeldNeu, SystemOld, _),
-	SystemNeu = "",
-	debug(myTrace, 'delete: Feld=~k SystemAlt=~k', [FeldNeu, SystemOld]),
-	retractall(sammlung:sammlung(_, SystemOld, _, _, _, _, _, _)),
-	retractall(spielStatus:systemAusstattung([SystemOld, _, _], _)),
-	retractall(spielStatus:planeten(_, SystemOld, _, _)),	
-	retractall(spielStatus:systeme(_, SystemOld, _)),	
+/* move evtl. mit anderer farbe */
+insUpdDel(FeldNummerNeu, System, FarbeNeu) :-
+	spielStatus:systeme(FeldNummerAlt, System, FarbeAlt),
+	FeldNummerNeu \= FeldNummerAlt,
+	debug(myTrace, 'verschoben: FeldAlt=~k FeldNeu=~k System=~k', [FeldNummerAlt, FeldNummerNeu, System]),
+	retractall(spielStatus:systeme(FeldNummerAlt, System, _)),
+	assertz(spielStatus:systeme(FeldNummerNeu, System, FarbeNeu)),
+	ignore(updFarbe(System, FarbeAlt, FarbeNeu)),
 	!.
 	
+/* Attibuts-update */
+insUpdDel(FeldNummerNeu, System, FarbeNeu) :-
+	spielStatus:systeme(FeldNummerNeu, System, FarbeAlt),
+	debug(myTrace, 'Attribut-Update: Feld=~k System=~k Farbe=~k', [FeldNummerNeu, System, FarbeNeu]),
+	retractall(spielStatus:systeme(FeldNummerNeu, System, _)),
+	assertz(spielStatus:systeme(FeldNummerNeu, System, FarbeNeu)),
+	updFarbe(System, FarbeAlt, FarbeNeu),
+	!.
+
+updFarbe(System, FarbeAlt, FarbeNeu) :-
+	FarbeNeu \= FarbeAlt,
+	forall(planetSammelEigenschaftenDefaults:sammelDefaultSystemTyp(FarbeAlt, Aktion1, Stoff1),
+	ignore(retractall(sammlung:sammlung(_, System, _, Aktion1, Stoff1, _, _, _)))),
+	/* neue Defaults anlegen */
+	forall((planetSammelEigenschaftenDefaults:sammelDefaultSystemTyp(FarbeNeu, Aktion2, Stoff2),
+	        sammlung:sammlung(_, 'System', 'MeinPlanet', Aktion2, Stoff2, Haupt, Neben, Ruest),
+	        spielStatus:planeten(_, System, Planet, _),
+	        sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Aktion2)),
+	        assertz(sammlung:sammlung(-1, System, Planet, Aktion2, Stoff2, Haupt, Neben, Ruest))
+	      ).
+
 fehlerZeile(Zeile, Spalte) :-
 	server:holeCssAlsStyle(StyleString),
 	textResources:getText(txtDieZeile, TxtDieZeile),

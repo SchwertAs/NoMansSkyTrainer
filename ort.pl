@@ -1,29 +1,28 @@
 :- module(ort, [ort/1]).
 
 
-ort(ortNil).
-ort(ortHauptBasis).
-ort(ortWald). 
-ort(ortBasisTerminus).
-ort(ortWeltRaum).
 ort(ortAnomalie).
-ort(ortRaumStation). 
-ort(ortWasser).
+ort(ortAtmosphaerenAnlage).
 ort(ortAussenPosten).
-ort(ortHandelsStation).
-ort(ortNahrungsProzessor).
-ort(ortKleineRaffinerie).
-ort(ortMittlereRaffinerie).
-ort(ortGrosseRaffinerie).
-ort(ortHandelsTerminal).
+ort(ortBasisTerminus).
+ort(ortBergbauEinheit).
 ort(ortForschungsTerminal).
 ort(ortFrachter).
-ort(ortSpieler).
-ort(ortBasis).
-ort(ortSauerStoffVerarbeiter).
-ort(ortAtmosphaerenAnlage).
-ort(ortBergbauEinheit).
+ort(ortGrosseRaffinerie).
+ort(ortHandelsStation).
+ort(ortHandelsTerminal).
+ort(ortHauptBasis).
+ort(ortKleineRaffinerie).
+ort(ortMittlereRaffinerie).
+ort(ortNahrungsProzessor).
+ort(ortNil).
 ort(ortPlantage).
+ort(ortRaumStation). 
+ort(ortSauerStoffVerarbeiter).
+ort(ortSpieler).
+ort(ortWald). 
+ort(ortWasser).
+ort(ortWeltRaum).
 
 domaenenPruefungOrt(Ort) :-
 	ort(Ort) -> true; throw(error(domain_error(ort, Ort), _)).

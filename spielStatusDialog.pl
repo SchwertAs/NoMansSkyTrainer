@@ -45,7 +45,7 @@ spielStatusDialog(_Request) :-
 	textResources:getText(txtWaffe, TxtWaffe),
 	textResources:getText(solarStrahl, TxtSolarStrahl),
 	textResources:getText(gemuetsStrahl, TxtGemuetsStrahl),
-	textResources:getText(tragbareRaffinerie, TxtTragbareRaffinerie),
+	textResources:getText(persoenlicheRaffinerie, TxtPersoenlicheRaffinerie),
 	textResources:getText(txtBewegungsmöglichkeiten, TxtBewegungsmöglichkeiten),
 	textResources:getText(txtRaumschiffEinsetzbar, TxtRaumschiffEinsetzbar),
 	textResources:getText(txtMinenLaserAufExoFahrzeug, TxtMinenLaserAufExoFahrzeug),
@@ -102,7 +102,7 @@ spielStatusDialog(_Request) :-
 		       	             div(class('tr'),  
 		       	                 [div(class('td'), 
 		       	                      [input([name('anzugRaffinerie'), type('checkbox'), AnzugRaffinerieChecked]),
-		       	                       label(for('anzugRaffinerie'), TxtTragbareRaffinerie)
+		       	                       label(for('anzugRaffinerie'), TxtPersoenlicheRaffinerie)
 		       	                      ])
 		       	                 ])
 		       	        ])
@@ -178,6 +178,6 @@ spielStatus(Request) :-
     (Frachter = off -> assertz(spielStatus:spielStatus(frachterVorhanden, false)); assertz(spielStatus:spielStatus(frachterVorhanden, true))),
     (Spaere = off -> assertz(spielStatus:spielStatus(sphaereRufbar, false)); assertz(spielStatus:spielStatus(sphaereRufbar, true))),
 	assertz(spielStatus:spielStatus(konfiguriert, true)),
-	sammlung:vorgefertigeLoesungenErstellen,
+	sammlung:sammlungAnStatusAnpassen,
 	server:gespeichert.
 	

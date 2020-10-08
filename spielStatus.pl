@@ -19,15 +19,16 @@ spielStatusInit :-
 initSpielStatus :-
 	abolish(spielStatus/2)
 	,assertz(spielStatus(minenLaser, true))
-	,assertz(spielStatus(verbesserterMinenLaser, true))
-	,assertz(spielStatus(terrainFormer, true))
-	,assertz(spielStatus(waffeVorhanden, true))
-	,assertz(spielStatus(solarStrahl, true))
-	,assertz(spielStatus(gemuetsStrahl, true))
-	,assertz(spielStatus(raumSchiffIstFlott, true))
-	,assertz(spielStatus(exoFahrzeugMinenLaser, true))
-	,assertz(spielStatus(frachterVorhanden, true))
-	,assertz(spielStatus(sphaereRufbar, true))
+	,assertz(spielStatus(verbesserterMinenLaser, false))
+	,assertz(spielStatus(terrainFormer, false))
+	,assertz(spielStatus(waffeVorhanden, false))
+	,assertz(spielStatus(solarStrahl, false))
+	,assertz(spielStatus(gemuetsStrahl, false))
+	,assertz(spielStatus(anzugRaffinerie, false))
+	,assertz(spielStatus(raumSchiffIstFlott, false))
+	,assertz(spielStatus(exoFahrzeugMinenLaser, false))
+	,assertz(spielStatus(frachterVorhanden, false))
+	,assertz(spielStatus(sphaereRufbar, false))
 	,assertz(spielStatus(konfiguriert, false))
 	.
 
@@ -53,78 +54,82 @@ initSystemAusstattung :-
 	/* nur defaults Aktueller Ort kommt aus Eingabemaske */
 	abolish(systemAusstattung/2)
 	/* ort(<ort>, <Reisezeit von Hauptbasis in 1/100 sec>) */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 8500)) /* aus Questfortschritt fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAtmosphaerenAnlage], 536)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBergbauEinheit], 257)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSauerStoffVerarbeiter], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAussenPosten], 11336)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBasisTerminus], 430)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortAnomalie], 1444)) /* fix weil sie gerufen werden kann */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortBergbauEinheit], 257)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortForschungsTerminal], 470)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortFrachter], 5100)) /* fix: von Basis bis Brücke Frachter */ 
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortGrosseRaffinerie], 2400)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsStation], 18000)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHandelsTerminal], 1107)) /* aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortHauptBasis], 0)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortKleineRaffinerie], 1171)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortMittlereRaffinerie], 1135)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortNahrungsProzessor], 1100)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortPlantage], 620)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortRaumStation], 2914)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortRaumStation], 2914)) /* zwansgseingabe aus Maske */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSauerStoffVerarbeiter], 536)) /* aus Maske */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortSpieler], 0))
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWald], 1500)) /* fix */
 	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWasser], 10660)) /* aus Maske */
-	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWeltRaum], 1431)) /* fix */
+	,assertz(systemAusstattung(['System', 'MeinPlanet', ortWeltRaum], 2300)) /* fix */
 	.
 	
 copyDefaultIfEmpty(System, Planet) :-
 	findall(Entfernung, systemAusstattung([System, Planet, _], Entfernung), Entfernungen),
 	((Entfernungen = [],
-	  forall(systemAusstattung(['System', 'MeinPlanet', Ort], Entfernung),
-	      assertz(systemAusstattung([System, Planet, Ort], Entfernung))));
+	  forall((questOrt(Ort, vonAnfangAn),
+	          systemAusstattung(['System', 'MeinPlanet', Ort], Entfernung)),
+	          assertz(systemAusstattung([System, Planet, Ort], Entfernung))));
 	  true
 	).
 
-/* ------------------------- Rezepte für Wertvolle Dinge ----------------------------- */
-/* Rezeptstoff, Event, Questname
--- herstellen 
-questRezept(raumSchiffStartTreibStoff, vonAnfangAn, erwachen).
-questRezept(warpZelle, vonAnfangAn, erwachen).
-questRezept(ionenAkku, vonAnfangAn, erwachen).
-questRezept(lebensErhaltungsGel, vonAnfangAn, erwachen).
-questRezept(diWasserStoffGelee, vonAnfangAn, erwachen).
-questRezept(metallPlatten, vonAnfangAn, erwachen).
-questRezept(kohlenStoffNanoRohr, vonAnfangAn, erwachen).
-questRezept(projektilMunition, vonAnfangAn, erwachen).
-questRezept(kreaturenKugeln, vonAnfangAn, erwachen).
+/* ------------------------- PlanetenAusstattung durch Quest erworben ----------------------------- */
+questOrt(ortWald, vonAnfangAn).
+questOrt(ortRaumStation, vonAnfangAn).
+questOrt(ortSpieler, vonAnfangAn).
 
--- installieren Anzug 
-questRezept(scanner, vonAnfangAn, erwachen).
-questRezept(minenLaser, vonAnfangAn, erwachen).
-questRezept(analyseVisier, vonAnfangAn, erwachen).
-questRezept(blitzWerfer, vonAnfangAn, erwachen).
+/* ------------------------- Rezepte durch Quest erworben ----------------------------- */
+/* Rezeptstoff, Event, Questname */
+/* herstellen */
+questRezept(raumSchiffStartTreibStoffRezept, vonAnfangAn, erwachen).
+questRezept(warpZelleRezept, vonAnfangAn, erwachen).
+questRezept(ionenAkkuRezept, vonAnfangAn, erwachen).
+questRezept(lebensErhaltungsGelRezept, vonAnfangAn, erwachen).
+questRezept(diWasserStoffGeleeRezept, vonAnfangAn, erwachen).
+questRezept(metallPlattenRezept, vonAnfangAn, erwachen).
+questRezept(kohlenStoffNanoRohrRezept, vonAnfangAn, erwachen).
+questRezept(projektilMunitionRezept, vonAnfangAn, erwachen).
+questRezept(kreaturenKugelnRezept, vonAnfangAn, erwachen).
 
--- installieren Raumschiff 
-questRezept(impulsAntrieb, vonAnfangAn, erwachen).
-questRezept(startSchubDuese, vonAnfangAn, erwachen).
-questRezept(raketenWerfer, vonAnfangAn, erwachen).
-questRezept(deflektorSchild, vonAnfangAn, erwachen).
-questRezept(photonenKanone, vonAnfangAn, erwachen).
+/* installieren Anzug */
+questRezept(sauerStoffWiederVerwerterCRezept, vonAnfangAn, erwachen).
 
--- installieren Fahrzeuge
-questRezept(fusionsAntrieb, vonAnfangAn, erwachen).
-questRezept(humboldtAntrieb, vonAnfangAn, erwachen).
+/* installieren Multiwerkzeug */
+questRezept(scannerRezept, vonAnfangAn, erwachen).
+questRezept(minenLaserRezept, vonAnfangAn, erwachen).
+questRezept(analyseVisierRezept, vonAnfangAn, erwachen).
+questRezept(blitzWerferRezept, vonAnfangAn, erwachen).
 
+/* installieren Raumschiff */
+questRezept(impulsAntriebRezept, vonAnfangAn, erwachen).
+questRezept(startSchubDueseRezept, vonAnfangAn, erwachen).
+questRezept(raketenWerferRezept, vonAnfangAn, erwachen).
+questRezept(deflektorSchildRezept, vonAnfangAn, erwachen).
+questRezept(photonenKanoneRezept, vonAnfangAn, erwachen).
 
--- bauen 
-questRezept(tragbareRaffinerie, vonAnfangAn, erwachen).
-questRezept(tiefSeeKammer, vonAnfangAn, erwachen).
-questRezept(flagge2, vonAnfangAn, erwachen).
-questRezept(metallWand, vonAnfangAn, erwachen).
+/* bauen */
+questRezept(tragbareRaffinerieRezept, vonAnfangAn, erwachen).
 
--- chronologisch 
+/* chronologisch 
+questRezept(fusionsAntriebRezept, nachRoamerBau, erwachen).
+questRezept(humboldtAntriebRezept, nachNautilusBau, erwachen).
+
 questRezept(basisComputer, signalUntersuchen, erwachen).
-questRezept(konstruktionsForschungsStation, basisDatenComputerAktualisieren, erwachen).
 questRezept(terrainManipulator, signalUntersuchen, erwachen).
+questRezept(konstruktionsForschungsStation, basisDatenComputerAktualisieren, erwachen).
 questRezept(floraBehaelterTubus, basisComputerBenutzen, erwachen).
 questRezept(holzWand, basisComputerBenutzen, erwachen).
 questRezept(holzTuerRahmen, basisComputerBenutzen, erwachen).
@@ -138,6 +143,6 @@ questRezept(antiMaterie, demAnomalenSignalFolgen, erwachen).
 questRezept(fortgeschrittenerMinenLaserA, notSignalOeffnen, alleinInmittenDerSterne).
 questRezept(hermetischesSiegel, notSignalOeffnen, dieWeltRaumAnomalie).
 questRezept(teleportEmpfaenger, fabrikWiederEinschalten, ersteFabrik).
-questRezept(geoDesit, fabrikWiederEinschalten, zweiteFabrik).
- */
+questRezept(geoDesit, fabrikWiederEinschalten, zweiteFabrik). */
+
 

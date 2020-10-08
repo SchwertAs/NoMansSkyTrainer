@@ -22,7 +22,6 @@ planetMondNameSystemAuswahlDialog(_Request) :-
 		
 /* ----------------------  Eingabe Himmelskörper  ---------------------------------------------*/
 planetMondNameDialog(Request) :-
-	member(method(post), Request), !,
 	textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 	http_parameters(Request, 
 	[auswahlSystem(AuswahlSystem, [length > 0])
@@ -75,8 +74,9 @@ planetMondNameAnzeigen(AuswahlSystem) :-
 		\['</formSpace>'] 
 		             ],       
 	server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtNoNansSkyTrainerHimmelskoerperEingeben, TxtNoNansSkyTrainerHimmelskoerperEingeben),
-	TermerizedHead = [\[StyleString], title(TxtNoNansSkyTrainerHimmelskoerperEingeben)],
+	textResources:getText(txtNoMansSkyTrainerHimmelskoerperEing, TxtNoMansSkyTrainerHimmelskoerperEing),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerHimmelskoerperEing)],
+	debug(myTrace, 'AuswahlSystem: ~k', [AuswahlSystem]),
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlSystem) -->
@@ -111,8 +111,11 @@ innereEingabeZeile([Record|Rest]) -->
 		Record = [FeldNo, Planet, PlanetenTyp],
 		textResources:getText(txtBitteWaehlen, TxtBitteWaehlen),
 		((PlanetenTyp = '', PlanetenTyp0 = TxtBitteWaehlen); (PlanetenTyp0 = PlanetenTyp)),
-		findall([PlanetenTyp0, PlanTyp], 
-			planetenTypen:planetenGruppePlanetenTyp(PlanTyp, _),
+		textResources:getText(PlanetenTyp0, PlanetenTyp0Text),
+		findall([PlanetenTyp0Text, PlanTypText], 
+			(planetenTypen:planetenGruppePlanetenTyp(PlanTyp, _),
+		     textResources:getText(PlanTyp, PlanTypText)
+		    ),		
 			PlanetenTypen0),
 		sort(PlanetenTypen0, PlanetenTypen)
 	},
@@ -145,8 +148,7 @@ baueOptionMitVorwahl([]) -->
 baueOptionMitVorwahl([OptionTupel|Rest]) -->
 	{
 		OptionTupel = [Wert, Option],
-		textResources:getText(Option, OptionText),
-		((Wert = Option, OptionText0 = option(selected(selected), OptionText)); (OptionText0 = option(OptionText)))
+		((Wert = Option, OptionText0 = option(selected(selected), Option)); (OptionText0 = option(Option)))
 	},
 	html([
 		OptionText0
@@ -275,6 +277,9 @@ insUpdDel(System, PlanetNew, RecNo, PlanetenTyp) :-
 	debug(myTrace, 'Attribut-Update: RecNo=~k System=~k Planet=~k PlanetenTyp=~k', [RecNo, System, PlanetNew, PlanetenTyp]),
 	retractall(spielStatus:planeten(RecNo, System, PlanetNew, _)),
 	assertz(spielStatus:planeten(RecNo, System, PlanetNew, PlanetenTyp)),
+	ignore(retractall(sammlung:sammlung(0, System, PlanetNew, _, _, _, _, _))),
+	/* rauswerfen der unmöglichen Stoffe nach Planetentypänderung, reinbringen der Defaults für neuen Planetentyp */
+	sammlung:sammlungAnOrteAnpassen(System, PlanetNew),
 	!.
 
 /* in anderes Zeile verschoben */
@@ -313,8 +318,8 @@ insUpdDel(System, PlanetNew, RecNoNew, PlanetenTyp) :-
 	PlanetNew \= "",
 	debug(myTrace, 'insert: RecNoNew=~k System=~k Planet=~k PlanetenTyp=~k', [RecNoNew, System, PlanetNew, PlanetenTyp]),
 	assertz(spielStatus:planeten(RecNoNew, System, PlanetNew, PlanetenTyp)),
-	sammlung:copyDefaultIfEmpty(System, PlanetNew),
 	spielStatus:copyDefaultIfEmpty(System, PlanetNew),
+	sammlung:copyDefaultIfEmpty(System, PlanetNew),
 	!.
 	
 /* löschen cascade */

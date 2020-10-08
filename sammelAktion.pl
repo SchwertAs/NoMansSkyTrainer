@@ -1,24 +1,24 @@
-:- module(sammelAktion, [sammelOrt/2]).
+:- module(sammelAktion, [sammelAktion/1, sammelOrt/2, pruefeSammelAktionVorraussetzung/3]).
 
 sammelAktion(bekannt).
 sammelAktion(erkaempfen).
 sammelAktion(ernten).
 sammelAktion(ertauchen).
 sammelAktion(exoFahrzeugMinenLaserNutzen).
+sammelAktion(gemuetsStrahlNutzen).
 sammelAktion(herausSchlagen).
 sammelAktion(jagen).
 sammelAktion(kaufen).
 sammelAktion(minenLaserNutzen).
 sammelAktion(pfluecken).
 sammelAktion(raumSchuerfen).
+sammelAktion(solarStrahlNutzen).
 sammelAktion(terrainFormerNutzen).
 sammelAktion(unterWasserErkaempfen).
 sammelAktion(verbessertenMinenLaserNutzen).
-sammelAktion(vonTierErhalten).
-sammelAktion(solarStrahlNutzen).
-sammelAktion(gemuetsStrahlNutzen).
 sammelAktion(verdienen).
 sammelAktion(vonBergbauEinheitGewinnen).
+sammelAktion(vonTierErhalten).
 
 sammelOrt(bekannt, ortSpieler).
 sammelOrt(ernten, ortPlantage).
@@ -37,86 +37,26 @@ sammelOrt(raumSchuerfen, ortWeltRaum).
 sammelOrt(terrainFormerNutzen, ortWald).
 sammelOrt(unterWasserErkaempfen, ortWasser).
 sammelOrt(verbessertenMinenLaserNutzen, ortWald).
-sammelOrt(vonTierErhalten, ortWald).
+sammelOrt(vonTierErhalten, ortNahrungsProzessor).
 sammelOrt(solarStrahlNutzen, ortWald).
 sammelOrt(gemuetsStrahlNutzen, ortWald).
 sammelOrt(verdienen, ortRaumStation).
 sammelOrt(vonBergbauEinheitGewinnen, ortBergbauEinheit).
 
-/* Vorraussetzungen im Multiwerkzeug */
-pruefeSammelAktionVorraussetzung(_System, _Planet, minenLaserNutzen) :-
-	!,
-	spielStatus(minenLaser),
+sammelStatus(minenLaserNutzen, minenLaser).
+sammelStatus(verbessertenMinenLaserNutzen, verbesserterMinenLaser).
+sammelStatus(terrainFormerNutzen, terrainFormer).
+sammelStatus(jagen, waffeVorhanden).
+sammelStatus(erkaempfen, waffeVorhanden).
+sammelStatus(raumSchuerfen, raumSchiffIstFlott).
+sammelStatus(exoFahrzeugMinenLaserNutzen, exoFahrzeugMinenLaser).
+sammelStatus(solarStrahlNutzen, solarStrahl).
+sammelStatus(gemuetsStrahlNutzen, gemuetsStrahl).
+sammelStatus(unterWasserErkaempfen, waffeVorhanden).
+
+/* Vorraussetzungen nach spielstatus und systemausstattung */
+pruefeSammelAktionVorraussetzung(System, Planet, SammelAktion) :-
+	((sammelStatus(SammelAktion, NoetigerStatus), spielStatus:spielStatus(NoetigerStatus, true)); \+sammelStatus(SammelAktion, _)),
+	(sammelOrt(SammelAktion, Ort), spielStatus:systemAusstattung([System, Planet, Ort], _)),
 	!.
 	
-pruefeSammelAktionVorraussetzung(_System, _Planet, verbessertenMinenLaserNutzen) :-
-	!,
-	spielStatus(verbesserterMinenLaser),
-	!.
-
-pruefeSammelAktionVorraussetzung(_System, _Planet, terrainFormerNutzen) :-
-	!,
-	spielStatus(terrainFormer),
-	!.
-
-pruefeSammelAktionVorraussetzung(_System, _Planet, SammelAktion) :-
-	(SammelAktion = jagen; SammelAktion = erkaempfen),
-	!,
-	spielStatus(waffeVorhanden),
-	!.
-
-/* Vorraussetzungen ohne Ortseinschränkung */
-pruefeSammelAktionVorraussetzung(_System, _Planet, raumSchuerfen) :-
-	!,
-	spielStatus(raumSchiffIstFlott),
-	!.
-	
-pruefeSammelAktionVorraussetzung(_System, _Planet, exoFahrzeugMinenLaserNutzen) :-
-	!, /* TODO Abfrage auf Rufstation ergänzen */
-	spielStatus(exoFahrzeugMinenLaser),
-	!.
-
-pruefeSammelAktionVorraussetzung(_System, _Planet, solarStrahlNutzen) :-
-	!,
-	spielStatus(solarStrahl),
-	!.
-
-pruefeSammelAktionVorraussetzung(_System, _Planet, gemuetsStrahlNutzen) :-
-	!,
-	spielStatus(gemuetsStrahl),
-	!.
-
-pruefeSammelAktionVorraussetzung(System, Planet, vonBergbauEinheitGewinnen) :-
-	!,
-	spielStatus:systemAusstattung([System, Planet, ortBergbauEinheit], _),
-	!.
-
-/* Vorraussetzungen in Planetenausstattung */
-pruefeSammelAktionVorraussetzung(System, Planet, kaufen) :-
-	!,
-	/* TODO Handelsposten einbringen */
-	(spielStatus:systemAusstattung([System, Planet, ortHandelsTerminal], _);
-	 spielStatus:systemAusstattung([System, Planet, ortHandelsStation], _);
-	 spielStatus:systemAusstattung([System, Planet, ortRaumStation], _)
-	),
-	!.
-
-	
-pruefeSammelAktionVorraussetzung(System, Planet, unterWasserErkaempfen) :-
-	!,
-	spielStatus(waffeVorhanden),
-	sammelOrt(unterWasserErkaempfen, Ort),
-	spielStatus:systemAusstattung([System, Planet, Ort], _),
-	!.
-
-/* ernten, ertauchen, herausschlagen vonTierErhalten */
-pruefeSammelAktionVorraussetzung(System, Planet, Operation) :-
-	sammelOrt(Operation, Ort),
-	spielStatus:systemAusstattung([System, Planet, Ort], _),
-	!.
-
-pruefeSammelAktionVorraussetzung(_System, _Planet, _) :-
-	true.	
-
-spielStatus(Operation) :-
-	spielStatus:spielStatus(Operation, true).

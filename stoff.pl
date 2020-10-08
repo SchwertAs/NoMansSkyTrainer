@@ -8,6 +8,7 @@ stoff(rohStoff, aktiviertesEmeril, 696).
 stoff(rohStoff, aktiviertesIndium, 949).
 stoff(rohStoff, aktiviertesKupfer, 245).
 stoff(rohStoff, ammoniak, 62).
+stoff(rohStoff, basalt, 62).
 stoff(rohStoff, cadmium, 234).
 stoff(rohStoff, chlor, 602).
 stoff(rohStoff, deuterium, 34).
@@ -16,6 +17,7 @@ stoff(rohStoff, diWasserStoff, 34).
 stoff(rohStoff, emeril, 348).
 stoff(rohStoff, ferritStaub, 14).
 stoff(rohStoff, gold, 202).
+stoff(rohStoff, hadalKern, 92625).
 stoff(rohStoff, indium, 464).
 stoff(rohStoff, ionisiertesKobalt, 401).
 stoff(rohStoff, kobalt, 198).
@@ -62,34 +64,45 @@ stoff(rohStoff, fluessigSonne, 16). /* schürfen mit SonnenStrahl */
 stoff(rohStoff, hexit, 654). /* Belohnung Gildenaufträge */
 stoff(rohStoff, lebendesWasser, 16). /* von Kind des Helios bekommen */
 stoff(rohStoff, fragmentierteQualia, 16). /* mit Gemütstrahl erjagen */
+stoff(rohStoff, leuchtendesMineral, 3280). /* in schwebendem Kristall */
 
 stoff(rohStoff, nanitHaufen, -1).
 
+/* stoff(rohStoff, queckSilber, -1). */
+
+stoff(verbrauch, navigationsDaten, 1000).
+stoff(verbrauch, absprungKapselKoordinaten, 85000).
+stoff(verbrauch, protokollEntschluesselungsCode, 1500).
+stoff(verbrauch, geborgeneDaten, 50000).
 stoff(verbrauch, fabrikUeberschreibungsEinheit, 50000).
-stoff(verbrauch, verteidigungsBeleg, 10000).
 stoff(verbrauch, geborgenesFregattenModul, 95000).
-stoff(verbrauch, lagerErweiterung, 95000).
 stoff(verbrauch, frachtSchott, 95000).
-stoff(verbrauch, reparaturEinheit, 12000).
+stoff(verbrauch, lagerErweiterung, 95000).
+stoff(verbrauch, multiWerkzeugErweiterungsPlatz, 95000).
+stoff(verbrauch, verteidigungsBeleg, 10000).
+stoff(verbrauch, reparaturSet, 12000).
 stoff(verbrauch, anomalieDetektor, 3280).
+stoff(verbrauch, notfallUebertragungsEmpfaenger, 3280).
 
 /* =============================== hergestellte Produkte ================ */
 /* herstellen mit Fabrikrezept oder Questrezept, verkaufen */
+stoff(komponente, lebensErhaltungsGel, 200).
+stoff(komponente, diWasserStoffGelee, 200).
+stoff(komponente, ionenAkku, 200).
+stoff(komponente, mikroProzessor, 2000).
+stoff(komponente, hermetischesSiegel, 800).
+stoff(komponente, metallPlatten, 800).
+stoff(komponente, solarSpiegel, 6150).
+stoff(komponente, hydraulischeVerkabelung, 3600).
+stoff(komponente, quantenComputer, 4200).
+stoff(komponente, aminoKammer, 12300).
+stoff(komponente, magnetischerResonator, 6150).
 stoff(komponente, antiMaterie, 5233).
 stoff(komponente, antiMaterieGehaeuse, 6500).
-stoff(komponente, diWasserStoffGelee, 200).
-stoff(komponente, hermetischesSiegel, 800).
-stoff(komponente, ionenAkku, 200).
-stoff(komponente, kobaltSpiegel, 20500).
-stoff(komponente, lebensErhaltungsGel, 200).
-stoff(komponente, metallPlatten, 800).
-stoff(komponente, mikroProzessor, 2000).
-stoff(komponente, natriumDiode, 3500).
-stoff(komponente, salzRefaktor, 30500).
-stoff(komponente, sauerStoffFilter, 615).
+stoff(komponente, vierfachServo, 20000).
+stoff(komponente, kabelBaum, 50000).
 stoff(komponente, sauerStoffKapsel, 350).
 stoff(komponente, raumSchiffStartTreibStoff, 450).
-stoff(komponente, vierfachServo, 20000).
 
 stoff(produkt, angereicherterKohlenStoff, 50000).
 stoff(produkt, aronium, 25000).
@@ -113,7 +126,6 @@ stoff(produkt, instabilesGel, 50000).
 stoff(produkt, instabilesNatrium, 12300).
 stoff(produkt, instabilesPlasma, 5750).
 stoff(produkt, iridesit, 150000).
-stoff(produkt, kabelBaum, 50000).
 stoff(produkt, kohlenStoffKristall, 3600).
 stoff(produkt, kryogenKammer, 3800000).
 stoff(produkt, kryoPumpe, 4500000).
@@ -182,31 +194,45 @@ stoff(modul, gefahrenSchutz, 0).
 stoff(modul, gefahrGutSchutzHandschuh, 0).
 stoff(modul, giftSchutzModulA, 0).
 stoff(modul, giftSchutzModulB, 0).
+stoff(modul, giftSchutzModulC, 0).
+stoff(modul, giftSchutzModulS, 0).
 stoff(modul, jetPack, 0).
 stoff(modul, kuehlMittelNetzwerkC, 0).
 stoff(modul, lebensErhaltung, 0).
 stoff(modul, lebensErhaltungsModulA, 0).
 stoff(modul, lebensErhaltungsModulB, 0).
+stoff(modul, lebensErhaltungsModulC, 0).
 stoff(modul, lebensErhaltungsModulS, 0).
 stoff(modul, neuralStimulatorB, 0).
 stoff(modul, perfektionierterUebersetzerS, 0).
 stoff(modul, raketenStiefelA, 0).
 stoff(modul, sauerStoffUmleiterA, 0).
 stoff(modul, sauerStoffWiederVerwerterC, 0).
-stoff(modul, schildGitterB, 0).
 stoff(modul, schildModulA, 0).
+stoff(modul, schildModulB, 0).
 stoff(modul, schildModulC, 0).
+stoff(modul, schildModulS, 0).
+stoff(modul, schildGitterB, 0).
 stoff(modul, strahlungsDeflektorC, 0).
 stoff(modul, strahlungsSchutzModulA, 0).
 stoff(modul, strahlungsSchutzModulB, 0).
+stoff(modul, strahlungsSchutzModulC, 0).
 stoff(modul, strahlungsSchutzModulS, 0).
 stoff(modul, toxinDaempferC, 0).
 stoff(modul, verbesserterUebersetzerA, 0).
 stoff(modul, waermeSchichtC, 0).
 stoff(modul, waermeSchutzModulA, 0).
 stoff(modul, waermeSchutzModulB, 0).
+stoff(modul, waermeSchutzModulC, 0).
+stoff(modul, waermeSchutzModulS, 0).
+stoff(modul, waermeSchutzModulKaelteA, 0).
 stoff(modul, waermeSchutzModulKaelteB, 0).
+stoff(modul, waermeSchutzModulKaelteC, 0).
+stoff(modul, waermeSchutzModulKaelteS, 0).
+stoff(modul, unterWasserSchutzModulA, 0).
 stoff(modul, unterWasserSchutzModulB, 0).
+stoff(modul, unterWasserSchutzModulC, 0).
+stoff(modul, unterWasserSchutzModulS, 0).
 stoff(modul, persoenlicheRaffinerie, 0).
 stoff(modul, luftSchubAntriebS, 0).
 
@@ -258,6 +284,14 @@ stoff(modul, instabilitaetsAntriebA, 0).
 stoff(modul, unterLichtVerstaerkerS, 0).
 stoff(modul, notFallWarpEinheitA, 0).
 stoff(modul, poloFigur, 0).
+stoff(modul, nadaFigur, 0).
+stoff(modul, atlasFigur, 0).
+stoff(modul, artemisFigur, 0).
+stoff(modul, apolloFigur, 0).
+stoff(modul, nullFigur, 0).
+stoff(modul, cadmiumRaumschiffSpur, 0).
+stoff(modul, emerilRaumschiffSpur, 0).
+stoff(modul, goldeneRaumschiffSpur, 0).
 
 
 /* ------------------------------- Frachtermodule ----------------------- */
@@ -323,6 +357,9 @@ stoff(modul, wellenFormWiederVerwerterB, 0).
 stoff(modul, solarStrahl, 0).
 stoff(modul, gemuetsStrahl, 0).
 
+stoff(modul, qResonator, 0).
+stoff(modul, impulsWerferQuerschlaegerModul, 0).
+
 /* ------------------------------- Exo-Fahrzeugmodule ------------------- */
 /* immer vorhanden */
 stoff(modul, driftAufhaengungA, 0).
@@ -375,48 +412,49 @@ stoff(modul, nautilonKanonenModulC, 0).
 stoff(modul, osmotischerGeneratorC, 0).
 stoff(modul, tethysStrahl, 0).
 
-/* =============================== Baustoffe ============================ */
-/* ------------------------------- Terminals ---------------------------- */
-stoff(basisBauEndStoff, konstruktionsTerminal, 0).
-stoff(basisBauEndStoff, exoFahrzeugTerminal, 0).
-stoff(basisBauEndStoff, waffenTerminal, 0).
-stoff(basisBauEndStoff, wissenschaftsTerminal, 0).
-stoff(basisBauEndStoff, landwirtschaftsTerminal, 0).
+/* =============================== Baustoffe ============================ 
+Technologie
+	Allgemein
+	Tragbar
+	Lager
+	Spezialisiert
+		Exo Fahrzeug
+		Terminals
+		Landwirtschaft
+	Strom&Industrie
+		Industrie
+		Energie
+			Schalter
+		Technologie
+Strukturen
+Dekoration
+*/
 
-/* ------------------------------- Industriemodule ---------------------- */
-stoff(basisBauEndStoff, annaeherungsSchalter, 0).
-stoff(basisBauEndStoff, bodenSchalter, 0).
-stoff(basisBauEndStoff, elektroMagnetischerGenerator, 0).
-stoff(basisBauEndStoff, energieUmkehrer, 0).
-stoff(basisBauEndStoff, gasExtraktor, 0).
-stoff(basisBauEndStoff, mineralienExtraktor, 0).
-stoff(basisBauEndStoff, schalter, 0).
-stoff(basisBauEndStoff, solarModul, 0).
-stoff(basisBauEndStoff, versorgungsDepot, 0).
-stoff(basisBauEndStoff, versorgungsRohr, 0).
-stoff(basisBauEndStoff, wandSchalter, 0).
+/* ------------------------------- Technologie Allgemein ---------------- */
+stoff(basisBauEndStoff, basisTelePorterModul, 0).
+stoff(basisBauEndStoff, basisBergungsKapsel, 0).
+stoff(basisBauEndStoff, terminalDesGalaktischenMarktes, 0).
+stoff(basisBauEndStoff, gesundheitsStation, 0).
+stoff(basisBauEndStoff, gefahrenSchutzEinheit, 0).
+stoff(basisBauEndStoff, mittlereRaffinerie, 0).
+stoff(basisBauEndStoff, grosseRaffinerie, 0).
+stoff(basisBauEndStoff, aussehenModifikator, 0).
+stoff(basisBauEndStoff, antiMaterieReaktor, 0).
+stoff(basisBauEndStoff, sauerStoffVerarbeiter, 0).
+stoff(basisBauEndStoff, nachrichtenModul, 0).
+stoff(basisBauEndStoff, landeFeld, 0).
 
-
-/* ------------------------------- Landwirtschaftsmodule ---------------- */
-stoff(basisBauEndStoff, echinoKaktus, 0).
-stoff(basisBauEndStoff, eiweissPerlenKugel, 0).
-stoff(basisBauEndStoff, floraBehaelterHochBeet, 0).
-stoff(basisBauEndStoff, floraBehaelterKasten, 0).
-stoff(basisBauEndStoff, floraBehaelterTubus, 0).
-stoff(basisBauEndStoff, frostWurz, 0).
-stoff(basisBauEndStoff, gammaGras, 0).
-stoff(basisBauEndStoff, giftIgel, 0).
-stoff(basisBauEndStoff, gravitinoWirt, 0).
-stoff(basisBauEndStoff, grosserHydroKulturTrog, 0).
-stoff(basisBauEndStoff, hydroKulturTrog, 0).
-stoff(basisBauEndStoff, magenKrampfBlume, 0).
-stoff(basisBauEndStoff, morditWurzel, 0).
-stoff(basisBauEndStoff, nipNip, 0).
-stoff(basisBauEndStoff, pilzGeflecht, 0).
-stoff(basisBauEndStoff, sonnenRebe, 0).
-stoff(basisBauEndStoff, sternenDorn, 0).
-stoff(basisBauEndStoff, topfPflanze, 0).
-stoff(basisBauEndStoff, stehenderPflanzenBehaelter, 0).
+/* ------------------------------- Tragbare Technologie ----------------- */
+stoff(basisBauEndStoff, tragbareRaffinerie, 0).
+stoff(basisBauEndStoff, naehrStoffProzessor, 0).
+stoff(basisBauEndStoff, basisComputer, 0).
+stoff(basisBauEndStoff, konstruktionsForschungsStation, 0).
+stoff(basisBauEndStoff, autonomeBergBauEinheit, 0).
+stoff(basisBauEndStoff, atmosphaerenVerarbeitungsAnlage, 0).
+stoff(basisBauEndStoff, signalBooster, 0).
+stoff(basisBauEndStoff, speicherSignal, 0).
+stoff(basisBauEndStoff, speicherPunkt, 0).
+stoff(basisBauEndStoff, kommunikationsStation, 0).
 
 /* ------------------------------- Lager --- ---------------------------- */
 stoff(basisBauEndStoff, lagerBehaelter0, 0).
@@ -430,150 +468,259 @@ stoff(basisBauEndStoff, lagerBehaelter7, 0).
 stoff(basisBauEndStoff, lagerBehaelter8, 0).
 stoff(basisBauEndStoff, lagerBehaelter9, 0).
 stoff(basisBauEndStoff, verschlosseneKiste, 0).
+stoff(basisBauEndStoff, kleineKiste, 0).
+stoff(basisBauEndStoff, fassFoermigerFabrikator, 0).
+stoff(basisBauEndStoff, kistenFoermigerFabrikator, 0).
 
 /* ------------------------------- Exo-Fahrzeug-Stationen --------------- */
 stoff(basisBauEndStoff, roamerGeoBucht, 0).
-stoff(basisBauEndStoff, nomadenGeoBucht, 0).
-stoff(basisBauEndStoff, exoFahrzeugRufStation, 0).
-stoff(basisBauEndStoff, nautilonKammer, 0).
-stoff(basisBauEndStoff, pilgerGeoBucht, 0).
 stoff(basisBauEndStoff, kolossGeoBucht, 0).
 stoff(basisBauEndStoff, minotaurusGeoBucht, 0).
 stoff(basisBauEndStoff, rennInitiator, 0).
 stoff(basisBauEndStoff, rennHindernis, 0).
 stoff(basisBauEndStoff, rennKraftVerstaerker, 0).
+stoff(basisBauEndStoff, nautilonKammer, 0).
+stoff(basisBauEndStoff, exoFahrzeugRufStation, 0).
+stoff(basisBauEndStoff, pilgerGeoBucht, 0).
+stoff(basisBauEndStoff, nomadenGeoBucht, 0).
 
-/* ------------------------------- Tragbare Technologie ----------------- */
-stoff(basisBauEndStoff, autonomeBergBauEinheit, 0).
-stoff(basisBauEndStoff, basisComputer, 0).
-stoff(basisBauEndStoff, batterie, 0).
-stoff(basisBauEndStoff, konstruktionsForschungsStation, 0).
-stoff(basisBauEndStoff, bioTreibStoffReaktor, 0).
-stoff(basisBauEndStoff, elektrischeTarneinheit, 0).
-stoff(basisBauEndStoff, kommunikationsStation, 0).
-stoff(basisBauEndStoff, nachrichtenModul, 0).
-stoff(basisBauEndStoff, naehrStoffProzessor, 0).
-stoff(basisBauEndStoff, signalBooster, 0).
-stoff(basisBauEndStoff, speicherPunkt, 0).
-stoff(basisBauEndStoff, speicherSignal, 0).
-stoff(basisBauEndStoff, tragbareRaffinerie, 0).
+/* ------------------------------- Terminals ---------------------------- */
+stoff(basisBauEndStoff, konstruktionsTerminal, 0).
+stoff(basisBauEndStoff, exoFahrzeugTerminal, 0).
+stoff(basisBauEndStoff, waffenTerminal, 0).
+stoff(basisBauEndStoff, wissenschaftsTerminal, 0).
+stoff(basisBauEndStoff, landwirtschaftsTerminal, 0).
 
-/* ------------------------------- Technologie Allgemein ---------------- */
-stoff(basisBauEndStoff, antiMaterieReaktor, 0).
-stoff(basisBauEndStoff, atmosphaerenVerarbeitungsAnlage, 0).
-stoff(basisBauEndStoff, aussehenModifikator, 0).
+/* ------------------------------- Landwirtschaftsmodule ---------------- */
+stoff(basisBauEndStoff, hydroKulturTrog, 0).
+stoff(basisBauEndStoff, grosserHydroKulturTrog, 0).
+stoff(basisBauEndStoff, gammaGras, 0).
+stoff(basisBauEndStoff, pilzGeflecht, 0).
+stoff(basisBauEndStoff, frostWurz, 0).
+stoff(basisBauEndStoff, giftIgel, 0).
+stoff(basisBauEndStoff, sonnenRebe, 0).
+stoff(basisBauEndStoff, magenKrampfBlume, 0).
+stoff(basisBauEndStoff, gravitinoWirt, 0).
+stoff(basisBauEndStoff, morditWurzel, 0).
+stoff(basisBauEndStoff, echinoKaktus, 0).
+stoff(basisBauEndStoff, sternenDorn, 0).
+stoff(basisBauEndStoff, eiweissPerlenKugel, 0).
+stoff(basisBauEndStoff, nipNip, 0).
+stoff(basisBauEndStoff, stehenderPflanzenBehaelter, 0).
 stoff(basisBauEndStoff, automatischerFuetterer, 0).
-stoff(basisBauEndStoff, basisBergungsKapsel, 0).
-stoff(basisBauEndStoff, basisTelePorterModul, 0).
-stoff(basisBauEndStoff, gefahrenSchutzEinheit, 0).
-stoff(basisBauEndStoff, geraeuschBox, 0).
-stoff(basisBauEndStoff, gesundheitsStation, 0).
-stoff(basisBauEndStoff, grosseRaffinerie, 0).
-stoff(basisBauEndStoff, kurzStreckenTelePorter, 0).
-stoff(basisBauEndStoff, landeFeld, 0).
-stoff(basisBauEndStoff, leuchtBoden, 0).
-stoff(basisBauEndStoff, lichtBox, 0).
-stoff(basisBauEndStoff, mittlereRaffinerie, 0).
 stoff(basisBauEndStoff, nutzTierEinheit, 0).
-stoff(basisBauEndStoff, terminalDesGalaktischenMarktes, 0).
+stoff(basisBauEndStoff, floraBehaelterHochBeet, 0).
+stoff(basisBauEndStoff, floraBehaelterKasten, 0).
+stoff(basisBauEndStoff, floraBehaelterTubus, 0).
+stoff(basisBauEndStoff, topfPflanze, 0).
+
+/* ------------------------------- Industriemodule ---------------------- */
+stoff(basisBauEndStoff, mineralienExtraktor, 0).
+stoff(basisBauEndStoff, gasExtraktor, 0).
+stoff(basisBauEndStoff, versorgungsDepot, 0).
+stoff(basisBauEndStoff, versorgungsRohr, 0).
+
+/* ------------------------------- Energiemodule ------------------------ */
+stoff(basisBauEndStoff, solarModul, 0).
+stoff(basisBauEndStoff, bioTreibStoffReaktor, 0).
+stoff(basisBauEndStoff, elektroMagnetischerGenerator, 0).
+stoff(basisBauEndStoff, batterie, 0).
+stoff(basisBauEndStoff, elektrischeTarneinheit, 0).
+
+/* ------------------------------- Schalter ----------------------------- */
+stoff(basisBauEndStoff, energieUmkehrer, 0).
+stoff(basisBauEndStoff, automatischerSchalter, 0).
+stoff(basisBauEndStoff, wandSchalter, 0).
+stoff(basisBauEndStoff, annaeherungsSchalter, 0).
+stoff(basisBauEndStoff, bodenSchalter, 0).
+stoff(basisBauEndStoff, schalter, 0).
+
+/* ------------------------------- Technologie module ------------------------ */
+stoff(basisBauEndStoff, kurzStreckenTelePorter, 0).
 stoff(basisBauEndStoff, kugelErzeuger, 0).
-stoff(basisBauEndStoff, sauerStoffVerarbeiter, 0).
 stoff(basisBauEndStoff, byteBeatGeraet, 0).
 stoff(basisBauEndStoff, byteBeatSchaltung, 0).
+stoff(basisBauEndStoff, geraeuschBox, 0).
 
-
-/* ------------------------------- Energietechnologie ------------------- */
-stoff(basisBauEndStoff, automatischerSchalter, 0).
 
 /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Dekoration %%%%%%%%%%%%%%%%%%%%%%%%%%% */
-/* =====================  Motiv Designs ============================================== */
+/* =====================  Dekoration Motive  ======================================== */
 stoff(basisBauEndStoff, motivStilisiertesR, 0).
-stoff(basisBauEndStoff, motivRundPipette, 0).
 stoff(basisBauEndStoff, motivBuegel, 0).
-stoff(basisBauEndStoff, motivNo0, 0).
-stoff(basisBauEndStoff, motivSchildErstochenerVogel, 0).
-stoff(basisBauEndStoff, motivFaltungDuennDick, 0).
-stoff(basisBauEndStoff, motivZiegelSteine, 0).
-stoff(basisBauEndStoff, motivRadioAktivGrau, 0).
 stoff(basisBauEndStoff, motivGrabStein, 0).
-stoff(basisBauEndStoff, motivHelloGames, 0).
+stoff(basisBauEndStoff, motivNo0, 0).
 stoff(basisBauEndStoff, motivNo1, 0).
 stoff(basisBauEndStoff, motivNo2, 0).
-stoff(basisBauEndStoff, motivSchildGrünerMann, 0).
-stoff(basisBauEndStoff, motivSchildKorvax, 0).
 stoff(basisBauEndStoff, motivNo3, 0).
 stoff(basisBauEndStoff, motivNo5, 0).
 stoff(basisBauEndStoff, motivNo7, 0).
-stoff(basisBauEndStoff, motivNo9, 0).
 stoff(basisBauEndStoff, motivNo4, 0).
 stoff(basisBauEndStoff, motivNo6, 0).
 stoff(basisBauEndStoff, motivNo8, 0).
+stoff(basisBauEndStoff, motivNo9, 0).
+stoff(basisBauEndStoff, anomalieMotiv, 0).
+stoff(basisBauEndStoff, galaktischerHubMotiv, 0).
+stoff(basisBauEndStoff, zustimmendeHandbewegungMotiv, 0).
+stoff(basisBauEndStoff, nadaMotiv, 0).
+stoff(basisBauEndStoff, poloMotiv, 0).
+stoff(basisBauEndStoff, apolloMotiv, 0).
+stoff(basisBauEndStoff, artemisMotiv, 0).
+stoff(basisBauEndStoff, nullMotiv, 0).
+stoff(basisBauEndStoff, motivSchildErstochenerVogel, 0).
+stoff(basisBauEndStoff, motivSchildGrünerMann, 0).
+stoff(basisBauEndStoff, motivSchildKorvax, 0).
 stoff(basisBauEndStoff, motivFroschSack, 0).
 stoff(basisBauEndStoff, motivLaemmchen, 0).
+stoff(basisBauEndStoff, motivRundPipette, 0).
+stoff(basisBauEndStoff, motivFaltungDuennDick, 0).
+stoff(basisBauEndStoff, motivZiegelSteine, 0).
+stoff(basisBauEndStoff, motivRadioAktivGrau, 0).
 
-/* =====================  Dekorative Module 1 ======================================== */
-stoff(basisBauEndStoff, wandBildSchirm, 0).
-stoff(basisBauEndStoff, wandVentilator, 0).
-stoff(basisBauEndStoff, gruenerWandBildSchirm, 0).
-stoff(basisBauEndStoff, schubLadenSchrank, 0).
-stoff(basisBauEndStoff, wandEinheit, 0).
-stoff(basisBauEndStoff, lagerModulDeko, 0).
-stoff(basisBauEndStoff, deckenPaneel, 0).
-stoff(basisBauEndStoff, techBedienFeld, 0).
-stoff(basisBauEndStoff, server, 0).
-stoff(basisBauEndStoff, kanisterRegal, 0).
-stoff(basisBauEndStoff, kleineKiste, 0).
-stoff(basisBauEndStoff, schliessFach, 0).
-stoff(basisBauEndStoff, flachesModul, 0).
-stoff(basisBauEndStoff, seitenModul, 0).
-stoff(basisBauEndStoff, lagerModul, 0).
-stoff(basisBauEndStoff, regalModul, 0).
-stoff(basisBauEndStoff, roboterArm, 0).
-stoff(basisBauEndStoff, waffenRegal, 0).
-stoff(basisBauEndStoff, oszilloskop, 0).
-stoff(basisBauEndStoff, achtEckSchrank, 0).
-stoff(basisBauEndStoff, fassFoermigerFabrikator, 0).
-stoff(basisBauEndStoff, hoherSchrank, 0).
-stoff(basisBauEndStoff, kistenFoermigerFabrikator, 0).
-
-/* =====================  Dekorative Module 2 ======================================== */
-stoff(basisBauEndStoff, schalenSitzStuhl, 0).
-stoff(basisBauEndStoff, stuhlEckig, 0).
-stoff(basisBauEndStoff, flagge1, 0).
-stoff(basisBauEndStoff, tisch, 0).
-stoff(basisBauEndStoff, bett, 0).
-stoff(basisBauEndStoff, stuhlFriseur, 0).
-stoff(basisBauEndStoff, sofa, 0).
-stoff(basisBauEndStoff, flagge2, 0).
-stoff(basisBauEndStoff, wandFlagge1, 0).
-stoff(basisBauEndStoff, tischSechsEckig, 0).
-stoff(basisBauEndStoff, einfacherSchreibTisch, 0).
-stoff(basisBauEndStoff, ergonomischesSofa, 0).
-stoff(basisBauEndStoff, eckSofa, 0).
-stoff(basisBauEndStoff, flagge3, 0).
-stoff(basisBauEndStoff, flagge4, 0).
-stoff(basisBauEndStoff, wandFlagge3, 0).
-stoff(basisBauEndStoff, wandFlagge2, 0).
-stoff(basisBauEndStoff, bodenMatte, 0).
-stoff(basisBauEndStoff, grosseMonitorStation, 0).
-stoff(basisBauEndStoff, gewoelbterTisch, 0).
-stoff(basisBauEndStoff, monitorStation, 0).
-stoff(basisBauEndStoff, arbeitsPlatte, 0).
-stoff(basisBauEndStoff, leichterTisch, 0).
-
-/* =====================  Beleuchtung ================================================ */
+/* =====================  Dekoration Lichter ================================================ */
 stoff(basisBauEndStoff, lichtHandLampe, 0).
-stoff(basisBauEndStoff, weisseLeuchte, 0).
-stoff(basisBauEndStoff, lichtStehLampeEckig, 0).
 stoff(basisBauEndStoff, laborLampe, 0).
+stoff(basisBauEndStoff, leuchtBoden, 0).
+stoff(basisBauEndStoff, lichtBox, 0).
 stoff(basisBauEndStoff, blaueLeuchte, 0).
-stoff(basisBauEndStoff, roteLeuchte, 0).
-stoff(basisBauEndStoff, lichtStehLampeRund, 0).
-stoff(basisBauEndStoff, lichtStehLampeSchirm, 0).
-stoff(basisBauEndStoff, deckenLeuchte, 0).
+stoff(basisBauEndStoff, pinkeLeuchte, 0).
 stoff(basisBauEndStoff, gelbeLeuchte, 0).
 stoff(basisBauEndStoff, grueneLeuchte, 0).
-stoff(basisBauEndStoff, pinkeLeuchte, 0).
+stoff(basisBauEndStoff, roteLeuchte, 0).
+stoff(basisBauEndStoff, weisseLeuchte, 0).
+stoff(basisBauEndStoff, deckenLeuchte, 0).
+stoff(basisBauEndStoff, lichtStehLampeEckig, 0).
+stoff(basisBauEndStoff, lichtStehLampeRund, 0).
+stoff(basisBauEndStoff, lichtStehLampeSchirm, 0).
+
+/* =====================  Dekoration Blattwerk  ======================================== */
+stoff(basisBauEndStoff, fruechteBaum, 0).
+stoff(basisBauEndStoff, spindelBaum, 0).
+stoff(basisBauEndStoff, immerGruenBaum, 0).
+stoff(basisBauEndStoff, rankenFuesser, 0).
+stoff(basisBauEndStoff, fleischFressenderStrauch, 0).
+stoff(basisBauEndStoff, zwergPalme, 0).
+stoff(basisBauEndStoff, kurioserMais, 0).
+stoff(basisBauEndStoff, segelPalme, 0).
+stoff(basisBauEndStoff, kugelBaum, 0).
+stoff(basisBauEndStoff, steinGarten, 0).
+stoff(basisBauEndStoff, windenderStrauch, 0).
+stoff(basisBauEndStoff, regenSchirmBaum, 0).
+stoff(basisBauEndStoff, umschlingenderBaum, 0).
+stoff(basisBauEndStoff, blasenBildenderPilz, 0).
+stoff(basisBauEndStoff, wachsameWoelbung, 0).
+stoff(basisBauEndStoff, tentakelSpitze, 0).
+stoff(basisBauEndStoff, robusterStrauch, 0).
+stoff(basisBauEndStoff, gefrorenerPflanzenBehaelter, 0).
+stoff(basisBauEndStoff, uraltesNadelGehoelz, 0).
+stoff(basisBauEndStoff, meeresGestein, 0).
+stoff(basisBauEndStoff, mineralBogen, 0).
+stoff(basisBauEndStoff, edelSteinFels, 0).
+
+/* =====================  Dekoration Innen  ======================================== */
+stoff(basisBauEndStoff, kanisterRegal, 0).
+stoff(basisBauEndStoff, eckSofa, 0).
+stoff(basisBauEndStoff, ergonomischesSofa, 0).
+stoff(basisBauEndStoff, sofa, 0).
+stoff(basisBauEndStoff, einfacherSchreibTisch, 0).
+stoff(basisBauEndStoff, leichterTisch, 0).
+stoff(basisBauEndStoff, lagerModulDeko, 0).
+stoff(basisBauEndStoff, flachesModul, 0).
+stoff(basisBauEndStoff, regalModul, 0).
+stoff(basisBauEndStoff, seitenModul, 0).
+stoff(basisBauEndStoff, hoherSchrank, 0).
+stoff(basisBauEndStoff, roboterBegleiter, 0).
+stoff(basisBauEndStoff, expansionsWuerfelGeraet, 0).
+stoff(basisBauEndStoff, kugelHologrammGeraet, 0).
+stoff(basisBauEndStoff, taschenRealitaetsGenerator, 0).
+stoff(basisBauEndStoff, gewoelbterTisch, 0).
+stoff(basisBauEndStoff, waffenRegal, 0).
+stoff(basisBauEndStoff, grosseMonitorStation, 0).
+stoff(basisBauEndStoff, monitorStation, 0).
+stoff(basisBauEndStoff, deckenPaneel, 0).
+stoff(basisBauEndStoff, bodenMatte, 0).
+stoff(basisBauEndStoff, server, 0).
+stoff(basisBauEndStoff, schubLadenSchrank, 0).
+stoff(basisBauEndStoff, wandFlagge1, 0).
+stoff(basisBauEndStoff, wandFlagge2, 0).
+stoff(basisBauEndStoff, wandFlagge3, 0).
+stoff(basisBauEndStoff, schalenSitzStuhl, 0).
+stoff(basisBauEndStoff, stuhlEckig, 0).
+stoff(basisBauEndStoff, stuhlFriseur, 0).
+stoff(basisBauEndStoff, tisch, 0).
+stoff(basisBauEndStoff, tischSechsEckig, 0).
+stoff(basisBauEndStoff, eckSchreibTisch, 0).
+stoff(basisBauEndStoff, techBedienFeld, 0).
+stoff(basisBauEndStoff, wandBildSchirm, 0).
+stoff(basisBauEndStoff, wandVentilator, 0).
+stoff(basisBauEndStoff, wandEinheit, 0).
+stoff(basisBauEndStoff, bett, 0).
+stoff(basisBauEndStoff, arbeitsPlatte, 0).
+stoff(basisBauEndStoff, gruenerWandBildSchirm, 0).
+stoff(basisBauEndStoff, oszilloskop, 0).
+stoff(basisBauEndStoff, achtEckSchrank, 0).
+stoff(basisBauEndStoff, roboterArm, 0).
+stoff(basisBauEndStoff, schliessFach, 0).
+stoff(basisBauEndStoff, crewSchliessFach, 0).
+stoff(basisBauEndStoff, notFallHeizung, 0).
+stoff(basisBauEndStoff, notFallBeleuchtung, 0).
+stoff(basisBauEndStoff, lagerEinheit, 0).
+stoff(basisBauEndStoff, strapazierfaehigesMoebelStueck, 0).
+stoff(basisBauEndStoff, pflanzenKanister, 0).
+stoff(basisBauEndStoff, probenBehaelter, 0).
+stoff(basisBauEndStoff, grosseLagerEinheit, 0).
+stoff(basisBauEndStoff, bergungsKiste, 0).
+stoff(basisBauEndStoff, gesicherterAktenKoffer, 0).
+stoff(basisBauEndStoff, crewTruhe, 0).
+stoff(basisBauEndStoff, industrieWerkBank, 0).
+stoff(basisBauEndStoff, industriePalette, 0).
+stoff(basisBauEndStoff, industrieFass, 0).
+
+/* =====================  Dekoration Verzierungen ======================================== */
+stoff(basisBauEndStoff, krauseKoralle, 0).
+stoff(basisBauEndStoff, wasserKristall, 0).
+stoff(basisBauEndStoff, kronLeuchterBluete, 0).
+stoff(basisBauEndStoff, kleinesAquarium, 0).
+stoff(basisBauEndStoff, terrarium, 0). 
+stoff(basisBauEndStoff, rohr, 0).
+stoff(basisBauEndStoff, pyramide, 0).
+stoff(basisBauEndStoff, grosserKeil, 0).
+stoff(basisBauEndStoff, kleinerKeil, 0).
+stoff(basisBauEndStoff, gebogenesRohr, 0).
+stoff(basisBauEndStoff, flagge1, 0).
+stoff(basisBauEndStoff, flagge2, 0).
+stoff(basisBauEndStoff, flagge3, 0).
+stoff(basisBauEndStoff, flagge4, 0).
+stoff(basisBauEndStoff, kugel, 0).
+stoff(basisBauEndStoff, wuerfel, 0).
+stoff(basisBauEndStoff, zylinder, 0).
+stoff(basisBauEndStoff, pflasterungPodest, 0).
+stoff(basisBauEndStoff, bronzeneKreaturStatue, 0).
+stoff(basisBauEndStoff, silberneKreaturStatue, 0).
+stoff(basisBauEndStoff, goldeneKreaturStatue, 0).
+stoff(basisBauEndStoff, bronzeneDiploStatue, 0).
+stoff(basisBauEndStoff, silberneDiploStatue, 0).
+stoff(basisBauEndStoff, goldeneDiploStatue, 0).
+stoff(basisBauEndStoff, bronzeneGekStatue, 0).
+stoff(basisBauEndStoff, silberneGekStatue, 0).
+stoff(basisBauEndStoff, goldeneGekStatue, 0).
+stoff(basisBauEndStoff, bronzeneJaegerStatue, 0).
+stoff(basisBauEndStoff, silberneJaegerStatue, 0).
+stoff(basisBauEndStoff, goldeneJaegerStatue, 0).
+stoff(basisBauEndStoff, bronzeneKampfLaeuferStatue, 0).
+stoff(basisBauEndStoff, silberneKampfLaeuferStatue, 0).
+stoff(basisBauEndStoff, goldeneKampfLaeuferStatue, 0).
+stoff(basisBauEndStoff, bronzeneAtlasStatue, 0).
+stoff(basisBauEndStoff, silberneAtlasStatue, 0).
+stoff(basisBauEndStoff, goldeneAtlasStatue, 0).
+stoff(basisBauEndStoff, bronzeneAstronautenStatue, 0).
+stoff(basisBauEndStoff, silberneAstronautenStatue, 0).
+stoff(basisBauEndStoff, goldeneAstronautenStatue, 0).
+
+
+/* nicht mehr bekannte Dekos */
+stoff(basisBauEndStoff, lagerModul, 0).
+stoff(basisBauEndStoff, motivHelloGames, 0).
+
 
 
 /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Strukturen %%%%%%%%%%%%%%%%%%%%%%%%%%% */
@@ -666,7 +813,6 @@ stoff(basisBauEndStoff, lFoermigerKorridor, 0).
 stoff(basisBauEndStoff, korridorMitGlasDach, 0).
 stoff(basisBauEndStoff, holoTuer, 0).
 stoff(basisBauEndStoff, zugangsRampe, 0).
-stoff(basisBauEndStoff, pflasterungVierFach, 0).
 stoff(basisBauEndStoff, viererFundamentStrebe, 0).
 stoff(basisBauEndStoff, fundamentStrebe, 0).
 stoff(basisBauEndStoff, zylindrischerRaumRahmen, 0).
@@ -676,8 +822,8 @@ stoff(basisBauEndStoff, korridorFenster, 0).
 stoff(basisBauEndStoff, bioKuppelRaum, 0).
 stoff(basisBauEndStoff, gebogenerKorridor, 0).
 stoff(basisBauEndStoff, leiter, 0).
+stoff(basisBauEndStoff, pflasterungVierFach, 0).
 stoff(basisBauEndStoff, pflasterung, 0).
-stoff(basisBauEndStoff, pflasterungPodest, 0).
 stoff(basisBauEndStoff, grossesGlasPaneel, 0).
 stoff(basisBauEndStoff, aussichtsKugel, 0).
 
@@ -718,68 +864,6 @@ stoff(basisBauEndStoff, galaktischerHubBanner, 0).
 stoff(basisBauEndStoff, spezialistPoloBanner, 0).
 stoff(basisBauEndStoff, priesterEntitaetNadaBanner, 0).
 */
-stoff(basisBauEndStoff, mineralBogen, 0).
-stoff(basisBauEndStoff, edelSteinFels, 0).
-
-stoff(basisBauEndStoff, tentakelSpitze, 0).
-stoff(basisBauEndStoff, wachsameWoelbung, 0).
-stoff(basisBauEndStoff, blasenBildenderPilz, 0).
-stoff(basisBauEndStoff, uraltesNadelGehoelz, 0).
-stoff(basisBauEndStoff, gefrorenerPflanzenBehaelter, 0).
-stoff(basisBauEndStoff, robusterStrauch, 0).
-stoff(basisBauEndStoff, meeresGestein, 0).
-stoff(basisBauEndStoff, terrarium, 0). 
-stoff(basisBauEndStoff, segelPalme, 0).
-stoff(basisBauEndStoff, kugelBaum, 0).
-stoff(basisBauEndStoff, steinGarten, 0).
-stoff(basisBauEndStoff, taschenRealitaetsGenerator, 0).
-stoff(basisBauEndStoff, krauseKoralle, 0).
-stoff(basisBauEndStoff, wasserKristall, 0).
-stoff(basisBauEndStoff, kronLeuchterBluete, 0).
-stoff(basisBauEndStoff, rankenFuesser, 0).
-stoff(basisBauEndStoff, kleinesAquarium, 0).
-stoff(basisBauEndStoff, bronzeneAtlasStatue, 0).
-stoff(basisBauEndStoff, silberneAtlasStatue, 0).
-stoff(basisBauEndStoff, goldeneAtlasStatue, 0).
-stoff(basisBauEndStoff, fleischFressenderStrauch, 0).
-stoff(basisBauEndStoff, zwergPalme, 0).
-stoff(basisBauEndStoff, kurioserMais, 0).
-stoff(basisBauEndStoff, bronzeneJaegerStatue, 0).
-stoff(basisBauEndStoff, silberneJaegerStatue, 0).
-stoff(basisBauEndStoff, goldeneJaegerStatue, 0).
-stoff(basisBauEndStoff, expansionsWuerfelGeraet, 0).
-stoff(basisBauEndStoff, roboterBegleiter, 0).
-stoff(basisBauEndStoff, kugelHologrammGeraet, 0).
-stoff(basisBauEndStoff, artemisMotiv, 0).
-stoff(basisBauEndStoff, nullMotiv, 0).
-stoff(basisBauEndStoff, fruechteBaum, 0).
-stoff(basisBauEndStoff, spindelBaum, 0).
-stoff(basisBauEndStoff, immerGruenBaum, 0).
-stoff(basisBauEndStoff, apolloMotiv, 0).
-stoff(basisBauEndStoff, bronzeneDiploStatue, 0).
-stoff(basisBauEndStoff, silberneDiploStatue, 0).
-stoff(basisBauEndStoff, goldeneDiploStatue, 0).
-stoff(basisBauEndStoff, nadaMotiv, 0).
-stoff(basisBauEndStoff, poloMotiv, 0).
-stoff(basisBauEndStoff, bronzeneKampfLaeuferStatue, 0).
-stoff(basisBauEndStoff, silberneKampfLaeuferStatue, 0).
-stoff(basisBauEndStoff, goldeneKampfLaeuferStatue, 0).
-stoff(basisBauEndStoff, bronzeneGekStatue, 0).
-stoff(basisBauEndStoff, silberneGekStatue, 0).
-stoff(basisBauEndStoff, goldeneGekStatue, 0).
-stoff(basisBauEndStoff, anomalieMotiv, 0).
-stoff(basisBauEndStoff, galaktischerHubMotiv, 0).
-stoff(basisBauEndStoff, umschlingenderBaum, 0).
-stoff(basisBauEndStoff, regenSchirmBaum, 0).
-stoff(basisBauEndStoff, windenderStrauch, 0).
-stoff(basisBauEndStoff, nadaFigur, 0).
-stoff(basisBauEndStoff, zustimmendeHandbewegungMotiv, 0).
-stoff(basisBauEndStoff, bronzeneKreaturStatue, 0).
-stoff(basisBauEndStoff, silberneKreaturStatue, 0).
-stoff(basisBauEndStoff, goldeneKreaturStatue, 0).
-stoff(basisBauEndStoff, bronzeneAstronautenStatue, 0).
-stoff(basisBauEndStoff, silberneAstronautenStatue, 0).
-stoff(basisBauEndStoff, goldeneAstronautenStatue, 0).
 
 /* =============================== Frachter ============================= */
 stoff(basisBauEndStoff, flottenKommandoRaum, 0).
@@ -792,29 +876,15 @@ stoff(basisBauEndStoff, frachterKreuzungVierFach, 0).
 
 /* Eine Komponente */
 stoff(basisBauEndStoff, frachterTreppe, 0).
-stoff(basisBauEndStoff, gebogenesRohr, 0).
-stoff(basisBauEndStoff, grosserKeil, 0).
-stoff(basisBauEndStoff, kleinerKeil, 0).
-stoff(basisBauEndStoff, kugel, 0).
-stoff(basisBauEndStoff, pyramide, 0).
-stoff(basisBauEndStoff, rohr, 0).
 stoff(basisBauEndStoff, stabilerWuerfel, 0).
-stoff(basisBauEndStoff, wuerfel, 0).
-stoff(basisBauEndStoff, zylinder, 0).
 
 /* nur kaufen und verkaufen */
 stoff(handelsWare, zuckendesEi, 9600).
-
-stoff(handelsWare, absprungKapselKoordinaten, 85000).
-stoff(handelsWare, protokollEntschluesselungsCode, 85000).
-stoff(handelsWare, geborgeneDaten, 50000).
-stoff(handelsWare, queckSilber, -1).
-stoff(handelsWare, navigationsDaten, 1000).
+stoff(handelsWare, entschluesselteBenutzerDaten, 1000).
 stoff(handelsWare, antiHaftKolben, 6000).
 stoff(handelsWare, ausrangierteSchaltPlatte, 1000).
 stoff(handelsWare, autonomePositionierungsEinheit, 30000).
 stoff(handelsWare, bromSalz, 15000).
-stoff(handelsWare, entschluesselteBenutzerDaten, 1000).
 stoff(handelsWare, experimentelleEnergieFluessigkeit, 30000).
 stoff(handelsWare, fuenfDimensionalerTorus, 30000).
 stoff(handelsWare, funkenKanister, 1000).
@@ -920,7 +990,6 @@ stoff(kuriositaet, korvaxGehaeuse, 22000).
 stoff(kuriositaet, vyKeenBildnis, 24750).
 stoff(kuriositaet, vyKeenDolch, 11688).
 stoff(kuriositaet, divergenzWuerfel, 3015).
-stoff(kuriositaet, hadalKern, 92625).
 stoff(kuriositaet, korvaxKonvergenzWuerfel, 13063).
 stoff(kuriositaet, vykenTafel, 1250).
 
@@ -969,11 +1038,6 @@ stoff(bauRezept, superOxidKristallRezept, 0).
 stoff(bauRezept, raumSchiffStartTreibStoffRezept, 0).
 stoff(bauRezept, fortschrittlicherIonenAkkuRezept, 0).
 stoff(bauRezept, atlasPassV1Rezept, 0).
-stoff(bauRezept, kobaltSpiegelRezept, 0).
-stoff(bauRezept, salzRefaktorRezept, 0).
-stoff(bauRezept, natriumDiodeRezept, 0).
-stoff(bauRezept, sauerStoffFilterRezept, 0).
-stoff(bauRezept, sauerStoffKapselRezept, 0).
 stoff(bauRezept, hydrothermaleTreibStoffZelleRezept, 0).
 stoff(bauRezept, instabilesPlasmaRezept, 0).
 stoff(bauRezept, sternenSchildBatterieRezept, 0).
@@ -1263,6 +1327,22 @@ stoff(bauRezept, serverRezept, 0).
 stoff(bauRezept, kanisterRegalRezept, 0).
 stoff(bauRezept, kleineKisteRezept, 0).
 stoff(bauRezept, schliessFachRezept, 0).
+
+stoff(bauRezept, crewSchliessFachRezept, 0).
+stoff(bauRezept, notFallHeizungRezept, 0).
+stoff(bauRezept, notFallBeleuchtungRezept, 0).
+stoff(bauRezept, lagerEinheitRezept, 0).
+stoff(bauRezept, strapazierfaehigesMoebelStueckRezept, 0).
+stoff(bauRezept, pflanzenKanisterRezept, 0).
+stoff(bauRezept, probenBehaelterRezept, 0).
+stoff(bauRezept, grosseLagerEinheitRezept, 0).
+stoff(bauRezept, bergungsKisteRezept, 0).
+stoff(bauRezept, gesicherterAktenKofferRezept, 0).
+stoff(bauRezept, crewTruheRezept, 0).
+stoff(bauRezept, industrieWerkBankRezept, 0).
+stoff(bauRezept, industriePaletteRezept, 0).
+stoff(bauRezept, industrieFassRezept, 0).
+
 stoff(bauRezept, flachesModulRezept, 0).
 stoff(bauRezept, seitenModulRezept, 0).
 stoff(bauRezept, regalModulRezept, 0).
@@ -1295,7 +1375,7 @@ stoff(bauRezept, grosseMonitorStationRezept, 0).
 stoff(bauRezept, gewoelbterTischRezept, 0).
 stoff(bauRezept, monitorStationRezept, 0).
 stoff(bauRezept, arbeitsPlatteRezept, 0).
-stoff(bauRezept, leichterTischRezept, 0).
+stoff(bauRezept, eckSchreibTischRezept, 0).
 stoff(bauRezept, lichtHandLampeRezept, 0).
 stoff(bauRezept, weisseLeuchteRezept, 0).
 stoff(bauRezept, lichtStehLampeEckigRezept, 0).
@@ -1421,20 +1501,13 @@ stoff(bauRezept, kleinesMetallDreieckRezept, 0).
 stoff(bauRezept, betonDreieckRezept, 0).
 stoff(bauRezept, kleinesBetonDreieckRezept, 0).
 stoff(bauRezept, lichtBoxRezept, 0).
-stoff(bauRezept, leuchtBodenRezept, 0).
 stoff(bauRezept, geraeuschBoxRezept, 0).
 stoff(bauRezept, kugelErzeugerRezept, 0).
-stoff(bauRezept, lagerModulRezept, 0).
 stoff(bauRezept, automatischerSchalterRezept, 0).
 stoff(bauRezept, stehenderPflanzenBehaelterRezept, 0).
 stoff(bauRezept, sauerStoffVerarbeiterRezept, 0).
-
-/* für Quecksilber Items */
-/* diese Items sind noch nicht (27.02.20) baubar Rezepte jedoch käuflich
-stoff(bauRezept, galaktischerHubBannerRezept, 0).
-stoff(bauRezept, spezialistPoloBannerRezept, 0).
-stoff(bauRezept, priesterEntitaetNadaBannerRezept, 0).
-*/
+stoff(bauRezept, lagerModulRezept, 0).
+stoff(bauRezept, leichterTischRezept, 0).
 
 stoff(bauRezept, tentakelSpitzeRezept, 0).
 stoff(bauRezept, wachsameWoelbungRezept, 0).
@@ -1444,11 +1517,7 @@ stoff(bauRezept, gefrorenerPflanzenBehaelterRezept, 0).
 stoff(bauRezept, robusterStrauchRezept, 0).
 stoff(bauRezept, mineralBogenRezept, 0).
 stoff(bauRezept, edelSteinFelsRezept, 0).
-/*
-stoff(bauRezept, feuerWerkGruenRezept, 0).
-stoff(bauRezept, feuerWerkBlauRezept, 0).
-stoff(bauRezept, feuerWerkRotRezept, 0).
-*/
+
 stoff(bauRezept, meeresGesteinRezept, 0).
 stoff(bauRezept, terrariumRezept, 0).
 stoff(bauRezept, segelPalmeRezept, 0).
@@ -1458,7 +1527,6 @@ stoff(bauRezept, taschenRealitaetsGeneratorRezept, 0).
 stoff(bauRezept, krauseKoralleRezept, 0).
 stoff(bauRezept, wasserKristallRezept, 0).
 stoff(bauRezept, kronLeuchterBlueteRezept, 0).
-stoff(bauRezept, rankenFuesserRezept, 0).
 stoff(bauRezept, kleinesAquariumRezept, 0).
 stoff(bauRezept, bronzeneAtlasStatueRezept, 0).
 stoff(bauRezept, silberneAtlasStatueRezept, 0).
@@ -1496,6 +1564,10 @@ stoff(bauRezept, regenSchirmBaumRezept, 0).
 stoff(bauRezept, windenderStrauchRezept, 0).
 stoff(bauRezept, nadaFigurRezept, 0).
 stoff(bauRezept, poloFigurRezept, 0).
+stoff(bauRezept, atlasFigurRezept, 0).
+stoff(bauRezept, artemisFigurRezept, 0).
+stoff(bauRezept, apolloFigurRezept, 0).
+stoff(bauRezept, nullFigurRezept, 0).
 stoff(bauRezept, zustimmendeHandbewegungMotivRezept, 0).
 stoff(bauRezept, bronzeneKreaturStatueRezept, 0).
 stoff(bauRezept, silberneKreaturStatueRezept, 0).
@@ -1503,7 +1575,18 @@ stoff(bauRezept, goldeneKreaturStatueRezept, 0).
 stoff(bauRezept, bronzeneAstronautenStatueRezept, 0).
 stoff(bauRezept, silberneAstronautenStatueRezept, 0).
 stoff(bauRezept, goldeneAstronautenStatueRezept, 0).
+stoff(bauRezept, leuchtBodenRezept, 0).
+stoff(bauRezept, cadmiumRaumschiffSpurRezept, 0).
+stoff(bauRezept, emerilRaumschiffSpurRezept, 0).
+stoff(bauRezept, goldeneRaumschiffSpurRezept, 0).
+stoff(bauRezept, rankenFuesserRezept, 0).
 
+stoff(bauRezept, aminoKammerRezept, 0).
+stoff(bauRezept, solarSpiegelRezept, 0).
+stoff(bauRezept, magnetischerResonatorRezept, 0).
+stoff(bauRezept, quantenComputerRezept, 0).
+stoff(bauRezept, hydraulischeVerkabelungRezept, 0).
+stoff(bauRezept, sauerStoffKapselRezept, 0).
 
 stoff(rohUndKochStoff, chromatischesMetall, 245).
 stoff(rohUndKochStoff, faecium, 30).
@@ -1807,7 +1890,10 @@ fehlerOutputStoffNichtDefiniert(Stoff) :-
 produktNichtBewertet(Stoff) :-
 	stoff(StoffArt, Stoff, Wert),
 	/* wenn kaufbar oder verkaufbar */
-	(stoffKlasse:stoffKlasse(StoffArt, _, true, _, _); stoffKlasse:stoffKlasse(StoffArt, _, _, true, _)),
+	StoffArt \= bauRezept,
+	StoffArt \= basisBauEndStoff,
+	StoffArt \= pass,
+	StoffArt \= modul,
 	Wert = 0,
 	format('~nElement(e) ~k ist nicht bewertet~n', Stoff)
 	.
@@ -1818,7 +1904,6 @@ stoffNichtVerwendet(Stoff) :-
 	StoffArt \= pass,
 	StoffArt \= basisBauEndStoff,
 	StoffArt \= kuriositaet,
-	StoffArt \= artefakt,
 	StoffArt \= stoerung,
 	\+stoffInFunktionErgebnisStoff(Stoff),
 	\+stoffInFunktionEingangsStoff(Stoff),

@@ -127,8 +127,8 @@ planetenEigenschaftenAnzeigen(AuswahlSystem, AuswahlPlanet) :-
 		 ]),
 	\['</formSpace>']		             ],       
 	server:holeCssAlsStyle(StyleString),
-	textResources:getText(txtNoMansSkyTrainerHimmelskoerperEingeben, TxtNoMansSkyTrainerHimmelskoerperEingeben),
-	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerHimmelskoerperEingeben)],
+	textResources:getText(txtNoMansSkyTrainerHimmelskoerperEing, TxtNoMansSkyTrainerHimmelskoerperEing),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerHimmelskoerperEing)],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
 eingabeTabelleReadOnly(AuswahlSystem, AuswahlPlanet) -->
@@ -147,7 +147,7 @@ tabelleEinrichtungen(
 	HauptBasisVorhandenVal,
 	WasserVorhandenVal, WasserEntfernungVal,
 	AussenPostenVorhandenVal, AussenPostenEntfernungVal, 
-	RaumstationVorhandenVal, RaumstationEntfernungVal,
+	_RaumstationVorhandenVal, RaumstationEntfernungVal,
 	MittlereRaffinerieVorhandenVal, MittlereRaffinerieEntfernungVal,
 	GrosseRaffinerieVorhandenVal, GrosseRaffinerieEntfernungVal,
 	HandelsTerminalVorhandenVal, HandelsTerminalEntfernungVal,
@@ -196,6 +196,27 @@ tabelleEinrichtungen(
 	},
 	html(div(class('table50'),[
    	    div(class('tr'), [
+   	    	div(class('th'), TxtRaumStation),
+			div(class('td'), [
+			    input([	type('checkbox'), 
+	   	  	    		name('raumstation_vorhanden'),
+	   	  	    		tabindex(100),
+	   	  	    		checked,
+	   	  	    		disabled
+	   	  	    	  ]),			   
+	   	  	    input([	type('text'), 
+	   	  	    		value(RaumstationEntfernungVal), 
+	   	  	    		size(6), 
+	   	  	    		minlength(1), 
+	   	  	    		maxlength(6), 
+	   	  	    		pattern('(^[1..9]*[0-9]*$)|Zeit'),
+	   	  	    		name('raumstation_entfernung'),
+	   	  	    		tabindex(100)
+	   	  	    	  ]),
+	   	  	   label([for('hauptBasis_entfernung')],[' 1/100 sec'])
+			  ])
+    	  	]),
+   	    div(class('tr'), [
    	    	div(class('th'), TxtHauptBasis),
 			div(class('td'), [
 				\check('hauptBasis_vorhanden', HauptBasisVorhandenVal, 101),
@@ -206,7 +227,7 @@ tabelleEinrichtungen(
 	   	  	    		maxlength(6), 
 	   	  	    		pattern('(^[1..9]*[0-9]*$)|Zeit'),
 	   	  	    		name('hauptBasis_entfernung'),
-	   	  	    		tabindex(102),
+	   	  	    		tabindex(101),
 	   	  	    		disabled(true)
 	   	  	    	  ]),
 	   	  	   label([for('hauptBasis_entfernung')],[' 1/100 sec'])
@@ -219,10 +240,6 @@ tabelleEinrichtungen(
    	    div(class('tr'), [
    	    	div(class('th'), TxtAussenPosten),
    	    	\checkZeitUnitGruppe('aussenPosten_vorhanden', AussenPostenVorhandenVal, 103, 'aussenPosten_entfernung', AussenPostenEntfernungVal, 103)
-   	  	]),
-   	    div(class('tr'), [
-   	    	div(class('th'), TxtRaumStation),
-   	    	\checkZeitUnitGruppe('raumstation_vorhanden', RaumstationVorhandenVal, 104, 'raumstation_entfernung', RaumstationEntfernungVal, 104)
    	  	]),
   	    div(class('tr'), [
    	    	div(class('th'), TxtMittlereRaffinerie),
@@ -306,7 +323,7 @@ checkZeitUnitGruppe(NameCheck, ValueCheck, IndexCheck, NameZeit, ValueZeit, Inde
    	  	   label([for(NameZeit)],[' 1/100 sec'])
 		])
 	).
-
+	
 check(CheckName, CheckVal, Index) -->
 	 { string_concat('<input type="checkbox" name=', CheckName, CheckedString0),
 	   string_concat(CheckedString0, ' tabindex=', CheckedString1),
@@ -327,10 +344,10 @@ planetenEigenschaften(Request) :-
 	 auswahlPlanet(AuswahlPlanet, [length > 0]),
 	 
      hauptBasis_vorhanden(HauptBasisVorhanden, [default(off)]),
+     raumstation_vorhanden(RaumstationVorhanden, [default(on)]),
      wasser_vorhanden(WasserVorhanden, [default(off)]),
      aussenPosten_vorhanden(AussenPostenVorhanden, [default(off)]),
-     raumstation_vorhanden(RaumstationVorhanden, [default(off)]),
-     
+          
      mittlereRaffinerie_vorhanden(RaffinerieMittelVorhanden, [default(off)]),
      grosseRaffinerie_vorhanden(RaffinerieGrossVorhanden, [default(off)]),
      handelsTerminal_vorhanden(HandelsTerminalVorhanden, [default(off)]),
@@ -361,7 +378,7 @@ planetenEigenschaften(Request) :-
      atmosphaerenAnlage_entfernung(AtmosphaerenAnlageEntfernung, [default('Zeit')]),
      bergbauEinheit_entfernung(BergbauEinheitEntfernung, [default('Zeit')]),
      plantage_entfernung(PlantageEntfernung, [default('Zeit')])
-    ]),
+    ]),    
     ((WasserVorhanden = on, WasserEntfernung = 'Zeit', fehlerBehandlungGruppe(ortWasser));
      (AussenPostenVorhanden = on, AussenPostenEntfernung = 'Zeit', fehlerBehandlungGruppe(ortAussenPosten));
      (RaumstationVorhanden = on, RaumstationEntfernung = 'Zeit', fehlerBehandlungGruppe(ortRaumStation));
@@ -377,25 +394,6 @@ planetenEigenschaften(Request) :-
      (BergbauEinheitVorhanden = on, BergbauEinheitEntfernung = 'Zeit', fehlerBehandlungGruppe(ortBergbauEinheit));
      (AtmosphaerenAnlageVorhanden = on, AtmosphaerenAnlageEntfernung = 'Zeit', fehlerBehandlungGruppe(ortAtmosphaerenAnlage));
      (PlantageVorhanden = on, PlantageEntfernung = 'Zeit', fehlerBehandlungGruppe(ortPlantage));
-     (HauptBasisVorhanden = off,
-      WasserVorhanden = off,
-      AussenPostenVorhanden = off,
-      RaumstationVorhanden = off,
-      RaffinerieMittelVorhanden = off,
-      RaffinerieGrossVorhanden = off,
-      HandelsTerminalVorhanden = off,
-      HandelsStationVorhanden = off,
-      RaffinerieKleinVorhanden = off,
-      NahrungsProzessorVorhanden = off,
-      BasisTerminusVorhanden = off,
-      KonstruktionsStationVorhanden = off,
-      SauerstoffVearbeiterVorhanden = off,
-      AtmosphaerenAnlageVorhanden = off,
-      BergbauEinheitVorhanden = off,
-      PlantageVorhanden = off,
-      ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, _], _))),
-      gespeichert
-     );
      (ausgabe:zeitFeldToNumber(WasserEntfernung, WasserEntfernungNum),
       ausgabe:zeitFeldToNumber(AussenPostenEntfernung, AussenPostenEntfernungNum),
       ausgabe:zeitFeldToNumber(RaumstationEntfernung, RaumstationEntfernungNum),
@@ -411,18 +409,14 @@ planetenEigenschaften(Request) :-
       ausgabe:zeitFeldToNumber(AtmosphaerenAnlageEntfernung, AtmosphaerenAnlageEntfernungNum),
       ausgabe:zeitFeldToNumber(BergbauEinheitEntfernung, BergbauEinheitEntfernungNum),
       ausgabe:zeitFeldToNumber(PlantageEntfernung, PlantageEntfernungNum),
-      (spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung);
-       Entfernung = -1
+      (Entfernung = -1;
+       spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung)
       ),
-      ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, _], _))),
       (Entfernung = -1;
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung))
       ),
       (HauptBasisVorhanden = off; 
-       (assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHauptBasis], 0)),
-      	assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWald], 1500)),
-      	assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWeltRaum], 1431)), 
-      	assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortAnomalie], 1444)) 
+       (assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHauptBasis], 0))
       )),
       (WasserVorhanden = off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWasser], WasserEntfernungNum))
@@ -469,6 +463,7 @@ planetenEigenschaften(Request) :-
       (PlantageVorhanden= off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortPlantage], PlantageEntfernungNum))
       ), 
+      sammlung:sammlungAnOrteAnpassen(AuswahlSystem, AuswahlPlanet),
 	  server:gespeichert
 	)).
 	  

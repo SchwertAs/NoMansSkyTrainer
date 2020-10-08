@@ -9,8 +9,8 @@
 baueFuerVorfertigung(System, Planet, Strategie, Anzahl, Stoff) :-
 	abolish(loesung/8),
 	abolish(maxTiefe/1),
-	dict_create(SammelSet0, 'SammelStueckliste', []),
 	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
+	dict_create(SammelSet0, 'SammelStueckliste', []),
 	assertz(maxTiefe(4)),
 	beschaffen(System, Planet, Strategie, Anzahl, Stoff, [], [], Vorgaenge),
 	dict_create(SammelSet1, 'SammelStueckliste', []),
@@ -18,7 +18,7 @@ baueFuerVorfertigung(System, Planet, Strategie, Anzahl, Stoff) :-
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
 	logistik:sammelVorgaengeZusammenfassen(Vorgaenge, OptimierteVorgaenge),
-	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
+	reisen:bildeReiseZeiten(System, Planet, OptimierteVorgaenge, GesamtReiseZeit),
 	arbeitsVorbereitung:bildeAvZeiten(Vorgaenge, 0, GesamtVorgaengeZeit),
 	statistik:bildeGesamtAufwaende(Vorgaenge, 0, GesamtEinkaufsAufwand),
 	GesamtZeitAufwand is GesamtVorgaengeZeit + GesamtReiseZeit, 
@@ -35,14 +35,14 @@ baue(System, Planet, Strategie, Anzahl, Stoff) :-
 	dict_create(SammelSet0, 'SammelStueckliste', []),
 	assertz(loesung(none, [], SammelSet0, 0, 0, 0, 0, 0)),
 	assertz(ersterNichtBeschaffbarerStoff(Strategie, none, [])),
-	assertz(maxTiefe(99)),
+	assertz(maxTiefe(11)),
 	beschaffen(System, Planet, Strategie, Anzahl, Stoff, [], [], Vorgaenge),
 	dict_create(SammelSet1, 'SammelStueckliste', []),
 	statistik:bildeSammelSet(Vorgaenge, SammelSet1, SammelSet),
 	statistik:bildeGesamtZahl(SammelSet, 0, GesamtZahl),
 	statistik:bildeGesamtWert(SammelSet, 0, GesamtWertSammlung),
 	logistik:sammelVorgaengeZusammenfassen(Vorgaenge, OptimierteVorgaenge),
-	reisen:bildeReiseZeiten(OptimierteVorgaenge, GesamtReiseZeit),
+	reisen:bildeReiseZeiten(System, Planet, OptimierteVorgaenge, GesamtReiseZeit),
 	arbeitsVorbereitung:bildeAvZeiten(Vorgaenge, 0, GesamtVorgaengeZeit),
 	statistik:bildeGesamtAufwaende(OptimierteVorgaenge, 0, GesamtEinkaufsAufwand),
 	GesamtZeitAufwand is GesamtVorgaengeZeit + GesamtReiseZeit, 
@@ -100,7 +100,7 @@ beschaffen(System, Planet, Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaen
 	length(StoffPfad, Len),
 	Len =< MaxTiefe, 
 	rezept:rezept(Operation, Komponenten, [AnzahlRezeptErgebnis, Stoff], _),
-	rezeptZulaessig(System, Planet, Operation, Komponenten, Stoff),
+	rezeptZulaessig(Operation, Komponenten, Stoff),
 	keinZirkel(Komponenten, StoffPfad, Stoff),
 	divmod(Anzahl, AnzahlRezeptErgebnis, AnzahlDivision, Rest),
 	(Rest > 0, AnzahlRaffinaden is AnzahlDivision + 1; Rest = 0, AnzahlRaffinaden is AnzahlDivision),
@@ -161,80 +161,83 @@ multipliziereVorgangsWerte(Vorgaenge, Faktor, VorgaengeMultipliziertBisher, Vorg
 	multipliziereVorgangsWerte(RestVorgaenge, Faktor, VorgaengeMultipliziertBisher1, VorgaengeMultipliziert).   
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
-rezeptZulaessig(_, _, Operation, _, _) :-
+rezeptZulaessig(Operation, _, _) :-
 	memberchk(Operation, [herstellen, installieren, rezeptInFabrikErwerben]),
 	!.
 
-rezeptZulaessig(System, Planet, bauen, _, _) :-
-	spielStatus:systemAusstattung([System, Planet, ortHauptBasis], _),
+rezeptZulaessig(bauen, _, _) :-
+	spielStatus:systemAusstattung([_, _, ortHauptBasis], _),
 	!.
 
-rezeptZulaessig(_, _, inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
+rezeptZulaessig(inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _]],
 	spielStatus:spielStatus(anzugRaffinerie, true),
 	!.
 
-rezeptZulaessig(System, Planet, inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
+rezeptZulaessig(inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _]],
-	spielStatus:systemAusstattung([System, Planet, ortKleineRaffinerie], _), 
+	spielStatus:systemAusstattung([_, _, ortKleineRaffinerie], _), 
 	!.
 	
-rezeptZulaessig(System, Planet, raffinieren, Komponenten, _) :-
+rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
-	 spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _)
+	(spielStatus:systemAusstattung([_, _, ortMittlereRaffinerie], _);
+	 spielStatus:systemAusstattung([_, _, ortGrosseRaffinerie], _)
 	),
 	!.
 	
-rezeptZulaessig(System, Planet, raffinieren, Komponenten, _) :-
+rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _]],
-	(spielStatus:systemAusstattung([System, Planet, ortMittlereRaffinerie], _);
-	 spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _)
+	(spielStatus:systemAusstattung([_, _, ortMittlereRaffinerie], _);
+	 spielStatus:systemAusstattung([_, _, ortGrosseRaffinerie], _)
 	),
 	!.
 
-rezeptZulaessig(System, Planet, raffinieren, Komponenten, _) :-
+rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _], [_, _]],
-	spielStatus:systemAusstattung([System, Planet, ortGrosseRaffinerie], _),
+	spielStatus:systemAusstattung([_, _, ortGrosseRaffinerie], _),
 	!.
 
-rezeptZulaessig(System, Planet, ausSauerStoffVearbeiterGewinnen, Komponenten, _) :-
+rezeptZulaessig(ausSauerStoffVearbeiterGewinnen, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	spielStatus:systemAusstattung([System, Planet, ortSauerStoffVerarbeiter], _),
+	spielStatus:systemAusstattung([_, _, ortSauerStoffVerarbeiter], _),
 	!.
 
-rezeptZulaessig(System, Planet, ausAtmosphaerenAnlageGewinnen, Komponenten, Stoff) :-
+rezeptZulaessig(ausAtmosphaerenAnlageGewinnen, Komponenten, Stoff) :-
 	Komponenten = [[_, _]],
 	/* es muss eine Atmospherenanlage auf dem Planeten geben */
-	spielStatus:systemAusstattung([System, Planet, ortAtmosphaerenAnlage], _),
-	spielStatus:planeten(_, System, Planet, AtmospherenArt),
+	spielStatus:systemAusstattung([_, _, ortAtmosphaerenAnlage], _),
+	spielStatus:planeten(_, _, _, AtmospherenArt),
 	Stoff = AtmospherenArt,
 	!.
 
-rezeptZulaessig(System, Planet, kochen, _, _) :-
-	spielStatus:systemAusstattung([System, Planet, ortNahrungsProzessor], _),
+rezeptZulaessig(kochen, _, _) :-
+	spielStatus:systemAusstattung([_, _, ortNahrungsProzessor], _),
 	!.
 
-rezeptZulaessig(System, Planet, rezeptInAussenPostenErwerben, Komponenten, _) :-
+rezeptZulaessig(rezeptInAussenPostenErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	spielStatus:systemAusstattung([System, Planet, ortAussenPosten], _),
+	spielStatus:systemAusstattung([_, _, ortAussenPosten], _),
 	!.
 	
-rezeptZulaessig(System, Planet, rezeptAmForschungsComputerErwerben, Komponenten, _) :-
+rezeptZulaessig(rezeptAmForschungsComputerErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	spielStatus:systemAusstattung([System, Planet, ortForschungsTerminal], _),
+	spielStatus:systemAusstattung([_, _, ortForschungsTerminal], _),
 	!.
 
-rezeptZulaessig(_, _, WandlungsArt, Komponenten, _) :-
+rezeptZulaessig(modulInRaumstationErwerben, _, _) :-
+	spielStatus:systemAusstattung([_, _, ortRaumStation], _),
+	!.
+	 
+rezeptZulaessig(WandlungsArt, Komponenten, _) :-
 	(WandlungsArt = rezeptInAnomalieErwerben; 
-	 WandlungsArt = rezeptInAnomalieForschungsComputerErwerben;
-	 WandlungsArt = modulInRaumstationErwerben
+	 WandlungsArt = rezeptInAnomalieForschungsComputerErwerben
 	),
 	Komponenten = [[_, _]],
 	spielStatus:spielStatus(sphaereRufbar, true),
 	!.
 
-rezeptZulaessig(_, _, WandlungsArt, Komponenten, _) :-
+rezeptZulaessig(WandlungsArt, Komponenten, _) :-
 	WandlungsArt = rezeptInFrachterErwerben, /* Fregattenmodule */
 	Komponenten = [[_, _]],
 	spielStatus:spielStatus(frachterVorhanden, true),
@@ -279,18 +282,18 @@ keinZirkel(Komponenten, StoffPfad, Stoff) :-
 	
 baueBegruendung(Strategie, Komp, ListeBisherigerVorgaenge) :-
 	ersterNichtBeschaffbarerStoffGesetzt(false),
-	retract(ersterNichtBeschaffbarerStoffGesetzt(false)),
+	retract(ersterNichtBeschaffbarerStoffGesetzt(_)),
 	assertz(ersterNichtBeschaffbarerStoffGesetzt(true)),	
 	assertz(ersterNichtBeschaffbarerStoff(Strategie, Komp, ListeBisherigerVorgaenge)),
 	fail.
 	
-/*---------------------------------------------------------------*/
+/*-----------------------------  Erklärungskomponente  ----------------------------------*/
 listeBeschaffen(System, Planet, Strategie, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
 	Komponenten = [[Anz1, Komp1]],
 	Anzahl1 is Anz1 * AnzahlRaffinaden,
 	ceiling(Anzahl1, Anzahl1GanzZahlig),
 	(beschaffen(System, Planet, Strategie, Anzahl1GanzZahlig, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge);
-	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge))
 	).
 
 listeBeschaffen(System, Planet, Strategie, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
@@ -300,10 +303,10 @@ listeBeschaffen(System, Planet, Strategie, AnzahlRaffinaden, Komponenten, StoffP
 	ceiling(Anzahl1, Anzahl1GanzZahlig),
 	ceiling(Anzahl2, Anzahl2GanzZahlig),
 	(beschaffen(System, Planet, Strategie, Anzahl1GanzZahlig, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge1);
-	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge))
 	),
 	(beschaffen(System, Planet, Strategie, Anzahl2GanzZahlig, Komp2, StoffPfad, ListeVorgaenge1, ListeVorgaenge);
-	 baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge))
 	).
 
 listeBeschaffen(System, Planet, Strategie, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
@@ -315,13 +318,13 @@ listeBeschaffen(System, Planet, Strategie, AnzahlRaffinaden, Komponenten, StoffP
 	ceiling(Anzahl2, Anzahl2GanzZahlig),
 	ceiling(Anzahl3, Anzahl3GanzZahlig),
 	(beschaffen(System, Planet, Strategie, Anzahl1GanzZahlig, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2);
-	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge))
 	),
 	(beschaffen(System, Planet, Strategie, Anzahl2GanzZahlig, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3);
-	 baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge))
 	),
 	(beschaffen(System, Planet, Strategie, Anzahl3GanzZahlig, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge);
-	 baueBegruendung(Strategie, Komp3, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp3, ListeBisherigerVorgaenge))
 	).
 
 listeBeschaffen(System, Planet, Strategie, AnzahlRaffinaden, Komponenten, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge) :-
@@ -335,15 +338,15 @@ listeBeschaffen(System, Planet, Strategie, AnzahlRaffinaden, Komponenten, StoffP
 	ceiling(Anzahl3, Anzahl3GanzZahlig),
 	ceiling(Anzahl4, Anzahl4GanzZahlig),
 	(beschaffen(System, Planet, Strategie, Anzahl1GanzZahlig, Komp1, StoffPfad, ListeBisherigerVorgaenge, ListeVorgaenge2);
-	 baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp1, ListeBisherigerVorgaenge))
 	),
 	(beschaffen(System, Planet, Strategie, Anzahl2GanzZahlig, Komp2, StoffPfad, ListeVorgaenge2, ListeVorgaenge3);
-	 baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp2, ListeBisherigerVorgaenge))
 	),
 	(beschaffen(System, Planet, Strategie, Anzahl3GanzZahlig, Komp3, StoffPfad, ListeVorgaenge3, ListeVorgaenge4);
-	 baueBegruendung(Strategie, Komp3, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp3, ListeBisherigerVorgaenge))
 	),
 	(beschaffen(System, Planet, Strategie, Anzahl4GanzZahlig, Komp4, StoffPfad, ListeVorgaenge4, ListeVorgaenge);
-	 baueBegruendung(Strategie, Komp4, ListeBisherigerVorgaenge)
+	 (!, baueBegruendung(Strategie, Komp4, ListeBisherigerVorgaenge))
 	).
 	

@@ -5,6 +5,7 @@
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/wandelAktion').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/stoff').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/spielStatus').
+:-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/vorfertigen').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/sammlung').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/rezept').
 :-	use_module('D:/Andi/Documents/Projekte/Prolog/NoMansSkyTrainer/kaufen').
