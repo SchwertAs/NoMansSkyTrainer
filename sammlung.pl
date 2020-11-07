@@ -291,10 +291,11 @@ copyDefaultIfEmpty(System, Planet) :-
 
 defaultsEinfuegenBeiLeerenAktionen(MoeglicheAktionen) :-
 	member(Aktion, MoeglicheAktionen),
+	Aktion \= bekannt,
 	spielStatus:planeten(_, System, Planet, _),
 	System \= 'System',
 	findall(Stoff, (sammlung(_, System, Planet, Aktion, Stoff, _, _, _)), StoffeMitAktion), 
-	StoffeMitAktion = [],
+	StoffeMitAktion = [], 
 	ermittleDefaultSammelArtenMitStoffen(System, Planet, DefaultSammelArten),
 	forall((select([Operation, Stoff], DefaultSammelArten, _), 
 	        sammlung(_, 'System', 'MeinPlanet', Operation, Stoff, Haupt, Neben, Ruest)

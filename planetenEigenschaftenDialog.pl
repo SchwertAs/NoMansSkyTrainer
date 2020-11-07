@@ -409,15 +409,15 @@ planetenEigenschaften(Request) :-
       ausgabe:zeitFeldToNumber(AtmosphaerenAnlageEntfernung, AtmosphaerenAnlageEntfernungNum),
       ausgabe:zeitFeldToNumber(BergbauEinheitEntfernung, BergbauEinheitEntfernungNum),
       ausgabe:zeitFeldToNumber(PlantageEntfernung, PlantageEntfernungNum),
-      (Entfernung = -1;
-       spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung)
-      ),
-      (Entfernung = -1;
-       assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], Entfernung))
-      ),
+      ignore(retractall(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet,_], _))),
+      assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], 0)),
+      spielStatus:systemAusstattung(['System', 'MeinPlanet', ortWald], WaldEntfernungNum),
+      assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWald], WaldEntfernungNum)),
+      spielStatus:systemAusstattung(['System', 'MeinPlanet', ortWeltRaum], WeltRaumEntfernungNum),
+      assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWeltRaum], WeltRaumEntfernungNum)),
       (HauptBasisVorhanden = off; 
        (assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortHauptBasis], 0))
-      )),
+      )), 
       (WasserVorhanden = off; 
        assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortWasser], WasserEntfernungNum))
       ),

@@ -74,16 +74,14 @@ beschaffen(System, Planet, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :
 beschaffen(System, Planet, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammlung:sammlung(_, System, Planet, Operation, Stoff, _, _, _),
 	sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Operation),
-	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
-	!.
+	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge).
 
 /* in aktuellem System sammeln */
 beschaffen(System, _, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	sammlung:sammlung(_, System, Planet, Operation, Stoff, _, _, _),
 	System \= 'System',
 	sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Operation),
-	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
-	!.
+	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge).
 
 /* in anderem System sammeln */
 beschaffen(_, _, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
@@ -91,8 +89,7 @@ beschaffen(_, _, _, Anzahl, Stoff, _, BisherigeVorgaenge, Vorgaenge) :-
 	System \= 'System', 
 	Planet \= 'MeinPlanet',
 	sammelAktion:pruefeSammelAktionVorraussetzung(System, Planet, Operation),
-	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge),
-	!.
+	append([[System, Planet, Anzahl, Operation, [], [Anzahl, Stoff]]], BisherigeVorgaenge, Vorgaenge).
 
 /* aus rezept erbauen */
 beschaffen(System, Planet, Strategie, Anzahl, Stoff, StoffPfad, BisherigeVorgaenge, ListeVorgaenge) :-
@@ -176,57 +173,67 @@ rezeptZulaessig(inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
 
 rezeptZulaessig(inEinfacherRaffinerieRaffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _]],
-	spielStatus:systemAusstattung([_, _, ortKleineRaffinerie], _), 
+	spielStatus:systemAusstattung([System, _, ortKleineRaffinerie], _), 
+	System \= 'System',
 	!.
 	
 rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	(spielStatus:systemAusstattung([_, _, ortMittlereRaffinerie], _);
-	 spielStatus:systemAusstattung([_, _, ortGrosseRaffinerie], _)
+	(spielStatus:systemAusstattung([System, _, ortMittlereRaffinerie], _);
+	 spielStatus:systemAusstattung([System, _, ortGrosseRaffinerie], _)
 	),
+	System \= 'System',
 	!.
 	
 rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _]],
-	(spielStatus:systemAusstattung([_, _, ortMittlereRaffinerie], _);
-	 spielStatus:systemAusstattung([_, _, ortGrosseRaffinerie], _)
+	(spielStatus:systemAusstattung([System, _, ortMittlereRaffinerie], _);
+	 spielStatus:systemAusstattung([System, _, ortGrosseRaffinerie], _)
 	),
+	System \= 'System',
 	!.
 
 rezeptZulaessig(raffinieren, Komponenten, _) :-
 	Komponenten = [[_, _], [_, _], [_, _]],
-	spielStatus:systemAusstattung([_, _, ortGrosseRaffinerie], _),
+	spielStatus:systemAusstattung([System, _, ortGrosseRaffinerie], _),
+	System \= 'System',
 	!.
 
 rezeptZulaessig(ausSauerStoffVearbeiterGewinnen, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	spielStatus:systemAusstattung([_, _, ortSauerStoffVerarbeiter], _),
+	spielStatus:systemAusstattung([System, _, ortSauerStoffVerarbeiter], _),
+	System \= 'System',
 	!.
 
 rezeptZulaessig(ausAtmosphaerenAnlageGewinnen, Komponenten, Stoff) :-
 	Komponenten = [[_, _]],
 	/* es muss eine Atmospherenanlage auf dem Planeten geben */
-	spielStatus:systemAusstattung([_, _, ortAtmosphaerenAnlage], _),
+	spielStatus:systemAusstattung([System, _, ortAtmosphaerenAnlage], _),
+	System \= 'System',
 	spielStatus:planeten(_, _, _, AtmospherenArt),
 	Stoff = AtmospherenArt,
 	!.
 
 rezeptZulaessig(kochen, _, _) :-
-	spielStatus:systemAusstattung([_, _, ortNahrungsProzessor], _),
+	spielStatus:systemAusstattung([System, _, ortNahrungsProzessor], _),
+	System \= 'System',
 	!.
 
 rezeptZulaessig(rezeptInAussenPostenErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	spielStatus:systemAusstattung([_, _, ortAussenPosten], _),
+	spielStatus:systemAusstattung([System, _, ortAussenPosten], _),
+	System \= 'System',
 	!.
 	
 rezeptZulaessig(rezeptAmForschungsComputerErwerben, Komponenten, _) :-
 	Komponenten = [[_, _]],
-	spielStatus:systemAusstattung([_, _, ortForschungsTerminal], _),
+	spielStatus:systemAusstattung([System, _, ortForschungsTerminal], _),
+	System \= 'System',
 	!.
 
 rezeptZulaessig(modulInRaumstationErwerben, _, _) :-
-	spielStatus:systemAusstattung([_, _, ortRaumStation], _),
+	spielStatus:systemAusstattung([System, _, ortRaumStation], _),
+	System \= 'System',
 	!.
 	 
 rezeptZulaessig(WandlungsArt, Komponenten, _) :-

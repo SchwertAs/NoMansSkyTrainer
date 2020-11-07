@@ -318,7 +318,7 @@ text(de, zugefrorener, 'Zugefrorener Planet').
 /* Update vom 22.09.20 */
 text(de, geschmolzener, 'Geschmolzener Planet'). 
 text(de, blut, 'Blutplanet').
-text(de, basalt, 'Basaltplanet').
+text(de, basaltPlanet, 'Basaltplanet').
 text(de, endloserMorast, 'Endloser Morast').
 text(de, feurigeSchreckensWelt, 'Feurige Schreckenswelt').
 
@@ -454,6 +454,7 @@ text(de, aktiviertesEmeril, 'aktiviertes Emeril').
 text(de, aktiviertesIndium, 'aktiviertes Indium').
 text(de, aktiviertesKupfer, 'aktiviertes Kupfer').
 text(de, ammoniak, 'Ammoniak').
+text(de, basalt, 'Basalt').
 text(de, cadmium, 'Cadmium').
 text(de, chlor, 'Chlor').
 text(de, deuterium, 'deuterium').
@@ -489,7 +490,7 @@ text(de, uran, 'Uran').
 text(de, verrostetesMetall, 'verrostetes Metall').
 text(de, zaeheFluessigkeiten, 'zähe Flüssigkeiten').
 text(de, zytoPhosphat, 'Zytophosphat').
-text(de, hexit, 'hexite').
+text(de, hexit, 'Hexit').
 
 text(de, tritiumHyperCluster, 'Tritium Hypercluster').
 text(de, geodeLand, 'Geode (Land)').
@@ -1791,12 +1792,12 @@ text(de, chromatischesMetall, 'chromatisches Metall').
 text(de, faecium, 'Faecium').
 text(de, frostKristall, 'Frostkristall').
 text(de, gammaWurzel, 'Gammawurzel').
-text(de, hypnotischesAuge, 'Hypnotischesauge').
+text(de, hypnotischesAuge, 'hypnotisches Auge').
 text(de, kaktusFleisch, 'Kaktusfleisch').
 text(de, kelpBeutel, 'Kelpbeutel').
 text(de, kohlenStoff, 'Kohlenstoff').
 text(de, kuerbisKnolle, 'Kürbisknolle').
-text(de, mordit, 'Mordite').
+text(de, mordit, 'Mordit').
 text(de, pilzSchimmel, 'Pilzschimmel').
 text(de, salz, 'Salz').
 text(de, solanium, 'Solanium').
@@ -2452,7 +2453,7 @@ text(en, zugefrorener, 'freezed up planet').
 /* Update vom 22.09.20 */
 text(en, geschmolzener, 'melted Planet'). 
 text(en, blut, 'bloodplanet').
-text(en, basalt, 'basaltplanet').
+text(en, basaltPlanet, 'basaltplanet').
 text(en, endloserMorast, 'never ending marsh').
 text(en, feurigeSchreckensWelt, 'fiery horror world').
 
@@ -2588,6 +2589,7 @@ text(en, aktiviertesEmeril, 'Activated Emeril').
 text(en, aktiviertesIndium, 'Activated Indium').
 text(en, aktiviertesKupfer, 'Activated Copper').
 text(en, ammoniak, 'Ammonia').
+text(en, basalt, 'Basalt').
 text(en, cadmium, 'Cadmium').
 text(en, chlor, 'Chlorine').
 text(en, deuterium, 'Deuterium').
@@ -3934,7 +3936,7 @@ text(en, kaktusFleisch, 'Cactus Flesh').
 text(en, kelpBeutel, 'Kelp sac').
 text(en, kohlenStoff, 'Carbon').
 text(en, kuerbisKnolle, 'Marrow Bulb').
-text(en, mordit, 'Mordit').
+text(en, mordit, 'Mordite').
 text(en, pilzSchimmel, 'Fungal Mould').
 text(en, salz, 'Salt').
 text(en, solanium, 'Solanium').

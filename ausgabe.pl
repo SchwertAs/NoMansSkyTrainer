@@ -3,11 +3,10 @@
           letzesListenElement/2]).
 
 baueStoffListeFuerStoffKlassen(StoffKlassen, Stoffe) :-
-	findall(Stoff, 
+	findall(StoffText, 
 	  (select(Stoffklasse, StoffKlassen, _), 
 	   stoff:stoff(Stoffklasse, Stoff0, _),
-	   textResources:getText(Stoff0, StoffText),
-	   textResources:stringToSubstantiv(StoffText, Stoff)
+	   textResources:getText(Stoff0, StoffText)
 	  ), Stoffe).
 	
 ausgabeSammlung(SammelSet, SammelList, SammelListDanach) :-
@@ -116,8 +115,6 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	VonOrt = [System, Planet, _],
 	NachOrt = [SystemNach, PlanetNach, Nach],
 	
-	retractall(spielStatus:systemAusstattung([_, _, ortSimulationsSpieler], _)),
-	assertz(spielStatus:systemAusstattung([System, Planet, ortSimulationsSpieler], 0)),
 	retractall(reisen:letzterOrt(_, _, _)),
 	assertz(reisen:letzterOrt(System, Planet, ortHauptBasis)),
 	reisen:reisen(NachOrt, ReiseZeit),

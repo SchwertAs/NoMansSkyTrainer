@@ -155,15 +155,17 @@ lenOfCode(Code, Len) :-
     !.
 
 lenOfCode(Code, Len) :-
-	((Code = 45, Len = 6, !); /* - */
-	 (Code = 32, Len = 5, !); /* " " */ 
-	 (Code = 228, Len = 10, !); /* ‰ˆ¸ƒ÷‹ﬂ */ 
-	 (Code = 246, Len = 10, !);
-	 (Code = 252, Len = 10, !);
+	((Code = 32, Len = 5, !); /* " " */ 
+	 (Code = 40, Len = 11, !); /* ( */
+	 (Code = 41, Len = 11, !); /* ) */
+	 (Code = 45, Len = 6, !); /* - */
 	 (Code = 196, Len = 12, !);
 	 (Code = 214, Len = 14, !);
 	 (Code = 220, Len = 13, !);
-	 (Code = 223, Len = 11, !)
+	 (Code = 223, Len = 11, !);
+	 (Code = 228, Len = 10, !); /* ‰ˆ¸ƒ÷‹ﬂ */ 
+	 (Code = 246, Len = 10, !);
+	 (Code = 252, Len = 10, !)
 	).
 	
 lenOfCode(_, Len) :-

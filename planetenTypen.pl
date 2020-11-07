@@ -103,7 +103,7 @@ planetenGruppePlanetenTyp(trostloserTot, tot).
 
 /* noch ungesicherte Planetentypen */
 planetenGruppePlanetenTyp(blut, tot).
-planetenGruppePlanetenTyp(basalt, tot).
+planetenGruppePlanetenTyp(basaltPlanet, tot).
 
 planetenGruppePlanetenTyp(azur, megaExotisch). 
 planetenGruppePlanetenTyp(heimgesuchterEmeril, megaExotisch). 
