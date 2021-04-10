@@ -277,7 +277,7 @@ insUpdDel(System, PlanetNew, RecNo, PlanetenTyp) :-
 	debug(myTrace, 'Attribut-Update: RecNo=~k System=~k Planet=~k PlanetenTyp=~k', [RecNo, System, PlanetNew, PlanetenTyp]),
 	retractall(spielStatus:planeten(RecNo, System, PlanetNew, _)),
 	assertz(spielStatus:planeten(RecNo, System, PlanetNew, PlanetenTyp)),
-	ignore(retractall(sammlung:sammlung(0, System, PlanetNew, _, _, _, _, _))),
+	ignore(retractall(sammlung:sammlung(_, System, PlanetNew, _, _, _, _, _))),
 	/* rauswerfen der unmöglichen Stoffe nach Planetentypänderung, reinbringen der Defaults für neuen Planetentyp */
 	sammlung:sammlungAnOrteAnpassen(System, PlanetNew),
 	!.

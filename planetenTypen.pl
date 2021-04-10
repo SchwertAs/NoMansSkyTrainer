@@ -1,4 +1,4 @@
-:- module(planetenTypen, [planetenGruppePlanetenTyp/2]).
+:- module(planetenTypen, [planetenGruppePlanetenTyp/2, passendesGasPlanetenTyp/3]).
 
 planetenTyp(exotischBlasen).
 planetenTyp(exotischDrahtZelle).
@@ -44,8 +44,7 @@ planetenTypIstNormal(PlanetenTyp) :-
 	PlanetenTyp = radioAktiv;
 	PlanetenTyp = trocken,
 	PlanetenTyp = sumpfig.
-	
-	
+		
 planetenGruppePlanetenTyp(sprudelnder, exotischBlasen). 
 planetenGruppePlanetenTyp(schaeumender, exotischBlasen). 
 planetenGruppePlanetenTyp(schaumiger, exotischBlasen). 
@@ -110,7 +109,6 @@ planetenGruppePlanetenTyp(heimgesuchterEmeril, megaExotisch).
 planetenGruppePlanetenTyp(himmelBlauer, megaExotisch). 
 planetenGruppePlanetenTyp(nichtFunktionierender, megaExotisch). 
 planetenGruppePlanetenTyp(purpur, megaExotisch). 
-planetenGruppePlanetenTyp(scharlachRoter, vulkanisch). 
 planetenGruppePlanetenTyp(toedlicheGrueneAnomalieMegaExot, megaExotisch). 
 planetenGruppePlanetenTyp(ultramarin, megaExotisch). 
 planetenGruppePlanetenTyp(verdammterJade, megaExotisch). 
@@ -151,6 +149,7 @@ planetenGruppePlanetenTyp(instabiler, vulkanisch).
 planetenGruppePlanetenTyp(lava, vulkanisch). 
 planetenGruppePlanetenTyp(magma, vulkanisch). 
 planetenGruppePlanetenTyp(obsidianPerle, vulkanisch).
+planetenGruppePlanetenTyp(scharlachRoter, vulkanisch). 
 planetenGruppePlanetenTyp(tektonischer, vulkanisch). 
 planetenGruppePlanetenTyp(vulkanischer, vulkanisch). 
 
@@ -236,7 +235,18 @@ planetenGruppePlanetenTyp(verfallenerNuklearer, radioAktiv).
 planetenGruppePlanetenTyp(verstrahlter, radioAktiv). 
 
 
-
+passendesGasPlanetenTyp(System, Planet, Stoff) :-
+	spielStatus:planeten(_, System, Planet, PlanetenTyp),
+	planetenGruppePlanetenTyp(PlanetenTyp, PlanetenGruppe),
+	((PlanetenGruppe = gemaessigt, Stoff = stickStoff);
+	 (PlanetenGruppe = giftig, Stoff = stickStoff);
+	 (PlanetenGruppe = radioAktiv, Stoff = radon);
+	 (PlanetenGruppe = frostig, Stoff = radon);
+	 (planetenTypIstExotisch(PlanetenTyp), Stoff = sauerStoff);
+	 (PlanetenGruppe = heiss, Stoff = schwefelin);
+	 (PlanetenGruppe = trocken, Stoff = schwefelin)
+	).
+	 
 test :-
 	\+testInKonsistent.
 	

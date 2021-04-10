@@ -9,7 +9,7 @@ hierarchieGrafik(Vorgaenge, Svg) :-
   findall(Stoff, baum(_, _, Stoff, _), Beschriftungen),
   findall(SvgX, (select(Beschriftung, Beschriftungen, _), symbolFromBeschriftung(Beschriftung, SvgX)), Symbols),
   concatSymbols(Symbols, "", Svg1),
-  findall(AnzPosesEbene, (between(1, 9, UntersuchungsEbene), 
+  findall(AnzPosesEbene, (between(1, 12, UntersuchungsEbene), 
                           findall(Pos, (baum(Pos, Ebene, _, _), 
                                         Ebene=UntersuchungsEbene
                                        ), PosesPerEbene), 

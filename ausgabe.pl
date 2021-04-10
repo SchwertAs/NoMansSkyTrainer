@@ -110,19 +110,15 @@ ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 
 ausgabeVorgaenge(Vorgaenge, VorgaengePred, VorgaengePredDanach) :-
 	Vorgaenge = [ Kopf | Rest], 
-	Kopf = [_, _, _, Operation, [[_, VonOrt], [_, NachOrt]], [_, Produkt]],
+	Kopf = [_, _, _, Operation, [[_, _], [_, NachOrt]], [ReiseZeit, Produkt]],
 	Operation = reisen,
-	VonOrt = [System, Planet, _],
-	NachOrt = [SystemNach, PlanetNach, Nach],
+	NachOrt = [NachSystem, NachPlanet, NachOrtsTeil],
 	
-	retractall(reisen:letzterOrt(_, _, _)),
-	assertz(reisen:letzterOrt(System, Planet, ortHauptBasis)),
-	reisen:reisen(NachOrt, ReiseZeit),
 	bildeOperation(ReiseZeit, Operation, OperationString),
 	
-	atom_string(SystemNach, SystemNachString),
-	atom_string(PlanetNach, PlanetNachString),
-	textResources:getText(Nach, NachString),
+	atom_string(NachSystem, SystemNachString),
+	atom_string(NachPlanet, PlanetNachString),
+	textResources:getText(NachOrtsTeil, NachString),
 	textResources:getText(Produkt, ProduktString),
 	textResources:getText(txtBitteReisenSieNachSystem, TxtBitteReisenSieNachSystem),
  	string_concat(TxtBitteReisenSieNachSystem, SystemNachString, Anweisung6),

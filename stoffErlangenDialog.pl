@@ -42,6 +42,8 @@ stoffErlangenDialog(Request) :-
 	[auswahlSystem(AuswahlSystem, [length > 0]),
 	 auswahlPlanet(AuswahlPlanet, [length > 0])
 	]) ,
+	ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
+    assertz(spielStatus:systemAusstattung([AuswahlSystem, AuswahlPlanet, ortSpieler], 0)),    
 	((AuswahlPlanet = TxtBitteWaehlen, server:fehlerBehandlung); 
 	 stoffErlangenAnzeigen(AuswahlSystem, AuswahlPlanet)
 	).

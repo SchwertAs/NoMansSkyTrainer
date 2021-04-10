@@ -37,7 +37,7 @@ sammelOrt(raumSchuerfen, ortWeltRaum).
 sammelOrt(terrainFormerNutzen, ortWald).
 sammelOrt(unterWasserErkaempfen, ortWasser).
 sammelOrt(verbessertenMinenLaserNutzen, ortWald).
-sammelOrt(vonTierErhalten, ortNahrungsProzessor).
+sammelOrt(vonTierErhalten, ortWald).
 sammelOrt(solarStrahlNutzen, ortWald).
 sammelOrt(gemuetsStrahlNutzen, ortWald).
 sammelOrt(verdienen, ortRaumStation).

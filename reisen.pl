@@ -1,4 +1,4 @@
-:- module(reisen, [bildeReiseZeiten/4, fuegeReiseOperationenEin/2]).
+:- module(reisen, [bildeReiseZeiten/4, fuegeReiseOperationenEin/4]).
 
 :- dynamic(letzterOrt/3).
 
@@ -26,11 +26,8 @@ bauenNurInFrachter(frachterKreuzungVierFach).
 bauenNurInFrachter(frachterTreppe).
 
 bildeReiseZeiten(System, Planet, Vorgaenge, ReiseZeit) :-
-    ignore(retractall(spielStatus:systemAusstattung([_, _, ortSpieler], _))),
-    assertz(spielStatus:systemAusstattung([System, Planet, ortSpieler], 0)),
 	noetigeRaffinerieEingabefaecher(Vorgaenge, 0, NoetigeRaffinerieEingabeFaecher),
-	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	retractall(letzterOrt(_, _, _)),
+	ignore(retractall(letzterOrt(_, _, _))),
 	assertz(letzterOrt(System, Planet, ortHauptBasis)),
 	findall(VorgangsOrt1, (member(Vorgang, Vorgaenge), vorgangsOrt(NoetigeRaffinerieEingabeFaecher, Vorgang, VorgangsOrt1)), VorgangsOrte1),
 	findall(EinzelZeit, (member(VorgangsOrt2, VorgangsOrte1), reisen(VorgangsOrt2, EinzelZeit)), EinzelZeiten),
@@ -152,21 +149,21 @@ reisen([_System, _Planet, VorgangsOrt], Zeit) :-
  	!.
 
 /* Nullreise */
-reisen([System, Planet, VorgangsOrt], Zeit) :-
-	letzterOrt(SystemVorher, PlanetVorher, VorgangsOrtVorher),
-	SystemVorher = System,
-	PlanetVorher = Planet, 
-	VorgangsOrtVorher = VorgangsOrt,
+reisen([NachSystem, NachPlanet, NachOrtsTeil], Zeit) :-
+	letzterOrt(VonSystem, VonPlanet, VonOrtsTeil),
+	VonSystem = NachSystem,
+	VonPlanet = NachPlanet, 
+	VonOrtsTeil = NachOrtsTeil,
 	Zeit = 0,  /* der Spieler muss nicht zum bereits eingenommenen Ort reisen */
  	!.
 
 /* vorhaben auf gleichem Planeten; Reise zu Fuß / mit Raumschiff */
-reisen([System, Planet, VorgangsOrt], Zeit) :-
-	letzterOrt(System, Planet, Ort),
-	spielStatus:systemAusstattung([System, Planet, Ort], ZurBasisTransferZeit),
-	spielStatus:systemAusstattung([System, Planet, VorgangsOrt], ZumVorgangTransferZeit),
+reisen([System, Planet, NachOrtsTeil], Zeit) :-
+	letzterOrt(System, Planet, VonOrtsTeil),
+	spielStatus:systemAusstattung([System, Planet, VonOrtsTeil], ZurBasisTransferZeit),
+	spielStatus:systemAusstattung([System, Planet, NachOrtsTeil], ZumVorgangTransferZeit),
 	retractall(letzterOrt(_, _, _)),
-	assertz(letzterOrt(System, Planet, VorgangsOrt)),
+	assertz(letzterOrt(System, Planet, NachOrtsTeil)),
 	Zeit is ZurBasisTransferZeit + ZumVorgangTransferZeit,
 	!.
 
@@ -174,16 +171,15 @@ reisen([System, Planet, VorgangsOrt], Zeit) :-
 /* TODO Meilenstein Fahrzeuge */
 
 /* vorhaben auf anderem Planeten in gleichem System; Reise mit Raumschiff über RaumStation und zu Fuß*/
-reisen([System, Planet, VorgangsOrt], Zeit) :-
-	spielStatus:spielStatus(raumSchiffIstFlott, true),
-	letzterOrt(System1, Planet1, Ort),
-	spielStatus:systemAusstattung([System1, Planet1, Ort], ZurBasisTransferZeit),
-	System = System1,
-	spielStatus:systemAusstattung([System1, Planet1, ortRaumStation], TransferZurRaumStation),
-	spielStatus:systemAusstattung([System, Planet, ortRaumStation], TransferVonRaumStation),
-	spielStatus:systemAusstattung([System, Planet, VorgangsOrt], ZumVorgangTransferZeit),
+reisen([NachSystem, NachPlanet, NachOrtsTeil], Zeit) :-
+	letzterOrt(VonSystem, VonPlanet, VonOrtsTeil),
+	NachSystem = VonSystem,
+	spielStatus:systemAusstattung([VonSystem, VonPlanet, VonOrtsTeil], ZurBasisTransferZeit),
+	spielStatus:systemAusstattung([VonSystem, VonPlanet, ortRaumStation], TransferZurRaumStation),
+	spielStatus:systemAusstattung([NachSystem, NachPlanet, ortRaumStation], TransferVonRaumStation),
+	spielStatus:systemAusstattung([NachSystem, NachPlanet, NachOrtsTeil], ZumVorgangTransferZeit),
 	retractall(letzterOrt(_, _, _)),
-	assertz(letzterOrt(System, Planet, VorgangsOrt)),
+	assertz(letzterOrt(NachSystem, NachPlanet, NachOrtsTeil)),
 	Zeit is ZurBasisTransferZeit + TransferZurRaumStation + TransferVonRaumStation + ZumVorgangTransferZeit,
 	!.
 
@@ -223,7 +219,7 @@ reisen([System, Planet, VorgangsOrt], Zeit) :-
 	WarpTransferZeit = 4100, 
 	spielStatus:systemAusstattung([System, Planet, ortRaumStation], ZurBasisTransferZeit1),
 	spielStatus:systemAusstattung([System, Planet, VorgangsOrt], ZumVorgangTransferZeit),
-	retractall(letzterOrt(_, _, _)),
+	ignore(retractall(letzterOrt(_, _, _))),
 	assertz(letzterOrt(System, Planet, VorgangsOrt)),
 	Zeit is ZurBasisTransferZeit0 + ZurBasisTransferZeit1 + ZumAbflugZeit + WarpTransferZeit + ZumVorgangTransferZeit,
 	!.
@@ -261,14 +257,14 @@ terminalOeffnen(980).
 */
 
 /* ------------------------------------------------------------------------------------------------------ */
-fuegeReiseOperationenEin(Vorgaenge, VorgaengeDanach) :-
+fuegeReiseOperationenEin(System, Planet, Vorgaenge, VorgaengeDanach) :-
 	/* ermittelt größte nötige RaffinerieEingabefachzahl für alle Vorgänge */
 	/* dadurch wird nur eine Reise für Raffinieren benötigt */
-	spielStatus:systemAusstattung([System, Planet, ortSpieler], _),
-	retractall(reisen:letzterOrt(_, _, _)),
-	assertz(reisen:letzterOrt(System, Planet, ortHauptBasis)),
 	noetigeRaffinerieEingabefaecher(Vorgaenge, 0, NoetigeFaecher),
-	fuegeReiseOperationenEinSub(NoetigeFaecher, Vorgaenge, [System, Planet, ortSpieler], [], VorgaengeDanach).
+	ReiseOrtBisher = [System, Planet, ortSpieler], 
+	ignore(retractall(letzterOrt(_, _, _))),
+	assertz(letzterOrt(System, Planet, ortHauptBasis)),
+	fuegeReiseOperationenEinSub(NoetigeFaecher, Vorgaenge, ReiseOrtBisher, [], VorgaengeDanach).
 
 
 fuegeReiseOperationenEinSub(_, Vorgaenge, _, VorgaengeBisher, VorgaengeDanach) :-
@@ -283,21 +279,25 @@ fuegeReiseOperationenEinSub(NoetigeRaffinerieEingabeFaecher, Vorgaenge, ReiseOrt
 	append(VorgaengeBisher, ErweiterterVorgang, VorgaengeBisher1),
 	fuegeReiseOperationenEinSub(NoetigeRaffinerieEingabeFaecher, RestVorgaenge, ReiseOrtBisherDanach, VorgaengeBisher1, VorgaengeDanach),
 	!.
-
-vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, [SystemBisher, PlanetBisher, ReiseOrtBisher], [System, Planet, VorgangsOrt], VorgaengeBisher2, ReiseOrtBisherDanach) :-
-	ReiseOrtBisher = VorgangsOrt,
-	SystemBisher = System, /* Vorgangsort und Aufenthaltsort gleiches System, gleicher Planet */
-	PlanetBisher = Planet,
-	VorgaengeBisher2 = VorgaengeBisher,
-	ReiseOrtBisherDanach = [System, Planet, ReiseOrtBisher].
-
-vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, [_, _, VorgangsOrt], VorgaengeBisher2, ReiseOrtBisherDanach) :-
-	VorgangsOrt = ortSpieler,
+	
+/* keine Reise, weil gleicher Ort */
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2, ReiseOrtBisherDanach) :-
+    ReiseOrtBisher = VorgangsOrt,
 	VorgaengeBisher2 = VorgaengeBisher,
 	ReiseOrtBisherDanach = ReiseOrtBisher.
 
+/* keine Reise weil Aktion überall moeglich */ 
 vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2, ReiseOrtBisherDanach) :-
-	letzterOrt(System, Planet, _Ort1),
-	append([[System, Planet, 1, reisen, [[1, ReiseOrtBisher], [1, VorgangsOrt]], [1, angekommen]]], VorgaengeBisher, VorgaengeBisher2),
+	VorgangsOrt = [_, _, VorgangsOrtsTeil], 
+	VorgangsOrtsTeil = ortSpieler,
+	VorgaengeBisher2 = VorgaengeBisher,
+	ReiseOrtBisherDanach = ReiseOrtBisher.
+
+
+/* Reise an anderen Ort */
+vorgangAnfuegenWennVerschiedeneOrte(VorgaengeBisher, ReiseOrtBisher, VorgangsOrt, VorgaengeBisher2, ReiseOrtBisherDanach) :-
+	ReiseOrtBisher = [System, Planet, _OrtsTeil],
+	reisen(VorgangsOrt, ReiseZeit),
+	append([[System, Planet, 1, reisen, [[1, ReiseOrtBisher], [1, VorgangsOrt]], [ReiseZeit, angekommen]]], VorgaengeBisher, VorgaengeBisher2),
 	ReiseOrtBisherDanach = VorgangsOrt.
 

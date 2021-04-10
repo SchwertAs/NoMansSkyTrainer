@@ -1,6 +1,5 @@
 :- module(logistik, [sammelVorgaengeZusammenfassen/2]).
-
-/* Minimalversion ohne Funktion als Platzhalter */	
+	
 sammelVorgaengeZusammenfassen(Vorgaenge, OptimierteVorgaenge) :-
 	/* gleiche Vorgänge, die mehrfach vorkommen, zu einer mit erhöhter Stückzahl machen bei gleicher Reihenfolge */
 	/* summarischer Satz ist an Position des ersten Auftretens des Vorganges */

@@ -69,13 +69,14 @@ sammlungInit :-
 	,assertz(sammlung(0, 'System', 'MeinPlanet', herausSchlagen, kohlenStoff, 5, 5, 150))
 	
 	/* mit Minenlaser auf Planet */
+	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, ammoniak, 7, 7, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, basalt, 3, 3, 150))
+	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, diWasserStoff, 4, 4, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, radon, 87, 7, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, stickStoff, 9, 9, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, schwefelin, 87, 7, 150)) 
-	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, ammoniak, 7, 7, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, pilzSchimmel, 1, 1, 150))
 
-	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, diWasserStoff, 4, 4, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, ferritStaub, 3, 3, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, kobalt, 4, 4, 150))
 	,assertz(sammlung(0, 'System', 'MeinPlanet', minenLaserNutzen, kohlenStoff, 2, 2, 150))
