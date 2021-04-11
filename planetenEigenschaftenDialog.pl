@@ -378,7 +378,7 @@ planetenEigenschaften(Request) :-
      atmosphaerenAnlage_entfernung(AtmosphaerenAnlageEntfernung, [default('Zeit')]),
      bergbauEinheit_entfernung(BergbauEinheitEntfernung, [default('Zeit')]),
      plantage_entfernung(PlantageEntfernung, [default('Zeit')])
-    ]),    
+    ]),
     ((WasserVorhanden = on, WasserEntfernung = 'Zeit', fehlerBehandlungGruppe(ortWasser));
      (AussenPostenVorhanden = on, AussenPostenEntfernung = 'Zeit', fehlerBehandlungGruppe(ortAussenPosten));
      (RaumstationVorhanden = on, RaumstationEntfernung = 'Zeit', fehlerBehandlungGruppe(ortRaumStation));
@@ -394,6 +394,12 @@ planetenEigenschaften(Request) :-
      (BergbauEinheitVorhanden = on, BergbauEinheitEntfernung = 'Zeit', fehlerBehandlungGruppe(ortBergbauEinheit));
      (AtmosphaerenAnlageVorhanden = on, AtmosphaerenAnlageEntfernung = 'Zeit', fehlerBehandlungGruppe(ortAtmosphaerenAnlage));
      (PlantageVorhanden = on, PlantageEntfernung = 'Zeit', fehlerBehandlungGruppe(ortPlantage));
+     (HauptBasisVorhanden = off, AussenPostenVorhanden = on, fehlerBehandlungKeinBauMoeglich(ortAussenPosten));
+     (HauptBasisVorhanden = off, RaffinerieMittelVorhanden = on, fehlerBehandlungKeinBauMoeglich(ortMittlereRaffinerie));
+     (HauptBasisVorhanden = off, RaffinerieGrossVorhanden = on, fehlerBehandlungKeinBauMoeglich(ortGrosseRaffinerie));
+     (HauptBasisVorhanden = off, HandelsTerminalVorhanden = on, fehlerBehandlungKeinBauMoeglich(ortHandelsTerminal));
+     (HauptBasisVorhanden = off, BasisTerminusVorhanden = on, fehlerBehandlungKeinBauMoeglich(ortBasisTerminus));
+     (HauptBasisVorhanden = off, PlantageVorhanden = on, fehlerBehandlungKeinBauMoeglich(ortPlantage));
      (ausgabe:zeitFeldToNumber(WasserEntfernung, WasserEntfernungNum),
       ausgabe:zeitFeldToNumber(AussenPostenEntfernung, AussenPostenEntfernungNum),
       ausgabe:zeitFeldToNumber(RaumstationEntfernung, RaumstationEntfernungNum),
@@ -483,4 +489,19 @@ fehlerBehandlungGruppe(Gruppe) :-
 		             ],
 	reply_html_page(TermerizedHead, TermerizedBody).
 
+fehlerBehandlungKeinBauMoeglich(Gruppe) :-
+   	server:holeCssAlsStyle(StyleString),
+	textResources:getText(Gruppe, TxtGruppe),
+	textResources:getText(txtDieEinrichtung, TxtDieEinrichtung),
+	textResources:getText(txtVorhandenOhneBasis, TxtVorhandenGekennzeichnet),
+   	string_concat(TxtDieEinrichtung, TxtGruppe, FehlerMeldung0),
+   	string_concat(FehlerMeldung0, TxtVorhandenGekennzeichnet, FehlerMeldung),
+	textResources:getText(txtNoMansSkyTrainerFehlerInZeile, TxtNoMansSkyTrainerFehlerInZeile),
+	TermerizedHead = [\[StyleString], title(TxtNoMansSkyTrainerFehlerInZeile)],
+	TermerizedBody = [
+		\['<redHeader>'],
+		h3(align(center), FehlerMeldung),
+		\['</redHeader>']
+		             ],
+	reply_html_page(TermerizedHead, TermerizedBody).
 	

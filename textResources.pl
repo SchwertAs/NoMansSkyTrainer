@@ -144,6 +144,7 @@ text(de, txtEinrichtungenUndIhreReisezeit, 'Einrichtungen und ihre Reisezeit von
 text(de, txtJeweilsDieEinrichtungMit, 'Jeweils die Einrichtung mit der kürzesten Reisezeit zur Hauptbasis angeben!').
 text(de, txtDieEinrichtung, 'Die Einrichtung ').
 text(de, txtVorhandenGekennzeichnet, ' ist als vorhanden gekennzeichnet, aber die Zeitangabe fehlt').
+text(de, txtVorhandenOhneBasis, ' ist als vorhanden gekennzeichnet, aber die Einrichtung braucht eine Hauptbasis').
 
 /* Fixtexte planetSammelEigenschaftenDialog */
 text(de, txtSammelartEingebenHimmelskoerperAuswahl, 'Sammelart eingeben').
@@ -2280,6 +2281,7 @@ text(en, txtEinrichtungenUndIhreReisezeit, 'Facilities and their travel times fr
 text(en, txtJeweilsDieEinrichtungMit, 'Specify each facility with has the lowest travel time from the main base!').
 text(en, txtDieEinrichtung, 'The facility ').
 text(en, txtVorhandenGekennzeichnet, ' is marked as existing, but the travel time is missing').
+text(en, txtVorhandenOhneBasis, ' is marked as existing, but this facility needs a main base').
 
 /* Fixtexte planetSammelEigenschaftenDialog */
 text(en, txtSammelartEingebenHimmelskoerperAuswahl, 'Choice of collecting mode').
