@@ -992,6 +992,7 @@ stoff(kuriositaet, vyKeenDolch, 11688).
 stoff(kuriositaet, divergenzWuerfel, 3015).
 stoff(kuriositaet, korvaxKonvergenzWuerfel, 13063).
 stoff(kuriositaet, vykenTafel, 1250).
+stoff(kuriositaet, hexKern, 32). /* bei der Jagd gefunden */ 
 
 stoff(bauRezept, byteBeatGeraetRezept, 0).
 stoff(bauRezept, saeureRezept, 0).
@@ -1632,14 +1633,12 @@ stoff(kochStoff, derStellarator, 100000).
 stoff(kochStoff, dickerFleischEintopf, 26000).
 stoff(kochStoff, dickerSuesserTeig, 48000).
 stoff(kochStoff, diploStuecke, 1400).
-stoff(kochStoff, duftendeKraeuter, 800).
 stoff(kochStoff, eisCreme, 48000).
 stoff(kochStoff, eisSchreie, 90000).
 stoff(kochStoff, engelsObstKuchen, 31300).
 stoff(kochStoff, entfesselteMonstrositaet, 152200).
 stoff(kochStoff, entfesseltesSahneHorn, 128000).
 stoff(kochStoff, entsetzlicherMarmeladenSchwamm, 180700).
-stoff(kochStoff, enzymFluessigkeit, 800).
 stoff(kochStoff, erfrischungsGetraenk, 1800).
 stoff(kochStoff, ewigSiedenderKuchen, 64300).
 stoff(kochStoff, ewigeEisCreme, 44000).
@@ -1650,7 +1649,6 @@ stoff(kochStoff, extraFluffigerTeig, 28000).
 stoff(kochStoff, fasrigerEintopf, 6400).
 stoff(kochStoff, fellKnaeuelGelee, 9000).
 stoff(kochStoff, fellTorteInAspik, 54000).
-stoff(kochStoff, fermentierteFruechte, 800).
 stoff(kochStoff, festerFettKuchen, 54000).
 stoff(kochStoff, feuerBeere, 800).
 stoff(kochStoff, feuerWasser, 1800).
@@ -1687,7 +1685,6 @@ stoff(kochStoff, geschmorteOrgane, 6400).
 stoff(kochStoff, gestampfteWurzelPastete, 40000).
 stoff(kochStoff, gesuessteButter, 26000).
 stoff(kochStoff, gesuessteProtoButter, 32000).
-stoff(kochStoff, gesuessterKompost, 800).
 stoff(kochStoff, gewuerzterApfelKuchen, 64300).
 stoff(kochStoff, glasKoerner, 300).
 stoff(kochStoff, glasKuchen, 179600).
@@ -1767,7 +1764,6 @@ stoff(kochStoff, monstroeserHonigKuchen, 800).
 stoff(kochStoff, monstroeserPudding, 100000).
 stoff(kochStoff, omelett, 18000).
 stoff(kochStoff, parasitenOmelett, 102000).
-stoff(kochStoff, pheromonBeutel, 800).
 stoff(kochStoff, pikanteFleischBaellchen, 18800).
 stoff(kochStoff, pilgerBeere, 300).
 stoff(kochStoff, pilgerElixier, 800).

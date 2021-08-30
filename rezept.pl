@@ -1175,14 +1175,14 @@ rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeButter], [1, kreaturenEi]],[1
 rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeButter], [1, grosseEier]],[1, dickerSuesserTeig], 250.0).
 rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeProtoButter], [1, kreaturenEi]],[1, dickerSuesserTeig], 250.0).
 rezept(kochen, [[1, verfeinertesMehl], [1, klebrigeProtoButter], [1, grosseEier]],[1, dickerSuesserTeig], 250.0).
-rezept(kochen, [[1, faecium], [1, aloeFleisch]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, frostKristall]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, gammaWurzel]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, glasKoerner]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, heptaploidWeizen]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, jadeErbsen]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, sievertBohnen]],[1, duftendeKraeuter], 250.0).
-rezept(kochen, [[1, faecium], [1, solanium]],[1, duftendeKraeuter], 250.0).
+rezept(kochen, [[1, faecium], [1, aloeFleisch]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, frostKristall]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, gammaWurzel]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, glasKoerner]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, heptaploidWeizen]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, jadeErbsen]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, sievertBohnen]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, solanium]],[1, kreaturenKugeln], 250.0).
 rezept(kochen, [[1, frostKristall], [1, klebrigerPudding]],[1, eisCreme], 250.0).
 rezept(kochen, [[1, klebrigerPudding], [1, gefroreneKnollen]],[1, eisCreme], 250.0).
 rezept(kochen, [[1, gefroreneKnollen], [1, hypnotischesAuge]],[1, eisSchreie], 250.0).
@@ -1195,13 +1195,13 @@ rezept(kochen, [[1, anormaleMarmelade], [1, sahne], [1, windenderAufgewuehlterTe
 rezept(kochen, [[1, sahne], [1, windenderAufgewuehlterTeig]],[1, entfesseltesSahneHorn], 250.0).
 rezept(kochen, [[1, sahne], [1, grahmeLade], [1, heulenderTeig]],[1, entsetzlicherMarmeladenSchwamm], 250.0).
 rezept(kochen, [[1, sahne], [1, fellKnaeuelGelee], [1, heulenderTeig]],[1, entsetzlicherMarmeladenSchwamm], 250.0).
-rezept(kochen, [[1, faecium], [1, gefroreneKnollen]],[1, enzymFluessigkeit], 250.0).
-rezept(kochen, [[1, faecium], [1, fleischigeWurzeln]],[1, enzymFluessigkeit], 250.0).
-rezept(kochen, [[1, faecium], [1, impulsBohnen]],[1, enzymFluessigkeit], 250.0).
-rezept(kochen, [[1, faecium], [1, kaktusNektar]],[1, enzymFluessigkeit], 250.0).
-rezept(kochen, [[1, faecium], [1, pilzSchimmel]],[1, enzymFluessigkeit], 250.0).
-rezept(kochen, [[1, faecium], [1, solartillo]],[1, enzymFluessigkeit], 250.0).
-rezept(kochen, [[1, faecium], [1, ungiftigerPilz]],[1, enzymFluessigkeit], 250.0).
+rezept(kochen, [[1, faecium], [1, gefroreneKnollen]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, fleischigeWurzeln]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, impulsBohnen]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, kaktusNektar]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, pilzSchimmel]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, solartillo]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, ungiftigerPilz]],[1, kreaturenKugeln], 250.0).
 rezept(kochen, [[1, aloeFleisch]],[1, erfrischungsGetraenk], 250.0).
 rezept(kochen, [[1, sahne], [1, kuchenTeig], [1, immerBrennendeMarmelade]],[1, ewigSiedenderKuchen], 250.0).
 rezept(kochen, [[1, klebrigerPudding], [1, hexaBeere], [1, frostKristall]],[1, ewigeEisCreme], 250.0).
@@ -1251,14 +1251,14 @@ rezept(kochen, [[1, ungiftigerPilz], [1, ungiftigerPilz]],[1, fasrigerEintopf], 
 rezept(kochen, [[1, leopardenFrucht], [1, verarbeiteterZucker]],[1, fellKnaeuelGelee], 250.0).
 rezept(kochen, [[1, leopardenFrucht], [1, tortenBoden]],[1, fellTorteInAspik], 250.0).
 rezept(kochen, [[1, fellKnaeuelGelee], [1, tortenBoden]],[1, fellTorteInAspik], 250.0).
-rezept(kochen, [[1, faecium], [1, feuerBeere]],[1, fermentierteFruechte], 250.0).
-rezept(kochen, [[1, faecium], [1, grahBeere]],[1, fermentierteFruechte], 250.0).
-rezept(kochen, [[1, faecium], [1, hexaBeere]],[1, fermentierteFruechte], 250.0).
-rezept(kochen, [[1, faecium], [1, kaktusFleisch]],[1, fermentierteFruechte], 250.0).
-rezept(kochen, [[1, faecium], [1, kuerbisKnolle]],[1, fermentierteFruechte], 250.0).
-rezept(kochen, [[1, faecium], [1, pilgerBeere]],[1, fermentierteFruechte], 250.0).
-rezept(kochen, [[1, faecium], [1, sternenKnolle]],[1, fermentierteFruechte], 250.0).
-rezept(kochen, [[1, faecium], [1, suessWurzel]],[1, fermentierteFruechte], 250.0).
+rezept(kochen, [[1, faecium], [1, feuerBeere]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, grahBeere]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, hexaBeere]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, kaktusFleisch]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, kuerbisKnolle]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, pilgerBeere]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, sternenKnolle]],[1, kreaturenKugeln], 250.0).
+rezept(kochen, [[1, faecium], [1, suessWurzel]],[1, kreaturenKugeln], 250.0).
 rezept(kochen, [[1, regisFett], [1, tortenBoden]],[1, festerFettKuchen], 250.0).
 rezept(kochen, [[1, bratOel], [1, tortenBoden]],[1, festerFettKuchen], 250.0).
 rezept(kochen, [[1, protoOel], [1, tortenBoden]],[1, festerFettKuchen], 250.0).
@@ -1378,9 +1378,6 @@ rezept(kochen, [[1, katzenLeber], [1, katzenLeber]],[1, geschmorteOrgane], 250.0
 rezept(kochen, [[1, tortenBoden], [1, suessWurzel]],[1, gestampfteWurzelPastete], 250.0).
 rezept(kochen, [[1, geschlageneButter], [1, verarbeiteterZucker]],[1, gesuessteButter], 250.0).
 rezept(kochen, [[1, protoButter], [1, verarbeiteterZucker]],[1, gesuessteProtoButter], 250.0).
-rezept(kochen, [[1, faecium], [1, duftendeKraeuter]],[1, gesuessterKompost], 250.0).
-rezept(kochen, [[1, faecium], [1, enzymFluessigkeit]],[1, gesuessterKompost], 250.0).
-rezept(kochen, [[1, faecium], [1, fermentierteFruechte]],[1, gesuessterKompost], 250.0).
 rezept(kochen, [[1, kuchenTeig], [1, holzApfel]],[1, gewuerzterApfelKuchen], 250.0).
 rezept(kochen, [[1, kuchenTeig], [1, sahne], [1, schlaengelndeMarmelade]],[1, gewuerzterApfelKuchen], 250.0).
 rezept(kochen, [[1, frostKristall]],[1, glasKoerner], 250.0).
@@ -1507,8 +1504,6 @@ rezept(kochen, [[1, sahne], [1, larvenKern], [1, verarbeiteterZucker]],[1, monst
 rezept(kochen, [[1, kreaturenEi], [1, wuerzigerKaese]],[1, omelett], 250.0).
 rezept(kochen, [[1, grosseEier], [1, wuerzigerKaese]],[1, omelett], 250.0).
 rezept(kochen, [[1, larvenKern], [1, protoKaese]],[1, parasitenOmelett], 250.0).
-rezept(kochen, [[1, duftendeKraeuter], [1, mordit]],[1, pheromonBeutel], 250.0).
-rezept(kochen, [[1, enzymFluessigkeit], [1, mordit]],[1, pheromonBeutel], 250.0).
 rezept(kochen, [[1, sternenKnolle]],[1, pilgerBeere], 250.0).
 rezept(kochen, [[1, pilgerBeere]],[1, pilgerElixier], 250.0).
 rezept(kochen, [[1, heisseSosse], [1, geheimnisVollerFleischEintopf]],[1, pikanteFleischBaellchen], 250.0).
